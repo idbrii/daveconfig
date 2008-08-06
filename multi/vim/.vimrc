@@ -1,6 +1,6 @@
 " Author:	DBriscoe (pydave@gmail.com)
-" Modified: 03 Aug 2008
-" Influences:
+" Modified: 06 Aug 2008
+" Influences: (TODO)
 "	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
 "	* Whoever I got cscope from
 "	* MacVim guy
@@ -172,7 +172,12 @@ nnoremap <C-\> :ptag <C-r><C-w><CR>
 
 " Windows keys
 nmap <C-s> :w<CR>
-nmap <C-a> 1GVG
+" change increment to allow select all
+nnoremap <C-x><C-z> <C-a>
+nnoremap <C-x><C-x> <C-x>
+" select all
+nnoremap <C-a> 1GVG
+" Windows clipboard
 nmap <C-c> "+y
 nmap <C-v> "+p
 " Keep block select, but require shift
@@ -218,37 +223,54 @@ nnoremap <space> za
 "inoremap <Down> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>Down>"<CR>
 
 """ Abbreviations
+"" Command
+" Diff
+cabbrev diffboth diffthis<CR><C-w><C-w>:diffthis<CR>
+cabbrev vdiffsp vert diffsplit
+
+" Windowing (Full screen on my monitor
+cabbrev vert set lines=59
+cabbrev large set lines=59<CR>:set columns=100
+
+"" Insert
 " General
-iabbr _me DBriscoe (pydave@gmail.com)
-iabbr _t  <C-R>=strftime("%H:%M:%S")<CR>
-iabbr _d  <C-R>=strftime("%d %b %Y")<CR>
-iabbr _dt <C-R>=strftime("%a, %d %b %Y %H:%M:%S")<CR>
+iabbrev _me DBriscoe (pydave@gmail.com)
+iabbrev _t  <C-R>=strftime("%H:%M:%S")<CR>
+iabbrev _d  <C-R>=strftime("%d %b %Y")<CR>
+iabbrev _dt <C-R>=strftime("%a, %d %b %Y %H:%M:%S")<CR>
 
 " Shebangs
-abbreviate shebangpy #! /usr/bin/env python
-abbreviate shebangsh #! /bin/sh
-abbreviate shebangbash #! /bin/bash
+iabbrev shebangpy #! /usr/bin/env python
+iabbrev shebangsh #! /bin/sh
+iabbrev shebangbash #! /bin/bash
 
 " macros
-abbreviate #i #include
-abbreviate #d #define
-abbreviate D_P DBG_PRINT
-abbreviate _guard_ #ifndef <CR>#define <CR><CR>#endif //<ESC>kO
+iabbrev _poff #pragma optimize("", off)
+iabbrev _pon #pragma optimize("", on)
+iabbrev #i #include
+iabbrev #d #define
+iabbrev D_P DBG_PRINT
+iabbrev _guard_ #ifndef <CR>#define <CR><CR>#endif //<ESC>kO
 
 " constructs
-abbreviate frepeat for (int i = 0; i < 0; ++i)
+iabbrev frepeat for (int i = 0; i < 0; ++i)
 
 " for Java: Copies type and sets up new
-abbreviate jnew <ESC>BBByW$i new <ESC>pa);<ESC>hi
+iabbrev jnew <ESC>BBByW$i new <ESC>pa);<ESC>hi
 
 " for Java: makes main signature
-abbreviate jmain public static void main (String[] args)
+iabbrev jmain public static void main (String[] args)
 
 " for Java: output shortcuts
-abbreviate Sout System.out.println
-abbreviate Serr System.err.println
+iabbrev Sout System.out.println
+iabbrev Serr System.err.println
 
 " for Java: import shortcuts
-abbreviate Iawt import java.awt.*;
-abbreviate Iswing import javax.swing.*;
-abbreviate Ijava import java.*;<ESC>bi
+iabbrev Iawt import java.awt.*;
+iabbrev Iswing import javax.swing.*;
+iabbrev Ijava import java.*;<ESC>bi
+
+
+" =-=-=-=-=-=
+" Source work additions
+runtime work.vim
