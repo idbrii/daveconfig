@@ -2,4 +2,4 @@
 if glob('Makefile') == "" | let &mp="g++ -o %< %" | endif
 
 setlocal cindent
-source $HOME/.vim/cscope_maps.vim
+runtime cscope_maps.vim
