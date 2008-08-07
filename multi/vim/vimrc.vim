@@ -82,7 +82,6 @@ endif
 
 " read tags 4 directories deep
 set tags=./tags;../../../../
-set tags+=$HOME/.vim/tags/python.ctags
 
 """"" Folding
 set foldmethod=syntax		" By default, use syntax to determine folds
