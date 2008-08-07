@@ -81,3 +81,9 @@ setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ 
 " PyDoc commands (requires python_pydoc.vim)
 nmap  K :call ShowPyDoc('<C-R><C-W>', 1)<CR> 
 vmap  K y:call ShowPyDoc('<C-R>"', 1)<CR> 
+
+" Stdlib tags
+" Unix
+"setlocal tags+=$HOME/.vim/tags/python.ctags
+" Windows
+setlocal tags+=$HOME/vimfiles/tags/python.ctags
