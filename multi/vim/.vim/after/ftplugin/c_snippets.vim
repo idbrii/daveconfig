@@ -51,7 +51,7 @@ exec "Snippet template template <typename ".st."_InputIter".et."><CR>".st.et
 exec "Snippet namespace namespace ".st.":substitute(expand('%'),'.','\\l&', 'g')".et."<CR>{<CR>".st.et."<CR>};<CR>".st.et
 exec "Snippet map std::map<".st."key".et.", ".st."value".et."> map".st.et.";<CR>".st.et
 exec "Snippet mark #if 0<CR><CR>".st.et."<CR><CR>#endif<CR><CR>".st.et
-exec "Snippet if if(".st.et.")<CR>{<CR>".st.et."<CR>}<CR>".st.et
+exec "Snippet if if (".st.et.")<CR>{<CR>".st.et."<CR>}<CR>".st.et
 exec "Snippet main int main (int argc, char const* argv[])<CR>{<CR>".st.et."<CR>return 0;<CR>}<CR>".st.et
 exec "Snippet Inc #include <".st.et."><CR>".st.et
 exec "Snippet inc #include \"".st.et.".h\"".st.et
