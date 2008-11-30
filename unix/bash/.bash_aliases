@@ -10,4 +10,5 @@ alias la='ls -a'
 alias cls='clear'
 
 # Advanced applications
-alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
+# unfortunately, this is Mac-specific. Ideally, I'd use $VIMRUNTIME
+# currently doesn't work alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
