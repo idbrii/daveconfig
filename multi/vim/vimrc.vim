@@ -83,7 +83,7 @@ endif
 " read tags 4 directories deep
 set tags=./tags;../../../../
 
-""""" Folding
+"""" Folding
 set foldmethod=syntax		" By default, use syntax to determine folds
 set foldlevelstart=99		" All folds open by default
 
@@ -154,13 +154,13 @@ nmap <Tab> >>
 nmap <S-Tab> <<
 
 " Easy cmdline run (normal, visual)
-map \ :!<up><CR>
-ounmap \
+map <Leader>\ :!<up><CR>
+ounmap <Leader>\
 
 " Easy make
 map <F5> :make 
-map \| :make<up><CR>
-ounmap \|
+map <Leader>\| :make<up><CR>
+ounmap <Leader>\|
 
 " Global search
 map gs :%s/
@@ -230,6 +230,10 @@ cabbrev vdiffsp vert diffsplit
 " Windowing (Full screen on my monitor
 cabbrev vert set lines=59
 cabbrev large set lines=59<CR>:set columns=100
+
+" VimShell - run sh from within a Vim buffer
+cabbrev vshell runtime scripts/vimsh/vimsh.vim
+cabbrev vsh runtime scripts/vimsh/vimsh.vim
 
 "" Insert
 " General
