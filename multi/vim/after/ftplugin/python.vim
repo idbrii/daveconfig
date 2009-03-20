@@ -67,7 +67,7 @@ import vim
 def EvaluateCurrentRange():
     eval(compile('\n'.join(vim.current.range),'','exec'),globals())
 EOL
-map <C-h> :py EvaluateCurrentRange()
+map <C-h> :py EvaluateCurrentRange()<CR>
 
 " no tabs in python files
 setlocal expandtab
@@ -77,6 +77,7 @@ setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,clas
 
 " allows us to run :make and get syntax errors for our python scripts
 setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " PyDoc commands (requires python_pydoc.vim)
 nmap  K :call ShowPyDoc('<C-R><C-W>', 1)<CR> 
