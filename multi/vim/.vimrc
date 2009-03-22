@@ -97,8 +97,9 @@ au!
 	" In plain-text files and svn commit buffers, wrap automatically at 78 chars
 "	au FileType text,svn setlocal tw=78 fo+=t
 
-	" In all files, try to jump back to the last spot cursor was in before exiting
-	au BufReadPost *
+	" In most files, jump back to the last spot cursor was in before exiting
+    " (except: git commit)
+	au BufReadPost * if &ft != 'gitcommit' |
 		\ if line("'\"") > 0 && line("'\"") <= line("$") |
 		\   exe "normal g`\"" |
 		\ endif
