@@ -26,8 +26,13 @@ set ruler						" line numbers and column the cursor is on
 "set number						" Show line numbering
 "set numberwidth=1			" Use 1 col + 1 space for numbers
 "colorscheme tango
-"colorscheme carvedwood
-colorscheme elflord         " Good terminal colours
+if has("macunix")
+    " looks good on my mac terminal
+    colorscheme elflord
+else
+    " looks good on ubuntu terminal
+    colorscheme carvedwood
+endif
 
 
 " tab labels show the filename without path(tail)
