@@ -1,3 +1,7 @@
+colorscheme desert
+
 " =-=-=-=-=-=
-" Source work additions
-runtime gwork.vim
+" Source work additions, if available
+if filereadable(glob("$HOME/vimfiles/gwork.vim"))
+    runtime gwork.vim
+endif
