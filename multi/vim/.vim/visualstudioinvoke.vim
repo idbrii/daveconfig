@@ -5,6 +5,6 @@
 "   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
 
 " Nice and wide for our huge files
-set columns=145
+set columns=140
 " Centre cursor
 normal zz
