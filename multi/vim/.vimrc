@@ -155,7 +155,11 @@ nnoremap  <c-left>   Bh
 "nnoremap  <s-right>  vl
 "nnoremap  <s-left>   vh
 
-" Use tab and shift-tab to indent in normal mode
+" Use ^T and ^D to indent in visual (like in normal, but keep selection)
+" Note: this can probably be done with Select mode, but I don't use that.
+vnoremap <C-T> >gv
+vnoremap <C-D> <LT>gv
+" Use tab and shift-tab for indent in normal mode
 nmap <Tab> >>
 nmap <S-Tab> <<
 
@@ -187,6 +191,9 @@ vmap <C-c> "+y
 nmap <C-v> "+p
 " Keep block select, but require shift
 nnoremap <C-S-v> <C-v>
+
+" Make Y work like D and C
+nmap Y y$
 
 " Make backspace work in normal
 nmap <BS> X
