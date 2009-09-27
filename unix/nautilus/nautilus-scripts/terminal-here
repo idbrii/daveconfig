@@ -1,14 +1,17 @@
 #!/bin/sh
-#
-# This script opens a gnome-terminal in the directory you select.
-#
-# Distributed under the terms of GNU GPL version 2 or later
-#
-# Copyright (C) Keith Conger <acid@twcny.rr.com>
-#
-# Install in your ~/Nautilus/scripts directory.
-# You need to be running Nautilus 1.0.3+ to use scripts.
+# From Chris Picton
+# Replaces a Script by Martin Enlund
+# Modified to work with spaces in path by Christophe Combelles
 
-cd $NAUTILUS_SCRIPT_CURRENT_URI
-exec gnome-terminal
+# This script either opens in the current directory, 
+# or in the selected directory
 
+base="`echo $NAUTILUS_SCRIPT_CURRENT_URI | cut -d'/' -f3- | sed 's/%20/ /g'`"
+if [ -z "$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS" ]; then
+     dir="$base"
+else 
+     while [ ! -z "$1" -a ! -d "$base/$1" ]; do shift; done
+     dir="$base/$1"
+fi
+
+gnome-terminal --working-directory="$dir"
