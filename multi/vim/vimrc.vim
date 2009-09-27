@@ -17,6 +17,7 @@ set nocompatible				" Don't be compatible with vi
 set ignorecase					" search is case insensitive
 set smartcase					" search case sensitive if caps on 
 set hlsearch					" Highlight matches to the search 
+set incsearch					" Incremental search
 
 """" Display
 set background=dark			" I use dark background
@@ -188,7 +189,7 @@ nnoremap <C-x><C-x> <C-x>
 nnoremap <C-a> 1GVG
 " Windows clipboard
 vmap <C-c> "+y
-nmap <C-v> "+p
+nnoremap <C-v> "+p
 " Keep block select, but require shift
 nnoremap <C-S-v> <C-v>
 
