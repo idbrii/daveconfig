@@ -17,7 +17,7 @@ set nocompatible				" Don't be compatible with vi
 set ignorecase					" search is case insensitive
 set smartcase					" search case sensitive if caps on 
 set hlsearch					" Highlight matches to the search 
-set incsearch					" Incremental search
+set incsearch					" Find as you type
 
 """" Display
 set background=dark			" I use dark background
@@ -158,8 +158,9 @@ nnoremap  <c-left>   Bh
 
 " Use ^T and ^D to indent in visual (like in normal, but keep selection)
 " Note: this can probably be done with Select mode, but I don't use that.
+" TODO: upgrade snippetsemu and change C-t to Tab
 vnoremap <C-T> >gv
-vnoremap <C-D> <LT>gv
+vnoremap <S-Tab> <LT>gv
 " Use tab and shift-tab for indent in normal mode
 nmap <Tab> >>
 nmap <S-Tab> <<
