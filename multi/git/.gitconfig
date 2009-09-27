@@ -1,0 +1,23 @@
+[user]
+	name = pydave
+	email = pydave@gmail.com
+[github]
+	user = pydave
+	token = f5a89d4ec402edcb927fda7462b88774
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+    purify = checkout
+[core]
+	excludesfile = /home/dbriscoe/.gitignore
+[giggle]
+	compact-mode = false
+	main-window-maximized = true
+	main-window-geometry = 495x556+255+56
