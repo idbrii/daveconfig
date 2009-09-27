@@ -12,7 +12,8 @@
 #               root to std output.  But gksudo updates your sudo access
 #               privs, so running nautilus with sudo will succeed
 #               without asking for a password.
+#
+# 26 Sep 2009 -- pydave - added full paths to ensure we know what's being executed
 
-
-foo=`gksudo -u root -k -m "enter your password for nautilus root access" /bin/echo "got r00t?"`
-sudo nautilus --no-desktop $NAUTILUS_SCRIPT_CURRENT_URI
+foo=`/usr/bin/gksudo -u root -k -m "Enter your password for nautilus root access" /bin/echo "got r00t?"`
+/usr/bin/sudo /usr/bin/nautilus --no-desktop $NAUTILUS_SCRIPT_CURRENT_URI
