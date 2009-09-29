@@ -260,7 +260,7 @@ nnoremap <space> za
 cabbrev diffboth diffthis<CR><C-w><C-w>:diffthis<CR>
 cabbrev vdiffsp vert diffsplit
 
-" Windowing (Full screen on my monitor
+" Windowing (Full screen on my monitor)
 cabbrev vert set lines=59
 cabbrev large set lines=59<CR>:set columns=100
 
