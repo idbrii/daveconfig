@@ -20,8 +20,18 @@ alias lh='ls -lh'
 alias la='ls -A'
 alias les='/usr/share/vim/vim71/macros/less.sh'
 
+# aptitude
+alias aptinstall='sudo aptitude install'
+alias aptremove='sudo aptitude remove'
+alias aptsearch='apt-cache search'
+alias aptshow='apt-cache show'
+
 # windows work-alike
 alias cls='clear'
+alias tracert='tracepath'
+
+# python
+alias ipy='ipython'
 
 # Advanced applications
 # unfortunately, this is Mac-specific. Ideally, I'd use $VIMRUNTIME

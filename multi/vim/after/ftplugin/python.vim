@@ -77,6 +77,9 @@ setlocal expandtab
 "" smart indenting for python
 setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
+"" simple indent-based folding
+setlocal foldmethod=indent
+
 "" allows us to run :make and get syntax errors for our python scripts
 setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
