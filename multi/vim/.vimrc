@@ -190,7 +190,7 @@ nnoremap <C-x><C-x> <C-x>
 nnoremap <C-a> 1GVG
 " Windows clipboard
 vmap <C-c> "+y
-nmap <C-v> "+p
+nnoremap <C-v> "+p
 " Keep block select, but require shift
 nnoremap <C-S-v> <C-v>
 
