@@ -1,5 +1,6 @@
 " Use :make to compile c, even without a makefile
-if glob('Makefile') == "" | let &mp="g++ -o %< %" | endif
+" This is problematic with deep directories (and I don't understand glob)
+"if glob('Makefile') == "" | let &mp="g++ -o %< %" | endif
 
 setlocal cindent
 runtime cscope_maps.vim
