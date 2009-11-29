@@ -12,12 +12,22 @@
 [alias]
 	st = status
 	ci = commit
-	co = checkout
 	br = branch
+	co-branch = checkout
     purify = checkout
+    resolve = add
+    diff-staged = diff --cached
+    piecemeal = add --patch
+    unstage = reset
+[merge]
+	tool = meld
+[diff]
+	renames = copies
 [core]
 	excludesfile = /home/dbriscoe/.gitignore
 [giggle]
 	compact-mode = false
 	main-window-maximized = true
-	main-window-geometry = 495x556+255+56
+	main-window-geometry = 0x0+0+0
+[branch]
+	autosetupmerge = true
