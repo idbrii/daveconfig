@@ -281,6 +281,8 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 
 " Disable the defaults for lookupfile because I already have something on F5
 let g:LookupFile_DisableDefaultMap = 1
+" Don't want maps for git. Just use Normal commands
+let g:git_no_map_default = 1
 
 " =-=-=-=-=-=
 " Source work additions
