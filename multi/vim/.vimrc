@@ -1,5 +1,5 @@
 " Author:	DBriscoe (pydave@gmail.com)
-" Modified: 06 Aug 2008
+" Modified: $Date$
 " Influences: (TODO)
 "	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
 "	* Whoever I got cscope from
@@ -293,6 +293,9 @@ iabbrev Iawt import java.awt.*;
 iabbrev Iswing import javax.swing.*;
 iabbrev Ijava import java.*;<ESC>bi
 
+
+" Disable the defaults for lookupfile because I already have something on F5
+let g:LookupFile_DisableDefaultMap = 1
 
 " =-=-=-=-=-=
 " Source work additions
