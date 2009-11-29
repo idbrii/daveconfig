@@ -236,6 +236,11 @@ nnoremap <space> za
 " allow arrow keys when code completion window is up
 "inoremap <Down> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>Down>"<CR>
 
+" SuperTab
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
+
 """ Abbreviations
 "" Command
 " Diff
