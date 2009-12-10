@@ -1,5 +1,5 @@
 " Author:	DBriscoe (pydave@gmail.com)
-" Modified: 06 Aug 2008
+" Modified: $Date$
 " Influences: (TODO)
 "	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
 "	* Whoever I got cscope from
@@ -236,6 +236,11 @@ nnoremap <space> za
 " allow arrow keys when code completion window is up
 "inoremap <Down> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>Down>"<CR>
 
+" SuperTab
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
+
 """ Abbreviations
 "" Command
 " Diff
@@ -273,21 +278,11 @@ iabbrev _guard_ #ifndef <CR>#define <CR><CR>#endif //<ESC>kO
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)
 
-" for Java: Copies type and sets up new
-iabbrev jnew <ESC>BBByW$i new <ESC>pa);<ESC>hi
 
-" for Java: makes main signature
-iabbrev jmain public static void main (String[] args)
-
-" for Java: output shortcuts
-iabbrev Sout System.out.println
-iabbrev Serr System.err.println
-
-" for Java: import shortcuts
-iabbrev Iawt import java.awt.*;
-iabbrev Iswing import javax.swing.*;
-iabbrev Ijava import java.*;<ESC>bi
-
+" Disable the defaults for lookupfile because I already have something on F5
+let g:LookupFile_DisableDefaultMap = 1
+" Don't want maps for git. Just use Normal commands
+let g:git_no_map_default = 1
 
 " =-=-=-=-=-=
 " Source work additions

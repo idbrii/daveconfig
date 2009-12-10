@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Nautilus script -> open gvim
+#
+# Owner : Largey Patrick from Switzerland
+#   	  patrick.largey@nazeman.org
+#		 www.nazeman.org
+#
+# Licence : GNU GPL 
+#
+# Copyright (C) Nazeman
+#
+# Ver. 0.9-1 Date: 16.02.2002
+# Add multiple file open in the same windows
+# 
+# David modified: 02 Sep 2009
+#
+# Dependence : Nautilus (of course)
+#			    gvim
+#
+filesall=""
+while [ $# -gt 0 ]
+	do
+		files=`echo "$1" | sed 's/ /\?/g'`
+		filesall="$files $filesall"
+		shift
+	done
+gvim $filesall&
