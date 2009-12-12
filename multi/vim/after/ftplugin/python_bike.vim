@@ -1,5 +1,5 @@
 " Bicycle Repair Man integration for Vim
-" Version 0.3
+" Version 0.3.1
 " Copyright (c) 2003 Marius Gedminas <mgedmin@delfi.lt>
 "
 " Needs Vim 6.x with python interpreter (Python 2.2 or newer)
@@ -54,6 +54,15 @@
 "  - Would be nice if :BikeImport<CR> asked to enter package
 "  - Would be nice if :BikeRename myNewName<CR> worked
 "  - The code is not very robust (grep for XXX)
+
+" Exit quickly if already running or when 'compatible' is set.          {{{1
+if exists("g:bike_version") || &cp
+  finish
+endif
+"1}}}
+
+" Version number
+let g:bike_version = "0.3.1"
 
 "
 " Default settings for global configuration variables                   {{{1
