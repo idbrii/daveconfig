@@ -162,4 +162,3 @@ if has("cscope")
 
 endif
 
-
