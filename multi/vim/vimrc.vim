@@ -260,7 +260,7 @@ nnoremap <space> za
 cabbrev diffboth diffthis<CR><C-w><C-w>:diffthis<CR>
 cabbrev vdiffsp vert diffsplit
 
-" Windowing (Full screen on my monitor
+" Windowing (Full screen on my monitor)
 cabbrev vert set lines=59
 cabbrev large set lines=59<CR>:set columns=100
 
@@ -291,24 +291,11 @@ iabbrev _guard_ #ifndef <CR>#define <CR><CR>#endif //<ESC>kO
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)
 
-" for Java: Copies type and sets up new
-iabbrev jnew <ESC>BBByW$i new <ESC>pa);<ESC>hi
-
-" for Java: makes main signature
-iabbrev jmain public static void main (String[] args)
-
-" for Java: output shortcuts
-iabbrev Sout System.out.println
-iabbrev Serr System.err.println
-
-" for Java: import shortcuts
-iabbrev Iawt import java.awt.*;
-iabbrev Iswing import javax.swing.*;
-iabbrev Ijava import java.*;<ESC>bi
-
 
 " Disable the defaults for lookupfile because I already have something on F5
 let g:LookupFile_DisableDefaultMap = 1
+" Don't want maps for git. Just use Normal commands
+let g:git_no_map_default = 1
 
 " =-=-=-=-=-=
 " Source work additions
