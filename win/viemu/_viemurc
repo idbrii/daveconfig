@@ -1,0 +1,32 @@
+" Author:	DBriscoe (pydave@gmail.com)
+" Modified: $Date$
+
+" Use Tab and Shift-Tab to indent in visual (like in normal, but keep selection)
+" Note: this can probably be done with Select mode, but I don't use that.
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <LT>gv
+" Use tab and shift-tab for indent in normal mode
+nmap <Tab> >>
+nmap <S-Tab> <<
+
+" Global search
+" Not supported in 2.2
+"map gs :%s/
+"vmap gs :s/
+
+" Make Y work like D and C
+nmap Y y$
+
+" Make backspace work in normal
+nmap <BS> X
+
+" Clear search highlight with ^L
+nnoremap <c-l> :noh<return>
+
+
+""""" Visual Studio only
+
+
+nnoremap <c-]> :vsc VAssistX.GotoImplementation<cr>
+
+
