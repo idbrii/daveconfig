@@ -204,6 +204,7 @@ bufexplorer-customization	bufexplorer.txt	/*bufexplorer-customization*
 bufexplorer-installation	bufexplorer.txt	/*bufexplorer-installation*
 bufexplorer-todo	bufexplorer.txt	/*bufexplorer-todo*
 bufexplorer-usage	bufexplorer.txt	/*bufexplorer-usage*
+bufexplorer-windowlayout	bufexplorer.txt	/*bufexplorer-windowlayout*
 bufexplorer.txt	bufexplorer.txt	/*bufexplorer.txt*
 buffer-explorer	bufexplorer.txt	/*buffer-explorer*
 creating-snippets	snippets_emu.txt	/*creating-snippets*
@@ -216,6 +217,7 @@ g:bufExplorerFindActive	bufexplorer.txt	/*g:bufExplorerFindActive*
 g:bufExplorerReverseSort	bufexplorer.txt	/*g:bufExplorerReverseSort*
 g:bufExplorerShowDirectories	bufexplorer.txt	/*g:bufExplorerShowDirectories*
 g:bufExplorerShowRelativePath	bufexplorer.txt	/*g:bufExplorerShowRelativePath*
+g:bufExplorerShowTabBuffer	bufexplorer.txt	/*g:bufExplorerShowTabBuffer*
 g:bufExplorerShowUnlisted	bufexplorer.txt	/*g:bufExplorerShowUnlisted*
 g:bufExplorerSortBy	bufexplorer.txt	/*g:bufExplorerSortBy*
 g:bufExplorerSplitBelow	bufexplorer.txt	/*g:bufExplorerSplitBelow*
@@ -499,6 +501,11 @@ v_]%	matchit.txt	/*v_]%*
 v_a%	matchit.txt	/*v_a%*
 v_g%	matchit.txt	/*v_g%*
 vs	surround.txt	/*vs*
+xml-plugin-callbacks	xml-plugin.txt	/*xml-plugin-callbacks*
+xml-plugin-html	xml-plugin.txt	/*xml-plugin-html*
+xml-plugin-mappings	xml-plugin.txt	/*xml-plugin-mappings*
+xml-plugin-settings	xml-plugin.txt	/*xml-plugin-settings*
+xml-plugin.txt	xml-plugin.txt	/*xml-plugin.txt*
 yS	surround.txt	/*yS*
 ySS	surround.txt	/*ySS*
 ys	surround.txt	/*ys*
