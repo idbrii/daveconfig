@@ -1,5 +1,5 @@
 " Settings for when vim is invoked from visual studio.
-" Modified: 07 Aug 2008
+" Modified: 24 Mar 2010
 "
 " VS passes the following arguments to vim:
 "   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
@@ -8,3 +8,15 @@
 set columns=140
 " Centre cursor
 normal zz
+
+
+""""" Load cscope database if we can
+" Setup cscope for visual studio (game development)
+if has("cscope")
+    " disable verbose for our initial load
+    set nocscopeverbose
+    " add any database in current directory
+    runtime work_cscope.vim
+    " okay, be verbose from now on
+    set cscopeverbose
+endif
