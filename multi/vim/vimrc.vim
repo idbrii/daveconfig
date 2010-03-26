@@ -1,9 +1,10 @@
 " Author:	DBriscoe (pydave@gmail.com)
 " Modified: $Date$
-" Influences: (TODO)
+" Influences:
 "	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
-"	* Whoever I got cscope from
-"	* MacVim guy
+"	* MacVim's defaults: http://macvim.org/OSX/index.php
+" Notes:
+" mapping Tab in normal mode breaks cscope -- adds tabs when you jump somewhere
 
 " Don't load plugins if we aren't in Vim7
 if version < 700
@@ -26,10 +27,12 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 set ruler						" line numbers and column the cursor is on
 "set number						" Show line numbering
 "set numberwidth=1			" Use 1 col + 1 space for numbers
-"colorscheme tango
+
 if has("macunix")
     " looks good on my mac terminal
     colorscheme elflord
+elseif has("windows")
+    colorscheme desert
 else
     " looks good on ubuntu terminal
     colorscheme carvedwood
@@ -57,6 +60,7 @@ set linebreak					" Show wrap at word boundaries and preface wrap with >>
 set showbreak=>>
 
 """" Editing
+set nojoinspaces            " I don't use double spaces
 set showmatch				" Briefly jump to the matching bracket
 set matchtime=1				" For .1 seconds
 "set formatoptions-=tc		" can I format for myself?? TODO
@@ -68,6 +72,9 @@ set expandtab				" Use spaces, not tabs (use Ctrl-V+Tab to insert a tab)
 "set autoindent				" Indent like previous line
 set smartindent				" Try to be clever about indenting
 "set cindent				" Really clever indenting
+if version > 600
+    set backspace=start         " backspace can clear up to beginning of line
+endif
 
 " we don't want to edit these type of files
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
@@ -114,8 +121,9 @@ au!
 		\ endif
 
 	" Switch to the directory of the current file, unless it's a help file.
+    "	TODO: Why do I prefer BufReadPost over BufEnter?
 "	au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
-    " Switch to directory of current file (not help files) on open.
+	" Switch to the directory of the current file, unless it's a help file.
 	au BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
 
 	" kill calltip window if we move cursor or leave insert mode
@@ -166,15 +174,17 @@ nnoremap  <c-left>   Bh
 "nnoremap  <s-right>  vl
 "nnoremap  <s-left>   vh
 
-" Use ^T and ^D to indent in visual (like in normal, but keep selection)
+" Use Ctrl-Tab and Shift-Tab to indent in visual 
+" Also add Ctrl-t for consistency with insert mode (but keeps selection)
+" Can't map Ctrl-D since that's page down
 " Note: this can probably be done with Select mode, but I don't use that.
 " TODO: upgrade snippetsemu and change C-t to Tab
+vnoremap <C-Tab> >gv
 vnoremap <C-T> >gv
 vnoremap <S-Tab> <LT>gv
-" Use ctrl-tab and ctrl-shift-tab for indent in normal mode
-" Need to use ctrl because mapping <Tab breaks cscope -- adds tabs when you jump somewhere
-nmap <C-Tab> >>
-nmap <C-S-Tab> <<
+" Use ctrl-tab and shift-tab for indent in normal mode
+nnoremap <C-Tab> >>
+nnoremap <S-Tab> <<
 
 " Easy cmdline run (normal, visual)
 map <Leader>\ :!<up><CR>
