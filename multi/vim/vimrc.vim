@@ -39,16 +39,6 @@ else
 endif
 
 
-" tab labels show the filename without path(tail)
-set guitablabel=%N/\ %t\ %M
-
-""" Windows
-if exists(":tab")				" Try to move to other windows if changing buf
-	set switchbuf=useopen,usetab
-else							" Try other windows & tabs if available
-	set switchbuf=useopen
-endif
-
 """" Messages, Info, Status
 set shortmess+=a				" Use [+] [RO] [w] for modified, read-only, modified
 set showcmd						" Display what command is waiting for an operator
@@ -75,6 +65,7 @@ set smartindent				" Try to be clever about indenting
 if version > 600
     set backspace=start         " backspace can clear up to beginning of line
 endif
+
 
 " we don't want to edit these type of files
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
@@ -141,7 +132,7 @@ endif
 " bind ctrl+space for omnicompletion
 inoremap <C-Space> <C-x><C-o>
 " Ensure we're using all options
-set completeopt=menu,preview,menuone,longest
+set completeopt=menu,preview,menuone
 
 " SuperTab -- not currently in use
 let g:SuperTabDefaultCompletionType = 'context'
@@ -154,6 +145,10 @@ let g:SuperTabMappingBackward = '<s-c-space>'
 
 " Toggle the tag list bar
 nmap <F4> :TlistToggle<CR>
+
+" Scratch file for random bits
+nnoremap <F1> :e ~/.vim-scratch<CR>
+nnoremap <S-F1> :sp ~/.vim-scratch<CR>
 
 """" Movement
 " work more logically with wrapped lines
@@ -180,7 +175,7 @@ nnoremap  <c-left>   Bh
 " Note: this can probably be done with Select mode, but I don't use that.
 " TODO: upgrade snippetsemu and change C-t to Tab
 vnoremap <C-Tab> >gv
-vnoremap <C-T> >gv
+vnoremap <C-t> >gv
 vnoremap <S-Tab> <LT>gv
 " Use ctrl-tab and shift-tab for indent in normal mode
 nnoremap <C-Tab> >>
@@ -201,6 +196,10 @@ vmap gs :s/
 
 " Open preview window for tags (just jump with <C-]>)
 nnoremap <A-]> :ptag <C-r><C-w><CR>
+
+" Simplify most common cscope command
+" (<C-\>s is defined in cscope_maps.vim)
+nmap <C-\><C-\> <C-\>s
 
 " Windows keys
 nmap <C-s> :w<CR>
@@ -301,11 +300,34 @@ iabbrev _guard_ #ifndef <CR>#define <CR><CR>#endif //<ESC>kO
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)
 
+"""""
+" Plugins
 
-" Disable the defaults for lookupfile because I already have something on F5
-let g:LookupFile_DisableDefaultMap = 1
+"""""
+" LookupFile
+let g:LookupFile_DisableDefaultMap = 1          " Disable defaults -- make is F5
+"let g:LookupFile_MinPatLength = 6              " Is it slow enough yet?
+let g:LookupFile_UpdateTime = 400               " wait a bit longer before completing
+let g:LookupFile_PreserveLastPattern = 0        " what I last looked up is in bufexplorer
+let g:LookupFile_EscCancelsPopup = 1            " this doesn't work! I can't get out with Esc
+let g:LookupFile_AlwaysAcceptFirst = 1          " easier to pick first result
+
+let lookupfile = findfile('filenametags', '.;/')
+if filereadable(lookupfile)
+    let g:LookupFile_TagExpr = string(lookupfile)
+    let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
+endif
+
+""" Like visual assist
+" Open file
+nnoremap <A-S-o> :LookupFile<CR>
+" Open header/implementation -- gives list of files with the same name
+nnoremap <A-o> :LookupFile<CR><C-r>#<Esc>F.C.
+
 " Don't want maps for git. Just use Normal commands
 let g:git_no_map_default = 1
+
+
 
 " =-=-=-=-=-=
 " Source work additions
