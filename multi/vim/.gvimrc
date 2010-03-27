@@ -1,7 +1,23 @@
 colorscheme desert
 
+" tab labels show the filename without path(tail)
+set guitablabel=%N/\ %t\ %M
+
+""" Windows
+if exists(":tab")				" Try to move to other windows if changing buf
+	set switchbuf=useopen,usetab
+else							" Try other windows & tabs if available
+	set switchbuf=useopen
+endif
+
+""" Extra menu options
+" If we're unix or mac, we probably have the required unix tools
+" and ~/.vim is probably our vim folder
+if has("unix") || has("mac")
+    menu Tools.Build\ Other\ Tags   :source ~/.vim/scripts/buildtags.vim<CR>
+endif
+
+
 " =-=-=-=-=-=
 " Source work additions, if available
-if filereadable(glob("$HOME/vimfiles/gwork.vim"))
-    runtime gwork.vim
-endif
+runtime gwork.vim
