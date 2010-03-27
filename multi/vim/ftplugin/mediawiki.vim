@@ -1,2 +1,6 @@
-" Since I haven't figured out a clever foldpattern, we do it manually
+" Use spell checking for writable files
+if !&readonly
+    set spell
+endif
+
 set foldmethod=marker
