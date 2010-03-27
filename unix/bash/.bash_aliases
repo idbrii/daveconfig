@@ -23,6 +23,7 @@ alias les='/usr/share/vim/vim71/macros/less.sh'
 # aptitude
 alias aptinstall='sudo aptitude install'
 alias aptremove='sudo aptitude remove'
+alias aptautoremove='sudo apt-get autoremove'   # no autoremove for aptitude
 alias aptsearch='apt-cache search'
 alias aptshow='apt-cache show'
 
@@ -36,3 +37,9 @@ alias ipy='ipython'
 # Advanced applications
 # unfortunately, this is Mac-specific. Ideally, I'd use $VIMRUNTIME
 # currently doesn't work alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
+
+
+
+# Quick way to view files in vim
+function v { $* | view - ; }
+
