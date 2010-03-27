@@ -87,7 +87,10 @@ if has("spell")
 endif
 
 " read tags 4 directories deep
-set tags=./tags;../../../../
+"set tags=./tags;../../../../
+" search up recursively for tags file (to root)
+set tags=./tags;/
+
 
 """" Folding
 set foldmethod=syntax		" By default, use syntax to determine folds
@@ -122,17 +125,24 @@ au!
 	augroup END
 endif
 
-"""" Key Mappings
+
+
+
+"""" Completion
+
 " bind ctrl+space for omnicompletion
-"inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-"			\ "\<lt>C-n>" :
-"			\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-"			\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-"			\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-"imap <C-@> <C-Space>
-"
-" Simpler remapping. TODO: What is difference?
 inoremap <C-Space> <C-x><C-o>
+" Ensure we're using all options
+set completeopt=menu,preview,menuone,longest
+
+" SuperTab -- not currently in use
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
+
+
+
+"""" Key Mappings
 
 " Toggle the tag list bar
 nmap <F4> :TlistToggle<CR>
@@ -161,9 +171,10 @@ nnoremap  <c-left>   Bh
 " TODO: upgrade snippetsemu and change C-t to Tab
 vnoremap <C-T> >gv
 vnoremap <S-Tab> <LT>gv
-" Use tab and shift-tab for indent in normal mode
-nmap <Tab> >>
-nmap <S-Tab> <<
+" Use ctrl-tab and ctrl-shift-tab for indent in normal mode
+" Need to use ctrl because mapping <Tab breaks cscope -- adds tabs when you jump somewhere
+nmap <C-Tab> >>
+nmap <C-S-Tab> <<
 
 " Easy cmdline run (normal, visual)
 map <Leader>\ :!<up><CR>
@@ -179,7 +190,7 @@ map gs :%s/
 vmap gs :s/
 
 " Open preview window for tags (just jump with <C-]>)
-nnoremap <C-\> :ptag <C-r><C-w><CR>
+nnoremap <A-]> :ptag <C-r><C-w><CR>
 
 " Windows keys
 nmap <C-s> :w<CR>
@@ -211,6 +222,13 @@ nmap ^ <C-^>
 nmap <A-Left> :bp<CR>
 nmap <A-Right> :bn<CR>
 
+" Ctrl+Shift+PgUp/Dn - Move between files
+nnoremap <C-S-PageDown> :next<CR>
+nnoremap <C-S-PageUp> :prev<CR>
+" Ctrl+PgUp/Dn - Move between quickfix locations
+nnoremap <C-PageDown> :cn<CR>
+nnoremap <C-PageUp> :cp<CR>
+
 
 """ Extra functionality for some existing commands:
 
@@ -227,19 +245,14 @@ noremap Q gq
 vnoremap g* y/<C-R>"<CR>
 vnoremap g# y?<C-R>"<CR>
 
+" <Shift-space> reloads the file
+nnoremap <S-space> :e<CR>
+
 " <space> toggles folds opened and closed
 nnoremap <space> za
 
 " <space> in visual mode creates a fold over the marked range
 "vnoremap <space> zf
-
-" allow arrow keys when code completion window is up
-"inoremap <Down> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>Down>"<CR>
-
-" SuperTab
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabMappingForward = '<c-space>'
-let g:SuperTabMappingBackward = '<s-c-space>'
 
 """ Abbreviations
 "" Command
@@ -247,7 +260,7 @@ let g:SuperTabMappingBackward = '<s-c-space>'
 cabbrev diffboth diffthis<CR><C-w><C-w>:diffthis<CR>
 cabbrev vdiffsp vert diffsplit
 
-" Windowing (Full screen on my monitor
+" Windowing (Full screen on my monitor)
 cabbrev vert set lines=59
 cabbrev large set lines=59<CR>:set columns=100
 
