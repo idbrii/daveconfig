@@ -203,7 +203,7 @@ exec "Snippet tryef try:
 " Shebang
 exec "Snippet sb #!/usr/bin/env python<CR>".st.et
 "exec "Snippet sbe #!/usr/bin/env python<CR># -*- coding: ".st."encoding".et." -*-<CR>".st.et
-"exec "Snippet sbu #!/usr/bin/env python<CR># -*- coding: UTF-8 -*-<CR>".st.et
+exec "Snippet sbu #!/usr/bin/env python<CR># -*- coding: utf-8 -*-<CR>".st.et
 "exec "Snippet sbl1 #!/usr/bin/env python<CR># -*- coding: Latin-1 -*-<CR>".st.et
 
 " Name check (main default)
@@ -217,7 +217,7 @@ exec "Snippet unittest if __name__ == '__main__':
 \<CR>def setUp(self):
 \<CR>".st."pass".et."
 \<CR>
-\<CR>def runTest(self):
+\<CR><BS>def runTest(self):
 \<CR>".st.et
 
 " Doc tests.
@@ -225,6 +225,6 @@ exec "Snippet doctest def _test():
 \<CR>import doctest
 \<CR>doctest.testmod()
 \<CR>
-\<CR>if __name__ == '__main__':
+\<CR><BS>if __name__ == '__main__':
 \<CR>_test()
 \<CR>".st.et
