@@ -19,5 +19,5 @@ endif
 
 
 " =-=-=-=-=-=
-" Source work additions, if available
-runtime gwork.vim
+" Source local environment additions, if available
+runtime glocal.vim
