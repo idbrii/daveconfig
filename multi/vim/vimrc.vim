@@ -302,6 +302,11 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 """""
 " Plugins
 
+" SuperTab
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
+
 """""
 " LookupFile
 let g:LookupFile_DisableDefaultMap = 1          " Disable defaults -- make is F5
