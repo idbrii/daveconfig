@@ -2,6 +2,14 @@
 # vim:set fdm=marker:
 # Build the LookupFile database
 
+cscope=$1
+if [ $# -lt 1 ] ; then
+    # assume plain cscope if we got no input
+    cscope=cscope
+fi
+
+filetype=$2
+
 tagdir=.
 tagfile=$tagdir/filenametags
 
@@ -10,14 +18,16 @@ cd $tagdir
 
 # Build filenametags	{{{
 echo "!_TAG_FILE_SORTED	2	/2=foldcase/"> $tagfile
-if [ "$1" == "cpp" ] ; then
-    # Simple cpp version
+if [ "$filetype" == "cpp" ] ; then
+    # Probably a big c++ project, so use the simple format
     find . -type f -iname "*.cpp" -o -iname "*.h" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+
 else
-    # generic version for everthing (from vimdoc). Excludes common nontext files
+    # Don't know what we are so include anything that's not binary or junk (from vimdoc)
     # DavidAdd: Directories: .git
     # DavidAdd: Files: pyc
     find . \( -name .git -o -name .svn -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\).*' -type f -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+
 fi
 
 # }}}
@@ -34,7 +44,7 @@ cut -f2 $tagfile | tail --lines=+2 > cscope.files
 # May want to consider these flags
 #	-m "lang"       Use lang for multi-lingual cscope.
 #	-R              Recurse directories for files.
-mlcscope -b -q -k
+$cscope -b -q -k
 
 # }}}
 
