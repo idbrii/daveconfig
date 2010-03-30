@@ -16,7 +16,7 @@ if has("cscope")
     " disable verbose for our initial load
     set nocscopeverbose
     " add any database in current directory
-    runtime local_cscope.vim
+    runtime cscope_local.vim
     " okay, be verbose from now on
     set cscopeverbose
 endif
