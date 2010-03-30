@@ -330,5 +330,5 @@ let g:git_no_map_default = 1
 
 
 " =-=-=-=-=-=
-" Source work additions
-runtime work.vim
+" Source local environment additions
+runtime local.vim
