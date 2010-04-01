@@ -100,19 +100,18 @@ if has("cscope")
     "
 
     if has('quickfix')
-        " Put results in the quickfix window
-		set cscopequickfix=s-,c-,d-,i-,t-,e-
+        " push all search types to quickfix window
+		set cscopequickfix=s-,g-,c-,t-,e-,f-,i-,d-
 	endif
-    " We use lcscope because if quickfix is enabled, it uses that, otherwise
-    " it's the same as cscope.
-    nmap <C-\>s :lcs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>g :lcs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>c :lcs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>t :lcs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>e :lcs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-\>i :lcs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>	
+
+    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 
 
