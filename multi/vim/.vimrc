@@ -1,5 +1,4 @@
 " Author:	DBriscoe (pydave@gmail.com)
-" Modified: $Date$
 " Influences:
 "	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
 "	* MacVim's defaults: http://macvim.org/OSX/index.php
@@ -12,7 +11,7 @@ if version < 700
 endif
 
 """ Settings 
-set nocompatible				" Don't be compatible with vi
+set nocompatible				" who needs vi, we've got Vim!
 
 """" Searching and Patterns
 set ignorecase					" search is case insensitive
@@ -22,10 +21,9 @@ set incsearch					" Find as you type
 
 """" Display
 set background=dark			" I use dark background
-set lazyredraw					" Don't repaint when scripts are running
+set lazyredraw				" Don't repaint when scripts are running
 set scrolloff=3				" Keep 3 lines below and above cursor
-set ruler						" line numbers and column the cursor is on
-"set number						" Show line numbering
+"set number					" Show line numbering
 "set numberwidth=1			" Use 1 col + 1 space for numbers
 
 if has("macunix")
@@ -42,7 +40,7 @@ endif
 """" Messages, Info, Status
 set shortmess+=a				" Use [+] [RO] [w] for modified, read-only, modified
 set showcmd						" Display what command is waiting for an operator
-set ruler						" Show pos below the win if there's no status line
+set ruler						" line numbers and column the cursor is on
 set laststatus=2				" Always show statusline, even if only 1 window
 set report=0					" Notify of all whole-line changes
 set visualbell					" Use visual bell (no beep)
@@ -302,6 +300,11 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 
 """""
 " Plugins
+
+" SuperTab
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabMappingForward = '<c-space>'
+let g:SuperTabMappingBackward = '<s-c-space>'
 
 """""
 " LookupFile

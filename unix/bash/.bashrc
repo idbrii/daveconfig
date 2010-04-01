@@ -3,7 +3,6 @@
 # This is the .bashrc from git. Modified for my ubuntu
 # lines with ## are my changes (for ubuntu and mac)
 # Last update:
-# $Date$
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
