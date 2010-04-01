@@ -1,5 +1,4 @@
 " Author:	DBriscoe (pydave@gmail.com)
-" Modified: $Date$
 
 " Use Tab and Shift-Tab to indent in visual (like in normal, but keep selection)
 " Note: this can probably be done with Select mode, but I don't use that.
