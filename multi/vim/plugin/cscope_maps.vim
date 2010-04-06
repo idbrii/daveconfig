@@ -38,9 +38,9 @@ if has("cscope")
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
 
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    set cscopetagorder=0
+    " 0 = check cscope for definition of a symbol before checking ctags
+	" 1 = reverse search order
+    set cscopetagorder=1
 
     " Don't connect to cscope here. It's better to customize with our
     " work_cscope.vim setup
