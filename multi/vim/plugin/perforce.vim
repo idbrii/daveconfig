@@ -349,7 +349,7 @@ command! -nargs=0 PFUpdateViews :call perforce#UpdateViewMappings()
 
 " New normal mode mappings.
 if (! exists('no_plugin_maps') || ! no_plugin_maps) &&
-      \ (! exists('no_perforce_maps') || ! no_execmap_maps)
+      \ (! exists('no_perforce_maps') || ! no_perforce_maps)
   nnoremap <silent> <Leader>prap :PFRefreshActivePane<cr>
   nnoremap <silent> <Leader>prfs :PFRefreshFileStatus<cr>
 
