@@ -102,6 +102,12 @@ if has("cscope")
     if has('quickfix')
         " push all search types to quickfix window
 		set cscopequickfix=s-,g-,c-,t-,e-,f-,i-,d-
+		if &cscopetag && &cscopetagorder is 0
+			" If we're using cscope to jump around with tags, then don't put
+			" definition in quickfix. Otherwise, our quick ^] jumps won't have
+			" a tag stack.
+			set cscopequickfix-=g-
+		endif
 	endif
 
     nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
