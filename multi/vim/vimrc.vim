@@ -209,6 +209,11 @@ nnoremap <C-a> 1GVG
 " Windows clipboard
 vmap <C-c> "+y
 nnoremap <C-v> "+p
+
+" Paste last yanked item
+noremap <Leader>p "0p
+noremap <Leader>P "0P
+
 " Keep block select, but require shift
 nnoremap <C-S-v> <C-v>
 
@@ -287,13 +292,7 @@ iabbrev shebangpy #! /usr/bin/env python
 iabbrev shebangsh #! /bin/sh
 iabbrev shebangbash #! /bin/bash
 
-" macros
-iabbrev _poff #pragma optimize("", off)
-iabbrev _pon #pragma optimize("", on)
-iabbrev #i #include
-iabbrev #d #define
-iabbrev D_P DBG_PRINT
-iabbrev _guard_ #ifndef <CR>#define <CR><CR>#endif //<ESC>kO
+
 
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)
@@ -325,12 +324,21 @@ endif
 " Open file
 nnoremap <A-S-o> :LookupFile<CR>
 " Open header/implementation -- gives list of files with the same name
-nnoremap <A-o> :LookupFile<CR><C-r>#<Esc>F.C.
+" using Leader first because cpp.vim has faster <A-o> (and doesn't change last
+" command)
+nnoremap <Leader><A-o> :LookupFile<CR><C-r>#<Esc>F."_C.
+
+
+"""""""""""
+" Git
 
 " Don't want maps for git. Just use Normal commands
 let g:git_no_map_default = 1
 
 
+"""""""""""
+" Perforce
+let no_perforce_maps=1
 
 " =-=-=-=-=-=
 " Source local environment additions
