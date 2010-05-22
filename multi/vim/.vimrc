@@ -277,7 +277,10 @@ cabbrev what :redir @c<CR>:g//<CR>:redir END<CR>:new<CR>:put! c<CR><CR>
 "" Puts whatever is in between in a new buffer
 "" You can use ctag/cscope output, g searches, whatever! -- clobbers your c buffer
 cabbrev rstart redir @c<CR>
-cabbrev rend redir END<CR>:new<CR>:put! c<CR><CR>
+cabbrev rend redir END<CR>:sp ~/.rend.vimscratch<CR>:put! c<CR><CR>
+"" Faster ways to start search redirects. Require rend once complete.
+cabbrev rg redir @c<CR>:g
+cabbrev rv redir @c<CR>:v
 
 " Diff
 cabbrev diffboth diffthis<CR><C-w><C-w>:diffthis<CR>
