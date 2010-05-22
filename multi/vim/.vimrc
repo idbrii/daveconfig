@@ -46,6 +46,7 @@ set report=0					" Notify of all whole-line changes
 set visualbell					" Use visual bell (no beep)
 set linebreak					" Show wrap at word boundaries and preface wrap with >>
 set showbreak=>>
+"set splitbelow                  " Make preview (and all other) splits appear at the bottom
 
 """" Editing
 set nojoinspaces            " I don't use double spaces
@@ -145,8 +146,8 @@ let g:SuperTabMappingBackward = '<s-c-space>'
 nmap <F4> :TlistToggle<CR>
 
 " Scratch file for random bits
-nnoremap <F1> :e ~/.vim-scratch<CR>
-nnoremap <S-F1> :sp ~/.vim-scratch<CR>
+nnoremap <F1> :sp ~/.vim-scratch<CR>
+nnoremap <S-F1> :e ~/.vim-scratch<CR>
 
 """" Movement
 " work more logically with wrapped lines
@@ -266,8 +267,18 @@ nnoremap <space> za
 " <space> in visual mode creates a fold over the marked range
 "vnoremap <space> zf
 
+
 """ Abbreviations
 "" Command
+
+" Redirect commands to new buffer
+"" Puts the last g search command in a new buffer -- clobbers your c buffer
+cabbrev what :redir @c<CR>:g//<CR>:redir END<CR>:new<CR>:put! c<CR><CR>
+"" Puts whatever is in between in a new buffer
+"" You can use ctag/cscope output, g searches, whatever! -- clobbers your c buffer
+cabbrev rstart redir @c<CR>
+cabbrev rend redir END<CR>:new<CR>:put! c<CR><CR>
+
 " Diff
 cabbrev diffboth diffthis<CR><C-w><C-w>:diffthis<CR>
 cabbrev vdiffsp vert diffsplit
