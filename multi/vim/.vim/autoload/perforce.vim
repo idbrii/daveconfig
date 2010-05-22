@@ -2041,7 +2041,7 @@ function! s:GetClientInfo()
   let infoStr = ''
   call s:PushP4Context()
   try
-    let infoStr = perforce#PFIF(0, 4, 'info')
+    let infoStr = perforce#PFIF(0, 4, 'set')
     if s:errCode != 0
       return s:ConfirmMessage((v:errmsg != '') ? v:errmsg : infoStr, 'OK', 1,
             \ 'Error')
@@ -2050,9 +2050,9 @@ function! s:GetClientInfo()
     call s:PopP4Context(0)
   endtry
   let g:p4ClientRoot = genutils#CleanupFileName(s:StrExtract(infoStr,
-        \ '\CClient root: [^'."\n".']\+', 13))
-  let s:p4Client = s:StrExtract(infoStr, '\CClient name: [^'."\n".']\+', 13)
-  let s:p4User = s:StrExtract(infoStr, '\CUser name: [^'."\n".']\+', 11)
+        \ '\CP4ROOT=[^ '."\n".']\+', 13))
+  let s:p4Client = s:StrExtract(infoStr, '\CP4CLIENT=[^ '."\n".']\+', 13)
+  let s:p4User = s:StrExtract(infoStr, '\CP4USER=[^ '."\n".']\+', 11)
 endfunction
 
 " Get/refresh filestatus for the specified buffer with optimizations.
