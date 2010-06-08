@@ -243,9 +243,12 @@ nmap <A-Right> :bn<CR>
 " Ctrl+Shift+PgUp/Dn - Move between files
 nnoremap <C-S-PageDown> :next<CR>
 nnoremap <C-S-PageUp> :prev<CR>
-" Ctrl+PgUp/Dn - Move between quickfix locations
-nnoremap <C-PageDown> :cn<CR>
-nnoremap <C-PageUp> :cp<CR>
+" Ctrl+PgUp/Dn - Move between quickfix marks
+nnoremap <C-PageDown> :cnext<CR>
+nnoremap <C-PageUp> :cprev<CR>
+" Alt+PgUp/Dn - Move between location window marks
+nnoremap <A-PageDown> :lnext<CR>
+nnoremap <A-PageUp> :lprev<CR>
 
 
 """ Extra functionality for some existing commands:
@@ -341,7 +344,8 @@ endif
 
 """ Like visual assist
 " Open file
-nnoremap <A-S-o> :LookupFile<CR>
+nnoremap <A-S-o> :LUTags<CR>
+nnoremap <C-S-o> :LUBufs<CR>
 " Open header/implementation -- gives list of files with the same name
 " using Leader first because cpp.vim has faster <A-o> (and doesn't change last
 " command)
