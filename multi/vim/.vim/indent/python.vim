@@ -15,7 +15,7 @@ let b:did_indent = 1
 
 setlocal expandtab
 setlocal nolisp
-setlocal autoindent
+setlocal autoindent	" indentexpr isn't much help otherwise
 setlocal indentexpr=GetPythonIndent(v:lnum)
 setlocal indentkeys=!^F,o,O,<:>,0),0],0},=elif,=except,0#
 

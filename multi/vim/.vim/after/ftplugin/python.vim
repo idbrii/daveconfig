@@ -87,6 +87,9 @@ setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 nmap  K :call ShowPyDoc('<C-R><C-W>', 1)<CR> 
 vmap  K y:call ShowPyDoc('<C-R>"', 1)<CR> 
 
+"" Quick commenting
+vmap <C-o> :s/^/#<CR>:silent nohl<CR>
+
 "" Stdlib tags
 if has("unix")
     setlocal tags+=$HOME/.vim/tags/python.ctags
