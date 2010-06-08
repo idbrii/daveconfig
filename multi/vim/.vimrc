@@ -15,8 +15,8 @@ set nocompatible				" who needs vi, we've got Vim!
 
 """" Searching and Patterns
 set ignorecase					" search is case insensitive
-set smartcase					" search case sensitive if caps on 
-set hlsearch					" Highlight matches to the search 
+set smartcase					" search case sensitive if caps on
+set hlsearch					" Highlight matches to the search
 set incsearch					" Find as you type
 
 """" Display
@@ -173,7 +173,7 @@ nnoremap  <c-left>   Bh
 "nnoremap  <s-right>  vl
 "nnoremap  <s-left>   vh
 
-" Use Ctrl-Tab and Shift-Tab to indent in visual 
+" Use Ctrl-Tab and Shift-Tab to indent in visual
 " Also add Ctrl-t for consistency with insert mode (but keeps selection)
 " Can't map Ctrl-D since that's page down
 " Note: this can probably be done with Select mode, but I don't use that.
@@ -230,7 +230,7 @@ nmap Y y$
 nmap <BS> X
 
 if &diff
-" easily handle diffing 
+" easily handle diffing
    vnoremap < :diffget<CR>
    vnoremap > :diffput<CR>
 endif
