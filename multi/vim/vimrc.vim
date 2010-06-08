@@ -110,6 +110,11 @@ au!
 		\   exe "normal g`\"" |
 		\ endif
 
+    " Commenting blocks
+    autocmd FileType build,xml,html vmap <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
+    autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
+
+
 	" Switch to the directory of the current file, unless it's a help file.
     "	TODO: Why do I prefer BufReadPost over BufEnter?
 "	au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
