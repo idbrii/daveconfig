@@ -278,7 +278,8 @@ nnoremap <space> za
 "vnoremap <space> zf
 
 
-""" Abbreviations
+"""""""""""
+""" Abbreviations   {{{
 "" Command
 
 " Redirect commands to new buffer
@@ -321,8 +322,10 @@ iabbrev shebangbash #! /bin/bash
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)
 
-"""""
-" Plugins
+"}}}
+
+"""""""""""
+" Plugins   {{{
 
 " SuperTab
 let g:SuperTabDefaultCompletionType = 'context'
@@ -355,21 +358,25 @@ nnoremap <C-S-o> :LUBufs<CR>
 " command)
 nnoremap <Leader><A-o> :LookupFile<CR><C-r>#<Esc>F."_C.
 
+"}}}
+
 
 """""""""""
-" Git
+" Source Control    {{{
 
+" Git
 " Don't want maps for git. Just use Normal commands
 let g:git_no_map_default = 1
 
 
-"""""""""""
 " Perforce
 let no_perforce_maps=1
 
+"}}}
+
 
 """""""""""
-" Functions
+" Functions {{{
 
 " CopyFilenameToClipboard
 " Argument: ("%") or ("%:p")
@@ -377,7 +384,10 @@ function! CopyFilenameToClipboard(filename)
     let @*=expand(a:filename)
 endfunction
 
+"}}}
 
 " =-=-=-=-=-=
 " Source local environment additions
 runtime local.vim
+
+" vim: sw=4 fdm=marker
