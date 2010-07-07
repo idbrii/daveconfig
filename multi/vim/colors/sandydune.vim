@@ -22,7 +22,7 @@ let g:colors_name="desert"
 
 hi Normal	guifg=White guibg=grey20
 
-" highlight groups
+" highlight groups {{{
 hi Cursor	guibg=khaki guifg=slategrey
 "hi CursorIM
 "hi Directory
@@ -53,8 +53,10 @@ hi WarningMsg	guifg=salmon
 "hi Menu
 "hi Scrollbar
 "hi Tooltip
+"}}}
 
-" syntax highlighting groups
+" syntax highlighting groups {{{
+" http://www.tayloredmktg.com/rgb/
 hi Comment	guifg=SkyBlue
 hi Constant	guifg=#ffa0a0
 "String		guifg=#000000	"a string constant: "this is a string"
@@ -83,7 +85,8 @@ hi PreProc	guifg=indianred
 hi Type		guifg=darkkhaki
 "StorageClass	guifg=#000000	"static, register, volatile, etc.
 "Structure	guifg=#000000	"struct, union, enum, etc.
-"Typedef	guifg=#000000	"A typedef
+"darkkhaki=#bdb76b
+hi Typedef	guifg=#cdc79b
 
 hi Special	guifg=navajowhite
 "SpecialChar	guifg=#000000	"special character in a constant
@@ -98,8 +101,9 @@ hi Ignore	guifg=grey40
 "hi Error
 hi Todo		guifg=orangered guibg=yellow2
 
+" }}}
 
-" color terminal definitions
+" color terminal definitions {{{
 hi SpecialKey	ctermfg=darkgreen
 hi NonText	cterm=bold ctermfg=darkblue
 hi Directory	ctermfg=darkcyan
@@ -135,6 +139,7 @@ hi Underlined	cterm=underline ctermfg=5
 hi Ignore	cterm=bold ctermfg=7
 hi Ignore	ctermfg=darkgrey
 hi Error	cterm=bold ctermfg=7 ctermbg=1
+" }}}
 
 
-"vim: sw=4
+" vim: sw=4 fdm=marker fdl=0
