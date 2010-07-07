@@ -66,7 +66,8 @@ hi Constant	guifg=#ffa0a0
 "Float		guifg=#000000	"a floating point constant: 2.3e10
 
 hi Identifier	guifg=palegreen
-"hi Function	    guifg=lightgreen
+" palegreen=#98fb98
+hi Function	    guifg=#b0e0b0
 
 hi Statement	guifg=khaki
 "Conditional	guifg=#000000	"if, then, else, endif, switch, etc.
@@ -142,4 +143,4 @@ hi Error	cterm=bold ctermfg=7 ctermbg=1
 " }}}
 
 
-" vim: sw=4 fdm=marker fdl=0
+" vim: sw=4 fdm=marker
