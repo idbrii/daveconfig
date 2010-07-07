@@ -1,14 +1,20 @@
-ln -s ~/data/settings/daveconfig/multi/vim/.vim ~/.
-ln -s ~/data/settings/daveconfig/multi/vim/.vimrc ~/.
-ln -s ~/data/settings/daveconfig/multi/vim/.gvimrc ~/.
+#! /bin/sh
 
-ln -s ~/data/settings/daveconfig/multi/git/.gitconfig ~/.
-ln -s ~/data/settings/daveconfig/multi/git/.gitignore ~/.
+dconfig_path=~/data/settings/daveconfig
 
-ln -s ~/data/settings/daveconfig/unix/bash/.bash_aliases ~/.
+ln -s $dconfig_path/multi/vim/.vim ~/.
+ln -s $dconfig_path/multi/vim/.vimrc ~/.
+ln -s $dconfig_path/multi/vim/.gvimrc ~/.
+
+ln -s $dconfig_path/multi/git/.gitconfig ~/.
+ln -s $dconfig_path/multi/git/.gitignore ~/.
+
+ln -s $dconfig_path/unix/bash/.bash_aliases ~/.
+# bashrc is different on different platforms
 if [ `uname` = 'Linux' ] ; then
-    ln -s ~/data/settings/daveconfig/unix/bash/.bashrc ~/.
+    ln -s $dconfig_path/unix/bash/.bashrc ~/.
 else
     # if mac
-    ln -s ~/data/settings/daveconfig/unix/bash/.profile ~/.
+    ln -s $dconfig_path/unix/bash/.profile ~/.
 fi
+
