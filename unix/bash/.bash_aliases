@@ -39,6 +39,8 @@ alias ipy='ipython'
 # currently doesn't work alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
 
 
+alias butter='ssh flutterbutter.local'
+
 
 # Quick way to view files in vim
 function v { $* | view - ; }
