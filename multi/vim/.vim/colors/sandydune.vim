@@ -70,18 +70,21 @@ hi Identifier	guifg=palegreen
 hi Function	    guifg=#b0e0b0
 
 hi Statement	guifg=khaki
-"Conditional	guifg=#000000	"if, then, else, endif, switch, etc.
-"Repeat		guifg=#000000	"for, do, while, etc.
-"Label		guifg=#000000	"case, default, etc.
-"Operator	guifg=#000000	""sizeof", "+", "*", etc.
-"Keyword	guifg=#000000	"any other keyword
-"Exception	guifg=#000000	"try, catch, throw
+"hi Statement	guifg=orange     "break and others below
+hi Conditional	guifg=yellow	"if, then, else, endif, switch, etc.
+hi Repeat		guifg=orangered	"for, do, while, etc.
+hi Label		guifg=yellow	"case, default, etc.
+hi Operator     guifg=palegreen	""sizeof", "+", "*", etc.
+hi Keyword	    guifg=#000000	"any other keyword
+hi Exception	guifg=orange	"try, catch, throw
 
-hi PreProc	guifg=indianred
-"Include	guifg=#000000	"preprocessor #include
-"Define		guifg=#000000	"preprocessor #define
-"Macro		guifg=#000000	"same as Define
-"PreCondit	guifg=#000000	"preprocessor #if, #else, #endif, etc.
+hi PreProc	    guifg=sienna
+hi Macro	  	guifg=peru         	"preprocessor #define
+hi PreCondit	guifg=sandybrown   	"preprocessor #if, #else, #endif, etc.
+hi Include	    guifg=tan
+
+"almost white
+"hi Include	guifg=beige
 
 hi Type		guifg=darkkhaki
 "StorageClass	guifg=#000000	"static, register, volatile, etc.
