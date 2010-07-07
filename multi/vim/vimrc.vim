@@ -25,6 +25,7 @@ set lazyredraw				" Don't repaint when scripts are running
 set scrolloff=3				" Keep 3 lines below and above cursor
 "set number					" Show line numbering
 "set numberwidth=1			" Use 1 col + 1 space for numbers
+set guioptions-=T			" Disable the toolbar
 
 if has("macunix")
     " looks good on my mac terminal
@@ -116,9 +117,8 @@ au!
 
 
 	" Switch to the directory of the current file, unless it's a help file.
-    "	TODO: Why do I prefer BufReadPost over BufEnter?
-"	au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
-	" Switch to the directory of the current file, unless it's a help file.
+    " Could use BufEnter instead, but then we have constant changing pwd.
+    " Use <S-e> to reload the buffer if you want to cd.
 	au BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
 
 	" kill calltip window if we move cursor or leave insert mode
@@ -366,6 +366,17 @@ let g:git_no_map_default = 1
 """""""""""
 " Perforce
 let no_perforce_maps=1
+
+
+"""""""""""
+" Functions
+
+" CopyFilenameToClipboard
+" Argument: ("%") or ("%:p")
+function! CopyFilenameToClipboard(filename)
+    let @*=expand(a:filename)
+endfunction
+
 
 " =-=-=-=-=-=
 " Source local environment additions
