@@ -19,6 +19,11 @@
     diff-staged = diff --cached
     piecemeal = add --patch
     unstage = reset
+
+    who = shortlog -s --
+    graph = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'
+	histlog = log --pretty=format:\"%C(red)%h%C(reset) %C(blue)%an%C(reset), %C(green)%cr%Creset : %s\"
+
 [merge]
 	tool = meld
 [diff]
