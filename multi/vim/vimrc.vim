@@ -190,9 +190,11 @@ map <Leader>\ :!<up><CR>
 ounmap <Leader>\
 
 " Easy make
-map <F5> :make 
-map <Leader>\| :make<up><CR>
-ounmap <Leader>\|
+nmap <S-F5> :make 
+nmap <Leader>\| :make<up><CR>
+"ounmap <Leader>\|
+" For async make. Don't have to hit enter after running make.
+nmap <F5> :silent make 
 
 " Global search
 map gs :%s/
@@ -335,8 +337,10 @@ let g:LookupFile_UpdateTime = 400               " wait a bit longer before compl
 let g:LookupFile_PreserveLastPattern = 0        " what I last looked up is in bufexplorer
 let g:LookupFile_EscCancelsPopup = 1            " this doesn't work! I can't get out with Esc
 let g:LookupFile_AlwaysAcceptFirst = 1          " easier to pick first result
+let g:LookupFile_Bufs_LikeBufCmd = 0            " Use same wildcard types as LUTags
 
-let lookupfile = findfile('filenametags', '.;/')
+let lookupfile = findfile('filenametags', '.;/')    " must be somewhere above us
+let lookupfile = fnamemodify(lookupfile, ':p')      " get the full path
 if filereadable(lookupfile)
     let g:LookupFile_TagExpr = string(lookupfile)
     let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
