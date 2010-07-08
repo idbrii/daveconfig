@@ -59,29 +59,30 @@ hi WarningMsg	guifg=salmon
 " http://www.tayloredmktg.com/rgb/
 hi Comment	guifg=SkyBlue
 hi Constant	guifg=#ffa0a0
-"String		guifg=#000000	"a string constant: "this is a string"
+hi String	guifg=#ffa0c0	"a string constant: "this is a string"
 "Character	guifg=#000000	"a character constant: 'c', '\n'
 "Number		guifg=#000000	"a number constant: 234, 0xff
 "Boolean	guifg=#000000	"a boolean constant: TRUE, false
-"Float		guifg=#000000	"a floating point constant: 2.3e10
+hi Float	guifg=#ffc0b0	"a floating point constant: 2.3e10
 
-hi Identifier	guifg=palegreen
-" palegreen=#98fb98
-hi Function	    guifg=#b0e0b0
+"hi Identifier	guifg=palegreen
+hi Identifier	guifg=#d0ffe0   " Used for cpp custom member/static function
+hi Function	    guifg=#b0e0b0   " Used for cpp custom function definition
 
-hi Statement	guifg=khaki
-"hi Statement	guifg=orange     "break and others below
+"hi Statement	guifg=khaki     " break, return, and all below
+hi Statement	guifg=palegoldenrod     " break, return, and all below
 hi Conditional	guifg=yellow	"if, then, else, endif, switch, etc.
-hi Repeat		guifg=orangered	"for, do, while, etc.
-hi Label		guifg=yellow	"case, default, etc.
-hi Operator     guifg=palegreen	""sizeof", "+", "*", etc.
-hi Keyword	    guifg=#000000	"any other keyword
-hi Exception	guifg=orange	"try, catch, throw
+hi Repeat		guifg=orange	"for, do, while, etc.
+hi Label		guifg=gold		"case, default, etc.
+hi Operator     guifg=goldenrod	""sizeof", "+", "*", etc.
+"hi Keyword	    guifg=#000000	"any other keyword (never used?)
+hi Exception	guifg=orangered	"try, catch, throw
 
-hi PreProc	    guifg=sienna
-hi Macro	  	guifg=peru         	"preprocessor #define
-hi PreCondit	guifg=sandybrown   	"preprocessor #if, #else, #endif, etc.
-hi Include	    guifg=tan
+hi PreProc	    guifg=tan
+hi Define	    guifg=tan   	"named constants
+hi Macro	  	guibg=grey21 guifg=sandybrown       "preprocessor #define
+hi PreCondit	guibg=grey21 guifg=peru         	"preprocessor #if, #else, #endif, etc.
+hi Include	    guibg=grey21 guifg=chocolate
 
 "almost white
 "hi Include	guifg=beige
@@ -92,7 +93,7 @@ hi Type		guifg=darkkhaki
 "darkkhaki=#bdb76b
 hi Typedef	guifg=#cdc79b
 
-hi Special	guifg=navajowhite
+hi Special	guifg=beige
 "SpecialChar	guifg=#000000	"special character in a constant
 "Tag		guifg=#000000	"you can use CTRL-] on this
 "Delimiter	guifg=#000000	"character that needs attention
