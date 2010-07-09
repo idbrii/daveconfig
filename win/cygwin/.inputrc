@@ -1,0 +1,15 @@
+# Home Key
+"\e[7~":beginning-of-line
+
+# End Key
+"\e[8~":end-of-line
+
+# Delete Key
+"\e[3~":delete-char
+
+# Insert Key
+"\e[2~":paste-from-clipboard
+
+# Ctrl+left/right
+"\eOc": forward-word
+"\eOd": backward-word
