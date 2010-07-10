@@ -6,8 +6,8 @@ syn match    cCustomParen    "(" contains=cParen contains=cCppParen
 "syn match    cCustomFunc        "\(::\|->\|\.\)\zs\w\+\s*\ze([^)]*).*[);]" contains=cCustomParen
 syn match    cCustomMemberFunc  "\(->\|\.\)\zs\w\+\ze\s*(" contains=cCustomParen
 syn match    cCustomStaticFunc  "::\zs\w\+\s*\ze([^)]*).*[);]" contains=cCustomParen
-hi def link cCustomMemberFunc  Identifier
-hi def link cCustomStaticFunc  Identifier
+hi def link cCustomMemberFunc  Function
+hi def link cCustomStaticFunc  Function
 
 " Constants are all caps with underscores. Minimum 3 characters.
 " Source: http://stackoverflow.com/questions/1512602/highlighting-defined-value-in-vim/1515550#1515550
