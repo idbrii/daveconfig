@@ -10,7 +10,7 @@ if version < 700
 	set noloadplugins
 endif
 
-""" Settings 
+""" Settings
 set nocompatible				" who needs vi, we've got Vim!
 
 """" Searching and Patterns
@@ -30,12 +30,13 @@ set guioptions-=T			" Disable the toolbar
 if has("macunix")
     " looks good on my mac terminal
     colorscheme elflord
-elseif has("windows")
+elseif has("win32")
     colorscheme desert
 else
     " looks good on ubuntu terminal
     colorscheme carvedwood
 endif
+" TODO: pablo is good if you have few colors and don't like bold, but what condition would that be?
 
 
 """" Messages, Info, Status
@@ -184,6 +185,14 @@ vnoremap <S-Tab> <LT>gv
 " Use ctrl-tab and shift-tab for indent in normal mode
 nnoremap <C-Tab> >>
 nnoremap <S-Tab> <<
+
+
+" Quick fix slashes
+"	win -> unix
+vnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
+"	unix -> win
+vnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
+
 
 " Easy cmdline run (normal, visual)
 map <Leader>\ :!<up><CR>
@@ -371,6 +380,8 @@ let g:git_no_map_default = 1
 
 " Perforce
 let no_perforce_maps=1
+let g:p4CheckOutDefault = 1		" Yes as default
+"let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
 
 "}}}
 
