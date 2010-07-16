@@ -3,7 +3,7 @@
 @echo off
 setlocal
 set exist=%1
-set noexist="%~dp1\junctioned"
+set noexist="%~dpn1\junctioned"
 
 if .%exist%==. (
     echo Invalid input: %*
