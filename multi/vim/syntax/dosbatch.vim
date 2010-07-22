@@ -88,7 +88,7 @@ endif
 syn match dosbatchLabel		"^\s*:\s*\h\w*\>"
 syn match dosbatchLabel		"\<\(goto\|call\)\s\+:\h\w*\>"lc=4
 syn match dosbatchLabel		"\<goto\s\+\h\w*\>"lc=4
-syn match dosbatchLabel		":\h\w*\>"
+"syn match dosbatchLabel		":\h\w*\>"
 
 " Comments - usual rem but also two colons as first non-space is an idiom
 syn match dosbatchComment	"^rem\($\|\s.*$\)"lc=3 contains=dosbatchTodo,dosbatchSpecialChar,@dosbatchNumber,dosbatchVariable,dosbatchArgument,@Spell
