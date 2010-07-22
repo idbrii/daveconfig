@@ -75,8 +75,12 @@ endfunction
 
 
 "mappings
-map  <leader>pw :call ShowPyDoc('<C-R><C-W>', 1)<CR> 
-map  <leader>pW :call ShowPyDoc('<C-R><C-A>', 1)<CR> 
+if (! exists('no_plugin_maps') || ! no_plugin_maps) &&
+      \ (! exists('no_pydoc_maps') || ! no_pydoc_maps)
+    map  <leader>pw :call ShowPyDoc('<C-R><C-W>', 1)<CR>
+    map  <leader>pW :call ShowPyDoc('<C-R><C-A>', 1)<CR>
+endif
+
 "commands
 command -nargs=1 Pydoc :call ShowPyDoc('<args>', 1)
 command -nargs=*  PydocSearch :call ShowPyDoc('<args>', 0)
