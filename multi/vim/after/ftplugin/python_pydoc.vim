@@ -27,9 +27,14 @@
 
 "Please feel free to contact me.
 
-if !exists('loaded_pydoc') || &cp
+if !exists('loaded_pydoc') && !exists('g:pydoc_cmd')
+    " No pydoc available
+    finish
+elseif exists('loaded_pydocvim') || &cp
+    " Already loaded
     finish
 endif
+let loaded_pydocvim = 1
 
 set switchbuf=useopen
 function! ShowPyDoc(name, type)
