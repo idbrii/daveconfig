@@ -1,6 +1,7 @@
 cscope.*
 .DS_STORE
 filenametags
+*~
 *.pyc
 *.swp
 tags
