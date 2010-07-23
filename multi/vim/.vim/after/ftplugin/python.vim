@@ -16,7 +16,7 @@ setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ 
 setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
-if exists('g:pydoc_cmd')
+if exists('loaded_pydocvim')
     nmap  K :call ShowPyDoc('<C-R><C-W>', 1)<CR>
     vmap  K y:call ShowPyDoc('<C-R>"', 1)<CR>
 endif
