@@ -27,10 +27,7 @@
 
 "Please feel free to contact me.
 
-if !exists('loaded_pydoc') && !exists('g:pydoc_cmd')
-    " No pydoc available
-    finish
-elseif exists('loaded_pydocvim') || &cp
+if exists('loaded_pydocvim') || &cp
     " Already loaded
     finish
 endif

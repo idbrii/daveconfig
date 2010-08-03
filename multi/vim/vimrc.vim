@@ -383,8 +383,11 @@ nnoremap <C-S-o> :LUBufs<CR>
 " command)
 nnoremap <Leader><A-o> :LookupFile<CR><C-r>#<Esc>F."_C.
 
-" Pydoc maps conflict with \p
+" Pydoc
+"  Pydoc maps conflict with \p
 let no_pydoc_maps = 1
+"  Highlighting is ugly
+let g:pydoc_highlight = 0
 
 "}}}
 

@@ -65,9 +65,9 @@ hi String	guifg=#ffa0c0	"a string constant: "this is a string"
 "Boolean	guifg=#000000	"a boolean constant: TRUE, false
 hi Float	guifg=#ffc0b0	"a floating point constant: 2.3e10
 
-"hi Identifier	guifg=palegreen
-hi Identifier	guifg=#d0ffe0   " Used for cpp custom member/static function
-hi Function	    guifg=#b0e0b0   " Used for cpp custom function definition
+hi Identifier	guifg=palegreen
+"hi Identifier	guifg=#d0ffe0   " Used for cpp custom member/static function
+hi Function	    guifg=#90e090   " Used for cpp custom function definition
 
 "hi Statement	guifg=khaki     " break, return, and all below
 hi Statement	guifg=palegoldenrod     " break, return, and all below
@@ -93,12 +93,12 @@ hi Type		guifg=darkkhaki
 "darkkhaki=#bdb76b
 hi Typedef	guifg=#cdc79b
 
-hi Special	guifg=beige
-"SpecialChar	guifg=#000000	"special character in a constant
-"Tag		guifg=#000000	"you can use CTRL-] on this
-"Delimiter	guifg=#000000	"character that needs attention
-"SpecialComment	guifg=#000000	"special things inside a comment
-"Debug		guifg=#000000	"debugging statements
+hi Special	guifg=navajowhite
+hi SpecialChar	guifg=#ffffff	"special character in a constant
+hi Tag			guifg=#ffffe0	"you can use CTRL-] on this
+hi Delimiter	guifg=#ffe0ff	"character that needs attention
+hi SpecialComment	guifg=#e0ffff	"special things inside a comment
+hi Debug		guifg=#f0f0f0	"debugging statements
 
 "hi Underlined
 
