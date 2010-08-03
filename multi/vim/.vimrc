@@ -208,9 +208,11 @@ nmap <Leader>\| :make<up><CR>
 " For async make. Don't have to hit enter after running make.
 nmap <F5> :silent make 
 
-" Global search
-map gs :%s/
-vmap gs :s/
+" Very magic global search (see \v and smagic)
+nmap gs :%sm/\v
+vmap gs :sm/\v
+nnoremap / /\v
+nnoremap ? ?\v
 
 " Open preview window for tags (just jump with <C-]>)
 nnoremap <A-]> :ptag <C-r><C-w><CR>
