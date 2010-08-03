@@ -44,6 +44,7 @@ set shortmess+=a				" Use [+] [RO] [w] for modified, read-only, modified
 set showcmd						" Display what command is waiting for an operator
 set ruler						" line numbers and column the cursor is on
 set laststatus=2				" Always show statusline, even if only 1 window
+set noequalalways               " Don't resize when closing a window
 set report=0					" Notify of all whole-line changes
 set visualbell					" Use visual bell (no beep)
 set linebreak					" Show wrap at word boundaries and preface wrap with >>
@@ -193,6 +194,8 @@ vnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
 "	unix -> win
 vnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
+" Quickly find todo items
+nmap <Leader>t :vimgrep TODO %<CR>
 
 " Easy cmdline run (normal, visual)
 map <Leader>\ :!<up><CR>
@@ -261,6 +264,8 @@ nnoremap <C-PageUp> :cprev<CR>
 nnoremap <A-PageDown> :lnext<CR>
 nnoremap <A-PageUp> :lprev<CR>
 
+" Quickly open/close quickfix
+nmap <Leader>c :cwindow<CR>
 
 """ Extra functionality for some existing commands:
 
