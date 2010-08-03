@@ -351,12 +351,21 @@ let g:LookupFile_EscCancelsPopup = 1            " this doesn't work! I can't get
 let g:LookupFile_AlwaysAcceptFirst = 1          " easier to pick first result
 let g:LookupFile_Bufs_LikeBufCmd = 0            " Use same wildcard types as LUTags
 
-let lookupfile = findfile('filenametags', '.;/')    " must be somewhere above us
-let lookupfile = fnamemodify(lookupfile, ':p')      " get the full path
-if filereadable(lookupfile)
-    let g:LookupFile_TagExpr = string(lookupfile)
-    let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
-endif
+" Like gf but use filenametags instead of path
+nmap <Leader>gf :LUTags <c-r>=expand('<cfile>:t')<CR><CR>
+
+function! FindFilenameTagsFile()
+    " From our current directory, search up for filenametags
+    let lookupfile = findfile('filenametags', '.;/')    " must be somewhere above us
+    let lookupfile = fnamemodify(lookupfile, ':p')      " get the full path
+    if filereadable(lookupfile)
+        let g:LookupFile_TagExpr = string(lookupfile)
+        let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
+    else
+        let g:LookupFile_UsingSpecializedTags = 0   " only if the previous line is right
+    endif
+endfunction
+call FindFilenameTagsFile()
 
 """ Like visual assist
 " Open file
