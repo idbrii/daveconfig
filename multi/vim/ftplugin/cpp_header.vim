@@ -17,6 +17,12 @@ endif
 let loaded_cppheader = 1
 
 
+" Ensure our settings variables exist and set defaults
+if !exists('g:cpp_header_use_preview')
+    let g:cpp_header_use_preview = 0
+end
+
+
 " Save compatibility options
 let s:save_cpo = &cpo
 set cpo&vim
@@ -86,11 +92,28 @@ endfunction
 
 " Purpose: Add a header path to the file.
 function s:InsertHeader(path)
+    if has('modify_fname')
+        let l:filename = fnamemodify(a:path, ':t')
+    else
+        let l:filename = a:path
+    endif
 	let l:escaped_path = escape(a:path, "\\")
-	let l:pattern = '^\s*#\s*include\s*\(["<]\)' . a:path . '\([">]\)'
+	let l:pattern = '\v^\s*#\s*include\s*["<](.*[\/\\])?' . l:filename . '[">]'
 	let l:iline = search(l:pattern)
 	if l:iline > 0
-		echo '#include "' . a:path . '" already present'
+        if ( g:cpp_header_use_preview )
+            " Use the preview window to show the include
+            set previewheight=1
+            silent exec "pedit +" . l:iline
+            echo 'include already present on line ' . l:iline
+        else
+            " Show the include in the command-line
+            echo 'already included:'
+            let l:save_cursor = getpos(".")
+            call setpos('.', l:iline)
+            number
+            call setpos('.', l:save_cursor)
+        endif
 		return
 	endif
 
