@@ -1,1 +1,1 @@
-bcomp _viemurc C:\h\apps\viemu\_viemurc
+bcomp _viemurc e:\h\apps\viemu\_viemurc
