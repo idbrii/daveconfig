@@ -6,7 +6,6 @@ setlocal cindent
 if exists('loaded_cpp_extra') || &cp
     finish
 endif
-
 let loaded_cpp_extra = 1
 
 runtime cscope_maps.vim
@@ -17,12 +16,12 @@ iabbrev _pon #pragma optimize("", on)
 iabbrev #i #include
 iabbrev #d #define
 iabbrev D_P DBG_PRINT
-iabbrev _guard_ #ifndef <CR>#define <CR><CR>#endif //<ESC>kO
+iabbrev _guard_ #ifndef zzz<CR>#define zzz<CR><CR>#endif<ESC>kO
 
 " Fast switch between header and implementation (instead of lookup file)
 "
 " Source: http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file#By_modifying_ftplugins
-function! SwitchSourceHeader()
+function SwitchSourceHeader()
     if (expand ("%:t") == expand ("%:t:r") . ".cpp")
         find %:t:r.h
     else
