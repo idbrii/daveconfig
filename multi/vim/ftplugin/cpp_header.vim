@@ -144,6 +144,14 @@ function s:InsertHeader(path)
 	normal G
 	let l:last_include_line = search('^\s*#\s*include', 'b')
 
+    if ( g:cpp_header_use_preview )
+        " Use the preview window to show the include
+        " Use height=2 because we open preview before we put line (to
+        " avoid unsaved error). So we show the line before and the include.
+        set previewheight=2
+        silent exec "pedit +" . l:last_include_line
+    endif
+
 	let l:text = '#include "' . a:path . '"'
 	call append(l:last_include_line, l:text)
     " We inserted a line, so change the cursor position
@@ -155,12 +163,12 @@ function s:InsertHeader(path)
         exec "normal " . g:cpp_header_n_dir_to_trim . "df/"
     endif
 
-    " Set lastpos mark so you can easily jump
-    " back to coding with ``
+    " Set lastpos mark so you can easily jump back to coding with ``
+    call setpos("'`", l:save_cursor)
+
     if ( g:cpp_header_use_preview )
+        " We have the preview window, so main doesn't need to show include
         call setpos(".", l:save_cursor)
-    else
-        call setpos("'`", l:save_cursor)
     endif
 endfunction
 
@@ -173,7 +181,6 @@ function s:AddIncludeForTag_Impl(tag_expr)
 	endif
 
 	call s:InsertHeader(header)
-
 endfunction
 
 
