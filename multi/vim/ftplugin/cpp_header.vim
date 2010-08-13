@@ -8,6 +8,8 @@
 "   * Add the header for a tag
 "
 " TODO: Add forward declare
+"       Jump to include on insert? -- need something since the includes are
+"       big ugly paths since my tags aren't awesome.
 "
 
 " Protect against multiple reloads
