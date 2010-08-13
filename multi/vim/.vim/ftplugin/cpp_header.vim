@@ -23,6 +23,9 @@ let loaded_cppheader = 1
 if !exists('g:cpp_header_use_preview')
     let g:cpp_header_use_preview = 0
 end
+if !exists('g:cpp_header_n_dir_to_trim')
+    let g:cpp_header_n_dir_to_trim = 0
+end
 
 
 " Save compatibility options
@@ -31,6 +34,8 @@ set cpo&vim
 
 " Configurable options
 let s:header_extensions = ["h", "hpp", "hh", "hxx"]
+
+
 
 " Function: FixGuard()
 " Purpose: Update the header guards in the current buffer.
@@ -71,6 +76,8 @@ function s:FixGuard()
 	call setpos('.', l:save_cursor)
 endfunction
 
+
+
 " Purpose: Return the first header-based match for the specified tag
 " expression.
 "
@@ -102,7 +109,9 @@ function s:InsertHeader(path)
 	let l:escaped_path = escape(a:path, "\\")
 	let l:pattern = '\v^\s*#\s*include\s*["<](.*[\/\\])?' . l:filename . '[">]'
 	let l:iline = search(l:pattern)
+
 	if l:iline > 0
+        " Include already exists. Inform the user.
         if ( g:cpp_header_use_preview )
             " Use the preview window to show the include
             set previewheight=1
@@ -119,6 +128,14 @@ function s:InsertHeader(path)
 		return
 	endif
 
+    " Check if the tag is in the current file
+    let l:currentfile = expand('%:b')
+    let l:samefile = match(l:currentfile, l:filename)
+	if l:samefile == 0
+        echo 'include is current file'
+        return
+    endif
+
 	" Search backwards for the last include. search() will return 0 if there
 	" are no matches, which will make the append append on the first line in
 	" the file.
@@ -128,6 +145,11 @@ function s:InsertHeader(path)
 	let l:text = '#include "' . a:path . '"'
 	call append(l:last_include_line, l:text)
 
+    " Get in position to fix the include and auto trim some directories.
+    normal jf/
+    if g:cpp_header_n_dir_to_trim > 0
+        exec "normal " . g:cpp_header_n_dir_to_trim . "df/"
+    endif
 endfunction
 
 function s:AddIncludeForTag_Impl(tag_expr)
@@ -138,10 +160,17 @@ function s:AddIncludeForTag_Impl(tag_expr)
 		return
 	endif
 
+    " Save the current cursor and set lastpos mark so you can easily jump
+    " back to coding with ``
 	let l:save_cursor = getpos(".")
 	call s:InsertHeader(header)
-	call setpos('.', l:save_cursor)
+	call setpos("'`", l:save_cursor)
+    if ( g:cpp_header_use_preview )
+        call setpos(".", l:save_cursor)
+    endif
 endfunction
+
+
 
 if (! exists('no_plugin_maps') || ! no_plugin_maps) &&
       \ (! exists('no_cpp_header_maps') || ! no_cpp_header_maps)
