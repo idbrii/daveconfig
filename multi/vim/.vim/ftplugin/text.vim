@@ -1,6 +1,6 @@
 " Use spell checking for writable files
 if !&readonly
-    set spell
+    setlocal spell
 endif
 
 " Text files probably have no useful syntax, so use manual
