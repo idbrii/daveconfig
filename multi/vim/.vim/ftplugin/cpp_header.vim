@@ -101,40 +101,42 @@ endfunction
 
 " Purpose: Add a header path to the file.
 function s:InsertHeader(path)
-    if has('modify_fname')
-        let l:filename = fnamemodify(a:path, ':t')
-    else
-        let l:filename = a:path
+    " Save the current cursor so we can restore on error or completion
+	let l:save_cursor = getpos(".")
+
+    " Only use the base name for higher likelihood of matches
+    let l:filename = fnamemodify(a:path, ':t')
+
+    " Check if including the current file
+    let l:currentfile = expand('%:b')
+    let l:samefile = match(l:currentfile, l:filename)
+	if l:samefile == 0
+        call setpos(".", l:save_cursor)
+        echo 'include is current file'
+        return
     endif
-	let l:escaped_path = escape(a:path, "\\")
+
+    " Check if include already exists
 	let l:pattern = '\v^\s*#\s*include\s*["<](.*[\/\\])?' . l:filename . '[">]'
 	let l:iline = search(l:pattern)
-
 	if l:iline > 0
         " Include already exists. Inform the user.
+
+        " grab the existing include
+        silent normal 0"cy$
+        " Jump back to where we were
+        call setpos(".", l:save_cursor)
         if ( g:cpp_header_use_preview )
             " Use the preview window to show the include
             set previewheight=1
             silent exec "pedit +" . l:iline
             echo 'include already present on line ' . l:iline
         else
-            " Show the include in the command-line
-            echo 'already included:'
-            let l:save_cursor = getpos(".")
-            call setpos('.', l:iline)
-            number
-            call setpos('.', l:save_cursor)
+            echo 'include already exists: ' . @c
         endif
-		return
-	endif
 
-    " Check if the tag is in the current file
-    let l:currentfile = expand('%:b')
-    let l:samefile = match(l:currentfile, l:filename)
-	if l:samefile == 0
-        echo 'include is current file'
         return
-    endif
+	endif
 
 	" Search backwards for the last include. search() will return 0 if there
 	" are no matches, which will make the append append on the first line in
@@ -144,11 +146,21 @@ function s:InsertHeader(path)
 
 	let l:text = '#include "' . a:path . '"'
 	call append(l:last_include_line, l:text)
+    " We inserted a line, so change the cursor position
+    let l:save_cursor[1] += 1
 
     " Get in position to fix the include and auto trim some directories.
     normal jf/
     if g:cpp_header_n_dir_to_trim > 0
         exec "normal " . g:cpp_header_n_dir_to_trim . "df/"
+    endif
+
+    " Set lastpos mark so you can easily jump
+    " back to coding with ``
+    if ( g:cpp_header_use_preview )
+        call setpos(".", l:save_cursor)
+    else
+        call setpos("'`", l:save_cursor)
     endif
 endfunction
 
@@ -160,14 +172,8 @@ function s:AddIncludeForTag_Impl(tag_expr)
 		return
 	endif
 
-    " Save the current cursor and set lastpos mark so you can easily jump
-    " back to coding with ``
-	let l:save_cursor = getpos(".")
 	call s:InsertHeader(header)
-	call setpos("'`", l:save_cursor)
-    if ( g:cpp_header_use_preview )
-        call setpos(".", l:save_cursor)
-    endif
+
 endfunction
 
 
