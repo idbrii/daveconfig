@@ -8,6 +8,7 @@ endif
 
 " Set a different name for this location
 iabbrev _me pydave (pydave@gmail.com)
+iabbrev _company pydave
 
 " Perforce
 " Open a history window for the current file
