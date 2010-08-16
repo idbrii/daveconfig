@@ -12,11 +12,9 @@ iabbrev _me pydave (pydave@gmail.com)
 iabbrev _company pydave
 
 " Perforce
-" Open a history window for the current file
-" Will probably show an open connection dialog
-cabbrev p4vhist !p4v -win 0 -cmd "history %:p"
 
 let g:p4Presets = 'perforce:1666 pydave_client pydave'
+let g:external_diff = 'bcomp.bat'
 
 let g:DAVID_local_root = "c:/p4/main"
 
