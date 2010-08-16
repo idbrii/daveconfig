@@ -209,6 +209,10 @@ nmap <Leader>* :grep -e "<C-r>/"
 map <Leader>\ :!<up><CR>
 ounmap <Leader>\
 
+" Generic Header comments (requires formatoptions+=r)
+"  Uses vim's commentstring to figure out the local comment character
+nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> @file	<C-r>%<CR>@module	<C-r>=expand('%:p:h:t')<CR><CR><CR>@author	_me<CR>@brief	<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
+
 " Easy make
 nmap <S-F5> :make 
 nmap <Leader>\| :make<up><CR>
@@ -332,6 +336,7 @@ cabbrev vsh runtime scripts/vimsh/vimsh.vim
 "" Insert
 " General
 iabbrev _me DBriscoe (pydave@gmail.com)
+iabbrev _company pydave
 iabbrev _t  <C-R>=strftime("%H:%M:%S")<CR>
 iabbrev _d  <C-R>=strftime("%d %b %Y")<CR>
 iabbrev _dt <C-R>=strftime("%a, %d %b %Y %H:%M:%S")<CR>
