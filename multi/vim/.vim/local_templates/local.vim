@@ -1,5 +1,6 @@
-" Special settings for work development
+" Special settings for local environment
 "
+
 " Switch to the directory of the current file, unless it's a help file.
 if has("autocmd")
 augroup vimrcEx
@@ -15,10 +16,14 @@ iabbrev _company pydave
 " Will probably show an open connection dialog
 cabbrev p4vhist !p4v -win 0 -cmd "history %:p"
 
+let g:p4Presets = 'perforce:1666 pydave_client pydave'
+
 let g:DAVID_local_root = "c:/p4/main"
 
 " Vim on Windows defaults to findstr, but cygwin grep is better
 set grepprg=grep\ -nH
+" If most code has a path like: p4\game\main\packages\core\game\dev\src\
+let g:cpp_header_n_dir_to_trim = 8
 
 " Setup cscope for general use
 if has("cscope")
