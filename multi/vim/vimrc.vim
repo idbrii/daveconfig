@@ -188,6 +188,9 @@ vnoremap <S-Tab> <LT>gv
 " Use ctrl-tab and shift-tab for indent in normal mode
 nnoremap <C-Tab> >>
 nnoremap <S-Tab> <<
+" and insert mode
+inoremap <C-Tab> <C-t>
+inoremap <C-S-Tab> <C-d>
 
 
 " Quick fix slashes
@@ -198,6 +201,9 @@ vnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
 " Quickly find todo items
 nmap <Leader>t :vimgrep TODO %<CR>
+
+" Easy grep for current query
+nmap <Leader>* :grep -e "<C-r>/"
 
 " Easy cmdline run (normal, visual)
 map <Leader>\ :!<up><CR>
