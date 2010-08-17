@@ -57,7 +57,8 @@ set showmatch				" Briefly jump to the matching bracket
 set matchtime=1				" For .1 seconds
 "set formatoptions-=tc		" can I format for myself?? (only matters when textwidth>0)
 set formatoptions+=r		" magically continue comments
-set formatoptions-=o		" I tend to use o for whitespace, not continuing comments
+set formatoptions-=o        " I tend to use o for whitespace, not continuing
+                            " comments (some filetypes overwrite)
 set tabstop=4				" 1 tab = x spaces
 set shiftwidth=4			" (used on auto indent)
 set softtabstop=4			" 4 spaces as a tab for bs/del
