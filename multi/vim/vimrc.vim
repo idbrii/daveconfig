@@ -355,6 +355,10 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 """""""""""
 " Plugins   {{{
 
+" Cpp
+" Don't want menus for cpp.
+let no_plugin_menus = 1
+
 " SuperTab
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabMappingForward = '<c-space>'
@@ -371,7 +375,7 @@ let g:LookupFile_AlwaysAcceptFirst = 1          " easier to pick first result
 let g:LookupFile_Bufs_LikeBufCmd = 0            " Use same wildcard types as LUTags
 
 " Like gf but use filenametags instead of path
-nmap <Leader>gf :LUTags <c-r>=expand('<cfile>:t')<CR><CR>
+nmap <Leader>gf :LUTags <C-r>=expand('<cfile>:t')<CR><CR><CR>
 
 function! FindFilenameTagsFile()
     " From our current directory, search up for filenametags
@@ -400,6 +404,8 @@ nnoremap <Leader><A-o> :LookupFile<CR><C-r>#<Esc>F."_C.
 let no_pydoc_maps = 1
 "  Highlighting is ugly
 let g:pydoc_highlight = 0
+
+let python_highlight_all=1
 
 "}}}
 
