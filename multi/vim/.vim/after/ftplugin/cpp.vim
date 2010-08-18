@@ -9,9 +9,8 @@ if exists('loaded_cpp_extra') || &cp
 endif
 let loaded_cpp_extra = 1
 
-" Filetypes seem to be autosetting o as part of fo, so I need to remove
-"   automatically on all filetypes
-"   I tend to use o for whitespace, not continuing comments
+" Filetype set fo+=o, but I tend to use o and O to add whitespace, not
+" to continue comments
 setlocal formatoptions-=o
 
 runtime cscope_maps.vim
