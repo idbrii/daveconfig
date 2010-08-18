@@ -122,9 +122,6 @@ function s:InsertHeader(path)
 	if l:iline > 0
         " Include already exists. Inform the user.
 
-        " grab the existing include
-        silent normal 0"cy$
-        " Jump back to where we were
         call setpos(".", l:save_cursor)
         if ( g:cpp_header_use_preview )
             " Use the preview window to show the include
@@ -132,7 +129,7 @@ function s:InsertHeader(path)
             silent exec "pedit +" . l:iline
             echo 'include already present on line ' . l:iline
         else
-            echo 'include already exists: ' . @c
+            echo 'include already exists: ' . getline(l:iline)
         endif
 
         return
