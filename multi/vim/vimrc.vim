@@ -202,6 +202,7 @@ vnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
 " Quickly find todo items
 nmap <Leader>t :vimgrep TODO %<CR>
+nmap <Leader>T :grep TODO -R .
 
 " Easy grep for current query
 nmap <Leader>* :grep -e "<C-r>/"
@@ -377,15 +378,16 @@ let g:LookupFile_Bufs_LikeBufCmd = 0            " Use same wildcard types as LUT
 " Like gf but use filenametags instead of path
 nmap <Leader>gf :LUTags <C-r>=expand('<cfile>:t')<CR><CR><CR>
 
-function! FindFilenameTagsFile()
+function FindFilenameTagsFile()
     " From our current directory, search up for filenametags
     let lookupfile = findfile('filenametags', '.;/')    " must be somewhere above us
     let lookupfile = fnamemodify(lookupfile, ':p')      " get the full path
     if filereadable(lookupfile)
         let g:LookupFile_TagExpr = string(lookupfile)
         let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
+        echo 'Lookupfile=' . g:LookupFile_TagExpr
     else
-        let g:LookupFile_UsingSpecializedTags = 0   " only if the previous line is right
+        let g:LookupFile_UsingSpecializedTags = 0
     endif
 endfunction
 call FindFilenameTagsFile()
