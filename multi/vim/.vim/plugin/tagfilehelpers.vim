@@ -21,17 +21,19 @@ function <SID>FindTagFile(tag_file_name)
 endfunction
 
 
-function LocateFilenameTagsFile()
-    """ Tag file for Lookupfile
-    let l:tagfile = <SID>FindTagFile('filenametags')
-    if filereadable(l:tagfile)
-        let g:LookupFile_TagExpr = string(l:tagfile)
-        let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
-        echomsg 'Lookupfile=' . g:LookupFile_TagExpr
-    else
-        let g:LookupFile_UsingSpecializedTags = 0
-    endif
-endfunction
+if exists('loaded_lookupfile')
+    function LocateFilenameTagsFile()
+        """ Tag file for Lookupfile
+        let l:tagfile = <SID>FindTagFile('filenametags')
+        if filereadable(l:tagfile)
+            let g:LookupFile_TagExpr = string(l:tagfile)
+            let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
+            echomsg 'Lookupfile=' . g:LookupFile_TagExpr
+        else
+            let g:LookupFile_UsingSpecializedTags = 0
+        endif
+    endfunction
+endif
 
 if has("cscope")
     function LocateCscopeFile()
