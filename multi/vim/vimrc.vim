@@ -205,7 +205,7 @@ nmap <Leader>t :vimgrep TODO %<CR>
 nmap <Leader>T :grep TODO -R .
 
 " Easy grep for current query
-nmap <Leader>* :grep -e "<C-r>/"
+nmap <Leader>* :grep -e "<C-r>/" *
 
 " Easy cmdline run (normal, visual)
 map <Leader>\ :!<up><CR>
