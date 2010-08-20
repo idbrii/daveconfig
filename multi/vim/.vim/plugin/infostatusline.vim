@@ -10,7 +10,8 @@ let loaded_infostatusline = 1
 
 set laststatus=2				" Always show statusline, even if only 1 window
 if !exists('g:alt_statusline')
-    let g:alt_statusline = 'ascii:%-3b hex:%2B %{PrintNumSelected()} %= %l,%c%V %P '
+    let g:alt_statusline = 'ascii:%-3b hex:%2B %{PrintNumSelected()} %= HiLi<%{synIDattr(synID(line("."),col("."),1),"name")}> what<%{synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")}> %l,%c%V %P '
+
 endif
 
 function PrintNumSelected()
