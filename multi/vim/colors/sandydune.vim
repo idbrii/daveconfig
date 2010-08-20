@@ -94,7 +94,7 @@ hi Type		guifg=darkkhaki
 hi Typedef	guifg=#cdc79b
 
 hi Special	guifg=navajowhite
-hi SpecialChar	guifg=#ffffff	"special character in a constant
+hi SpecialChar	guifg=#cf7696	"special character in a constant
 hi Tag			guifg=#ffffe0	"you can use CTRL-] on this
 hi Delimiter	guifg=#ffe0ff	"character that needs attention
 hi SpecialComment	guifg=#e0ffff	"special things inside a comment
