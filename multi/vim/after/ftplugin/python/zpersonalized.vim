@@ -1,3 +1,4 @@
+" Personalized python settings
 " Author:	DBriscoe (pydave@gmail.com)
 " Influences:
 "	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
