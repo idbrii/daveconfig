@@ -34,5 +34,6 @@
 	compact-mode = false
 	main-window-maximized = true
 	main-window-geometry = 0x0+0+0
+	main-window-view = HistoryView
 [branch]
 	autosetupmerge = true
