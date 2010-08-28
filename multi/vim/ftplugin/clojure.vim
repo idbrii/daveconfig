@@ -138,14 +138,15 @@ if exists("b:vimclojure_namespace")
 	call vimclojure#MapPlug("n", "ep", "EvalParagraph")
 
 	call vimclojure#MakePlug("n", "StartRepl", 'vimclojure#Repl.New()')
-	call vimclojure#MapPlug("n", "sr", "StartRepl")
+    " D: already have a map for \s
+	"call vimclojure#MapPlug("n", "sr", "StartRepl")
 
 	inoremap <Plug>ClojureReplEnterHook <Esc>:call b:vimclojure_repl.enterHook()<CR>
 	inoremap <Plug>ClojureReplUpHistory <C-O>:call b:vimclojure_repl.upHistory()<CR>
 	inoremap <Plug>ClojureReplDownHistory <C-O>:call b:vimclojure_repl.downHistory()<CR>
 
 	nnoremap <Plug>ClojureClosePreview :pclose!<CR>
-    " I already have a map for \p
+    " D: already have a map for \p
 	"call vimclojure#MapPlug("n", "p", "ClosePreview")
 
 	setlocal omnifunc=vimclojure#OmniCompletion
