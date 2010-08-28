@@ -27,8 +27,16 @@ endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-vmap <C-c><C-c> "ry :call Send_to_Screen(@r)<CR>
-nmap <C-c><C-c> vip<C-c><C-c>
+if (! exists('no_plugin_maps') || ! no_plugin_maps)
+    " Send selection
+    vmap <Leader>r "cy:call Send_to_Screen(@c)<CR>
 
-nmap <C-c>v :call Screen_Vars()<CR>
+    " Send paragraph -- often misbehaves in python because interactive
+    " python expects lots of whitespace after blocks
+    nmap <Leader>r vip<Leader>r
 
+    " Send entire file
+    nmap <Leader>R 1GVG<Leader>r
+
+    "nmap <C-c>v :call Screen_Vars()<CR>
+endif
