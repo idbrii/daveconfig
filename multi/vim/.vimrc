@@ -395,6 +395,13 @@ let g:pydoc_highlight = 0
 
 let python_highlight_all=1
 
+" Clojure
+let clj_want_gorilla = 1
+let vimclojure#NailgunClient = "$HOME/.clojure-vim/ng"
+let g:clj_highlight_builtins = 1
+let g:clj_highlight_contrib = 1
+let g:clj_paren_rainbow = 1
+
 "}}}
 
 

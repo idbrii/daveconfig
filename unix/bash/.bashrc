@@ -89,3 +89,5 @@ if [ -x /usr/lib/command-not-found ]; then
 		fi
 	}
 fi
+
+export CLASSPATH=/usr/share/java/clojure.jar:$HOME/.clojure-vim/clojure-contrib.jar:$HOME/.clojure-vim/clojure-contrib-slim.jar:$HOME/.clojure-vim/vimclojure.jar:$HOME/.clojure-vim/vimclojure-source.jar
