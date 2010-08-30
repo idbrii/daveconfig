@@ -5,7 +5,7 @@
 
 if [ $# -lt 1 ] ; then
     echo Error - insufficient inputs
-    echo -e "Usage: $0 [left|right|top|bottom]"
+    echo -e "Usage: $0 [left|right|top|bottom|fill]"
     exit 1
 fi
 
@@ -37,6 +37,10 @@ if [ $SIDE == "top" ] ; then
 elif [ $SIDE == "bottom" ] ; then
     # Move to bottom half of screen
     wmctrl -r :ACTIVE: -e"0,-1,$HEIGHT,-1,$HALF_HEIGHT"
+
+elif [ $SIDE == "fill" ] ; then
+    # Force maximize
+    wmctrl -r :ACTIVE: -e"0,0,0,$WIDTH,$HEIGHT"
 
 else
     # Half screen
