@@ -1,3 +1,14 @@
+" syntax doesn't work -- why?
+" g:clj_want_folding is useless?
+setlocal foldmethod=indent
+" There's probably something in vimclojure to do this, but how does it work?
+nmap <buffer> -- ggVGy<C-w><C-w>Gpi<CR><CR><C-w><C-w>``
+vmap <buffer> -- y<C-w><C-w>Gpi<CR><CR><C-w><C-w>``
+
+" Show documentation in repl (assumes repl is top window)
+nmap <buffer> K :let clj_doc = expand("<cword>")<CR>:wincmd k<CR>Go(doc <C-r>=expand(clj_doc)<CR>)<CR>
+vmap <buffer> K y:wincmd k<CR>Go(doc <Esc>pA)<CR>
+
 " Some shortcuts for server functionality
 if exists("g:loaded_clojure_david")
 	finish
@@ -22,7 +33,6 @@ endfunction
 
 function <SID>ClojureReplStart()
     if s:clojure_david_server_active == 0
-        echo 'hello'
         call ClojureReplServerStart()
     endif
 endfunction
