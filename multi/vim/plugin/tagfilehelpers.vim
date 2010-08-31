@@ -44,6 +44,8 @@ if has("cscope")
         let l:tagfile = <SID>FindTagFile('cscope.out')
         let l:tagpath = fnamemodify(l:tagfile, ':h')
         if filereadable(l:tagfile)
+            let g:cscope_database = l:tagfile
+            let g:cscope_relative_path = l:tagpath
             " Set the cscope file relative to where it was found
             execute 'cs add ' . l:tagfile . ' ' . l:tagpath
             runtime cscope_maps.vim
