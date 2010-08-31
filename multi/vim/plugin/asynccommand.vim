@@ -1,7 +1,7 @@
 " AsyncCommand
 "   Execute commands and have them send their result to vim when they
 "   complete.
-"   TODO: cscope search, windows testing
+"   TODO: cscope search
 " Author: pydave
 " Influences: http://vim.wikia.com/wiki/VimTip1549 (Getting results back into Vim)
 "
@@ -21,11 +21,8 @@ endif
 
 " Basic background task running is different on each platform
 if has("win32")
-    " Gotta try this in Windows
+    " Works in Windows (Win7 x64)
     function! <SID>Async_Impl(tool_cmd, vim_cmd)
-        "exec 'silent !start cmd /k "grep -n '.a:query.' > '.temp_file.' & vim --servername '.v:servername.' --remote-expr "OnCompleteGetAsyncGrepResults('."'".temp_file."')\""
-        "required for cmd /c: .' & pause"'
-        "silent exec "!start cmd /c \"grep -n ".a:query." > ".temp_file." & vim --servername ".v:servername." --remote-expr " . vim_expr . " \" "
         silent exec "!start cmd /c \"".a:tool_cmd." & ".a:vim_cmd."\""
     endfunction
 else
@@ -40,7 +37,7 @@ function! AsyncCommand(command, vim_func)
     let temp_file = tempname()
 
     " Grab output and error in case there's something we should see
-    let tool_cmd = a:command." &> ".temp_file
+    let tool_cmd = a:command . printf(&shellredir, temp_file)
 
     let vim_cmd = "vim --servername ".v:servername." --remote-expr \"" . a:vim_func . "('" . temp_file . "')\" "
 
@@ -54,7 +51,7 @@ endfunction
 " Grep
 "   - open result in quickfix
 function! AsyncGrep(query)
-    let grep_cmd = "grep -n ".a:query
+    let grep_cmd = "grep --line-number --with-filename ".a:query
     let vim_func = "OnCompleteGetAsyncGrepResults"
 
     call AsyncCommand(grep_cmd, vim_func)
