@@ -31,13 +31,21 @@ if has("cscope")
     """"" Load cscope database if we can
     " disable verbose for our initial load
     set nocscopeverbose
+
     " add any database in current directory
     if filereadable("cscope.out")
-        cs add cscope.out
+        let g:cscope_database = 'cscope.out'
+
     " else add database pointed to by environment
     elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
+        let g:cscope_database = $CSCOPE_DB
     endif
+
+    if exists("g:cscope_database") && g:cscope_database != ""
+        cs add g:cscope_database
+        let g:cscope_relative_path = '.'
+    endif
+
     " okay, be verbose from now on
     set cscopeverbose
 
