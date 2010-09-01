@@ -20,6 +20,9 @@ alias lh='ls -lh'
 alias la='ls -A'
 alias les='/usr/share/vim/vim71/macros/less.sh'
 
+# safer way to delete
+alias trash='mv -t ~/.local/share/Trash/files --backup=t'
+
 # aptitude
 alias aptinstall='sudo aptitude install'
 alias aptremove='sudo aptitude remove'
