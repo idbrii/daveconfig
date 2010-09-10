@@ -1,11 +1,13 @@
 " Settings for when vim is invoked from visual studio.
-" Modified: 24 Mar 2010
+" Modified: 10 Sep 2010
 "
 " VS passes the following arguments to vim:
 "   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
 
 " Nice and wide for our huge files
 set columns=140
+" Full screen height
+set lines=9999
 " Centre cursor
 normal zz
 
