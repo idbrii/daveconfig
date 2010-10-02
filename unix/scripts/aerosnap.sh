@@ -36,7 +36,7 @@ if [ $SIDE == "top" ] ; then
 
 elif [ $SIDE == "bottom" ] ; then
     # Move to bottom half of screen
-    wmctrl -r :ACTIVE: -e"0,-1,$HEIGHT,-1,$HALF_HEIGHT"
+    wmctrl -r :ACTIVE: -e"0,-1,$HALF_HEIGHT,-1,$HALF_HEIGHT"
 
 elif [ $SIDE == "fill" ] ; then
     # Force maximize
