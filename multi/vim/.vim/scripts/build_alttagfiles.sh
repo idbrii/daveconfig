@@ -24,9 +24,9 @@ if [ "$filetype" == "cpp" ] ; then
 
 else
     # Don't know what we are so include anything that's not binary or junk (from vimdoc)
-    # DavidAdd: Directories: .git
-    # DavidAdd: Files: pyc
-    find . \( -name .git -o -name .svn -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\).*' -type f -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+    # DavidAdd: Files: .git tags filenametags cscope.files
+    # DavidAdd: Filetypes: pyc out
+    find . \( -name .git -o -name .svn -o -name tags -o -name filenametags -o -name cscope.files -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\|out\).*' -type f -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 fi
 
