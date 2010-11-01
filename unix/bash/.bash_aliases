@@ -18,6 +18,7 @@ fi
 alias ll='ls -l'
 alias lh='ls -lh'
 alias la='ls -A'
+alias lll='ls -Ahl'
 alias les='/usr/share/vim/vim71/macros/less.sh'
 
 # safer way to delete
@@ -29,6 +30,8 @@ alias aptremove='sudo aptitude remove'
 alias aptautoremove='sudo apt-get autoremove'   # no autoremove for aptitude
 alias aptsearch='apt-cache search'
 alias aptshow='apt-cache show'
+alias aptwhichrepo='apt-cache policy'
+alias aptpkglist='dpkg-query --list'
 
 # windows work-alike
 alias cls='clear'
@@ -43,8 +46,14 @@ alias ipy='ipython'
 
 
 alias butter='ssh flutterbutter.local'
+alias mediabutter='ssh mediaserver@flutterbutter.local'
 
 
 # Quick way to view files in vim
 function v { $* | view - ; }
 
+function ge { gvim --remote-silent $* ; }
+function move_and_link() {
+    mv $1 $2
+    ln -sv $2 $1
+}
