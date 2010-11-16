@@ -16,6 +16,14 @@ SIDE=$1
 DIMENSIONS=`xdpyinfo | grep 'dimensions:' | cut -f 2 -d ':'`
 WIDTH=`echo $DIMENSIONS | cut -f 1 -d 'x'`
 HEIGHT=`echo $DIMENSIONS | cut -f 2 -d 'x' | cut -f 1 -d ' '`
+
+if [ $WIDTH -gt 2000 ] ; then
+    # HACK: multiple monitors
+    DIMENSIONS="1366x768"
+    WIDTH=1366
+    HEIGHT=768
+fi
+
 # get half of the screen height and width
 HALF_HEIGHT=$(($HEIGHT/2))
 HALF_WIDTH=$(($WIDTH/2))
