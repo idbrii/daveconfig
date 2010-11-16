@@ -2,6 +2,10 @@
 " License: The MIT License
 " URL:     http://github.com/motemen/git-vim/
 
+if !exists('g:git_always_verbose_commit')
+    let g:git_always_verbose_commit = 0
+endif
+
 if !exists('g:git_command_edit')
     let g:git_command_edit = 'new'
 endif
@@ -332,10 +336,15 @@ function! GitCommit(args)
     "    return
     "endif
 
+    let verbose = ''
+    if g:git_always_verbose_commit
+        let verbose = '--verbose '
+    endif
+
     " Create COMMIT_EDITMSG file
     let editor_save = $EDITOR
     let $EDITOR = ''
-    let git_output = s:SystemGit('commit ' . args)
+    let git_output = s:SystemGit('commit ' . verbose . args)
     let $EDITOR = editor_save
 
     " signoff already handled, so don't pass through -s/--signoff again
