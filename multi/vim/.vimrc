@@ -410,6 +410,7 @@ let g:clj_paren_rainbow = 1
 " Git
 " Don't want maps for git. Just use Normal commands
 let g:git_no_map_default = 1
+let g:git_always_verbose_commit = 1
 
 
 " Perforce
