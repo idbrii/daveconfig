@@ -1,7 +1,7 @@
 " Abbreviations that are useful in java
 
 " for Java: Copies type and sets up new
-iabbrev jnew <ESC>BBByW$i new <ESC>pa);<ESC>hi
+iabbrev jnew <ESC>BBByE$anew <ESC>pa);<ESC>hi
 
 " for Java: makes main signature
 iabbrev jmain public static void main (String[] args)
