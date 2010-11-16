@@ -356,6 +356,8 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 """""""""""
 " Plugins   {{{
 
+let MRU_Max_Entries = 50
+
 " Cpp
 " Don't want menus for cpp.
 let no_plugin_menus = 1
