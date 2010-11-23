@@ -204,7 +204,13 @@ function! GitStatus(args)
     nnoremap <buffer> r       $:GitRm   <cfile><Enter>:call <SID>RefreshGitStatus()<Enter>
     nnoremap <buffer> -       $:silent  !git reset HEAD -- =expand('<cfile>')<Enter><Enter>:call <SID>RefreshGitStatus()<Enter>
     nnoremap <buffer> e       $:e       <cfile><Enter>
-    nnoremap <buffer> c       :q<Enter>:GitCommit<Enter>i
+    if g:git_always_verbose_commit
+        " For verbose commits, we show the staged diff using most of the
+        " window and open the commit on top of it
+        nnoremap <buffer> c       :q<Enter>:GitDiff --staged<Enter>:wincmd _<Enter>:GitCommit<Enter>i
+    else
+        nnoremap <buffer> c       :q<Enter>:GitCommit<Enter>i
+    endif
     nnoremap <buffer> q       :q<Enter>
 
     if g:git_status_show_options == 1
@@ -336,15 +342,10 @@ function! GitCommit(args)
     "    return
     "endif
 
-    let verbose = ''
-    if g:git_always_verbose_commit
-        let verbose = '--verbose '
-    endif
-
     " Create COMMIT_EDITMSG file
     let editor_save = $EDITOR
     let $EDITOR = ''
-    let git_output = s:SystemGit('commit ' . verbose . args)
+    let git_output = s:SystemGit('commit ' . args)
     let $EDITOR = editor_save
 
     " signoff already handled, so don't pass through -s/--signoff again
