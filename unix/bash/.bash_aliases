@@ -40,6 +40,10 @@ alias tracert='tracepath'
 # python
 alias ipy='ipython'
 
+android_code=~/data/code/android
+alias and_go_sdk='export PATH=$PATH:$android_code/android-sdk-linux_86/tools'
+alias and_ndk_build='$android_code/android-ndk-r4b/ndk-build'
+
 # Advanced applications
 # unfortunately, this is Mac-specific. Ideally, I'd use $VIMRUNTIME
 # currently doesn't work alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
