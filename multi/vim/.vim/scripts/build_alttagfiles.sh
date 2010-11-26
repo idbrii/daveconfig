@@ -10,7 +10,7 @@ fi
 
 filetype=$2
 
-tagdir=.
+tagdir=$PWD
 tagfile=$tagdir/filenametags
 
 cd $tagdir
@@ -20,17 +20,17 @@ cd $tagdir
 echo "!_TAG_FILE_SORTED	2	/2=foldcase/"> $tagfile
 if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
-    find . -type f -iname "*.cpp" -o -iname "*.h" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+    find $tagdir -type f -iname "*.cpp" -o -iname "*.h" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 elif [ "$filetype" == "java" ] ; then
     # The only types we're interested in are java
-    find . -type f -iname "*.java" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+    find $tagdir -type f -iname "*.java" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 else
     # Don't know what we are so include anything that's not binary or junk (from vimdoc)
     # DavidAdd: Files: .git tags filenametags cscope.files
     # DavidAdd: Filetypes: pyc out
-    find . \( -name .git -o -name .svn -o -name tags -o -name filenametags -o -name cscope.files -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\|out\).*' -type f -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+    find $tagdir \( -name .git -o -name .svn -o -name tags -o -name filenametags -o -name cscope.files -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\|out\).*' -type f -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 fi
 
