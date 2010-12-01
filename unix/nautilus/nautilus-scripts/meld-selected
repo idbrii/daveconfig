@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Nautilus script -> open meld
+#
+# Owner : Largey Patrick from Switzerland
+#   	  patrick.largey@nazeman.org
+#		 www.nazeman.org
+#
+# Licence : GNU GPL 
+#
+# Copyright (C) Nazeman
+#
+# Ver. 0.9-1 Date: 16.02.2002
+# Add multiple file open in the same windows
+# 
+# David modified: 24 Nov 2010
+#
+# Dependence : Nautilus (of course)
+#			    meld
+#
+filesall=""
+while [ $# -gt 0 ]
+	do
+		files=`echo "$1" | sed 's/ /\?/g'`
+		filesall="$files $filesall"
+		shift
+	done
+meld $filesall&
