@@ -41,7 +41,8 @@ alias tracert='tracepath'
 alias ipy='ipython'
 
 android_code=~/data/code/android
-alias and_go_sdk='export PATH=$PATH:$android_code/android-sdk-linux_86/tools'
+alias and_export_sdk='export PATH=$PATH:$android_code/android-sdk-linux_86/tools'
+alias and_go_sdk='cd $android_code/android-sdk-linux_86/tools'
 alias and_ndk_build='$android_code/android-ndk-r4b/ndk-build'
 
 # Advanced applications
