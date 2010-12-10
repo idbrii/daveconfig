@@ -1,3 +1,13 @@
+" Using javacomplete from
+" http://www.vim.org/scripts/script.php?script_id=1785
+setlocal omnifunc=javacomplete#Complete
+" parameter info is optional
+setlocal completefunc=javacomplete#CompleteParamsInfo 
+" Suggested maps:
+"inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P> 
+"inoremap <buffer> <C-S-Space> <C-X><C-U><C-P> 
+
+
 " Abbreviations that are useful in java
 
 " for Java: Copies type and sets up new
