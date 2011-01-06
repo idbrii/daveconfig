@@ -432,6 +432,17 @@ function! CopyFilenameToClipboard(filename)
     let @*=expand(a:filename)
 endfunction
 
+" Remove all text except what matches the current search result
+" The opposite of :%s///g (which clears all instances of the current search.
+" Note: Clobbers the c register
+function! ClearAllButMatches()
+    let @c=""
+    %s//\=setreg('C', submatch(0), 'l')/g
+    %d _
+    put c
+    0d _
+endfunction
+
 "}}}
 
 " =-=-=-=-=-=
