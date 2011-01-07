@@ -278,6 +278,7 @@ nnoremap <A-PageUp> :lprev<CR>
 
 " Quickly open/close quickfix
 nmap <Leader>c :cwindow<CR>
+nmap <Leader>lc :lwindow<CR>
 
 """ Extra functionality for some existing commands:
 
