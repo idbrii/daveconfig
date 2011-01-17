@@ -6,5 +6,5 @@
 selected_folder=$1
 # use -print0 and -0 to put NULL at the end
 # of strings so we don't have problems with space
-find $PWD/$selected_folder -print0 -iname "*.jpg" -o -iname "*.jpeg" | xargs -0 eog
+find $PWD/$selected_folder \( -iname "*.jpg" -o -iname "*.jpeg" \) -print0 | xargs -0 eog
 
