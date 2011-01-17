@@ -53,6 +53,12 @@ if has("cscope")
     endfunction
 endif
 
+" Just call them all -- don't use this if you don't have access to all of them
+function LocateAll()
+    call LocateFilenameTagsFile()
+    call LocateCscopeFile()
+endfunction
+
 
 " setup filename tags if we can find it, but be quiet about it
 silent call LocateFilenameTagsFile()
