@@ -139,8 +139,7 @@ endif
 """" Completion
 
 " bind ctrl+space for omnicompletion
-" disable this while I try out Supertab
-"inoremap <C-Space> <C-x><C-o>
+inoremap <C-Space> <C-x><C-o>
 
 " Ensure we're using all options
 set completeopt=menu,preview,menuone
@@ -362,15 +361,16 @@ let MRU_Max_Entries = 50
 let no_plugin_menus = 1
 
 " SuperTab
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabMappingForward = '<c-space>'
-let g:SuperTabMappingBackward = '<s-c-space>'
+"let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabMappingForward = '<c-space>'
+"let g:SuperTabMappingBackward = '<s-c-space>'
 " supertab + eclim == java win
-let g:SuperTabDefaultCompletionTypeDiscovery = [
-\ "&completefunc:<c-x><c-u>",
-\ "&omnifunc:<c-x><c-o>",
-\ ]
-let g:SuperTabLongestHighlight = 1
+"let g:SuperTabDefaultCompletionTypeDiscovery = [
+"            \ "&completefunc:<c-x><c-u>",
+"            \ "&omnifunc:<c-x><c-o>",
+"            \ ]
+"let g:SuperTabLongestHighlight = 1
+"let g:SuperTabMappingTabLiteral = '<tab>'
 
 """""
 " LookupFile
