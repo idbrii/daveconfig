@@ -1,0 +1,10 @@
+#! /bin/sh
+
+# Show all of the pictures in the selected folder in Eye of Gnome.
+# (Makes it easy to do a slide show of a hierarchy of folders.)
+
+selected_folder=$1
+# use -print0 and -0 to put NULL at the end
+# of strings so we don't have problems with space
+find $PWD/$selected_folder -print0 -iname "*.jpg" -o -iname "*.jpeg" | xargs -0 eog
+
