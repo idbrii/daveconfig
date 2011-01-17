@@ -19,6 +19,9 @@ export PAGER
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# If using a dumb terminal like vim's :shell, then don't do anything
+[ "$TERM" == "dumb" ] && return
+
 # Alias definitions.
 ##My additions are in into a separate file: ~/.bash_aliases
 ##instead of adding them here directly.
@@ -56,6 +59,9 @@ xterm*)
     PS1='\[\033[01;36m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     #PS1='\[\033[01;30m\]\h\[\033[00m\]:\[\033[01;38m\]\w\[\033[00m\]\$ '
     ;;
+dumb)
+    # Don't do anything for a dumb terminal -- like :shell in vim
+    ;;
 *)
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
     #PS1='\u@\h:\w\$ '
@@ -68,6 +74,9 @@ xterm*|rxvt*)
 #    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 #    PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}: ${PWD/$HOME/~}\007"'
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+    ;;
+dumb)
+    # Don't do anything for a dumb terminal -- like :shell in vim
     ;;
 *)
     ;;
