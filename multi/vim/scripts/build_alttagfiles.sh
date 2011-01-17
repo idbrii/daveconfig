@@ -22,6 +22,10 @@ if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
     find . -type f -iname "*.cpp" -o -iname "*.h" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
+elif [ "$filetype" == "android" ] ; then
+    # Android uses java and xml. Assume we're in the source directory
+    find . ../res -type f \( -iname "*.xml" -o -iname "*.java" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+
 elif [ "$filetype" == "java" ] ; then
     # The only types we're interested in are java
     find . -type f -iname "*.java" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
