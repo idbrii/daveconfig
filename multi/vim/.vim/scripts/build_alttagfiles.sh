@@ -45,7 +45,7 @@ fi
 # Create the cscope.files from filenametags
 # cscope needs full paths, so replace the relative path with the fully
 # qualified path
-cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^.|$tagdir|" > cscope.files
+cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^\./|$tagdir/|" > cscope.files
 
 # Build cscope database
 #	-b              Build the database only.
