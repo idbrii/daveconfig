@@ -201,6 +201,21 @@ vnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 nmap <Leader>t :vimgrep TODO %<CR>
 nmap <Leader>T :grep TODO -R .
 
+" Redo search with whole word toggled
+function! ToggleWholeWord()
+    " Adds or removes the \<\> word boundary markers on the current search
+    " Note: Only applies to search query as a whole
+
+    " remove whole word boundaries if they exists
+    let search = substitute(@/, '\\<\(.*\)\\>', '\1', '')
+    if search == @/
+        " there were no whole word flags, so add them
+        let search = '\<' . search . '\>'
+    endif
+    let @/ = search
+endfunction
+nmap <Leader>/ :call ToggleWholeWord()<CR>n
+
 " Easy grep for current query
 nmap <Leader>* :grep -e "<C-r>/" *
 
