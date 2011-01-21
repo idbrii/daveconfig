@@ -81,6 +81,24 @@ snippet try Try/Except/Else/Finally
 snippet ifmain
 	if __name__ == '__main__':
 		${1:main()}
+# unit tests
+snippet unittest
+	if __name__ == '__main__':
+		import unittest
+
+		class ${1:ClassName}Test(unittest.TestCase):
+			def setUp(self):
+				${2:pass}
+
+			def runTest(self):
+				${3:pass}
+snippet doctest
+	def _test():
+		import doctest
+		doctest.testmod()
+
+	if __name__ == '__main__':
+		_test()
 # __magic__
 snippet _
 	__${1:init}__${2}
