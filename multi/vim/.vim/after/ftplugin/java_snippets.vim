@@ -35,7 +35,7 @@ let st = g:snip_start_tag
 let et = g:snip_end_tag
 let cd = g:snip_elem_delim
 
-exec "Snippet method // {{{ ".st."method".et."<CR>/**<CR> * ".st.et."<CR> */<CR>public ".st."return".et." ".st."method".et."() {<CR>".st.et."}<CR>// }}}<CR>".st.et
+exec "Snippet method /**<CR>".st.et."<CR>/<CR>".st."public".et." ".st."return".et." ".st."method".et."() {<CR>".st.et."<CR>}<CR>".st.et
 exec "Snippet jps private static final ".st."string".et." ".st.et." = \"".st.et."\";<CR>".st.et
 exec "Snippet jtc try {<CR>".st.et."<CR>} catch (".st.et." e) {<CR>".st.et."<CR>} finally {<CR>".st.et."<CR>}<CR>".st.et
 exec "Snippet jlog /** Logger for this class and subclasses. */<CR><CR>protected final Log log = LogFactory.getLog(getClass());<CR>".st.et
