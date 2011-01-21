@@ -3,9 +3,6 @@ snippet main
 	{
 		${1:/* code */}
 	}
-snippet de
-	default:
-		${1}
 snippet ca
 	catch(${1:Exception} ${2:e}) ${3}
 snippet if
@@ -21,7 +18,9 @@ snippet sw
 snippet cs
 	case ${1}:
 		${2}
-	${3}
+		${3:break;}
+
+	${4}
 snippet tc
 	public class ${1:`Filename()`} extends ${2:TestCase}
 snippet t
