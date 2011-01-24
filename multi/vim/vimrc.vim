@@ -79,7 +79,6 @@ set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 
 """" Coding
 set history=100				" 100 Lines of history
-set showfulltag				" Show more information while completing tags
 filetype plugin on          " Enable filetype plugins
 filetype plugin indent on   " Let filetype plugins indent for me
 syntax on                   " Turn on syntax highlighting
@@ -141,8 +140,11 @@ endif
 " bind ctrl+space for omnicompletion
 inoremap <C-Space> <C-x><C-o>
 
-" Ensure we're using all options
+" Use all complete options
 set completeopt=menu,preview,menuone
+" Note: we must choose between showfulltag and completeopt+=longest. See help.
+"set showfulltag				" Show more information while completing tags
+set completeopt+=longest        " Fill in the longest match
 
 
 
