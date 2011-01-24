@@ -55,6 +55,9 @@ endif
 
 " Just call them all -- don't use this if you don't have access to all of them
 function LocateAll()
+    " Make sure we have the full path
+    silent! cd %:p:h
+    " Locate all of our files
     call LocateFilenameTagsFile()
     call LocateCscopeFile()
 endfunction
