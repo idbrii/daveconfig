@@ -39,3 +39,7 @@ snippet cos
 	static public final String ${1:var} = "${2}";${3}
 snippet as
 	assert ${1:test} : "${2:Failure message}";${3}
+snippet alog
+	android.util.Log.${1:i}(${2:TAG}, "${3}");
+snippet atag
+	static final String TAG = "${1:`Filename()`}";${2}
