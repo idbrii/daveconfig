@@ -182,6 +182,7 @@ function! GitStatus(args)
 
         let instructions .= "add    = a or Enter        edit             = e\n"
         let instructions .= "diff   = d                 switch to commit = c\n"
+        let instructions .= "difftool = T               difftool (prompt)= t\n"
         let instructions .= "remove = r                 close window     = q\n"
         let instructions .= "reset  = -                 hide options     = ?\n"
         let instructions .= "\n"
@@ -204,6 +205,8 @@ function! GitStatus(args)
     nnoremap <buffer> r       $:GitRm   <cfile><Enter>:call <SID>RefreshGitStatus()<Enter>
     nnoremap <buffer> -       $:silent  !git reset HEAD -- =expand('<cfile>')<Enter><Enter>:call <SID>RefreshGitStatus()<Enter>
     nnoremap <buffer> e       $:e       <cfile><Enter>
+    nnoremap <buffer> t       $:        !git difftool<Enter>
+    nnoremap <buffer> T       $:silent  !git difftool --no-prompt<Enter>
     if g:git_always_verbose_commit
         " For verbose commits, we show the staged diff using most of the
         " window and open the commit on top of it
