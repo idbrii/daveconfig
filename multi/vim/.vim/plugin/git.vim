@@ -180,11 +180,11 @@ function! GitStatus(args)
     if g:git_status_show_options == 1
         let instructions =  "git-vim GitStatus\n\n"
 
-        let instructions .= "add    = a or Enter        edit             = e\n"
-        let instructions .= "diff   = d                 switch to commit = c\n"
+        let instructions .= "add      = a or Enter      edit             = e\n"
+        let instructions .= "diff     = d               switch to commit = c\n"
         let instructions .= "difftool = T               difftool (prompt)= t\n"
-        let instructions .= "remove = r                 close window     = q\n"
-        let instructions .= "reset  = -                 hide options     = ?\n"
+        let instructions .= "remove   = r               close window     = q\n"
+        let instructions .= "reset    = -               hide options     = ?\n"
         let instructions .= "\n"
     else
         let instructions = "git-vim GitStatus --- type ? for options\n\n"
