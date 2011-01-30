@@ -9,10 +9,12 @@ snippet if
 	if (${1}) ${2}
 snippet wh
 	while (${1}) ${2}
-snippet for
+snippet for Flexible for loop
 	for (${1}; ${2}; ${3}) ${4}
-snippet fore
+snippet for For each loop
 	for (${1} : ${2}) ${3}
+snippet fo Conventional for loop
+	for (int ${2:i} = 0; $2 < ${1:count}; ++$2) ${3}
 snippet sw
 	switch (${1}) ${2}
 snippet cs
@@ -33,6 +35,10 @@ snippet m
 	${1:void} ${2:method}(${3}) ${4}
 snippet v
 	${1:String} ${2:var}${3: = null}${4};${5}
+snippet mv
+	final ${1:String} _${2:var};${3}
+snippet cv
+	_${1:var} = $1;${2}
 snippet co
 	static public final ${1:String} ${2:var} = ${3};${4}
 snippet cos
