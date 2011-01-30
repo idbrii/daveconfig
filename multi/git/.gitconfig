@@ -13,6 +13,7 @@
 	st = status
 	ci = commit
 	br = branch
+	ff = merge --ff-only
 	co-branch = checkout
     purify = checkout
     resolve = add
