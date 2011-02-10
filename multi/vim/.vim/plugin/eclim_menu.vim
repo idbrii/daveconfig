@@ -2,7 +2,7 @@
 
 " Note: This only works if eclim is running _before_ vim is launched.
 
-if g:eclimAvailable
+if exists("g:eclimAvailable") && g:eclimAvailable
     " imports whatever is needed
     menu E&clim.ImportMissing :JavaImportMissing<CR>
     menu E&clim.ImportPrettify :JavaImportClean<CR>:JavaImportSort<CR>
