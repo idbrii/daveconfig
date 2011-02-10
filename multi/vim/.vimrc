@@ -326,16 +326,22 @@ nnoremap <space> za
 "" Command
 
 " Diff
-cabbrev diffboth diffthis<CR><C-w><C-w>:diffthis<CR>
-cabbrev vdiffsp vert diffsplit
+if &diff
+    function! <SID>DiffBoth()
+        diffthis
+        wincmd w
+        diffthis
+    endfunction
+    command! Diffboth call <SID>DiffBoth()
+    command! -nargs=1 -complete=file Vdiffsp vert diffsplit <q-args>
+endif
 
 " Windowing (Full screen on my monitor)
-cabbrev vert set lines=59
-cabbrev large set lines=59<CR>:set columns=100
+command! VertScreen set lines=59
+command! LargeScreen set lines=59 | set columns=100
 
 " VimShell - run sh from within a Vim buffer
-cabbrev vshell runtime scripts/vimsh/vimsh.vim
-cabbrev vsh runtime scripts/vimsh/vimsh.vim
+command! VShell runtime scripts/vimsh/vimsh.vim
 
 "" Insert
 " General
