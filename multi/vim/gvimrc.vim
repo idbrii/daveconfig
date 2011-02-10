@@ -1,4 +1,4 @@
-colorscheme desert
+colorscheme sandydune
 
 " tab labels show the filename without path(tail)
 set guitablabel=%N/\ %t\ %M
