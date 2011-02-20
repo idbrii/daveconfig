@@ -1,8 +1,9 @@
 " Add menu items
 
 " Note: This only works if eclim is running _before_ vim is launched.
+" Actually, the eclimd_running variable doesn't seem to work at all.
 
-if exists("g:eclimAvailable") && g:eclimAvailable
+if exists("g:eclimd_running") && g:eclimd_running
     " imports whatever is needed
     menu E&clim.ImportMissing :JavaImportMissing<CR>
     menu E&clim.ImportPrettify :JavaImportClean<CR>:JavaImportSort<CR>
