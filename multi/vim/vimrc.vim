@@ -418,7 +418,19 @@ let no_pydoc_maps = 1
 "  Highlighting is ugly
 let g:pydoc_highlight = 0
 
-let python_highlight_all=1
+" Turning all on gives me end of line highlighting that I don't like.
+" For some reason, if I turn everything else on, then I don't get it.
+"let python_highlight_all = 1
+let python_highlight_builtin_funcs = 1
+let python_highlight_builtin_objs = 1
+let python_highlight_doctests = 1
+let python_highlight_exceptions = 1
+let python_highlight_indent_errors = 1
+let python_highlight_space_errors = 1
+let python_highlight_string_format = 1
+let python_highlight_string_formatting = 1
+let python_highlight_string_templates = 1
+
 
 " Clojure
 let clj_want_gorilla = 1
