@@ -2,7 +2,7 @@
 
 " Note: This only works if eclim is running _before_ vim is launched.
 
-if exists("g:eclimAvailable") && g:eclimAvailable
+if exists("g:eclimd_running") && g:eclimd_running
     " Add an alternate to lookupfile to use Eclim's project searching -- great
     " for libraries (which are in a different project root).
     " Note: don't have a good alternate right now.
