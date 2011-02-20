@@ -326,7 +326,7 @@ nnoremap <space> za
 "" Command
 
 " Diff
-if &diff
+if has("diff")
     function! <SID>DiffBoth()
         diffthis
         wincmd w
