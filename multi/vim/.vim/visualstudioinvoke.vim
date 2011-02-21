@@ -1,11 +1,13 @@
-" Settings for when vim is invoked from visual studio.
-" Modified: 10 Sep 2010
+" Settings for when vim is invoked from an IDE.
+" Modified: 21 Feb 2011
 "
 " VS passes the following arguments to vim:
 "   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
+" Eclipse passes:
+"   --servername Viclipse --remote-silent "+source ~/.vim/visualstudioinvoke.vim" ${resource_loc}
 
-" Nice and wide for our huge files
-set columns=140
+" Decent width
+set columns=100
 " Full screen height
 set lines=9999
 " Centre cursor
@@ -25,3 +27,9 @@ endif
 
 " We don't seem to be in the right directory in the vimrc, so call this again
 silent call LocateFilenameTagsFile()
+
+" Keep up to date on change from external editor
+setlocal autoread
+" We'll be opened with the full path, but jump to the local directory so
+" Lookupfile, etc work better.
+silent! cd %:p:h
