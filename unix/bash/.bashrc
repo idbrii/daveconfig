@@ -2,7 +2,6 @@
 
 # This is the .bashrc from git. Modified for my ubuntu
 # lines with ## are my changes (for ubuntu and mac)
-# Last update:
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
@@ -19,12 +18,11 @@ export PAGER
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# If using a dumb terminal like vim's :shell, then don't do anything
+# If using a dumb terminal like vim's :shell, then don't do anything (since I
+# use ls --color=auto as an alias)
 [ "$TERM" == "dumb" ] && return
 
-# Alias definitions.
 ##My additions are in into a separate file: ~/.bash_aliases
-##instead of adding them here directly.
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -97,10 +95,10 @@ esac
 # if the command-not-found package is installed, use it
 if [ -x /usr/lib/command-not-found ]; then
 	function command_not_found_handle {
-	        # check because c-n-f could've been removed in the meantime
-                if [ -x /usr/lib/command-not-found ]; then
+        # check because c-n-f could've been removed in the meantime
+        if [ -x /usr/lib/command-not-found ]; then
 		   /usr/bin/python /usr/lib/command-not-found -- $1
-                   return $?
+           return $?
 		else
 		   return 127
 		fi
