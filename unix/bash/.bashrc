@@ -62,6 +62,10 @@ xterm*)
 dumb)
     # Don't do anything for a dumb terminal -- like :shell in vim
     ;;
+screen*)
+    # put square brackets around hostname to indicate a screen session
+    PS1='\[\033[01;36m\][\h]\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    ;;
 *)
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
     #PS1='\u@\h:\w\$ '
@@ -74,6 +78,10 @@ xterm*|rxvt*)
 #    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 #    PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}: ${PWD/$HOME/~}\007"'
     PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+    ;;
+screen*)
+    # put square brackets around hostname to indicate a screen session
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@[${HOSTNAME}]: ${PWD}\007"'
     ;;
 dumb)
     # Don't do anything for a dumb terminal -- like :shell in vim
