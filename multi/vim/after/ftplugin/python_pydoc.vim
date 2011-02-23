@@ -1,9 +1,11 @@
 "pydoc.vim: pydoc integration for vim
 "performs searches and can display the documentation of python modules
+"1.3.6
 "Author: André Kelpe <efeshundertelf at googlemail dot com>
 "Author: Romain Chossart <romainchossat at gmail dot com>
 "Author: Matthias Vogelgesang
 "http://www.vim.org/scripts/script.php?script_id=910
+"
 "This plugin integrates the pydoc into vim. You can view the
 "documentation of a module by using :Pydoc foo.bar.baz or search
 "a word (uses pydoc -k) in the documentation by typing PydocSearch
@@ -54,8 +56,10 @@ function! ShowPyDoc(name, type)
     set buftype=nofile
     setlocal modifiable
     normal ggdG
+    " remove function/method arguments
     let s:name2 = substitute(a:name, '(.*', '', 'g' )
-    let s:name2 = substitute(a:name, ':', '', 'g' )
+    " remove all colons
+    let s:name2 = substitute(s:name2, ':', '', 'g' )
     if a:type==1
         execute  "silent read ! " . g:pydoc_cmd . " " . s:name2 
     else 
@@ -90,12 +94,12 @@ function! ShowPyDoc(name, type)
     endif
 endfunction
 
-
+"highlighting
 function! Highlight(name)
     execute "sb __doc__"
     set filetype=man
-    syn on
-    execute 'syntax keyword pydoc '.s:name2
+    "syn on
+    execute 'syntax keyword pydoc '.a:name
     hi pydoc gui=reverse
 endfunction
 
@@ -109,6 +113,9 @@ if (! exists('no_plugin_maps') || ! no_plugin_maps) &&
     au FileType python,man map <buffer> <leader>pW :call ShowPyDoc('<C-R><C-A>', 1)<CR>
     au FileType python,man map <buffer> <leader>pk :call ShowPyDoc('<C-R><C-W>', 0)<CR>
     au FileType python,man map <buffer> <leader>pK :call ShowPyDoc('<C-R><C-A>', 0)<CR>
+
+    " remap the K (or 'help') key
+    nnoremap <silent> <buffer> K :call ShowPyDoc(expand("<cword>"), 1)<CR>
 endif
 
 "commands
