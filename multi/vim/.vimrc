@@ -384,10 +384,11 @@ let no_plugin_menus = 1
 "let g:SuperTabLongestHighlight = 1
 "let g:SuperTabMappingTabLiteral = '<tab>'
 
-" Eclim tries to connect on startup because it sees loaded_taglist
-" We can use either one of these flags to fix it, but which one do we want?
+" Eclim was trying to connect on startup because it sees loaded_taglist
+" Either one of these flags to fixed it, but now it doesn't happen anymore.
 "let g:EclimTaglistEnabled = 0
-let g:taglisttoo_disabled = 1
+"let g:taglisttoo_disabled = 1
+
 
 
 """""
