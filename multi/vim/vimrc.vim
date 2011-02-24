@@ -185,13 +185,10 @@ nnoremap  <c-left>   Bh
 "nnoremap  <s-right>  vl
 "nnoremap  <s-left>   vh
 
-" Use Ctrl-Tab and Shift-Tab to indent in visual
-" Also add Ctrl-t for consistency with insert mode (but keeps selection)
-" Can't map Ctrl-D since that's page down
+" Use Ctrl-Tab/Tab and Shift-Tab to change indent in visual
 " Note: this can probably be done with Select mode, but I don't use that.
-" TODO: upgrade snippetsemu and change C-t to Tab
 vnoremap <C-Tab> >gv
-vnoremap <C-t> >gv
+vnoremap <Tab> >gv
 vnoremap <S-Tab> <LT>gv
 " Use ctrl-tab and shift-tab for indent in normal mode
 nnoremap <C-Tab> >>
