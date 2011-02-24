@@ -8,3 +8,16 @@ startup_message off
 # Change default scrollback value for new windows
 defscrollback 1000
 
+# Don't use Ctrl-A to activate screen. I'm likely to hit that by accident.
+# <Ctrl-`> is so inconvenient that I won't use that for any other purpose.
+escape ^``
+
+# use caption to show window list:
+#   based on: https://bbs.archlinux.org/viewtopic.php?pid=435490#p435490
+#   color from: http://www.softpanorama.org/Utilities/Screen/screenrc_examples.shtml
+caption always "%{= kw}%-w%{+b kg}%n %t%{-}%+w %-="
+
+#The pattern search|name tells screen to search your end-of-prompt for some
+#string (in this case, '> '). The name part, specifies the default shell name
+#for the window
+shelltitle 'first'
