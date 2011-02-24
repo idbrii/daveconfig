@@ -337,8 +337,8 @@ if has("diff")
         wincmd w
         diffthis
     endfunction
-    command! Diffboth call <SID>DiffBoth()
-    command! -nargs=1 -complete=file Vdiffsp vert diffsplit <q-args>
+    command! DiffBoth call <SID>DiffBoth()
+    command! -nargs=1 -complete=file VDiffSp vert diffsplit <q-args>
 endif
 
 " Windowing (Full screen on my monitor)
