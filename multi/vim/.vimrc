@@ -5,14 +5,14 @@
 " Notes:
 " mapping Tab in normal mode breaks cscope -- adds tabs when you jump somewhere
 
+set nocompatible				" who needs vi, we've got Vim!
+
 " Don't load plugins if we aren't in Vim7
 if version < 700
 	set noloadplugins
 endif
 
 """ Settings
-set nocompatible				" who needs vi, we've got Vim!
-
 """" Searching and Patterns
 set ignorecase					" search is case insensitive
 set smartcase					" search case sensitive if caps on
@@ -71,6 +71,10 @@ if version > 600
     set backspace=start         " backspace can clear up to beginning of line
 endif
 
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
 
 " we don't want to edit these type of files
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
@@ -150,6 +154,10 @@ set completeopt+=longest        " Fill in the longest match
 
 
 """" Key Mappings
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
 
 " Toggle the tag list bar
 nmap <F4> :TlistToggle<CR>
@@ -342,6 +350,9 @@ command! LargeScreen set lines=59 | set columns=100
 
 " VimShell - run sh from within a Vim buffer
 command! VShell runtime scripts/vimsh/vimsh.vim
+
+" Diff against the file on disk. Useful for recovery. See also :help DiffOrig
+command DiffOrig vert split original.vimscratch | silent r # | silent 0d_ | diffthis | wincmd p | diffthis
 
 "" Insert
 " General
