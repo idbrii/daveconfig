@@ -473,7 +473,14 @@ let g:p4CheckOutDefault = 1		" Yes as default
 " CopyFilenameToClipboard
 " Argument: ("%") or ("%:p")
 function! CopyFilenameToClipboard(filename)
+    " TODO: Probably only need to set specific registers on different
+    " platforms.
     let @*=expand(a:filename)
+    let @+=@*
+endfunction
+" This is generally what I need
+function! CopyFullPathToClipboard()
+    call CopyFilenameToClipboard("%:p")
 endfunction
 
 " Remove all text except what matches the current search result
