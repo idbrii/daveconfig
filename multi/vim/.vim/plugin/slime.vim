@@ -1,14 +1,18 @@
 " Author: Jonathan Palardy
 " Send buffer contents to a screen session
-" http://technotales.wordpress.com/2008/10/17/screencast-like-slime-for-vim/
+" Source: http://technotales.wordpress.com/2008/10/17/screencast-like-slime-for-vim/
+" Source: https://github.com/jpalardy/dotfiles/raw/master/vim/plugin/slime.vim
+"
+" Note: some maps clobber the c register
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function Slime_Send_to_Screen(text)
-  if !exists("g:screen_sessionname") || !exists("g:screen_windowname")
+  if !exists("b:slime")
     call Slime_Screen_Vars()
   end
 
-  echo system("screen -S " . g:screen_sessionname . " -p " . g:screen_windowname . " -X stuff '" . substitute(a:text, "'", "'\\\\''", 'g') . "'")
+  let escaped_text = substitute(shellescape(a:text), "\\\\\n", "\n", "g")
+  call system("screen -S " . b:slime["sessionname"] . " -p " . b:slime["windowname"] . " -X stuff " . escaped_text)
 endfunction
 
 function Slime_Get_Screen_Session_Names(A,L,P)
@@ -16,13 +20,12 @@ function Slime_Get_Screen_Session_Names(A,L,P)
 endfunction
 
 function Slime_Screen_Vars()
-  if !exists("g:screen_sessionname") || !exists("g:screen_windowname")
-    let g:screen_sessionname = ""
-    let g:screen_windowname = "0"
+  if !exists("b:slime")
+    let b:slime = {"sessionname": "", "windowname": "0"}
   end
 
-  let g:screen_sessionname = input("session name: ", "", "custom,Slime_Get_Screen_Session_Names")
-  let g:screen_windowname = input("window name: ", g:screen_windowname)
+  let b:slime["sessionname"] = input("session name: ", b:slime["sessionname"], "custom,Slime_Get_Screen_Session_Names")
+  let b:slime["windowname"]  = input("window name: ", b:slime["windowname"])
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
