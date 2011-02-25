@@ -11,7 +11,7 @@ function Slime_Send_to_Screen(text)
   echo system("screen -S " . g:screen_sessionname . " -p " . g:screen_windowname . " -X stuff '" . substitute(a:text, "'", "'\\\\''", 'g') . "'")
 endfunction
 
-function <SID>Slime_Screen_Session_Names(A,L,P)
+function Slime_Get_Screen_Session_Names(A,L,P)
   return system("screen -ls | awk '/Attached/ {print $1}'")
 endfunction
 
@@ -21,7 +21,7 @@ function Slime_Screen_Vars()
     let g:screen_windowname = "0"
   end
 
-  let g:screen_sessionname = input("session name: ", "", "custom,<SID>Slime_Screen_Session_Names")
+  let g:screen_sessionname = input("session name: ", "", "custom,Slime_Get_Screen_Session_Names")
   let g:screen_windowname = input("window name: ", g:screen_windowname)
 endfunction
 
