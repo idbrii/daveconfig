@@ -3,8 +3,24 @@
 # Show all of the pictures in the selected folder in Eye of Gnome.
 # (Makes it easy to do a slide show of a hierarchy of folders.)
 
-selected_folder=$1
-# use -print0 and -0 to put NULL at the end
-# of strings so we don't have problems with space
-find $PWD/$selected_folder \( -iname "*.jpg" -o -iname "*.jpeg" \) -print0 | xargs -0 eog
+# Make a temp file using this script's name and the pid
+pic_list_file="/tmp/`basename $0`.$$.tmp"
 
+# make sure our temp file doesn't exist
+rm $pic_list_file
+for i in `seq $#` ; do
+    # for each argument find the images in that folder
+
+    # Note: We _should_ be able to pass these directory to find without using a
+    # loop, except I don't know how to escape the spaces in filenames.
+
+    # use -print0 and -0 to put NULL at the end
+    # of strings so we don't have problems with space
+    find "$1" -type f -iregex ".*\.\(jpe?g\|png\|gif\)" -print0 >> $pic_list_file
+    shift
+done
+
+# send the full list to eye of gnome
+cat $pic_list_file | xargs -0 eog
+# remove the temp file
+rm $pic_list_file
