@@ -4,7 +4,7 @@
 " VS passes the following arguments to vim:
 "   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
 " Eclipse passes:
-"   --servername Viclipse --remote-silent "+source ~/.vim/visualstudioinvoke.vim" ${resource_loc}
+"   --servername Viclipse --remote-silent "+runtime visualstudioinvoke.vim" ${resource_loc}
 
 " Decent width
 set columns=100
