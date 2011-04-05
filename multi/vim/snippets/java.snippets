@@ -49,3 +49,5 @@ snippet alog
 	android.util.Log.${1:i}(${2:TAG}, "${3}");${4}
 snippet atag
 	static final String TAG = "${1:`Filename()`}";${2}
+snippet afind
+	final ${1:TextView} ${2:view} = ($1) findViewById(R.id.${3:$2});${4}
