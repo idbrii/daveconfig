@@ -26,7 +26,7 @@ endif
 vmap <C-o> :s/^/#<CR>:silent nohl<CR>
 
 "" Stdlib tags
-if has("unix")
+if has("unix") || has("macunix")
     setlocal tags+=$HOME/.vim/tags/python.ctags
 else
     "" Windows
