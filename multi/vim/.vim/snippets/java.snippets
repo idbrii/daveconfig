@@ -45,6 +45,15 @@ snippet cos
 	static public final String ${1:var} = "${2}";${3}
 snippet as
 	assert ${1:test} : "${2:Failure message}";${3}
+snippet constints Inner class to group constants
+	static class ${1} {
+		static final int ${2};
+		${3}
+		static {
+			int i = 0;
+			$2 = i++;
+		}
+	}${4}
 snippet nullclear Resetting a variable
 	if (${1:var} != null) {
 		$1.${2}
