@@ -6,8 +6,9 @@
 "" no tabs in python files
 setlocal expandtab
 
-"" smart indenting for python
-setlocal smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"" c-indenting for python
+"" Would use smartindent, but it indents # at the first column
+setlocal cindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 "" simple indent-based folding
 setlocal foldmethod=indent
