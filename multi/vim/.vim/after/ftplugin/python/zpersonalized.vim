@@ -20,6 +20,7 @@ setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 if exists('loaded_pydocvim')
     nmap <buffer> K :call ShowPyDoc('<C-R><C-W>', 1)<CR>
     vmap <buffer> K y:call ShowPyDoc('<C-R>"', 1)<CR>
+    nmap <buffer> <C-k> :Pydoc <C-R><C-W>
 endif
 
 "" Quick commenting
