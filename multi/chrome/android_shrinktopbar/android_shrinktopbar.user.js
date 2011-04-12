@@ -2,9 +2,10 @@
 // @name		Android Dev Header Shrink
 // @description	This script shrinks the header on the Android Developer sites down by moving the search and a link to Android's home into the tab bar.
 // @namespace	http://userscripts.org/users/TheQwerty
-// @include		http://d.android.com/*
-// @include		http://developer.android.com/*
-// @include		http://android-developers.blogspot.com/*
+// @match		http://d.android.com/*
+// @match		http://developer.android.com/*
+// @match		http://android-developers.blogspot.com/*
+// @match		file:///*/android-sdk-linux_86/*
 // ==/UserScript==
 
 (function() {
@@ -21,7 +22,7 @@
 	}
 
 	function main() {
-		// Remape unsafeWindow for Chrome.
+		// Remap unsafeWindow for Chrome.
 		if (! window.unsafeWindow) {
 			window.unsafeWindow = window;
 		}
