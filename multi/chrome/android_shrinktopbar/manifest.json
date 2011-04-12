@@ -1,0 +1,16 @@
+{
+    "content_scripts": [ {
+        "exclude_globs":    [  ],
+        "include_globs":    [ "*" ],
+        "js":               [ "android_shrinktopbar.user.js" ],
+        "matches":          [
+                            "http://d.android.com/*",
+                            "http://developer.android.com/*",
+                            "http://android-developers.blogspot.com/*",
+                            "file:///*/android-sdk-linux_86/*"
+                            ]
+    } ],
+    "description":  "Shrinks the header on the Android Developer sites down by moving the search and a link to Android's home into the tab bar.",
+    "name":         "Android Dev Header Shrink",
+    "version":      "1"
+}
