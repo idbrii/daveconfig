@@ -25,7 +25,7 @@ if exists('loaded_pydocvim')
 endif
 
 "" Quick commenting
-vmap <C-o> :s/^/#<CR>:silent nohl<CR>
+vmap <buffer> <C-o> :s/^/#<CR>:silent nohl<CR>
 
 "" Stdlib tags
 if has("unix") || has("macunix")
