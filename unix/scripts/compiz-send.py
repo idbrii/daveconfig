@@ -1,4 +1,9 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
+#
+# Dbus Helper Script
+# Source: http://wiki.compiz.org/Plugins/Dbus#Dbus_Helper_Script
+#
+# You must enable D-Bus in CompizConfig to use this script
 
 import sys, dbus, subprocess
 
