@@ -16,7 +16,7 @@ for a in `ls $config_dir` ;do
 done
 
 # bashrc is different on different platforms
-function delete_if_symbolic() {
+function delete_if_symbolic {
     file=$1
     if [ -L $file ] ; then
         rm $file
