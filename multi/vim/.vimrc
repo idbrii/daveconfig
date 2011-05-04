@@ -230,6 +230,10 @@ nmap <Leader>* :grep -e "<C-r>/" *
 map <Leader>\ :!<up><CR>
 ounmap <Leader>\
 
+" Invoke meld to easily diff the current directory
+" Only useful if we're in a version-controlled directory
+nmap <Leader>gd :e<CR>:!meld . &<CR>
+
 " Generic Header comments (requires formatoptions+=r)
 "  Uses vim's commentstring to figure out the local comment character
 nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> @file	<C-r>%<CR>@module	<C-r>=expand('%:p:h:t')<CR><CR><CR>@author	_me<CR>@brief	<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
