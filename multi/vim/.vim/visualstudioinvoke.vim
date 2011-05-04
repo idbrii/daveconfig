@@ -6,12 +6,15 @@
 " Eclipse passes:
 "   --servername Viclipse --remote-silent "+runtime visualstudioinvoke.vim" ${resource_loc}
 
-" If default screen size then make it bigger
-if &columns==80 && &lines==24
-    " Decent width
-    set columns=100
-    " Full screen height
-    set lines=9999
+" Disable resizing because it breaks under Ubuntu Natty in Unity
+if !has("unix")
+    " If default screen size then make it bigger
+    if &columns==80 && &lines==24
+        " Decent width
+        set columns=100
+        " Full screen height
+        set lines=9999
+    endif
 endif
 
 " Centre cursor
