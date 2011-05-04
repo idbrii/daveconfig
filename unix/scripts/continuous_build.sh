@@ -13,8 +13,12 @@ lang=$1
 
 while true ; do
     echo building...
-    ctags -R .
-    bash ~/.vim/scripts/build_alttagfiles.sh cscope $lang
+    if [ $1 == "android" ] ; then
+        bash ~/.vim/scripts/build_android_tags.sh
+    else
+        ctags -R .
+        bash ~/.vim/scripts/build_alttagfiles.sh cscope $lang
+    fi
     echo done. sleeping.
     sleep 1m
 done
