@@ -1,5 +1,7 @@
-# Creating to work with GNU bash, version 2.05b.0(1)-release (powerpc-apple-darwin8.0)
-# 26 Dec 2008
+# Bash shortcuts
+#
+# My single bash_aliases file. I haven't tried separating each platform since I
+# don't do that much on many platforms.
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -19,23 +21,12 @@ alias ll='ls -l'
 alias lh='ls -lh'
 alias la='ls -A'
 alias lll='ls -Ahl'
-alias les='/usr/share/vim/vim71/macros/less.sh'
-
-# safer way to delete
-alias trash='mv -t ~/.local/share/Trash/files --backup=t'
-
-# aptitude
-alias aptinstall='sudo aptitude install'
-alias aptremove='sudo aptitude remove'
-alias aptautoremove='sudo apt-get autoremove'   # no autoremove for aptitude
-alias aptsearch='apt-cache search'
-alias aptshow='apt-cache show'
-alias aptwhichrepo='apt-cache policy'
-alias aptpkglist='dpkg-query --list'
+alias les='/usr/share/vim/vim73/macros/less.sh'
 
 # windows work-alike
 alias cls='clear'
 alias tracert='tracepath'
+
 
 # python
 #alias ipy='ipython'
@@ -46,14 +37,6 @@ alias and_export_sdk='export PATH=$PATH:$android_code/android-sdk-linux_86/tools
 alias and_go_sdk='cd $android_code/android-sdk-linux_86/platform-tools'
 alias and_ndk_build='$android_code/android-ndk-r4b/ndk-build'
 
-# Advanced applications
-# unfortunately, this is Mac-specific. Ideally, I'd use $VIMRUNTIME
-# currently doesn't work alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
-
-
-alias butter='ssh flutterbutter.local'
-alias mediabutter='ssh mediaserver@flutterbutter.local'
-
 
 # Quick way to view files in vim
 function v { $* | view - ; }
@@ -63,3 +46,49 @@ function move_and_link() {
     mv $1 $2
     ln -sv $2 $1
 }
+
+
+
+#################
+# Location-specific section
+
+# Home
+alias butter='ssh flutterbutter.local'
+alias mediabutter='ssh mediaserver@flutterbutter.local'
+
+
+
+#################
+# Platform-specific section
+
+
+#################
+# Linux
+
+alias gogo='xdg-open'
+# safer way to delete
+alias trash='mv -t ~/.local/share/Trash/files --backup=t'
+# aptitude
+alias aptinstall='sudo aptitude install'
+alias aptremove='sudo aptitude remove'
+alias aptautoremove='sudo apt-get autoremove'   # no autoremove for aptitude
+alias aptsearch='apt-cache search'
+alias aptshow='apt-cache show'
+alias aptwhichrepo='apt-cache policy'
+alias aptpkglist='dpkg-query --list'
+
+
+#################
+# Mac (darwin)
+
+#alias gogo='open'
+# Ideally, I'd use $VIMRUNTIME. Didn't work last time I was on a mac.
+#alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
+# safer way to delete
+#alias trash='mv -t ~/.Trash --backup=t'
+
+
+#################
+# cygwin
+
+#alias gogo='cygstart'
