@@ -21,10 +21,14 @@
     piecemeal = add --patch
     unstage = reset
 
+    what = whatchanged
     who = shortlog -s --
     graph = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'
     histlog = log --pretty=format:\"%C(red)%h%C(reset) %C(blue)%an%C(reset), %C(green)%cr%Creset : %s\"
     changelog = log --abbrev-commit --pretty=short --stat
+
+    #open a github url for the current git repo
+    hub = !git remote -v|sed "'s|.*git[:@]\\(.*\\).git.*|http://\\1|;s|m:|m/|'"|uniq|xargs xdg-open
 
 [merge]
 	tool = meld
