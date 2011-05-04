@@ -26,3 +26,9 @@ export CLASSPATH=/usr/share/java/clojure.jar:$HOME/.clojure-vim/clojure-contrib.
 
 # Set our primary development gpg key to be default
 export GPGKEY=D4D6822E
+
+# Pointer to the previous Ubuntu install
+export OTHER_HOME=/media/bork$HOME
+if [ ! -d $OTHER_HOME ] ; then
+    export OTHER_HOME=/media/munge$HOME
+fi
