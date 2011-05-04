@@ -1,5 +1,7 @@
 runtime syntax/diff.vim
 setlocal filetype=
+" Everything in git-status is line-wise, so use cursorline
+setlocal cursorline
 
 " match first 50 characters on first line, unless it starts with #
 syntax match gitCommitHeader    +^[^#]\%1l.\{1,50}+
