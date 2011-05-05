@@ -1,0 +1,15 @@
+#!/usr/bin/env xdg-open
+# Invoke Scale. Note that this depends on the bindings set for compiz.
+# Requires xdotool
+
+# To add to the unity launcher, you must add a link to this file in
+#   /usr/share/applications/
+
+[Desktop Entry]
+Comment=Switch between programs
+Exec=/usr/bin/xdotool key --delay 10 Super+Tab
+Icon=plugin-scale
+Name=Exposé
+Terminal=false
+Type=Application
+Version=1.0
