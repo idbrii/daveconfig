@@ -71,15 +71,25 @@ screen*)
 esac
 
 # If this is an xterm set the title to user@host:dir
+function build_prompt_command
+{
+    p_user=$1
+    p_host=$2
+    # Put the user and host as requested. Add the current dir using ~ if
+    # applicable, but only if it's home (not somewhere else with
+    # /.../home/user)
+    echo 'echo -ne "\033]0;'$p_user'@'$p_host': ${PWD/#$HOME/~}\007"'
+}
 case "$TERM" in
 xterm*|rxvt*)
-#    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-#    PROMPT_COMMAND='echo -ne "\033]0;${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+    # Shorten the user and hostname to the first character since generally
+    # that's enough to tell them apart.
+#    PROMPT_COMMAND=`build_prompt_command ${USER} ${HOSTNAME}`
+    PROMPT_COMMAND=`build_prompt_command ${USER::1} ${HOSTNAME::1}`
     ;;
 screen*)
     # put square brackets around hostname to indicate a screen session
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@[${HOSTNAME}]: ${PWD}\007"'
+    PROMPT_COMMAND=`build_prompt_command ${USER::1} [${HOSTNAME::1}]`
     ;;
 dumb)
     # Don't do anything for a dumb terminal -- like :shell in vim
