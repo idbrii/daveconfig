@@ -5,3 +5,4 @@ filenametags
 *.pyc
 *.swp
 tags
+.ropeproject
