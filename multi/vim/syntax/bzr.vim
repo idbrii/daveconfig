@@ -3,6 +3,7 @@
 " Maintainer:	Adeodato Simó <dato@net.com.org.es>
 " BranchURL:	http://people.debian.org/~adeodato/code/bzr/bzr-vim
 " Based On:	svn.vim by Dmitry Vasiliev
+" vim:et ts=2 sw=2 sts=2
 
 " For version 5.x: Clear all syntax items.
 " For version 6.x: Quit when a syntax file was already loaded.
@@ -19,6 +20,10 @@ syn match  bzrRemoved	"^removed:$"
 syn match  bzrModified	"^modified:$"
 syn match  bzrRenamed	"^renamed:$"
 syn match  bzrUnkown	"^unknown:$"
+syn match   gitcommitFirstLine	"\%^[^#].*"  nextgroup=gitcommitBlank skipnl
+syn match   gitcommitSummary	"^.\{0,50\}" contained containedin=gitcommitFirstLine nextgroup=gitcommitOverflow contains=@Spell
+syn match   gitcommitOverflow	".*" contained contains=@Spell
+syn match   gitcommitBlank	"^[^#].*" contained contains=@Spell
 
 syn region  bzrLogDiff	start="^=== " end="\%$\|^# start " contains=@diff
 syn include @diff	syntax/diff.vim
@@ -44,6 +49,9 @@ if version >= 508 || !exists("did_bzr_syn_inits")
   HiLink bzrModified	diffFile
   HiLink bzrRenamed	diffOnly
   HiLink bzrUnkown	diffLine
+  HiLink gitcommitSummary		Keyword
+  "HiLink gitcommitOverflow  Error
+  HiLink gitcommitBlank     Error
 
   delcommand HiLink
 endif
