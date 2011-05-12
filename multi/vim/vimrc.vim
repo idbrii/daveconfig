@@ -38,6 +38,14 @@ if has("persistent_undo")
         "   http://code.google.com/p/vim-undo-persistence/source/detail?r=70
         call mkdir(&undodir, "p", 0700)
     endif
+
+    augroup persistent_undo
+        au!
+        au BufWritePre /tmp/*           setlocal noundofile
+        au BufWritePre COMMIT_EDITMSG   setlocal noundofile
+        au BufWritePre *.tmp            setlocal noundofile
+        au BufWritePre *.bak            setlocal noundofile
+    augroup END
 endif
 
 if has("macunix")
