@@ -307,6 +307,10 @@ if &diff
    vnoremap > :diffput<CR>
 endif
 
+" Move in file
+nnoremap -0 <C-o>
+nnoremap -= <C-i>
+
 " Switch files
 nmap ^ <C-^>
 nmap <A-Left> :bp<CR>
