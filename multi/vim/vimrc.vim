@@ -36,7 +36,7 @@ if has("persistent_undo")
         " If the directory doesn't exist try to create undo dir, because vim
         " 703 doesn't do it even though this change should make it work:
         "   http://code.google.com/p/vim-undo-persistence/source/detail?r=70
-        call mkdir(&undodir, "p")
+        call mkdir(&undodir, "p", 0700)
     endif
 endif
 
