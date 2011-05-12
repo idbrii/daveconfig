@@ -43,13 +43,13 @@ if version >= 508 || !exists("did_bzr_syn_inits")
     command -nargs=+ HiLink hi def link <args>
   endif
 
-  HiLink bzrDelimiter	Comment
-  HiLink bzrAdded	diffAdded
-  HiLink bzrRemoved	diffRemoved
-  HiLink bzrModified	diffFile
-  HiLink bzrRenamed	diffOnly
-  HiLink bzrUnkown	diffLine
-  HiLink gitcommitSummary		Keyword
+  HiLink bzrDelimiter       Comment
+  HiLink bzrAdded           diffAdded
+  HiLink bzrRemoved         diffRemoved
+  HiLink bzrModified        diffFile
+  HiLink bzrRenamed         diffOnly
+  HiLink bzrUnkown          diffLine
+  HiLink gitcommitSummary   Keyword
   "HiLink gitcommitOverflow  Error
   HiLink gitcommitBlank     Error
 
