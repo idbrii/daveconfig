@@ -27,6 +27,19 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 "set numberwidth=1			" Use 1 col + 1 space for numbers
 set guioptions-=T			" Disable the toolbar
 
+if has("persistent_undo")
+    " Enable undo that lasts between sessions.
+    " TODO: how/when to clean up undo files?
+    set undofile
+    let &undodir = expand('$HOME/.vim-undo')
+    if filewritable(&undodir) == 0 && exists("*mkdir")
+        " If the directory doesn't exist try to create undo dir, because vim
+        " 703 doesn't do it even though this change should make it work:
+        "   http://code.google.com/p/vim-undo-persistence/source/detail?r=70
+        call mkdir(&undodir, "p")
+    endif
+endif
+
 if has("macunix")
     " looks good on my mac terminal
     colorscheme elflord
