@@ -7,13 +7,10 @@
 
 
 ## Used by mail and other programs that invoke your favourite editor.
-VISUAL=vim
-export VISUAL
+export VISUAL=vim
 ## comment this if the above isn't really is your favourite editor
-EDITOR="$VISUAL"
-export EDITOR
-PAGER=less
-export PAGER
+export EDITOR="$VISUAL"
+export PAGER=less
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
