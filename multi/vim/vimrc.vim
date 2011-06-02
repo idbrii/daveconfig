@@ -118,6 +118,9 @@ endif
 " search up recursively for tags file (to root)
 set tags=./tags;/
 
+" Don't show full path. Just give some path.
+set cscopepathcomp=3
+
 
 """" Folding
 set foldmethod=syntax		" By default, use syntax to determine folds
