@@ -55,7 +55,7 @@ cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^|$tagdir/|" | grep -v -e .xml -e 
 # May want to consider these flags
 #	-m "lang"       Use lang for multi-lingual cscope.
 #	-R              Recurse directories for files.
-$cscope -b -q -k
+$cscope -b -q -k -P$(basename $current)
 
 # }}}
 
