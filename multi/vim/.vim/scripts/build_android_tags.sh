@@ -46,7 +46,7 @@ find $tag_dirs $current/res -type f \( -iname "*.xml" -o -iname "*.java" \) -pri
 # cscope needs full paths, so replace the relative path with the fully
 # qualified path
 # Exclude generated code and xml from cscope. It's not helpful.
-cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^\./|$tagdir/|" | grep -v -e .xml -e R.java > cscope.files
+cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^|$tagdir/|" | grep -v -e .xml -e R.java > cscope.files
 
 # Build cscope database
 #	-b              Build the database only.
