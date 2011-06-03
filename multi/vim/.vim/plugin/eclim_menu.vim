@@ -4,9 +4,23 @@
 " Actually, the eclimd_running variable doesn't seem to work at all.
 
 if exists("g:eclimd_running") && g:eclimd_running
+
+    " I added my package prefix to Eclipse's Organize Imports setting and now
+    " eclim and eclipse appear to be consistent in how they sort.
+    let g:EclimJavaImportPackageSeparationLevel = 1
+    function! JavaCleanupFile()
+        JavaImportMissing
+        JavaImportClean
+        JavaImportSort
+        %JavaFormat
+        Validate
+    endfunction
+
     " imports whatever is needed
     menu E&clim.ImportMissing :JavaImportMissing<CR>
     menu E&clim.ImportPrettify :JavaImportClean<CR>:JavaImportSort<CR>
+
+    menu E&clim.Prettify :call JavaCleanupFile()<CR>
 
     " opens javadoc for statement in browser
     menu E&clim.JavaDocSearch  :JavaDocSearch -x declarations<CR>
