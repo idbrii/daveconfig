@@ -669,6 +669,7 @@ function! s:MRU_Open_Window(...)
     setlocal nobuflisted
     " Use fixed height for the MRU window
     setlocal winfixheight
+    setlocal cursorline
 
     " Setup the cpoptions properly for the maps to work
     let old_cpoptions = &cpoptions
