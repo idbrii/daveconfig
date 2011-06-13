@@ -108,7 +108,13 @@ COUNT=0
             $DOWNLOADTOOL $restore_dir$src_name $PACKAGE_PREFIX$src_id
             ex +$INDEX's/^\s*\(\d\+ \)\d\+\( .*\)$/\1'$src_id'\2/' +'wq' $scripts_list_bak
             let COUNT+=1
-            unzip -u $restore_dir$src_name -d ~/.vim/bundle/$plugin_name
+            unzip -u $restore_dir$src_name -d ~/.vim/bundle/$plugin_name/
+            if [ ! $? -eq 0 ] ; then
+                echo
+                echo "$plugin_name wasn't a zip. Assuming default install is ~/.vim/plugin/"
+                mkdir -p ~/.vim/bundle/$plugin_name/plugin
+                mv $restore_dir$src_name ~/.vim/bundle/$plugin_name/plugin/$src_name
+            fi
             cd ~/.vim/bundle/$plugin_name
             git add .
             echo -e "Auto-update $plugin_name\n\nUse downloadvimscripts to install new version from\n\t$PAGE_PREFIX$script_id" | git commit -F -
