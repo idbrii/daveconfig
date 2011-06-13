@@ -28,3 +28,6 @@
 [submodule "multi/vim/bundle/ack"]
 	path = multi/vim/bundle/ack
 	url = git@github.com:pydave/vim-ack.git
+[submodule "multi/vim/bundle/xmledit"]
+	path = multi/vim/bundle/xmledit
+	url = git@github.com:pydave/xmledit.git
