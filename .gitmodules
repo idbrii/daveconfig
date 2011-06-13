@@ -1,0 +1,3 @@
+[submodule "multi/vim/bundle/git-vim"]
+	path = multi/vim/bundle/git-vim
+	url = git@github.com:pydave/git-vim.git
