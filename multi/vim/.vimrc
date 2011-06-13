@@ -454,6 +454,8 @@ let no_plugin_menus = 1
 "let g:EclimTaglistEnabled = 0
 "let g:taglisttoo_disabled = 1
 
+" Reduce the amount of automatic stuff from xml.vim
+let g:no_xml_maps = 1
 
 
 """""
