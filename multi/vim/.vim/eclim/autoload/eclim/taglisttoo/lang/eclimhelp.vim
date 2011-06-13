@@ -4,7 +4,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2009  Eric Van Dewoestine
+" Copyright (C) 2005 - 2010  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -21,18 +21,12 @@
 "
 " }}}
 
-" Ticket(ticket) {{{
-function eclim#project#tracker#Ticket(ticket)
-  let url = eclim#project#util#GetProjectSetting('org.eclim.project.tracker')
-  if type(url) == 0 || url == ''
-    call eclim#util#EchoWarning(
-      \ "Viewing tickets requires project setting " .
-      \ "'org.eclim.project.tracker'.")
-    return
-  endif
-
-  let url = substitute(url, '<id>', a:ticket, 'g')
-  call eclim#web#OpenUrl(url)
+" Parse(file, settings) {{{
+function! eclim#taglisttoo#lang#eclimhelp#Parse(file, settings)
+  return taglisttoo#util#Parse(a:file, [
+      \ ['a', '\*([^ *]+)\*', 1],
+      \ ['s', '\n([^\n]+)\n[=^-]{4,}', 1],
+    \ ])
 endfunction " }}}
 
 " vim:ft=vim:fdm=marker

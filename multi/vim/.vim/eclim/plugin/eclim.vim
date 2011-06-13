@@ -105,7 +105,7 @@ endif
 
 if !exists("g:EclimHome")
   " set at build/install time.
-  let g:EclimHome = '/home/dbriscoe/data/apps/eclipse/plugins/org.eclim_1.6.1'
+  let g:EclimHome = '/home/dbriscoe/data/apps/eclipse/plugins/org.eclim_1.6.3'
   if has('win32unix')
     let g:EclimHome = eclim#cygwin#CygwinPath(g:EclimHome)
   endif
@@ -116,6 +116,10 @@ if !exists("g:EclimEclipseHome")
   if has('win32unix')
     let g:EclimEclipseHome = eclim#cygwin#CygwinPath(g:EclimEclipseHome)
   endif
+endif
+
+if !exists("g:EclimMenus")
+  let g:EclimMenus = 1
 endif
 " }}}
 
@@ -164,18 +168,6 @@ if g:EclimShowCurrentErrorBalloon && has('balloon_eval')
   set balloonexpr=eclim#util#Balloon(eclim#util#GetLineError(line('.')))
 endif
 
-if g:EclimMakeLCD
-  augroup eclim_make_lcd
-    autocmd!
-    autocmd QuickFixCmdPre make
-      \ if g:EclimMakeLCD | call <SID>QuickFixLocalChangeDirectory() | endif
-    autocmd QuickFixCmdPost make
-      \ if g:EclimMakeLCD && exists('w:quickfix_dir') |
-      \   exec 'lcd ' . escape(w:quickfix_dir, ' ') |
-      \ endif
-  augroup END
-endif
-
 if g:EclimMakeQfFilter
   augroup eclim_qf_filter
     autocmd!
@@ -191,7 +183,7 @@ if g:EclimSignLevel
     autocmd QuickFixCmdPost *make* call eclim#display#signs#Show('', 'qf')
     autocmd QuickFixCmdPost grep*,vimgrep* call eclim#display#signs#Show('i', 'qf')
     autocmd QuickFixCmdPost lgrep*,lvimgrep* call eclim#display#signs#Show('i', 'loc')
-    autocmd BufWinEnter * call eclim#display#signs#Update()
+    autocmd WinEnter,BufWinEnter * call eclim#display#signs#Update()
   augroup END
 endif
 
@@ -205,19 +197,13 @@ if has('netbeans_intg')
     autocmd BufWinLeave * call eclim#vimplugin#BufferClosed()
   augroup END
 endif
+
+if has('gui_running') && g:EclimMenus
+  augroup eclim_menus
+    autocmd BufNewFile,BufReadPost,WinEnter * call eclim#display#menu#Generate()
+    autocmd VimEnter * if expand('<amatch>')=='' | call eclim#display#menu#Generate() | endif
+  augroup END
+endif
 " }}}
-
-" QuickFixLocalChangeDirectory() {{{
-function! s:QuickFixLocalChangeDirectory()
-  if g:EclimMakeLCD
-    let w:quickfix_dir = getcwd()
-
-    let dir = eclim#project#util#GetCurrentProjectRoot()
-    if dir == ''
-      let dir = substitute(expand('%:p:h'), '\', '/', 'g')
-    endif
-    exec 'lcd ' . escape(dir, ' ')
-  endif
-endfunction " }}}
 
 " vim:ft=vim:fdm=marker
