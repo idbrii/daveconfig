@@ -6,6 +6,10 @@
 # Description: auto-load vim plugins
 # Dependency: which, sed, awk, ex, rm, mv
 
+#Run as:
+# ./downloadvimscripts -o /tmp/vim_bundle_download/ dvs_bundles.dat
+
+
 function CheckDependency()
 {
     [[ -z $(which $1) ]] && { echo "Dependency broken: $1"; exit 1; }
@@ -17,6 +21,8 @@ CheckDependency "awk"
 CheckDependency "ex"
 CheckDependency "rm"
 CheckDependency "mv"
+CheckDependency "unzip"
+CheckDependency "git"
 
 function ShowUsage()
 {
@@ -91,6 +97,7 @@ COUNT=0
     while read line; do
         script_id=$(echo $line | awk '{print $1}')
         old_src_id=$(echo $line | awk '{print $2}')
+        plugin_name=$(echo $line | awk '{print $3}')
         tmpfile='/tmp/'$script_id
         $DOWNLOADTOOL $tmpfile $PAGE_PREFIX$script_id
         tmpline=$(sed -n '/download_script\.php?src_id/p' $tmpfile | sed -n '1p')
@@ -101,6 +108,11 @@ COUNT=0
             $DOWNLOADTOOL $restore_dir$src_name $PACKAGE_PREFIX$src_id
             ex +$INDEX's/^\s*\(\d\+ \)\d\+\( .*\)$/\1'$src_id'\2/' +'wq' $scripts_list_bak
             let COUNT+=1
+            unzip -u $restore_dir$src_name -d ~/.vim/bundle/$plugin_name
+            cd ~/.vim/bundle/$plugin_name
+            git add .
+            echo -e "Auto-update $plugin_name\n\nUse downloadvimscripts to install new version from\n\t$PAGE_PREFIX$script_id" | git commit -F -
+            cd -
         fi
         rm -rf $tmpfile
         let INDEX+=1
