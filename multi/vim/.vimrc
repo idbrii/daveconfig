@@ -85,6 +85,7 @@ set shiftwidth=4			" (used on auto indent)
 set softtabstop=4			" 4 spaces as a tab for bs/del
 set smarttab				" Use tab button for tabs
 set expandtab				" Use spaces, not tabs (use Ctrl-V+Tab to insert a tab)
+set cinkeys-=0#             " Free # from the first column: It's for more than preprocessors!
 "set autoindent				" Indent like previous line
 set smartindent				" Try to be clever about indenting
 "set cindent				" Really clever indenting
