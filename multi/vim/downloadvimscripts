@@ -1,0 +1,113 @@
+#!/bin/bash
+# Script: downloadvimscripts
+# Author: Frank Sun <frank.sun.319@gmail.com>
+# Date: Jan. 6, 2009
+# Version: 1.5.6
+# Description: auto-load vim plugins
+# Dependency: which, sed, awk, ex, rm, mv
+
+function CheckDependency()
+{
+    [[ -z $(which $1) ]] && { echo "Dependency broken: $1"; exit 1; }
+}
+
+CheckDependency "which"
+CheckDependency "sed"
+CheckDependency "awk"
+CheckDependency "ex"
+CheckDependency "rm"
+CheckDependency "mv"
+
+function ShowUsage()
+{
+    echo "USAGE: $(basename $0) [-o restore_dir] scripts_list_file"
+    exit 1
+}
+
+[[ $# -eq 0 ]] || [[ $# -gt 3 ]] && ShowUsage
+
+# handle options
+while getopts ":o:" opt; do
+    case $opt in
+        o )
+        [[ -d $OPTARG ]] && restore_dir="${OPTARG%/}/" || { echo "$OPTARG is not exist." ; exit 0 ; }
+        ;;
+        * )
+        ShowUsage
+        ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+# define and verify $scripts_list
+[[ -n $1 ]] && scripts_list=$1 || ShowUsage
+[[ ! -w $scripts_list ]] && { echo "File $scripts_list is not writable." ; exit 1 ; }
+
+# define and verify $restore_dir
+if [[ -z $restore_dir ]]; then
+    [[ $scripts_list =~ '/' ]] && restore_dir="${1%/*}/" || restore_dir="$(pwd)/"
+fi
+[[ ! -w $restore_dir ]] && { echo "Directory $restore_dir is not writable." ; exit 1; }
+
+# define download tool
+if [[ -n $(which wget) ]]; then
+    DOWNLOADTOOL='wget -q -O'
+elif [[ -n $(which curl) ]]; then
+    DOWNLOADTOOL='curl -s -o'
+else
+    echo 'Both wget and curl are not exist!'
+    exit 1
+fi
+
+# make $items_list file
+items_list='/tmp/'${scripts_list##*/}.tmp
+function Filter()
+{
+    while read line; do
+        line=$(echo $line | sed -n '/^\s*\([0-9]\+\s\+\)\{2\}[0-9a-zA-Z_-]\+\s*$/p')
+        [[ -n $line ]] && echo $line
+    done
+}
+Filter < $scripts_list > $items_list
+
+# make $scripts_list_bak file
+scripts_list_bak=${items_list%.tmp}.bak
+echo -e 'ScriptID SourceID Filename\n--------------------------' > $scripts_list_bak
+cat $items_list >> $scripts_list_bak
+
+# check if input var is a number
+function IsNumber()
+{
+    echo "$1" | sed -n '/^[0-9]\+$/p'
+}
+
+# core algorithm
+# get vim scripts and update scripts_list_file
+PAGE_PREFIX='http://www.vim.org/scripts/script.php?script_id='
+PACKAGE_PREFIX='http://www.vim.org/scripts/download_script.php?src_id='
+INDEX=3
+COUNT=0
+{
+    while read line; do
+        script_id=$(echo $line | awk '{print $1}')
+        old_src_id=$(echo $line | awk '{print $2}')
+        tmpfile='/tmp/'$script_id
+        $DOWNLOADTOOL $tmpfile $PAGE_PREFIX$script_id
+        tmpline=$(sed -n '/download_script\.php?src_id/p' $tmpfile | sed -n '1p')
+        src_id=$(echo $tmpline | sed 's/^.*download_script\.php?src_id=\([0-9]\+\).*$/\1/')
+        [ -z "$(IsNumber $old_src_id)" -o -z "$(IsNumber $src_id)" ] && continue
+        if (( $old_src_id < $src_id )); then
+            src_name=$(echo $tmpline | sed 's/<[^>]*>//g')
+            $DOWNLOADTOOL $restore_dir$src_name $PACKAGE_PREFIX$src_id
+            ex +$INDEX's/^\s*\(\d\+ \)\d\+\( .*\)$/\1'$src_id'\2/' +'wq' $scripts_list_bak
+            let COUNT+=1
+        fi
+        rm -rf $tmpfile
+        let INDEX+=1
+    done
+} < $items_list
+
+# clean up
+rm -rf $items_list
+mv $scripts_list_bak $scripts_list
+(($COUNT > 0)) && echo "$COUNT new files downloaded and saved in $restore_dir"
