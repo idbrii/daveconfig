@@ -139,8 +139,9 @@ au!
 
 	" In most files, jump back to the last spot cursor was in before exiting
     " (except: git commit)
+    " See :help last-position-jump
 	au BufReadPost * if &ft != 'gitcommit' |
-		\ if line("'\"") > 0 && line("'\"") <= line("$") |
+		\ if line("'\"") > 1 && line("'\"") <= line("$") |
 		\   exe "normal g`\"" |
 		\ endif
 
