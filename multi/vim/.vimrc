@@ -12,6 +12,10 @@ if version < 700
 	set noloadplugins
 endif
 
+" Load pathogen -- it loads other plugins, so do it first.
+call pathogen#runtime_append_all_bundles()
+
+
 """ Settings
 """" Searching and Patterns
 set ignorecase					" search is case insensitive
