@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2011  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -44,16 +44,30 @@ endif
 " Handles opening windows in the vertical tool window on the left (taglist,
 " project tree, etc.)
 function! eclim#display#window#VerticalToolWindowOpen(name, weight, ...)
-  let taglist_window = exists('g:TagList_title') ? bufwinnr(g:TagList_title) : -1
+  let taglist_window = exists('g:TagList_title') ?
+    \ bufwinnr(eclim#util#EscapeBufferName(g:TagList_title)) : -1
   if exists('g:Tlist_Use_Horiz_Window') && g:Tlist_Use_Horiz_Window
     let taglist_window = -1
   endif
 
+  let nerdtree_window = -1
+  let index = 1
+  while index <= winnr('$')
+    if getbufvar(winbufnr(index), 'NERDTreeType') == 'primary'
+      let nerdtree_window = index
+      break
+    endif
+    let index += 1
+  endwhile
+
   let relative_window = 0
   let relative_window_loc = 'below'
-  if taglist_window != -1 || len(g:VerticalToolBuffers) > 0
+  if taglist_window != -1 || nerdtree_window != -1 || len(g:VerticalToolBuffers) > 0
     if taglist_window != -1
       let relative_window = taglist_window
+    endif
+    if nerdtree_window != -1
+      let relative_window = nerdtree_window
     endif
     for toolbuf in keys(g:VerticalToolBuffers)
       exec 'let toolbuf = ' . toolbuf
@@ -232,20 +246,15 @@ endfunction " }}}
 
 " s:PreventCloseOnBufferDelete() {{{
 function! s:PreventCloseOnBufferDelete()
-  let numtoolwindows = 0
-  for toolbuf in keys(g:VerticalToolBuffers)
-    exec 'let toolbuf = ' . toolbuf
-    if bufwinnr(toolbuf) != -1
-      let numtoolwindows += 1
-    endif
-  endfor
-
   let index = 1
+  let numtoolwindows = 0
   let numtempwindows = 0
   let tempbuffers = []
   while index <= winnr('$')
     let buf = winbufnr(index)
-    if buf != -1 && getbufvar(buf, 'eclim_temp_window') != ''
+    if index(keys(g:VerticalToolBuffers), string(buf)) != -1
+      let numtoolwindows += 1
+    elseif getwinvar(index, '&winfixheight') || getwinvar(index, '&winfixwidth')
       call add(tempbuffers, buf)
     endif
     let index += 1

@@ -1,11 +1,10 @@
 " Author:  Eric Van Dewoestine
 "
 " Description: {{{
-"   see http://eclim.org/vim/java/maven/run.html
 "
 " License:
 "
-" Copyright (C) 2005 - 2009  Eric Van Dewoestine
+" Copyright (C) 2005 - 2010  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -22,16 +21,17 @@
 "
 " }}}
 
-" Maven(bang, args) {{{
-" Executes maven 1.x using the supplied arguments.
-function! eclim#java#maven#run#Maven(bang, args)
-  call eclim#util#MakeWithCompiler('eclim_maven', a:bang, a:args)
-endfunction " }}}
-
-" Mvn(bang, args) {{{
-" Executes maven 2.x using the supplied arguments.
-function! eclim#java#maven#run#Mvn(bang, args)
-  call eclim#util#MakeWithCompiler('eclim_mvn', a:bang, a:args)
+" Parse(file, settings) {{{
+function! eclim#taglisttoo#lang#hibernate#Parse(file, settings)
+  return taglisttoo#util#Parse(a:file, [
+      \ ['c', "<class\\s+[^>]*?name=['\"](.*?)['\"]", 1],
+      \ ['j', "<joined-subclass\\s+[^>]*?name=['\"](.*?)['\"]", 1],
+      \ ['t', "<typedef\\s+[^>]*?name=['\"](.*?)['\"]", 1],
+      \ ['f', "<filter-def\\s+[^>]*?name=['\"](.*?)['\"]", 1],
+      \ ['i', "<import\\s+[^>]*?class=['\"](.*?)['\"]", 1],
+      \ ['q', "<query\\s+[^>]*?name=['\"](.*?)['\"]", 1],
+      \ ['s', "<sql-query\\s+[^>]*?name=['\"](.*?)['\"]", 1],
+    \ ])
 endfunction " }}}
 
 " vim:ft=vim:fdm=marker

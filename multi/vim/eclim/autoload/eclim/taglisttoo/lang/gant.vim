@@ -1,11 +1,10 @@
 " Author:  Eric Van Dewoestine
 "
 " Description: {{{
-"   see http://eclim.org/vim/common/vcs.html
 "
 " License:
 "
-" Copyright (C) 2005 - 2009  Eric Van Dewoestine
+" Copyright (C) 2005 - 2010  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -22,8 +21,13 @@
 "
 " }}}
 
-" Mappings {{{
-  nnoremap <silent> <buffer> <cr> :call eclim#vcs#editor#ViewDiff()<cr>
-" }}}
+" Parse(file, settings) {{{
+function! eclim#taglisttoo#lang#gant#Parse(file, settings)
+  return taglisttoo#util#Parse(a:file, [
+      \ ['t', "\\s*target\\s*\\(\\s*(?:name\\s*:)?\\s*['\"]?([^'\",: ]+)", 1],
+      \ ['f', "\\s*def\\s+(\\w+)\\s*\\(", 1],
+      \ ['f', "\\s*(?:final|def)?\\s*(\\w+)\\s*=\\s*\\{", 1],
+    \ ])
+endfunction " }}}
 
 " vim:ft=vim:fdm=marker

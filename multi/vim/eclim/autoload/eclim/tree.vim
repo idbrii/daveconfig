@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2011  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -72,7 +72,7 @@ function! eclim#tree#TreeHome()
   endif
   let s:tree_count += 1
 
-  call eclim#tree#Tree(name, [expand('$HOME')], [], 1, [])
+  call eclim#tree#Tree(name, [eclim#UserHome()], [], 1, [])
 endfunction " }}}
 
 " TreePanes() {{{
@@ -116,8 +116,8 @@ function! eclim#tree#Tree(name, roots, aliases, expand, filters)
 
   " register setting prior to listing any directories
   if exists("g:TreeSettingsFunction")
-    let Settings = function(g:TreeSettingsFunction)
-    call Settings()
+    let l:Settings = function(g:TreeSettingsFunction)
+    call l:Settings()
     let s:settings_loaded = 1
   endif
 
@@ -266,7 +266,7 @@ function! eclim#tree#GetParentPosition()
   let lnum = 0
   let line = getline('.')
   if line =~ '\s*' . s:node_prefix
-    if line =~ '^' . s:node_regex . '[.[:alnum:]_]'
+    if line =~ '^' . s:node_regex . '\S'
       let search = s:root_regex
     else
       let search = '^'
@@ -481,7 +481,11 @@ function! eclim#tree#Cursor(line, prevline)
     let start = len(line) - len(substitute(line, '^\s\+\W', '', ''))
 
     " only use the real previous line if we've only moved one line
-    let pline = abs(a:prevline - lnum) == 1 ? getline(a:prevline) : ''
+    let moved = a:prevline - lnum
+    if moved < 0
+      let moved = -moved
+    endif
+    let pline = moved == 1 ? getline(a:prevline) : ''
     let pstart = pline != '' ?
       \ len(pline) - len(substitute(pline, '^\s\+\W', '', '')) : -1
 
@@ -682,7 +686,12 @@ function! eclim#tree#Refresh()
       " if we are adding a new entry we'll just add one that has the correct
       " index + prefix and let the next block set the proper display path.
       if s:MatchesFilter(norm_entry)
-        let initial = fnamemodify(entry, ':t')
+        if isdirectory(entry)
+          let initial = fnamemodify(substitute(entry, '/$', '', ''), ':t') . '/'
+        else
+          let initial = fnamemodify(entry, ':t')
+        endif
+
         if index(dirs, entry) != -1
           let display_entry = indent . s:node_prefix . s:dir_closed_prefix . initial
         else
@@ -1001,8 +1010,8 @@ function! eclim#tree#ListDir(dir, ...)
   endif
 
   if exists('b:dir_actions') && (!a:0 || a:1)
-    for Action in b:dir_actions
-      call Action(a:dir, contents)
+    for l:Action in b:dir_actions
+      call l:Action(a:dir, contents)
     endfor
   endif
 
@@ -1107,10 +1116,6 @@ function! eclim#tree#DisplayActionChooser(file, actions, executeFunc)
   new
   let height = len(a:actions) + 1
 
-  " for maximize.vim
-  let b:eclim_temp_window = 1
-  let b:eclim_temp_window_height = height
-
   exec 'resize ' . height
 
   setlocal noreadonly modifiable
@@ -1167,7 +1172,7 @@ function! s:Mappings()
 
   nmap <buffer> <silent> A    :call eclim#tree#ToggleViewHidden()<cr>
 
-  nmap <buffer> <silent> ~    :call eclim#tree#SetRoot(expand('$HOME'))<cr>
+  nmap <buffer> <silent> ~    :call eclim#tree#SetRoot(eclim#UserHome())<cr>
   nmap <buffer> <silent> C    :call eclim#tree#SetRoot(eclim#tree#GetPath())<cr>
   nmap <buffer> <silent> K    :call eclim#tree#SetRoot(substitute(
     \ <SID>PathToAlias(eclim#tree#GetRoot()),
