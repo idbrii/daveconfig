@@ -27,8 +27,9 @@
     histlog = log --pretty=format:\"%C(red)%h%C(reset) %C(blue)%an%C(reset), %C(green)%cr%Creset : %s\"
     changelog = log --abbrev-commit --pretty=short --stat
 
-    #open a github url for the current git repo
-    hub = !git remote -v|sed "'s|.*git[:@]\\(.*\\).git.*|http://\\1|;s|m:|m/|'"|uniq|xargs xdg-open
+    # open a github url for the current git repo
+    hub = !git remote -v | sed -e"'s#git[:@]\\([^:]*\\):#https://\\1/#;s#^.*\\s\\(.*\\)\\.git\\s.*#\\1#'" | uniq | xargs xdg-open
+    #   uses 2 sed substitutions:  ^-- change git: urls to https:      ^-- pull out url and remove .git to get webpage
 
 [merge]
 	tool = meld
