@@ -415,6 +415,9 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 
 let MRU_Max_Entries = 50
 
+" Gundo -- visualize the undo tree
+nnoremap <F2> :GundoToggle<CR>
+
 " Surround
 vmap  c    <Plug>Vsurround
 vmap  C    <Plug>VSurround
