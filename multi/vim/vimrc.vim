@@ -546,4 +546,4 @@ endfunction
 " Source local environment additions
 runtime local.vim
 
-" vim: sw=4 fdm=marker
+"vi:et:sw=4 ts=4 fdm=marker
