@@ -10,3 +10,6 @@
 [submodule "multi/vim/bundle/asynccommand"]
 	path = multi/vim/bundle/asynccommand
 	url = git@github.com:pydave/AsyncCommand.git
+[submodule "multi/vim/bundle/gundo"]
+	path = multi/vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
