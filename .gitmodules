@@ -7,3 +7,6 @@
 [submodule "multi/vim/bundle/surround"]
 	path = multi/vim/bundle/surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "multi/vim/bundle/asynccommand"]
+	path = multi/vim/bundle/asynccommand
+	url = git@github.com:pydave/AsyncCommand.git
