@@ -134,6 +134,7 @@ set foldlevelstart=99		" All folds open by default
 
 """" Command Line
 set wildmenu                " Autocomplete features in the status bar
+set wildmode=longest,list,full
 
 """" Autocommands
 if has("autocmd")
