@@ -13,3 +13,6 @@
 [submodule "multi/vim/.vim/bundle/gundo"]
 	path = multi/vim/.vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule "multi/vim/.vim/bundle/fugitive"]
+	path = multi/vim/.vim/bundle/fugitive
+	url = git@github.com:pydave/vim-fugitive.git
