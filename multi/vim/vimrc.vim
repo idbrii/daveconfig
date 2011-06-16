@@ -124,6 +124,11 @@ endif
 " search up recursively for tags file (to root)
 set tags=./tags;/
 
+" allow commands like :find to search recursively from the current file's
+" directory. Ideally, I should set path to some useful directories, but I
+" don't have a good working set right now.
+set path+=./**
+
 " Don't show full path. Just give some path.
 set cscopepathcomp=3
 
