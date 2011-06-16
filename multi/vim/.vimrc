@@ -262,9 +262,11 @@ nmap <Leader>* :grep -e "<C-r>/" *
 map <Leader>\ :!<up><CR>
 ounmap <Leader>\
 
-" Invoke meld to easily diff the current directory
-" Only useful if we're in a version-controlled directory
-nmap <Leader>gd :e<CR>:!meld . &<CR>
+if executable('meld')
+    " Invoke meld to easily diff the current directory
+    " Only useful if we're in a version-controlled directory
+    nmap <Leader>gD :e<CR>:!meld . &<CR>
+endif
 
 " Generic Header comments (requires formatoptions+=r)
 "  Uses vim's commentstring to figure out the local comment character
