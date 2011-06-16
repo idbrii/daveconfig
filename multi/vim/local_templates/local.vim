@@ -1,18 +1,11 @@
 " Special settings for local environment
 "
 
-" Switch to the directory of the current file, unless it's a help file.
-if has("autocmd")
-augroup vimrcEx
-    au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
-endif
-
 " Set a different name for this location
 iabbrev _me pydave (pydave@gmail.com)
 iabbrev _company pydave
 
 " Perforce
-
 let g:p4Presets = 'perforce:1666 pydave_client pydave'
 let g:external_diff = 'bcomp.bat'
 
