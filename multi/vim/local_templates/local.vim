@@ -11,10 +11,17 @@ let g:external_diff = 'bcomp.bat'
 
 let g:DAVID_local_root = "c:/p4/main"
 
+" Git shortcuts
+nmap <Leader>gi :GitStatus<CR>
+nmap <Leader>gc :GitDiff --staged<CR>
+
 " Vim on Windows defaults to findstr, but cygwin grep is better
 set grepprg=grep\ -nH
 " If most code has a path like: p4\game\main\packages\core\game\dev\src\
 let g:cpp_header_n_dir_to_trim = 8
+
+" I've started using shift insert since c-v is so broken
+imap <S-Insert> <C-r>+
 
 " Setup cscope for general use
 if has("cscope")
