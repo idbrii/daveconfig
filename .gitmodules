@@ -16,3 +16,6 @@
 [submodule "multi/vim/bundle/fugitive"]
 	path = multi/vim/bundle/fugitive
 	url = git@github.com:pydave/vim-fugitive.git
+[submodule "multi/vim/bundle/gitv"]
+	path = multi/vim/bundle/gitv
+	url = git://github.com/gregsexton/gitv.git
