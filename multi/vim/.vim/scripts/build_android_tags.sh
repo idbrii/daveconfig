@@ -36,7 +36,8 @@ tagfile=$tagdir/filenametags
 echo "!_TAG_FILE_SORTED	2	/2=foldcase/"> $tagfile
 
 # Android uses java and xml. Only include xml files for the current project.
-find $tag_dirs $current/res -type f \( -iname "*.xml" -o -iname "*.java" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+# We filter our cscope.files to only look at java, so it the xml files are only for LookupFile
+find $tag_dirs $current/res $current/AndroidManifest.xml -type f \( -iname "*.xml" -o -iname "*.java" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 # }}}
 
