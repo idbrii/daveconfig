@@ -2,7 +2,6 @@
 "       in your path.
 " On Ubuntu:
 "   sudo apt-get install ack-grep
-"   ln -s /usr/bin/ack-grep /usr/bin/ack
 " With MacPorts:
 "   sudo port install p5-app-ack
 
@@ -35,10 +34,10 @@ function! Ack(command, args)
   call asynccommand#run(cmd, env)
 endfunction
 
-command! -nargs=+ -complete=file Ack     call Ack("asynccommand#quickfix",     <q-args>)
-command! -nargs=+ -complete=file AckAdd  call Ack("asynccommand#quickfix_add", <q-args>)
-command! -nargs=+ -complete=file LAck    call Ack("asynccommand#loclist",      <q-args>)
-command! -nargs=+ -complete=file LAckAdd call Ack("asynccommand#loclist_add",  <q-args>)
-command! -nargs=+ -complete=file AckG    call Ack("asynccommand#quickfix",     <q-args>)
+command! -nargs=+ -complete=file Ack     call Ack("asynchandler#quickfix",     <q-args>)
+command! -nargs=+ -complete=file AckAdd  call Ack("asynchandler#quickfix_add", <q-args>)
+command! -nargs=+ -complete=file LAck    call Ack("asynchandler#loclist",      <q-args>)
+command! -nargs=+ -complete=file LAckAdd call Ack("asynchandler#loclist_add",  <q-args>)
+command! -nargs=+ -complete=file AckG    call Ack("asynchandler#quickfix",     <q-args>)
 
 let &cpo = s:save_cpo
