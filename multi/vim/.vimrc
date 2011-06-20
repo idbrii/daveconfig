@@ -390,7 +390,7 @@ command! LargeScreen set lines=59 | set columns=100
 command! VShell runtime scripts/vimsh/vimsh.vim
 
 " Diff against the file on disk. Useful for recovery. See also :help DiffOrig
-command DiffSaved vert split original.vimscratch | silent %d | silent r # | silent 0d_ | diffthis | wincmd p | diffthis
+command! DiffSaved vert split original.vimscratch | silent %d | silent r # | silent 0d_ | diffthis | wincmd p | diffthis
 
 "" Insert
 " General
