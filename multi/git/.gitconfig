@@ -20,6 +20,7 @@
     diff-staged = diff --cached
     piecemeal = add --patch
     unstage = reset
+    substat = submodule foreach "git status && echo"
 
     what = whatchanged
     who = shortlog -s --
