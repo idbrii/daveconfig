@@ -514,6 +514,11 @@ let g:clj_paren_rainbow = 1
 """""""""""
 " Source Control    {{{
 
+" Git
+nmap <leader>gv :Gitv --all<cr>
+nmap <leader>gV :Gitv! --all<cr>
+vmap <leader>gV :Gitv! --all<cr>
+
 " Perforce
 let no_perforce_maps=1
 let g:p4CheckOutDefault = 1		" Yes as default
