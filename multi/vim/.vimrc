@@ -514,12 +514,6 @@ let g:clj_paren_rainbow = 1
 """""""""""
 " Source Control    {{{
 
-" Git
-" Don't want maps for git. Just use Normal commands
-let g:git_no_default_mappings = 1
-let g:git_always_verbose_commit = 1
-
-
 " Perforce
 let no_perforce_maps=1
 let g:p4CheckOutDefault = 1		" Yes as default
