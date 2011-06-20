@@ -163,7 +163,7 @@ au!
 
 	" Switch to the directory of the current file, unless it's a help file.
     " Could use BufEnter instead, but then we have constant changing pwd.
-    " Use <S-e> to reload the buffer if you want to cd.
+    " Use <S-space> to reload the buffer if you want to cd.
 	au BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
 
 	" kill calltip window if we move cursor or leave insert mode
