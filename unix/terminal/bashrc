@@ -34,10 +34,16 @@ fi
 shopt -s checkwinsize
 
 # don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth:erasedups
 
 # Don't blindly execute history
 shopt -s histverify
+
+# Bigger history
+export HISTSIZE=10000
+
+# Don't store these little commands
+export HISTIGNORE="&:ls:[bf]g:exit"
 
 # Bashmarks provides bookmarking in bash
 source ~/data/settings/daveconfig/unix/terminal/bashmarks/bashmarks.sh
