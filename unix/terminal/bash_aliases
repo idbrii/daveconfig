@@ -45,6 +45,8 @@ alias and_export_sdk='export PATH=$PATH:$android_sdks/android-sdk-linux/tools:$a
 alias and_go_sdk='cd $android_sdks/android-sdk-linux/platform-tools'
 #alias and_ndk_build='$android_sdks/android-ndk-r4b/ndk-build'
 
+# Version control
+alias g=git
 function init_skeleton {
     cp ../gitignore .gitignore
     git init
