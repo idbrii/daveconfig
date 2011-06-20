@@ -1,0 +1,3 @@
+export DIR_dave="$HOME/data/settings/daveconfig"
+export DIR_and="$HOME/data/code/android"
+export DIR_vim="$HOME/data/settings/daveconfig/multi/vim/.vim"

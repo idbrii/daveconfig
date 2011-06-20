@@ -39,6 +39,11 @@ export HISTCONTROL=ignoreboth
 # Don't blindly execute history
 shopt -s histverify
 
+# Bashmarks provides bookmarking in bash
+source ~/data/settings/daveconfig/unix/terminal/bashmarks/bashmarks.sh
+export SDIRS=~/data/settings/daveconfig/unix/terminal/bashmarks.sdirs
+
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
