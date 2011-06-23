@@ -23,10 +23,11 @@ else
 endif
 
 function! Ack(command, args)
-  let cmd = s:prg . " -H --nocolor --nogroup --column " . a:args
-  if a:args =~ '\m\C\<-[gf]\>'
+  if a:args =~ '\m\C\%(^\|\s\)-[gflL]\%($\|\s\)' || a:args =~ '\m\C\%(^\|\s\)--files-with\(-out\)\?-matches\>\%($\|\s\)'
+    let cmd = s:prg . " -H --nocolor --nogroup " . a:args
     let format = "%f"
   else
+    let cmd = s:prg . " -H --nocolor --nogroup --column " . a:args
     let format = "%f:%l:%c:%m"
   endif
   let title = '[Found: %s] Ack ' . substitute(a:args, '%', '%%', 'g')
