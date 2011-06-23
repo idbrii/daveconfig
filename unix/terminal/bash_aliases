@@ -60,6 +60,8 @@ function move_and_link() {
     ln -sv $2 $1
 }
 
+# Start serving the local directory as a website
+alias webserve='python -m SimpleHTTPServer'
 
 
 #################
