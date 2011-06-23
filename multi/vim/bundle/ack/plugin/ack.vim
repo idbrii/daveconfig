@@ -38,6 +38,5 @@ command! -nargs=+ -complete=file Ack     call Ack("asynchandler#quickfix",     <
 command! -nargs=+ -complete=file AckAdd  call Ack("asynchandler#quickfix_add", <q-args>)
 command! -nargs=+ -complete=file LAck    call Ack("asynchandler#loclist",      <q-args>)
 command! -nargs=+ -complete=file LAckAdd call Ack("asynchandler#loclist_add",  <q-args>)
-command! -nargs=+ -complete=file AckG    call Ack("asynchandler#quickfix",     <q-args>)
 
 let &cpo = s:save_cpo
