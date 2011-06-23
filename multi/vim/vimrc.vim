@@ -49,6 +49,8 @@ if has("persistent_undo")
         au BufWritePre COMMIT_EDITMSG   setlocal noundofile
         au BufWritePre *.tmp            setlocal noundofile
         au BufWritePre *.bak            setlocal noundofile
+        au BufWritePre *.scratch        setlocal noundofile
+        au BufWritePre .vim-scratch     setlocal noundofile
     augroup END
 endif
 
