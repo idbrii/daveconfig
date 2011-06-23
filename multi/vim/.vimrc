@@ -159,8 +159,8 @@ au!
 		\ endif
 
     " Commenting blocks
-    autocmd FileType build,xml,html vmap <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
-    autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
+    autocmd FileType build,xml,html vmap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
+    autocmd FileType java,c,cpp,cs  vmap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
 
 	" Switch to the directory of the current file, unless it's a help file.
