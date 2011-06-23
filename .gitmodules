@@ -25,3 +25,6 @@
 [submodule "multi/vim/bundle/repeat"]
 	path = multi/vim/bundle/repeat
 	url = git://github.com/tpope/vim-repeat.git
+[submodule "multi/vim/bundle/ack"]
+	path = multi/vim/bundle/ack
+	url = git@github.com:pydave/vim-ack.git
