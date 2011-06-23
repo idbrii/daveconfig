@@ -1,6 +1,7 @@
 [user]
 	name = pydave
 	email = pydave@gmail.com
+	signingkey = D4D6822E
 [github]
 	user = pydave
 	token = f5a89d4ec402edcb927fda7462b88774

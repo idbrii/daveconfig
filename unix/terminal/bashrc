@@ -125,3 +125,6 @@ fi
 export ECLIM_ECLIPSE_HOME=/home/$USER/data/apps/eclipse
 
 export CLASSPATH=/usr/share/java/clojure.jar:$HOME/.clojure-vim/clojure-contrib.jar:$HOME/.clojure-vim/clojure-contrib-slim.jar:$HOME/.clojure-vim/vimclojure.jar:$HOME/.clojure-vim/vimclojure-source.jar
+
+# Set our primary development gpg key to be default
+export GPGKEY=D4D6822E
