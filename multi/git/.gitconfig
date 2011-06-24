@@ -49,3 +49,5 @@
 	main-window-view = HistoryView
 [branch]
 	autosetupmerge = true
+[web]
+	browser = chromium-browser
