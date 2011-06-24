@@ -454,6 +454,11 @@ let no_plugin_menus = 1
 "let g:EclimTaglistEnabled = 0
 "let g:taglisttoo_disabled = 1
 
+" Eclim indentation makes the screen flicker and doesn't help much
+let g:EclimXmlIndentDisabled = 1
+" Eclim xml validation never works because I don't have DTDs
+let g:EclimXmlValidate = 0
+
 " Reduce the amount of automatic stuff from xml.vim
 let g:no_xml_maps = 1
 
