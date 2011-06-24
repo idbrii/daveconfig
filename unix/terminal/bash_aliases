@@ -36,10 +36,10 @@ alias tracert='tracepath'
 #alias ipy='ipython'
 alias ipy='screen -X title ipy ; ipython'
 
-android_code=~/data/code/android
-alias and_export_sdk='export PATH=$PATH:$android_code/android-sdk-linux_86/tools:$android_code/android-sdk-linux_86/platform-tools'
-alias and_go_sdk='cd $android_code/android-sdk-linux_86/platform-tools'
-alias and_ndk_build='$android_code/android-ndk-r4b/ndk-build'
+android_sdks=~/data/.android_devkit
+alias and_export_sdk='export PATH=$PATH:$android_sdks/android-sdk-linux_86/tools:$android_sdks/android-sdk-linux_86/platform-tools'
+alias and_go_sdk='cd $android_sdks/android-sdk-linux_86/platform-tools'
+alias and_ndk_build='$android_sdks/android-ndk-r4b/ndk-build'
 
 function init_skeleton {
     cp ../gitignore .gitignore
