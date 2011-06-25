@@ -17,6 +17,7 @@
 	ff = merge --ff-only
 	co-branch = checkout
     purify = checkout
+    refloginspect = log --walk-reflogs
     resolve = add
     diff-staged = diff --cached
     piecemeal = add --patch
