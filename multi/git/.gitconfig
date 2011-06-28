@@ -52,3 +52,7 @@
 	autosetupmerge = true
 [web]
 	browser = chromium-browser
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
