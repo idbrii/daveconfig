@@ -306,9 +306,6 @@ nnoremap <C-v> "+p
 noremap <Leader>p "0p
 noremap <Leader>P "0P
 
-" Keep block select, but require shift
-nnoremap <C-S-v> <C-v>
-
 " Make Y work like D and C
 nmap Y y$
 
