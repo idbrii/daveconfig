@@ -139,6 +139,26 @@ set cscopepathcomp=3
 set foldmethod=syntax		" By default, use syntax to determine folds
 set foldlevelstart=99		" All folds open by default
 
+" Instead of calling diffoff -- which resets some variables, everything should
+" call DiffOff() which will do diff off and then apply the user's settings.
+function! DiffOff()
+    diffoff
+
+    " Now we want to undo changes from diffoff
+
+    " I always use syntax unless modelines say otherwise. Unfortunately,
+    " modelines won't be reapplied.
+    setlocal foldmethod=syntax
+    " Since the fold level changes from the diff, reset it to the start value
+    setlocal foldlevel=&foldlevelstart
+
+    " While reloading the filetype is a good idea, it's pretty slow, so let's
+    " not do that until we get bothered by it.
+    " Then try to reload filetype, which might change the fold settings
+    "unlet! b:did_ftplugin
+    "let &filetype = &filetype
+endfunction
+
 """" Command Line
 set wildmenu                " Autocomplete features in the status bar
 set wildmode=longest,list,full
