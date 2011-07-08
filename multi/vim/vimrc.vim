@@ -111,7 +111,7 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 
 """" Coding
-set history=100				" 100 Lines of history
+set history=500				" 100 Lines of history
 filetype plugin on          " Enable filetype plugins
 filetype plugin indent on   " Let filetype plugins indent for me
 syntax on                   " Turn on syntax highlighting
