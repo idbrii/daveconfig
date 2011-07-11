@@ -150,7 +150,7 @@ function! DiffOff()
     " modelines won't be reapplied.
     setlocal foldmethod=syntax
     " Since the fold level changes from the diff, reset it to the start value
-    setlocal foldlevel=&foldlevelstart
+    exec "setlocal foldlevel=" . &foldlevelstart
 
     " While reloading the filetype is a good idea, it's pretty slow, so let's
     " not do that until we get bothered by it.
