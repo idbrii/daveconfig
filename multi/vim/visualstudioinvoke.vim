@@ -1,10 +1,9 @@
 " Settings for when vim is invoked from an IDE.
-" Modified: 21 Feb 2011
 "
 " VS passes the following arguments to vim:
 "   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
 " Eclipse passes:
-"   --servername Viclipse --remote-silent "+runtime visualstudioinvoke.vim" ${resource_loc}
+"   --servername Viclipse --remote-silent "+runtime visualstudioinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
 
 " Disable resizing because it breaks under Ubuntu Natty in Unity
 if !has("unix")
