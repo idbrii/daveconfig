@@ -478,6 +478,11 @@ let g:no_xml_maps = 1
 " Don't have maps for bufkill -- too easy to delete a buffer by accident
 let no_bufkill_maps = 1
 
+" Delete Fugitive buffers when I leave them so they don't pollute BufExplorer
+augroup FugitiveCustom
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
 """""
 " LookupFile
 let g:LookupFile_DisableDefaultMap = 1          " Disable defaults -- make is F5
