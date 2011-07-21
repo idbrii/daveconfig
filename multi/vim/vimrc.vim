@@ -158,6 +158,7 @@ function! DiffOff()
     "unlet! b:did_ftplugin
     "let &filetype = &filetype
 endfunction
+let g:DiffOff = function("DiffOff")
 
 """" Command Line
 set wildmenu                " Autocomplete features in the status bar
