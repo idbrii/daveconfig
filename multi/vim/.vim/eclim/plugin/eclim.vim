@@ -105,7 +105,7 @@ endif
 
 if !exists("g:EclimHome")
   " set at build/install time.
-  let g:EclimHome = '/home/dbriscoe/data/apps/eclipse/plugins/org.eclim_1.6.3'
+  let g:EclimHome = '/home/dbriscoe/data/apps/eclipse/plugins/org.eclim_1.7.1'
   if has('win32unix')
     let g:EclimHome = eclim#cygwin#CygwinPath(g:EclimHome)
   endif
@@ -157,6 +157,11 @@ endif
 " Auto Commands{{{
 
 if g:EclimShowCurrentError
+  " forcing load of util, otherwise a bug in vim is sometimes triggered when
+  " searching for a pattern where the pattern is echoed twice.  Reproducable
+  " by opening a new vim and searching for 't' (/t<cr>).
+  runtime eclim/autoload/eclim/util.vim
+
   augroup eclim_show_error
     autocmd!
     autocmd CursorMoved * call eclim#util#ShowCurrentError()

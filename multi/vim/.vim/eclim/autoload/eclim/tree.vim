@@ -774,6 +774,12 @@ function! eclim#tree#Mkdir()
     return
   endif
 
+  " work around apparent vim bug attempting to create a dir with a trailing
+  " slash.
+  if response[-1:] == '/'
+    let response = response[:-2]
+  endif
+
   call mkdir(response, 'p')
   call eclim#tree#Refresh()
 endfunction " }}}
@@ -1187,7 +1193,8 @@ function! s:Mappings()
 
   nmap <buffer> <silent> D    :call eclim#tree#Mkdir()<cr>
 
-  nnoremap <buffer> <silent> <c-l> <c-l>:silent doautocmd eclim_tree User <buffer><cr>
+  let ctrl_l = escape(maparg('<c-l>'), '|')
+  exec 'nnoremap <buffer> <silent> <c-l> :silent doautocmd eclim_tree User <buffer><cr>' . ctrl_l
 
   command! -nargs=1 -complete=dir -buffer CD :call eclim#tree#SetRoot('<args>')
   command! -nargs=1 -complete=dir -buffer Cd :call eclim#tree#SetRoot('<args>')
