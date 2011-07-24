@@ -265,7 +265,7 @@ vnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
 vnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
 " Quickly find todo items
-nmap <Leader>t :vimgrep TODO %<CR>
+nmap <Leader>t :vimgrep "\CTODO" %<CR>
 nmap <Leader>T :grep TODO -R .
 
 " Redo search with whole word toggled
