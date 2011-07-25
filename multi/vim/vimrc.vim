@@ -379,6 +379,7 @@ nnoremap <S-space> :e<CR>
 
 " <space> toggles folds opened and closed
 nnoremap <space> za
+nnoremap <A-space> zA
 
 " <space> in visual mode creates a fold over the marked range
 "vnoremap <space> zf
