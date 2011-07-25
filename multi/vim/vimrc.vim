@@ -138,6 +138,7 @@ set cscopepathcomp=3
 """" Folding
 set foldmethod=syntax		" By default, use syntax to determine folds
 set foldlevelstart=99		" All folds open by default
+set foldnestmax=3           " At deepest, fold blocks within class methods
 
 " Instead of calling diffoff -- which resets some variables, everything should
 " call DiffOff() which will do diff off and then apply the user's settings.
