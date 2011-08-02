@@ -453,6 +453,12 @@ vmap  C    <Plug>VSurround
 " Don't want menus for cpp.
 let no_plugin_menus = 1
 
+" Ropevim
+" Don't use <C-c> mappings -- I don't use the maps much.
+let g:ropevim_enable_shortcuts = 0
+let g:ropevim_local_prefix = '<LocalLeader>r'
+let g:ropevim_global_prefix = '<LocalLeader>r'
+
 " SuperTab
 "let g:SuperTabDefaultCompletionType = 'context'
 "let g:SuperTabMappingForward = '<c-space>'
