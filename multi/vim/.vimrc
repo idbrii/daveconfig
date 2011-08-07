@@ -446,8 +446,10 @@ endif
 nnoremap <F2> :GundoToggle<CR>
 
 " Surround
-vmap  c    <Plug>Vsurround
-vmap  C    <Plug>VSurround
+" Use c as my surround character (it looks like a hug)
+vmap c <Plug>Vsurround
+vmap C <Plug>VSurround
+nnoremap yc ys
 
 " Cpp
 " Don't want menus for cpp.
