@@ -13,8 +13,19 @@
 # Determine the directories to index {{{
 current=`basename $PWD`
 # include referenced libraries
-projects="$current `grep android.library.reference default.properties | cut -d= -f2- | cut -c4- `"
+projects="../$current `grep android.library.reference default.properties | cut -d= -f2-`"
 for p in $projects; do
+    # Fix paths to relative to parent directory. They will be relative to
+    # current (up one directory in the build directory) or in the current
+    # directory
+    if [[ $p =~ '../' ]] ; then
+        # strip off since we're moving up
+        p=${p#../}
+    else
+        # add the current so we can find from above
+        p=$current/$p
+    fi
+
     tag_dirs="$tag_dirs $p/src $p/gen"
 done
 # }}}
