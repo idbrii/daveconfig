@@ -33,6 +33,11 @@ alias tracert='tracepath'
 
 
 # python
+
+# Ensure that ipython works with virtualenv. Instead of calling the ipython
+# wrapper, just start the loop ourself. Virtualenv will provide us with the
+# right python that uses the correct pythonpath.
+alias ipython='python -c "import IPython; IPython.Shell.IPShell().mainloop()"'
 #alias ipy='ipython'
 alias ipy='screen -X title ipy ; ipython'
 
