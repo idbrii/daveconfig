@@ -13,9 +13,21 @@ setlocal cindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 "" simple indent-based folding
 setlocal foldmethod=indent
 
-"" allows us to run :make and get syntax errors for our python scripts
-setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+"" Use an errorformat that matches Python's stack trace.
 setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+"" Run :make to launch the script and load runtime errors in quickfix.
+setlocal makeprg=python\ %
+
+function! PyCompileCheck()
+    " Finds syntax errors in the current file and adds them to the quickfix.
+    " This isn't really necessary with eclim since it does auto syntax
+    " checking.
+
+    let l:makeprg = &makeprg
+    setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+    make
+    let &makeprg = l:makeprg
+endfunction
 
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
 if exists('loaded_pydocvim')
