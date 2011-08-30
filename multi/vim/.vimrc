@@ -316,7 +316,7 @@ nmap <C-\><C-\> <C-\>s
 " Windows keys
 nmap <C-s> :w<CR>
 " change increment to allow select all
-nnoremap <C-x><C-z> <C-a>
+nnoremap <C-x><C-s> <C-a>
 nnoremap <C-x><C-x> <C-x>
 " select all
 nnoremap <C-a> 1GVG
