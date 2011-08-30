@@ -10,7 +10,7 @@ if !exists('g:loaded_asynccommand')
     finish
 endif
 
-command! AsyncPython call s:AsyncPython(expand('%'))
+command! -nargs=1 -complete=file AsyncPython call s:AsyncPython(<q-args>)
 
 function! s:AsyncPython(script_name)
     let command = 'python ' . a:script_name
