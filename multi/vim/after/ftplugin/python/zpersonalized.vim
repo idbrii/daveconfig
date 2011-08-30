@@ -27,6 +27,11 @@ endif
 "" Quick commenting
 vmap <buffer> <C-o> :s/^/#<CR>:silent nohl<CR>
 
+" Complete is too slow in python
+" Disable searching included files since that seems to be what's stalling it.
+" Why isn't this smarter? -- maybe due to eclim?
+set complete-=i
+
 "" Stdlib tags
 if has("unix") || has("macunix")
     setlocal tags+=$HOME/.vim/tags/python.ctags
