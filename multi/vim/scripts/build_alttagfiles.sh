@@ -1,6 +1,11 @@
 #! /bin/sh
 # vim:set fdm=marker:
-# Build the LookupFile database
+
+# Build the LookupFile and cscope databases
+
+# Installing dependents:
+#   aptinstall exuberant-ctags cscope
+#   pip install pycscope
 
 cscope=$1
 if [ $# -lt 1 ] ; then
@@ -48,14 +53,20 @@ fi
 # qualified path
 cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^\./|$tagdir/|" > cscope.files
 
-# Build cscope database
-#	-b              Build the database only.
-#	-k              Kernel Mode - don't use /usr/include for #include files.
-#	-q              Build an inverted index for quick symbol seaching.
-# May want to consider these flags
-#	-m "lang"       Use lang for multi-lingual cscope.
-#	-R              Recurse directories for files.
-$cscope -b -q -k
+if [ "$filetype" == "python" ] ; then
+    # Requires the python package pycscope:
+    #   pip install pycscope
+    pycscope.py -i cscope.files
+else
+    # Build cscope database
+    #	-b              Build the database only.
+    #	-k              Kernel Mode - don't use /usr/include for #include files.
+    #	-q              Build an inverted index for quick symbol seaching.
+    # May want to consider these flags
+    #	-m "lang"       Use lang for multi-lingual cscope.
+    #	-R              Recurse directories for files.
+    $cscope -b -q -k
+fi
 
 # }}}
 
