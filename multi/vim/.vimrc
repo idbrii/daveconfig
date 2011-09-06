@@ -181,8 +181,8 @@ au!
 		\ endif
 
     " Commenting blocks
-    autocmd FileType build,xml,html vmap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
-    autocmd FileType java,c,cpp,cs  vmap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
+    autocmd FileType build,xml,html xmap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
+    autocmd FileType java,c,cpp,cs  xmap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
 
 	" Switch to the directory of the current file, unless it's a help file.
@@ -248,9 +248,9 @@ nnoremap  <c-left>   Bh
 
 " Use Ctrl-Tab/Tab and Shift-Tab to change indent in visual
 " Note: this can probably be done with Select mode, but I don't use that.
-vnoremap <C-Tab> >gv
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <LT>gv
+xnoremap <C-Tab> >gv
+xnoremap <Tab> >gv
+xnoremap <S-Tab> <LT>gv
 " Use ctrl-tab and shift-tab for indent in normal mode
 nnoremap <C-Tab> >>
 nnoremap <S-Tab> <<
@@ -261,9 +261,9 @@ inoremap <C-S-Tab> <C-d>
 
 " Quick fix slashes
 "	win -> unix
-vnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
+xnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
 "	unix -> win
-vnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
+xnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
 " Quickly find todo items
 nmap <Leader>t :vimgrep "\CTODO" %<CR>
@@ -304,7 +304,7 @@ nmap <F5> :make
 
 " Magic global search (see smagic)
 nmap gs :%sm/
-vmap gs :sm/
+xmap gs :sm/
 
 " Open preview window for tags (just jump with <C-]>)
 nnoremap <A-]> :ptag <C-r><C-w><CR>
@@ -321,7 +321,7 @@ nnoremap <C-x><C-x> <C-x>
 " select all
 nnoremap <C-a> 1GVG
 " Windows clipboard
-vmap <C-c> "+y
+xmap <C-c> "+y
 nnoremap <C-v> "+p
 
 " Paste last yanked item
@@ -365,8 +365,8 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 noremap Q gq
 
 " * and # search for next/previous of selected text when used in visual mode
-vnoremap g* y/<C-R>"<CR>
-vnoremap g# y?<C-R>"<CR>
+xnoremap g* y/<C-R>"<CR>
+xnoremap g# y?<C-R>"<CR>
 
 " <Shift-space> reloads the file
 nnoremap <S-space> :e<CR>
@@ -376,7 +376,7 @@ nnoremap <space> za
 nnoremap <A-space> zA
 
 " <space> in visual mode creates a fold over the marked range
-"vnoremap <space> zf
+"xnoremap <space> zf
 
 
 """""""""""
@@ -441,8 +441,8 @@ nnoremap <F2> :GundoToggle<CR>
 
 " Surround
 " Use c as my surround character (it looks like a hug)
-vmap c <Plug>Vsurround
-vmap C <Plug>VSurround
+xmap c <Plug>Vsurround
+xmap C <Plug>VSurround
 nnoremap yc ys
 
 " Cpp
