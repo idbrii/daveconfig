@@ -484,6 +484,8 @@ let g:ropevim_global_prefix = '<LocalLeader>r'
 let g:EclimXmlIndentDisabled = 1
 " Eclim xml validation never works because I don't have DTDs
 let g:EclimXmlValidate = 0
+" Don't show todo markers in margin
+let g:EclimSignLevel = 2
 
 " Reduce the amount of automatic stuff from xml.vim
 let g:no_xml_maps = 1
