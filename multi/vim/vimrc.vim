@@ -334,12 +334,6 @@ nmap Y y$
 " Make backspace work in normal
 nmap <BS> X
 
-if &diff
-" easily handle diffing
-   vnoremap < :diffget<CR>
-   vnoremap > :diffput<CR>
-endif
-
 " Move in file
 nnoremap -0 <C-o>
 nnoremap -= <C-i>
