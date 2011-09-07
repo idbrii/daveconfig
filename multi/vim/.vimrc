@@ -441,7 +441,7 @@ nnoremap <F2> :GundoToggle<CR>
 
 " Surround
 " Use c as my surround character (it looks like a hug)
-xmap c <Plug>Vsurround
+xmap c <Plug>VSurround
 xmap C <Plug>VSurround
 nnoremap yc ys
 
