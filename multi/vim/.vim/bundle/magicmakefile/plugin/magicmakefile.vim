@@ -10,10 +10,10 @@ endif
 
 function GuessMakefile()
     let this_buf = bufname('%')
-
-    " Store the original makeprg so we have something to append to.
-    if getbufvar(this_buf, 'base_makeprg') == ""
-        call setbufvar(this_buf, 'base_makeprg', &makeprg)
+    if len(this_buf) == 0
+        " Ignore cases where bufname is empty. This might happen if there are
+        " multiple results or something is invalid.
+        return
     endif
 
     " Guess the makefile to use.
@@ -23,14 +23,20 @@ function GuessMakefile()
     endif
 
     if filereadable(b:makefile) == 0
-        " If we have a valid makefile, then change the makeprg to use it.
-        call setbufvar(this_buf, '&makeprg', b:base_makeprg . ' --makefile=' . b:makefile)
+        " No makefile found, must be unsupported filetype. Abort!
+        return
     endif
+
+    " If we have a valid makefile, then change the makeprg to use it.
+    " NOTE: Assumes that we're using make (and not cmake or gmake).
+    call setbufvar(this_buf, '&makeprg', 'make --makefile=' . b:makefile)
 endfunction
 
 augroup MagicMakefile
     " Guess the current makefile every time the filetype changes, since that's
-    " most likely when we need to change the makefile.
+    " most likely when we need to change the makefile. We need to provide the
+    " file changed from the filetype or else we'll get invalid errors from
+    " setbufvar.
     " NOTE: This causes a bug where we don't switch between the local and
     " default makefiles if we edit files in different folders (the switch only
     " happens when we first set the filetype). You can call GuessMakefile() to
