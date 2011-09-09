@@ -9,6 +9,11 @@ if !exists("g:magicmakefile_dir")
 endif
 
 function GuessMakefile()
+    if &buftype == 'nofile'
+        " We only want to deal with real files.
+        return
+    endif
+
     let this_buf = bufname('%')
     if len(this_buf) == 0
         " Ignore cases where bufname is empty. This might happen if there are
