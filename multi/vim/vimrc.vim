@@ -190,8 +190,7 @@ au!
     " Use <S-space> to reload the buffer if you want to cd.
 	au BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
 
-	" kill calltip window if we move cursor or leave insert mode
-	au CursorMovedI * if pumvisible() == 0|pclose|endif
+	" kill calltip window if we leave insert mode
 	au InsertLeave * if pumvisible() == 0|pclose|endif
 
 	augroup END
