@@ -407,9 +407,6 @@ command! DiffSaved vert split original.vimscratch | silent %d | silent r # | sil
 " General
 iabbrev _me DBriscoe (pydave@gmail.com)
 iabbrev _company pydave
-iabbrev _t  <C-R>=strftime("%H:%M:%S")<CR>
-iabbrev _d  <C-R>=strftime("%d %b %Y")<CR>
-iabbrev _dt <C-R>=strftime("%a, %d %b %Y %H:%M:%S")<CR>
 
 " Shebangs
 iabbrev shebangpy #! /usr/bin/env python
