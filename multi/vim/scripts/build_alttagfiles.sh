@@ -25,7 +25,7 @@ cd $tagdir
 echo "!_TAG_FILE_SORTED	2	/2=foldcase/"> $tagfile
 if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
-    find . -type f -iname "*.cpp" -o -iname "*.h" -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+    find . -type f \( -iname "*.cpp" -o -iname "*.h" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 elif [ "$filetype" == "android" ] ; then
     # Android uses java and xml. Assume we're in the source directory
