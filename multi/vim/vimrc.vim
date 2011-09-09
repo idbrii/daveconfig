@@ -210,6 +210,9 @@ set completeopt=menu,preview,menuone
 "set showfulltag				" Show more information while completing tags
 set completeopt+=longest        " Fill in the longest match
 
+" Don't search included files for insert completion since that should be fast. 
+set complete-=i
+
 
 
 
