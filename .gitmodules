@@ -31,3 +31,6 @@
 [submodule "multi/vim/bundle/xmledit"]
 	path = multi/vim/bundle/xmledit
 	url = git@github.com:pydave/xmledit.git
+[submodule "multi/vim/bundle/OmniCppComplete"]
+	path = multi/vim/bundle/OmniCppComplete
+	url = git://github.com/vim-scripts/OmniCppComplete.git
