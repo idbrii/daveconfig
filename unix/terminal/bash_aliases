@@ -1,3 +1,5 @@
+#! /bin/bash
+
 # Bash shortcuts
 #
 # My single bash_aliases file. I haven't tried separating each platform since I
@@ -112,3 +114,4 @@ alias aptpkglist='dpkg-query --list'
 # cygwin
 
 #alias gogo='cygstart'
+
