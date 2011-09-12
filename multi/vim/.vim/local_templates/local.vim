@@ -20,9 +20,6 @@ set grepprg=grep\ -nH
 " If most code has a path like: p4\game\main\packages\core\game\dev\src\
 let g:cpp_header_n_dir_to_trim = 8
 
-" I've started using shift insert since c-v is so broken
-imap <S-Insert> <C-r>+
-
 " Setup cscope for general use
 if has("cscope")
     " using mlcscope from cygwin
