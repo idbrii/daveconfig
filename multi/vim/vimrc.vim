@@ -326,6 +326,10 @@ nnoremap <C-a> 1GVG
 xmap <C-c> "+y
 nnoremap <C-v> "+p
 
+" I've started using Shift-Insert to paste too (especially in insert)
+inoremap <S-Insert> <C-r>+
+cnoremap <S-Insert> <C-r>+
+
 " Paste last yanked item
 noremap <Leader>p "0p
 noremap <Leader>P "0P
