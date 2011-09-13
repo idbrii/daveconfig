@@ -18,7 +18,7 @@
 	url = git@github.com:pydave/vim-fugitive.git
 [submodule "multi/vim/bundle/gitv"]
 	path = multi/vim/bundle/gitv
-	url = git://github.com/gregsexton/gitv.git
+	url = git@github.com:pydave/gitv.git
 [submodule "unix/terminal/bashmarks"]
 	path = unix/terminal/bashmarks
 	url = git@github.com:pydave/bashmarks.git
