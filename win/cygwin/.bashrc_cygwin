@@ -1,7 +1,0 @@
-# Setup some keys for rxvt
-export INPUTRC=$HOME/.inputrc
-
-# Don't break my terminal (Ctrl-S should be save!)
-stty start ""
-stty stop ""
-
