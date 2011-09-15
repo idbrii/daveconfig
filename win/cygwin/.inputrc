@@ -13,3 +13,11 @@
 # Ctrl+left/right
 "\eOc": forward-word
 "\eOd": backward-word
+
+# Ctrl+Left/Right to move by whole words
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+
+# Ctrl+Backspace/Delete to delete whole words
+"\e[3;5~": kill-word
+"\C-_": backward-kill-word
