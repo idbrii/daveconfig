@@ -1,9 +1,6 @@
 #! /bin/bash
 
 # Bash shortcuts
-#
-# My single bash_aliases file. I haven't tried separating each platform since I
-# don't do that much on many platforms.
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -71,47 +68,30 @@ function move_and_link() {
 alias webserve='python -m SimpleHTTPServer'
 
 
+DIR=~/data/settings/daveconfig/unix/terminal
+
 #################
 # Location-specific section
 
-# Home
-alias butter='ssh flutterbutter.local'
-alias mediabutter='ssh mediaserver@flutterbutter.local'
-
-
+source $DIR/local.bash_aliases
 
 #################
 # Platform-specific section
 
-
-#################
-# Linux
-
-alias gogo='xdg-open'
-# safer way to delete
-alias trash='mv -t ~/.local/share/Trash/files --backup=t'
-# aptitude
-alias aptinstall='sudo aptitude install'
-alias aptremove='sudo aptitude remove'
-alias aptautoremove='sudo apt-get autoremove'   # no autoremove for aptitude
-alias aptsearch='apt-cache search'
-alias aptshow='apt-cache show'
-alias aptwhichrepo='apt-cache policy'
-alias aptpkglist='dpkg-query --list'
-
-
-#################
-# Mac (darwin)
-
-#alias gogo='open'
-# Ideally, I'd use $VIMRUNTIME. Didn't work last time I was on a mac.
-#alias les='/Applications/MacVim.app/Contents/Resources/vim/runtime/macros/less.sh'
-# safer way to delete
-#alias trash='mv -t ~/.Trash --backup=t'
+case "`uname -o`" in
+Cygwin*)
+	source $DIR/cygwin.bash_aliases
+    ;;
+Linux)
+	source $DIR/ubuntu.bash_aliases
+    ;;
+darwin)
+	source $DIR/mac.bash_aliases
+    ;;
+*)
+	echo "bash_aliases: Platform not supported"
+    ;;
+esac
 
 
-#################
-# cygwin
-
-#alias gogo='cygstart'
 
