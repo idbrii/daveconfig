@@ -14,3 +14,10 @@ function P4DiffInExternalTool()
     exec '!p4 set P4DIFF=' . g:external_diff . ' & p4 diff %:p & p4 set P4DIFF='
 endfunction
 command PDiffExternal silent call P4DiffInExternalTool()
+
+function s:PGDiff()
+	PPrint
+	vsplit #
+	DiffBoth
+endfunction
+command PGDiff silent call <SID>PGDiff()
