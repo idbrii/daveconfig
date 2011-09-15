@@ -6,13 +6,13 @@
 	url = git@github.com:pydave/snipmate.vim.git
 [submodule "multi/vim/bundle/surround"]
 	path = multi/vim/bundle/surround
-	url = https://github.com/tpope/vim-surround.git
+	url = git://github.com/tpope/vim-surround.git
 [submodule "multi/vim/bundle/asynccommand"]
 	path = multi/vim/bundle/asynccommand
 	url = git@github.com:pydave/AsyncCommand.git
 [submodule "multi/vim/bundle/gundo"]
 	path = multi/vim/bundle/gundo
-	url = http://github.com/sjl/gundo.vim.git
+	url = git://github.com/sjl/gundo.vim.git
 [submodule "multi/vim/bundle/fugitive"]
 	path = multi/vim/bundle/fugitive
 	url = git@github.com:pydave/vim-fugitive.git
