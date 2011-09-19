@@ -90,6 +90,9 @@ syn region	csRegion matchgroup=csPreCondit start="^\s*#\s*region.*$"
     \ end="^\s*#\s*endregion" transparent fold contains=TOP
 
 
+" Code blocks
+syn region	csBlock		start="{" end="}" transparent fold
+
 
 " Strings and constants
 syn match   csSpecialError	contained "\\."
