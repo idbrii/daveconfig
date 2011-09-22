@@ -34,3 +34,9 @@ function w {
     done
     $1 $p &
 }
+
+function p4 {
+	export PWD=`cygpath -wa .`
+	p4.exe $@
+}
+
