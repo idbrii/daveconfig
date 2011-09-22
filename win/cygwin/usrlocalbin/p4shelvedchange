@@ -1,0 +1,27 @@
+#! /bin/bash
+
+# Determine what changelist a shelf was probably created at.
+#
+# Assuming that the shelf creator had synced all at once and that one of the
+# files that's modified was included in that sync, then we can use the files in
+# the shelf to find their CL.
+# Since it's unlikely that they modified a file in their HEAD CL, this really
+# just gives us a starting point. However, we could use that to extrapolate.
+
+if [ $# -lt 1 ] ; then
+    echo "Usage: $0 shelved-cl"
+    exit 1
+fi
+
+# Source: http://stackoverflow.com/questions/7409752/how-do-i-checkout-a-perforce-shelf-at-the-changelist-it-was-shelved-at/7410811#7410811
+# first get all of the files in the shelf with their revisions
+# | look for changes to files (adds and deletes don't matter)
+# | remove the change type and file type (we just want the depot path and revision)
+# | get the changelist for each revision
+# | ignore everything except the revision
+# | sort and uniqueify
+# | get the last (highest) value
+p4 files @=$1 | grep -e "integrate change" -e "edit change" | sed -e"s/\(#.[^ ]*\).*/\1/" | xargs p4 files | sed -e"s/.*change \([0-9]*\).*/\1/" | sort -u | tail --lines=1
+
+# TODO: if we modify the revision to give us the next one and then get the
+# lowest changelist, we'll get a range of possible changelists.
