@@ -11,4 +11,3 @@ stty start ""
 stty stop ""
 
 export PATH=/bin:/usr/local/bin:/usr/bin:$PATH
-source /c/david/py-set.bash
