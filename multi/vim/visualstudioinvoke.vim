@@ -1,7 +1,7 @@
 " Settings for when vim is invoked from an IDE.
 "
 " VS passes the following arguments to vim:
-"   --servername VimualStudio --remote-silent +"<C-z>" +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
+"   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
 " Eclipse passes:
 "   --servername Viclipse --remote-silent "+runtime visualstudioinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
 
@@ -9,6 +9,8 @@
 "<c-z> brings gvim to foreground - on win2k, gvim gets focus but won't bring
 "itself to foreground otherwise. You can remove it if you don't have this
 "bring-to-foreground problem.
+" This doesn't work, but it calls foreground() which does something. Look into
+" that and remote_foreground({server})
 
 
 
