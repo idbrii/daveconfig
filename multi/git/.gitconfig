@@ -43,6 +43,7 @@
 	renames = copies
 [core]
 	excludesfile = ~/.gitignore
+	autocrlf = input
 [giggle]
 	compact-mode = false
 	main-window-maximized = true
