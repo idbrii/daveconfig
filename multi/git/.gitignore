@@ -7,3 +7,5 @@ filenametags
 tags
 .ropeproject
 en.latin1.add.spl
+obj/
+*.vspscc
