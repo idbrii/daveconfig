@@ -42,7 +42,7 @@
 [diff]
 	renames = copies
 [core]
-	excludesfile = /home/dbriscoe/.gitignore
+	excludesfile = ~/.gitignore
 [giggle]
 	compact-mode = false
 	main-window-maximized = true
