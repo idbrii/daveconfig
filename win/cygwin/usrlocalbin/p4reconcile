@@ -1,0 +1,125 @@
+#! /bin/bash
+
+# define your own ignores with local_ignores this:
+# local_ignores="-e something_ugly"
+my_ignores="-e \.DS_Store -e \.swp -e cscope\. -e [\/]tags -e filenametags"
+build_ignores="-e \.tlog -e \.log -e \.dummy -e \.pyc"
+vs_ignores="-e \.vssscc -e \.vspscc -e \.csproj\.user -e \.vcxproj -e \.lib -e \.obj -e \.opensdf -e \.sdf -e \.suo"
+ignored_files="$my_ignores $local_ignores $build_ignores $vs_ignores"
+ignored_folders="-e [\/]\.git[\/] -e [\/]obj[\/] -e [\/]Release[\/] -e [\/]Debug[\/]"
+
+port="$1"
+user="$2"
+workspace="$3"
+folder="$4"
+
+p4settings="-p '$port' -u '$user' -c '$workspace'"
+
+echo Starting up...
+echo Ignoring: $ignored_files $ignored_folders
+echo
+
+if [ $# -eq 1 ] ; then
+    echo "Usage: $0 port user workspace files-or-folders-to-reconcile"
+    folder=$1
+    p4settings=
+    echo "Assuming:"
+    echo "  port="
+    echo "  user="
+    echo "  workspace="
+    echo
+    echo "Using:"
+    echo "  files-or-folders-to-reconcile=$folder"
+	echo
+	echo
+elif [ $# -lt 4 ] ; then
+    echo "Usage: $0 port user workspace files-or-folders-to-reconcile"
+    exit 1
+fi
+
+# Strip ellipsis for path changing.
+# We do this even if we don't change the path so we ensure there is one and
+# only one ellipsis at the end of the path.
+folder=${folder%/...}
+
+# use windows path if not depot syntax
+if [ ${folder:0:2} != "//" ] ; then
+	folder=`cygpath -aw ${folder}`
+fi
+
+# ensure we have the ellipsis or we won't do anything
+folder=$folder/...
+
+echo
+echo Reconciling $folder
+echo
+
+# add new files. {{{
+
+# determine the filepath for find {{{
+
+# Resolve and validate filepath.
+# If using depot syntax and strip off the ellipsis so that where only
+# gives us the mapping for the folder (not everything in it).
+FILEPATH=`p4 -ztag where "${folder%/...}" | grep "^... path" | cut -f3- -d ' '`
+if [ -z "$FILEPATH" ]; then
+	# something is wrong and we have nothing for our input path
+    echo "Can't reconcile given path."
+    exit 1
+fi
+
+# Use Cygwin paths since we're using cygwin find
+FILEPATH=`cygpath -a $FILEPATH`
+
+if [ ! -d "$FILEPATH" ]; then
+    echo "Desired folder does not exist: $FILEPATH"
+    exit 1
+fi
+
+# }}}
+
+echo
+echo Using filepath: $FILEPATH
+echo
+
+# detect p4 config filename (to screen it out).
+P4CONFIGFILE=`p4 set | grep P4CONFIG | cut -f2- -d '='`
+if [ -z "$P4CONFIGFILE" ]; then
+    P4CONFIGFILE='.p4'
+fi
+
+# add new files (excluding P4CONFIG and other ignored files).
+echo
+echo 'Adding new files...'
+find "`cygpath -a $FILEPATH`" -type f -print \
+	| cygpath -waf - \
+    | grep -v $ignored_files \
+    | grep -v $ignored_folders \
+    | grep -vF "$P4CONFIGFILE" \
+    | p4 $p4_settings -x- add 2>&1 \
+    | grep -vFi "can't add" \
+    | grep -vFi "existing file" \
+    | grep -vFi "no permission" \
+    | grep -vFi "use -f option to force"
+# }}}
+
+# edit modified files. {{{
+echo
+echo 'Checking out modified files...'
+p4 $p4_settings diff -se "$folder" 2>&1 \
+    | grep -vFi "file(s) not on client" \
+    | p4 $p4_settings -x- edit
+# }}}
+
+# delete missing files. {{{
+echo
+echo 'Deleting missing files...'
+p4 $p4_settings diff -sd "$folder" 2>&1 \
+    | grep -vFi "file(s) not on client" \
+    | p4 $p4_settings -x- delete
+# }}}
+
+echo
+echo 'Done.'
+
+#vi:et:sw=4 ts=4 fdm=marker
