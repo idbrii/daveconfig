@@ -44,8 +44,8 @@ export HISTSIZE=10000
 export HISTIGNORE="&:ls:[bf]g:exit"
 
 # Bashmarks provides bookmarking in bash
-source ~/data/settings/daveconfig/unix/terminal/bashmarks/bashmarks.sh
 export SDIRS=~/data/settings/daveconfig/unix/terminal/bashmarks.sdirs
+source ~/data/settings/daveconfig/unix/terminal/bashmarks/bashmarks.sh
 
 
 # set variable identifying the chroot you work in (used in the prompt below)
