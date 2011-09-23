@@ -494,6 +494,12 @@ let g:ropevim_global_prefix = '<LocalLeader>r'
 let g:EclimXmlIndentDisabled = 1
 " Eclim xml validation never works because I don't have DTDs
 let g:EclimXmlValidate = 0
+
+" Note: To turn off the signs that are added everywhere, you can use these
+" commands:
+" sign undefine qf_warning
+" sign undefine qf_error
+
 " Don't show todo markers in margin
 let g:EclimSignLevel = 2
 
