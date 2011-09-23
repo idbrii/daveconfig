@@ -351,8 +351,8 @@ nmap Y y$
 nmap <BS> X
 
 " Move in file
-nnoremap -0 <C-o>
-nnoremap -= <C-i>
+nnoremap <Leader>[ <C-o>
+nnoremap <Leader>] <C-i>
 
 " Switch files
 nmap ^ <C-^>
