@@ -235,6 +235,9 @@ noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
+" don't interfere with selection mode
+sunmap j
+sunmap k
 
 " Ctrl + Arrows - Move around quickly
 nnoremap  <c-up>     {
