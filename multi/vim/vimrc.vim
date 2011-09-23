@@ -445,11 +445,11 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 """""""""""
 " Plugins   {{{
 
-let MRU_Max_Entries = 50
+let MRU_Max_Entries = 200
 
 " don't store temp files or git files
 if has("win32")
-    let MRU_Exclude_Files = '.*\\\.git\\.*\|^c:\\temp\\.*'
+    let MRU_Exclude_Files = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\'
 else
     let MRU_Exclude_Files = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
 endif
