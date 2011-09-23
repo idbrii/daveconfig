@@ -29,4 +29,5 @@ mklink    %USERPROFILE%\.gitignore    %daveconfig%\multi\git\.gitignore
 
 mklink    %USERPROFILE%\.inputrc      %daveconfig%\win\cygwin\.inputrc
 mklink    %USERPROFILE%\.minttyrc     %daveconfig%\win\cygwin\.minttyrc
+mklink    %USERPROFILE%\_vsvimrc      %daveconfig%\win\visualstudio\_vsvimrc
 
