@@ -149,7 +149,7 @@ set foldnestmax=3           " At deepest, fold blocks within class methods
 
 " Instead of calling diffoff -- which resets some variables, everything should
 " call DiffOff() which will do diff off and then apply the user's settings.
-function! DiffOff()
+function! MyDiffOff()
     diffoff
 
     " Now we want to undo changes from diffoff
@@ -166,7 +166,7 @@ function! DiffOff()
     "unlet! b:did_ftplugin
     "let &filetype = &filetype
 endfunction
-let g:DiffOff = function("DiffOff")
+let g:DiffOff = function("MyDiffOff")
 
 """" Command Line
 set wildmenu                " Autocomplete features in the status bar
