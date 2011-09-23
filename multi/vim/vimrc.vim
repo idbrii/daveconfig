@@ -12,6 +12,13 @@ if version < 700
 	set noloadplugins
 endif
 
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes
+" synchronization across (heterogeneous) systems easier.
+if has('win32')
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+
+
 " Load pathogen -- it loads other plugins, so do it first.
 call pathogen#runtime_append_all_bundles()
 
