@@ -1,0 +1,236 @@
+" bring in all some of vimrc {{{
+
+" Author:	DBriscoe (pydave@gmail.com)
+" Influences:
+"	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
+"	* MacVim's defaults: http://macvim.org/OSX/index.php
+" Notes:
+" mapping Tab in normal mode breaks cscope -- adds tabs when you jump somewhere
+
+set nocompatible				" who needs vi, we've got Vim!
+
+" Don't load plugins if we aren't in Vim7
+if version < 700
+	set noloadplugins
+endif
+
+""" Settings
+"""" Searching and Patterns
+set ignorecase					" search is case insensitive
+set smartcase					" search case sensitive if caps on
+set hlsearch					" Highlight matches to the search
+set incsearch					" Find as you type
+
+"""" Display
+set background=dark			" I use dark background
+set lazyredraw				" Don't repaint when scripts are running
+set scrolloff=3				" Keep 3 lines below and above cursor
+"set number					" Show line numbering
+"set numberwidth=1			" Use 1 col + 1 space for numbers
+set guioptions-=T			" Disable the toolbar
+
+
+"""" Messages, Info, Status
+set shortmess+=a				" Use [+] [RO] [w] for modified, read-only, modified
+set showcmd						" Display what command is waiting for an operator
+set ruler						" line numbers and column the cursor is on
+set laststatus=2				" Always show statusline, even if only 1 window
+set noequalalways               " Don't resize when closing a window
+set report=0					" Notify of all whole-line changes
+set visualbell					" Use visual bell (no beep)
+set linebreak					" Show wrap at word boundaries and preface wrap with >>
+set showbreak=>>
+"set splitbelow                  " Make preview (and all other) splits appear at the bottom
+
+"""" Editing
+set nojoinspaces            " I don't use double spaces
+set showmatch				" Briefly jump to the matching bracket
+set matchtime=1				" For .1 seconds
+"set formatoptions-=tc		" can I format for myself?? (only matters when textwidth>0)
+set formatoptions+=r		" magically continue comments
+set formatoptions-=o        " I tend to use o for whitespace, not continuing
+                            " comments (some filetypes overwrite)
+set isfname-==              " allow completion in var=/some/path
+set tabstop=4				" 1 tab = x spaces
+set shiftwidth=4			" (used on auto indent)
+set softtabstop=4			" 4 spaces as a tab for bs/del
+set smarttab				" Use tab button for tabs
+set expandtab				" Use spaces, not tabs (use Ctrl-V+Tab to insert a tab)
+set cinkeys-=0#             " Free # from the first column: It's for more than preprocessors!
+"set autoindent				" Indent like previous line
+set smartindent				" Try to be clever about indenting
+"set cindent				" Really clever indenting
+if version > 600
+    set backspace=start         " backspace can clear up to beginning of line
+endif
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" we don't want to edit these type of files
+set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
+" Show these file types at the end while using :edit command
+set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
+
+"""" Coding
+set history=500				" 100 Lines of history
+filetype plugin on          " Enable filetype plugins
+filetype plugin indent on   " Let filetype plugins indent for me
+syntax on                   " Turn on syntax highlighting
+"syntax enable				" Keep current highlighting scheme
+if has("spell")
+    "set spell   "check spelling (z= suggestions, zg add good word, zb bad)
+    syntax spell notoplevel
+endif
+
+" read tags 4 directories deep
+"set tags=./tags;../../../../
+" search up recursively for tags file (to root)
+set tags=./tags;/
+
+" allow commands like :find to search recursively from the current file's
+" directory. Ideally, I should set path to some useful directories, but I
+" don't have a good working set right now.
+set path+=./**
+
+" Don't show full path. Just give some path.
+set cscopepathcomp=3
+
+
+"""" Folding
+set foldmethod=syntax		" By default, use syntax to determine folds
+set foldlevelstart=99		" All folds open by default
+set foldnestmax=3           " At deepest, fold blocks within class methods
+
+
+"""" Key Mappings
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+"inoremap <C-U> <C-G>u<C-U>
+
+
+" Generic Header comments (requires formatoptions+=r)
+"  Uses vim's commentstring to figure out the local comment character
+"nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> @file	<C-r>%<CR>@module	<C-r>=expand('%:p:h:t')<CR><CR><CR>@author	_me<CR>@brief	<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
+
+" Magic global search (see smagic)
+nmap gs :%sm/
+xmap gs :sm/
+
+
+" Windows keys
+nmap <C-s> :w<CR>
+" change increment to allow select all
+nnoremap <C-x><C-s> <C-a>
+nnoremap <C-x><C-x> <C-x>
+" select all
+nnoremap <C-a> 1GVG
+" Windows clipboard
+xmap <C-c> "+y
+nnoremap <C-v> "+p
+
+" I've started using Shift-Insert to paste too (especially in insert)
+inoremap <S-Insert> <C-r>+
+cnoremap <S-Insert> <C-r>+
+
+" Paste last yanked item
+noremap <Leader>p "0p
+noremap <Leader>P "0P
+
+" Make Y work like D and C
+nmap Y y$
+
+" Make backspace work in normal
+nmap <BS> X
+
+" Move in file
+nnoremap <Leader>[ <C-o>
+nnoremap <Leader>] <C-i>
+
+" Switch files
+"nmap ^ <C-^>
+"nmap <A-Left> :bp<CR>
+"nmap <A-Right> :bn<CR>
+
+" Ctrl+Shift+PgUp/Dn - Move between files
+"nnoremap <C-S-PageDown> :next<CR>
+"nnoremap <C-S-PageUp> :prev<CR>
+" Ctrl+PgUp/Dn - Move between quickfix marks
+"nnoremap <C-PageDown> :cnext<CR>
+"nnoremap <C-PageUp> :cprev<CR>
+" Alt+PgUp/Dn - Move between location window marks
+"nnoremap <A-PageDown> :lnext<CR>
+"nnoremap <A-PageUp> :lprev<CR>
+
+""" Extra functionality for some existing commands:
+
+" Q formats paragraphs, instead of entering ex mode
+"noremap Q gq
+
+" * and # search for next/previous of selected text when used in visual mode
+"xnoremap g* y/<C-R>"<CR>
+"xnoremap g# y?<C-R>"<CR>
+
+" <Shift-space> reloads the file
+"nnoremap <S-space> :e<CR>
+
+" <space> toggles folds opened and closed
+"nnoremap <space> za
+"nnoremap <A-space> zA
+
+" <space> in visual mode creates a fold over the marked range
+"xnoremap <space> zf
+
+
+"""""""""""
+""" Abbreviations   {{{
+"" Command
+
+" Diff
+if has("diff")
+    function! <SID>DiffBoth()
+        diffthis
+        wincmd w
+        diffthis
+    endfunction
+    command! DiffBoth call <SID>DiffBoth()
+    command! -nargs=1 -complete=file VDiffSp vert diffsplit <q-args>
+endif
+
+" Windowing (Full screen on my monitor)
+command! VertScreen set lines=59
+command! LargeScreen set lines=59 | set columns=100
+
+" VimShell - run sh from within a Vim buffer
+command! VShell runtime scripts/vimsh/vimsh.vim
+
+" Diff against the file on disk. Useful for recovery. See also :help DiffOrig
+command! DiffSaved vert split original.vimscratch | silent %d | silent r # | silent 0d_ | diffthis | wincmd p | diffthis
+
+"" Insert
+" General
+iabbrev _me DBriscoe (pydave@gmail.com)
+iabbrev _company pydave
+
+" Shebangs
+iabbrev shebangpy #! /usr/bin/env python
+iabbrev shebangsh #! /bin/sh
+iabbrev shebangbash #! /bin/bash
+
+
+
+" constructs
+iabbrev frepeat for (int i = 0; i < 0; ++i)
+
+"}}}
+
+" =-=-=-=-=-=
+" Source local environment additions
+runtime local.vim
+
+"vi:et:sw=4 ts=4 fdm=marker
+"}}}
+
