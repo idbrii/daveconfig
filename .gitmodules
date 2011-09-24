@@ -40,3 +40,9 @@
 [submodule "multi/vim/.vim/bundle/snipmate-snippets"]
 	path = multi/vim/.vim/bundle/snipmate-snippets
 	url = git@github.com:pydave/snipmate-snippets.git
+[submodule "multi/vim/.vim/bundle/tlib"]
+	path = multi/vim/.vim/bundle/tlib
+	url = git://github.com/tomtom/tlib_vim.git
+[submodule "multi/vim/.vim/bundle/mw-utils"]
+	path = multi/vim/.vim/bundle/mw-utils
+	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
