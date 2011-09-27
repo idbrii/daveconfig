@@ -41,8 +41,8 @@ if [ "$filetype" == "cpp" ] ; then
     find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 elif [ "$filetype" == "cs" ] ; then
-    # C sharp code
-    find $search_dirs -type f \( -iname "*.cs" -o -iname "*.xaml" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+    # C sharp code. don't include examples which are often alongside.
+    find $search_dirs -not \( -name "examples" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 elif [ "$filetype" == "content" ] ; then
     # Some kind of content files
