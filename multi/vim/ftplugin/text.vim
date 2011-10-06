@@ -8,3 +8,6 @@ set foldmethod=manual
 
 " Text files might have numbered lists
 setlocal formatoptions+=n
+
+" English isn't case-sensitive. Use my original case when completing.
+setlocal infercase
