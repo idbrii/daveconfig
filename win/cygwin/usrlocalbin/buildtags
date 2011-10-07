@@ -78,7 +78,7 @@ sed -i -e"s/.cygdrive.c/c:/g" $tagfile
 # does cscope really need full paths? Try without them
 cut -f2 $tagfile | tail --lines=+2 > cscope.files
 
-ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -L cscope.files
+ctags --fields=+iaS --extra=+q -L cscope.files
 
 if [ "$filetype" == "python" ] ; then
     # Requires the python package pycscope:
