@@ -218,6 +218,8 @@ set completeopt=menu,preview,menuone
 set completeopt+=longest        " Fill in the longest match
 
 " Don't search included files for insert completion since that should be fast. 
+" Don't use tags for insert completion, that's what omnicomplete is for
+set complete-=t
 set complete-=i
 
 
