@@ -585,7 +585,7 @@ command! Ghistory Gitv! --all
 " Perforce
 let no_perforce_maps=1
 let g:p4CheckOutDefault = 1		" Yes as default
-"let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
+let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
 
 "}}}
 
