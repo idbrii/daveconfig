@@ -46,7 +46,7 @@ elif [ "$filetype" == "cs" ] ; then
 
 elif [ "$filetype" == "android" ] ; then
     # Android uses java and xml. Assume we're in the source directory
-    find . ../res -type f \( -iname "*.xml" -o -iname "*.java" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+    find $tagdir ../res -type f \( -iname "*.xml" -o -iname "*.java" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
 
 elif [ "$filetype" == "java" ] ; then
     # The only types we're interested in are java
@@ -66,14 +66,29 @@ sed -i -e"s/.cygdrive.c/c:/g" $tagfile
 
 # }}}
 
-
-# Build cscope	{{{
+# Build ctags and cscope	{{{
 # Create the cscope.files from filenametags
-# cscope needs full paths, so replace the relative path with the fully
-# qualified path
-cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^\./|$tagdir/|" > cscope.files
-# does cscope really need full paths? Try without them
-#cut -f2 $tagfile | tail --lines=+2 > cscope.files
+
+case $OSTYPE in
+	cygwin*)
+	# mlcscope needs full paths, so replace the relative path with the fully
+	# qualified path
+	cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^\./|$tagdir/|" > cscope.files
+;;
+	*)
+	# cscope doesn't seem to need full paths
+	cut -f2 $tagfile | tail --lines=+2 > cscope.files
+;;
+esac
+
+case $filetype in
+    cpp|cs|c)
+        ctags --c++-kinds=+p --fields=+iaS --extra=+q -L cscope.files
+        ;;
+    *)
+        ctags -L cscope.files
+        ;;
+esac
 
 if [ "$filetype" == "python" ] ; then
     # Requires the python package pycscope:
