@@ -70,7 +70,7 @@ sed -i -e"s/.cygdrive.c/c:/g" $tagfile
 
 # }}}
 
-# Build cscope	{{{
+# Build ctags and cscope	{{{
 # Create the cscope.files from filenametags
 # cscope needs full paths, so replace the relative path with the fully
 # qualified path
@@ -78,7 +78,16 @@ sed -i -e"s/.cygdrive.c/c:/g" $tagfile
 # does cscope really need full paths? Try without them
 cut -f2 $tagfile | tail --lines=+2 > cscope.files
 
-ctags --fields=+iaS --extra=+q -L cscope.files
+case $filetype in
+cpp)
+cs)
+c)
+    ctags --c++-kinds=+p --fields=+iaS --extra=+q -L cscope.files
+    ;;
+*)
+    ctags -L cscope.files
+    ;;
+esac
 
 if [ "$filetype" == "python" ] ; then
     # Requires the python package pycscope:
