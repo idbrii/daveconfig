@@ -46,3 +46,6 @@
 [submodule "multi/vim/.vim/bundle/mw-utils"]
 	path = multi/vim/.vim/bundle/mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "multi/vim/.vim/bundle/yankring"]
+	path = multi/vim/.vim/bundle/yankring
+	url = git://github.com/vim-scripts/YankRing.vim.git
