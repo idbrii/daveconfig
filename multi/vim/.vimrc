@@ -465,6 +465,26 @@ xmap c <Plug>VSurround
 xmap C <Plug>VSurround
 nnoremap yc ys
 
+" Yankring
+" Give yankring its own dir
+let g:yankring_history_dir = expand('$HOME/.vim-yankring')
+if filewritable(g:yankring_history_dir) == 0 && exists("*mkdir")
+    " If the directory doesn't exist try to create undo dir, because vim
+    " 703 doesn't do it even though this change should make it work:
+    "   http://code.google.com/p/vim-undo-persistence/source/detail?r=70
+    call mkdir(g:yankring_history_dir, "p", 0700)
+endif
+let g:yankring_history_file = 'history'
+
+" Bypass single letter deletes
+let g:yankring_min_element_length = 2
+
+" Function to unclobber yankring maps
+function! YRRunAfterMaps()
+    " Make Y work like D and C
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
 " Cpp
 " Don't want menus for cpp.
 let no_plugin_menus = 1
