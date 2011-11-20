@@ -463,7 +463,6 @@ nnoremap <F2> :GundoToggle<CR>
 " Use c as my surround character (it looks like a hug)
 xmap c <Plug>VSurround
 xmap C <Plug>VSurround
-nnoremap yc ys
 
 " Yankring
 " Give yankring its own dir
