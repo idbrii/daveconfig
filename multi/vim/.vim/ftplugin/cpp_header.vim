@@ -26,6 +26,9 @@ end
 if !exists('g:cpp_header_n_dir_to_trim')
     let g:cpp_header_n_dir_to_trim = 0
 end
+if !exists('g:cpp_header_after_first_include')
+    let g:cpp_header_after_first_include = 0
+end
 
 
 " Save compatibility options
@@ -135,22 +138,29 @@ function s:InsertHeader(path)
         return
 	endif
 
-	" Search backwards for the last include. search() will return 0 if there
-	" are no matches, which will make the append append on the first line in
-	" the file.
-	normal G
-	let l:last_include_line = search('^\s*#\s*include', 'b')
+	if ( g:cpp_header_after_first_include )
+		" Search forwards for the first include.
+		normal 0G
+		let l:flags = ''
+	else
+		" Search backwards for the last include.
+		normal G
+		let l:flags = 'b'
+	endif
+	" search() will return 0 if there are no matches, which will make the
+	" append append on the first line in the file.
+	let l:to_insert_after = search('^\s*#\s*include', l:flags)
 
     if ( g:cpp_header_use_preview )
         " Use the preview window to show the include
         " Use height=2 because we open preview before we put line (to
         " avoid unsaved error). So we show the line before and the include.
         set previewheight=2
-        silent exec "pedit +" . l:last_include_line
+        silent exec "pedit +" . l:to_insert_after
     endif
 
 	let l:text = '#include "' . a:path . '"'
-	call append(l:last_include_line, l:text)
+	call append(l:to_insert_after, l:text)
     " We inserted a line, so change the cursor position
     let l:save_cursor[1] += 1
 
