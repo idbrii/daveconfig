@@ -9,7 +9,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2011  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -105,7 +105,7 @@ endif
 
 if !exists("g:EclimHome")
   " set at build/install time.
-  let g:EclimHome = '/home/dbriscoe/data/apps/eclipse/plugins/org.eclim_1.7.1'
+  let g:EclimHome = '/home/dbriscoe/data/apps/eclipse/plugins/org.eclim_1.7.2'
   if has('win32unix')
     let g:EclimHome = eclim#cygwin#CygwinPath(g:EclimHome)
   endif
@@ -185,9 +185,9 @@ endif
 
 if g:EclimSignLevel
   augroup eclim_qf
-    autocmd QuickFixCmdPost *make* call eclim#display#signs#Show('', 'qf')
-    autocmd QuickFixCmdPost grep*,vimgrep* call eclim#display#signs#Show('i', 'qf')
-    autocmd QuickFixCmdPost lgrep*,lvimgrep* call eclim#display#signs#Show('i', 'loc')
+    autocmd QuickFixCmdPost *make* call eclim#display#signs#Show('', 'qf', 1)
+    autocmd QuickFixCmdPost grep*,vimgrep* call eclim#display#signs#Show('i', 'qf', 1)
+    autocmd QuickFixCmdPost lgrep*,lvimgrep* call eclim#display#signs#Show('i', 'loc', 1)
     autocmd WinEnter,BufWinEnter * call eclim#display#signs#Update()
   augroup END
 endif
@@ -197,9 +197,9 @@ if has('netbeans_intg')
     " autocommands used to work around the fact that the "unmodified" event in
     " vim's netbean support is commentted out for some reason.
     autocmd BufWritePost * call eclim#vimplugin#BufferWritten()
-    autocmd CursorHold * call eclim#vimplugin#BufferUnmodified()
-    autocmd CursorHold * call eclim#vimplugin#BufferUnmodified()
+    autocmd CursorHold,CursorHoldI * call eclim#vimplugin#BufferModified()
     autocmd BufWinLeave * call eclim#vimplugin#BufferClosed()
+    autocmd BufEnter * call eclim#vimplugin#BufferEnter()
   augroup END
 endif
 
