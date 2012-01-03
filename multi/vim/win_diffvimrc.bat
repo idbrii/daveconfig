@@ -1,2 +1,2 @@
-call bcomp .vimrc "%USERPROFILE%\_vimrc"
-call bcomp .gvimrc "%USERPROFILE%\_gvimrc"
+call bcomp .vimrc "%USERPROFILE%\.vimrc"
+call bcomp .gvimrc "%USERPROFILE%\.gvimrc"
