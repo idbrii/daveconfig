@@ -47,6 +47,9 @@ export HISTIGNORE="&:ls:[bf]g:exit"
 export SDIRS=~/data/settings/daveconfig/unix/terminal/bashmarks.sdirs
 source ~/data/settings/daveconfig/unix/terminal/bashmarks/bashmarks.sh
 
+# Use scons in quiet mode
+export SCONSFLAGS=-Q
+
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
