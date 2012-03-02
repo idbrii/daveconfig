@@ -456,6 +456,9 @@ else
     let MRU_Exclude_Files = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
 endif
 
+" AsyncCommand
+cabbrev Cscope AsyncCscopeFindSymbol
+
 " Gundo -- visualize the undo tree
 nnoremap <F2> :GundoToggle<CR>
 
