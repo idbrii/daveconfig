@@ -464,7 +464,7 @@ nnoremap <F2> :GundoToggle<CR>
 xmap c <Plug>VSurround
 xmap C <Plug>VSurround
 
-" Yankring
+" YankRing
 " Give yankring its own dir
 let g:yankring_history_dir = expand('$HOME/.vim-yankring')
 if filewritable(g:yankring_history_dir) == 0 && exists("*mkdir")
@@ -478,11 +478,38 @@ let g:yankring_history_file = 'history'
 " Bypass single letter deletes
 let g:yankring_min_element_length = 2
 
+" Prevent huge clipboard copies from slowing down vim. YankRing takes a long
+" time to trim something down to a large length. I don't intend to use
+" YankRing for enormous yanks.
+let g:yankring_max_element_length = 8192
+
+" Some settings to try to get yank ring to not mess with default vim
+" functionality so much.
+let g:yankring_manage_numbered_reg = 0
+let g:yankring_clipboard_monitor = 0
+let g:yankring_paste_check_default_buffer = 0
+
 " Function to unclobber yankring maps
 function! YRRunAfterMaps()
     " Make Y work like D and C
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+    nnoremap Y :<C-U>silent YRYankCount 'y$'<CR>
 endfunction
+
+" Don't let yankring use f, t, /. It doesn't record them properly in macros
+" and that's my most common use. Yankring also blocks macros of macros (it
+" prompts for the macro register), but removing @ doesn't fix that :(
+let g:yankring_zap_keys = ''
+
+" Disable yankring for regular p/P. This preserves vim's normal behavior, but
+" I can still use C-p/C-n to cycle through yankring.
+let g:yankring_paste_n_bkey = ''
+let g:yankring_paste_n_akey = ''
+" Also disable for visual. This ensures that the text deleted through a visual
+" paste is put in the numbered buffers (and is the next paste).
+let g:yankring_paste_v_key = ''
+let g:yankring_paste_v_bkey = ''
+let g:yankring_paste_v_akey = ''
+
 
 " Cpp
 " Don't want menus for cpp.
