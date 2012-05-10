@@ -309,6 +309,9 @@ ounmap <Leader>\
 "  Uses vim's commentstring to figure out the local comment character
 nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
 
+" Netrw shortcuts
+nmap <Leader>e :Explore<CR>
+
 " Easy make
 nmap <Leader>\| :make<up><CR>
 "ounmap <Leader>\|
