@@ -59,6 +59,8 @@ function init_skeleton {
 function v { $* | view - ; }
 
 function ge { gvim --remote-silent $* ; }
+function vv { vim --servername VIM $* ; }
+
 function move_and_link() {
     mv $1 $2
     ln -sv $2 $1
