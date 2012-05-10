@@ -3,6 +3,12 @@
 """ vim: set ft=python :
 """
 
+if exists('loaded_pycode')
+    finish
+endif
+let loaded_pycode = 1
+
+
 if has("python")
     python << EOF
 
