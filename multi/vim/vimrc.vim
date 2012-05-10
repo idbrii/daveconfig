@@ -284,7 +284,7 @@ nmap <Leader>t :vimgrep "\CTODO" %<CR>
 nmap <Leader>T :grep TODO -R .
 
 " Redo search with whole word toggled
-function! ToggleWholeWord()
+function! <SID>ToggleWholeWord()
     " Adds or removes the \<\> word boundary markers on the current search
     " Note: Only applies to search query as a whole
 
@@ -296,7 +296,7 @@ function! ToggleWholeWord()
     endif
     let @/ = search
 endfunction
-nmap <Leader>/ :call ToggleWholeWord()<CR>n
+nmap <Leader>/ :call <SID>ToggleWholeWord()<CR>n
 
 " Easy grep for current query
 nmap <Leader>* :grep -e "<C-r>/" *
@@ -309,11 +309,9 @@ ounmap <Leader>\
 "  Uses vim's commentstring to figure out the local comment character
 nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
 
-" Netrw shortcuts
-nmap <Leader>e :Explore<CR>
-
-" Netrw shortcuts
-nmap <Leader>e :Explore<CR>
+" Make \e like \be but for netrw
+nnoremap <Leader>e :Explore<CR>
+nnoremap <C-w><Leader>e :Vexplore<CR>
 
 " Easy make
 nmap <Leader>\| :make<up><CR>
