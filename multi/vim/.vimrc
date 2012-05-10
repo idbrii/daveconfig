@@ -312,6 +312,9 @@ nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Co
 " Netrw shortcuts
 nmap <Leader>e :Explore<CR>
 
+" Netrw shortcuts
+nmap <Leader>e :Explore<CR>
+
 " Easy make
 nmap <Leader>\| :make<up><CR>
 "ounmap <Leader>\|
