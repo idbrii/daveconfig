@@ -1,8 +1,0 @@
-#! /bin/bash
-
-# Determine what changes the current user made over the last week
-#
-
-# Source: http://stackoverflow.com/q/911739/79125#911802
-p4 changes -l -i -m 100 -u $USERNAME -s submitted @`date --date="1 week ago" +"%Y/%m/%d"`,@now
-
