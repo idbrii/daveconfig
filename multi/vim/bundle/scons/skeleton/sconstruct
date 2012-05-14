@@ -23,4 +23,4 @@ env = Environment()
 add_custom_builder(env)
 
 # Define Explicit Targets
-Default(env.Book('REPLACE_default_target' + src_suffix))
+Default(env.Custom('REPLACE_default_target'))
