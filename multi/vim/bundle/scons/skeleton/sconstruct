@@ -18,9 +18,18 @@ def add_custom_builder(env):
     for target in Glob('*' + src_suffix):
         env.Custom(target)
 
+    return env
+
 # Create
-env = Environment()
-add_custom_builder(env)
+env = add_custom_builder(Environment())
 
 # Define Explicit Targets
 Default(env.Custom('REPLACE_default_target'))
+
+# For languages supported by scons, you can use Program instead:
+#Program(
+#    target = '.REPLACE_output',
+#    source = ['.REPLACE_source']),
+#    #LINKFLAGS = ['.REPLACE'],
+#    #LIBS = ['.REPLACE']
+#)
