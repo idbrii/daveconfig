@@ -36,10 +36,15 @@ iabbrev _guard_ #ifndef zzz<CR>#define zzz<CR><CR>#endif<ESC>kO
 "
 " Source: http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file#By_modifying_ftplugins
 function SwitchSourceHeader()
-    if (expand ("%:t") == expand ("%:t:r") . ".cpp")
-        find %:t:r.h
+    if (expand ("%:t") == expand ("%:t:r") . ".h")
+		try
+			find %:t:r.cpp
+		catch /^Vim\%((\a\+)\)\=:E345/
+			" Error: Can't find file. Try inline instead.
+			find %:t:r.inl
+		endtry
     else
-        find %:t:r.cpp
+        find %:t:r.h
     endif
 endfunction
 
