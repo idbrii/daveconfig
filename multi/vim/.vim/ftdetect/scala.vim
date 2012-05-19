@@ -3,4 +3,4 @@
 " Revision: 15234
 " 29 Aug 2009
 
-au BufRead,BufNewFile *.scala set filetype=scala
+au BufRead,BufNewFile *.scala setfiletype scala
