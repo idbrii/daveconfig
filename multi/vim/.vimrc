@@ -33,6 +33,11 @@ endif
 " ctrlp (fuzzy file finder) cache
 let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 
+" Default to utf-8 instead of latin1
+if $LANG == ''
+    set encoding=utf-8
+endif
+
 " Display {{{1
 set background=dark			" I use dark background
 set nolazyredraw				" Don't repaint when scripts are running
