@@ -316,6 +316,12 @@ nmap <Leader>\| :make<up><CR>
 nmap <S-F5> :silent make 
 nmap <F5> :make 
 
+" If available, use scons instead of make. -u is upward search for root
+" SConstruct.
+if executable('scons')
+    set makeprg=scons\ -u
+endif
+
 " Magic global search (see smagic)
 nmap gs :%sm/
 xmap gs :sm/
