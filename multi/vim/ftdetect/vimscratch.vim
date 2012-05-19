@@ -1,3 +1,3 @@
 " log files
 "
-au BufRead,BufNewFile *.vimscratch set filetype=vimscratch
+au BufRead,BufNewFile *.vimscratch setfiletype vimscratch

@@ -1,3 +1,3 @@
 " Actionscript files
 "
-au BufRead,BufNewFile *.as set filetype=actionscript
+au BufRead,BufNewFile *.as setf actionscript
