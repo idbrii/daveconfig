@@ -28,14 +28,15 @@ function! CtrlP_Statusline_Main(focus, byfname, regexp, prv, item, nxt, marked)
     let dyncwd = getcwd()
 
     let item    = '%#CtrlPMode1# '.a:item.' %*'
-    let focus   = '%#CtrlPMode2# '.a:focus.' %*'
+    " Don't show focus because the >>> and --- are enough.
+    let focus   = ''
     let byfname = '%#CtrlPMode1# '.a:byfname.' %*'
     let regex   = a:regexp  ? '%#CtrlPMode2# regex %*' : ''
-    " Don't show slider because it's confusing and cluttered.
-    " default: let slider  = ' <'.a:prv.'>={'.a:item.'}=<'.a:nxt.'>'
-    let slider  = ' {'.a:item.'}'
+    " Don't show prev/next -- they're confusing and cluttered.
+    let slider  = '|%#CtrlPMode2# '.a:item.' %*|'
     let dir     = ' %=%<%#CtrlPMode2# '.dyncwd.' %*'
-    let stl     = focus.byfname.regex.slider.marked.dir
+    " Put regex later since it makes the UI jump around otherwise.
+    let stl     = focus.byfname.slider.regex.marked.dir
     return stl
 endfunction
 
