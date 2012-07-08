@@ -49,3 +49,6 @@
 [submodule "multi/vim/bundle/yankring"]
 	path = multi/vim/bundle/yankring
 	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "multi/vim/bundle/ctrlp"]
+	path = multi/vim/bundle/ctrlp
+	url = git://github.com/kien/ctrlp.vim.git

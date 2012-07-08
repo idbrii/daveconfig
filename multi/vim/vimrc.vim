@@ -583,27 +583,32 @@ augroup FugitiveCustom
     autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
-"""""
-" LookupFile
-let g:LookupFile_DisableDefaultMap = 1          " Disable defaults -- make is F5
-"let g:LookupFile_MinPatLength = 6              " Is it slow enough yet?
-let g:LookupFile_UpdateTime = 400               " wait a bit longer before completing
-let g:LookupFile_PreserveLastPattern = 0        " what I last looked up is in bufexplorer
-let g:LookupFile_EscCancelsPopup = 1            " this doesn't work! I can't get out with Esc
-let g:LookupFile_AlwaysAcceptFirst = 1          " easier to pick first result
-let g:LookupFile_Bufs_LikeBufCmd = 0            " Use same wildcard types as LUTags
+" CtrlP - fuzzy file finder
+let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_extensions = ['funky']
+let g:ctrlp_max_depth = 32
+let g:ctrlp_by_filename = 1
+let g:ctrlp_dotfiles = 0
+" I usually have a cscope.files file in the root of my project that tells me
+" where all the interesting files are. That's way faster than searching.
+let g:ctrlp_user_command = ['cscope.files', 'cat %s/cscope.files']
 
-" Like gf but use filenametags instead of path
-nmap <Leader>gf :LUTags <C-r>=expand('<cfile>:t')<CR><CR><CR>
+let g:ctrlp_mruf_exclude = g:MRU_Exclude_Files
 
-""" Like visual assist
-" Open file
-nnoremap <A-S-o> :LUTags<CR>
-nnoremap <C-S-o> :LUBufs<CR>
-" Open header/implementation -- gives list of files with the same name
-" using Leader first because cpp.vim has faster <A-o> (and doesn't change last
+let g:ctrlp_map = '<A-S-o>'
+nmap <C-S-o> :CtrlPBuffer<CR>
+nmap <A-S-m> :CtrlPMRUFiles<CR>
+
+" Like gf but use cscope.files instead of path
+nmap <Leader>gf :CtrlP <C-r>=expand('<cfile>:t')<CR><CR><CR>
+
+" Open header/implementation -- gives list of files with the same name using
+" Leader first because cpp.vim has faster <A-o> (and doesn't change last
 " command)
-nnoremap <Leader><A-o> :LookupFile<CR><C-r>#<Esc>F."_C.
+nnoremap <Leader><A-o> :CtrlP<CR><C-r>#<Esc>F."_C.
+
+
 
 " Pydoc
 "  Pydoc maps conflict with \p

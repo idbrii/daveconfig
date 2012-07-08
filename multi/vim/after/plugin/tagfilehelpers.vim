@@ -58,11 +58,6 @@ function LocateAll()
     " Make sure we have the full path
     silent! cd %:p:h
     " Locate all of our files
-    call LocateFilenameTagsFile()
     call LocateCscopeFile()
 endfunction
 
-
-" setup filename tags if we can find it, but be quiet about it
-silent call LocateFilenameTagsFile()
-" don't automatically call cscope. we probably need cscopeprg, etc to get set
