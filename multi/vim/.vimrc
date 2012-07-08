@@ -561,6 +561,7 @@ endif
 let g:ctrlp_map = '<A-S-o>'
 nmap <C-S-o> :CtrlPBuffer<CR>
 nmap <A-S-m> :CtrlPMRUFiles<CR>
+nmap <A-S-l> :CtrlPLastMode<CR>
 
 " Like gf but use cscope.files instead of path
 nmap <Leader>gf :CtrlP <C-r>=expand('<cfile>:t')<CR><CR><CR>
