@@ -52,3 +52,9 @@
 [submodule "multi/vim/.vim/bundle/ctrlp"]
 	path = multi/vim/.vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
+[submodule "multi/vim/.vim/bundle/ctrlp-funky"]
+	path = multi/vim/.vim/bundle/ctrlp-funky
+	url = git@github.com:pydave/ctrlp-funky.git
+[submodule "multi/vim/.vim/bundle/ctrlp-register"]
+	path = multi/vim/.vim/bundle/ctrlp-register
+	url = git://github.com/mattn/ctrlp-register.git
