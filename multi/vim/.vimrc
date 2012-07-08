@@ -332,6 +332,11 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 "}}}
 " Plugins   {{{1
 
+" Magic make
+" Disable magic make since I'm not using a lot of makefiles these days.
+" TODO: Setup scons files instead.
+let b:loaded_magic_make = 1
+
 " Renamer
 let g:RenamerSupportColonWToRename = 1
 
