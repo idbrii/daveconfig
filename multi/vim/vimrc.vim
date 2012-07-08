@@ -463,6 +463,8 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 " Make \e like \be but for netrw
 nnoremap <Leader>e :Explore<CR>
 nnoremap <C-w><Leader>e :Vexplore<CR>
+" Set browsed dir as current dir
+let g:netrw_keepdir = 0
 
 " MRU
 let g:MRU_Max_Entries = 200
