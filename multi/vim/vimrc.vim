@@ -466,17 +466,6 @@ nnoremap <C-w><Leader>e :Vexplore<CR>
 " Set browsed dir as current dir
 let g:netrw_keepdir = 0
 
-" MRU
-let g:MRU_Max_Entries = 200
-let g:MRU_File = s:vim_cache.'mru'
-
-" don't store temp files or git files
-if has("win32")
-    let g:MRU_Exclude_Files = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\'
-else
-    let g:MRU_Exclude_Files = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
-endif
-
 " AsyncCommand
 cabbrev Cscope AsyncCscopeFindSymbol
 
@@ -594,7 +583,12 @@ let g:ctrlp_dotfiles = 0
 " where all the interesting files are. That's way faster than searching.
 let g:ctrlp_user_command = ['cscope.files', 'cat %s/cscope.files']
 
-let g:ctrlp_mruf_exclude = g:MRU_Exclude_Files
+" don't store temp files or git files
+if has("win32")
+    let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\'
+else
+    let g:ctrlp_mruf_exclude = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
+endif
 
 let g:ctrlp_map = '<A-S-o>'
 nmap <C-S-o> :CtrlPBuffer<CR>
