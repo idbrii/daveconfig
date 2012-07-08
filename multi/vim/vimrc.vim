@@ -38,11 +38,17 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 "set numberwidth=1			" Use 1 col + 1 space for numbers
 set guioptions-=T			" Disable the toolbar
 
+" I put most vim temp files in their own directory.
+let s:vim_cache = expand('$HOME/.vim-cache/')
+if filewritable(s:vim_cache) == 0 && exists("*mkdir")
+    call mkdir(s:vim_cache, "p", 0700)
+endif
+
 if has("persistent_undo")
     " Enable undo that lasts between sessions.
     " TODO: how/when to clean up undo files?
     set undofile
-    let &undodir = expand('$HOME/.vim-undo')
+    let &undodir = s:vim_cache.'undo'
     if filewritable(&undodir) == 0 && exists("*mkdir")
         " If the directory doesn't exist try to create undo dir, because vim
         " 703 doesn't do it even though this change should make it work:
@@ -460,6 +466,7 @@ nnoremap <C-w><Leader>e :Vexplore<CR>
 
 " MRU
 let MRU_Max_Entries = 200
+let MRU_File = s:vim_cache.'mru'
 
 " don't store temp files or git files
 if has("win32")
@@ -481,11 +488,8 @@ xmap C <Plug>VSurround
 
 " YankRing
 " Give yankring its own dir
-let g:yankring_history_dir = expand('$HOME/.vim-yankring')
+let g:yankring_history_dir = s:vim_cache.'yankring'
 if filewritable(g:yankring_history_dir) == 0 && exists("*mkdir")
-    " If the directory doesn't exist try to create undo dir, because vim
-    " 703 doesn't do it even though this change should make it work:
-    "   http://code.google.com/p/vim-undo-persistence/source/detail?r=70
     call mkdir(g:yankring_history_dir, "p", 0700)
 endif
 let g:yankring_history_file = 'history'
