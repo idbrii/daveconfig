@@ -543,7 +543,7 @@ augroup END
 " CtrlP - fuzzy file finder
 let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 let g:ctrlp_use_caching = 1
-let g:ctrlp_extensions = ['funky']
+let g:ctrlp_extensions = ['funky', 'register']
 let g:ctrlp_max_depth = 32
 let g:ctrlp_by_filename = 1
 let g:ctrlp_dotfiles = 0
