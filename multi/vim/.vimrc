@@ -465,14 +465,14 @@ nnoremap <Leader>e :Explore<CR>
 nnoremap <C-w><Leader>e :Vexplore<CR>
 
 " MRU
-let MRU_Max_Entries = 200
-let MRU_File = s:vim_cache.'mru'
+let g:MRU_Max_Entries = 200
+let g:MRU_File = s:vim_cache.'mru'
 
 " don't store temp files or git files
 if has("win32")
-    let MRU_Exclude_Files = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\'
+    let g:MRU_Exclude_Files = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\'
 else
-    let MRU_Exclude_Files = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
+    let g:MRU_Exclude_Files = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
 endif
 
 " AsyncCommand
