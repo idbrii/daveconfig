@@ -46,9 +46,9 @@
 [submodule "multi/vim/bundle/mw-utils"]
 	path = multi/vim/bundle/mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "multi/vim/bundle/yankring"]
-	path = multi/vim/bundle/yankring
-	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "multi/vim/bundle/yankstack"]
+	path = multi/vim/bundle/yankstack
+	url = git://github.com/maxbrunsfeld/vim-yankstack.git
 [submodule "multi/vim/bundle/ctrlp"]
 	path = multi/vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
