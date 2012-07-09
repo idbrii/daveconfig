@@ -18,10 +18,9 @@ if has('win32')
     set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
-
-" Load pathogen -- it loads other plugins, so do it first.
-call pathogen#runtime_append_all_bundles()
-
+" Some things need to be setup before anything else in the vimrc (but after
+" the above path setup since it uses those paths).
+runtime before_vimrc.vim
 
 """ Settings
 """" Searching and Patterns
@@ -460,11 +459,6 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 " Plugins   {{{
 
 " Yankstack
-let g:yankstack_map_keys = 0
-
-" Call before other plugins so maps it clobbers can be defined below.
-call yankstack#setup()
-
 " Make Y work like D and C
 nmap Y y$
 
