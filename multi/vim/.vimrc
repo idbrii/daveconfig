@@ -385,6 +385,9 @@ nnoremap <C-PageUp> :cprev<CR>
 nnoremap <A-PageDown> :lnext<CR>
 nnoremap <A-PageUp> :lprev<CR>
 
+" undo a change in the previous window - often used for diff
+nnoremap <C-w>u :wincmd p <bar> undo <bar> wincmd p <bar> diffupdate<CR>
+
 """ Extra functionality for some existing commands:
 
 " CTRL-g shows filename and buffer number, too.
