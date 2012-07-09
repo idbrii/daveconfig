@@ -658,4 +658,4 @@ endfunction
 " Source local environment additions
 runtime local.vim
 
-"vi:et:sw=4 ts=4 fdm=marker
+" vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
