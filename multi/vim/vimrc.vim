@@ -412,13 +412,6 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 """""""""""
 " Plugins   {{{
 
-" Yankstack
-" Make Y work like D and C
-nmap Y y$
-
-nmap <C-p> <Plug>yankstack_substitute_older_paste
-nmap <C-n> <Plug>yankstack_substitute_newer_paste
-
 " Netrw
 " Make \e like \be but for netrw
 nnoremap <Leader>e :Explore<CR>
