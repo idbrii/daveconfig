@@ -152,27 +152,6 @@ set foldmethod=syntax		" By default, use syntax to determine folds
 set foldlevelstart=99		" All folds open by default
 set foldnestmax=3           " At deepest, fold blocks within class methods
 
-" Instead of calling diffoff -- which resets some variables, everything should
-" call DiffOff() which will do diff off and then apply the user's settings.
-function! MyDiffOff()
-    diffoff
-
-    " Now we want to undo changes from diffoff
-
-    " I always use syntax unless modelines say otherwise. Unfortunately,
-    " modelines won't be reapplied.
-    setlocal foldmethod=syntax
-    " Since the fold level changes from the diff, reset it to the start value
-    exec "setlocal foldlevel=" . &foldlevelstart
-
-    " While reloading the filetype is a good idea, it's pretty slow, so let's
-    " not do that until we get bothered by it.
-    " Then try to reload filetype, which might change the fold settings
-    "unlet! b:did_ftplugin
-    "let &filetype = &filetype
-endfunction
-let g:DiffOff = function("MyDiffOff")
-
 """" Command Line
 set wildmenu                " Autocomplete features in the status bar
 set wildmode=longest,list,full
@@ -417,26 +396,12 @@ nnoremap <A-space> zA
 """ Abbreviations   {{{
 "" Command
 
-" Diff
-if has("diff")
-    function! <SID>DiffBoth()
-        diffthis
-        wincmd w
-        diffthis
-    endfunction
-    command! DiffBoth call <SID>DiffBoth()
-    command! -nargs=1 -complete=file VDiffSp vert diffsplit <q-args>
-endif
-
 " Windowing (Full screen on my monitor)
 command! VertScreen set lines=59
 command! LargeScreen set lines=59 | set columns=100
 
 " VimShell - run sh from within a Vim buffer
 command! VShell runtime scripts/vimsh/vimsh.vim
-
-" Diff against the file on disk. Useful for recovery. See also :help DiffOrig
-command! DiffSaved vert split original.vimscratch | silent %d | silent r # | silent 0d_ | diffthis | wincmd p | diffthis
 
 "" Insert
 " General
@@ -603,21 +568,24 @@ let g:clj_paren_rainbow = 1
 
 
 """""""""""
-" Source Control    {{{
+" Source Control    {{{1
 
+" Meld          {{{2
 if executable('meld')
     " Invoke meld to easily diff the current directory
     " Only useful if we're in a version-controlled directory
+
+    " :e is used to change to current file's directory. See vimrc.
     nmap <Leader>gD :e<CR>:!meld . &<CR>
 endif
 
-" Git
+" Git          {{{2
 nmap <leader>gv :Gitv --all<cr>
 nmap <leader>gV :Gitv! --all<cr>
 
 command! Ghistory Gitv! --all
 
-" Perforce
+" Perforce          {{{2
 let no_perforce_maps=1
 let g:p4CheckOutDefault = 1		" Yes as default
 let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
@@ -626,7 +594,7 @@ let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
 
 
 """""""""""
-" Functions {{{
+" Functions {{{1
 
 " CopyFilenameToClipboard
 " Argument: ("%") or ("%:p")
