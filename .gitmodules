@@ -58,3 +58,6 @@
 [submodule "multi/vim/.vim/bundle/ctrlp-register"]
 	path = multi/vim/.vim/bundle/ctrlp-register
 	url = git://github.com/mattn/ctrlp-register.git
+[submodule "multi/vim/.vim/bundle/renamer"]
+	path = multi/vim/.vim/bundle/renamer
+	url = git@github.com:pydave/renamer.vim.git
