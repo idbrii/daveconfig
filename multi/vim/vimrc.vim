@@ -475,6 +475,9 @@ nnoremap <C-w><Leader>e :Vexplore<CR>
 " Set browsed dir as current dir
 let g:netrw_keepdir = 0
 
+" Renamer
+let g:RenamerSupportColonWToRename = 1
+
 " AsyncCommand
 cabbrev Cscope AsyncCscopeFindSymbol
 
