@@ -23,12 +23,6 @@ endif
 runtime before_vimrc.vim
 
 """ Settings
-"""" Searching and Patterns
-set ignorecase					" search is case insensitive
-set smartcase					" search case sensitive if caps on
-set hlsearch					" Highlight matches to the search
-set incsearch					" Find as you type
-
 """" Display
 set background=dark			" I use dark background
 set nolazyredraw				" Don't repaint when scripts are running
@@ -137,11 +131,6 @@ endif
 "set tags=./tags;../../../../
 " search up recursively for tags file (to root)
 set tags=./tags;/
-
-" allow commands like :find to search recursively from the current file's
-" directory. Ideally, I should set path to some useful directories, but I
-" don't have a good working set right now.
-set path+=./**
 
 " Don't show full path. Just give some path.
 set cscopepathcomp=3
@@ -257,38 +246,6 @@ inoremap <C-Tab> <C-t>
 inoremap <C-S-Tab> <C-d>
 
 
-" Quick fix slashes
-"	win -> unix
-xnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
-"	unix -> win
-xnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
-
-" Quickly find todo items
-nmap <Leader>t :vimgrep "\CTODO" %<CR>
-nmap <Leader>T :grep TODO -R .
-
-" Redo search with whole word toggled
-function! <SID>ToggleWholeWord()
-    " Adds or removes the \<\> word boundary markers on the current search
-    " Note: Only applies to search query as a whole
-
-    " remove whole word boundaries if they exists
-    let search = substitute(@/, '\\<\(.*\)\\>', '\1', '')
-    if search == @/
-        " there were no whole word flags, so add them
-        let search = '\<' . search . '\>'
-    endif
-    let @/ = search
-endfunction
-nmap <Leader>/ :call <SID>ToggleWholeWord()<CR>n
-
-" Easy grep for current query
-nmap <Leader>* :grep -e "<C-r>/" *
-
-" Easy cmdline run (normal, visual)
-map <Leader>\ :!<up><CR>
-ounmap <Leader>\
-
 " Generic Header comments (requires formatoptions+=r)
 "  Uses vim's commentstring to figure out the local comment character
 nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
@@ -305,10 +262,6 @@ nmap <F5> :make
 if executable('scons')
     set makeprg=scons\ -u
 endif
-
-" Magic global search (see smagic)
-nmap gs :%sm/
-xmap gs :sm/
 
 " Open preview window for tags (just jump with <C-]>)
 nnoremap <A-]> :ptag <C-r><C-w><CR>
@@ -360,15 +313,8 @@ nnoremap <C-w>u :wincmd p <bar> undo <bar> wincmd p <bar> diffupdate<CR>
 " CTRL-g shows filename and buffer number, too.
 nnoremap <C-g> 2<C-g>
 
-" <C-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
-
 " Q formats paragraphs, instead of entering ex mode
 noremap Q gq
-
-" * and # search for next/previous of selected text when used in visual mode
-xnoremap g* y/<C-R>"<CR>
-xnoremap g# y?<C-R>"<CR>
 
 " <Shift-space> reloads the file
 nnoremap <S-space> :e<CR>
@@ -401,8 +347,6 @@ iabbrev _company pydave
 iabbrev shebangpy #! /usr/bin/env python
 iabbrev shebangsh #! /bin/sh
 iabbrev shebangbash #! /bin/bash
-
-
 
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)
@@ -574,22 +518,6 @@ let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
 
 "}}}
 
-
-"""""""""""
-" Functions {{{1
-
-" Remove all text except what matches the current search result
-" The opposite of :%s///g (which clears all instances of the current search.
-" Note: Clobbers the c register
-function! ClearAllButMatches()
-    let @c=""
-    %s//\=setreg('C', submatch(0), 'l')/g
-    %d _
-    put c
-    0d _
-endfunction
-
-"}}}
 
 " =-=-=-=-=-=
 " Source local environment additions
