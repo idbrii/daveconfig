@@ -317,24 +317,13 @@ nnoremap <A-]> :ptag <C-r><C-w><CR>
 " (<C-\>s is defined in cscope_maps.vim)
 nmap <C-\><C-\> <C-\>s
 
-" Windows keys
 nmap <C-s> :w<CR>
+
 " change increment to allow select all
 nnoremap <C-x><C-s> <C-a>
 nnoremap <C-x><C-x> <C-x>
 " select all
 nnoremap <C-a> 1GVG
-" Windows clipboard
-xmap <C-c> "+y
-nnoremap <C-v> "+p
-
-" I've started using Shift-Insert to paste too (especially in insert)
-inoremap <S-Insert> <C-r>+
-cnoremap <S-Insert> <C-r>+
-
-" Paste last yanked item
-noremap <Leader>p "0p
-noremap <Leader>P "0P
 
 " Make backspace work in normal
 nmap <BS> X
@@ -595,19 +584,6 @@ let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
 
 """""""""""
 " Functions {{{1
-
-" CopyFilenameToClipboard
-" Argument: ("%") or ("%:p")
-function! CopyFilenameToClipboard(filename)
-    " TODO: Probably only need to set specific registers on different
-    " platforms.
-    let @*=expand(a:filename)
-    let @+=@*
-endfunction
-" This is generally what I need
-function! CopyFullPathToClipboard()
-    call CopyFilenameToClipboard("%:p")
-endfunction
 
 " Remove all text except what matches the current search result
 " The opposite of :%s///g (which clears all instances of the current search.
