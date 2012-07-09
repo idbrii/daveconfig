@@ -1,8 +1,8 @@
 " Vim color file
 " Maintainer:	pydave <pydave@gmail.com>
-" Last Change:	06 Jul 2010
+" Last Change:	08 Jul 2012
 " Origin:   Based on desert.vim
-" Version:	sandydune.vim
+" Version:	0.2
 
 " cool help screens
 " :he group-name
@@ -18,7 +18,7 @@ if version > 580
 	syntax reset
     endif
 endif
-let g:colors_name="desert"
+let g:colors_name="sandydune"
 
 hi Normal	guifg=White guibg=grey20
 
