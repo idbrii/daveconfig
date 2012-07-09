@@ -37,6 +37,9 @@ if filewritable(s:vim_cache) == 0 && exists("*mkdir")
     call mkdir(s:vim_cache, "p", 0700)
 endif
 
+" ctrlp (fuzzy file finder) cache
+let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
+
 if has("persistent_undo")
     " Enable undo that lasts between sessions.
     " TODO: how/when to clean up undo files?
@@ -211,28 +214,6 @@ nmap <F4> :TlistToggle<CR>
 nnoremap <F1> :sp ~/.vim-scratch<CR>
 nnoremap <S-F1> :e ~/.vim-scratch<CR>
 
-"""" Movement
-" work more logically with wrapped lines
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
-" don't interfere with selection mode
-sunmap j
-sunmap k
-
-" Ctrl + Arrows - Move around quickly
-nnoremap  <c-up>     {
-nnoremap  <c-down>   }
-nnoremap  <c-right>  El
-nnoremap  <c-left>   Bh
-
-" Shift + Arrows - Visually Select text
-"nnoremap  <s-up>     Vk
-"nnoremap  <s-down>   Vj
-"nnoremap  <s-right>  vl
-"nnoremap  <s-left>   vh
-
 " Use Ctrl-Tab/Tab and Shift-Tab to change indent in visual
 " Note: this can probably be done with Select mode, but I don't use that.
 xnoremap <C-Tab> >gv
@@ -280,30 +261,6 @@ nnoremap <C-a> 1GVG
 
 " Make backspace work in normal
 nmap <BS> X
-
-" Move in file
-nnoremap <Leader>[ <C-o>
-nnoremap <Leader>] <C-i>
-
-" Switch files
-nmap ^ <C-^>
-nmap <A-Left> :bp<CR>
-nmap <A-Right> :bn<CR>
-
-" Ctrl+Shift+PgUp/Dn - Move between files
-nnoremap <C-S-PageDown> :next<CR>
-nnoremap <C-S-PageUp> :prev<CR>
-" \+PgUp/Dn - Move between tabs
-nnoremap <Leader><PageDown> :tabnext<CR>
-nnoremap <Leader><PageUp> :tabprev<CR>
-" \Bksp - Advance tabs
-nnoremap <Leader><Backspace> :tabnext<CR>
-" Ctrl+PgUp/Dn - Move between quickfix marks
-nnoremap <C-PageDown> :cnext<CR>
-nnoremap <C-PageUp> :cprev<CR>
-" Alt+PgUp/Dn - Move between location window marks
-nnoremap <A-PageDown> :lnext<CR>
-nnoremap <A-PageUp> :lprev<CR>
 
 " undo a change in the previous window - often used for diff
 nnoremap <C-w>u :wincmd p <bar> undo <bar> wincmd p <bar> diffupdate<CR>
@@ -355,13 +312,6 @@ iabbrev frepeat for (int i = 0; i < 0; ++i)
 
 """""""""""
 " Plugins   {{{
-
-" Netrw
-" Make \e like \be but for netrw
-nnoremap <Leader>e :Explore<CR>
-nnoremap <C-w><Leader>e :Vexplore<CR>
-" Set browsed dir as current dir
-let g:netrw_keepdir = 0
 
 " Renamer
 let g:RenamerSupportColonWToRename = 1
@@ -431,36 +381,6 @@ augroup FugitiveCustom
     autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
-" CtrlP - fuzzy file finder
-let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
-let g:ctrlp_use_caching = 1
-let g:ctrlp_extensions = ['funky', 'register']
-let g:ctrlp_max_depth = 32
-let g:ctrlp_by_filename = 1
-let g:ctrlp_dotfiles = 0
-" I usually have a cscope.files file in the root of my project that tells me
-" where all the interesting files are. That's way faster than searching.
-let g:ctrlp_user_command = ['cscope.files', 'cat %s/cscope.files']
-
-" don't store temp files or git files
-if has("win32")
-    let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\'
-else
-    let g:ctrlp_mruf_exclude = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
-endif
-
-let g:ctrlp_map = '<A-S-o>'
-nmap <C-S-o> :CtrlPBuffer<CR>
-nmap <A-S-m> :CtrlPMRUFiles<CR>
-nmap <A-S-l> :CtrlPLastMode<CR>
-
-" Like gf but use cscope.files instead of path
-nmap <Leader>gf :CtrlP <C-r>=expand('<cfile>:t')<CR><CR><CR>
-
-" Open header/implementation -- gives list of files with the same name using
-" Leader first because cpp.vim has faster <A-o> (and doesn't change last
-" command)
-nnoremap <Leader><A-o> :CtrlP<CR><C-r>#<Esc>F."_C.
 
 
 
