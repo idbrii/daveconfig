@@ -69,7 +69,7 @@ nmap <C-S-o> :CtrlPBuffer<CR>
 nmap <A-S-m> :CtrlPMRUFiles<CR>
 nmap <A-S-l> :CtrlPLastMode<CR>
 
-" Like gf but use cscope.files instead of path
+" Like gf but use filelist instead of path
 nmap <Leader>gf :CtrlP <C-r>=expand('<cfile>:t')<CR><CR><CR>
 
 " Open header/implementation -- gives list of files with the same name using
