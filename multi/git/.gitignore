@@ -1,9 +1,9 @@
 cscope.*
 .DS_STORE
-filenametags
 *~
 *.pyc
 *.swp
+filelist
 tags
 .ropeproject
 en.latin1.add.spl

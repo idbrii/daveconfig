@@ -2,10 +2,6 @@
 "
 execute '!bash ~/.vim/scripts/build_alttagfiles.sh' &cscopeprg &ft
 
-if filereadable('./filenametags')
-    let g:LookupFile_TagExpr = string('./filenametags')
-    let g:LookupFile_UsingSpecializedTags = 1       " only if the previous line is right
-endif
 if filereadable('./cscope.out')
     set nocscopeverbose
     " add any database in current directory

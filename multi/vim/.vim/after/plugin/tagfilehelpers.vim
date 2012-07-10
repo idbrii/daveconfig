@@ -21,16 +21,14 @@ function <SID>FindTagFile(tag_file_name)
 endfunction
 
 
-if exists('loaded_lookupfile')
-    function LocateFilenameTagsFile()
-        """ Tag file for Lookupfile
-        let l:tagfile = <SID>FindTagFile('filenametags')
+if exists('g:loaded_ctrlp')
+    function LocateFilelist()
+        """ List of files for CtrlP
+        " Might be useful if you're using files from different directories.
+        let l:tagfile = <SID>FindTagFile('filelist')
         if filereadable(l:tagfile)
-            let g:LookupFile_TagExpr = string(l:tagfile)
-            let g:LookupFile_UsingSpecializedTags = 1   " only if the previous line is right
-            echomsg 'Lookupfile=' . g:LookupFile_TagExpr
-        else
-            let g:LookupFile_UsingSpecializedTags = 0
+            let g:ctrlp_project_root = string(l:tagfile)
+            echomsg 'Filelist=' . g:ctrlp_project_root 
         endif
     endfunction
 endif
