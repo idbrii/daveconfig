@@ -5,6 +5,7 @@
 " Notes:
 " mapping Tab in normal mode breaks cscope -- adds tabs when you jump somewhere
 
+" Initial setup {{{1
 set nocompatible				" who needs vi, we've got Vim!
 
 " Don't load plugins if we aren't in Vim7
@@ -22,15 +23,7 @@ endif
 " the above path setup since it uses those paths).
 runtime before_vimrc.vim
 
-""" Settings
-"""" Display
-set background=dark			" I use dark background
-set nolazyredraw				" Don't repaint when scripts are running
-set scrolloff=3				" Keep 3 lines below and above cursor
-"set number					" Show line numbering
-"set numberwidth=1			" Use 1 col + 1 space for numbers
-set guioptions-=T			" Disable the toolbar
-
+" Storage {{{1
 " I put most vim temp files in their own directory.
 let s:vim_cache = expand('$HOME/.vim-cache/')
 if filewritable(s:vim_cache) == 0 && exists("*mkdir")
@@ -40,6 +33,26 @@ endif
 " ctrlp (fuzzy file finder) cache
 let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 
+" Display {{{1
+set background=dark			" I use dark background
+set nolazyredraw				" Don't repaint when scripts are running
+set scrolloff=3				" Keep 3 lines below and above cursor
+"set number					" Show line numbering
+"set numberwidth=1			" Use 1 col + 1 space for numbers
+set guioptions-=T			" Disable the toolbar
+
+if has("macunix")
+    " looks good on my mac terminal
+    colorscheme elflord
+elseif has("win32")
+    colorscheme desert
+else
+    " looks good on ubuntu terminal
+    colorscheme carvedwood
+endif
+" TODO: pablo is good if you have few colors and don't like bold, but what condition would that be?
+
+" Undo {{{1
 if has("persistent_undo")
     " Enable undo that lasts between sessions.
     " TODO: how/when to clean up undo files?
@@ -63,17 +76,7 @@ if has("persistent_undo")
     augroup END
 endif
 
-if has("macunix")
-    " looks good on my mac terminal
-    colorscheme elflord
-elseif has("win32")
-    colorscheme desert
-else
-    " looks good on ubuntu terminal
-    colorscheme carvedwood
-endif
-" TODO: pablo is good if you have few colors and don't like bold, but what condition would that be?
-
+" Settings {{{1
 
 """" Messages, Info, Status
 set shortmess+=a				" Use [+] [RO] [w] for modified, read-only, modified
@@ -119,7 +122,7 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 " Show these file types at the end while using :edit command
 set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 
-"""" Coding
+" Coding {{{1
 set history=500				" 100 Lines of history
 filetype plugin on          " Enable filetype plugins
 filetype plugin indent on   " Let filetype plugins indent for me
@@ -130,25 +133,13 @@ if has("spell")
     syntax spell notoplevel
 endif
 
-" read tags 4 directories deep
-"set tags=./tags;../../../../
-" search up recursively for tags file (to root)
-set tags=./tags;/
-
-" Don't show full path. Just give some path.
-set cscopepathcomp=3
 
 
-"""" Folding
-set foldmethod=syntax		" By default, use syntax to determine folds
-set foldlevelstart=99		" All folds open by default
-set foldnestmax=3           " At deepest, fold blocks within class methods
-
-"""" Command Line
+" Command Line {{{1
 set wildmenu                " Autocomplete features in the status bar
 set wildmode=longest,list,full
 
-"""" Autocommands
+" Autocommands {{{1
 if has("autocmd")
 augroup vimrcEx
 au!
@@ -179,10 +170,7 @@ au!
 	augroup END
 endif
 
-
-
-
-"""" Completion
+" Completion {{{1
 
 " bind ctrl+space for omnicompletion
 inoremap <C-Space> <C-x><C-o>
@@ -198,38 +186,13 @@ set completeopt+=longest        " Fill in the longest match
 set complete-=t
 set complete-=i
 
-
-
-
-"""" Key Mappings
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" Toggle the tag list bar
-nmap <F4> :TlistToggle<CR>
+" Vim Scratch {{{1
 
 " Scratch file for random bits
 nnoremap <F1> :sp ~/.vim-scratch<CR>
 nnoremap <S-F1> :e ~/.vim-scratch<CR>
 
-" Use Ctrl-Tab/Tab and Shift-Tab to change indent in visual
-" Note: this can probably be done with Select mode, but I don't use that.
-xnoremap <C-Tab> >gv
-xnoremap <Tab> >gv
-xnoremap <S-Tab> <LT>gv
-" Use ctrl-tab and shift-tab for indent in normal mode
-nnoremap <C-Tab> >>
-nnoremap <S-Tab> <<
-" and insert mode
-inoremap <C-Tab> <C-t>
-inoremap <C-S-Tab> <C-d>
-
-
-" Generic Header comments (requires formatoptions+=r)
-"  Uses vim's commentstring to figure out the local comment character
-nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
+" Building {{{1
 
 " Easy make
 nmap <Leader>\| :make<up><CR>
@@ -244,12 +207,30 @@ if executable('scons')
     set makeprg=scons\ -u
 endif
 
+" Tags {{{1
+
+" read tags 4 directories deep
+"set tags=./tags;../../../../
+" search up recursively for tags file (to root)
+set tags=./tags;/
+
+" Don't show full path. Just give some path.
+set cscopepathcomp=3
+
+" Toggle the tag list bar
+nmap <F4> :TlistToggle<CR>
+
 " Open preview window for tags (just jump with <C-]>)
 nnoremap <A-]> :ptag <C-r><C-w><CR>
 
 " Simplify most common cscope command
 " (<C-\>s is defined in cscope_maps.vim)
 nmap <C-\><C-\> <C-\>s
+
+" AsyncCommand
+cabbrev Cscope AsyncCscopeFindSymbol
+
+" Common text {{{1
 
 nmap <C-s> :w<CR>
 
@@ -265,7 +246,28 @@ nmap <BS> X
 " undo a change in the previous window - often used for diff
 nnoremap <C-w>u :wincmd p <bar> undo <bar> wincmd p <bar> diffupdate<CR>
 
-""" Extra functionality for some existing commands:
+" Generic Header comments (requires formatoptions+=r)
+"  Uses vim's commentstring to figure out the local comment character
+nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
+
+" Indent {{{2
+" Use Ctrl-Tab/Tab and Shift-Tab to change indent in visual
+" Note: this can probably be done with Select mode, but I don't use that.
+xnoremap <C-Tab> >gv
+xnoremap <Tab> >gv
+xnoremap <S-Tab> <LT>gv
+" Use ctrl-tab and shift-tab for indent in normal mode
+nnoremap <C-Tab> >>
+nnoremap <S-Tab> <<
+" and insert mode
+inoremap <C-Tab> <C-t>
+inoremap <C-S-Tab> <C-d>
+
+" Shadow: Improve existing commands {{{2
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
 
 " CTRL-g shows filename and buffer number, too.
 nnoremap <C-g> 2<C-g>
@@ -276,6 +278,13 @@ noremap Q gq
 " <Shift-space> reloads the file
 nnoremap <S-space> :e<CR>
 
+" Folding {{{1
+
+" Settings
+set foldmethod=syntax		" By default, use syntax to determine folds
+set foldlevelstart=99		" All folds open by default
+set foldnestmax=3           " At deepest, fold blocks within class methods
+
 " <space> toggles folds opened and closed
 nnoremap <space> za
 nnoremap <A-space> zA
@@ -285,7 +294,7 @@ nnoremap <A-space> zA
 
 
 """""""""""
-""" Abbreviations   {{{
+" Abbreviations   {{{1
 "" Command
 
 " Windowing (Full screen on my monitor)
@@ -309,15 +318,10 @@ iabbrev shebangbash #! /bin/bash
 iabbrev frepeat for (int i = 0; i < 0; ++i)
 
 "}}}
-
-"""""""""""
-" Plugins   {{{
+" Plugins   {{{1
 
 " Renamer
 let g:RenamerSupportColonWToRename = 1
-
-" AsyncCommand
-cabbrev Cscope AsyncCscopeFindSymbol
 
 " Gundo -- visualize the undo tree
 nnoremap <F2> :GundoToggle<CR>
@@ -411,9 +415,6 @@ let g:clj_highlight_contrib = 1
 let g:clj_paren_rainbow = 1
 
 "}}}
-
-
-"""""""""""
 " Source Control    {{{1
 
 " Meld          {{{2
