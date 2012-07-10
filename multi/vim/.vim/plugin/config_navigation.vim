@@ -56,6 +56,7 @@ let g:ctrlp_dotfiles = 0
 " I generate a filelist file in the root of my project that tells me where all
 " the interesting files are. That's far faster than searching.
 let g:ctrlp_user_command = ['filelist', 'cat %s/filelist']
+let g:ctrlp_root_markers = ['filelist']
 
 " don't store temp files or git files
 if has("win32")
