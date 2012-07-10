@@ -42,9 +42,6 @@ if has("cscope")
     set cscopeverbose
 endif
 
-" We don't seem to be in the right directory in the vimrc, so call this again
-silent call LocateFilenameTagsFile()
-
 " Keep up to date on change from external editor
 setlocal autoread
 " We'll be opened with the full path, but jump to the local directory so
