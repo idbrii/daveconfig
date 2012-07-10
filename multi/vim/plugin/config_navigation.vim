@@ -53,9 +53,15 @@ let g:ctrlp_extensions = ['funky', 'register']
 let g:ctrlp_max_depth = 32
 let g:ctrlp_by_filename = 1
 let g:ctrlp_dotfiles = 0
+
 " I generate a filelist file in the root of my project that tells me where all
 " the interesting files are. That's far faster than searching.
-let g:ctrlp_user_command = ['filelist', 'cat %s/filelist']
+if has("win32")
+    " cygwin cat suddenly stopped working.
+    let g:ctrlp_user_command = ['filelist', 'type %s\\filelist']
+else
+    let g:ctrlp_user_command = ['filelist', 'cat %s/filelist']
+endif
 let g:ctrlp_root_markers = ['filelist']
 
 " don't store temp files or git files
