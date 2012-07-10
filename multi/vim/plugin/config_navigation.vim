@@ -53,9 +53,9 @@ let g:ctrlp_extensions = ['funky', 'register']
 let g:ctrlp_max_depth = 32
 let g:ctrlp_by_filename = 1
 let g:ctrlp_dotfiles = 0
-" I usually have a cscope.files file in the root of my project that tells me
-" where all the interesting files are. That's way faster than searching.
-let g:ctrlp_user_command = ['cscope.files', 'cat %s/cscope.files']
+" I generate a filelist file in the root of my project that tells me where all
+" the interesting files are. That's far faster than searching.
+let g:ctrlp_user_command = ['filelist', 'cat %s/filelist']
 
 " don't store temp files or git files
 if has("win32")

@@ -1,5 +1,5 @@
 #! /bin/sh
-# Build ctags, filenametags, and cscope db for the current project
+# Build ctags, filelist, and cscope db for the current project
 #
 # Android projects have libraries and I'd like to include all of their
 # information too, so we use the project file (which determines which libraries
@@ -41,24 +41,25 @@ ctags -R $tag_dirs
 cscope=cscope
 
 tagdir=$PWD
-tagfile=$tagdir/filenametags
+tagfile=$tagdir/filelist
 
-# Build filenametags	{{{
-echo "!_TAG_FILE_SORTED	2	/2=foldcase/"> $tagfile
+# Build filelist	{{{
 
-# Android uses java and xml. Only include xml files for the current project.
-# We filter our cscope.files to only look at java, so it the xml files are only for LookupFile
-find $tag_dirs $current/res $current/AndroidManifest.xml -type f \( -iname "*.xml" -o -iname "*.java" \) -printf "%f\t%p\t1\n" | sort -f >> $tagfile
+# Android uses java and xml. Only include xml files for the current project. We
+# filter our cscope.files to only look at java, so it the xml files are only
+# for filelist.
+find $tag_dirs $current/res $current/AndroidManifest.xml -type f \( -iname "*.xml" -o -iname "*.java" \) -print | sort -f > $tagfile
 
 # }}}
 
 
 # Build cscope	{{{
-# Create the cscope.files from filenametags
+
+# Create the cscope.files from filelist.
+# Exclude generated code and xml from cscope. It's not helpful.
 # cscope needs full paths, so replace the relative path with the fully
 # qualified path
-# Exclude generated code and xml from cscope. It's not helpful.
-cut -f2 $tagfile | tail --lines=+2 | sed -e"s|^|$tagdir/|" | grep -v -e .xml -e R.java > cscope.files
+cat $tagfile | sed -e"s|^|$tagdir/|" | grep -v -e .xml -e R.java > cscope.files
 
 # Build cscope database
 #	-b              Build the database only.
