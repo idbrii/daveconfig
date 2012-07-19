@@ -61,6 +61,9 @@
 [submodule "multi/vim/.vim/bundle/renamer"]
 	path = multi/vim/.vim/bundle/renamer
 	url = git@github.com:pydave/renamer.vim.git
+[submodule "multi/vim/.vim/bundle/tabular"]
+	path = multi/vim/.vim/bundle/tabular
+	url = git://github.com/godlygeek/tabular.git
 [submodule "multi/vim/.vim/bundle/textobj-word-column"]
 	path = multi/vim/.vim/bundle/textobj-word-column
 	url = git://github.com/coderifous/textobj-word-column.vim.git
