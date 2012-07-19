@@ -237,6 +237,10 @@ nmap <C-s> :w<CR>
 " change increment to allow select all
 nnoremap <C-x><C-s> <C-a>
 nnoremap <C-x><C-x> <C-x>
+" Don't let speeddating override the above. (They'll be properly mapped later
+" if speeddating loads.)
+let g:speeddating_no_mappings = 1
+
 " select all
 nnoremap <C-a> 1GVG
 
