@@ -38,26 +38,26 @@ cd $tagdir
 rm $tagfile
 if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
-    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -printf | sort -f >> $tagfile
+    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -print | sort -f >> $tagfile
 
 elif [ "$filetype" == "cs" ] ; then
     # C sharp code. don't include examples which are often alongside.
-    find $search_dirs -not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -printf | sort -f >> $tagfile
+    find $search_dirs -not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print | sort -f >> $tagfile
 
 elif [ "$filetype" == "android" ] ; then
     # Android uses java and xml. Assume we're in the source directory
-    find $tagdir ../res -type f \( -iname "*.xml" -o -iname "*.java" \) -printf | sort -f >> $tagfile
+    find $tagdir ../res -type f \( -iname "*.xml" -o -iname "*.java" \) -print | sort -f >> $tagfile
 
 elif [ "$filetype" == "java" ] ; then
     # The only types we're interested in are java
-    find $search_dirs -type f -iname "*.java" -printf | sort -f >> $tagfile
+    find $search_dirs -type f -iname "*.java" -print | sort -f >> $tagfile
 
 else
     # Don't know what we are so include anything that's not binary or junk (from vimdoc)
     # DavidAdd: Files: .git tags filelist
     # DavidAdd: Filetypes: pyc out
     # DavidAdd: Folder: v (for virtualenv)
-    find $search_dirs \( -name .git -o -name v -o -name .svn -o -name .bzr -o -name tags -o -name filelist -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\|out\).*' -type f -printf | sort -f >> $tagfile
+    find $search_dirs \( -name .git -o -name v -o -name .svn -o -name .bzr -o -name tags -o -name filelist -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\|out\).*' -type f -print | sort -f >> $tagfile
 
 fi
 
