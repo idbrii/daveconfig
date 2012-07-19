@@ -64,3 +64,6 @@
 [submodule "multi/vim/.vim/bundle/textobj-word-column"]
 	path = multi/vim/.vim/bundle/textobj-word-column
 	url = git://github.com/coderifous/textobj-word-column.vim.git
+[submodule "multi/vim/.vim/bundle/speeddating"]
+	path = multi/vim/.vim/bundle/speeddating
+	url = git://github.com/tpope/vim-speeddating.git
