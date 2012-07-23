@@ -133,6 +133,14 @@ if has("spell")
     syntax spell notoplevel
 endif
 
+" Figure out what function we're in. This relies on a coding standard where
+" functions start in the first column and their signature is on one line.
+" Mapped to the similar <C-g> (which I don't use very often).
+" TODO: Should this be language-specific? There's definitely a better version
+" for python (to allow nested definitions and to show functions and classes.
+" Can I combine this with <C-g>'s functionality (print both) and override that
+" key?
+nnoremap <C-g><C-g>  :let last_search=@/<Bar> ?^\w? mark c<Bar> noh<Bar> echo getline("'c")<Bar> let @/ = last_search<CR>
 
 
 " Command Line {{{1
