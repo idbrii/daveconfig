@@ -59,3 +59,7 @@
 	prompt = false
 [mergetool]
 	prompt = false
+[difftool "beyond"]
+	cmd = difftool.beyond.git.sh $LOCAL $REMOTE $BASE
+[mergetool "beyond"]
+	cmd = mergetool.beyond.git.sh $LOCAL $REMOTE $BASE $MERGED
