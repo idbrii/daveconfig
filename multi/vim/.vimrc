@@ -46,16 +46,21 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 "set numberwidth=1			" Use 1 col + 1 space for numbers
 set guioptions-=T			" Disable the toolbar
 
-if has("macunix")
-    " looks good on my mac terminal
-    colorscheme elflord
-elseif has("win32")
-    colorscheme desert
-else
-    " looks good on ubuntu terminal
-    colorscheme carvedwood
+if !has("gui_running")
+    if 0 < &t_Co && &t_Co < 8
+        " pablo is good if you have few colors and don't like bold.
+        colorscheme pablo
+    elseif has("macunix")
+        " looks good on my mac terminal
+        colorscheme elflord
+    elseif has("win32")
+        " looks better than sandydune on Win command prompt
+        colorscheme desert
+    else
+        " looks good on ubuntu terminal
+        "colorscheme carvedwood
+    endif
 endif
-" TODO: pablo is good if you have few colors and don't like bold, but what condition would that be?
 
 " Undo {{{1
 if has("persistent_undo")
