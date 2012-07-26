@@ -49,7 +49,6 @@ nnoremap <A-PageUp> :lprev<CR>
 
 " CtrlP plugin -- fuzzy file finder {{{1
 let g:ctrlp_use_caching = 1
-let g:ctrlp_extensions = ['funky', 'register']
 let g:ctrlp_max_depth = 32
 let g:ctrlp_by_filename = 1
 let g:ctrlp_dotfiles = 0
@@ -76,9 +75,13 @@ else
 endif
 
 let g:ctrlp_map = '<A-S-o>'
-nmap <C-S-o> :CtrlPBuffer<CR>
 nmap <A-S-m> :CtrlPMRUFiles<CR>
-nmap <A-S-l> :CtrlPLastMode<CR>
+
+let g:ctrlp_extensions = ['funky', 'register']
+nmap <unique> <C-o>l :CtrlPLastMode<CR>
+nmap <unique> <C-o>b :CtrlPBuffer<CR>
+nmap <unique> <C-o>f :call ctrlp#init(ctrlp#funky#id())<CR>
+nmap <unique> <C-o>r :CtrlPRegister<CR>
 
 " Like gf but use filelist instead of path
 " You still need to type <C-\>s to populate the name.
