@@ -8,6 +8,16 @@
 " Load immediately -- it loads other plugins, so do it first.
 call pathogen#runtime_append_all_bundles()
 
+" Setup filetype and syntax. Doing these right after pathogen because
+" somethings depend on them (colorschemes) and pathogen must come first.
+filetype plugin indent on   " Enable+detect filetype plugins and use to indent
+syntax on                   " Turn on syntax highlighting
+"syntax enable				" Enable, but keep current highlighting scheme
+if has("spell")
+    "set spell   "check spelling (z= suggestions, zg add good word, zb bad)
+    syntax spell notoplevel
+endif
+
 
 " Yankstack
 " Load immediately -- is clobbers some base commands, so if those are
