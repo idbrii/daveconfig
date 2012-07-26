@@ -134,14 +134,6 @@ set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 
 " Coding {{{1
 set history=500				" 100 Lines of history
-filetype plugin on          " Enable filetype plugins
-filetype plugin indent on   " Let filetype plugins indent for me
-syntax on                   " Turn on syntax highlighting
-"syntax enable				" Keep current highlighting scheme
-if has("spell")
-    "set spell   "check spelling (z= suggestions, zg add good word, zb bad)
-    syntax spell notoplevel
-endif
 
 " Figure out what function we're in. This relies on a coding standard where
 " functions start in the first column and their signature is on one line.
