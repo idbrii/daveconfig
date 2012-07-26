@@ -81,12 +81,14 @@ nmap <A-S-m> :CtrlPMRUFiles<CR>
 nmap <A-S-l> :CtrlPLastMode<CR>
 
 " Like gf but use filelist instead of path
-nmap <Leader>gf :CtrlP <C-r>=expand('<cfile>:t')<CR><CR><CR>
+" You still need to type <C-\>s to populate the name.
+nmap <Leader>gf :let @/ = '\<'. expand('<cfile>:t') .'\>'<Bar> CtrlP<CR>
 
 " Open header/implementation -- gives list of files with the same name using
 " Leader first because cpp.vim has faster <A-o> (and doesn't change last
 " command)
-nnoremap <Leader><A-o> :CtrlP<CR><C-r>#<Esc>F."_C.
+" You still need to type <C-\>s to populate the name.
+nmap <Leader><A-o> :let @/ = '\<'. expand('%:t:r') .'\>'<Bar> CtrlP<CR>
 
 " Netrw plugin -- Navigate filesystems {{{1
 " Make \e like \be but for netrw
