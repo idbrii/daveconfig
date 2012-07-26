@@ -2,6 +2,10 @@
 " (So don't use did_ftplugin -- the base setting is already done and we just
 " want to put some icing on it.)
 
+if !exists('g:loaded_fugitive')
+    finish
+endif
+
 " Fold filenames under the three headings: staged, modified, untracked
 function! FoldGitCommit(lnum)
     let text = getline(a:lnum)
@@ -64,3 +68,4 @@ endfunction
 " Use the folding function
 setlocal foldmethod=expr
 setlocal foldexpr=FoldGitCommit(v:lnum)
+
