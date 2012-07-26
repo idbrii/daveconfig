@@ -244,6 +244,11 @@ cabbrev Cscope AsyncCscopeFindSymbol
 
 nmap <C-s> :w<CR>
 
+" Underscores are like visible spaces. So the alt version of space is
+" underscore.
+inoremap <A-Space> _
+cnoremap <A-Space> _
+
 " change increment to allow select all
 nnoremap <C-x><C-s> <C-a>
 nnoremap <C-x><C-x> <C-x>
