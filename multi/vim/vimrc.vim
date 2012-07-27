@@ -350,8 +350,14 @@ nnoremap <F2> :GundoToggle<CR>
 xmap c <Plug>VSurround
 xmap C <Plug>VSurround
 
-
-
+" \ surrounds with anything. (Replaces latext map that I don't use except by
+" accident.)
+let g:surround_92 = "\1Surround with: \1 \r \1\1"
+augroup SurroundCustom
+    au!
+    " m surrounds with commented foldmarkers
+    au FileType * let b:surround_109 = printf(&commentstring, " \1Marker name: \1 {{{") . " \r " . printf(&commentstring, " }}}")
+augroup END
 
 " Cpp
 " Don't want menus for cpp.
