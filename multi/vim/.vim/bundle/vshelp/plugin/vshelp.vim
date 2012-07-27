@@ -6,17 +6,19 @@ endif
 let g:loaded_vshelp = 1
 
 
-if !exists("g:vshelp_devenv")
-	" assume pathogen
-	let g:vshelp_devenv = expand('~\.vim\bundle\vshelp\scripts\open_in_visualstudio.cmd')
+if !exists("s:vshelp_devenv")
+	" assume relative to current
+	let install_dir = expand("<sfile>:p:h:h")
+	let s:vshelp_devenv = install_dir . expand('/scripts/open_in_visualstudio.cmd')
 
-	" fall back on default
-	if !filereadable(g:vshelp_devenv)
-		let g:vshelp_devenv = expand('~\.vim\scripts\open_in_visualstudio.cmd')
+	" fail if not found
+	if !filereadable(s:vshelp_devenv)
+		echoerr 'vshelp is installed incorrectly. The plugin/ and scripts/ directories must be in the same folder.'
+		finish
 	endif
 endif
 
 function s:OpenInVisualStudio()
-	exec 'silent ! ' . g:vshelp_devenv . ' ' . fnameescape(expand('%:p')) . ' ' . line('.')
+	exec 'silent ! ' . s:vshelp_devenv . ' ' . fnameescape(expand('%:p')) . ' ' . line('.')
 endfunction
 command VSOpen call s:OpenInVisualStudio()
