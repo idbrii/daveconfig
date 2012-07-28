@@ -1,0 +1,2 @@
+[alias]
+	subaddvim = !sh -c 'git submodule add ${1} multi/vim/.vim/bundle/${2}' -
