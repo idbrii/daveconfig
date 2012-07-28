@@ -76,3 +76,9 @@
 [submodule "multi/vim/bundle/NrrwRgn"]
 	path = multi/vim/bundle/NrrwRgn
 	url = git://github.com/chrisbra/NrrwRgn.git
+[submodule "multi/vim/bundle/VimOrganizer"]
+	path = multi/vim/bundle/VimOrganizer
+	url = git://github.com/hsitz/VimOrganizer.git
+[submodule "multi/vim/bundle/calendar"]
+	path = multi/vim/bundle/calendar
+	url = git://github.com/vim-scripts/calendar.vim--Matsumoto.git
