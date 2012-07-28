@@ -5,5 +5,5 @@ set columns=90
 " Small font
 set guifont=ProggyCleanTT:h12:cANSI
 
-colorscheme desert
+colorscheme sandydune
 

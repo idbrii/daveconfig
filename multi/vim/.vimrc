@@ -410,13 +410,6 @@ let g:no_xml_maps = 1
 " Don't have maps for bufkill -- too easy to delete a buffer by accident
 let no_bufkill_maps = 1
 
-" Delete Fugitive buffers when I leave them so they don't pollute BufExplorer
-augroup FugitiveCustom
-    autocmd BufReadPost fugitive://* set bufhidden=delete
-augroup END
-
-
-
 
 " Pydoc
 "  Pydoc maps conflict with \p
@@ -443,29 +436,6 @@ let clj_want_gorilla = 1
 let g:clj_highlight_builtins = 1
 let g:clj_highlight_contrib = 1
 let g:clj_paren_rainbow = 1
-
-"}}}
-" Source Control    {{{1
-
-" Meld          {{{2
-if executable('meld')
-    " Invoke meld to easily diff the current directory
-    " Only useful if we're in a version-controlled directory
-
-    " :e is used to change to current file's directory. See vimrc.
-    nmap <Leader>gD :e<CR>:!meld . &<CR>
-endif
-
-" Git          {{{2
-nmap <leader>gv :Gitv --all<cr>
-nmap <leader>gV :Gitv! --all<cr>
-
-command! Ghistory Gitv! --all
-
-" Perforce          {{{2
-let no_perforce_maps=1
-let g:p4CheckOutDefault = 1		" Yes as default
-let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
 
 "}}}
 
