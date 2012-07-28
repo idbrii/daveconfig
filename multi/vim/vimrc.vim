@@ -58,7 +58,7 @@ if !has("gui_running")
         colorscheme desert
     else
         " looks good on ubuntu terminal
-        "colorscheme carvedwood
+        colorscheme lucius
     endif
 endif
 
