@@ -11,10 +11,6 @@ let g:external_diff = 'bcomp.bat'
 
 let g:DAVID_local_root = "c:/p4/main"
 
-" Git shortcuts
-nmap <Leader>gi :Gstatus<CR>
-nmap <Leader>gd :Gdiff<CR>
-
 " Vim on Windows defaults to findstr, but cygwin grep is better
 set grepprg=grep\ -nH
 " If most code has a path like: p4\game\main\packages\core\game\dev\src\
