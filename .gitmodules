@@ -73,3 +73,6 @@
 [submodule "multi/vim/.vim/bundle/textconv"]
 	path = multi/vim/.vim/bundle/textconv
 	url = git@github.com:pydave/textconv.vim.git
+[submodule "multi/vim/.vim/bundle/NrrwRgn"]
+	path = multi/vim/.vim/bundle/NrrwRgn
+	url = git://github.com/chrisbra/NrrwRgn.git
