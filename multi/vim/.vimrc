@@ -47,18 +47,19 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 set guioptions-=T			" Disable the toolbar
 
 if !has("gui_running")
-    if 0 < &t_Co && &t_Co < 8
-        " pablo is good if you have few colors and don't like bold.
-        colorscheme pablo
+    if 0 < &t_Co && &t_Co <= 8
+        " evening looks decent on low colours, but is hideous in 256-color and
+        " in the gui.
+        colorscheme evening
+    elseif &t_Co >= 256
+        " looks good on my hi-color ubuntu terminal
+        colorscheme lucius
     elseif has("macunix")
         " looks good on my mac terminal
         colorscheme elflord
     elseif has("win32")
         " looks better than sandydune on Win command prompt
         colorscheme desert
-    else
-        " looks good on ubuntu terminal
-        colorscheme lucius
     endif
 endif
 
