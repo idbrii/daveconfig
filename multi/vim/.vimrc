@@ -438,6 +438,9 @@ let g:clj_highlight_builtins = 1
 let g:clj_highlight_contrib = 1
 let g:clj_paren_rainbow = 1
 
+" Calendar
+let g:calendar_no_mappings = 1
+
 "}}}
 
 
