@@ -6,6 +6,7 @@
 
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#runtime_append_all_bundles()
 
 " Setup filetype and syntax. Doing these right after pathogen because
