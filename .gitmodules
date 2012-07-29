@@ -85,3 +85,6 @@
 [submodule "multi/vim/bundle/eunuch"]
 	path = multi/vim/bundle/eunuch
 	url = git@github.com:pydave/vim-eunuch.git
+[submodule "multi/vim/bundle/pathogen"]
+	path = multi/vim/bundle/pathogen
+	url = git@github.com:pydave/vim-pathogen.git
