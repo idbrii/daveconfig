@@ -99,7 +99,10 @@ set report=0					" Notify of all whole-line changes
 set visualbell					" Use visual bell (no beep)
 set linebreak					" Show wrap at word boundaries and preface wrap with >>
 set showbreak=>>
+
+""" Buffers
 "set splitbelow                  " Make preview (and all other) splits appear at the bottom
+set switchbuf=useopen       " Ignore tabs; try to stay within the current viewport
 
 """" Editing
 set nojoinspaces            " I don't use double spaces
