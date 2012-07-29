@@ -200,6 +200,11 @@ set completeopt+=longest        " Fill in the longest match
 set complete-=t
 set complete-=i
 
+" Always use forward slashes.
+if exists('+shellslash')
+    set shellslash
+endif
+
 " Vim Scratch {{{1
 
 " Scratch file for random bits
