@@ -91,3 +91,12 @@
 [submodule "multi/vim/bundle/man"]
 	path = multi/vim/bundle/man
 	url = git@github.com:pydave/vim-man.git
+[submodule "multi/vim/bundle/textobj-user"]
+	path = multi/vim/bundle/textobj-user
+	url = git://github.com/kana/vim-textobj-user.git
+[submodule "multi/vim/bundle/textobj-indent"]
+	path = multi/vim/bundle/textobj-indent
+	url = git://github.com/kana/vim-textobj-indent.git
+[submodule "multi/vim/bundle/textobj-underscore"]
+	path = multi/vim/bundle/textobj-underscore
+	url = git://github.com/kana/vim-textobj-underscore.git
