@@ -28,9 +28,9 @@ endif
 
 " Between files {{{1
 " Switch files
-nmap ^ <C-^>
-nmap <A-Left> :bp<CR>
-nmap <A-Right> :bn<CR>
+nnoremap ^ <C-^>
+nnoremap <A-Left> :bp<CR>
+nnoremap <A-Right> :bn<CR>
 
 " Ctrl+Shift+PgUp/Dn - Move between files
 nnoremap <C-S-PageDown> :next<CR>
@@ -75,23 +75,23 @@ else
 endif
 
 let g:ctrlp_map = '<A-S-o>'
-nmap <A-S-m> :CtrlPMRUFiles<CR>
+nnoremap <A-S-m> :CtrlPMRUFiles<CR>
 
 let g:ctrlp_extensions = ['funky', 'register']
-nmap <unique> <C-o>l :CtrlPLastMode<CR>
-nmap <unique> <C-o>b :CtrlPBuffer<CR>
-nmap <unique> <C-o>f :call ctrlp#init(ctrlp#funky#id())<CR>
-nmap <unique> <C-o>r :CtrlPRegister<CR>
+nnoremap <unique> <C-o>l :CtrlPLastMode<CR>
+nnoremap <unique> <C-o>b :CtrlPBuffer<CR>
+nnoremap <unique> <C-o>f :call ctrlp#init(ctrlp#funky#id())<CR>
+nnoremap <unique> <C-o>r :CtrlPRegister<CR>
 
 " Like gf but use filelist instead of path
 " You still need to type <C-\>s to populate the name.
-nmap <Leader>gf :let @/ = '\<'. expand('<cfile>:t') .'\>'<Bar> CtrlP<CR>
+"nnoremap <Leader>gf :let @/ = '\<'. expand('<cfile>:t') .'\>'<Bar> CtrlP<CR>
 
 " Open header/implementation -- gives list of files with the same name using
 " Leader first because cpp.vim has faster <A-o> (and doesn't change last
 " command)
 " You still need to type <C-\>s to populate the name.
-nmap <Leader><A-o> :let @/ = '\<'. expand('%:t:r') .'\>'<Bar> CtrlP<CR>
+nnoremap <Leader><A-o> :let @/ = '\<'. expand('%:t:r') .'\>'<Bar> CtrlP<CR>
 
 " Netrw plugin -- Navigate filesystems {{{1
 " Make \e like \be but for netrw
