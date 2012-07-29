@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--perforce-xml-version=1.0-->
+<CustomToolDefList varName="customtooldeflist">
+ <CustomToolDef>
+  <Definition>
+   <Name>p4clean</Name>
+   <Command>C:\bin\p4clean.bat</Command>
+   <Arguments>%f</Arguments>
+   <InitDir>C:\</InitDir>
+  </Definition>
+  <AddToContext>true</AddToContext>
+  <Refresh>true</Refresh>
+ </CustomToolDef>
+</CustomToolDefList>
