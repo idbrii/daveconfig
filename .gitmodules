@@ -88,3 +88,6 @@
 [submodule "multi/vim/.vim/bundle/pathogen"]
 	path = multi/vim/.vim/bundle/pathogen
 	url = git@github.com:pydave/vim-pathogen.git
+[submodule "multi/vim/.vim/bundle/man"]
+	path = multi/vim/.vim/bundle/man
+	url = git@github.com:pydave/vim-man.git
