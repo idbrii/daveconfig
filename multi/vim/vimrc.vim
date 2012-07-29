@@ -34,7 +34,7 @@ endif
 let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 
 " Default to utf-8 instead of latin1
-if $LANG == ''
+if !exists('$LANG')
     set encoding=utf-8
 endif
 
