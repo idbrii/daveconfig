@@ -100,3 +100,9 @@
 [submodule "multi/vim/bundle/textobj-underscore"]
 	path = multi/vim/bundle/textobj-underscore
 	url = git://github.com/kana/vim-textobj-underscore.git
+[submodule "multi/vim/bundle/operator-user"]
+	path = multi/vim/bundle/operator-user
+	url = git://github.com/kana/vim-operator-user.git
+[submodule "multi/vim/bundle/operator-camelize"]
+	path = multi/vim/bundle/operator-camelize
+	url = git://github.com/tyru/operator-camelize.vim.git
