@@ -36,6 +36,7 @@
     #   uses 2 sed substitutions:      ^-- change ssh to readonly     ^-- fix protocol and pull out url
     # open all urls for the current git repo
     hub = "!git hublist | while read url ; do xdg-open $url ; done"
+	subupdate = "! git submodule sync ; git submodule update --init"
 
 
 [merge]
