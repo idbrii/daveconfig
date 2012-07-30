@@ -9,6 +9,11 @@ iabbrev _company pydave
 let g:p4Presets = 'perforce:1666 pydave_client pydave'
 let g:external_diff = 'bcomp.bat'
 
+" When Perforce is slow:
+let g:p4EnableActiveStatus = 0
+let g:p4EnableRuler = 0
+
+" Enable my p4 customizations
 let g:DAVID_local_root = "c:/p4/main"
 
 " If most code has a path like: p4\game\main\packages\core\game\dev\src\
