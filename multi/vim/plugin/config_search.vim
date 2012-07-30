@@ -54,6 +54,40 @@ nmap <Leader>* :grep -e "<C-r>/" *
 map <Leader>\ :!<up><CR>
 ounmap <Leader>\
 
+
+if executable('grep')
+    " We always want grep (not findstr). Use -H so it works on a single file.
+    " (Apparently some greps may no support -H. How to fix that?)
+    let &grepprg='grep -nH'
+
+    " Generally, we don't want to look in nonsense files. If you really want
+    " these, then toggle off intelligence. Pass 1 to force smartness.
+    function! SmartGrepToggle(...)
+        let smart_options = '--binary-files=without-match'
+                    \ .' --exclude-dir=.cvs'
+                    \ .' --exclude-dir=.git'
+                    \ .' --exclude-dir=.hg'
+                    \ .' --exclude-dir=.svn'
+                    \ .' --exclude=*.swp'
+
+        " If changing GREP_OPTIONS breaks something
+        " (http://stackoverflow.com/q/11713507/79125), you could set grepprg
+        " instead, but it will be impossible to see the search query in the
+        " quickfix statusbar:
+        "let &grepprg='grep -nH ' . smart_options
+
+        let force_on = a:0 && a:1
+        if force_on || !exists('$GREP_OPTIONS')
+            let $GREP_OPTIONS = smart_options
+            return 'grep: smart'
+        else
+            let $GREP_OPTIONS = ''
+            return 'grep: basic'
+        endif
+    endfunction
+    call SmartGrepToggle(1)
+endif
+
 """""""""""
 " Functions {{{1
 
