@@ -212,7 +212,7 @@ nnoremap <F1> :sp ~/.vim-aside<CR>
 nnoremap <S-F1> :e ~/.vim-aside<CR>
 
 " Similar map for todo.
-nnoremap <A-F1> :sp ~/.todo.org<CR>
+nnoremap <Leader><F1> :sp ~/.todo.org<CR>
 
 " Building {{{1
 
