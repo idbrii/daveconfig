@@ -1,3 +1,8 @@
+if exists('loaded_python_rope') || &cp
+    finish
+endif
+let loaded_python_rope = 1
+
 let rope = '/usr/local/ropevim.vim'
 if filereadable(rope)
     exec 'source ' . rope
