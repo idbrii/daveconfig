@@ -55,7 +55,7 @@ let g:ctrlp_dotfiles = 0
 
 let g:ctrlp_regexp = 1
 let g:ctrlp_prompt_mappings = { 'PrtAdd(".*")': ['<space>'] }
-let g:ctrlp_lazy_update = 150
+let g:ctrlp_lazy_update = 100
 
 " I generate a filelist file in the root of my project that tells me where all
 " the interesting files are. That's far faster than searching.
