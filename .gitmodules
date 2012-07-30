@@ -106,3 +106,6 @@
 [submodule "multi/vim/.vim/bundle/operator-camelize"]
 	path = multi/vim/.vim/bundle/operator-camelize
 	url = git://github.com/tyru/operator-camelize.vim.git
+[submodule "multi/vim/.vim/bundle/itchy"]
+	path = multi/vim/.vim/bundle/itchy
+	url = git@github.com:pydave/itchy.vim.git
