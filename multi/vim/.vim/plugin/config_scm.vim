@@ -13,12 +13,12 @@ endif
 if executable('git')
     
     " Fugitive
-    nmap <Leader>gi :Gstatus<CR>gg<C-n>
-    nmap <Leader>gd :Gdiff<CR>
+    nnoremap <Leader>gi :Gstatus<CR>gg<C-n>
+    nnoremap <Leader>gd :Gdiff<CR>
 
     " Gitv
-    nmap <leader>gv :Gitv --all<cr>
-    nmap <leader>gV :Gitv! --all<cr>
+    nnoremap <leader>gv :Gitv --all<cr>
+    nnoremap <leader>gV :Gitv! --all<cr>
     
     command! Ghistory Gitv! --all
 
