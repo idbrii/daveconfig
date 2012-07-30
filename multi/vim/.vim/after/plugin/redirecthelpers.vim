@@ -3,9 +3,13 @@
 " Automates use of the :redir command by putting the output into a new buffer.
 " Author: pydave
 "
-" Note: Uses ftplugin/vimscratch.vim for REnd
+" Dependencies: Uses itchy plugin for REnd
 "
-if exists('g:loaded_redirecthelpers')
+
+if !exists('itchy_loaded') || exists(':Scratch') != 2
+    echoerr 'RedirectHelpers requires itchy'
+    finish
+elseif exists('g:loaded_redirecthelpers')
     finish
 endif
 let g:loaded_redirecthelpers = 1
@@ -15,7 +19,7 @@ function! <SID>What()
     redir @c
     global/
     redir END
-    new
+    silent Scratch redirect
     put! c
 endfunction
 command! What call <SID>What()
@@ -25,7 +29,7 @@ command! What call <SID>What()
 command! RStart redir @c
 function! <SID>RedirectEnd()
     redir END
-    sp ~/.redir.vimscratch
+    silent Scratch redirect
     put! c
 endfunction
 command! REnd call <SID>RedirectEnd()

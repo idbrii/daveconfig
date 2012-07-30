@@ -5,8 +5,10 @@
 if !has("diff")
     echoerr 'DiffBuff requires diff support'
     finish
-endif
-if exists('g:loaded_diffbuff')
+elseif !exists('itchy_loaded') || exists(':Scratch') != 2
+    echoerr 'DiffBuff requires itchy'
+    finish
+elseif exists('g:loaded_diffbuff')
     finish
 endif
 let g:loaded_diffbuff = 1
@@ -32,7 +34,13 @@ command! -nargs=1 -complete=file VDiffSp vert diffsplit <q-args>
 
 " Diff against the file on disk. Useful for recovery. See also :help DiffOrig
 function <SID>DiffSaved() "{{{2
-    vert split original.vimscratch
+    let old_always = g:itchy_always_split
+    let old_suffix = g:itchy_buffer_suffix
+    let g:itchy_always_split = 2
+    let g:itchy_buffer_suffix = 'Original'
+    silent Scratch .
+    let g:itchy_always_split = old_always
+    let g:itchy_buffer_suffix = old_suffix
     silent %d
     silent r #
     silent 0d_
@@ -52,7 +60,6 @@ function! MyDiffOff()
 
     " I always use syntax unless modelines say otherwise. Unfortunately,
     " modelines won't be reapplied.
-    setlocal foldmethod=syntax
     " Since the fold level changes from the diff, reset it to the start value
     exec "setlocal foldlevel=" . &foldlevelstart
 
