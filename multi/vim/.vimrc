@@ -82,8 +82,8 @@ if has("persistent_undo")
         au BufWritePre COMMIT_EDITMSG   setlocal noundofile
         au BufWritePre *.tmp            setlocal noundofile
         au BufWritePre *.bak            setlocal noundofile
-        au BufWritePre *.scratch        setlocal noundofile
-        au BufWritePre .vim-scratch     setlocal noundofile
+        au BufWritePre *.vimscratch     setlocal noundofile
+        au BufWritePre .vim-aside       setlocal noundofile
     augroup END
 endif
 
@@ -205,11 +205,15 @@ if exists('+shellslash')
     set shellslash
 endif
 
-" Vim Scratch {{{1
+" Asides {{{1
 
-" Scratch file for random bits
-nnoremap <F1> :sp ~/.vim-scratch<CR>
-nnoremap <S-F1> :e ~/.vim-scratch<CR>
+" Write Asides to yourself. (Quick access to a file for random things I want
+" to write down.)
+nnoremap <F1> :sp ~/.vim-aside<CR>
+nnoremap <S-F1> :e ~/.vim-aside<CR>
+
+" Similar map for todo.
+nnoremap <A-F1> :sp ~/.todo.org<CR>
 
 " Building {{{1
 
