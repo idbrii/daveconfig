@@ -16,15 +16,22 @@ endif
 " to see them.
 function! <SID>PrintGitStatusHelp()
     echo 'GStatus commands:'
-    echo '    a     - alternative view'
-    echo '    i     - index view'
-    echo '    D     - diff'
-    echo '    s     - un/stage'
-    echo '    p     - patch'
-    echo '    <C-N> - next file'
-    echo '    <C-P> - previous file'
-    echo '    C     - commit'
-    echo '    c     - verbose commit'
+    echo '	<C-N> - next file'
+    echo '	<C-P> - previous file'
+    echo '	<CR>  - :Gedit'
+    echo '	s     - un/stage'
+    echo '	a     - alternative view'
+    echo '	i     - index view'
+    echo '	C     - commit'
+    echo '	c     - verbose commit'
+    echo '	ca    - amend commit'
+    echo '	D     - diff'
+    echo '	O     - :Gtabedit'
+    echo '	o     - :Gsplit'
+    echo '	p     - patch'
+    echo '	q     - close status'
+    echo '	R     - reload status'
+    echo '	S     - :Gvsplit'
 endfunction
 nnoremap <buffer> <silent> <F1> :call <SID>PrintGitStatusHelp()<CR>
 
