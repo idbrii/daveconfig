@@ -14,5 +14,7 @@ setlocal foldmethod=indent
 " remove : from the keyword chars.
 setlocal iskeyword-=:
 
-" Easy source.
+" Easy source file.
 nnoremap <buffer> <Leader>vso :w<CR>:source %<CR>
+" Easy execute line.
+nnoremap <buffer> <Leader>v: 0y$:<C-r>"<CR>
