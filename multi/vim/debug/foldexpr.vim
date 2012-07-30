@@ -1,3 +1,5 @@
+" Displays fold level.
+" Useful for debugging foldexpressions.
 function! ShowLines(FoldFunction)
     let nlines = 20
     let lazyredraw = &lazyredraw
@@ -10,8 +12,7 @@ function! ShowLines(FoldFunction)
 
     normal gg
     set scrollbind
-    vsplit numbers
-    set ft=vimscratch
+    silent Scratch numbers
     normal ggdG
     put c
     normal ggdd
