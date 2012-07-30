@@ -45,7 +45,7 @@ if /bin/grep --help | /bin/grep -- --exclude-dir &>/dev/null; then
         SMART_GREP_OPTIONS="$SMART_GREP_OPTIONS --exclude=$PATTERN"
     done
 fi
-# export SMART_GREP_OPTIONS
+# This alias may override ghostscript. That's not a problem for me.
 alias gs='grep $SMART_GREP_OPTIONS'
 
 # windows work-alike
