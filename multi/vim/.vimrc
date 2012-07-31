@@ -456,6 +456,16 @@ let g:calendar_no_mappings = 1
 let g:itchy_always_split = 1
 "issue #1: let g:itchy_startup = 1
 
+" Golden-ratio
+" Don't resize automatically.
+let g:golden_ratio_autocommand = 0
+
+" Mnemonic: - is next to = and golden ratio also resizes all windows so I can
+" see).
+nmap <C-w>- <Plug>(golden_ratio_resize)
+" Fill screen with current window.
+nnoremap <C-w>+ <C-w>\|<C-w>_
+
 "}}}
 
 
