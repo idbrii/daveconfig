@@ -1,2 +1,0 @@
-[alias]
-	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/.vim/bundle/$2; };f"

@@ -1,0 +1,8 @@
+# These are settings useful in this repository. Add them to your clone's
+# config. (The .git/config file cannot be shared within the repository, so it's
+# up to the cloner to get it.)
+
+[alias]
+	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/.vim/bundle/$2; };f"
+
+# vi: set ft=gitconfig :
