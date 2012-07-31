@@ -106,3 +106,6 @@
 [submodule "multi/vim/bundle/itchy"]
 	path = multi/vim/bundle/itchy
 	url = git@github.com:pydave/itchy.vim.git
+[submodule "multi/vim/bundle/golden-ratio"]
+	path = multi/vim/bundle/golden-ratio
+	url = git://github.com/roman/golden-ratio.git
