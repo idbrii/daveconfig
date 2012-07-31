@@ -99,7 +99,9 @@ DIR=~/data/settings/daveconfig/unix/terminal
 #################
 # Location-specific section
 
-source $DIR/local.bash_aliases
+if [ -f $DIR/local.bash_aliases ]; then
+    source $DIR/local.bash_aliases
+fi
 
 #################
 # Platform-specific section
