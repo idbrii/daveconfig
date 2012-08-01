@@ -109,3 +109,6 @@
 [submodule "multi/vim/bundle/golden-ratio"]
 	path = multi/vim/bundle/golden-ratio
 	url = git://github.com/roman/golden-ratio.git
+[submodule "multi/vim/bundle/powerline"]
+	path = multi/vim/bundle/powerline
+	url = git://github.com/Lokaltog/vim-powerline.git
