@@ -466,6 +466,13 @@ nmap <C-w>- <Plug>(golden_ratio_resize)
 " Fill screen with current window.
 nnoremap <C-w>+ <C-w>\|<C-w>_
 
+" Powerline
+" Don't want to need patched fonts everywhere.
+let Powerline_symbols = 'compatible'
+" Use my theme
+let Powerline_colorscheme = 'sanity'
+
+
 "}}}
 
 

@@ -112,3 +112,6 @@
 [submodule "multi/vim/bundle/powerline"]
 	path = multi/vim/bundle/powerline
 	url = git://github.com/Lokaltog/vim-powerline.git
+[submodule "multi/vim/bundle/powerline-sanity"]
+	path = multi/vim/bundle/powerline-sanity
+	url = git@github.com:pydave/powerline-sanity.git
