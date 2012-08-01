@@ -3,6 +3,6 @@
 # up to the cloner to get it.)
 
 [alias]
-	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/.vim/bundle/$2; };f"
+	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/.vim/bundle/$2 ; };f"
 
 # vi: set ft=gitconfig :
