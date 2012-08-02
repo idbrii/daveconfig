@@ -469,8 +469,13 @@ nnoremap <C-w>+ <C-w>\|<C-w>_
 " Powerline
 " Don't want to need patched fonts everywhere.
 let Powerline_symbols = 'compatible'
+let Powerline_stl_path_style = 'relative'
 " Use my theme
 let Powerline_colorscheme = 'sanity'
+
+let g:Powerline#Segments#ctrlp#segments#focus = ''
+let g:Powerline#Segments#ctrlp#segments#prev = ''
+let g:Powerline#Segments#ctrlp#segments#next = ''
 
 
 "}}}

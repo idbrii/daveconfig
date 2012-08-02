@@ -111,7 +111,7 @@
 	url = git://github.com/roman/golden-ratio.git
 [submodule "multi/vim/.vim/bundle/powerline"]
 	path = multi/vim/.vim/bundle/powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
+	url = git@github.com:pydave/vim-powerline.git
 [submodule "multi/vim/.vim/bundle/powerline-sanity"]
 	path = multi/vim/.vim/bundle/powerline-sanity
 	url = git@github.com:pydave/powerline-sanity.git
