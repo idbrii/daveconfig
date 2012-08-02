@@ -63,3 +63,7 @@
 	cmd = difftool.beyond.git.sh $LOCAL $REMOTE $BASE
 [mergetool "beyond"]
 	cmd = mergetool.beyond.git.sh $LOCAL $REMOTE $BASE $MERGED
+[difftool "gvim"]
+	cmd = difftool.gvim.git.sh $LOCAL $REMOTE $BASE
+[mergetool "gvim"]
+	cmd = mergetool.gvim.git.sh $LOCAL $REMOTE $BASE $MERGED
