@@ -7,7 +7,7 @@
 " Author:   DBriscoe
 " Based on Stepan Koltsov's create-scala
 
-function! MakeJavaFile()
+function! skeletons#java#create()
     if exists("b:template_used") && b:template_used
         return
     endif
@@ -58,9 +58,6 @@ function! MakeJavaFile()
 
     " clear the first (blank) line and position the cursor at the ctor
     normal ggdd7jw
-    
 endfunction
-
-au BufNewFile *.java call MakeJavaFile()
 
 " vim: set ts=4 sw=4 et:

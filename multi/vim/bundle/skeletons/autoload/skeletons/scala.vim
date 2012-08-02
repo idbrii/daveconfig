@@ -8,7 +8,7 @@
 " Revision   : 17312
 "        https://lampsvn.epfl.ch/trac/scala/export/18603/scala-tool-support/trunk/src/vim/plugin/31-create-scala.vim
 
-function! MakeScalaFile()
+function! skeletons#scala#create()
     if exists("b:template_used") && b:template_used
         return
     endif
@@ -41,17 +41,15 @@ function! MakeScalaFile()
         call append("0", "package " . p)
     endif
     
-    "norm G
-    "call append(".", "class " . class . " {")
+    norm G
+    call append(".", "class " . class . " {")
     
-    "norm G
+    norm G
     "call append(".", "} /// end of " . class)
+    call append(".", "}")
     
     call append(".", "// vim: set ts=4 sw=4 et:")
     call append(".", "")
-    
 endfunction
-
-au BufNewFile *.scala call MakeScalaFile()
 
 " vim: set ts=4 sw=4 et:
