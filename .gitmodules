@@ -115,3 +115,6 @@
 [submodule "multi/vim/.vim/bundle/powerline-sanity"]
 	path = multi/vim/.vim/bundle/powerline-sanity
 	url = git@github.com:pydave/powerline-sanity.git
+[submodule "multi/vim/.vim/bundle/TailMinusF"]
+	path = multi/vim/.vim/bundle/TailMinusF
+	url = git://github.com/matsuu/TailMinusF.git
