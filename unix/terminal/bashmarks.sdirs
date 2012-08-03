@@ -1,5 +1,6 @@
 export DIR_dave="$HOME/data/settings/daveconfig"
 export DIR_and="$HOME/data/code/android"
 export DIR_vim="$HOME/data/settings/daveconfig/multi/vim/.vim"
+export DIR_bun="$HOME/data/settings/daveconfig/multi/vim/.vim/bundle"
 export DIR_bundle="$HOME/data/settings/daveconfig/multi/vim/.vim/bundle"
 export DIR_code="$HOME/data/code"
