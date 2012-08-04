@@ -1,6 +1,9 @@
 " Windows-style clipboard
+" + is the clipboard and * is the selection buffer. See 'clipboard'
+" Alt switches to use the selection.
 xmap <C-c> "+y
 nnoremap <C-v> "+p
+nnoremap <A-v> "*p
 
 " Make Y work like D and C
 nmap Y y$
@@ -8,6 +11,8 @@ nmap Y y$
 " Shift-Insert to paste (especially useful in insert)
 inoremap <S-Insert> <C-r>+
 cnoremap <S-Insert> <C-r>+
+inoremap <A-Insert> <C-r>*
+cnoremap <A-Insert> <C-r>*
 
 " Paste last yanked item
 noremap <Leader>p "0p
@@ -17,7 +22,7 @@ noremap <Leader>P "0P
 " Argument: ("%") or ("%:p")
 function! CopyFilenameToClipboard(filename)
     " TODO: Probably only need to set specific registers on different
-    " platforms.
+    " platforms. Setting both lets me paste into terminals with middle mouse.
     let @*=expand(a:filename)
     let @+=@*
 endfunction
