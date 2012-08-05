@@ -17,6 +17,8 @@ if [ ! -d $OTHER_HOME ] ; then
     export OTHER_HOME=/media/munge$HOME
 fi
 
+export PATH=$PATH:~/data/apps/bin
+
 
 ## Commands {{{1
 # if the command-not-found package is installed, use it
