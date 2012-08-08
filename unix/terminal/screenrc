@@ -21,3 +21,5 @@ caption always "%{= kw}%-w%{+b kg}%n %t%{-}%+w %-="
 #string (in this case, '> '). The name part, specifies the default shell name
 #for the window
 shelltitle 'first'
+
+msgwait 1
