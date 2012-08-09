@@ -464,6 +464,7 @@ nnoremap <C-w>+ <C-w>\|<C-w>_
 let Powerline_symbols = 'compatible'
 let Powerline_stl_path_style = 'relative'
 " Use my theme
+let Powerline_theme = 'sanity'
 let Powerline_colorscheme = 'sanity'
 
 let g:Powerline#Segments#ctrlp#segments#focus = ''
