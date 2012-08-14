@@ -118,3 +118,6 @@
 [submodule "multi/vim/bundle/TailMinusF"]
 	path = multi/vim/bundle/TailMinusF
 	url = git://github.com/matsuu/TailMinusF.git
+[submodule "multi/vim/bundle/notgrep"]
+	path = multi/vim/bundle/notgrep
+	url = git@github.com:pydave/vim-notgrep.git
