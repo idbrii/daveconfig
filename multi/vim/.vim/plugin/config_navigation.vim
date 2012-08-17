@@ -47,6 +47,17 @@ nnoremap <C-PageUp> :cprev<CR>
 nnoremap <A-PageDown> :lnext<CR>
 nnoremap <A-PageUp> :lprev<CR>
 
+" Quickly launch input data
+if has("win32")
+    command! -nargs=1 Gogo ! start <args>
+elseif has("macunix")
+    " TODO: Does this work as expected? Does it need q-quoting?
+    command! -nargs=1 Gogo ! open <args>
+elseif has("unix")
+    " TODO: Does this work as expected? Does it need q-quoting?
+    command! -nargs=1 Gogo ! xdg-open <args>
+endif
+
 " CtrlP plugin -- fuzzy file finder {{{1
 let g:ctrlp_use_caching = 1
 let g:ctrlp_max_depth = 32
