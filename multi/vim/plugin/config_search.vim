@@ -86,6 +86,10 @@ if executable('grep')
         endif
     endfunction
     call SmartGrepToggle(1)
+else
+    " If grep isn't installed, then use vimgrep instead of falling back on 
+    " findstr or other nonsense!
+    set grepprg=internal
 endif
 
 """""""""""
