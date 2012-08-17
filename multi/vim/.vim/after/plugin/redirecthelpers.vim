@@ -14,23 +14,33 @@ elseif exists('g:loaded_redirecthelpers')
 endif
 let g:loaded_redirecthelpers = 1
 
-"" Puts the last g search command in a new buffer -- clobbers your c buffer
+"" Puts the last g search command in a new buffer
 function! <SID>What()
+	let s:c_save = @c
     redir @c
     global/
     redir END
     silent Scratch redirect
     put! c
+	let @c = s:c_save
 endfunction
 command! What call <SID>What()
 
 "" Puts whatever is in between RStart and REnd in a new buffer
-"" You can use ctag/cscope output, g searches, whatever! -- clobbers your c buffer
-command! RStart redir @c
+"" You can use ctag/cscope output, g searches, whatever!
+function! <SID>RedirectStart()
+	let s:c_save = @c
+	let s:more_save = &more
+	set nomore
+	redir @c
+endfunction
+command! RStart call <SID>RedirectStart()
 function! <SID>RedirectEnd()
     redir END
     silent Scratch redirect
     put! c
+	let @c = s:c_save
+	let &more = s:more_save
 endfunction
 command! REnd call <SID>RedirectEnd()
 
