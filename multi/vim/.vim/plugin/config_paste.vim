@@ -8,10 +8,11 @@ nnoremap <A-v> "*p
 " Make Y work like D and C
 nmap Y y$
 
-" Shift-Insert to paste (especially useful in insert)
-inoremap <S-Insert> <C-r>+
+" Shift-Insert to paste (especially useful in insert). Breaks undo before
+" insert paste.
+inoremap <S-Insert> <C-g>u<C-r>+
 cnoremap <S-Insert> <C-r>+
-inoremap <A-Insert> <C-r>*
+inoremap <A-Insert> <C-g>u<C-r>*
 cnoremap <A-Insert> <C-r>*
 
 " Paste last yanked item
