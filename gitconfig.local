@@ -4,5 +4,6 @@
 
 [alias]
 	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/.vim/bundle/$2 ; };f"
+	pullmasterrebase = "!f(){ [ $# -eq 1 ] && git checkout master && git pull --rebase github master && git checkout $1 && git rebase master ; };f"
 
 # vi: set ft=gitconfig :
