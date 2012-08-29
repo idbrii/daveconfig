@@ -17,10 +17,10 @@ xmap gs :sm/
 " <C-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-" * and # search for next/previous of selected text when used in visual mode
-xnoremap g* y/<C-R>"<CR>
-xnoremap g# y?<C-R>"<CR>
-
+" * and # search for next/previous of selected text when used in visual mode.
+" Add leading \V to prevent magic and escape /
+xnoremap g* y/\V<C-R>=substitute(@", '/', '\\/', 'g')<CR><CR>
+xnoremap g# y?\V<C-R>=substitute(@", '/', '\\/', 'g')<CR><CR>
 
 " Quick fix slashes
 "	win -> unix
