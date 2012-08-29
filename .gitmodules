@@ -124,3 +124,6 @@
 [submodule "multi/vim/bundle/notgrep"]
 	path = multi/vim/bundle/notgrep
 	url = git@github.com:pydave/vim-notgrep.git
+[submodule "multi/vim/bundle/LargeFile"]
+	path = multi/vim/bundle/LargeFile
+	url = git://github.com/vim-scripts/LargeFile.git
