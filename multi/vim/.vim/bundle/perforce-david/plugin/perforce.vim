@@ -18,7 +18,7 @@ command PDiffExternal silent call P4DiffInExternalTool()
 
 function s:PGDiff()
 	PPrint
-	vsplit #
+	wincmd H
 	DiffBoth
 endfunction
 command PGDiff silent call <SID>PGDiff()
