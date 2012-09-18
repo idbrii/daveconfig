@@ -1,9 +1,21 @@
-function! P4CheckoutFilesInGitCommit()
-	if !executable('p4')
-		echoerr 'p4 is not available'
-		return
-	endif
+function! s:P4Checkout(root, path)
+	let fname = fnamemodify(a:root .'/'. a:path, ':p')
+	let fname = fnameescape(fname)
 
+	if exists('g:loaded_perforce')
+		exec 'PEdit ' . fname
+		" PEdit opens a new buffer, so switch back to the gitcommit buffer.
+		wincmd p
+	else
+		if executable('p4')
+			exec '!p4 edit ' . fname
+		else
+			echoerr 'p4 is not available'
+		endif
+	endif
+endfunction
+
+function! P4CheckoutFilesInGitCommit()
     let line = getline('.')
     let line = substitute(line, '^#\s*\w*:\s*', '', '')
 
@@ -15,17 +27,10 @@ function! P4CheckoutFilesInGitCommit()
     endif
     let root = fnamemodify(root, ':h')
 
-    let fname = root .'/'. line
-
-	exec '!p4 edit ' . fnameescape(fname)
+	call s:P4Checkout(root, line)
 endfunction
 
 function! P4CheckoutFilesInGitDiff()
-	if !executable('p4')
-		echoerr 'p4 is not available'
-		return
-	endif
-
     let bareline = getline('.')
     let line = substitute(bareline, '^diff.*\sb/', '', '')
 	if len(bareline) == len(line)
@@ -35,7 +40,6 @@ function! P4CheckoutFilesInGitDiff()
 
     " Search for the git directory and find its parent
     let root = '//depot'
-    let fname = root .'/'. line
 
-	exec '!p4 edit ' . fname
+	call s:P4Checkout(root, line)
 endfunction
