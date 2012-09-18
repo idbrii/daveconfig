@@ -18,9 +18,9 @@ xmap gs :sm/
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " * and # search for next/previous of selected text when used in visual mode.
-" Add leading \V to prevent magic and escape /
-xnoremap g* y/\V<C-R>=substitute(@", '/', '\\/', 'g')<CR><CR>
-xnoremap g# y?\V<C-R>=substitute(@", '/', '\\/', 'g')<CR><CR>
+" Add leading \V to prevent magic and escape / and \
+xnoremap g* y/\V<C-R>=escape(@", '/\')<CR><CR>
+xnoremap g# y?\V<C-R>=escape(@", '/\')<CR><CR>
 
 " Quick fix slashes
 "	win -> unix
