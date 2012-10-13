@@ -78,7 +78,7 @@
 	url = git://github.com/chrisbra/NrrwRgn.git
 [submodule "multi/vim/bundle/VimOrganizer"]
 	path = multi/vim/bundle/VimOrganizer
-	url = git://github.com/hsitz/VimOrganizer.git
+	url = git@github.com:pydave/VimOrganizer.git
 [submodule "multi/vim/bundle/calendar"]
 	path = multi/vim/bundle/calendar
 	url = git@github.com:pydave/calendar-vim.git
@@ -120,7 +120,7 @@
 	url = git@github.com:pydave/powerline-sanity.git
 [submodule "multi/vim/bundle/TailMinusF"]
 	path = multi/vim/bundle/TailMinusF
-	url = git://github.com/matsuu/TailMinusF.git
+	url = git@github.com:pydave/TailMinusF.git
 [submodule "multi/vim/bundle/notgrep"]
 	path = multi/vim/bundle/notgrep
 	url = git@github.com:pydave/vim-notgrep.git
