@@ -19,6 +19,10 @@ if !exists("s:vshelp_devenv")
 endif
 
 function s:OpenInVisualStudio()
-	exec 'silent ! ' . s:vshelp_devenv . ' ' . fnameescape(expand('%:p')) . ' ' . line('.')
+	let prefix = 'silent ! '
+	if exists('g:loaded_asynccommand')
+		let prefix = 'AsyncCommand '
+	endif
+	exec prefix . s:vshelp_devenv . ' ' . fnameescape(expand('%:p')) . ' ' . line('.')
 endfunction
 command VSOpen call s:OpenInVisualStudio()
