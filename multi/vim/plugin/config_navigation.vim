@@ -73,7 +73,7 @@ let g:ctrlp_use_caching = 1
 let g:ctrlp_max_depth = 32
 let g:ctrlp_by_filename = 1
 let g:ctrlp_dotfiles = 0
-let g:ctrlp_mruf_max = 300
+let g:ctrlp_max_height = &lines / 2
 
 let g:ctrlp_regexp = 1
 let g:ctrlp_prompt_mappings = { 'PrtAdd(".*")': ['<space>'] }
