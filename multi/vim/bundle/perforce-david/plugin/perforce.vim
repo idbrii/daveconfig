@@ -21,6 +21,32 @@ function P4DiffInExternalTool()
 endfunction
 command PDiffExternal silent call P4DiffInExternalTool()
 
+" TODO: Support arbitrary revisions?
+function! s:PAnnotate()
+	if exists("g:p4SplitCommand")
+		let p4SplitCommand_bak = g:p4SplitCommand
+	endif
+
+	let g:p4SplitCommand = 'vsplit'
+	" -q for no header, so the lines match up.
+	PF annotate -q %
+
+	" Shrink to be an adjacent window. (So we can look in the
+	" syntax-highlighted one instead.)
+	setlocal nowrap
+	vertical resize 20
+	setlocal scrollbind
+	wincmd p
+	setlocal scrollbind
+	syncbind
+	" TODO: Should remove scrollbind when closed.
+
+	if exists("p4SplitCommand_bak")
+		let g:p4SplitCommand = p4SplitCommand_bak
+	endif
+endfunction
+command PAnnotate call s:PAnnotate()
+
 function s:PGDiff()
 	PPrint
 	wincmd H
