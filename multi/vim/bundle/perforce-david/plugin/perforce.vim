@@ -2,10 +2,15 @@
 
 " Open a history window for the current file
 " Will probably show an open connection dialog
-function P4VFileHistory()
+function s:P4VFileHistory()
     !start p4v -win 0 -cmd "history %:p"
 endfunction
-command PVHistory call P4VFileHistory()
+command PVHistory call s:P4VFileHistory()
+
+function s:P4VTimeLapse()
+    !start p4v -win 0 -cmd "annotate -i %:p"
+endfunction
+command PVTimeLapse call s:P4VTimeLapse()
 
 " PChanges doesn't default to current file -- so add another option
 command PChangesThisFile call perforce#PFIF(0, 0, 'changes', "%:p")
@@ -45,6 +50,8 @@ function! SetupPerforce()
 	" Perforce shortcuts
 	nnoremap <Leader>fi :PChange<CR>
 	nnoremap <Leader>fd :PGDiff<CR>
+	nnoremap <Leader>fv :exec 'PChanges -u '. $USERNAME<CR>
+	nnoremap <Leader>fV :PChangesThisFile<CR>
 endfunction
 
 if exists('g:DAVID_local_root') && executable('p4')
