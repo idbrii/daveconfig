@@ -52,6 +52,8 @@ function! SetupPerforce()
 	nnoremap <Leader>fd :PGDiff<CR>
 	nnoremap <Leader>fv :exec 'PChanges -u '. $USERNAME<CR>
 	nnoremap <Leader>fV :PChangesThisFile<CR>
+
+	delcommand PChange
 endfunction
 
 if exists('g:DAVID_local_root') && executable('p4')
