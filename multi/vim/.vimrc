@@ -477,8 +477,11 @@ let g:notgrep_no_mappings = 1
 " VimOrg
 let g:org_enable_menu = 0
 
+" Operators
+map <Leader>` <Plug>(operator-camelize-toggle)
 
 "}}}
+
 
 
 " =-=-=-=-=-=
