@@ -4,7 +4,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -27,7 +27,18 @@ if !exists('g:EclimTodoSearchPattern')
 endif
 
 if !exists('g:EclimTodoSearchExtensions')
-  let g:EclimTodoSearchExtensions = ['java', 'py', 'php', 'jsp', 'xml', 'html']
+  let g:EclimTodoSearchExtensions = [
+      \ 'css',
+      \ 'html',
+      \ 'java',
+      \ 'js',
+      \ 'jsp',
+      \ 'php',
+      \ 'py',
+      \ 'rb',
+      \ 'sql',
+      \ 'xml',
+    \ ]
 endif
 
 if !exists('g:EclimProjectStatusLine')
@@ -47,6 +58,7 @@ let s:command_move = '-command project_move -p "<project>" -d "<dir>"'
 let s:command_refresh = '-command project_refresh -p "<project>"'
 let s:command_refresh_file =
   \ '-command project_refresh_file -p "<project>" -f "<file>"'
+let s:command_build = '-command project_build -p "<project>"'
 let s:command_projects = '-command projects'
 let s:command_project_list = '-command project_list'
 let s:command_project_by_resource = '-command project_by_resource -f "<file>"'
@@ -121,17 +133,12 @@ function! eclim#project#util#ProjectCreate(args)
   endif
 
   " execute any pre-project creation hooks
-  for nature in natureIds
-    exec 'runtime autoload/eclim/' . nature . '/project.vim'
-    try
-      let l:ProjectPre = function('eclim#' . nature . '#project#ProjectCreatePre')
-      if !l:ProjectPre(folder)
-        return
-      endif
-    catch /E\(117\|700\):.*/
-      " ignore
-    endtry
-  endfor
+  let hook_result = s:ProjectNatureHooks(natureIds, 'ProjectCreatePre', [folder])
+  if type(hook_result) == g:NUMBER_TYPE && !hook_result
+    return
+  elseif type(hook_result) == g:STRING_TYPE && len(hook_result)
+    let command .= ' -a ' . hook_result
+  endif
 
   let port = eclim#client#nailgun#GetNgPort(workspace)
   let result = eclim#ExecuteEclim(command, port)
@@ -141,14 +148,39 @@ function! eclim#project#util#ProjectCreate(args)
   endif
 
   " execute any post-project creation hooks
-  for nature in natureIds
+  call s:ProjectNatureHooks(natureIds, 'ProjectCreatePost', [folder])
+endfunction " }}}
+
+function! s:ProjectNatureHooks(natureIds, hookName, args) " {{{
+  let results = ''
+  for nature in a:natureIds
+    if nature == 'none'
+      continue
+    endif
+
+    exec 'runtime autoload/eclim/' . nature . '/project.vim'
     try
-      let l:ProjectPost = function('eclim#' . nature . '#project#ProjectCreatePost')
-      call l:ProjectPost(folder)
+      let l:Hook = function('eclim#' . nature . '#project#' . a:hookName)
+      let result = call(l:Hook, a:args)
+      if type(result) == g:NUMBER_TYPE && !result
+        return result
+      endif
+      if type(result) == g:STRING_TYPE
+        if len(results)
+          let results .= ' '
+        endif
+        let results .= result
+      endif
     catch /E\(117\|700\):.*/
       " ignore
     endtry
   endfor
+
+  if len(results)
+    return results
+  endif
+
+  return 1
 endfunction " }}}
 
 " ProjectImport(arg) {{{
@@ -161,6 +193,27 @@ function! eclim#project#util#ProjectImport(arg)
   endif
   let command = substitute(s:command_import, '<folder>', folder, '')
 
+  let naturesDict = {}
+  for [key, value] in items(eclim#project#util#GetNatureAliasesDict())
+    let naturesDict[value[-1]] = key
+  endfor
+
+  let natureIds = []
+  let dotproject = folder . '/' . '.project'
+  if filereadable(dotproject)
+    for line in readfile(dotproject)
+      if line =~ '^\s*<nature>'
+        let id = substitute(line, '.*\<nature>\(.*\)</nature>.*', '\1', '')
+        if has_key(naturesDict, id)
+          call add(natureIds, naturesDict[id])
+        endif
+      endif
+    endfor
+    if !s:ProjectNatureHooks(natureIds, 'ProjectImportPre', [folder])
+      return
+    endif
+  endif
+
   let workspace = eclim#eclipse#ChooseWorkspace(folder)
   if workspace == '0'
     return
@@ -169,6 +222,11 @@ function! eclim#project#util#ProjectImport(arg)
 
   let result = eclim#ExecuteEclim(command, port)
   if result != '0'
+    let project = eclim#project#util#GetProject(folder)
+    if !len(natureIds)
+      let natureIds = eclim#project#util#GetProjectNatureAliases(project)
+    endif
+    call s:ProjectNatureHooks(natureIds, 'ProjectImportPost', [project])
     call eclim#util#Echo(result)
     call eclim#project#util#ClearProjectsCache()
   endif
@@ -253,8 +311,7 @@ function! eclim#project#util#ProjectMove(args)
   endif
 endfunction " }}}
 
-" s:ProjectMove(oldname, newname, command) {{{
-function! s:ProjectMove(oldname, newname, command)
+function! s:ProjectMove(oldname, newname, command) " {{{
   let cwd = substitute(getcwd(), '\', '/', 'g')
   let cwd_return = 1
   let oldpath = eclim#project#util#GetProjectRoot(a:oldname)
@@ -372,6 +429,26 @@ function! eclim#project#util#ProjectRefresh(args, ...)
   endif
 endfunction " }}}
 
+" ProjectBuild([project]) {{{
+" Build the current or requested project.
+function! eclim#project#util#ProjectBuild(...)
+  let project = a:0 > 0 ? a:1 : ''
+
+  if project == ''
+    if !eclim#project#util#IsCurrentFileInProject()
+      return
+    endif
+    let project = eclim#project#util#GetCurrentProjectName()
+  endif
+
+  call eclim#util#Echo("Building project '" . project . "'...")
+  let command = substitute(s:command_build, '<project>', project, '')
+  let port = eclim#project#util#GetProjectPort(project)
+  let result = eclim#ExecuteEclim(command, port)
+  call eclim#project#problems#ProblemsUpdate('build')
+  call eclim#util#Echo(result)
+endfunction " }}}
+
 " ProjectInfo(project) {{{
 " Echos info for the current or supplied project.
 function! eclim#project#util#ProjectInfo(project)
@@ -387,7 +464,23 @@ function! eclim#project#util#ProjectInfo(project)
   let command = substitute(s:command_project_info, '<project>', project, '')
   let port = eclim#project#util#GetProjectPort(project)
   let result = eclim#ExecuteEclim(command, port)
-  if result != '0'
+  if type(result) == g:DICT_TYPE
+    let output =
+        \ 'Name:      ' . result.name . "\n" .
+        \ 'Path:      ' . result.path . "\n" .
+        \ 'Workspace: ' . result.workspace . "\n" .
+        \ 'Open:      ' . (result.open ? 'true' : 'false')
+    if has_key(result, 'natures')
+      let output .= "\n" . 'Natures:   ' . join(result.natures, ', ')
+    endif
+    if has_key(result, 'depends')
+      let output .= "\n" . 'Depends On: ' . join(result.depends, ', ')
+    endif
+    if has_key(result, 'referenced')
+      let output .= "\n" . 'Referenced By: ' . join(result.referenced, ', ')
+    endif
+    call eclim#util#Echo(output)
+  elseif type(result) == g:STRING_TYPE
     call eclim#util#Echo(result)
   endif
 endfunction " }}}
@@ -469,14 +562,28 @@ function! eclim#project#util#ProjectList(workspace)
   endif
 
   let port = eclim#client#nailgun#GetNgPort(workspace)
-  let projects = split(eclim#ExecuteEclim(s:command_project_list, port), '\n')
+  let projects = eclim#ExecuteEclim(s:command_project_list, port)
   if len(projects) == 0
     call eclim#util#Echo("No projects.")
   endif
-  if len(projects) == 1 && projects[0] == '0'
+  if type(projects) != g:LIST_TYPE
     return
   endif
-  call eclim#util#Echo(join(projects, "\n"))
+
+  let pad = 0
+  for project in projects
+    let pad = len(project.name) > pad ? len(project.name) : pad
+  endfor
+
+  let output = []
+  for project in projects
+    call add(output,
+      \ eclim#util#Pad(project.name, pad) . ' - ' .
+      \ (project.open ? ' open ' : 'closed') . ' - ' .
+      \ project.path)
+  endfor
+
+  call eclim#util#Echo(join(output, "\n"))
 endfunction " }}}
 
 " ProjectNatures(project) {{{
@@ -486,13 +593,16 @@ function! eclim#project#util#ProjectNatures(project)
   if a:project != ''
     let command .= ' -p "' . a:project . '"'
     let port = eclim#project#util#GetProjectPort(a:project)
-    let projects = split(eclim#ExecuteEclim(command, port), '\n')
+    let projects = eclim#ExecuteEclim(command, port)
+    if type(projects) != g:LIST_TYPE
+      return
+    endif
   else
     let projects = []
     for workspace in eclim#eclipse#GetAllWorkspaceDirs()
       let port = eclim#client#nailgun#GetNgPort(workspace)
-      let results = split(eclim#ExecuteEclim(command, port), '\n')
-      if len(results) == 1 && results[0] == '0'
+      let results = eclim#ExecuteEclim(command, port)
+      if type(results) != g:LIST_TYPE
         continue
       endif
       let projects += results
@@ -502,11 +612,18 @@ function! eclim#project#util#ProjectNatures(project)
   if len(projects) == 0
     call eclim#util#Echo("No projects.")
   endif
-  if len(projects) == 1 && projects[0] == '0'
-    return
-  endif
 
-  call eclim#util#Echo(join(projects, "\n"))
+  let pad = 0
+  for project in projects
+    let pad = len(project.name) > pad ? len(project.name) : pad
+  endfor
+
+  let output = []
+  for project in projects
+    call add(output,
+      \ eclim#util#Pad(project.name, pad) . ' - ' . join(project.natures, ', '))
+  endfor
+  call eclim#util#Echo(join(output, "\n"))
 endfunction " }}}
 
 " ProjectNatureModify(command, args) {{{
@@ -515,14 +632,26 @@ function! eclim#project#util#ProjectNatureModify(command, args)
   let args = eclim#util#ParseCmdLine(a:args)
 
   let project = args[0]
-  let natures = join(args[1:], ',')
+  let natures = args[1:]
   let command = a:command == 'add' ? s:command_nature_add : s:command_nature_remove
   let command = substitute(command, '<project>', project, '')
-  let command = substitute(command, '<natures>', natures, '')
+  let command = substitute(command, '<natures>', join(natures, ','), '')
+
+  if a:command == 'add'
+    let hook_result = s:ProjectNatureHooks(natures, 'ProjectNatureAddPre', [project])
+    if type(hook_result) == g:NUMBER_TYPE && !hook_result
+      return
+    elseif type(hook_result) == g:STRING_TYPE && len(hook_result)
+      let command .= ' -a ' . hook_result
+    endif
+  endif
 
   let port = eclim#project#util#GetProjectPort(project)
   let result = eclim#ExecuteEclim(command, port)
   if result != '0'
+    if a:command == 'add'
+      call s:ProjectNatureHooks(natures, 'ProjectNatureAddPost', [project])
+    endif
     call eclim#util#Echo(result)
   endif
 endfunction " }}}
@@ -541,22 +670,45 @@ function! eclim#project#util#ProjectSettings(project)
 
   let command = substitute(s:command_project_settings, '<project>', project, '')
   let port = eclim#project#util#GetProjectPort(project)
-  if eclim#util#TempWindowCommand(command, project . "_settings", port)
-    exec "lcd " . escape(eclim#project#util#GetProjectRoot(project), ' ')
-    setlocal buftype=acwrite
-    setlocal filetype=jproperties
-    setlocal noreadonly
-    setlocal modifiable
-    setlocal foldmethod=marker
-    setlocal foldmarker={,}
-    setlocal foldlevel=0
 
-    let b:project = project
-    augroup project_settings
-      autocmd! BufWriteCmd <buffer>
-      autocmd BufWriteCmd <buffer> call <SID>SaveSettings()
-    augroup END
+  let settings = eclim#ExecuteEclim(command, port)
+  if type(settings) != g:LIST_TYPE
+    return
   endif
+
+  let content = ['# Settings for project: eclim', '']
+  let path = ''
+  for setting in settings
+    if setting.path != path
+      if path != ''
+        let content += ['# }', '']
+      endif
+      let path = setting.path
+      call add(content, '# ' . path . ' {')
+    endif
+    let description = split(setting.description, '\n')
+    let content += map(description, "'\t# ' . v:val")
+    call add(content, "\t" . setting.name . '=' . setting.value)
+  endfor
+  if path != ''
+    call add(content, '# }')
+  endif
+
+  call eclim#util#TempWindow(project . "_settings", content)
+  exec "lcd " . escape(eclim#project#util#GetProjectRoot(project), ' ')
+  setlocal buftype=acwrite
+  setlocal filetype=jproperties
+  setlocal noreadonly
+  setlocal modifiable
+  setlocal foldmethod=marker
+  setlocal foldmarker={,}
+  setlocal foldlevel=0
+
+  let b:project = project
+  augroup project_settings
+    autocmd! BufWriteCmd <buffer>
+    autocmd BufWriteCmd <buffer> call <SID>SaveSettings()
+  augroup END
 endfunction " }}}
 
 " ProjectUpdate() {{{
@@ -572,9 +724,9 @@ function! eclim#project#util#ProjectUpdate()
   let command = substitute(s:command_project_update, '<project>', name, '')
 
   let result = eclim#ExecuteEclim(command)
-  if result =~ '|'
+  if type(result) == g:LIST_TYPE && len(result) > 0
     let errors = eclim#util#ParseLocationEntries(
-      \ split(result, '\n'), g:EclimValidateSortResults)
+      \ result, g:EclimValidateSortResults)
     call eclim#util#SetLocationList(errors)
   else
     call eclim#util#ClearLocationList()
@@ -582,83 +734,96 @@ function! eclim#project#util#ProjectUpdate()
   endif
 endfunction " }}}
 
-" ProjectGrep(command, args) {{{
-" Executes the supplied vim grep command with the specified pattern against
-" one or more file patterns.
-function! eclim#project#util#ProjectGrep(command, args)
+function! eclim#project#util#ProjectGrep(command, args) " {{{
+  " Executes the supplied vim grep command with the specified pattern against
+  " one or more file patterns.
+
   if !eclim#project#util#IsCurrentFileInProject()
     return
   endif
 
-  let bufnum = bufnr('%')
-  let project_dir = eclim#project#util#GetCurrentProjectRoot()
-  let cwd = getcwd()
-"  let save_opt = &eventignore
-"  set eventignore=all
+  let project = eclim#project#util#GetProject(expand('%:p'))
+  let tail = substitute(a:args, '\(.\).\{-}\1\s\(.*\)', '\2', '')
+  let pattern = substitute(a:args, '\(.*\)\s\+\M' . tail . '\m$', '\1', '')
+  let cmd = a:command
+  let acd = &autochdir
+  set noautochdir
   try
-    silent exec 'lcd ' . escape(project_dir, ' ')
-    silent! exec a:command . ' ' . a:args
+    if pattern != a:args && tail != a:args && tail != ''
+      let files = eclim#util#ParseArgs(tail)
+      let paths = ''
+      for file in files
+        if paths != ''
+          let paths .= ' '
+        endif
+        let paths .= escape(project.path, ' ') . '/' . file
+      endfor
+      let links = get(project, 'links', {})
+      if len(links)
+        for link in values(links)
+          for file in files
+            let paths .= ' ' . escape(link, ' ') . '/' . file
+          endfor
+        endfor
+      endif
+      silent exec a:command . ' ' . pattern . ' ' . paths
+    else
+      " let vim generate the proper error
+      silent exec a:command . ' ' . a:args
+    endif
+  catch /E480/
+    " no results found
+  catch /.*/
+    call eclim#util#EchoError(v:exception)
+    return
   finally
-"    let &eventignore = save_opt
-    silent exec 'lcd ' . escape(cwd, ' ')
+    let &autochdir = acd
     " force quickfix / location list signs to update.
     call eclim#display#signs#Update()
   endtry
-"  if bufnum != bufnr('%')
-    " force autocommands to execute if grep jumped to a file.
-"    edit
-"  endif
-  if a:command =~ '^l'
-    let numresults = len(getloclist(0))
-  else
-    let numresults = len(getqflist())
-  endif
 
+  let numresults = len(a:command =~ '^l' ? getloclist(0) : getqflist())
   if numresults == 0
     call eclim#util#EchoInfo('No results found.')
   endif
 endfunction " }}}
 
-" ProjectTab(project) {{{
-" Opens a new tab with the project tree and tab relative working directory for
-" the specified project.
-function! eclim#project#util#ProjectTab(project)
+function! eclim#project#util#ProjectTab(project) " {{{
+  " Opens a new tab with the project tree and tab relative working directory for
+  " the specified project.
+
+  let project = a:project
   let names = eclim#project#util#GetProjectNames()
-  if index(names, a:project) == -1
-    call eclim#util#EchoError("No project '" . a:project . "' found.")
-    return
-  endif
-  if winnr('$') > 1 || expand('%') != '' ||
-   \ &modified || line('$') != 1 || getline(1) != ''
-    tablast | tabnew
-  endif
-  call eclim#common#util#Tcd(eclim#project#util#GetProjectRoot(a:project))
-  call eclim#project#tree#ProjectTree(a:project)
-endfunction " }}}
-
-" TreeTab(title, dir) {{{
-" Like ProjectTab, but opens for an arbitrary directory.
-function! eclim#project#util#TreeTab(title, dir)
-  let dir = fnamemodify(a:dir, ':p')
-  let dir = substitute(dir, '/$', '', '')
-  if !isdirectory(dir)
-    call eclim#util#EchoError('Directory does not exist: ' . dir)
-    return
-  endif
-
-  if winnr('$') > 1 || expand('%') != '' ||
-   \ &modified || line('$') != 1 || getline(1) != ''
-    tablast | tabnew
-    if dir == eclim#UserHome()
-      tabmove 0
+  if index(names, project) == -1
+    let is_project = 0
+    let dir = expand(project, ':p')
+    if !isdirectory(dir)
+      call eclim#util#EchoError("No project '" . project . "' found.")
+      return
     endif
+    let project = fnamemodify(substitute(dir, '/$', '', ''), ':t')
+  else
+    let is_project = 1
+    let dir = eclim#project#util#GetProjectRoot(project)
   endif
-  let name = dir
-  if len(name) > 30
-    let name = fnamemodify(dir, ':t') . ': ' . dir
+
+  if exists('t:eclim_project') ||
+   \ winnr('$') > 1 || expand('%') != '' ||
+   \ &modified || line('$') != 1 || getline(1) != ''
+    tablast | tabnew
   endif
+
+  let t:eclim_project = project
   call eclim#common#util#Tcd(dir)
-  call eclim#project#tree#ProjectTreeOpen([name], [dir], a:title)
+  if g:EclimProjectTabTreeAutoOpen
+    if is_project
+      call eclim#project#tree#ProjectTree(project)
+    else
+      call eclim#project#tree#ProjectTree(dir)
+    endif
+  else
+    call eclim#util#Echo('ProjectTab ' . project . ' cwd: ' . dir)
+  endif
 endfunction " }}}
 
 " Todo() {{{
@@ -671,38 +836,48 @@ function! eclim#project#util#Todo()
   let path = expand('%:p')
   silent! exec 'lvimgrep /' . g:EclimTodoSearchPattern . '/gj ' . path
   if !empty(getloclist(0))
-    lopen
+    exec 'lopen ' . g:EclimLocationListHeight
   else
     call eclim#util#Echo('No Results found')
   endif
 endfunction " }}}
 
-" ProjectTodo() {{{
-" Show the todo tags of the whole project in the location list.
-function! eclim#project#util#ProjectTodo()
+function! eclim#project#util#ProjectTodo() " {{{
+  " Show the todo tags of the whole project in the location list.
   if !eclim#project#util#IsCurrentFileInProject()
     return
   endif
 
-  let path = eclim#project#util#GetCurrentProjectRoot()
-  if len(g:EclimTodoSearchExtensions) > 0
-    let paths = map(copy(g:EclimTodoSearchExtensions), 'path . "/**/*." . v:val')
+  if len(g:EclimTodoSearchExtensions) == 0
+  endif
 
-    silent! exec 'lvimgrep /' . g:EclimTodoSearchPattern . '/gj ' . paths[0]
-    for path in paths[1:]
-      silent! exec 'lvimgrepadd /' . g:EclimTodoSearchPattern . '/gj ' . path
-    endfor
-
-    if !empty(getloclist(0))
-      lopen
-    else
-      call eclim#util#Echo('No Results found')
+  let project = eclim#project#util#GetProject(expand('%:p'))
+  let paths = ''
+  for ext in g:EclimTodoSearchExtensions
+    if paths != ''
+      let paths .= ' '
     endif
+    let paths .= escape(project.path, ' ') . '/**/*' . ext
+  endfor
+  let links = get(project, 'links', {})
+  if len(links)
+    for link in values(links)
+      for ext in g:EclimTodoSearchExtensions
+        let paths .= ' ' . escape(link, ' ') . '/**/*' . ext
+      endfor
+    endfor
+  endif
+
+  silent! exec 'lvimgrep /' . g:EclimTodoSearchPattern . '/gj ' . paths
+
+  if !empty(getloclist(0))
+    exec 'lopen ' . g:EclimLocationListHeight
+  else
+    call eclim#util#Echo('No Results found')
   endif
 endfunction " }}}
 
-" SaveSettings() {{{
-function! s:SaveSettings()
+function! s:SaveSettings() " {{{
   call eclim#SaveSettings(s:command_update, b:project)
 endfunction " }}}
 
@@ -736,8 +911,15 @@ endfunction " }}}
 " GetProjectRelativeFilePath([file]) {{{
 " Gets the project relative path for the current or supplied file.
 function! eclim#project#util#GetProjectRelativeFilePath(...)
+  if exists('b:eclim_file')
+    return b:eclim_file
+  endif
+
   let file = a:0 == 0 ? expand('%:p') : a:1
   let project = eclim#project#util#GetProject(file)
+  if !len(project)
+    return ''
+  endif
 
   let file = substitute(fnamemodify(file, ':p'), '\', '/', 'g')
   let pattern = '\(/\|$\)'
@@ -748,7 +930,7 @@ function! eclim#project#util#GetProjectRelativeFilePath(...)
 
   " handle file in linked folder
   if result == file
-    for name in keys(project.links)
+    for name in keys(get(project, 'links', {}))
       if file =~ '^' . project.links[name] . pattern
         let result = substitute(file, project.links[name], name, '')
       endif
@@ -771,23 +953,22 @@ function! eclim#project#util#GetProjects()
   let workspaces = eclim#eclipse#GetAllWorkspaceDirs()
   if len(s:workspace_projects) != len(workspaces)
     for workspace in workspaces
-      let result = eclim#ExecuteEclim(
+      let results = eclim#ExecuteEclim(
         \ s:command_projects, eclim#client#nailgun#GetNgPort(workspace))
-      if result == '0'
+      if type(results) != g:LIST_TYPE
         continue
       endif
-      let results = split(result, "\n")
-      let projects = []
-      for line in results
-        let project = eval(line)
+      for project in results
         let project['workspace'] = workspace
         if has('win32unix')
           let project['path'] = eclim#cygwin#CygwinPath(project['path'])
-          call map(project['links'], 'eclim#cygwin#CygwinPath(v:val)')
+          if has_key(project, 'links')
+            call map(project['links'], 'eclim#cygwin#CygwinPath(v:val)')
+          endif
         endif
-        call add(projects, project)
       endfor
-      let s:workspace_projects[workspace] = projects
+      let s:workspace_projects[workspace] = results
+      unlet results
     endfor
   endif
 
@@ -798,10 +979,12 @@ function! eclim#project#util#GetProjects()
   return all
 endfunction " }}}
 
-" GetProject(file) {{{
-function! eclim#project#util#GetProject(file)
-  let path = substitute(fnamemodify(a:file, ':p'), '\', '/', 'g')
-  let dir = fnamemodify(path, ':h')
+" GetProject(path) {{{
+function! eclim#project#util#GetProject(path)
+  " if a [No Name] buffer, use the current working directory.
+  let path = a:path != '' ? a:path : getcwd()
+
+  let path = substitute(fnamemodify(path, ':p'), '\', '/', 'g')
   let pattern = '\(/\|$\)'
   if has('win32') || has('win64')
     let pattern .= '\c'
@@ -813,22 +996,31 @@ function! eclim#project#util#GetProject(file)
   call sort(projects, 's:ProjectSortPathDepth')
 
   for project in projects
-    if dir =~ '^' . project.path . pattern
+    if path =~ '^' . project.path . pattern
       return project
     endif
 
     " check linked folders
-    for name in keys(project.links)
-      if dir =~ '^' . project.links[name] . pattern
+    for name in keys(get(project, 'links', {}))
+      if path =~ '^' . project.links[name] . pattern
         return project
       endif
     endfor
   endfor
+
+  " project not found by path, fallback to buffer local variable
+  if exists('b:eclim_project')
+    for project in projects
+      if project.name == b:eclim_project
+        return project
+      endif
+    endfor
+  endif
+
   return {}
 endfunction " }}}
 
-" s:ProjectSortPathDepth(p1, p2) {{{
-function! s:ProjectSortPathDepth(p1, p2)
+function! s:ProjectSortPathDepth(p1, p2) " {{{
   return len(a:p2.path) - len(a:p1.path)
 endfunction " }}}
 
@@ -848,17 +1040,17 @@ function! eclim#project#util#GetProjectNames(...)
     let command = s:command_project_list . ' -n ' . a:1
     for workspace in eclim#eclipse#GetAllWorkspaceDirs()
       let port = eclim#client#nailgun#GetNgPort(workspace)
-      let results = split(eclim#ExecuteEclim(command, port), '\n')
-      if len(results) == 1 && results[0] == '0'
+      let results = eclim#ExecuteEclim(command, port)
+      if type(results) != g:LIST_TYPE
         continue
       endif
       let projects += results
     endfor
 
-    call map(projects, "substitute(v:val, '\\(.\\{-}\\)\\s\\+-\\s\\+.*', '\\1', '')")
-
+    call map(projects, "v:val.name")
     return projects
   endif
+
   let names = map(eclim#project#util#GetProjects(), 'v:val.name')
   call sort(names)
   return names
@@ -871,16 +1063,27 @@ function! eclim#project#util#GetProjectNatureAliases(...)
   if a:0 > 0 && a:1 != ''
     let command = s:command_natures . ' -p "' . a:1 . '"'
     let result = eclim#ExecuteEclim(command)
-    if result == '0'
+    if type(result) != g:LIST_TYPE || len(result) == 0
       return []
     endif
-    let aliases = split(substitute(result, '.\{-}\s-\s', '', ''), ' ')
-    return aliases
+    return result[0]['natures']
   endif
 
-  let aliases = split(eclim#ExecuteEclim(s:command_nature_aliases), '\n')
-  if len(aliases) == 1 && aliases[0] == '0'
+  let aliases = eclim#ExecuteEclim(s:command_nature_aliases)
+  if type(aliases) != g:LIST_TYPE
     return []
+  endif
+
+  return aliases
+endfunction " }}}
+
+" GetNatureAliasesDict() {{{
+" Gets a dict of all natures aliases where the alias is the key and the nature
+" id is the value.
+function! eclim#project#util#GetNatureAliasesDict()
+  let aliases = eclim#ExecuteEclim(s:command_nature_aliases . ' -m')
+  if type(aliases) != g:DICT_TYPE
+    return {}
   endif
 
   return aliases
@@ -1034,9 +1237,12 @@ function! eclim#project#util#CommandCompleteProjectByNature(
   let projects = eclim#project#util#GetProjectNames(a:nature)
   if cmdLine !~ '[^\\]\s$'
     let argLead = escape(escape(argLead, '~'), '~')
+    " remove escape slashes
+    let argLead = substitute(argLead, '\', '', 'g')
     call filter(projects, 'v:val =~ "^' . argLead . '"')
   endif
 
+  call map(projects, 'escape(v:val, " ")')
   return projects
 endfunction " }}}
 
@@ -1152,6 +1358,19 @@ function! eclim#project#util#CommandCompleteProjectRelative(
   call map(results, "substitute(v:val, ' ', '\\\\ ', 'g')")
 
   return eclim#util#ParseCommandCompletionResults(argLead, results)
+endfunction " }}}
+
+function! eclim#project#util#CommandCompleteProjectOrDirectory(argLead, cmdLine, cursorPos) " {{{
+  " Custom command completion for :ProjectTree/:ProjectTab to complete project names or
+  " directories
+
+  let projects = []
+  if a:argLead !~ '[~/]'
+    let projects = eclim#project#util#CommandCompleteProjectByNature(
+      \ a:argLead, a:cmdLine, a:cursorPos, '')
+  endif
+  let dirs = eclim#util#CommandCompleteDir(a:argLead, a:cmdLine, a:cursorPos)
+  return projects + dirs
 endfunction " }}}
 
 " CommandCompleteAbsoluteOrProjectRelative(argLead, cmdLine, cursorPos) {{{

@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -27,6 +27,18 @@ if !exists("g:EclimShowQuickfixSigns")
   let g:EclimShowQuickfixSigns = 1
 endif
 
+if !exists("g:EclimShowLoclistSigns")
+  let g:EclimShowLoclistSigns = 1
+endif
+
+if !exists("g:EclimQuickfixSignText")
+  let g:EclimQuickfixSignText = '> '
+endif
+
+if !exists("g:EclimLoclistSignText")
+  let g:EclimLoclistSignText = '>>'
+endif
+
 if !exists("g:EclimUserSignText")
   let g:EclimUserSignText = '#'
 endif
@@ -36,26 +48,25 @@ if !exists("g:EclimUserSignHighlight")
 endif
 " }}}
 
-" Define(name, text, highlight) {{{
-" Defines a new sign name or updates an existing one.
-function! eclim#display#signs#Define(name, text, highlight)
+function! eclim#display#signs#Define(name, text, highlight) " {{{
+  " Defines a new sign name or updates an existing one.
   exec "sign define " . a:name . " text=" . a:text . " texthl=" . a:highlight
 endfunction " }}}
 
-" Place(name, line) {{{
-" Places a sign in the current buffer.
-function! eclim#display#signs#Place(name, line)
+function! eclim#display#signs#Place(name, line) " {{{
+  " Places a sign in the current buffer.
   if a:line > 0
     let lastline = line('$')
     let line = a:line <= lastline ? a:line : lastline
-    exec "sign place " . line . " line=" . line . " name=" . a:name .
+    let id = a:name == 'placeholder' ? 999999 : line
+    exec "sign place " . id . " line=" . line . " name=" . a:name .
       \ " buffer=" . bufnr('%')
   endif
 endfunction " }}}
 
-" PlaceAll(name, list) {{{
-" Places a sign in the current buffer for each line in the list.
-function! eclim#display#signs#PlaceAll(name, list)
+function! eclim#display#signs#PlaceAll(name, list) " {{{
+  " Places a sign in the current buffer for each line in the list.
+
   let lastline = line('$')
   for line in a:list
     if line > 0
@@ -66,25 +77,23 @@ function! eclim#display#signs#PlaceAll(name, list)
   endfor
 endfunction " }}}
 
-" Undefine(name) {{{
-" Undefines a sign name.
-function! eclim#display#signs#Undefine(name)
+function! eclim#display#signs#Undefine(name) " {{{
+  " Undefines a sign name.
   exec "sign undefine " . a:name
 endfunction " }}}
 
-" Unplace(id) {{{
-" Un-places a sign in the current buffer.
-function! eclim#display#signs#Unplace(id)
+function! eclim#display#signs#Unplace(id) " {{{
+  " Un-places a sign in the current buffer.
   exec 'sign unplace ' . a:id . ' buffer=' . bufnr('%')
 endfunction " }}}
 
-" UnplaceAll(id) {{{
-" Un-places all signs in the supplied list from the current buffer.
-" The list may be a list of ids or a list of dictionaries as returned by
-" GetExisting()
-function! eclim#display#signs#UnplaceAll(list)
+function! eclim#display#signs#UnplaceAll(list) " {{{
+  " Un-places all signs in the supplied list from the current buffer.
+  " The list may be a list of ids or a list of dictionaries as returned by
+  " GetExisting()
+
   for sign in a:list
-    if type(sign) == 4
+    if type(sign) == g:DICT_TYPE
       call eclim#display#signs#Unplace(sign['id'])
     else
       call eclim#display#signs#Unplace(sign)
@@ -92,9 +101,8 @@ function! eclim#display#signs#UnplaceAll(list)
   endfor
 endfunction " }}}
 
-" Toggle(name, line) {{{
-" Toggle a sign on the current line.
-function! eclim#display#signs#Toggle(name, line)
+function! eclim#display#signs#Toggle(name, line) " {{{
+  " Toggle a sign on the current line.
   if a:line > 0
     let existing = eclim#display#signs#GetExisting(a:name)
     let exists = len(filter(existing, "v:val['line'] == a:line"))
@@ -106,9 +114,9 @@ function! eclim#display#signs#Toggle(name, line)
   endif
 endfunction " }}}
 
-" CompareSigns(s1, s2) {{{
-" Used by ViewSigns to sort list of sign dictionaries.
-function! s:CompareSigns(s1, s2)
+function! s:CompareSigns(s1, s2) " {{{
+  " Used by ViewSigns to sort list of sign dictionaries.
+
   if a:s1.line == a:s2.line
     return 0
   endif
@@ -118,10 +126,10 @@ function! s:CompareSigns(s1, s2)
   return -1
 endfunction " }}}
 
-" ViewSigns(name) {{{
-" Open a window to view all placed signs with the given name in the current
-" buffer.
-function! eclim#display#signs#ViewSigns(name)
+function! eclim#display#signs#ViewSigns(name) " {{{
+  " Open a window to view all placed signs with the given name in the current
+  " buffer.
+
   let filename = expand('%:p')
   let signs = eclim#display#signs#GetExisting(a:name)
   call sort(signs, 's:CompareSigns')
@@ -140,8 +148,7 @@ function! eclim#display#signs#ViewSigns(name)
   augroup END
 endfunction " }}}
 
-" JumpToSign() {{{
-function! s:JumpToSign()
+function! s:JumpToSign() " {{{
   let winnr = bufwinnr(bufnr('^' . b:filename))
   if winnr != -1
     let line = substitute(getline('.'), '^\(\d\+\)|.*', '\1', '')
@@ -150,9 +157,9 @@ function! s:JumpToSign()
   endif
 endfunction " }}}
 
-" GetDefined() {{{
-" Gets a list of defined sign names.
-function! eclim#display#signs#GetDefined()
+function! eclim#display#signs#GetDefined() " {{{
+  " Gets a list of defined sign names.
+
   redir => list
   silent exec 'sign list'
   redir END
@@ -165,15 +172,15 @@ function! eclim#display#signs#GetDefined()
   return names
 endfunction " }}}
 
-" GetExisting(...) {{{
-" Gets a list of existing signs for the current buffer.
-" The list consists of dictionaries with the following keys:
-"   id:   The sign id.
-"   line: The line number.
-"   name: The sign name (erorr, warning, etc.)
-"
-" Optionally a sign name may be supplied to only retrieve signs of that name.
-function! eclim#display#signs#GetExisting(...)
+function! eclim#display#signs#GetExisting(...) " {{{
+  " Gets a list of existing signs for the current buffer.
+  " The list consists of dictionaries with the following keys:
+  "   id:   The sign id.
+  "   line: The line number.
+  "   name: The sign name (erorr, warning, etc.)
+  "
+  " Optionally a sign name may be supplied to only retrieve signs of that name.
+
   let bufnr = bufnr('%')
 
   redir => signs
@@ -194,10 +201,10 @@ function! eclim#display#signs#GetExisting(...)
   return existing
 endfunction " }}}
 
-" HasExisting(...) {{{
-" Determines if there are any existing signs.
-" Optionally a sign name may be supplied to only test for signs of that name.
-function! eclim#display#signs#HasExisting(...)
+function! eclim#display#signs#HasExisting(...) " {{{
+  " Determines if there are any existing signs.
+  " Optionally a sign name may be supplied to only test for signs of that name.
+
   let bufnr = bufnr('%')
 
   redir => results
@@ -219,8 +226,7 @@ function! eclim#display#signs#HasExisting(...)
   return 0
 endfunction " }}}
 
-" s:ParseSign(raw) {{{
-function! s:ParseSign(raw)
+function! s:ParseSign(raw) " {{{
   let attrs = split(a:raw)
 
   exec 'let line = ' . split(attrs[0], '=')[1]
@@ -241,14 +247,14 @@ function! s:ParseSign(raw)
   return {'id': id, 'line': line, 'name': name}
 endfunction " }}}
 
-" Update() {{{
-" Updates the signs for the current buffer.  This function will read both the
-" location list and the quickfix list and place a sign for any entries for the
-" current file.
-" This function supports a severity level by examining the 'type' key of the
-" dictionaries in the location or quickfix list.  It supports 'i' (info), 'w'
-" (warning), and 'e' (error).
-function! eclim#display#signs#Update()
+function! eclim#display#signs#Update() " {{{
+  " Updates the signs for the current buffer.  This function will read both the
+  " location list and the quickfix list and place a sign for any entries for the
+  " current file.
+  " This function supports a severity level by examining the 'type' key of the
+  " dictionaries in the location or quickfix list.  It supports 'i' (info), 'w'
+  " (warning), and 'e' (error).
+
   if !has('signs') || !g:EclimSignLevel
     return
   endif
@@ -256,57 +262,42 @@ function! eclim#display#signs#Update()
   let save_lazy = &lazyredraw
   set lazyredraw
 
-  call eclim#display#signs#Define('error', '>>', g:EclimErrorHighlight)
   let placeholder = eclim#display#signs#SetPlaceholder()
 
   " remove all existing signs
   let existing = eclim#display#signs#GetExisting()
   for exists in existing
-    if exists.name =~ '^\(error\|info\|warning\|qf_error\|qf_warning\)$'
+    if exists.name =~ '^\(qf_\)\?\(error\|info\|warning\)$'
       call eclim#display#signs#Unplace(exists.id)
     endif
   endfor
 
-  let qflist = getqflist()
+  let qflist = filter(g:EclimShowQuickfixSigns ? getqflist() : [],
+    \ 'bufnr("%") == v:val.bufnr')
+  let loclist = filter(g:EclimShowLoclistSigns ? getloclist(0) : [],
+    \ 'bufnr("%") == v:val.bufnr')
 
-  if g:EclimShowQuickfixSigns
-    let errors = filter(copy(qflist),
-      \ 'bufnr("%") == v:val.bufnr && (v:val.type == "" || v:val.type == "e")')
-    let warnings = filter(copy(qflist),
-      \ 'bufnr("%") == v:val.bufnr && v:val.type == "w"')
-    call map(errors, 'v:val.lnum')
-    call map(warnings, 'v:val.lnum')
-    call eclim#display#signs#Define("qf_error", "> ", g:EclimErrorHighlight)
-    call eclim#display#signs#Define("qf_warning", "> ", g:EclimWarningHighlight)
-    call eclim#display#signs#PlaceAll("qf_error", errors)
-    call eclim#display#signs#PlaceAll("qf_warning", warnings)
-  endif
+  for [list, marker, prefix] in [
+      \ [qflist, g:EclimQuickfixSignText, 'qf_'],
+      \ [loclist, g:EclimLoclistSignText, '']]
+    if g:EclimSignLevel >= 4
+      let info = filter(copy(list), 'v:val.type == "" || tolower(v:val.type) == "i"')
+      call eclim#display#signs#Define(prefix . 'info', marker, g:EclimInfoHighlight)
+      call eclim#display#signs#PlaceAll(prefix . 'info', map(info, 'v:val.lnum'))
+    endif
 
-  let list = filter(getloclist(0), 'bufnr("%") == v:val.bufnr')
+    if g:EclimSignLevel >= 3
+      let warnings = filter(copy(list), 'tolower(v:val.type) == "w"')
+      call eclim#display#signs#Define(prefix . 'warning', marker, g:EclimWarningHighlight)
+      call eclim#display#signs#PlaceAll(prefix . 'warning', map(warnings, 'v:val.lnum'))
+    endif
 
-  if g:EclimSignLevel >= 4
-    let info = filter(copy(qflist) + copy(list),
-      \ 'bufnr("%") == v:val.bufnr && v:val.type == "i"')
-    let locinfo = filter(copy(list),
-      \ 'bufnr("%") == v:val.bufnr && v:val.type == ""')
-    call extend(info, locinfo)
-    call map(info, 'v:val.lnum')
-    call eclim#display#signs#Define("info", ">>", g:EclimInfoHighlight)
-    call eclim#display#signs#PlaceAll("info", info)
-  endif
-
-  if g:EclimSignLevel >= 3
-    let warnings = filter(copy(list), 'v:val.type == "w"')
-    call map(warnings, 'v:val.lnum')
-    call eclim#display#signs#Define("warning", ">>", g:EclimWarningHighlight)
-    call eclim#display#signs#PlaceAll("warning", warnings)
-  endif
-
-  if g:EclimSignLevel >= 2
-    let errors = filter(copy(list), 'v:val.type == "e"')
-    call map(errors, 'v:val.lnum')
-    call eclim#display#signs#PlaceAll("error", errors)
-  endif
+    if g:EclimSignLevel >= 2
+      let errors = filter(copy(list), 'tolower(v:val.type) == "e"')
+      call eclim#display#signs#Define(prefix . 'error', marker, g:EclimErrorHighlight)
+      call eclim#display#signs#PlaceAll(prefix . 'error', map(errors, 'v:val.lnum'))
+    endif
+  endfor
 
   if placeholder
     call eclim#display#signs#RemovePlaceholder()
@@ -315,43 +306,29 @@ function! eclim#display#signs#Update()
   let &lazyredraw = save_lazy
 endfunction " }}}
 
-" Show(type, list, [delayed]) {{{
-" Set the type on each entry in the specified list ('qf' or 'loc') and mark
-" any matches in the current file.
-function! eclim#display#signs#Show(type, list, ...)
-  if a:type != ''
-    if a:list == 'qf'
-      let list = getqflist()
-    else
-      let list = getloclist(0)
-    endif
-
+function! eclim#display#signs#QuickFixCmdPost() " {{{
+  " Force 'make' results to be of type error if no type set.
+  if expand('<amatch>') == 'make'
     let newentries = []
-    for entry in list
-      let entry['type'] = a:type
+    for entry in getqflist()
+      if entry['type'] == ''
+        let entry['type'] = 'e'
+      endif
       call add(newentries, entry)
     endfor
-
-    if a:list == 'qf'
-      call setqflist(newentries, 'r')
-    else
-      call setloclist(0, newentries, 'r')
-    endif
+    call setqflist(newentries, 'r')
   endif
-
-  let delayed = a:0 > 0 && a:1
-  if delayed
-    " prevent gvim from redrawing immediately after a :make call
-    call eclim#util#DelayedCommand('call eclim#display#signs#Update() | redraw!')
-  else
-    call eclim#display#signs#Update() | redraw!
-  endif
+  call eclim#display#signs#Update()
+  redraw!
 endfunction " }}}
 
-" SetPlaceholder([only_if_necessary]) {{{
-" Set sign at line 1 to prevent sign column from collapsing, and subsiquent
-" screen redraw.
-function! eclim#display#signs#SetPlaceholder(...)
+function! eclim#display#signs#SetPlaceholder(...) " {{{
+  " Set sign at line 1 to prevent sign column from collapsing, and subsiquent
+  " screen redraw.
+  " Optional args:
+  "   only_if_necessary: if 1, only set a placeholder if there are no existing
+  "   signs
+
   if !has('signs') || !g:EclimSignLevel
     return
   endif
@@ -372,8 +349,7 @@ function! eclim#display#signs#SetPlaceholder(...)
   return
 endfunction " }}}
 
-" RemovePlaceholder() {{{
-function! eclim#display#signs#RemovePlaceholder()
+function! eclim#display#signs#RemovePlaceholder() " {{{
   if !has('signs') || !g:EclimSignLevel
     return
   endif

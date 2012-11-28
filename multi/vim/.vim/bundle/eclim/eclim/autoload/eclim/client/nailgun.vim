@@ -1,10 +1,8 @@
 " Author:  Eric Van Dewoestine
 "
-" Description: {{{
+" License: {{{
 "
-" License:
-"
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -30,15 +28,17 @@
   endif
 " }}}
 
-" Execute(port, command) {{{
-" Function which invokes nailgun.
-function! eclim#client#nailgun#Execute(port, command)
-  if !exists('g:EclimNailgunClient')
-    call s:DetermineClient()
-  endif
+function! eclim#client#nailgun#Execute(port, command, ...) " {{{
+  let exec = a:0 ? a:1 : 0
 
-  if g:EclimNailgunClient == 'python'
-    return eclim#client#python#nailgun#Execute(a:port, a:command)
+  if !exec
+    if !exists('g:EclimNailgunClient')
+      call s:DetermineClient()
+    endif
+
+    if g:EclimNailgunClient == 'python' && has('python')
+      return eclim#client#python#nailgun#Execute(a:port, a:command)
+    endif
   endif
 
   let eclim = eclim#client#nailgun#GetEclimCommand()
@@ -47,6 +47,10 @@ function! eclim#client#nailgun#Execute(port, command)
   endif
 
   let command = a:command
+  if exec
+    let command = escape(command, '%#')
+  endif
+
   " on windows/cygwin where cmd.exe is used, we need to escape any '^'
   " characters in the command args.
   if has('win32') || has('win64') || has('win32unix')
@@ -54,22 +58,16 @@ function! eclim#client#nailgun#Execute(port, command)
   endif
 
   let eclim .= ' --nailgun-port ' . a:port . ' ' . command
-
-  " for windows/cygwin, need to add a trailing quote to complete the command.
-  if has('win32') || has('win64') || has('win32unix')
-    " for some reason, in cywin, if two double quotes are next to each other,
-    " then the preceding arg isn't quoted correctly, so add a space to prevent
-    " this.
-    let eclim = eclim . ' "'
+  if exec
+    let eclim = '!' . eclim
   endif
 
-  let result = eclim#util#System(eclim)
+  let result = eclim#util#System(eclim, exec, exec)
   return [v:shell_error, result]
 endfunction " }}}
 
-" GetEclimCommand() {{{
-" Gets the command to exexute eclim.
-function! eclim#client#nailgun#GetEclimCommand()
+function! eclim#client#nailgun#GetEclimCommand() " {{{
+  " Gets the command to exexute eclim.
   if !exists('g:EclimPath')
     let g:EclimPath = g:EclimEclipseHome . '/eclim'
 
@@ -83,23 +81,10 @@ function! eclim#client#nailgun#GetEclimCommand()
       return
     endif
 
-    " jump through the windows hoops
-    if has('win32') || has('win64') || has('win32unix')
-      if has("win32unix")
-        let g:EclimPath = eclim#cygwin#WindowsPath(g:EclimPath, 1)
-      endif
-
-      " on windows, the command must be executed on the drive where eclipse is
-      " installed.
-      let drive = substitute(g:EclimPath, '^\([a-zA-Z]:\).*', '\1', '')
-      let g:EclimPath = '" ' . drive . ' && "' . g:EclimPath . '"'
-
+    if has('win32unix')
       " in cygwin, we must use 'cmd /c' to prevent issues with eclim script +
       " some arg containing spaces causing a failure to invoke the script.
-      if has('win32unix')
-        let g:EclimPath = 'cmd /c ' . g:EclimPath
-      endif
-
+      let g:EclimPath = 'cmd /c "' . eclim#cygwin#WindowsPath(g:EclimPath, 1) . '"'
     else
       let g:EclimPath = '"' . g:EclimPath . '"'
     endif
@@ -107,9 +92,8 @@ function! eclim#client#nailgun#GetEclimCommand()
   return g:EclimPath
 endfunction " }}}
 
-" GetNgCommand() {{{
-" Gets path to the ng executable.
-function! eclim#client#nailgun#GetNgCommand()
+function! eclim#client#nailgun#GetNgCommand() " {{{
+  " Gets path to the ng executable.
   if !exists('g:EclimNgPath')
     let g:EclimNgPath = substitute(g:EclimHome, '\', '/', 'g') .  '/bin/ng'
 
@@ -126,22 +110,16 @@ function! eclim#client#nailgun#GetNgCommand()
       return
     endif
 
-    " on windows, the command must be executed on the drive where eclipse is
-    " installed.
-    "if has("win32") || has("win64")
-    "  let g:EclimNgPath =
-    "    \ '"' . substitute(g:EclimNgPath, '^\([a-zA-Z]:\).*', '\1', '') .
-    "    \ ' && "' . g:EclimNgPath . '"'
-    "else
-      let g:EclimNgPath = '"' . g:EclimNgPath . '"'
-    "endif
+    let g:EclimNgPath = '"' . g:EclimNgPath . '"'
   endif
   return g:EclimNgPath
 endfunction " }}}
 
-" GetNgPort([workspace]) {{{
-" Gets port that the nailgun server is configured to run on.
-function! eclim#client#nailgun#GetNgPort(...)
+function! eclim#client#nailgun#GetNgPort(...) " {{{
+  " Gets port that the nailgun server is configured to run on.
+  " Optional args:
+  "   workspace
+
   let port = 9091
   let eclimrc = eclim#UserHome() . '/.eclimrc'
   if filereadable(eclimrc)
@@ -176,6 +154,11 @@ function! eclim#client#nailgun#GetNgPort(...)
     endif
 
     let path = expand('%:p')
+    if path == ''
+      let path = getcwd() . '/'
+    endif
+    let path = substitute(path, '\', '/', 'g')
+
     " when we are in a temp window, use the initiating filename
     if &buftype != '' && exists('b:filename')
       let path = b:filename
@@ -198,8 +181,7 @@ function! eclim#client#nailgun#GetNgPort(...)
   return port
 endfunction " }}}
 
-" s:DetermineClient() {{{
-function! s:DetermineClient()
+function! s:DetermineClient() " {{{
   " at least one ubuntu user had serious performance issues using the python
   " client, so we are only going to default to python on windows machines
   " where there is an actual potential benefit to using it.

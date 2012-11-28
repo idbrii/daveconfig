@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -31,9 +31,12 @@
 " CodeComplete(findstart, base) {{{
 " Handles ant code completion.
 function! eclim#java#ant#complete#CodeComplete(findstart, base)
+  if !eclim#project#util#IsCurrentFileInProject(0)
+    return a:findstart ? -1 : []
+  endif
+
   if a:findstart
-    " update the file before vim makes any changes.
-    call eclim#java#ant#util#SilentUpdate()
+    call eclim#lang#SilentUpdate(1)
 
     " locate the start of the word
     let line = getline('.')
@@ -64,11 +67,10 @@ function! eclim#java#ant#complete#CodeComplete(findstart, base)
   else
     let offset = eclim#util#GetOffset() + len(a:base) - 1
     let project = eclim#project#util#GetCurrentProjectName()
-    if project == ''
+    let file = eclim#lang#SilentUpdate(1, 0)
+    if file == ''
       return []
     endif
-
-    let file = eclim#project#util#GetProjectRelativeFilePath()
 
     let command = s:complete_command
     let command = substitute(command, '<project>', project, '')
@@ -77,8 +79,8 @@ function! eclim#java#ant#complete#CodeComplete(findstart, base)
     let command = substitute(command, '<encoding>', eclim#util#GetEncoding(), '')
 
     let completions = []
-    let results = split(eclim#ExecuteEclim(command), '\n')
-    if len(results) == 1 && results[0] == '0'
+    let results = eclim#ExecuteEclim(command)
+    if type(results) != g:LIST_TYPE
       return
     endif
 
@@ -88,20 +90,17 @@ function! eclim#java#ant#complete#CodeComplete(findstart, base)
       \ '.\{-}\([[:alnum:].]\+\%' . col('.') . 'c\).*', '\1', '')
 
     for result in results
-      let word = substitute(result, '\(.\{-}\)|.*', '\1', '')
+      let word = result.completion
       " removed '<' and '>' from end tag results
       let word = substitute(word, '^<\(.*\)>$', '\1', '')
-
-      let menu = substitute(result, '.\{-}|\(.*\)|.*', '\1', '')
-      let menu = eclim#html#util#HtmlToText(menu)
-
-      let info = substitute(result, '.*|\(.*\)', '\1', '')
-      let info = eclim#html#util#HtmlToText(info)
 
       " strip off prefix if necessary.
       if word =~ '\.'
         let word = substitute(word, escape(prefix, '*'), '', '')
       endif
+
+      let menu = eclim#html#util#HtmlToText(result.menu)
+      let info = eclim#html#util#HtmlToText(result.info)
 
       let dict = {'word': word, 'menu': menu, 'info': info}
 
@@ -127,8 +126,8 @@ function! eclim#java#ant#complete#CommandCompleteTarget(argLead, cmdLine, cursor
     let command = substitute(command, '<project>', project, '')
     let command = substitute(command, '<file>', file, '')
 
-    let targets = split(eclim#ExecuteEclim(command), '\n')
-    if len(targets) == 1 && targets[0] == '0'
+    let targets = eclim#ExecuteEclim(command)
+    if type(targets) != g:LIST_TYPE
       return []
     endif
 

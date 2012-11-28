@@ -4,7 +4,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -41,20 +41,24 @@
   let s:shared_instances_by_names = {}
 " }}}
 
-" ProjectTree(...) {{{
-" Open a tree view of the current or specified projects.
-function! eclim#project#tree#ProjectTree(...)
+function! eclim#project#tree#ProjectTree(...) " {{{
+  " Open a tree view of the current or specified projects.
+
   " no project dirs supplied, use current project
   if len(a:000) == 0
     let name = eclim#project#util#GetCurrentProjectName()
-    if name == ''
-      call eclim#project#util#UnableToDetermineProject()
-      return
-    endif
     let names = [name]
+    if name == ''
+      if exists('t:cwd')
+        let names = [t:cwd]
+      else
+        call eclim#project#util#UnableToDetermineProject()
+        return
+      endif
+    endif
 
   " list of project names supplied
-  elseif type(a:000[0]) == 3
+  elseif type(a:000[0]) == g:LIST_TYPE
     let names = a:000[0]
     if len(names) == 1 && (names[0] == '0' || names[0] == '')
       return
@@ -75,38 +79,52 @@ function! eclim#project#tree#ProjectTree(...)
     endif
 
     let dir = eclim#project#util#GetProjectRoot(name)
-    if dir != ''
-      call add(dirs, dir)
-      let index += 1
-    else
-      call eclim#util#EchoWarning('Project not found: ' . name)
-      call remove(names_copy, index)
+    if dir == ''
+      let dir = expand(name, ':p')
+      if !isdirectory(dir)
+        call eclim#util#EchoWarning('Project not found: ' . name)
+        call remove(names_copy, index)
+        continue
+      endif
+      let names_copy[index] = fnamemodify(substitute(dir, '/$', '', ''), ':t')
     endif
+    call add(dirs, dir)
+    let index += 1
   endfor
   let names = names_copy
 
   if len(dirs) == 0
-    "call eclim#util#Echo('ProjectTree: No directories found for requested projects.')
     return
   endif
 
   " for session reload
   let g:Eclim_project_tree_names = join(names, '|')
 
+  let display = len(names) == 1 ?
+    \ 'Project: ' . names[0] :
+    \ 'Projects: ' . join(names, ', ')
+
   call eclim#project#tree#ProjectTreeClose()
-  call eclim#project#tree#ProjectTreeOpen(names, dirs)
+  call eclim#project#tree#ProjectTreeOpen(display, names, dirs)
 endfunction " }}}
 
-" ProjectTreeOpen(names, dirs, [title]) " {{{
-function! eclim#project#tree#ProjectTreeOpen(names, dirs, ...)
+function! eclim#project#tree#ProjectTreeToggle() " {{{
+  let title = s:GetTreeTitle()
+  let bufnum = bufnr(title)
+  let winnum = bufwinnr(title)
+  if bufnum == -1 || winnum == -1
+    call eclim#project#tree#ProjectTree()
+  else
+    exec winnum . 'winc w'
+    close
+    winc p
+  endif
+endfunction " }}}
+
+function! eclim#project#tree#ProjectTreeOpen(display, names, dirs) " {{{
   let expandDir = ''
   if g:EclimProjectTreeExpandPathOnOpen
     let expandDir = substitute(expand('%:p:h'), '\', '/', 'g')
-  endif
-
-  " support supplied tree name
-  if a:0 > 0 && a:1 != ''
-    let t:project_tree_name = a:1
   endif
 
   " see if we should just use a shared tree
@@ -159,6 +177,7 @@ function! eclim#project#tree#ProjectTreeOpen(names, dirs, ...)
   endtry
 
   setlocal bufhidden=hide
+  exec 'setlocal statusline=' . escape(a:display, ' ')
 
   if expand && expandDir != ''
     call eclim#util#DelayedCommand(
@@ -183,8 +202,7 @@ function! eclim#project#tree#ProjectTreeOpen(names, dirs, ...)
   setlocal nomodifiable
 endfunction " }}}
 
-" ProjectTreeClose() " {{{
-function! eclim#project#tree#ProjectTreeClose()
+function! eclim#project#tree#ProjectTreeClose() " {{{
   if exists('t:project_tree_name') || exists('t:project_tree_id')
     let winnr = bufwinnr(s:GetTreeTitle())
     if winnr != -1
@@ -194,8 +212,7 @@ function! eclim#project#tree#ProjectTreeClose()
   endif
 endfunction " }}}
 
-" Restore() " {{{
-function! eclim#project#tree#Restore()
+function! eclim#project#tree#Restore() " {{{
   if exists('t:project_tree_restoring')
     return
   endif
@@ -224,8 +241,7 @@ function! eclim#project#tree#Restore()
   endif
 endfunction " }}}
 
-" s:GetTreeTitle() {{{
-function! s:GetTreeTitle()
+function! s:GetTreeTitle() " {{{
   " support a custom name from an external plugin
   if exists('t:project_tree_name')
     return t:project_tree_name
@@ -238,8 +254,7 @@ function! s:GetTreeTitle()
   return g:EclimProjectTreeTitle . t:project_tree_id
 endfunction " }}}
 
-" s:GetSharedTreeBuffer(names) {{{
-function! s:GetSharedTreeBuffer(names)
+function! s:GetSharedTreeBuffer(names) " {{{
   let instance_names = join(a:names, '_')
   let instance_names = substitute(instance_names, '\W', '_', 'g')
   if g:EclimProjectTreeSharedInstance &&
@@ -249,13 +264,13 @@ function! s:GetSharedTreeBuffer(names)
   return -1
 endfunction " }}}
 
-" s:Mappings() " {{{
-function! s:Mappings()
+function! s:Mappings() " {{{
   nnoremap <buffer> <silent> E :call <SID>OpenFile('edit')<cr>
   nnoremap <buffer> <silent> S :call <SID>OpenFile('split')<cr>
   nnoremap <buffer> <silent> \| :call <SID>OpenFile('vsplit')<cr>
   nnoremap <buffer> <silent> T :call <SID>OpenFile('tablast \| tabnew')<cr>
   nnoremap <buffer> <silent> F :call <SID>OpenFileName()<cr>
+  nnoremap <buffer> <silent> Y :call <SID>YankFileName()<cr>
 
   " assign to buffer var to get around weird vim issue passing list containing
   " a string w/ a '<' in it on execution of mapping.
@@ -277,6 +292,7 @@ function! s:Mappings()
       \ 'K - set root to top most dir',
       \ 'F - open/create a file by name',
       \ 'D - create a new directory',
+      \ 'Y - yank current file/dir path to the clipboard',
       \ 'A - toggle hide/view hidden files',
       \ ':CD <dir> - set the root to <dir>',
     \ ]
@@ -284,8 +300,7 @@ function! s:Mappings()
     \ :call eclim#help#BufferHelp(b:project_tree_help, 'horizontal', 10)<cr>
 endfunction " }}}
 
-" s:InfoLine() {{{
-function! s:InfoLine()
+function! s:InfoLine() " {{{
   setlocal modifiable
   let pos = getpos('.')
   if len(b:roots) == 1
@@ -294,22 +309,52 @@ function! s:InfoLine()
       exec lnum . ',' . lnum . 'delete _'
     endif
 
-    let GetInfo = function('vcs#util#GetInfo')
+    let info = ''
     try
-      let info = GetInfo(b:roots[0])
-      if info != ''
-        call append(line('$') - 1, '" ' . info)
-      endif
-    catch /E117/
-      " noop if the function wasn't found
+      let info = function('vcs#util#GetInfo')(b:roots[0])
+    catch /E\(117\|700\)/
+      " fall back to fugitive
+      try
+        " make sure fugitive has the git dir for the current project
+        if !exists('b:git_dir') || (b:git_dir !~ '^\M' . b:roots[0])
+          let cwd = ''
+          if getcwd() . '/' != b:roots[0]
+            let cwd = getcwd()
+            exec 'lcd ' . escape(b:roots[0], ' ')
+          endif
+
+          if exists('b:git_dir')
+            unlet b:git_dir
+          endif
+          silent! doautocmd fugitive BufReadPost %
+
+          if cwd != ''
+            exec 'lcd ' . escape(cwd, ' ')
+          endif
+        endif
+
+        let info = function('fugitive#statusline')()
+        if info != ''
+          let branch = substitute(info, '^\[\Git(\(.*\))\]$', '\1', 'g')
+          if branch != info
+            let info = 'git:' . branch
+          endif
+        endif
+      catch /E\(117\|700\)/
+        " noop if the neither function was found
+      endtry
     endtry
+
+    " &modifiable check for silly side effect of fugitive autocmd
+    if info != '' && &modifiable
+      call append(line('$') - 1, '" ' . info)
+    endif
   endif
   call setpos('.', pos)
   setlocal nomodifiable
 endfunction " }}}
 
-" s:PathEcho() {{{
-function! s:PathEcho()
+function! s:PathEcho() " {{{
   if mode() != 'n'
     return
   endif
@@ -323,8 +368,7 @@ function! s:PathEcho()
   endif
 endfunction " }}}
 
-" s:OpenFile(action) " {{{
-function! s:OpenFile(action)
+function! s:OpenFile(action) " {{{
   let path = eclim#tree#GetPath()
   if path !~ '/$'
     if !filereadable(path)
@@ -333,28 +377,33 @@ function! s:OpenFile(action)
     endif
 
     call eclim#tree#ExecuteAction(path,
-      \ "call eclim#project#tree#OpenProjectFile('" . a:action . "', '<cwd>', '<file>')")
+      \ "call eclim#project#tree#OpenProjectFile('" . a:action . "', '<file>')")
   endif
 endfunction " }}}
 
-" s:OpenFileName() " {{{
-function! s:OpenFileName()
+function! s:OpenFileName() " {{{
   let path = eclim#tree#GetPath()
   if !isdirectory(path)
     let path = fnamemodify(path, ':h') . '/'
   endif
 
   let response = input('file: ', path, 'file')
-  let actions = eclim#tree#GetFileActions(response)
-  call eclim#tree#ExecuteAction(response, actions[0].action)
+  if response != ''
+    let actions = eclim#tree#GetFileActions(response)
+    call eclim#tree#ExecuteAction(response, actions[0].action)
+  endif
 endfunction " }}}
 
-" ProjectTreeSettings() {{{
-function! eclim#project#tree#ProjectTreeSettings()
+function! s:YankFileName() " {{{
+  let path = eclim#tree#GetPath()
+  let [@*, @+, @"] = [path, path, path]
+  call eclim#util#Echo('Copied path to clipboard: ' . path)
+endfunction " }}}
+
+function! eclim#project#tree#ProjectTreeSettings() " {{{
   for action in g:EclimProjectTreeActions
     call eclim#tree#RegisterFileAction(action.pattern, action.name,
-      \ "call eclim#project#tree#OpenProjectFile('" .
-      \   action.action . "', '<cwd>', '<file>')")
+      \ "call eclim#project#tree#OpenProjectFile('" . action.action . "', '<file>')")
   endfor
 
   call eclim#tree#RegisterDirAction(function('eclim#project#tree#InjectLinkedResources'))
@@ -372,21 +421,18 @@ function! eclim#project#tree#ProjectTreeSettings()
   augroup END
 endfunction " }}}
 
-" OpenProjectFile(cmd, cwd, file) {{{
+" OpenProjectFile(cmd, file) {{{
 " Execute the supplied command in one of the main content windows.
-function! eclim#project#tree#OpenProjectFile(cmd, cwd, file)
-  let cmd = a:cmd
-  let cwd = substitute(getcwd(), '\', '/', 'g')
-  let cwd = escape(cwd, ' &')
-
-  "exec 'cd ' . escape(a:cwd, ' ')
-  exec g:EclimProjectTreeContentWincmd
-
-  let file = cwd . '/' . a:file
-
-  if eclim#util#GoToBufferWindow(file)
+function! eclim#project#tree#OpenProjectFile(cmd, file)
+  if eclim#util#GoToBufferWindow(a:file)
     return
   endif
+
+  let file = a:file
+  let cmd = a:cmd
+  let cwd = getcwd()
+
+  exec g:EclimProjectTreeContentWincmd
 
   " if the buffer is a no name and action is split, use edit instead.
   if cmd =~ 'split' && expand('%') == '' &&
@@ -394,22 +440,32 @@ function! eclim#project#tree#OpenProjectFile(cmd, cwd, file)
     let cmd = 'edit'
   endif
 
+  " current file doesn't share same cwd as the project tree
+  let lcwd = getcwd()
+  if lcwd != cwd && !filereadable(file)
+    let file = escape(substitute(cwd, '\', '/', 'g'), ' &') . '/' . file
+  endif
+
   try
     exec cmd . ' ' file
   catch /E325/
-    " ignore attention error since the use should be prompted to handle it.
+    " ignore attention error since the user should be prompted to handle it.
+  finally
+    if lcwd != cwd
+      exec 'lcd ' . escape(cwd, ' ')
+    endif
   endtry
 endfunction " }}}
 
-" InjectLinkedResources(dir, contents) {{{
-function! eclim#project#tree#InjectLinkedResources(dir, contents)
+function! eclim#project#tree#InjectLinkedResources(dir, contents) " {{{
   let project = eclim#project#util#GetProject(a:dir)
   if len(project) == 0
     return
   endif
 
   " listing the project root, so inject our project links
-  if len(project.links) && substitute(a:dir, '/$', '', '') == project.path
+  if len(get(project, 'links', {})) &&
+   \ substitute(a:dir, '/$', '', '') == project.path
     if !exists('b:links')
       let b:links = {}
     endif
@@ -430,9 +486,8 @@ function! eclim#project#tree#InjectLinkedResources(dir, contents)
       let index += 1
     endfor
 
-    let index += 1
     for link in links
-      call insert(a:contents, a:dir . link . '/', index)
+      call add(a:contents, a:dir . link . '/')
     endfor
   endif
 endfunction " }}}

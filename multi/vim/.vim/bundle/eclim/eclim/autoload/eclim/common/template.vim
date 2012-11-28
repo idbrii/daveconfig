@@ -4,7 +4,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2009  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -68,7 +68,8 @@ endfunction " }}}
 function! s:FindTemplate()
   let templatesDir = expand(g:EclimTemplateDir)
   if !isdirectory(templatesDir)
-    call eclim#util#EchoError("No such directory: " . templatesDir)
+    call eclim#util#EchoDebug(
+      \ 'Template dir not found (g:EclimTemplateDir): ' . templatesDir)
     return ''
   endif
 
@@ -216,7 +217,7 @@ endfunction " }}}
 " Process <vim:username/> tags.
 function! s:Process_username(line)
   silent! let username = eclim#project#util#GetProjectSetting('org.eclim.user.name')
-  if type(username) == 0
+  if type(username) == g:NUMBER_TYPE
     let username = ''
   endif
   return s:Out(a:line, '<vim:username\s*\/>', username)
@@ -224,7 +225,7 @@ endfunction " }}}
 
 " s:Out(line, pattern, value) {{{
 function! s:Out(line, pattern, value)
-  let results = type(a:value) == 3 ? a:value : [a:value]
+  let results = type(a:value) == g:LIST_TYPE ? a:value : [a:value]
   if results[0] == '' && a:line =~ '^\s*' . a:pattern . '\s*$'
     return []
   endif
