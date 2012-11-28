@@ -12,8 +12,9 @@ function s:P4VTimeLapse()
 endfunction
 command PVTimeLapse call s:P4VTimeLapse()
 
-" PChanges doesn't default to current file -- so add another option
-command PChangesThisFile call perforce#PFIF(0, 0, 'changes', "%:p")
+" PChanges doesn't default to current file -- so add another option. Also give
+" longer descriptions so I can at least see the first line.
+command PChangesThisFile PChanges -L %
 
 " Adds PDiffExternal to existing perforce.vim options
 function P4DiffInExternalTool()
@@ -76,7 +77,7 @@ function! SetupPerforce()
 	" Perforce shortcuts
 	nnoremap <Leader>fi :PChange<CR>
 	nnoremap <Leader>fd :PGDiff<CR>
-	nnoremap <Leader>fv :exec 'PChanges -u '. $USERNAME<CR>
+	nnoremap <Leader>fv :exec 'PChanges -L -u '. $USERNAME<CR>
 	nnoremap <Leader>fV :PChangesThisFile<CR>
 
 	delcommand PChange
