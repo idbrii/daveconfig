@@ -4,7 +4,7 @@
 #
 
 ## Environment Settings {{{1
-export ANDROID_HOME=$HOME/data/.android_devkit/android-sdk-linux_86
+export ANDROID_HOME=$HOME/data/.android_devkit/android-sdk-linux
 
 export ECLIM_ECLIPSE_HOME=$HOME/data/apps/eclipse
 
