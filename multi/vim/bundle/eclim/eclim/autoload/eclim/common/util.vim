@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -58,72 +58,6 @@ function! eclim#common#util#DiffLastSaved()
   else
     echo "No changes"
   endif
-endfunction " }}}
-
-" FindInPath(file, path) {{{
-" Find a file in the supplied path returning a list of results.
-function! eclim#common#util#FindInPath(file, path)
-  let results = split(eclim#util#Globpath(a:path . '/**', a:file, 1), '\n')
-  "let results = split(eclim#util#Globpath(a:path, a:file, 1), '\n') + results
-  call map(results, "fnamemodify(v:val, ':p')")
-  return results
-endfunction " }}}
-
-" OtherWorkingCopy(project, action) {{{
-" Opens the same file from another project using the supplied action
-function! eclim#common#util#OtherWorkingCopy(project, action)
-  let path = eclim#project#util#GetProjectRelativeFilePath()
-  let project_path = s:OtherWorkingCopyPath(a:project)
-  if project_path == ''
-    return
-  endif
-  call eclim#util#GoToBufferWindowOrOpen(project_path, a:action)
-endfunction " }}}
-
-" OtherWorkingCopyDiff(project) {{{
-" Diffs the current file against the same file from another project.
-function! eclim#common#util#OtherWorkingCopyDiff(project)
-  let project_path = s:OtherWorkingCopyPath(a:project)
-  if project_path == ''
-    return
-  endif
-
-  let filename = expand('%:p')
-  diffthis
-
-  call eclim#util#GoToBufferWindowOrOpen(project_path, 'vertical split')
-  diffthis
-
-  let b:filename = filename
-  augroup other_diff
-    autocmd! BufWinLeave <buffer>
-    call eclim#util#GoToBufferWindowRegister(b:filename)
-    autocmd BufWinLeave <buffer> diffoff
-  augroup END
-endfunction " }}}
-
-" s:OtherWorkingCopyPath(project) {{{
-function! s:OtherWorkingCopyPath(project)
-  let path = eclim#project#util#GetProjectRelativeFilePath()
-
-  let project_name = a:project
-  if project_name =~ '[\\/]$'
-    let project_name = project_name[:-2]
-  endif
-
-  let project = {}
-  for p in eclim#project#util#GetProjects()
-    if p.name == project_name
-      let project = p
-      break
-    endif
-  endfor
-
-  if len(project) == 0
-    call eclim#util#EchoWarning("Project '" . project_name . "' not found.")
-    return ''
-  endif
-  return eclim#project#util#GetProjectRoot(project_name) . '/' . path
 endfunction " }}}
 
 " SwapTypedArguments() {{{
@@ -221,17 +155,22 @@ endfunction " }}}
 " ReadFile() {{{
 " Reads the contents of an archived file.
 function! eclim#common#util#ReadFile()
-  let file = substitute(expand('%'), '\', '/', 'g')
-  let command = substitute(s:command_read, '<file>', file, '')
+  let archive = substitute(expand('%'), '\', '/', 'g')
+  let command = substitute(s:command_read, '<file>', archive, '')
 
   let file = eclim#ExecuteEclim(command)
 
   if string(file) != '0'
+    let project = exists('b:eclim_project') ? b:eclim_project : ''
     let bufnum = bufnr('%')
     if has('win32unix')
       let file = eclim#cygwin#CygwinPath(file)
     endif
-    silent exec "keepjumps edit! " . escape(file, ' ')
+    silent exec "keepalt keepjumps edit! " . escape(file, ' ')
+    if project != ''
+      let b:eclim_project = project
+      let b:eclim_file = archive
+    endif
 
     exec 'bdelete ' . bufnum
 

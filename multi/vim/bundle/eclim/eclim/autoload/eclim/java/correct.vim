@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ function! eclim#java#correct#Correct()
     return
   endif
 
-  call eclim#java#util#SilentUpdate()
+  call eclim#lang#SilentUpdate()
 
   let project = eclim#project#util#GetCurrentProjectName()
   let file = eclim#project#util#GetProjectRelativeFilePath()
@@ -55,24 +55,34 @@ function! eclim#java#correct#Correct()
   let filename = expand('%:p')
   call eclim#util#TempWindowClear(window_name)
 
-  let results = split(eclim#ExecuteEclim(command), '\n')
+  let result = eclim#ExecuteEclim(command)
 
   " error executing the command.
-  if len(results) == 1 && results[0] == '0'
+  if type(result) != g:DICT_TYPE && type(result) != g:STRING_TYPE
     return
 
   " no error on the current line
-  elseif len(results) == 1
-    call eclim#util#Echo(results[0])
+  elseif type(result) == g:STRING_TYPE
+    call eclim#util#Echo(result)
     return
 
   " no correction proposals found.
-  elseif len(results) == 0
+  elseif len(result.corrections) == 0
     call eclim#util#EchoInfo('No Suggestions')
     return
   endif
 
-  call eclim#util#TempWindow(window_name, results)
+  let content = []
+  call add(content, result.message)
+  for correction in result.corrections
+    call add(content,
+      \ correction.index . '.' . result.offset . ': ' . correction.description)
+    for line in split(correction.preview, '\n')
+      call add(content, line != '' ? ("\t" . line) : line)
+    endfor
+  endfor
+
+  call eclim#util#TempWindow(window_name, content)
 
   let b:filename = filename
   augroup temp_window
@@ -101,7 +111,7 @@ function! eclim#java#correct#CorrectApply()
     if file_winnr != -1
       let filename = b:filename
       exec file_winnr . "winc w"
-      call eclim#java#util#SilentUpdate()
+      call eclim#lang#SilentUpdate()
 
       let index = substitute(line, '^\([0-9]\+\)\..*', '\1', '')
 
@@ -115,20 +125,8 @@ function! eclim#java#correct#CorrectApply()
       let command = substitute(command, '<encoding>', eclim#util#GetEncoding(), '')
       let command = substitute(command, '<apply>', index, '')
 
-      let content = split(eclim#ExecuteEclim(command), '\n')
-
-      if len(content) == 1 && content[0] == '0'
-        return
-      endif
-
-      let pos = getpos('.')
-
-      1,$delete _
-      call append(1, content)
-      1,1delete _
-
-      call setpos('.', pos)
-      update
+      call eclim#lang#Refactor(command)
+      call eclim#lang#UpdateSrcFile('java', 1)
 
       exec winnr . "winc w"
       close

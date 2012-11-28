@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -40,34 +40,43 @@ if !exists('g:VerticalToolWindowWidth')
 endif
 " }}}
 
-" VerticalToolWindowOpen(name, weight, [tablocal]) {{{
-" Handles opening windows in the vertical tool window on the left (taglist,
-" project tree, etc.)
-function! eclim#display#window#VerticalToolWindowOpen(name, weight, ...)
-  let taglist_window = exists('g:TagList_title') ?
-    \ bufwinnr(eclim#util#EscapeBufferName(g:TagList_title)) : -1
-  if exists('g:Tlist_Use_Horiz_Window') && g:Tlist_Use_Horiz_Window
-    let taglist_window = -1
+function! eclim#display#window#VerticalToolWindowOpen(name, weight, ...) " {{{
+  " Handles opening windows in the vertical tool window on the left (taglist,
+  " project tree, etc.)
+
+  let taglist_window = -1
+  if exists('g:TagList_title')
+    let taglist_window = bufwinnr(eclim#util#EscapeBufferName(g:TagList_title))
+    let taglist_position = 'left'
+    if exists('g:Tlist_Use_Horiz_Window') && g:Tlist_Use_Horiz_Window
+      let taglist_position = 'horizontal'
+    elseif exists('g:TaglistTooPosition')
+      let taglist_position = g:TaglistTooPosition
+    elseif exists('g:Tlist_Use_Right_Window') && g:Tlist_Use_Right_Window
+      let taglist_position = 'right'
+    endif
+  endif
+  if taglist_window == -1 && exists(':TagbarOpen')
+    let taglist_window = bufwinnr('__Tagbar__')
+    let taglist_position = 'right'
+    if exists('g:tagbar_left') && g:tagbar_left
+      let taglist_position = 'left'
+    endif
+  endif
+  if taglist_window != -1
+    " don't consider horizontal taglist, or taglist configured to display
+    " opposite the tool windows as a tool window member.
+    if taglist_position != g:VerticalToolWindowSide
+      let taglist_window = -1
+    endif
   endif
 
-  let nerdtree_window = -1
-  let index = 1
-  while index <= winnr('$')
-    if getbufvar(winbufnr(index), 'NERDTreeType') == 'primary'
-      let nerdtree_window = index
-      break
-    endif
-    let index += 1
-  endwhile
 
   let relative_window = 0
   let relative_window_loc = 'below'
-  if taglist_window != -1 || nerdtree_window != -1 || len(g:VerticalToolBuffers) > 0
+  if taglist_window != -1 || len(g:VerticalToolBuffers) > 0
     if taglist_window != -1
       let relative_window = taglist_window
-    endif
-    if nerdtree_window != -1
-      let relative_window = nerdtree_window
     endif
     for toolbuf in keys(g:VerticalToolBuffers)
       exec 'let toolbuf = ' . toolbuf
@@ -109,6 +118,7 @@ function! eclim#display#window#VerticalToolWindowOpen(name, weight, ...)
   let name = bufnum == -1 ? a:name : '+buffer' . bufnum
   silent call eclim#util#ExecWithoutAutocmds(wincmd . ' split ' . name)
 
+  doautocmd BufWinEnter
   setlocal winfixwidth
   setlocal nonumber
 
@@ -120,14 +130,20 @@ function! eclim#display#window#VerticalToolWindowOpen(name, weight, ...)
     autocmd BufDelete * call s:PreventCloseOnBufferDelete()
     autocmd BufEnter * nested call s:CloseIfLastWindow()
   augroup END
+
   if exists('g:TagList_title') &&
-   \ !exists('g:TagListToo') &&
    \ (!exists('g:Tlist_Use_Horiz_Window') || !g:Tlist_Use_Horiz_Window)
-    augroup eclim_vertical_tool_windows_move
+    augroup eclim_vertical_tool_windows_move_taglist
       autocmd!
+      exec 'autocmd BufWinEnter ' . eclim#util#EscapeBufferName(g:TagList_title) .
+        \ ' call s:MoveRelativeTo()'
     augroup END
-    exec 'autocmd BufWinEnter ' . g:TagList_title .
-      \ ' call s:MoveRelativeTo(g:TagList_title)'
+  endif
+  if exists(':TagbarOpen')
+    augroup eclim_vertical_tool_windows_move_tagbar
+      autocmd!
+      autocmd BufWinEnter __Tagbar__ call s:MoveRelativeTo()
+    augroup END
   endif
   augroup eclim_vertical_tool_windows_buffer
     exec 'autocmd BufWinLeave <buffer> ' .
@@ -136,10 +152,10 @@ function! eclim#display#window#VerticalToolWindowOpen(name, weight, ...)
   augroup END
 endfunction " }}}
 
-" VerticalToolWindowRestore() {{{
-" Used to restore the tool windows to their proper width if some action
-" altered them.
-function! eclim#display#window#VerticalToolWindowRestore()
+function! eclim#display#window#VerticalToolWindowRestore() " {{{
+  " Used to restore the tool windows to their proper width if some action
+  " altered them.
+
   for toolbuf in keys(g:VerticalToolBuffers)
     exec 'let toolbuf = ' . toolbuf
     if bufwinnr(toolbuf) != -1
@@ -148,10 +164,10 @@ function! eclim#display#window#VerticalToolWindowRestore()
   endfor
 endfunction " }}}
 
-" GetWindowOptions(winnum) {{{
-" Gets a dictionary containing all the localy set options for the specified
-" window.
-function! eclim#display#window#GetWindowOptions(winnum)
+function! eclim#display#window#GetWindowOptions(winnum) " {{{
+  " Gets a dictionary containing all the localy set options for the specified
+  " window.
+
   let curwin = winnr()
   try
     exec a:winnum . 'winc w'
@@ -164,7 +180,7 @@ function! eclim#display#window#GetWindowOptions(winnum)
 
   let list = substitute(list, '---.\{-}---', '', '')
   let winopts = {}
-  for wopt in split(list, '\_s\+')[1:]
+  for wopt in split(list, '\(\n\|\s\s\+\)')[1:]
     if wopt =~ '^[a-z]'
       if wopt =~ '='
         let key = substitute(wopt, '\(.\{-}\)=.*', '\1', '')
@@ -178,10 +194,10 @@ function! eclim#display#window#GetWindowOptions(winnum)
   return winopts
 endfunction " }}}
 
-" SetWindowOptions(winnum, options) {{{
-" Given a dictionary of options, sets each as local options for the specified
-" window.
-function! eclim#display#window#SetWindowOptions(winnum, options)
+function! eclim#display#window#SetWindowOptions(winnum, options) " {{{
+  " Given a dictionary of options, sets each as local options for the specified
+  " window.
+
   let curwin = winnr()
   try
     exec a:winnum . 'winc w'
@@ -189,7 +205,7 @@ function! eclim#display#window#SetWindowOptions(winnum, options)
       if key =~ '^no'
         silent! exec 'setlocal ' . key
       else
-        silent! exec 'setlocal ' . key . '=' . a:options[key]
+        silent! exec 'setlocal ' . key . '=' . escape(a:options[key], ' ')
       endif
     endfor
   finally
@@ -197,17 +213,31 @@ function! eclim#display#window#SetWindowOptions(winnum, options)
   endtry
 endfunction " }}}
 
-" s:CloseIfLastWindow() {{{
-function! s:CloseIfLastWindow()
+function! s:CloseIfLastWindow() " {{{
   if histget(':', -1) !~ '^bd'
-    let numtoolwindows = 0
-    for toolbuf in keys(g:VerticalToolBuffers)
-      exec 'let toolbuf = ' . toolbuf
-      if bufwinnr(toolbuf) != -1
-        let numtoolwindows += 1
+    let close = 1
+    for bufnr in tabpagebuflist()
+      if has_key(g:VerticalToolBuffers, bufnr)
+        continue
       endif
+      if exists('g:TagList_title') && bufname(bufnr) == g:TagList_title
+        continue
+      endif
+      if exists('g:BufExplorer_title') && bufname(bufnr) == '[BufExplorer]'
+        let close = 0
+        break
+      endif
+
+      let buftype = getbufvar(bufnr, '&buftype')
+      if buftype != '' && buftype != 'help'
+        continue
+      endif
+
+      let close = 0
+      break
     endfor
-    if winnr('$') == numtoolwindows
+
+    if close
       if tabpagenr('$') > 1
         tabclose
       else
@@ -217,8 +247,14 @@ function! s:CloseIfLastWindow()
   endif
 endfunction " }}}
 
-" s:MoveRelativeTo(name) {{{
-function! s:MoveRelativeTo(name)
+function! s:MoveRelativeTo() " {{{
+  " get the buffer that the taglist was opened from
+  let curwin = winnr()
+  let list_buffer = bufnr('%')
+  winc p
+  let orig_buffer = bufnr('%')
+  exec curwin . 'winc p'
+
   for toolbuf in keys(g:VerticalToolBuffers)
     exec 'let toolbuf = ' . toolbuf
     if bufwinnr(toolbuf) != -1
@@ -242,25 +278,33 @@ function! s:MoveRelativeTo(name)
     endif
   endwhile
   call eclim#display#window#VerticalToolWindowRestore()
+
+  " some window juggling so that winc p from taglist goes back to the original
+  " buffer
+  exec bufwinnr(orig_buffer) . 'winc w'
+  exec bufwinnr(list_buffer) . 'winc w'
 endfunction " }}}
 
-" s:PreventCloseOnBufferDelete() {{{
-function! s:PreventCloseOnBufferDelete()
+function! s:PreventCloseOnBufferDelete() " {{{
   let index = 1
   let numtoolwindows = 0
   let numtempwindows = 0
-  let tempbuffers = []
+  let tempbuffersbot = []
   while index <= winnr('$')
     let buf = winbufnr(index)
+    let bufname = bufname(buf)
     if index(keys(g:VerticalToolBuffers), string(buf)) != -1
       let numtoolwindows += 1
     elseif getwinvar(index, '&winfixheight') || getwinvar(index, '&winfixwidth')
-      call add(tempbuffers, buf)
+      let numtempwindows += 1
+      if getwinvar(index, '&winfixheight')
+        call add(tempbuffersbot, buf)
+      endif
     endif
     let index += 1
   endwhile
 
-  if winnr('$') == (numtoolwindows + len(tempbuffers))
+  if winnr('$') == (numtoolwindows + numtempwindows)
     let toolbuf = bufnr('%')
     if g:VerticalToolWindowSide == 'right'
       vertical topleft new
@@ -268,74 +312,39 @@ function! s:PreventCloseOnBufferDelete()
       vertical botright new
     endif
     setlocal noreadonly modifiable
-    let winnum = winnr()
-    exec 'let bufnr = ' . expand('<abuf>')
-
-    redir => list
-    silent exec 'buffers'
-    redir END
-
-    " build list of buffers open in other tabs to exclude
-    let tabbuffers = []
-    let lasttab = tabpagenr('$')
-    let index = 1
-    while index <= lasttab
-      if index != tabpagenr()
-        for bnum in tabpagebuflist(index)
-          call add(tabbuffers, bnum)
-        endfor
-      endif
-      let index += 1
-    endwhile
-
-    " build list of buffers not open in any window
-    let buffers = []
-    for entry in split(list, '\n')
-      exec 'let bnum = ' . substitute(entry, '\s*\([0-9]\+\).*', '\1', '')
-      if bnum != bufnr && index(tabbuffers, bnum) == -1 && bufwinnr(bnum) == -1
-        if bnum < bufnr
-          call insert(buffers, bnum)
-        else
-          call add(buffers, bnum)
-        endif
-      endif
-    endfor
-
-    " we found a hidden buffer, so open it
-    if len(buffers) > 0
-      exec 'buffer ' . buffers[0]
-      doautocmd BufEnter
-      doautocmd BufWinEnter
-      doautocmd BufReadPost
+    let curbuf = bufnr('%')
+    let removed = str2nr(expand('<abuf>'))
+    let next = eclim#common#buffers#OpenNextHiddenTabBuffer(removed)
+    if next != 0
+      let curbuf = next
     endif
 
+    " resize windows
     exec bufwinnr(toolbuf) . 'winc w'
     exec 'vertical resize ' . g:VerticalToolWindowWidth
 
     " fix the position of the temp windows
-    if len(tempbuffers) > 0
-      for buf in tempbuffers
-        " open the buffer in the temp window position
-        botright 10new
-        exec 'buffer ' . buf
-        setlocal winfixheight
+    for buf in tempbuffersbot
+      " open the buffer in the temp window position
+      botright 10new
+      exec 'buffer ' . buf
+      setlocal winfixheight
 
-        " close the old window
-        let winnr = winnr()
-        let index = 1
-        while index <= winnr('$')
-          if winbufnr(index) == buf && index != winnr
-            exec index . 'winc w'
-            close
-            winc p
-            break
-          endif
-          let index += 1
-        endwhile
-      endfor
-    endif
+      " close the old window
+      let winnr = winnr()
+      let index = 1
+      while index <= winnr('$')
+        if winbufnr(index) == buf && index != winnr
+          exec index . 'winc w'
+          close
+          winc p
+          break
+        endif
+        let index += 1
+      endwhile
+    endfor
 
-    exec winnum . 'winc w'
+    exec bufwinnr(curbuf) . 'winc w'
   endif
 endfunction " }}}
 

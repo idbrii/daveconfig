@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -23,47 +23,102 @@
 " }}}
 
 " Script Variables {{{
-let s:command_impl = '-command java_junit_impl -p "<project>" -f "<file>" <base>'
+let s:command_junit = '-command java_junit -p "<project>"'
+let s:command_tests = '-command java_junit_tests -p "<project>"'
+let s:command_find_test =
+  \ '-command java_junit_find_test -p "<project>" -f "<file>" ' .
+  \ '-o <offset> -e <encoding>'
+let s:command_impl = '-command java_junit_impl -p "<project>" -f "<file>"'
 let s:command_insert =
-  \ '-command java_junit_impl -p "<project>" -f "<file>" <base> ' .
+  \ '-command java_junit_impl -p "<project>" -f "<file>" ' .
   \ '-t "<type>" -s "<superType>" <methods>'
 " }}}
 
-" JUnitExecute(test) {{{
-" Execute the supplied test, or if none supplied, the current test.
-function! eclim#java#junit#JUnitExecute(test)
-  let test = a:test
-  if test == ''
-    let class = eclim#java#util#GetFullyQualifiedClassname()
-    let test = substitute(class, '\.', '/', 'g')
+function! eclim#java#junit#JUnit(test, bang) " {{{
+  let project = eclim#project#util#GetCurrentProjectName()
+  if project == '' && exists('b:project')
+    let project = b:project
+  endif
+
+  if project == ''
+    call eclim#project#util#IsCurrentFileInProject()
+    return
+  endif
+
+  let workspace = eclim#project#util#GetProjectWorkspace(project)
+  let port = eclim#client#nailgun#GetNgPort(workspace)
+
+  let command = s:command_junit
+  let command = substitute(command, '<project>', project, '')
+  if a:test != ''
+    if a:test == '%'
+      let command .= ' -f "' . eclim#project#util#GetProjectRelativeFilePath() . '"'
+    elseif a:test != '*'
+      let command .= ' -t "' . a:test . '"'
+    endif
   else
-    let class = substitute(test, '/', '\.', 'g')
+    let command .= ' -f "' . eclim#project#util#GetProjectRelativeFilePath() . '"'
+    let command .= ' -o ' . eclim#util#GetOffset()
+    let command .= ' -e ' . eclim#util#GetEncoding()
   endif
 
-  let command = eclim#project#util#GetProjectSetting("org.eclim.java.junit.command")
-  if type(command) == 0
-    return
+  let curbuf = bufnr('%')
+  let result = eclim#ExecuteEclim(command, port, {'exec': 1, 'raw': 1})
+  let results = split(substitute(result, "^\n*", '', 'g'), "\n")
+  call eclim#util#TempWindow('[JUnit Output]', results)
+  let b:project = project
+
+  if exists(":JUnit") != 2
+    command -buffer -nargs=? -complete=customlist,eclim#java#junit#CommandCompleteTest
+      \ JUnit :call eclim#java#junit#JUnit('<args>')
   endif
 
-  if command == ''
-    call eclim#util#EchoWarning(
-      \ "Command setting for 'junit' not set. " .
-      \ "Use :EclimSettings or :ProjectSettings to set it.")
-    return
-  endif
-
-  let command = substitute(command, '<testcase>', test, 'g')
-  let command = substitute(command, '<testcase_class>', class, 'g')
-
-  call eclim#util#Exec(command)
+  exec bufwinnr(curbuf) . 'winc w'
 endfunction " }}}
 
-" JUnitResult(test) {{{
-" Argument test can be one of the following:
-"   Empty string: Use the current file to determine the test result file.
-"   Class name of a test: Locate the results for class (ex. 'TestMe').
-"   The results dir relative results file name: TEST-org.foo.TestMe.xml
-function! eclim#java#junit#JUnitResult(test)
+function! eclim#java#junit#JUnitFindTest() " {{{
+  if !eclim#project#util#IsCurrentFileInProject()
+    return
+  endif
+
+  runtime eclim/autoload/eclim/java/search.vim
+
+  let project = eclim#project#util#GetCurrentProjectName()
+  let file = eclim#lang#SilentUpdate()
+  let command = s:command_find_test
+  let command = substitute(command, '<project>', project, '')
+  let command = substitute(command, '<file>', file, '')
+  let command = substitute(command, '<offset>', eclim#util#GetOffset(), '')
+  let command = substitute(command, '<encoding>', eclim#util#GetEncoding(), '')
+  let result = eclim#ExecuteEclim(command)
+  if type(result) == g:STRING_TYPE
+    call eclim#util#EchoError(result)
+    return
+  endif
+
+  if type(result) != g:DICT_TYPE
+    return
+  endif
+
+  call eclim#util#SetLocationList(eclim#util#ParseLocationEntries([result]))
+  let entry = getloclist(0)[0]
+  let name = substitute(bufname(entry.bufnr), '\', '/', 'g')
+  if g:EclimJavaSearchSingleResult != 'lopen'
+    call eclim#util#GoToBufferWindowOrOpen(name, g:EclimJavaSearchSingleResult)
+    call eclim#util#SetLocationList(eclim#util#ParseLocationEntries([result]))
+    call eclim#display#signs#Update()
+    call cursor(entry.lnum, entry.col)
+  else
+    exec 'lopen ' . g:EclimLocationListHeight
+  endif
+endfunction " }}}
+
+function! eclim#java#junit#JUnitResult(test) " {{{
+  " Argument test can be one of the following:
+  "   Empty string: Use the current file to determine the test result file.
+  "   Class name of a test: Locate the results for class (ex. 'TestMe').
+  "   The results dir relative results file name: TEST-org.foo.TestMe.xml
+
   let path = s:GetResultsDir()
   if path == ''
     call eclim#util#EchoWarning(
@@ -96,7 +151,7 @@ function! eclim#java#junit#JUnitResult(test)
 
   if found != ""
     let filename = expand('%:p')
-    exec "botright split " . found
+    exec "below split " . escape(found, ' ')
 
     augroup temp_window
       autocmd! BufWinLeave <buffer>
@@ -108,70 +163,36 @@ function! eclim#java#junit#JUnitResult(test)
   call eclim#util#Echo("Test result file not found for: " . fnamemodify(file, ':r'))
 endfunction " }}}
 
-" JUnitImpl() {{{
-" Opens a window that allows the user to choose methods to implement tests
-" for.
-function! eclim#java#junit#JUnitImpl()
+function! eclim#java#junit#JUnitImpl() " {{{
   if !eclim#project#util#IsCurrentFileInProject()
     return
   endif
 
-  call eclim#java#util#SilentUpdate()
+  call eclim#lang#SilentUpdate()
 
   let project = eclim#project#util#GetCurrentProjectName()
   let file = eclim#project#util#GetProjectRelativeFilePath()
-
   let command = s:command_impl
   let command = substitute(command, '<project>', project, '')
   let command = substitute(command, '<file>', file, '')
-  let base = substitute(expand('%:t'), 'Test', '', '')
-  let base = substitute(eclim#java#util#GetPackage(), '\.', '/', 'g') . "/" . base
-  if eclim#java#util#FileExists(base)
-    let base = fnamemodify(base, ':r')
-    let base = substitute(base, '/', '.', 'g')
-    let command = substitute(command, '<base>', '-b ' . base, '')
-  else
-    let base = ""
-    let command = substitute(command, '<base>', '', '')
-  endif
-
   call eclim#java#junit#JUnitImplWindow(command)
-  let b:base = base
 endfunction " }}}
 
-" JUnitImplWindow(command) {{{
-function! eclim#java#junit#JUnitImplWindow(command)
-  let name = eclim#project#util#GetProjectRelativeFilePath() . "_impl"
-  let project = eclim#project#util#GetCurrentProjectName()
-  let workspace = eclim#project#util#GetProjectWorkspace(project)
-  let port = eclim#client#nailgun#GetNgPort(workspace)
-
-  if eclim#util#TempWindowCommand(a:command, name, port)
-    setlocal ft=java
-    call eclim#java#impl#ImplWindowFolding()
-
+function! eclim#java#junit#JUnitImplWindow(command) " {{{
+  if (eclim#java#impl#Window(a:command, "impl"))
     nnoremap <silent> <buffer> <cr> :call <SID>AddTestImpl(0)<cr>
     vnoremap <silent> <buffer> <cr> :<C-U>call <SID>AddTestImpl(1)<cr>
   endif
 endfunction " }}}
 
-" AddTestImpl(visual) {{{
-function! s:AddTestImpl(visual)
-  let command = s:command_insert
-  if b:base != ""
-    let command = substitute(command, '<base>', '-b ' . b:base, '')
-  else
-    let command = substitute(command, '<base>', '', '')
-  endif
-
-  call eclim#java#impl#ImplAdd
-    \ (command, function("eclim#java#junit#JUnitImplWindow"), a:visual)
+function! s:AddTestImpl(visual) " {{{
+  call eclim#java#impl#Add
+    \ (s:command_insert, function("eclim#java#junit#JUnitImplWindow"), a:visual)
 endfunction " }}}
 
-" GetResultsDir() {{{
-function s:GetResultsDir()
+function! s:GetResultsDir() " {{{
   let path = eclim#project#util#GetProjectSetting("org.eclim.java.junit.output_dir")
-  if type(path) == 0
+  if type(path) == g:NUMBER_TYPE
     return
   endif
 
@@ -184,15 +205,30 @@ function s:GetResultsDir()
   return path
 endfunction " }}}
 
-" CommandCompleteTest(argLead, cmdLine, cursorPos) {{{
-" Custom command completion for junit test cases.
-function eclim#java#junit#CommandCompleteTest(argLead, cmdLine, cursorPos)
-  return eclim#java#test#CommandCompleteTest('junit', a:argLead, a:cmdLine, a:cursorPos)
+function! eclim#java#junit#CommandCompleteTest(argLead, cmdLine, cursorPos) " {{{
+  let cmdTail = strpart(a:cmdLine, a:cursorPos)
+  let argLead = substitute(a:argLead, cmdTail . '$', '', '')
+
+  let project = eclim#project#util#GetCurrentProjectName()
+  if project == '' && exists('b:project')
+    let project = b:project
+  endif
+  if project == ''
+    return []
+  endif
+
+  let command = s:command_tests
+  let command = substitute(command, '<project>', project, '')
+  let results = eclim#ExecuteEclim(command)
+  if type(results) != g:LIST_TYPE
+    return []
+  endif
+
+  call filter(results, 'v:val =~ "' . argLead . '"')
+  return results
 endfunction " }}}
 
-" CommandCompleteResult(argLead, cmdLine, cursorPos) {{{
-" Custom command completion for test case results.
-function! eclim#java#junit#CommandCompleteResult(argLead, cmdLine, cursorPos)
+function! eclim#java#junit#CommandCompleteResult(argLead, cmdLine, cursorPos) " {{{
   let cmdTail = strpart(a:cmdLine, a:cursorPos)
   let argLead = substitute(a:argLead, cmdTail . '$', '', '')
 

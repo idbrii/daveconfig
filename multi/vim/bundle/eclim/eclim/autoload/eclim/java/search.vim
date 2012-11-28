@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@
 " Script Varables {{{
   let s:search_src = "java_search"
   let s:search_doc = "java_docsearch"
+  let s:open_doc = "-command java_doc_url_open -u '<url>'"
   let s:search_element =
     \ '-command <search> -n "<project>" -f "<file>" ' .
     \ '-o <offset> -e <encoding> -l <length> <args>'
@@ -155,7 +156,7 @@ function! s:Search(command, ...)
     let result =  eclim#ExecuteEclim(search_cmd, port)
 
     if !in_project && filereadable(expand('%'))
-      return result . "\n" . s:SearchAlternate(argline, 0)
+      return result + s:SearchAlternate(argline, 0)
     endif
   endif
 
@@ -169,7 +170,7 @@ function! s:SearchAlternate(argline, element)
   if a:argline =~ '-t'
     call eclim#util#EchoError
       \ ("Alternate search doesn't support the type (-t) option yet.")
-    return
+    return []
   endif
   let search_pattern = ""
   if a:argline =~ '-x all'
@@ -220,33 +221,36 @@ function! s:SearchAlternate(argline, element)
     let loclist = getloclist(0)
     for entry in loclist
       let bufname = bufname(entry.bufnr)
+      let result = {
+          \ 'filename': bufname,
+          \ 'message': entry.text,
+          \ 'line': entry.lnum,
+          \ 'column': entry.col,
+        \ }
       " when searching for implementors, prevent dupes from the somewhat
-      " greedy pattern search.
-      if a:argline !~ '-x implementors' ||
-          \ !eclim#util#ListContains(results, bufname . '.*')
-        call add(results,
-          \ bufname . "|" . entry.lnum . " col " . entry.col . "|" . entry.text)
+      " greedy pattern search (may need some more updating post conversion to
+      " dict results).
+      if a:argline !~ '-x implementors' || !eclim#util#ListContains(results, result)
+        call add(results, result)
       endif
     endfor
   elseif len(files) > 0
-    " if an element search, filter out results that are not imported.
-    if a:element
-      let results = []
-      for file in files
-        let fully_qualified = eclim#java#util#GetPackage(file) . '.' .
-          \ eclim#java#util#GetClassname(file)
-        if eclim#java#util#IsImported(fully_qualified)
-          call add(results, file . "|1 col 1|" . fully_qualified)
-        endif
-      endfor
-    endif
-    if len(results) == 0
-      call map(files, 'v:val . "|1 col 1|"')
-      let results = files
-    endif
+    for file in files
+      let fully_qualified = eclim#java#util#GetPackage(file) . '.' .
+        \ eclim#java#util#GetClassname(file)
+      " if an element search, filter out results that are not imported.
+      if !a:element || eclim#java#util#IsImported(fully_qualified)
+        call add(results, {
+            \ 'filename': file,
+            \ 'message': fully_qualified,
+            \ 'line': 1,
+            \ 'column': 1,
+          \ })
+      endif
+    endfor
   endif
   call eclim#util#Echo(' ')
-  return join(results, "\n")
+  return results
 endfunction " }}}
 
 " BuildPattern() {{{
@@ -281,7 +285,7 @@ endfunction " }}}
 function! eclim#java#search#SearchAndDisplay(type, args)
   " if running from a non java source file, no SilentUpdate needed.
   if &ft == 'java'
-    call eclim#java#util#SilentUpdate()
+    call eclim#lang#SilentUpdate()
   endif
 
   let argline = a:args
@@ -291,17 +295,18 @@ function! eclim#java#search#SearchAndDisplay(type, args)
     let argline = '-p ' . argline
   endif
 
-  let results = split(s:Search(a:type, argline), '\n')
-  if len(results) == 1 && results[0] == '0'
+  let results = s:Search(a:type, argline)
+  if type(results) != g:LIST_TYPE
     return
   endif
   if !empty(results)
     if a:type == 'java_search'
       call eclim#util#SetLocationList(eclim#util#ParseLocationEntries(results))
+      let locs = getloclist(0)
       " if only one result and it's for the current file, just jump to it.
       " note: on windows the expand result must be escaped
-      if len(results) == 1 && results[0] =~ escape(expand('%:p'), '\') . '|'
-        if results[0] !~ '|1 col 1|'
+      if len(results) == 1 && locs[0].bufnr == bufnr('%')
+        if results[0].line != 1 && results[0].column != 1
           lfirst
         endif
 
@@ -314,7 +319,7 @@ function! eclim#java#search#SearchAndDisplay(type, args)
         call eclim#display#signs#Update()
         call cursor(entry.lnum, entry.col)
       else
-        lopen
+        exec 'lopen ' . g:EclimLocationListHeight
       endif
     elseif a:type == 'java_docsearch'
       let window_name = "javadoc_search_results"
@@ -323,9 +328,10 @@ function! eclim#java#search#SearchAndDisplay(type, args)
 
       if len(results) == 1 && g:EclimJavaDocSearchSingleResult == "open"
         let entry = results[0]
-        call <SID>ViewDoc(entry)
+        call s:ViewDoc(entry)
       else
-        call eclim#util#TempWindow(window_name, results)
+        call eclim#util#TempWindow(
+          \ window_name, results, {'height': g:EclimLocationListHeight})
 
         nnoremap <silent> <buffer> <cr> :call <SID>ViewDoc()<cr>
         augroup temp_window
@@ -356,44 +362,12 @@ endfunction " }}}
 function! s:ViewDoc(...)
   let url = a:0 > 0 ? a:1 : substitute(getline('.'), '\(.\{-}\)|.*', '\1', '')
 
-  " handle javadocs inside of a jar (like those from maven dependencies)
+  " handle javadocs inside of a jar
   if url =~ '^jar:file:.*!'
-    let jarpath = substitute(url, 'jar:file:\(.\{-}\)!.*', '\1', '')
-    let filepath = substitute(url, 'jar:file:.\{-}!\(.*\)', '\1', '')
-    let tempdir = g:EclimTempDir . '/' . fnamemodify(jarpath, ':t')
-    if !isdirectory(tempdir)
-      call mkdir(tempdir)
-    endif
-    if !filereadable(tempdir . filepath)
-      call eclim#util#Echo('Extracting javadocs to temp dir...')
-      let result = ''
-      if executable('unzip')
-        let result = eclim#util#System('unzip -q -d "' . tempdir . '" "' . jarpath . '"')
-      elseif executable('jar')
-        let cwd = getcwd()
-        exec 'cd ' . escape(tempdir, ' ')
-        try
-          let result = eclim#util#System('jar -xf "' . jarpath . '"')
-        finally
-          exec 'cd ' . escape(cwd, ' ')
-        endtry
-      else
-        let result = eclim#util#EchoError("Unable to find 'jar' or 'unzip' in the system path.")
-        return
-      endif
-      if v:shell_error
-        call eclim#util#EchoError('Error extracting jar file: ' . result)
-        return
-      endif
-    endif
-    let path = tempdir . filepath
-    if has('win32unix')
-      let path = eclim#cygwin#WindowsPath(path)
-    endif
-    let url = 'file://' . path
+    call eclim#ExecuteEclim(substitute(s:open_doc, '<url>', url, ''))
+  else
+    call eclim#web#OpenUrl(url)
   endif
-
-  call eclim#web#OpenUrl(url)
 endfunction " }}}
 
 " CommandCompleteJavaSearch(argLead, cmdLine, cursorPos) {{{
@@ -437,7 +411,8 @@ function! eclim#java#search#FindClassDeclaration()
   let class = substitute(line,
     \ '.\{-}\([0-9a-zA-Z_.]*\%' . col('.') . 'c[0-9a-zA-Z_.]*\).*', '\1', '')
   if class != line && class != '' && class =~ '^[a-zA-Z]'
-    exec "JavaSearch -t classOrInterface -p " . class
+    call eclim#java#search#SearchAndDisplay(
+      \ 'java_search', '-t classOrInterface -p ' . class)
   endif
 endfunction " }}}
 

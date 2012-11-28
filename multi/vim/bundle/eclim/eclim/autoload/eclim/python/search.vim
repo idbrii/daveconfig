@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2010  Eric Van Dewoestine
+" Copyright (C) 2005 - 2012  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -45,17 +45,17 @@ function! eclim#python#search#Find(context)
 
   let results =
     \ eclim#python#rope#Find(project, file, offset, encoding, a:context)
-  if type(results) == 0 && results == 0
+  if type(results) == g:NUMBER_TYPE && results == 0
     call eclim#util#SetLocationList([])
     return
   endif
 
   if !empty(results)
     call eclim#util#SetLocationList(eclim#util#ParseLocationEntries(results))
-
+    let locs = getloclist(0)
     " if only one result and it's for the current file, just jump to it.
     " note: on windows the expand result must be escaped
-    if len(results) == 1 && results[0] =~ escape(expand('%:p'), '\') . '|'
+    if len(results) == 1 && locs[0].bufnr == bufnr('%')
       if results[0] !~ '|1 col 1|'
         lfirst
       endif
@@ -70,9 +70,9 @@ function! eclim#python#search#Find(context)
 
       call cursor(entry.lnum, entry.col)
     else
-      lopen
+      exec 'lopen ' . g:EclimLocationListHeight
     endif
-  else
+  elseif has('python')
     call eclim#util#EchoInfo("Element not found.")
   endif
 endfunction " }}}
