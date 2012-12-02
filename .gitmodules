@@ -127,3 +127,6 @@
 [submodule "multi/vim/.vim/bundle/LargeFile"]
 	path = multi/vim/.vim/bundle/LargeFile
 	url = git://github.com/vim-scripts/LargeFile.git
+[submodule "multi/vim/.vim/bundle/diffusable"]
+	path = multi/vim/.vim/bundle/diffusable
+	url = git@github.com:pydave/vim-diffusable.git
