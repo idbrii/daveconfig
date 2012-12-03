@@ -323,6 +323,14 @@ nnoremap <A-space> zA
 " <space> in visual mode creates a fold over the marked range
 "xnoremap <space> zf
 
+" From Paradigm: http://www.reddit.com/r/vim/comments/10cqgd/looking_for_a_languageaware_block_selection/c6cpyrg
+" enable syntax folding for a variety of languages
+"set g:vimsyn_folding = 'afmpPrt'
+" create text object using [z and ]z
+vnoremap if :<C-U>silent!normal![zjV]zk<CR>
+onoremap if :normal Vif<CR>
+vnoremap af :<C-U>silent!normal![zV]z<CR>
+onoremap af :normal Vaf<CR>
 
 """""""""""
 " Abbreviations   {{{1
