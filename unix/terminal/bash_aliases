@@ -69,6 +69,9 @@ alias and_go_sdk='cd $android_sdks/android-sdk-linux/platform-tools'
 
 # Version control
 alias g=git
+# Completion: http://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
+complete -o default -o nospace -F _git g
+
 function init_skeleton {
     cp ../gitignore .gitignore
     git init
