@@ -8,11 +8,10 @@
 ::	2. Type: cmd
 ::	3. Ctrl-Shift-Enter
 ::
-set daveconfig=C:\david\daveconfig
+set daveconfig=C:\david\settings\daveconfig
 
 :: Make daveconfig in the same place everywhere (some scripts rely on this)
-mkdir %USERPROFILE%\data\settings
-mklink /D %USERPROFILE%\data\settings\daveconfig %daveconfig%
+mklink /D %USERPROFILE%\data C:\david
 
 :: Add links
 mklink    %USERPROFILE%\.bash_aliases %daveconfig%\unix\terminal\bash_aliases
