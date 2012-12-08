@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--perforce-xml-version=1.0-->
+<CustomToolDefList varName="customtooldeflist">
+ <CustomToolDef>
+  <Definition>
+   <Name>SyncChangesInCL - Selected</Name>
+   <Command>C:\bin\p4synccl.cmd</Command>
+   <Arguments>%S</Arguments>
+   <InitDir>$r</InitDir>
+  </Definition>
+  <Console>
+   <CloseOnExit>false</CloseOnExit>
+  </Console>
+  <AddToContext>true</AddToContext>
+  <Refresh>true</Refresh>
+ </CustomToolDef>
+ <CustomToolDef>
+  <Definition>
+   <Name>SyncChangesInCL - Input</Name>
+   <Command>C:\bin\p4synccl.cmd</Command>
+   <InitDir>$r</InitDir>
+  </Definition>
+  <Prompt>
+   <PromptText>Changelist:</PromptText>
+  </Prompt>
+  <Console>
+   <CloseOnExit>false</CloseOnExit>
+  </Console>
+ </CustomToolDef>
+</CustomToolDefList>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--perforce-xml-version=1.0-->
+<CustomToolDefList varName="customtooldeflist">
+ <CustomToolDef>
+  <Definition>
+   <Name>p4reconcile</Name>
+   <Command>C:\cygwin\bin\bash.exe</Command>
+   <Arguments>C:\cygwin\usr\local\bin\p4reconcile $p $u $c %d</Arguments>
+   <InitDir>C:\bcg</InitDir>
+  </Definition>
+  <Console>
+   <CloseOnExit>false</CloseOnExit>
+  </Console>
+  <AddToContext>true</AddToContext>
+  <Refresh>true</Refresh>
+ </CustomToolDef>
+</CustomToolDefList>
