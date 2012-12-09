@@ -86,6 +86,10 @@ function init_skeleton {
 function v { $* | view - ; }
 
 function ge { gvim --remote-silent $* ; }
+function gide
+{
+    gvim --servername VIDE --remote-silent $* ;
+}
 function vv { vim --servername VIM $* ; }
 
 function move_and_link() {
