@@ -1,9 +1,9 @@
 " Settings for when vim is invoked from an IDE.
 "
 " VS passes the following arguments to vim:
-"   --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
+"   --servername Vide --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime visualstudioinvoke.vim" $(ItemFileName)$(ItemExt)
 " Eclipse passes:
-"   --servername Viclipse --remote-silent "+runtime visualstudioinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
+"   --servername Vide --remote-silent "+runtime visualstudioinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
 
 " It might be useful to include: +"set path+=$(SolutionDir)/**" 
 
