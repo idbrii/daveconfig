@@ -49,6 +49,6 @@ if has("unix") || has("macunix")
     setlocal tags+=$HOME/.vim/tags/python.ctags
 else
     "" Windows
-    setlocal tags+=$HOME/vimfiles/tags/python.ctags
+    setlocal tags+=$HOME/.vim/tags/python.ctags
 endif
 
