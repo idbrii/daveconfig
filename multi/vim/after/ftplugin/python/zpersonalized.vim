@@ -52,3 +52,6 @@ else
     setlocal tags+=$HOME/.vim/tags/python.ctags
 endif
 
+" Don't bother with pyflakes, it usually doesn't work anyway.
+" See: https://groups.google.com/d/msg/eclim-user/KAXASg8t9MM/3HZn3fqZnJMJ
+let g:eclim_python_pyflakes_warn = 0
