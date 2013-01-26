@@ -133,3 +133,6 @@
 [submodule "multi/vim/.vim/bundle/bufexplorer"]
 	path = multi/vim/.vim/bundle/bufexplorer
 	url = git://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "multi/vim/.vim/bundle/ultisnips"]
+	path = multi/vim/.vim/bundle/ultisnips
+	url = git://github.com/SirVer/ultisnips.git
