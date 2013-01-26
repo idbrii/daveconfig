@@ -130,3 +130,6 @@
 [submodule "multi/vim/bundle/diffusable"]
 	path = multi/vim/bundle/diffusable
 	url = git@github.com:pydave/vim-diffusable.git
+[submodule "multi/vim/bundle/bufexplorer"]
+	path = multi/vim/bundle/bufexplorer
+	url = git://github.com/vim-scripts/bufexplorer.zip.git
