@@ -367,6 +367,14 @@ let b:loaded_magic_make = 1
 " Renamer
 let g:RenamerSupportColonWToRename = 1
 
+" Snippets -- Simplify commands. I rarely Expand. Instead I usually list and
+" then complete.
+let g:UltiSnipsExpandTrigger       = '<C-j>'
+let g:UltiSnipsListSnippets        = '<C-r><C-j>'
+let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+
 " Gundo -- visualize the undo tree
 nnoremap <F2> :GundoToggle<CR>
 
@@ -375,7 +383,7 @@ nnoremap <F2> :GundoToggle<CR>
 xmap c <Plug>VSurround
 xmap C <Plug>VSurround
 
-" \ surrounds with anything. (Replaces latext map that I don't use except by
+" \ surrounds with anything. (Replaces latex map that I don't use except by
 " accident.)
 let g:surround_92 = "\1Surround with: \1 \r \1\1"
 augroup SurroundCustom
