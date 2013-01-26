@@ -136,3 +136,6 @@
 [submodule "multi/vim/.vim/bundle/ultisnips"]
 	path = multi/vim/.vim/bundle/ultisnips
 	url = git://github.com/SirVer/ultisnips.git
+[submodule "multi/vim/.vim/bundle/david-snippets"]
+	path = multi/vim/.vim/bundle/david-snippets
+	url = git@github.com:pydave/vim-david-snippets.git
