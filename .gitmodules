@@ -73,12 +73,6 @@
 [submodule "multi/vim/.vim/bundle/NrrwRgn"]
 	path = multi/vim/.vim/bundle/NrrwRgn
 	url = git://github.com/chrisbra/NrrwRgn.git
-[submodule "multi/vim/.vim/bundle/VimOrganizer"]
-	path = multi/vim/.vim/bundle/VimOrganizer
-	url = git@github.com:pydave/VimOrganizer.git
-[submodule "multi/vim/.vim/bundle/calendar"]
-	path = multi/vim/.vim/bundle/calendar
-	url = git@github.com:pydave/calendar-vim.git
 [submodule "multi/vim/.vim/bundle/eunuch"]
 	path = multi/vim/.vim/bundle/eunuch
 	url = git@github.com:pydave/vim-eunuch.git
