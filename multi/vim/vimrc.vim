@@ -300,7 +300,7 @@ inoremap <C-S-Tab> <C-d>
 " Shadow: Improve existing commands {{{2
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
+" so that you can undo CTRL-U without undoing what you typed before it.
 inoremap <C-U> <C-G>u<C-U>
 
 " CTRL-g shows filename and buffer number, too.
