@@ -168,8 +168,8 @@ au!
 		\ endif
 
     " Commenting blocks
-    autocmd FileType build,xml,html xmap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
-    autocmd FileType java,c,cpp,cs  xmap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
+    autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
+    autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
 
 	" Switch to the directory of the current file, unless it's a help file.
@@ -217,11 +217,11 @@ nnoremap <Leader><F1> :sp ~/.todo.org<CR>
 " Building {{{1
 
 " Easy make
-nmap <Leader>\| :make<up><CR>
+nnoremap <Leader>\| :make<up><CR>
 "ounmap <Leader>\|
 " For async make. Don't have to hit enter after running make.
-nmap <S-F5> :silent make 
-nmap <F5> :make 
+nnoremap <S-F5> :silent make 
+nnoremap <F5> :make 
 
 " If available, use scons instead of make. -u is upward search for root
 " SConstruct.
@@ -240,7 +240,7 @@ set tags=./tags;/
 set cscopepathcomp=3
 
 " Toggle the tag list bar
-nmap <F4> :TlistToggle<CR>
+nnoremap <F4> :TlistToggle<CR>
 
 " Open preview window for tags (just jump with <C-]>)
 nnoremap <A-]> :ptag <C-r><C-w><CR>
@@ -254,7 +254,7 @@ cabbrev Cscope AsyncCscopeFindSymbol
 
 " Common text {{{1
 
-nmap <C-s> :w<CR>
+nnoremap <C-s> :w<CR>
 
 " Underscores are like visible spaces. So the alt version of space is
 " underscore.
@@ -272,14 +272,17 @@ let g:speeddating_no_mappings = 1
 nnoremap <C-a> 1GVG
 
 " Make backspace work in normal
-nmap <BS> X
+nnoremap <BS> X
+
+" Make cw consistent with dw?
+"nnoremap cw dwi
 
 " undo a change in the previous window - often used for diff
 nnoremap <C-w>u :wincmd p <bar> undo <bar> wincmd p <bar> diffupdate<CR>
 
 " Generic Header comments (requires formatoptions+=r)
 "  Uses vim's commentstring to figure out the local comment character
-nmap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
+nnoremap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
 
 " Indent {{{2
 " Use Ctrl-Tab/Tab and Shift-Tab to change indent in visual
