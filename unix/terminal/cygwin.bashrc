@@ -12,6 +12,7 @@ stty stop ""
 
 export PATH=/bin:/usr/local/bin:/usr/bin:$PATH
 
-# I don't have cygwin vim installed, but I can run Windows gvim and it blocks
-export EDITOR="gvim --nofork"
+# I don't have cygwin vim installed, but I can run Windows gvim and it blocks.
+# --nofork doesn't seem to be required.
+export EDITOR=gvim
 export GIT_EDITOR=$EDITOR
