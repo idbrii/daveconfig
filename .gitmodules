@@ -133,3 +133,6 @@
 [submodule "multi/vim/bundle/orgmode"]
 	path = multi/vim/bundle/orgmode
 	url = git://github.com/jceb/vim-orgmode.git
+[submodule "multi/vim/bundle/scriptease"]
+	path = multi/vim/bundle/scriptease
+	url = git://github.com/tpope/vim-scriptease.git
