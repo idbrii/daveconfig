@@ -136,3 +136,6 @@
 [submodule "multi/vim/.vim/bundle/scriptease"]
 	path = multi/vim/.vim/bundle/scriptease
 	url = git://github.com/tpope/vim-scriptease.git
+[submodule "multi/vim/.vim/bundle/sensible"]
+	path = multi/vim/.vim/bundle/sensible
+	url = git://github.com/tpope/vim-sensible.git
