@@ -1,9 +1,6 @@
 [submodule "multi/vim/.vim/bundle/slime"]
 	path = multi/vim/.vim/bundle/slime
 	url = git://github.com/jpalardy/vim-slime.git
-[submodule "multi/vim/.vim/bundle/snipmate"]
-	path = multi/vim/.vim/bundle/snipmate
-	url = git@github.com:pydave/snipmate.vim.git
 [submodule "multi/vim/.vim/bundle/surround"]
 	path = multi/vim/.vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
