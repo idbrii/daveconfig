@@ -216,10 +216,14 @@ nnoremap <Leader><F1> :sp ~/.todo.org<CR>
 
 " Building {{{1
 
+" Easy cmdline run
+"nnoremap <Leader>\ :!<up><CR>
+
 " Easy make
-nnoremap <Leader>\| :make<up><CR>
-"ounmap <Leader>\|
-" For async make. Don't have to hit enter after running make.
+"nnoremap <Leader>\| :make<up><CR>
+
+" Using silent prevents possible output that requires hitting enter to clear
+" every time I run make.
 nnoremap <S-F5> :silent make 
 nnoremap <F5> :make 
 
