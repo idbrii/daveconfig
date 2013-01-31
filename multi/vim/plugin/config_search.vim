@@ -50,10 +50,6 @@ nmap <Leader>/ :call <SID>ToggleWholeWord()<CR>n
 " Easy grep for current query
 nmap <Leader>* :grep -e "<C-r>/" *
 
-" Easy cmdline run (normal, visual)
-map <Leader>\ :!<up><CR>
-ounmap <Leader>\
-
 
 if executable('grep')
     " We always want grep (not findstr). Use -H so it works on a single file.
