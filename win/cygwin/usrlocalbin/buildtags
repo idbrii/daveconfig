@@ -107,6 +107,7 @@ else
 	# you try to rename the files (mv cscope.in.out cscope.out.in), cscope will
 	# stop working (you'll get errors about your database being invalid).
 	# [1] https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=602738
+	# TODO: cygwin replaced mlcscope with cscope. Does it still have this problem?
 fi
 
 # }}}

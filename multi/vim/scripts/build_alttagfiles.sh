@@ -73,6 +73,7 @@ case $OSTYPE in
 	cygwin*)
 	# mlcscope needs full paths, so replace the relative path with the fully
 	# qualified path
+	# TODO: cygwin replaced mlcscope with cscope. Does it still have this problem?
 	sed -i -e"s|^\./|$tagdir/|" $tagfile
 ;;
 	*)

@@ -21,8 +21,10 @@ let g:cpp_header_n_dir_to_trim = 8
 
 " Setup cscope for general use
 if has("cscope")
-    " using mlcscope from cygwin
-    set cscopeprg=mlcscope
+    " Sometimes cscope is replaced with mlcscope (old cygwin).
+	if !executable(&cscopeprg) && executable('mlcscope')
+		set cscopeprg=mlcscope
+	endif
 
     """"" Load cscope database if we can
     " disable verbose for our initial load
