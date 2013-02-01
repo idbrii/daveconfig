@@ -79,6 +79,10 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_prompt_mappings = { 'PrtAdd(".*")': ['<space>'] }
 let g:ctrlp_lazy_update = 100
 
+" I don't keep persistent file explorers, so allow them to be re-used (likely
+" I opened them and then decided to use ctrlp instead).
+let g:ctrlp_reuse_window = 'netrw\|bufexplorer'
+
 " I generate a filelist file in the root of my project that tells me where all
 " the interesting files are. That's far faster than searching.
 if has("win32")
