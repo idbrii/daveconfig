@@ -472,6 +472,10 @@ let g:calendar_no_mappings = 1
 let g:itchy_always_split = 1
 "issue #1: let g:itchy_startup = 1
 
+" Quick access to a Scratch and a Scratch of the current filetype
+nnoremap <Leader>ss :Scratch<CR>
+nnoremap <Leader>sf :exec 'Scratch '. &filetype<CR>
+
 " Golden-ratio
 " Don't resize automatically.
 let g:golden_ratio_autocommand = 0
