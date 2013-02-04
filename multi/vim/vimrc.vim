@@ -255,6 +255,7 @@ nmap <C-\><C-\> <C-\>s
 
 " AsyncCommand
 cabbrev Cscope AsyncCscopeFindSymbol
+let g:asynccommand_statusline_autohide = 1
 
 " Common text {{{1
 
