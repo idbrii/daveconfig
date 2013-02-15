@@ -15,7 +15,7 @@ function! s:P4Checkout(root, path)
 	endif
 endfunction
 
-function! P4CheckoutFilesInGitCommit()
+function! perforce#david#P4CheckoutFilesInGitCommit()
     let line = getline('.')
     let line = substitute(line, '^#\s*\w*:\s*', '', '')
 
@@ -30,7 +30,7 @@ function! P4CheckoutFilesInGitCommit()
 	call s:P4Checkout(root, line)
 endfunction
 
-function! P4CheckoutFilesInGitDiff()
+function! perforce#david#P4CheckoutFilesInGitDiff()
     let bareline = getline('.')
     let line = substitute(bareline, '^diff.*\sb/', '', '')
 	if len(bareline) == len(line)
