@@ -1,7 +1,5 @@
 """ Some python code for use in vim
 """
-""" vim: set ft=python :
-"""
 
 if exists('loaded_pycode')
     finish
