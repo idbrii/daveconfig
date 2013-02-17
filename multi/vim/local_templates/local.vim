@@ -5,6 +5,13 @@
 iabbrev _me pydave (pydave@gmail.com)
 iabbrev _company pydave
 
+
+" Some tools that depend on system packages and complain if they're not
+" installed. If you don't use them, then set these to skip loading.
+let loaded_python_bike = 0
+let loaded_python_ipy = 0
+let loaded_python_rope = 0
+
 " Perforce
 let g:p4Presets = 'perforce:1666 pydave_client pydave'
 let g:external_diff = 'bcomp.bat'
