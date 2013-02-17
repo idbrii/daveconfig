@@ -45,12 +45,7 @@ xnoremap <buffer> <C-o> :s/^/#<CR>:silent nohl<CR>
 set complete-=i
 
 "" Stdlib tags
-if has("unix") || has("macunix")
-    setlocal tags+=$HOME/.vim/tags/python.ctags
-else
-    "" Windows
-    setlocal tags+=$HOME/.vim/tags/python.ctags
-endif
+setlocal tags+=$HOME/.vim/tags/python.ctags
 
 " Don't bother with pyflakes, it usually doesn't work anyway.
 " See: https://groups.google.com/d/msg/eclim-user/KAXASg8t9MM/3HZn3fqZnJMJ
