@@ -1,75 +1,61 @@
 " ipython connectivity
 "
-" Applied as described here:
-"   http://ipython.scipy.org/moin/Cookbook/IPythonGVim
+" Requires:
+"   aptinstall ipython python-zmq
+"   cd /usr/share/doc/ipython/examples/vim
+"   zcat ipy.vim.gz | sudo tee ipy.vim > /dev/null
 "
-" apt-file find ipy.vim
-" ipython: /usr/share/doc/ipython/examples/vim/ipy.vim.gz
+" Usage:
+"   From a shell:
+"       ipython kernel
+"   Copy the connection string, like: --existing kernel-14799.json
+"   From vim:
+"       :IPython <connection-string>
+"   Example: 
+"       :IPython --existing kernel-14799.json
 
-if !exists("$IPY_SESSION")
+
+if &cp
     finish
 endif
 
-" set up the python interpreter within vim, to have all the right modules
-" imported, as well as certain useful globals set
-python import socket
-python import os
-python import vim
-python IPYSERVER = None
+" Maps <C-s> and doesn't only map to the local buffer.
+let g:ipy_perform_mappings = 0
 
-python << EOF
-# do we have a connection to the ipython instance?
-def check_server():
-    global IPYSERVER
-    if IPYSERVER:
-        return True
-    else:
-        return False
+if !exists('loaded_python_ipy')
+    let loaded_python_ipy = david#load_system_vimscript('/usr/share/doc/ipython/examples/vim/ipy.vim')
+endif
 
-# connect to the ipython server, if we need to
-def connect():
-    global IPYSERVER
-    if check_server():
-        return
-    try:
-        IPYSERVER = socket.socket(socket.AF_UNIX)
-        IPYSERVER.connect(os.environ.get('IPY_SERVER'))
-    except:
-        IPYSERVER = None
+if loaded_python_ipy
+    map <silent> <F5> :python run_this_file()<CR>
+    map <silent> <S-F5> :python run_this_line()<CR>
+    map <silent> <F9> :python run_these_lines()<CR>
+    map <silent> <leader>d :py get_doc_buffer()<CR>
+    map <silent> <leader>s :py update_subchannel_msgs(); echo("vim-ipython shell updated",'Operator')<CR>
+    map <silent> <S-F9> :python toggle_reselect()<CR>
+    "map <silent> <C-F6> :python send('%pdb')<CR>
+    "map <silent> <F6> :python set_breakpoint()<CR>
+    "map <silent> <s-F6> :python clear_breakpoint()<CR>
+    "map <silent> <F7> :python run_this_file_pdb()<CR>
+    "map <silent> <s-F7> :python clear_all_breaks()<CR>
+    imap <C-F5> <C-O><F5>
+    imap <S-F5> <C-O><S-F5>
+    imap <silent> <F5> <C-O><F5>
+    map <C-F5> :call <SID>toggle_send_on_save()<CR>
+    "" Example of how to quickly clear the current plot with a keystroke
+    map <silent> <F12> :python run_command("plt.clf()")<cr>
+    "" Example of how to quickly close all figures with a keystroke
+    map <silent> <F11> :python run_command("plt.close('all')")<cr>
 
-def disconnect():
-    if IPYSERVER:
-        IPYSERVER.close()
-
-def send(cmd):
-    x = 0
-    while True:
-        x += IPYSERVER.send(cmd)
-        if x < len(cmd):
-            cmd = cmd[x:]
-        else:
-            break
-
-def run_this_file():
-    if check_server():
-        send('run %s' % (vim.current.buffer.name,))
-    else:
-        raise Exception, "Not connected to an IPython server"
-EOF
-
-fun! <SID>toggle_send_on_save()
-    if exists("s:ssos") && s:ssos == 1
-        let s:ssos = 0
-        au! BufWritePost *.py :py run_this_file()
-        echo "Autosend Off"
-    else
-        let s:ssos = 1
-        au BufWritePost *.py :py run_this_file()
-        echo "Autowsend On"
-    endif
-endfun
-
-noremap <silent> <F5> :python run_this_file()<CR>
-inoremap <silent> <C-F5> <ESC><F5>a
-noremap <F7> :call <SID>toggle_send_on_save()<CR>
-py connect()
+    "pi custom
+    map <silent> <C-Return> :python run_this_file()<CR>
+    map <silent> <C-s> :python run_this_line()<CR>
+    imap <silent> <C-s> <C-O>:python run_this_line()<CR>
+    map <silent> <M-s> :python dedent_run_this_line()<CR>
+    vmap <silent> <C-S> :python run_these_lines()<CR>
+    vmap <silent> <M-s> :python dedent_run_these_lines()<CR>
+    map <silent> <M-c> I#<ESC>
+    vmap <silent> <M-c> I#<ESC>
+    map <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
+    vmap <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
+endif
