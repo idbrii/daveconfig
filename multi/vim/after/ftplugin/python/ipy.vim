@@ -69,7 +69,7 @@ fun! <SID>toggle_send_on_save()
     endif
 endfun
 
-map <silent> <F5> :python run_this_file()<CR>
-imap <silent> <C-F5> <ESC><F5>a
-map <F7> :call <SID>toggle_send_on_save()<CR>
+noremap <silent> <F5> :python run_this_file()<CR>
+inoremap <silent> <C-F5> <ESC><F5>a
+noremap <F7> :call <SID>toggle_send_on_save()<CR>
 py connect()

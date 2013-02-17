@@ -32,7 +32,7 @@ def SetBreakpoint():
             vim.current.buffer.append( 'import pdb', 0)
             vim.command( 'normal j1')
 
-vim.command( 'map <f9> :py SetBreakpoint()<cr>')
+vim.command( 'noremap <F9> :py SetBreakpoint()<CR>')
 
 def RemoveBreakpoints():
     import re
@@ -56,7 +56,7 @@ def RemoveBreakpoints():
 
     vim.command( 'normal %dG' % nCurrentLine)
 
-vim.command('map <s-f9> :py RemoveBreakpoints()<cr>')
+vim.command('noremap <S-F9> :py RemoveBreakpoints()<CR>')
 
 import os
 import sys
@@ -71,7 +71,7 @@ import vim
 def EvaluateCurrentRange():
     eval(compile('\n'.join(vim.current.range),'','exec'),globals())
 
-vim.command('map <C-h> :py EvaluateCurrentRange()<CR>')
+vim.command('noremap <C-h> :py EvaluateCurrentRange()<CR>')
 
 EOF
 endif

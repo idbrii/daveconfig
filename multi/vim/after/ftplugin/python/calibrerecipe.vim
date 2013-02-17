@@ -5,7 +5,7 @@ let loaded_calibrerecipe = 1
 
 function s:Calibre()
     setlocal makeprg=scons
-    nmap <buffer> <F5> :AsyncMake 
+    noremap <buffer> <F5> :AsyncMake 
 endfunction
 
 au BufNewFile,BufRead *.recipe			call s:Calibre()
