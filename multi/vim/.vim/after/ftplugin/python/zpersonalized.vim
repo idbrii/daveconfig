@@ -13,10 +13,7 @@ setlocal cindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 "" simple indent-based folding
 setlocal foldmethod=indent
 
-"" Use an errorformat that matches Python's stack trace.
-setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-"" Run :make to launch the script and load runtime errors in quickfix.
-setlocal makeprg=python\ -t\ %
+compiler python
 
 function! PyCompileCheck()
     " Finds syntax errors in the current file and adds them to the quickfix.
