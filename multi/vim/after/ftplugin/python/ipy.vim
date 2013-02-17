@@ -4,7 +4,7 @@
 "   http://ipython.scipy.org/moin/Cookbook/IPythonGVim
 "
 " apt-file find ipy.vim
-" ipython: /usr/share/doc/ipython/examples/core/ipy.vim
+" ipython: /usr/share/doc/ipython/examples/vim/ipy.vim.gz
 
 if !exists("$IPY_SESSION")
     finish
