@@ -20,10 +20,15 @@ function! PyCompileCheck()
     " This isn't really necessary with eclim since it does auto syntax
     " checking.
 
-    let l:makeprg = &makeprg
-    setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+    if exists('g:current_compiler')
+        let last_compiler = g:current_compiler
+        unlet g:current_compiler
+    endif
+    compiler py_compile
     make
-    let &makeprg = l:makeprg
+    if exists('last_compiler')
+        exec 'compiler '. last_compiler
+    endif
 endfunction
 
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
