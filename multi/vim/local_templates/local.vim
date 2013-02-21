@@ -4,7 +4,16 @@
 " Set a different name for this location
 iabbrev _me pydave (pydave@gmail.com)
 iabbrev _company pydave
+if has('win32')
+	let g:snips_author = '$USERNAME'
+else
+	let g:snips_author = '$USER'
+endif
 
+" If I don't have eclipse, I'll want to turn off eclim. TODO: Use
+" !executable('eclipse')?
+let g:EclimDisabled = 1
+let loaded_taglist = 1
 
 " Some tools that depend on system packages and complain if they're not
 " installed. If you don't use them, then set these to skip loading.
@@ -23,8 +32,24 @@ let g:p4EnableRuler = 0
 " Enable my p4 customizations
 let g:DAVID_local_root = "c:/p4/main"
 
+
+" Also exclude logs
+" TODO: For this to work, local.vim needs to be sourced after
+" config_navigation.vim
+let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\\|\\build\\.*\\logfiles\\'
+let g:ctrlp_mruf_case_sensitive = 0
+let loaded_android_ctrlp = 1
+
+
 " If most code has a path like: p4\game\main\packages\core\game\dev\src\
 let g:cpp_header_n_dir_to_trim = 8
+" After first or last include?
+"let g:cpp_header_after_first_include = 1
+
+if has('win32')
+	" Prefer unix even though we're on Windows.
+	set fileformats=unix,dos
+endif
 
 " Setup cscope for general use
 if has("cscope")
@@ -55,3 +80,10 @@ if has("cscope")
     set cscopeverbose
 
 endif
+
+" If python is not in the path (because that breaks build pipeline), but vim
+" plugins need python, setup python's paths in vim. Any build scripts called
+" from vim need to clear these variables.
+let $PYTHONHOME = $MY_PYTHONHOME
+let $PYTHONPATH = $PYTHONHOME . "/Lib"
+let $PATH = $PATH . ';' . $PYTHONHOME
