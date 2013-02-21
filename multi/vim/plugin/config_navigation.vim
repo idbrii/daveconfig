@@ -119,6 +119,10 @@ nnoremap <unique> <C-o>r :CtrlPRegister<CR>
 " You still need to type <C-\>s to populate the name.
 nnoremap <Leader><A-o> :let @/ = '\<'. expand('%:t:r') .'\>'<Bar> CtrlP<CR>
 
+" Code Search version of find symbol (finds text, not symbol).
+" Faster than cscope.
+nnoremap <unique> <Leader><A-S-g> :NotGrep <C-r>=expand('<cword>')<CR><CR>
+
 " Netrw plugin -- Navigate filesystems {{{1
 " Make \e like \be but for netrw
 nnoremap <Leader>e :Explore<CR>
