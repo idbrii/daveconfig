@@ -1,6 +1,6 @@
 " Author:	DBriscoe (pydave@gmail.com)
 " Influences:
-"	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
+"	* JAnderson: http://sontek.net/blog/detail/turning-vim-into-a-modern-python-ide
 "	* MacVim's defaults: http://macvim.org/OSX/index.php
 " Notes:
 " mapping Tab in normal mode breaks cscope -- adds tabs when you jump somewhere
