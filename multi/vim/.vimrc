@@ -149,8 +149,10 @@ nnoremap <C-g><C-g>  :let last_search=@/<Bar> ?^\w? mark c<Bar> noh<Bar> echo ge
 
 
 " Command Line {{{1
-set wildmenu                " Autocomplete features in the status bar
-set wildmode=longest,list,full
+" Autocomplete in cmdline: Give longest completion with list of options then
+" tab through options.
+set wildmenu
+set wildmode=longest:list,full
 
 " Autocommands {{{1
 if has("autocmd")
