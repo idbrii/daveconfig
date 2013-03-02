@@ -177,8 +177,10 @@ au!
     " Use <S-space> to reload the buffer if you want to cd.
 	au BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
 
+    " Disabled: I use the preview window for more than just omnicompletion, so
+    " maybe killing it so easily doesn't make sense.
 	" kill calltip window if we leave insert mode
-	au InsertLeave * if pumvisible() == 0|silent! pclose|endif
+	"au InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 	augroup END
 endif
