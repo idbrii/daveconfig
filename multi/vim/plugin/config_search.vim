@@ -11,8 +11,8 @@ set path+=./**
 
 
 " Magic global search (see smagic)
-nmap gs :%sm/
-xmap gs :sm/
+nnoremap gs :%sm/
+xnoremap gs :sm/
 
 " <C-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
@@ -29,8 +29,8 @@ xnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
 xnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
 " Quickly find todo items
-nmap <Leader>t :vimgrep "\CTODO" %<CR>
-nmap <Leader>T :grep TODO -R .
+nnoremap <Leader>t :vimgrep "\CTODO" %<CR>
+nnoremap <Leader>T :grep TODO -R .
 
 " Redo search with whole word toggled
 function! <SID>ToggleWholeWord()
@@ -45,10 +45,10 @@ function! <SID>ToggleWholeWord()
     endif
     let @/ = search
 endfunction
-nmap <Leader>/ :call <SID>ToggleWholeWord()<CR>n
+nnoremap <Leader>/ :call <SID>ToggleWholeWord()<CR>n
 
 " Easy grep for current query
-nmap <Leader>* :grep -e "<C-r>/" *
+nnoremap <Leader>* :grep -e "<C-r>/" *
 
 
 if executable('grep')
