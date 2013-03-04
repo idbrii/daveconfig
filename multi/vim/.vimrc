@@ -173,6 +173,8 @@ au!
     autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
     autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
+    " In cmdwin, Tab is the smart completion method.
+	autocmd CmdwinEnter * inoremap <buffer> <C-Space> <C-x><C-v>
 
 	" Switch to the directory of the current file, unless it's a help file.
     " Could use BufEnter instead, but then we have constant changing pwd.
