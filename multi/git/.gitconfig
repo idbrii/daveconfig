@@ -2,9 +2,10 @@
 	name = pydave
 	email = pydave@gmail.com
 	signingkey = D4D6822E
-[github]
-	user = pydave
-	token = f5a89d4ec402edcb927fda7462b88774
+[include]
+    # Do not store github or giggle information in this file! Instead, store
+    # them in a computer-local config file.
+	path = ~/.gitconfig.local
 [color]
 	diff = auto
 	status = auto
@@ -46,11 +47,6 @@
 [core]
 	excludesfile = ~/.gitignore
 	autocrlf = input
-[giggle]
-	compact-mode = false
-	main-window-maximized = true
-	main-window-geometry = 0x0+0+0
-	main-window-view = HistoryView
 [branch]
 	autosetupmerge = true
 [web]
