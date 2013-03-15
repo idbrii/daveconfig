@@ -69,3 +69,7 @@ endfunction
 setlocal foldmethod=expr
 setlocal foldexpr=FoldGitCommit(v:lnum)
 
+" Git commits are text and syntax is smart enough to only check the commit
+" message.
+setlocal spell
+
