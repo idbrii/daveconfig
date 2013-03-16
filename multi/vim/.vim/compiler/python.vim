@@ -25,7 +25,7 @@ CompilerSet makeprg=python\ -t\ %
 " Pull the full stacktrace into qf so you can step through the error
 " locations.
 CompilerSet errorformat=
-            \%A\ \ File\ \"%f\"\,\ line\ %l%.%#,
+            \%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,
             \%Z\ \ \ \ %m
 
 
