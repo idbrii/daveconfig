@@ -28,6 +28,18 @@ CompilerSet errorformat=
             \%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,
             \%Z\ \ \ \ %m
 
+" Found this in .vim/after/plugin/asynccommand_python.vim. It has extra stuff
+" for SyntaxErrors (%p is for the pointer to the error column). I can't get it
+" to work.
+" " Source: http://www.vim.org/scripts/script.php?script_id=477
+" setlocal errorformat=
+"     \%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
+"     \%C\ \ \ \ %.%#,
+"     \%+Z%.%#Error\:\ %.%#,
+"     \%A\ \ File\ \"%f\"\\\,\ line\ %l,
+"     \%+C\ \ %.%#,
+"     \%-C%p^,
+"     \%Z%m
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
