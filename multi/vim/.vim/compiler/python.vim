@@ -22,11 +22,28 @@ set cpo-=C
 "
 CompilerSet makeprg=python\ -t\ %
 
-" Pull the full stacktrace into qf so you can step through the error
-" locations.
+" Use each file and line of Tracebacks (to see and step through the code executing).
+" Include failed toplevel doctest example.
+" Ignore big star lines from doctests.
+" Ignore most of doctest summary. x2
 CompilerSet errorformat=
-            \%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,
-            \%Z\ \ \ \ %m
+      \%A%\\s%#File\ \"%f\"\\,\ line\ %l\\,\ in%.%#,
+      \%+CFailed\ example:%.%#,
+      \%Z%*\\s\ \ \ %m,
+      \%-G*%\\{70%\\},
+      \%-G%*\\d\ items\ had\ failures:,
+      \%-G%*\\s%*\\d\ of%*\\s%*\\d\ in%.%#
+
+" I don't use \%-G%.%# to remove extra output because most of it is useful as
+" context for the actual error message. I also don't include %+G because
+" they're unnecessary if I'm not squelching most output.
+" If I was using %+G, I'd probably want something like these. There are so
+" many, that I don't bother.
+"      \%+GTraceback%.%#,
+"      \%+G%*\\wError%.%#,
+"      \%+G***Test\ Failed***%.%#
+"      \%+GExpected%.%#,
+"      \%+GGot:%.%#,
 
 " Found this in .vim/after/plugin/asynccommand_python.vim. It has extra stuff
 " for SyntaxErrors (%p is for the pointer to the error column). I can't get it
