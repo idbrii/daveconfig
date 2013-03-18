@@ -346,6 +346,14 @@ onoremap if :normal Vif<CR>
 vnoremap af :<C-U>silent!normal![zV]z<CR>
 onoremap af :normal Vaf<CR>
 
+" Create text objects for pairs of identical characters
+for char in [ '$', '%', '*', ',', '-', '_', '.', '/', ':', ';', '<bar>', '<bslash>', '=' ]
+	exec 'xnoremap i' . char . ' :<C-U>silent!normal!T' . char . 'vt' . char . '<CR>'
+	exec 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+	exec 'xnoremap a' . char . ' :<C-U>silent!normal!F' . char . 'vf' . char . '<CR>'
+	exec 'onoremap a' . char . ' :normal va' . char . '<CR>'
+endfor
+
 """""""""""
 " Abbreviations   {{{1
 "" Command
