@@ -172,9 +172,6 @@ au!
     autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
     autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
-    " In cmdwin, Tab is the smart completion method.
-	autocmd CmdwinEnter * inoremap <buffer> <C-Space> <C-x><C-v>
-
 	" Switch to the directory of the current file, unless it's a help file.
     " Could use BufEnter instead, but then we have constant changing pwd.
     " Use <S-space> to reload the buffer if you want to cd.
@@ -332,6 +329,7 @@ set foldnestmax=3           " At deepest, fold blocks within class methods
 
 " <space> toggles folds opened and closed
 nnoremap <space> za
+" TODO: I don't think this works in ubuntu. Maybe <Leader><Space> is better?
 nnoremap <A-space> zA
 
 " <space> in visual mode creates a fold over the marked range
