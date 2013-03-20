@@ -93,18 +93,26 @@ endif
 
 " Remove all text except what matches the current search result.
 " The opposite of :%s///g (which clears all instances of the current search).
-function! s:ClearAllButMatches()
+function! s:ClearAllButMatches() range
+    let is_whole_file = a:firstline == 1 && a:lastline == line('$')
+
     let old_c = @c
 
     let @c=""
-    %sub//\=setreg('C', submatch(0), 'l')/g
-    %delete _
-    put c
-    0delete _
+    exec a:firstline .','. a:lastline .'sub//\=setreg("C", submatch(0), "l")/g'
+    exec a:firstline .','. a:lastline .'delete _'
+    put! c
+
+    " I actually want the above to replace the whole selection with c, but I'll
+    " settle for removing the blank line that's left when deleting the file
+    " contents.
+    if is_whole_file
+        $delete _
+    endif
 
     let @c = old_c
 endfunction
-command ClearAllButMatches call s:ClearAllButMatches()
+command! -range=% ClearAllButMatches <line1>,<line2>call s:ClearAllButMatches()
 
 "}}}
 
