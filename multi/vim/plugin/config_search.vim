@@ -91,8 +91,9 @@ endif
 """""""""""
 " Commands {{{1
 
-" Remove all text except what matches the current search result.
-" The opposite of :%s///g (which clears all instances of the current search).
+" Remove all text except what matches the current search result. Will put each
+" match on its own line. This is the opposite of :%s///g (which clears all
+" instances of the current search).
 function! s:ClearAllButMatches() range
     let is_whole_file = a:firstline == 1 && a:lastline == line('$')
 
