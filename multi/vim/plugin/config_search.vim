@@ -89,18 +89,22 @@ else
 endif
 
 """""""""""
-" Functions {{{1
+" Commands {{{1
 
-" Remove all text except what matches the current search result
-" The opposite of :%s///g (which clears all instances of the current search.
-" Note: Clobbers the c register
-function! ClearAllButMatches()
+" Remove all text except what matches the current search result.
+" The opposite of :%s///g (which clears all instances of the current search).
+function! s:ClearAllButMatches()
+    let old_c = @c
+
     let @c=""
-    %s//\=setreg('C', submatch(0), 'l')/g
-    %d _
+    %sub//\=setreg('C', submatch(0), 'l')/g
+    %delete _
     put c
-    0d _
+    0delete _
+
+    let @c = old_c
 endfunction
+command ClearAllButMatches call s:ClearAllButMatches()
 
 "}}}
 
