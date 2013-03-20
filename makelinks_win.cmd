@@ -14,19 +14,20 @@ set daveconfig=C:\david\settings\daveconfig
 mklink /D %USERPROFILE%\data C:\david
 
 :: Add links
-mklink    %USERPROFILE%\.bash_aliases %daveconfig%\unix\terminal\bash_aliases
-mklink    %USERPROFILE%\.bashrc       %daveconfig%\unix\terminal\bashrc
-mklink    %USERPROFILE%\.screenrc     %daveconfig%\unix\terminal\screenrc
+mklink    %USERPROFILE%\.bash_aliases    %daveconfig%\unix\terminal\bash_aliases
+mklink    %USERPROFILE%\.bashrc          %daveconfig%\unix\terminal\bashrc
+mklink    %USERPROFILE%\.screenrc        %daveconfig%\unix\terminal\screenrc
 
-mklink /D %USERPROFILE%\.vim          %daveconfig%\multi\vim\.vim
-mklink    %USERPROFILE%\.gvimrc       %daveconfig%\multi\vim\.gvimrc
-mklink    %USERPROFILE%\.vimrc        %daveconfig%\multi\vim\.vimrc
+mklink /D %USERPROFILE%\.vim             %daveconfig%\multi\vim\.vim
+mklink    %USERPROFILE%\.gvimrc          %daveconfig%\multi\vim\.gvimrc
+mklink    %USERPROFILE%\.vimrc           %daveconfig%\multi\vim\.vimrc
 
 
-mklink    %USERPROFILE%\.gitconfig    %daveconfig%\multi\git\.gitconfig
-mklink    %USERPROFILE%\.gitignore    %daveconfig%\multi\git\.gitignore
+mklink    %USERPROFILE%\.gitconfig       %daveconfig%\multi\git\.gitconfig
+mklink    %USERPROFILE%\.gitconfig.local %daveconfig%\multi\git\win.gitconfig.local
+mklink    %USERPROFILE%\.gitignore       %daveconfig%\multi\git\.gitignore
 
-mklink    %USERPROFILE%\.inputrc      %daveconfig%\win\cygwin\.inputrc
-mklink    %USERPROFILE%\.minttyrc     %daveconfig%\win\cygwin\.minttyrc
-mklink    %USERPROFILE%\_vsvimrc      %daveconfig%\win\visualstudio\_vsvimrc
+mklink    %USERPROFILE%\.inputrc         %daveconfig%\win\cygwin\.inputrc
+mklink    %USERPROFILE%\.minttyrc        %daveconfig%\win\cygwin\.minttyrc
+mklink    %USERPROFILE%\_vsvimrc         %daveconfig%\win\visualstudio\_vsvimrc
 

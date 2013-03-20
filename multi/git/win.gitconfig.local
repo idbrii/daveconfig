@@ -1,0 +1,14 @@
+[core]
+    # Ignore file mode changes in git for cygwin/windows.
+    # Windows (fat) keeps changing the permissions on my files. (644 -> 755)
+    # Make git ignore these changes.
+    # Source: http://stackoverflow.com/q/1580596/79125
+    filemode = false
+
+# At work I use Beyond Compare.
+[merge]
+    tool = beyond
+[diff]
+    tool = beyond
+
+# vi: et sw=4 ts=4 ft=gitconfig
