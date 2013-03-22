@@ -139,3 +139,9 @@
 [submodule "multi/vim/bundle/sensible"]
 	path = multi/vim/bundle/sensible
 	url = git://github.com/tpope/vim-sensible.git
+[submodule "multi/vim/bundle/argedit"]
+	path = multi/vim/bundle/argedit
+	url = git@github.com:pydave/vim-argedit.git
+[submodule "multi/vim/bundle/qargs"]
+	path = multi/vim/bundle/qargs
+	url = git://github.com/nelstrom/vim-qargs.git
