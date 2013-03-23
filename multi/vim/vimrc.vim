@@ -276,6 +276,10 @@ let g:speeddating_no_mappings = 1
 " select all
 nnoremap <C-a> 1GVG
 
+" gc selects previously changed text. (|gv| but for modification.)
+nnoremap gc :<C-U>silent!normal!`[v`]<CR>
+xnoremap gc :<C-U>silent!normal!`[v`]<CR>
+
 " Make backspace work in normal
 nnoremap <BS> X
 
