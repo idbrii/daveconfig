@@ -108,11 +108,18 @@ let g:ctrlp_reuse_window = 'netrw\|bufexplorer\|Scratch'
 " the interesting files are. That's far faster than searching.
 if has("win32")
     " cygwin cat suddenly stopped working.
-    let g:ctrlp_user_command = ['filelist', 'type %s\\filelist']
+    let filelist_cmd = 'type %s\\filelist'
 else
-    let g:ctrlp_user_command = ['filelist', 'cat %s/filelist']
+    let filelist_cmd = 'cat %s/filelist'
 endif
-let g:ctrlp_root_markers = ['filelist']
+let g:ctrlp_user_command = {
+            \   'types': {
+            \       1: ['.git', 'cd %s && git ls-files'],
+            \       2: ['filelist', filelist_cmd]
+            \   }
+            \}
+unlet filelist_cmd
+let g:ctrlp_root_markers = ['.git', 'filelist']
 
 " don't store temp files or git files
 if has("win32")
