@@ -263,6 +263,7 @@ nnoremap <C-s> :w<CR>
 
 " Underscores are like visible spaces. So the alt version of space is
 " underscore.
+" TODO: I don't know if this works in ubuntu.
 inoremap <A-Space> _
 cnoremap <A-Space> _
 
@@ -332,9 +333,8 @@ set foldlevelstart=99		" All folds open by default
 set foldnestmax=3           " At deepest, fold blocks within class methods
 
 " <space> toggles folds opened and closed
-nnoremap <space> za
-" TODO: I don't think this works in ubuntu. Maybe <Leader><Space> is better?
-nnoremap <A-space> zA
+nnoremap <Space> za
+nnoremap <Leader><Space> zA
 
 " <space> in visual mode creates a fold over the marked range
 "xnoremap <space> zf
