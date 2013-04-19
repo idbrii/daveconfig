@@ -31,6 +31,12 @@ function! PyCompileCheck()
     endif
 endfunction
 
+nnoremap <buffer> <F7> :set makeprg=nosetests<CR>:AsyncMake<CR>
+function! s:set_entrypoint()
+    exec 'nnoremap <F6> :set makeprg=python\ -t\ '. expand('%') .'<CR>:AsyncMake<CR>'
+endf
+command! -buffer PythonSetEntrypoint call s:set_entrypoint()
+
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
 if exists('loaded_pydocvim')
     nnoremap <buffer> K :call ShowPyDoc('<C-R><C-W>', 1)<CR>
