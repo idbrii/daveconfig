@@ -1,7 +1,7 @@
 " Easily switch between different fold methods
 "
 
-nmap <Leader>ff :call <SID>ToggleFold()<CR>
+nnoremap <Leader>ff :call <SID>ToggleFold()<CR>
 function! s:ToggleFold()
 	if !exists("b:fold_toggle_options")
 		" By default, use the main three. I rarely use custom expressions or
@@ -18,3 +18,9 @@ function! s:ToggleFold()
 
 	echo 'foldmethod is now ' . &l:foldmethod
 endfunction
+
+function! s:FoldParagraphs()
+    setlocal foldmethod=expr
+    setlocal fde=getline(v:lnum)=~'^\\s*$'&&getline(v:lnum+1)=~'\\S'?'<1':1
+endfunction
+command! FoldParagraphs call s:FoldParagraphs()
