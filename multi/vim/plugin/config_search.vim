@@ -22,6 +22,9 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 xnoremap g* y/\V<C-R>=escape(@", '/\')<CR><CR>
 xnoremap g# y?\V<C-R>=escape(@", '?\')<CR><CR>
 
+" Use && like :&&, but on visual selections.
+xnoremap && :&&<CR>
+
 " Quick fix slashes
 "	win -> unix
 xnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
