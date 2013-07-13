@@ -1,26 +1,41 @@
 " Some extensions to perforce.vim
 
-" Open a history window for the current file
-" Will probably show an open connection dialog
-function s:P4VFileHistory()
-    !start p4v -win 0 -cmd "history %:p"
-endfunction
-command PVHistory call s:P4VFileHistory()
+if !executable('p4')
+	finish
+endif
 
-function s:P4VTimeLapse()
-    !start p4v -win 0 -cmd "annotate -i %:p"
+
+" Invoke p4v for current file {{{
+if executable('p4v')
+	" Open a history window for the current file
+	" Will probably show an open connection dialog
+	function s:P4VFileHistory()
+		!start p4v -win 0 -cmd "history %:p"
+	endfunction
+	command PVHistory call s:P4VFileHistory()
+
+	function s:P4VTimeLapse()
+		!start p4v -win 0 -cmd "annotate -i %:p"
+	endfunction
+	command PVTimeLapse call s:P4VTimeLapse()
+endif
+
+
+" Invoke external diff for current file {{{
+function s:P4DiffInExternalTool()
+    exec '!p4 set P4DIFF=' . g:external_diff . ' & p4 diff %:p & p4 set P4DIFF='
 endfunction
-command PVTimeLapse call s:P4VTimeLapse()
+command PDiffExternal silent call s:P4DiffInExternalTool()
+
+
+" Dependent on perforce.vim {{{
+if !exists('g:loaded_perforce') || g:loaded_perforce <= 0
+	finish
+endif
 
 " PChanges doesn't default to current file -- so add another option. Also give
 " longer descriptions so I can at least see the first line.
 command PChangesThisFile PChanges -L %
-
-" Adds PDiffExternal to existing perforce.vim options
-function P4DiffInExternalTool()
-    exec '!p4 set P4DIFF=' . g:external_diff . ' & p4 diff %:p & p4 set P4DIFF='
-endfunction
-command PDiffExternal silent call P4DiffInExternalTool()
 
 " TODO: Support arbitrary revisions?
 function! s:PAnnotate()
@@ -68,7 +83,7 @@ function! s:P4CheckOutFile(p4_root)
 	edit
 endfunction
 
-function! SetupPerforce()
+function! s:InvasivePerforceSetup()
 	augroup p4autocheckout
 		au!
 		au FileChangedRO * nested :call <SID>P4CheckOutFile(g:DAVID_local_root)
@@ -83,6 +98,7 @@ function! SetupPerforce()
 	delcommand PChange
 endfunction
 
-if exists('g:DAVID_local_root') && executable('p4')
-	call SetupPerforce()
+" Make sure local machine is setup to work before setting autocmds or maps.
+if exists('g:DAVID_local_root')
+	call s:InvasivePerforceSetup()
 endif
