@@ -108,7 +108,8 @@ nnoremap <unique> <C-o>l :CtrlPLastMode<CR>
 nnoremap <unique> <C-o>b :CtrlPBuffer<CR>
 nnoremap <unique> <C-o>f :call ctrlp#init(ctrlp#funky#id())<CR>
 nnoremap <unique> <C-o>r :CtrlPRegister<CR>
-nnoremap <unique> <C-o>h :CtrlPHistory<CR>
+nnoremap <unique> <C-o>h :CtrlPCmdHistory<CR>
+nnoremap <unique> <C-o>s :CtrlPSearchHistory<CR>
 
 " Like gf but use filelist instead of path
 " You still need to type <C-\>s to populate the name.
