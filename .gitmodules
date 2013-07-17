@@ -145,3 +145,6 @@
 [submodule "multi/vim/.vim/bundle/qargs"]
 	path = multi/vim/.vim/bundle/qargs
 	url = git://github.com/nelstrom/vim-qargs.git
+[submodule "multi/vim/.vim/bundle/ctrlp-history"]
+	path = multi/vim/.vim/bundle/ctrlp-history
+	url = git@github.com:ompugao/ctrlp-history.git
