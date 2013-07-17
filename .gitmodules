@@ -147,4 +147,4 @@
 	url = git://github.com/nelstrom/vim-qargs.git
 [submodule "multi/vim/bundle/ctrlp-history"]
 	path = multi/vim/bundle/ctrlp-history
-	url = git@github.com:ompugao/ctrlp-history.git
+	url = git@github.com:pydave/ctrlp-history.git
