@@ -20,6 +20,9 @@ nnoremap  <c-left>   Bh
 "nnoremap  <s-right>  vl
 "nnoremap  <s-left>   vh
 
+" Quick toggle cursor at centre of screen.
+nnoremap <Leader>vc :let &scrolloff=999-&scrolloff<CR>
+
 " Jumplist - navigate previous locations
 if has('jumplist')
     nnoremap <Leader>[ <C-o>
