@@ -1,0 +1,19 @@
+#! /bin/bash
+
+# Run windows programs from bash.
+# Convert all arguments but the first to windows paths.
+# (Copied from cygwin.bash_aliases)
+function w {
+    p=
+    for ((at=2; at <= $#; at++))
+    do
+        p="$p `cygpath -wa ${!at}`"
+    done
+    $1 $p &
+}
+
+# I'm using python for windows (but not using PYTHONHOME because doing so
+# conflicts with our build).
+python=$(cygpath $MY_PYTHONHOME/python.exe)
+
+w $python $*
