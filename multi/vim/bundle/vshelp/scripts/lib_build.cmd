@@ -43,7 +43,7 @@ if NOT defined vcproj (
 
 set log_file=%TEMP%\build_%project%_%sku%.log
 
-call "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86 >NUL
+call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86 >NUL
 pushd %work_dir%
 
 :: /verbosity:quiet - squelch nonessential build output (so we don't see build step errors, etc).
