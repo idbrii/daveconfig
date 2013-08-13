@@ -113,6 +113,8 @@ nnoremap <unique> <C-o>f :call ctrlp#init(ctrlp#funky#id())<CR>
 nnoremap <unique> <C-o>r :CtrlPRegister<CR>
 nnoremap <unique> <C-o>h :CtrlPCmdHistory<CR>
 nnoremap <unique> <C-o>s :CtrlPSearchHistory<CR>
+" Don't ever do C-o so nothing happens if I take too long.
+nnoremap <unique> <C-o> <nop>
 
 " Like gf but use filelist instead of path
 " You still need to type <C-\>s to populate the name.
