@@ -118,6 +118,21 @@ function! s:ClearAllButMatches() range
 endfunction
 command! -range=% ClearAllButMatches <line1>,<line2>call s:ClearAllButMatches()
 
+function! s:SearchForAnyLine() range
+    let n_lines = a:lastline - a:firstline
+
+    " Replace newlines with bar
+    exec a:firstline .','. a:lastline .'s/\n/\\|/g'
+    " Remove trailing bar
+    exec a:firstline .','. a:firstline .'s/\\|$/'
+
+    let @/ = getline(a:firstline)
+    " Undo our changes. TODO: Should probably slurp up lines and modify them
+    " as a list instead.
+    normal! un
+endf
+command! -range=% SearchForAnyLine <line1>,<line2>call s:SearchForAnyLine()
+
 "}}}
 
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
