@@ -148,3 +148,6 @@
 [submodule "multi/vim/bundle/ctrlp-history"]
 	path = multi/vim/bundle/ctrlp-history
 	url = git@github.com:pydave/ctrlp-history.git
+[submodule "multi/vim/bundle/python-syntax"]
+	path = multi/vim/bundle/python-syntax
+	url = git@github.com:hdima/python-syntax.git
