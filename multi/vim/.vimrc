@@ -421,10 +421,16 @@ xmap C <Plug>VSurround
 " \ surrounds with anything. (Replaces latex map that I don't use except by
 " accident.)
 let g:surround_92 = "\1Surround with: \1 \r \1\1"
+
+function! s:SetupSurroundForCurrentFiletype()
+    " m surrounds with commented foldmarkers
+    " Ensure we escape %%s which printf doesn't recognize as %s.
+    let comment = substitute(&commentstring, '%%s', '%%%s', 'g')
+    let b:surround_109 = printf(comment, " \1Marker name: \1 {{{") . " \r " . printf(comment, " }}}")
+endf
 augroup SurroundCustom
     au!
-    " m surrounds with commented foldmarkers
-    au FileType * let b:surround_109 = printf(&commentstring, " \1Marker name: \1 {{{") . " \r " . printf(&commentstring, " }}}")
+    au FileType * call s:SetupSurroundForCurrentFiletype()
 augroup END
 
 " Cpp
