@@ -103,9 +103,9 @@
 [submodule "multi/vim/.vim/bundle/golden-ratio"]
 	path = multi/vim/.vim/bundle/golden-ratio
 	url = git://github.com/roman/golden-ratio.git
-[submodule "multi/vim/.vim/bundle/powerline"]
-	path = multi/vim/.vim/bundle/powerline
-	url = git@github.com:pydave/vim-powerline.git
+[submodule "multi/vim/.vim/bundle/airline"]
+	path = multi/vim/.vim/bundle/airline
+	url = git@github.com:bling/vim-airline.git
 [submodule "multi/vim/.vim/bundle/powerline-sanity"]
 	path = multi/vim/.vim/bundle/powerline-sanity
 	url = git@github.com:pydave/powerline-sanity.git
@@ -157,3 +157,4 @@
 [submodule "multi/vim/.vim/bundle/detectindent"]
 	path = multi/vim/.vim/bundle/detectindent
 	url = git@github.com:ciaranm/detectindent.git
+
