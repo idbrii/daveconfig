@@ -10,17 +10,17 @@ let g:airline#extensions#whitespace#checks = []
 let g:airline_theme='luna'
 let g:airline_theme='wombat'
 let g:airline_theme='bubblegum'
+let g:airline_theme='sanity'
 
 "let g:airline_theme_patch_func = 'AirlineThemePatch'
-function! AirlineThemePatch(palette)
-	" TODO: Change the RO red to orange (brightorange).
-	if g:airline_theme == 'bubblegum'
-		for colors in values(a:palette.normal)
-			let colors[1] = '#000000'
-			let colors[3] = 0
-		endfor
-	endif
-endfunction
+"function! AirlineThemePatch(palette)
+"	if g:airline_theme == 'sanity'
+"		for colors in values(a:palette.normal)
+"			let colors[1] = '#000000'
+"			let colors[3] = 0
+"		endfor
+"	endif
+"endfunction
 
 "let g:airline_mode_map = {
 "    \ '__' : '-',
