@@ -20,12 +20,17 @@ function ge {
 alias gogo='cygstart'
 
 # Run windows programs from bash.
-# Convert all arguments but the first to windows paths.
+# Convert all path arguments except the first to Windows paths.
 function w {
     p=
     for ((at=2; at <= $#; at++))
     do
-        p="$p `cygpath -wa ${!at}`"
+		if [ -e ${!at} ] ; then
+			arg="`cygpath --windows --absolute ${!at}`"
+		else
+			arg="${!at}"
+		fi
+		p="$p $arg"
     done
     $1 $p &
 }
