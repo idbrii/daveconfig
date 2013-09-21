@@ -120,6 +120,8 @@ nnoremap <unique> <C-o>s :CtrlPSearchHistory<CR>
 " Don't ever do C-o so nothing happens if I take too long.
 nnoremap <unique> <C-o> <nop>
 
+let g:airline#extensions#ctrlp#show_adjacent_modes = 0
+
 " Like gf but use filelist instead of path
 " You still need to type <C-\>s to populate the name.
 "nnoremap <Leader>gf :let @/ = '\<'. expand('<cfile>:t') .'\>'<Bar> CtrlP<CR>
