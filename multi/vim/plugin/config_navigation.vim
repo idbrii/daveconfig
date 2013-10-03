@@ -1,5 +1,7 @@
 " Move within file {{{1
-" work more logically with wrapped lines
+" work more logically with wrapped lines.
+" Also changes the behavior of dj since I'm remapping operator-pending mode.
+" But it makes dj behave like j which probably makes sense.
 noremap j gj
 noremap k gk
 noremap gj j
