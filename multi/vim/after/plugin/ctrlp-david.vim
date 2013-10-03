@@ -7,8 +7,8 @@ if !exists('g:loaded_ctrlp') || ( exists('g:loaded_ctrlp') && !g:loaded_ctrlp )
     finish
 endif
 
-if exists('Powerline_loaded') && g:Powerline_loaded > 0
-  " Don't bother with customizing ctrlp if we have powerline -- it just
+if (exists('Powerline_loaded') && g:Powerline_loaded > 0) || (exists("g:loaded_airline") && g:loaded_airline > 0)
+  " Don't bother with customizing ctrlp if we have a fancy statusline -- it just
   " overwrites our settings.
   finish
 endif
