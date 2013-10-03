@@ -51,11 +51,22 @@ if has("cscope")
     endfunction
 endif
 
+" Currently can't check for executable("csearch") because it's not in my path.
+function LocateCsearchIndex()
+	let l:tagfile = <SID>FindTagFile('csearch.index')
+	if filereadable(l:tagfile)
+		let $CSEARCHINDEX = l:tagfile
+		echomsg 'csearchindex=' . $CSEARCHINDEX
+	endif
+endfunction
+
 " Just call them all -- don't use this if you don't have access to all of them
 function LocateAll()
     " Make sure we have the full path
     silent! cd %:p:h
     " Locate all of our files
     call LocateCscopeFile()
+	" Locate the nearest cindex
+	call LocateCsearchIndex()
 endfunction
 

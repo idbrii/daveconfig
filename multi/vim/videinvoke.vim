@@ -43,6 +43,8 @@ if !exists('loaded_videinvoke')
         set cscopeverbose
     endif
 
+	call LocateCsearchIndex()
+
 
     " Eclim:
     " Checking g:eclimd_running doesn't work, so see if an eclim command is
