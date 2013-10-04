@@ -73,17 +73,17 @@ sed -i -e"s/.cygdrive.c/c:/g" $tagfile
 # Build ctags and cscope	{{{
 case $filetype in
 cpp|cs|c)
-    ctags --c++-kinds=+p --fields=+iaS --extra=+q -L filelist
+    ctags --c++-kinds=+p --fields=+iaS --extra=+q -L $tagfile
     ;;
 *)
-    ctags -L filelist
+    ctags -L $tagfile
     ;;
 esac
 
 if [ "$filetype" == "python" ] ; then
     # Requires the python package pycscope:
     #   pip install pycscope
-    pycscope.py -i filelist
+    pycscope.py -i $tagfile
 else
     # Build cscope database
     #	-b              Build the database only.
@@ -92,7 +92,7 @@ else
     # May want to consider these flags
     #	-m "lang"       Use lang for multi-lingual cscope.
     #	-R              Recurse directories for files.
-    $cscope -b -q -k -i filelist
+    $cscope -b -q -k -i $tagfile
 
 	# While cscope changed from cscope.out.$type to cscope.$type.out [1],
 	# mlcscope will still complain that it cannot find cscope.out.in. Ignore
