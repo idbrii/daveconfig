@@ -154,3 +154,6 @@
 [submodule "multi/vim/.vim/bundle/argumentative"]
 	path = multi/vim/.vim/bundle/argumentative
 	url = git@github.com:PeterRincker/vim-argumentative.git
+[submodule "multi/vim/.vim/bundle/detectindent"]
+	path = multi/vim/.vim/bundle/detectindent
+	url = git@github.com:ciaranm/detectindent.git
