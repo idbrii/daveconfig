@@ -436,6 +436,7 @@ augroup END
 " Cpp
 " Don't want menus for cpp.
 let no_plugin_menus = 1
+let c_no_curly_error = 1
 
 " Ropevim
 " Don't use <C-c> mappings -- I don't use the maps much.
