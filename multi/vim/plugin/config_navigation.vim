@@ -24,6 +24,8 @@ nnoremap  <c-left>   Bh
 
 " Quick toggle cursor at centre of screen.
 nnoremap <Leader>vc :let &scrolloff=999-&scrolloff<CR>
+" Quick wrap toggle
+nnoremap <Leader>vw :setlocal invwrap<CR>
 
 " Jumplist - navigate previous locations
 if has('jumplist')
