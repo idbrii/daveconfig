@@ -50,6 +50,9 @@ function! <SID>ToggleWholeWord()
 endfunction
 nnoremap <Leader>/ :call <SID>ToggleWholeWord()<CR>n
 
+" Search within visual block
+xnoremap <Leader>/ <Esc>/\%V
+
 " Easy grep for current query
 nnoremap <Leader>* :grep -e "<C-r>/" *
 
