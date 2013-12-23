@@ -56,6 +56,15 @@ xnoremap <Leader>/ <Esc>/\%V
 " Easy grep for current query
 nnoremap <Leader>* :grep -e "<C-r>/" *
 
+" Filters the quickfix list to keep results matching pattern. Bang removes
+" remove results matching the pattern. `:QFilter file|folder` and the list
+" will be filtered to that.
+" Source: http://www.reddit.com/r/vim/comments/1t39xl/filtering_quickfix_list/
+function! s:FilterQuickfixList(bang, pattern)
+  let cmp = a:bang ? '!~#' : '=~#'
+  call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) " . cmp . " a:pattern"))
+endfunction
+command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0, <q-args>)
 
 if executable('grep')
     " We always want grep (not findstr). Use -H so it works on a single file.
