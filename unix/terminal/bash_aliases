@@ -114,10 +114,10 @@ EOF
 # Quick way to view files in vim
 function v { $* | view - ; }
 
-function ge { gvim --remote-silent $* ; }
+function ge { gvim --remote-silent $* 2> ~/.vim-cache/errors.log ; }
 function gide
 {
-    gvim --servername VIDE --remote-silent $* ;
+    gvim --servername VIDE --remote-silent $* 2> ~/.vim-cache/errors.log ;
 }
 function vv { vim --servername VIM $* ; }
 
