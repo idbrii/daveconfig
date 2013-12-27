@@ -91,7 +91,7 @@ let g:ctrlp_lazy_update = 100
 
 " I don't keep persistent file explorers, so allow them to be re-used (likely
 " I opened them and then decided to use ctrlp instead).
-let g:ctrlp_reuse_window = 'netrw\|bufexplorer'
+let g:ctrlp_reuse_window = 'netrw\|bufexplorer\|Scratch'
 
 " I generate a filelist file in the root of my project that tells me where all
 " the interesting files are. That's far faster than searching.
