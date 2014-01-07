@@ -289,18 +289,6 @@ nnoremap <BS> X
 " Make cw consistent with dw?
 "nnoremap cw dwi
 
-" undo a change in the previous window - often used for diff
-nnoremap <C-w>u :wincmd p <bar> undo <bar> wincmd p <bar> diffupdate<CR>
-" Faster diff update.
-function! s:UpdateDiff()
-    if &diff
-        diffupdate
-    else
-        echom "E99: Current buffer is not in diff mode"
-    endif
-endf
-nnoremap <silent> du :call <SID>UpdateDiff()<CR>
-
 " Generic Header comments (requires formatoptions+=r)
 "  Uses vim's commentstring to figure out the local comment character
 nnoremap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
