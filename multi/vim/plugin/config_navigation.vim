@@ -42,11 +42,6 @@ nnoremap <A-Right> :bn<CR>
 " Ctrl+Shift+PgUp/Dn - Move between files
 nnoremap <C-S-PageDown> :next<CR>
 nnoremap <C-S-PageUp> :prev<CR>
-" \+PgUp/Dn - Move between tabs
-nnoremap <Leader><PageDown> :tabnext<CR>
-nnoremap <Leader><PageUp> :tabprev<CR>
-" \Bksp - Advance tabs
-nnoremap <Leader><Backspace> :tabnext<CR>
 " Ctrl+PgUp/Dn - Move between quickfix marks
 nnoremap <C-PageDown> :cnext<CR>
 nnoremap <C-PageUp> :cprev<CR>
