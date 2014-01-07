@@ -130,6 +130,8 @@ function! s:ClearAllButMatches() range
 endfunction
 command! -range=% ClearAllButMatches <line1>,<line2>call s:ClearAllButMatches()
 
+" Create a query out of selected lines. You can use ToggleWholeWord to turn
+" off whole word.
 function! s:SearchForAnyLine() range
     let n_lines = a:lastline - a:firstline
 
@@ -138,7 +140,7 @@ function! s:SearchForAnyLine() range
     " Remove trailing bar
     exec a:firstline .','. a:firstline .'s/\\|$/'
 
-    let @/ = getline(a:firstline)
+    let @/ = '\<\('. getline(a:firstline) .'\)\>'
     " Undo our changes. TODO: Should probably slurp up lines and modify them
     " as a list instead.
     normal! un
