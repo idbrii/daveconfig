@@ -468,7 +468,6 @@ let g:no_xml_maps = 1
 " Don't have maps for bufkill -- too easy to delete a buffer by accident
 let no_bufkill_maps = 1
 
-
 " Pydoc
 "  Pydoc maps conflict with \p
 let no_pydoc_maps = 1
@@ -523,6 +522,9 @@ let g:Powerline#Segments#ctrlp#segments#next = ''
 
 " NotGrep
 let g:notgrep_no_mappings = 1
+
+" I don't like the default maps and I don't want to define my own.
+let g:editqf_no_mappings = 1
 
 " Operators
 map <Leader>` <Plug>(operator-camelize-toggle)
