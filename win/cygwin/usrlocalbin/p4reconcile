@@ -73,6 +73,7 @@ FILEPATH=`cygpath -a $FILEPATH`
 
 if [ ! -d "$FILEPATH" ]; then
     echo "Desired folder does not exist: $FILEPATH"
+    echo "(Top-level directories are not supported.)"
     exit 1
 fi
 
