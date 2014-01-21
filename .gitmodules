@@ -164,3 +164,6 @@
 [submodule "multi/vim/bundle/abolish"]
 	path = multi/vim/bundle/abolish
 	url = git@github.com:tpope/vim-abolish.git
+[submodule "multi/vim/bundle/simplebisect"]
+	path = multi/vim/bundle/simplebisect
+	url = git@github.com:pydave/vim-simplebisect.git
