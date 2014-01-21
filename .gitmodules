@@ -161,3 +161,6 @@
 [submodule "multi/vim/.vim/bundle/editqf"]
 	path = multi/vim/.vim/bundle/editqf
 	url = git@github.com:jceb/vim-editqf.git
+[submodule "multi/vim/.vim/bundle/abolish"]
+	path = multi/vim/.vim/bundle/abolish
+	url = git@github.com:tpope/vim-abolish.git
