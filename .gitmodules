@@ -167,3 +167,6 @@
 [submodule "multi/vim/bundle/simplebisect"]
 	path = multi/vim/bundle/simplebisect
 	url = git@github.com:pydave/vim-simplebisect.git
+[submodule "multi/vim/bundle/vinegar"]
+	path = multi/vim/bundle/vinegar
+	url = git@github.com:tpope/vim-vinegar.git
