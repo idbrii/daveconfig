@@ -82,6 +82,35 @@ function init_skeleton {
 }
 
 
+function set_aside_vim {
+	if [ -d ~/vimarchive ] ; then
+		echo ~/vimarchive already exists. Aborting to remain idempotent.
+		return
+	fi
+
+	mkdir ~/vimarchive
+	mv ~/.*vim* ~/vimarchive
+	mkdir -p ~/.vim/bundle
+	git clone ~/vimarchive/.vim/bundle/pathogen/ ~/.vim/bundle/pathogen/
+	git clone ~/vimarchive/.vim/bundle/sensible/ ~/.vim/bundle/sensible/
+	cat << EOF > ~/.vimrc
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes
+" synchronization across (heterogeneous) systems easier.
+if has('win32')
+    set runtimepath=\$HOME/.vim,\$VIM/vimfiles,\$VIMRUNTIME,\$VIM/vimfiles/after,\$HOME/.vim/after
+endif
+
+" Load immediately -- it loads other plugins, so do it first.
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#runtime_append_all_bundles()
+
+set hlsearch
+colorscheme desert
+EOF
+
+	echo Basic vim setup complete
+}
+
 # Quick way to view files in vim
 function v { $* | view - ; }
 
