@@ -24,6 +24,11 @@ xnoremap g# y?\V<C-R>=escape(@", '?\')<CR><CR>
 
 " Use && like :&&, but on visual selections.
 xnoremap && :&&<CR>
+" Let g& work how I'd expect on visual selections (only act on the visual
+" selection). Different from && because it uses the current search query.
+xnoremap g& :s//~/&<CR>
+" I always want to re-use flags. If I change my mind, I can use :&
+nnoremap & :&&<CR>
 
 " Quick fix slashes
 "	win -> unix
