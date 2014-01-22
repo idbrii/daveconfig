@@ -25,8 +25,8 @@ let mapleader = ' '
 let maplocalleader = mapleader
 noremap <Space> <Nop>
 
-" This seems obvious.
-nnoremap <Leader><Leader> :
+" : is often used so this seems obvious. Super power it too.
+nnoremap <Leader><Leader> q:a
 
 " Until I get used to Space.
 noremap \ :<C-u>echoerr "\\ is not your leader"<CR>
