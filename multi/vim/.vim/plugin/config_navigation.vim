@@ -49,6 +49,10 @@ nnoremap <C-PageUp> :cprev<CR>
 nnoremap <A-PageDown> :lnext<CR>
 nnoremap <A-PageUp> :lprev<CR>
 
+" Follows <Leader>w convention from togglequickfix
+nnoremap <Leader>wp :pclose<CR>
+nnoremap <Leader>ww :wincmd w<CR>
+
 " Quickly launch input data
 if has("win32")
     if &shellslash

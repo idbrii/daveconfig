@@ -18,9 +18,12 @@ function <SID>QuickFixToggle(prefix)
     endif
 endfunction
 
+nnoremap <silent> <Plug>(togglequickfix-c) :call <SID>QuickFixToggle('c')<CR>
+nnoremap <silent> <Plug>(togglequickfix-l) :call <SID>QuickFixToggle('l')<CR>
+
 " Make it easier to turn these off in case I'm troubleshooting mappings.
 if (! exists('no_plugin_maps') || ! no_plugin_maps) &&
       \ (! exists('no_togglequickfix_maps') || ! no_togglequickfix_maps)
-    nmap <unique> <Leader>c :call <SID>QuickFixToggle('c')<CR>
-    nmap <unique> <Leader>lc :call <SID>QuickFixToggle('l')<CR>
+    nmap <unique> <Leader>wc <Plug>(togglequickfix-c)
+    nmap <unique> <Leader>wl <Plug>(togglequickfix-l)
 endif
