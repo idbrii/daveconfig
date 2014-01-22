@@ -9,6 +9,8 @@ setlocal foldmethod=indent
 nnoremap <buffer> <Leader>vso :w<CR>:source %<CR>
 " Easy execute line.
 nnoremap <buffer> <Leader>v: 0y$:<C-r>"<CR>
+" ; is easier than :
+nnoremap <buffer> <Leader>v; 0y$:<C-r>"<CR>
 
 " In vimscript, use compl-vim instead of omnicomplete for smart completion.
 inoremap <buffer> <C-Space> <C-x><C-v>
