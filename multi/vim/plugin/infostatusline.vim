@@ -73,5 +73,5 @@ function <SID>UseInfoStatusLine()
 endfunction
 
 if (! exists('no_plugin_maps') || ! no_plugin_maps)
-    map <Leader>s :call <SID>UseInfoStatusLine()<CR>
+    nnoremap <Leader>si :call <SID>UseInfoStatusLine()<CR>
 endif
