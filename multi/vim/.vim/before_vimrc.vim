@@ -19,6 +19,10 @@ if has("spell")
     syntax spell notoplevel
 endif
 
+" Try out space as my leader
+let mapleader = ' '
+let maplocalleader = mapleader
+nnoremap <Leader><Leader> :
 
 " Yankstack
 " Load immediately -- is clobbers some base commands, so if those are
