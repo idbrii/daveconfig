@@ -131,10 +131,20 @@ nnoremap <Leader><A-o> :let @/ = '\<'. expand('%:t:r') .'\>'<Bar> CtrlP<CR>
 " Faster than cscope.
 nnoremap <unique> <Leader><A-S-g> :NotGrep <C-r>=expand('<cword>')<CR><CR>
 
+" BufExplorer {{{1
+noremap <silent> <Leader>e :BufExplorer<CR>
+noremap <silent> <C-w><Leader>e :BufExplorerVerticalSplit<CR>
+
 " Netrw plugin -- Navigate filesystems {{{1
-" Make \e like \be but for netrw
-nnoremap <Leader>e :Explore<CR>
-nnoremap <C-w><Leader>e :Vexplore<CR>
+
+" This looks like a good idea, but it conflicts with golden-ratio. I don't
+" think I'd use it that much, so forget about it.
+"if exists("g:loaded_vinegar") && g:loaded_vinegar > 0
+"    nmap <unique> <C-w>- <C-w>v<Plug>VinegarUp
+"else
+"    nnoremap <unique> <C-w>- :Vexplore<CR>
+"endif
+
 " Set browsed dir as current dir
 let g:netrw_keepdir = 0
 
