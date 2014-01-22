@@ -21,8 +21,12 @@ endif
 
 " Try out space as my leader
 let mapleader = ' '
+" TODO: Consider let maplocalleader = '\'
 let maplocalleader = mapleader
 nnoremap <Leader><Leader> :
+
+" Until I get used to Space.
+noremap \ :<C-u>echoerr "\\ is not your leader"<CR>
 
 " Yankstack
 " Load immediately -- is clobbers some base commands, so if those are
