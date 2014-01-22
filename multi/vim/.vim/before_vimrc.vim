@@ -23,6 +23,9 @@ endif
 let mapleader = ' '
 " TODO: Consider let maplocalleader = '\'
 let maplocalleader = mapleader
+noremap <Space> <Nop>
+
+" This seems obvious.
 nnoremap <Leader><Leader> :
 
 " Until I get used to Space.
