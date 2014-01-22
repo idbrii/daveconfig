@@ -341,12 +341,12 @@ set foldmethod=syntax		" By default, use syntax to determine folds
 set foldlevelstart=99		" All folds open by default
 set foldnestmax=3           " At deepest, fold blocks within class methods
 
-" <space> toggles folds opened and closed
-nnoremap <Space> za
-nnoremap <Leader><Space> zA
+" \ toggles folds opened and closed
+nnoremap \ za
+nnoremap <Leader>\ zA
 
-" <space> in visual mode creates a fold over the marked range
-"xnoremap <space> zf
+" \ in visual mode creates a fold over the marked range
+xnoremap \ zf
 
 " From Paradigm: http://www.reddit.com/r/vim/comments/10cqgd/looking_for_a_languageaware_block_selection/c6cpyrg
 " enable syntax folding for a variety of languages
