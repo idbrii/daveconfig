@@ -18,6 +18,6 @@
 " Transposing
 " Source: https://github.com/justinmk/config/blob/31135cde3882ded0a08ac4ef2bae6568adff80a6/.vimrc#L876
 "transpose words, preserving punctuation
-nnoremap <silent> <Leader>dt :s,\v(\w+)(\W*%#\W*)(\w+),\3\2\1,<bar>nohl<CR>
+nnoremap <silent> <Leader>dt :s,\v(\w+)(\W*%#\W*)(\w+),\3\2\1,<bar>nohl<CR>:normal! ``<CR>
 "transpose WORDs, preserving whitespace
-nnoremap <silent> <Leader>dT :s,\v(\S+)(\s*\S*%#\S*\s*)(\S+),\3\2\1,<bar>nohl<CR>
+nnoremap <silent> <Leader>dT :s,\v(\S+)(\s*\S*%#\S*\s*)(\S+),\3\2\1,<bar>nohl<CR>:normal! ``<CR>
