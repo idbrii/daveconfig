@@ -31,6 +31,10 @@ nnoremap <Leader>vw :setlocal invwrap<CR>
 if has('jumplist')
     nnoremap <Leader>[ <C-o>
     nnoremap <Leader>] <C-i>
+    " Use arrows to move in jump list. :jumps shows newest at the bottom so
+    " down moves you towards newest.
+    nnoremap <A-Up> <C-o>
+    nnoremap <A-Down> <C-i>
 endif
 
 " Between files {{{1
