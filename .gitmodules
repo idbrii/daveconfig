@@ -170,3 +170,6 @@
 [submodule "multi/vim/.vim/bundle/vinegar"]
 	path = multi/vim/.vim/bundle/vinegar
 	url = git@github.com:tpope/vim-vinegar.git
+[submodule "multi/vim/.vim/bundle/ficklefold"]
+	path = multi/vim/.vim/bundle/ficklefold
+	url = git@github.com:pydave/vim-ficklefold.git
