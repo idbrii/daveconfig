@@ -279,6 +279,16 @@ let g:speeddating_no_mappings = 1
 " select all
 nnoremap <C-a> 1GVG
 
+" Use r for [right-angle braces] and a for <angle braces> like vim-surround
+vnoremap ir i]
+vnoremap ar a]
+vnoremap ia i>
+vnoremap aa a>
+onoremap ir i]
+onoremap ar a]
+onoremap ia i>
+onoremap aa a>
+
 " gc selects previously changed text. (|gv| but for modification.)
 nnoremap gc :<C-U>silent!normal!`[v`]<CR>
 xnoremap gc :<C-U>silent!normal!`[v`]<CR>
