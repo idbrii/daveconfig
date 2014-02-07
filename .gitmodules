@@ -91,6 +91,9 @@
 [submodule "multi/vim/.vim/bundle/textobj-underscore"]
 	path = multi/vim/.vim/bundle/textobj-underscore
 	url = git://github.com/kana/vim-textobj-underscore.git
+[submodule "multi/vim/.vim/bundle/textobj-between"]
+	path = multi/vim/.vim/bundle/textobj-between
+	url = git@github.com:thinca/vim-textobj-between.git
 [submodule "multi/vim/.vim/bundle/operator-user"]
 	path = multi/vim/.vim/bundle/operator-user
 	url = git://github.com/kana/vim-operator-user.git
@@ -157,7 +160,6 @@
 [submodule "multi/vim/.vim/bundle/detectindent"]
 	path = multi/vim/.vim/bundle/detectindent
 	url = git@github.com:ciaranm/detectindent.git
-
 [submodule "multi/vim/.vim/bundle/editqf"]
 	path = multi/vim/.vim/bundle/editqf
 	url = git@github.com:jceb/vim-editqf.git
