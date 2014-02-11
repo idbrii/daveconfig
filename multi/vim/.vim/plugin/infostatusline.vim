@@ -21,7 +21,7 @@ function PrintNumSelected()
 
     let l:lines = getline('.', 'v')
     if len(l:lines) == 0
-        " TODO: how to detect this earlier?
+		" TODO: how to detect this earlier? Maybe use `< and `> instead?
         let l:lines = getline('v', '.')
     endif
     let l:count_nonblank = 0
@@ -34,7 +34,10 @@ function PrintNumSelected()
         endif
         let l:count_nonblank += 1
 
-        if match(line, '^\s*//') >= 0   " TODO: use &comments
+		" Only works for one type of comments (e.g., c++ uses /* \n\n */ in
+		" commentstring)
+		let comment_regex = '^\s*' . printf(&commentstring, '.*')
+        if match(line, comment_regex) >= 0
             " line was just a comment
             continue
         endif
