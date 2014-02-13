@@ -34,11 +34,8 @@ function PrintNumSelected()
         endif
         let l:count_nonblank += 1
 
-		" Only works for one type of comments (e.g., c++ uses /* \n\n */ in
-		" commentstring)
-		let comment_regex = '^\s*' . printf(&commentstring, '.*')
-        if match(line, comment_regex) >= 0
-            " line was just a comment
+        if s:IsCommentLine(line)
+            " line was a comment
             continue
         endif
         let l:count_code += 1
@@ -65,6 +62,30 @@ function PrintNumSelected()
     endif
 
     return l:out_str
+endfunction
+
+
+" Source: http://www.reddit.com/r/vim/comments/1x8mk8/is_there_a_way_to_not_count_blank_lines_with/cf95oyp
+function! s:IsCommentLine(line)
+    let l:comtypes = []
+    let l:comlist = split(&comments, ',')
+    for i in comlist
+        let l:type = split(i, ':')
+        if len(type) > 1
+            let l:opt = type[1]
+        else
+            let l:opt = type[0]
+        endif
+        call add(comtypes, opt)
+    endfor
+    let i = 0
+    while i < len(comtypes)
+        if match(a:line, '^\s*' . escape(comtypes[i], '/*')) > -1
+            return 1
+        endif
+        let i += 1
+    endwhile
+    return 0
 endfunction
 
 
