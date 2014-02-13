@@ -64,30 +64,28 @@ function PrintNumSelected()
     return l:out_str
 endfunction
 
-
 " Source: http://www.reddit.com/r/vim/comments/1x8mk8/is_there_a_way_to_not_count_blank_lines_with/cf95oyp
 function! s:IsCommentLine(line)
-    let l:comtypes = []
-    let l:comlist = split(&comments, ',')
-    for i in comlist
-        let l:type = split(i, ':')
+    let comment_types = []
+    let comment_list = split(&comments, ',')
+    for i in comment_list
+        let type = split(i, ':')
         if len(type) > 1
-            let l:opt = type[1]
+            let opt = type[1]
         else
-            let l:opt = type[0]
+            let opt = type[0]
         endif
-        call add(comtypes, opt)
+        call add(comment_types, opt)
     endfor
     let i = 0
-    while i < len(comtypes)
-        if match(a:line, '^\s*' . escape(comtypes[i], '/*')) > -1
+    while i < len(comment_types)
+        if match(a:line, '^\s*' . escape(comment_types[i], '/*')) > -1
             return 1
         endif
         let i += 1
     endwhile
     return 0
 endfunction
-
 
 function <SID>UseInfoStatusLine()
 	if exists('w:std_statusline')
