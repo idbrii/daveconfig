@@ -11,7 +11,6 @@ let loaded_infostatusline = 1
 set laststatus=2				" Always show statusline, even if only 1 window
 if !exists('g:alt_statusline')
     let g:alt_statusline = 'ascii:%-3b hex:%2B %{PrintNumSelected()} %= HiLi<%{synIDattr(synID(line("."),col("."),1),"name")}> what<%{synIDattr(synIDtrans(synID(line("."),col("."),1)),"name")}> %l,%c%V %P '
-
 endif
 
 function PrintNumSelected()
@@ -67,9 +66,13 @@ endfunction
 
 
 function <SID>UseInfoStatusLine()
-    let l:swap_statusline = &statusline
-    let &statusline = g:alt_statusline
-    let g:alt_statusline = l:swap_statusline
+	if exists('w:std_statusline')
+		let &statusline = w:std_statusline
+		unlet w:std_statusline
+	else
+		let w:std_statusline = &statusline
+		let &statusline = g:alt_statusline
+	endif
 endfunction
 
 if (! exists('no_plugin_maps') || ! no_plugin_maps)
