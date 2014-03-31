@@ -88,9 +88,6 @@
 [submodule "multi/vim/.vim/bundle/textobj-indent"]
 	path = multi/vim/.vim/bundle/textobj-indent
 	url = git://github.com/kana/vim-textobj-indent.git
-[submodule "multi/vim/.vim/bundle/textobj-underscore"]
-	path = multi/vim/.vim/bundle/textobj-underscore
-	url = git://github.com/kana/vim-textobj-underscore.git
 [submodule "multi/vim/.vim/bundle/textobj-between"]
 	path = multi/vim/.vim/bundle/textobj-between
 	url = git@github.com:thinca/vim-textobj-between.git
