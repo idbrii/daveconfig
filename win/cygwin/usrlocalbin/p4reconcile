@@ -3,8 +3,8 @@
 # define your own ignores with local_ignores this:
 # local_ignores="-e something_ugly"
 my_ignores="-e \.DS_Store -e \.swp -e cscope\. -e [\/]tags -e filenametags"
-build_ignores="-e \.tlog -e \.log -e \.dummy -e \.pyc"
-vs_ignores="-e \.vssscc -e \.vspscc -e \.csproj\.user -e \.vcxproj -e \.lib -e \.obj -e \.opensdf -e \.sdf -e \.suo"
+build_ignores="-e \.pyc -e \.tlog -e \.log -e \.dummy"
+vs_ignores="-e \.vssscc -e \.vspscc -e \.csproj\.user -e \.vcxproj -e \.lib -e \.obj -e \.opensdf -e \.sdf -e \.suo -e \.lastbuildstate -e \.pdb -e \.pch"
 ignored_files="$my_ignores $local_ignores $build_ignores $vs_ignores"
 ignored_folders="-e [\/]\.git[\/] -e [\/]obj[\/] -e [\/]Release[\/] -e [\/]Debug[\/]"
 
