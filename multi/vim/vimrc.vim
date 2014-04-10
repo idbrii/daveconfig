@@ -245,6 +245,9 @@ set tags=./tags;/
 " Don't show full path. Just give some path.
 set cscopepathcomp=3
 
+" Cscope equivalent of :tag
+command! -nargs=1 Ctag cscope find s <args>
+
 " Toggle the tag list bar
 nnoremap <F4> :TlistToggle<CR>
 
