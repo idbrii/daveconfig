@@ -20,6 +20,7 @@ if executable('git')
     nnoremap <leader>gv :Gitv --all<CR>
     nnoremap <leader>gV :Gitv! --all<CR>
     xnoremap <leader>gV :Gitv! --all<CR>
+    nnoremap <Leader>gb :silent! cd %:p:h<CR>:Gblame<CR>
     let g:Gitv_DoNotMapCtrlKey = 1
     
     command! Ghistory Gitv! --all
