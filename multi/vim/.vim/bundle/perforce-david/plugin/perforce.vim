@@ -94,6 +94,7 @@ function! s:InvasivePerforceSetup()
 	nnoremap <Leader>fd :PGDiff<CR>
 	nnoremap <Leader>fv :exec 'PChanges -L -u '. $USERNAME<CR>
 	nnoremap <Leader>fV :PChangesThisFile<CR>
+	nnoremap <Leader>fb :silent! cd %:p:h<CR>:PBlame<CR>
 
 	delcommand PChange
 endfunction
