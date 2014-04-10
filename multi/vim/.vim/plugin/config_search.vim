@@ -73,7 +73,7 @@ command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0
 
 if executable('grep')
     " We always want grep (not findstr). Use -H so it works on a single file.
-    " (Apparently some greps may no support -H. How to fix that?)
+    " (Apparently some greps may not support -H. How to fix that?)
     let &grepprg='grep -nH'
 
     " Generally, we don't want to look in nonsense files. If you really want
@@ -85,6 +85,9 @@ if executable('grep')
                     \ .' --exclude-dir=.hg'
                     \ .' --exclude-dir=.svn'
                     \ .' --exclude=*.swp'
+                    \ .' --exclude=cscope.*'
+                    \ .' --exclude=filelist'
+                    \ .' --exclude=tags'
 
         " If changing GREP_OPTIONS breaks something
         " (http://stackoverflow.com/q/11713507/79125), you could set grepprg
