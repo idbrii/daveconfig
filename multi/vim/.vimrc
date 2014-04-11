@@ -500,7 +500,6 @@ let g:calendar_no_mappings = 1
 
 " Scratch
 let g:itchy_always_split = 1
-"issue #1: let g:itchy_startup = 1
 
 " Quick access to a Scratch and a Scratch of the current filetype
 nnoremap <Leader>ss :Scratch<CR>

@@ -114,12 +114,28 @@ EOF
 # Quick way to view files in vim
 function v { $* | view - ; }
 
-function ge { gvim --remote-silent $* 2> ~/.vim-cache/errors.log ; }
+function __default_to_scratch
+{
+    args=$*
+    if [ $# -lt 1 ] ; then
+        args="+ScratchNoSplit"
+    else
+        args="--remote-silent $args"
+    fi
+    echo $args
+}
+function ge
+{
+    gvim `__default_to_scratch $*` 2> ~/.vim-cache/errors.log ;
+}
 function gide
 {
-    gvim --servername VIDE --remote-silent $* 2> ~/.vim-cache/errors.log ;
+    gvim --servername VIDE `__default_to_scratch $*` 2> ~/.vim-cache/errors.log ;
 }
-function vv { vim --servername VIM $* ; }
+function vv
+{
+    vim --servername VIM `__default_to_scratch $*` 2> ~/.vim-cache/errors.log ;
+}
 
 function move_and_link() {
     mv $1 $2
