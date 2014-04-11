@@ -7,14 +7,14 @@ setlocal cindent
 " surround key o - Unoptimize region
 let b:surround_111 = "#pragma optimize( \"\", off ) \r #pragma optimize( \"\", on )"
 
-" surround key i - Warp region in if block
+" surround key i - Wrap region in if block
 let b:surround_105 = "if (\1if condition: \1)\n{ \r }"
 
 " surround key d - ifdef region
 let b:surround_100 = "#ifdef \1ifdef condition: \1 \r #endif"
 
 " Ensure the above are indented. This reindents everything within the surround
-" (is that undesireable?). I don't think there's a way to only indent what we
+" (is that undesirable?). I don't think there's a way to only indent what we
 " inserted.
 let b:surround_indent = 1
 
