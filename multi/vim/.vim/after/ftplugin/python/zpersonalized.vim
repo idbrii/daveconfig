@@ -33,7 +33,12 @@ endfunction
 
 nnoremap <buffer> <F7> :set makeprg=nosetests<CR>:AsyncMake<CR>
 function! s:set_entrypoint()
-    exec 'nnoremap <F6> :set makeprg=python\ -t\ '. expand('%') .'<CR>:AsyncMake<CR>'
+    " Use the current file and its directory and jump back there to run
+    " (ensures any expected relative paths will work).
+    let cur_file = expand('%:p')
+    let cur_dir = fnamemodify(cur_file, ':h')
+    let cur_file = fnamemodify(cur_file, ':t')
+    exec 'nnoremap <F6> :lcd '. cur_dir .'<CR>:set makeprg=python\ -t\ '. cur_file .'<CR>:AsyncMake<CR>'
 endf
 command! -buffer PythonSetEntrypoint call s:set_entrypoint()
 
