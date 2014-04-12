@@ -26,6 +26,8 @@ nnoremap  <c-left>   Bh
 nnoremap <Leader>vc :let &scrolloff=999-&scrolloff<CR>
 " Quick wrap toggle
 nnoremap <Leader>vw :setlocal invwrap<CR>
+" Quick spelling toggle
+nnoremap <Leader>vs :set invspell<CR>
 
 " Jumplist - navigate previous locations
 if has('jumplist')
