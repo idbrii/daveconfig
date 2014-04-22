@@ -22,7 +22,7 @@ function s:BufGrep(query)
 	" For each buffer, if it has a name, then grep for the query in it. We use
 	" g to get all matches and j to not jump anywhere -- we'll be on our way
 	" to the next buffer anyway.
-	exec 'bufdo if !bufname("%") | silent! vimgrepadd/' . a:query . '/gj % | endif'
+	exec 'noautocmd bufdo if !bufname("%") | silent! vimgrepadd/' . a:query . '/gj % | endif'
 
 	" Go back to start point
 	exec save_bufnr . 'buffer'
