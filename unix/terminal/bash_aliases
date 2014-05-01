@@ -104,6 +104,9 @@ endif
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#runtime_append_all_bundles()
 
+filetype plugin indent on
+syntax on
+
 set hlsearch
 colorscheme desert
 EOF
