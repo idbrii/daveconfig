@@ -14,6 +14,11 @@ set path+=./**
 nnoremap gs :%sm/
 xnoremap gs :sm/
 
+" Refactor remap.
+" Go to local definition and replace it in local scope. Uses textobj-indent
+" (for ai map).
+nmap gr 1gdvai:s/<C-R>///gc<left><left><left>
+
 " <C-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
