@@ -139,6 +139,8 @@ nnoremap <Leader><A-o> :let @/ = '\<'. expand('%:t:r') .'\>'<Bar> CtrlP<CR>
 " Code Search version of find symbol (finds text, not symbol).
 " Faster than cscope.
 nnoremap <unique> <Leader><A-S-g> :NotGrep <C-r>=expand('<cword>')<CR><CR>
+" More precise version (\b is word boundary).
+nnoremap <unique> <A-g> :NotGrep \b<C-r>=expand('<cword>')<CR>\b<CR>
 
 " BufExplorer {{{1
 noremap <silent> <Leader>e :BufExplorer<CR>
