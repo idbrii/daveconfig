@@ -53,9 +53,10 @@ nnoremap <C-PageUp> :cprev<CR>
 nnoremap <A-PageDown> :lnext<CR>
 nnoremap <A-PageUp> :lprev<CR>
 
-" Follows <Leader>w convention from togglequickfix
+" Follows <Leader>w convention from togglequickfix. Similar in style to <C-w>,
+" but the maps are totally different.
 nnoremap <Leader>wp :pclose<CR>
-nnoremap <Leader>ww :wincmd w<CR>
+nnoremap <Leader>ww :wincmd p<CR>
 
 " Quickly launch input data
 if has("win32")
