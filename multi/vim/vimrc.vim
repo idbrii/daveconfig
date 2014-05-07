@@ -135,7 +135,7 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 
 " Coding {{{1
-set history=500				" 100 Lines of history
+set history=500				" cmdline history
 
 " Figure out what function we're in. This relies on a coding standard where
 " functions start in the first column and their signature is on one line.
@@ -146,6 +146,9 @@ set history=500				" 100 Lines of history
 " key?
 nnoremap <C-g><C-g>  :let last_search=@/<Bar> ?^\w? mark c<Bar> noh<Bar> echo getline("'c")<Bar> let @/ = last_search<CR>
 
+" Esc without straying too far from homerow. Otherwise just inserts ^B. (See i_CTRL-B-gone.)
+" Possible alternative: C-s (used experiementally by surround).
+inoremap <C-b> <Esc>
 
 " Command Line {{{1
 " Autocomplete in cmdline: Give longest completion with list of options then
