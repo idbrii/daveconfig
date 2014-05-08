@@ -94,7 +94,7 @@ esac
 if [ "$filetype" == "python" ] ; then
     # Requires the python package pycscope:
     #   pip install pycscope
-    pycscope.py -i filelist
+    pycscope -i filelist
 else
     # Build cscope database
     #	-b              Build the database only.
