@@ -213,6 +213,10 @@ endif
 nnoremap <F1> :sp ~/.vim-aside<CR>
 nnoremap <S-F1> :e ~/.vim-aside<CR>
 
+" My Kinesis keyboard has F1 where Esc used to be. I have no use for help in
+" insert mode, so let's try this.
+inoremap <F1> <Esc>
+
 " Similar map for todo.
 nnoremap <Leader><F1> :sp ~/.todo.org<CR>
 
