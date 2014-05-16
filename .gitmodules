@@ -105,7 +105,7 @@
 	url = git@github.com:pydave/vim-ripple.git
 [submodule "multi/vim/.vim/bundle/golden-ratio"]
 	path = multi/vim/.vim/bundle/golden-ratio
-	url = git://github.com/roman/golden-ratio.git
+	url = git@github.com:pydave/golden-ratio.git
 [submodule "multi/vim/.vim/bundle/airline"]
 	path = multi/vim/.vim/bundle/airline
 	url = git@github.com:bling/vim-airline.git
@@ -126,7 +126,7 @@
 	url = git@github.com:pydave/vim-diffusable.git
 [submodule "multi/vim/.vim/bundle/bufexplorer"]
 	path = multi/vim/.vim/bundle/bufexplorer
-	url = git://github.com/vim-scripts/bufexplorer.zip.git
+	url = git@github.com:pydave/bufexplorer.zip.git
 [submodule "multi/vim/.vim/bundle/ultisnips"]
 	path = multi/vim/.vim/bundle/ultisnips
 	url = git://github.com/SirVer/ultisnips.git
