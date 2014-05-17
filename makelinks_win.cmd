@@ -18,9 +18,9 @@ mklink    %USERPROFILE%\.bash_aliases    %daveconfig%\unix\terminal\bash_aliases
 mklink    %USERPROFILE%\.bashrc          %daveconfig%\unix\terminal\bashrc
 mklink    %USERPROFILE%\.screenrc        %daveconfig%\unix\terminal\screenrc
 
-mklink /D %USERPROFILE%\.vim             %daveconfig%\multi\vim\.vim
-mklink    %USERPROFILE%\.gvimrc          %daveconfig%\multi\vim\.gvimrc
-mklink    %USERPROFILE%\.vimrc           %daveconfig%\multi\vim\.vimrc
+mklink /D %USERPROFILE%\.vim             %daveconfig%\multi\vim
+mklink    %USERPROFILE%\.gvimrc          %daveconfig%\multi\vim\gvimrc.vim
+mklink    %USERPROFILE%\.vimrc           %daveconfig%\multi\vim\vimrc.vim
 
 
 mklink    %USERPROFILE%\.gitconfig       %daveconfig%\multi\git\.gitconfig
