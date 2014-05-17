@@ -1,177 +1,177 @@
 [submodule "multi/vim/.vim/bundle/slime"]
-	path = multi/vim/.vim/bundle/slime
+	path = multi/vim/bundle/slime
 	url = git://github.com/jpalardy/vim-slime.git
 [submodule "multi/vim/.vim/bundle/surround"]
-	path = multi/vim/.vim/bundle/surround
+	path = multi/vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
 [submodule "multi/vim/.vim/bundle/asynccommand"]
-	path = multi/vim/.vim/bundle/asynccommand
+	path = multi/vim/bundle/asynccommand
 	url = git@github.com:pydave/AsyncCommand.git
 [submodule "multi/vim/.vim/bundle/gundo"]
-	path = multi/vim/.vim/bundle/gundo
+	path = multi/vim/bundle/gundo
 	url = git://github.com/sjl/gundo.vim.git
 [submodule "multi/vim/.vim/bundle/fugitive"]
-	path = multi/vim/.vim/bundle/fugitive
+	path = multi/vim/bundle/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
 [submodule "multi/vim/.vim/bundle/gitv"]
-	path = multi/vim/.vim/bundle/gitv
+	path = multi/vim/bundle/gitv
 	url = git@github.com:pydave/gitv.git
 [submodule "unix/terminal/bashmarks"]
 	path = unix/terminal/bashmarks
 	url = git@github.com:pydave/bashmarks.git
 [submodule "multi/vim/.vim/bundle/repeat"]
-	path = multi/vim/.vim/bundle/repeat
+	path = multi/vim/bundle/repeat
 	url = git://github.com/tpope/vim-repeat.git
 [submodule "multi/vim/.vim/bundle/ack"]
-	path = multi/vim/.vim/bundle/ack
+	path = multi/vim/bundle/ack
 	url = git@github.com:pydave/vim-ack.git
 [submodule "multi/vim/.vim/bundle/xmledit"]
-	path = multi/vim/.vim/bundle/xmledit
+	path = multi/vim/bundle/xmledit
 	url = git@github.com:pydave/xmledit.git
 [submodule "multi/vim/.vim/bundle/OmniCppComplete"]
-	path = multi/vim/.vim/bundle/OmniCppComplete
+	path = multi/vim/bundle/OmniCppComplete
 	url = git://github.com/vim-scripts/OmniCppComplete.git
 [submodule "multi/vim/.vim/bundle/perforce"]
-	path = multi/vim/.vim/bundle/perforce
+	path = multi/vim/bundle/perforce
 	url = git@github.com:pydave/vim-perforce.git
 [submodule "multi/vim/.vim/bundle/snipmate-snippets"]
-	path = multi/vim/.vim/bundle/snipmate-snippets
+	path = multi/vim/bundle/snipmate-snippets
 	url = git@github.com:pydave/snipmate-snippets.git
 [submodule "multi/vim/.vim/bundle/tlib"]
-	path = multi/vim/.vim/bundle/tlib
+	path = multi/vim/bundle/tlib
 	url = git://github.com/tomtom/tlib_vim.git
 [submodule "multi/vim/.vim/bundle/mw-utils"]
-	path = multi/vim/.vim/bundle/mw-utils
+	path = multi/vim/bundle/mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
 [submodule "multi/vim/.vim/bundle/yankstack"]
-	path = multi/vim/.vim/bundle/yankstack
+	path = multi/vim/bundle/yankstack
 	url = git://github.com/maxbrunsfeld/vim-yankstack.git
 [submodule "multi/vim/.vim/bundle/ctrlp"]
-	path = multi/vim/.vim/bundle/ctrlp
+	path = multi/vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git
 [submodule "multi/vim/.vim/bundle/ctrlp-funky"]
-	path = multi/vim/.vim/bundle/ctrlp-funky
+	path = multi/vim/bundle/ctrlp-funky
 	url = git@github.com:pydave/ctrlp-funky.git
 [submodule "multi/vim/.vim/bundle/ctrlp-register"]
-	path = multi/vim/.vim/bundle/ctrlp-register
+	path = multi/vim/bundle/ctrlp-register
 	url = git://github.com/mattn/ctrlp-register.git
 [submodule "multi/vim/.vim/bundle/renamer"]
-	path = multi/vim/.vim/bundle/renamer
+	path = multi/vim/bundle/renamer
 	url = git@github.com:pydave/renamer.vim.git
 [submodule "multi/vim/.vim/bundle/tabular"]
-	path = multi/vim/.vim/bundle/tabular
+	path = multi/vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
 [submodule "multi/vim/.vim/bundle/textobj-word-column"]
-	path = multi/vim/.vim/bundle/textobj-word-column
+	path = multi/vim/bundle/textobj-word-column
 	url = git://github.com/coderifous/textobj-word-column.vim.git
 [submodule "multi/vim/.vim/bundle/speeddating"]
-	path = multi/vim/.vim/bundle/speeddating
+	path = multi/vim/bundle/speeddating
 	url = git@github.com:pydave/vim-speeddating.git
 [submodule "multi/vim/.vim/bundle/textconv"]
-	path = multi/vim/.vim/bundle/textconv
+	path = multi/vim/bundle/textconv
 	url = git@github.com:pydave/textconv.vim.git
 [submodule "multi/vim/.vim/bundle/NrrwRgn"]
-	path = multi/vim/.vim/bundle/NrrwRgn
+	path = multi/vim/bundle/NrrwRgn
 	url = git://github.com/chrisbra/NrrwRgn.git
 [submodule "multi/vim/.vim/bundle/eunuch"]
-	path = multi/vim/.vim/bundle/eunuch
+	path = multi/vim/bundle/eunuch
 	url = git@github.com:pydave/vim-eunuch.git
 [submodule "multi/vim/.vim/bundle/pathogen"]
-	path = multi/vim/.vim/bundle/pathogen
+	path = multi/vim/bundle/pathogen
 	url = git@github.com:pydave/vim-pathogen.git
 [submodule "multi/vim/.vim/bundle/man"]
-	path = multi/vim/.vim/bundle/man
+	path = multi/vim/bundle/man
 	url = git@github.com:pydave/vim-man.git
 [submodule "multi/vim/.vim/bundle/textobj-user"]
-	path = multi/vim/.vim/bundle/textobj-user
+	path = multi/vim/bundle/textobj-user
 	url = git://github.com/kana/vim-textobj-user.git
 [submodule "multi/vim/.vim/bundle/textobj-indent"]
-	path = multi/vim/.vim/bundle/textobj-indent
+	path = multi/vim/bundle/textobj-indent
 	url = git://github.com/kana/vim-textobj-indent.git
 [submodule "multi/vim/.vim/bundle/textobj-between"]
-	path = multi/vim/.vim/bundle/textobj-between
+	path = multi/vim/bundle/textobj-between
 	url = git@github.com:thinca/vim-textobj-between.git
 [submodule "multi/vim/.vim/bundle/operator-user"]
-	path = multi/vim/.vim/bundle/operator-user
+	path = multi/vim/bundle/operator-user
 	url = git://github.com/kana/vim-operator-user.git
 [submodule "multi/vim/.vim/bundle/operator-camelize"]
-	path = multi/vim/.vim/bundle/operator-camelize
+	path = multi/vim/bundle/operator-camelize
 	url = git://github.com/tyru/operator-camelize.vim.git
 [submodule "multi/vim/.vim/bundle/itchy"]
-	path = multi/vim/.vim/bundle/itchy
+	path = multi/vim/bundle/itchy
 	url = git@github.com:pydave/itchy.vim.git
 [submodule "multi/vim/.vim/bundle/ripple"]
-	path = multi/vim/.vim/bundle/ripple
+	path = multi/vim/bundle/ripple
 	url = git@github.com:pydave/vim-ripple.git
 [submodule "multi/vim/.vim/bundle/golden-ratio"]
-	path = multi/vim/.vim/bundle/golden-ratio
+	path = multi/vim/bundle/golden-ratio
 	url = git@github.com:pydave/golden-ratio.git
 [submodule "multi/vim/.vim/bundle/airline"]
-	path = multi/vim/.vim/bundle/airline
+	path = multi/vim/bundle/airline
 	url = git@github.com:bling/vim-airline.git
 [submodule "multi/vim/.vim/bundle/powerline-sanity"]
-	path = multi/vim/.vim/bundle/powerline-sanity
+	path = multi/vim/bundle/powerline-sanity
 	url = git@github.com:pydave/powerline-sanity.git
 [submodule "multi/vim/.vim/bundle/TailMinusF"]
-	path = multi/vim/.vim/bundle/TailMinusF
+	path = multi/vim/bundle/TailMinusF
 	url = git@github.com:pydave/TailMinusF.git
 [submodule "multi/vim/.vim/bundle/notgrep"]
-	path = multi/vim/.vim/bundle/notgrep
+	path = multi/vim/bundle/notgrep
 	url = git@github.com:pydave/vim-notgrep.git
 [submodule "multi/vim/.vim/bundle/LargeFile"]
-	path = multi/vim/.vim/bundle/LargeFile
+	path = multi/vim/bundle/LargeFile
 	url = git://github.com/vim-scripts/LargeFile.git
 [submodule "multi/vim/.vim/bundle/diffusable"]
-	path = multi/vim/.vim/bundle/diffusable
+	path = multi/vim/bundle/diffusable
 	url = git@github.com:pydave/vim-diffusable.git
 [submodule "multi/vim/.vim/bundle/bufexplorer"]
-	path = multi/vim/.vim/bundle/bufexplorer
+	path = multi/vim/bundle/bufexplorer
 	url = git@github.com:pydave/bufexplorer.zip.git
 [submodule "multi/vim/.vim/bundle/ultisnips"]
-	path = multi/vim/.vim/bundle/ultisnips
+	path = multi/vim/bundle/ultisnips
 	url = git://github.com/SirVer/ultisnips.git
 [submodule "multi/vim/.vim/bundle/david-snippets"]
-	path = multi/vim/.vim/bundle/david-snippets
+	path = multi/vim/bundle/david-snippets
 	url = git@github.com:pydave/vim-david-snippets.git
 [submodule "multi/vim/.vim/bundle/orgmode"]
-	path = multi/vim/.vim/bundle/orgmode
+	path = multi/vim/bundle/orgmode
 	url = git://github.com/jceb/vim-orgmode.git
 [submodule "multi/vim/.vim/bundle/scriptease"]
-	path = multi/vim/.vim/bundle/scriptease
+	path = multi/vim/bundle/scriptease
 	url = git://github.com/tpope/vim-scriptease.git
 [submodule "multi/vim/.vim/bundle/sensible"]
-	path = multi/vim/.vim/bundle/sensible
+	path = multi/vim/bundle/sensible
 	url = git://github.com/tpope/vim-sensible.git
 [submodule "multi/vim/.vim/bundle/argedit"]
-	path = multi/vim/.vim/bundle/argedit
+	path = multi/vim/bundle/argedit
 	url = git@github.com:pydave/vim-argedit.git
 [submodule "multi/vim/.vim/bundle/qargs"]
-	path = multi/vim/.vim/bundle/qargs
+	path = multi/vim/bundle/qargs
 	url = git://github.com/nelstrom/vim-qargs.git
 [submodule "multi/vim/.vim/bundle/ctrlp-history"]
-	path = multi/vim/.vim/bundle/ctrlp-history
+	path = multi/vim/bundle/ctrlp-history
 	url = git@github.com:pydave/ctrlp-history.git
 [submodule "multi/vim/.vim/bundle/python-syntax"]
-	path = multi/vim/.vim/bundle/python-syntax
+	path = multi/vim/bundle/python-syntax
 	url = git@github.com:hdima/python-syntax.git
 [submodule "multi/vim/.vim/bundle/argumentative"]
-	path = multi/vim/.vim/bundle/argumentative
+	path = multi/vim/bundle/argumentative
 	url = git@github.com:PeterRincker/vim-argumentative.git
 [submodule "multi/vim/.vim/bundle/detectindent"]
-	path = multi/vim/.vim/bundle/detectindent
+	path = multi/vim/bundle/detectindent
 	url = git@github.com:ciaranm/detectindent.git
 [submodule "multi/vim/.vim/bundle/editqf"]
-	path = multi/vim/.vim/bundle/editqf
+	path = multi/vim/bundle/editqf
 	url = git@github.com:jceb/vim-editqf.git
 [submodule "multi/vim/.vim/bundle/abolish"]
-	path = multi/vim/.vim/bundle/abolish
+	path = multi/vim/bundle/abolish
 	url = git@github.com:tpope/vim-abolish.git
 [submodule "multi/vim/.vim/bundle/simplebisect"]
-	path = multi/vim/.vim/bundle/simplebisect
+	path = multi/vim/bundle/simplebisect
 	url = git@github.com:pydave/vim-simplebisect.git
 [submodule "multi/vim/.vim/bundle/vinegar"]
-	path = multi/vim/.vim/bundle/vinegar
+	path = multi/vim/bundle/vinegar
 	url = git@github.com:tpope/vim-vinegar.git
 [submodule "multi/vim/.vim/bundle/ficklefold"]
-	path = multi/vim/.vim/bundle/ficklefold
+	path = multi/vim/bundle/ficklefold
 	url = git@github.com:pydave/vim-ficklefold.git
