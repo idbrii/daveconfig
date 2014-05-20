@@ -19,8 +19,8 @@ mklink    %USERPROFILE%\.bashrc          %daveconfig%\unix\terminal\bashrc
 mklink    %USERPROFILE%\.screenrc        %daveconfig%\unix\terminal\screenrc
 
 mklink /D %USERPROFILE%\.vim             %daveconfig%\multi\vim
-mklink    %USERPROFILE%\.gvimrc          %daveconfig%\multi\vim\gvimrc.vim
-mklink    %USERPROFILE%\.vimrc           %daveconfig%\multi\vim\vimrc.vim
+echo source %daveconfig%\multi\vim\gvimrc.vim> %USERPROFILE%\.gvimrc
+echo source %daveconfig%\multi\vim\vimrc.vim > %USERPROFILE%\.vimrc
 
 
 mklink    %USERPROFILE%\.gitconfig       %daveconfig%\multi\git\.gitconfig
