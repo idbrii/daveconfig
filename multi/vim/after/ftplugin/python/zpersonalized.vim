@@ -58,7 +58,8 @@ xnoremap <buffer> <silent> <Leader><C-o> :s/^\([ \t]*\)#/\1/<CR>:silent nohl<CR>
 " Why isn't this smarter? -- maybe due to eclim?
 set complete-=i
 
-"" Stdlib tags
+"" stdlib tags
+" ctags -R -f ~/.vim/tags/python.ctags --c-kinds=+p --fields=+S /usr/lib/python/
 setlocal tags+=$HOME/.vim/tags/python.ctags
 
 " Don't bother with pyflakes, it usually doesn't work anyway.
