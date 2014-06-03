@@ -175,3 +175,6 @@
 [submodule "multi/vim/bundle/ficklefold"]
 	path = multi/vim/bundle/ficklefold
 	url = git@github.com:pydave/vim-ficklefold.git
+[submodule "multi/vim/bundle/fixquick"]
+	path = multi/vim/bundle/fixquick
+	url = git@github.com:pydave/vim-fixquick.git
