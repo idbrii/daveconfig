@@ -14,3 +14,6 @@ nnoremap <buffer> <Leader>v; 0y$:<C-r>"<CR>
 
 " In vimscript, use compl-vim instead of omnicomplete for smart completion.
 inoremap <buffer> <C-Space> <C-x><C-v>
+
+" No tabs in vim files.
+setlocal expandtab
