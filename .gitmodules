@@ -178,3 +178,6 @@
 [submodule "multi/vim/bundle/fixquick"]
 	path = multi/vim/bundle/fixquick
 	url = git@github.com:pydave/vim-fixquick.git
+[submodule "multi/vim/bundle/searchsavvy"]
+	path = multi/vim/bundle/searchsavvy
+	url = git@github.com:pydave/vim-searchsavvy.git
