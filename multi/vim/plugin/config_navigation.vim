@@ -28,6 +28,8 @@ nnoremap <Leader>vc :let &scrolloff=999-&scrolloff<CR>
 nnoremap <Leader>vw :setlocal invwrap<CR>
 " Quick spelling toggle
 nnoremap <Leader>vs :set invspell<CR>
+" Show cursor (crosshairs like a t)
+nnoremap <Leader>vt :set invcursorline invcursorcolumn<CR>
 
 " Jumplist - navigate previous locations
 if has('jumplist')
