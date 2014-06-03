@@ -64,7 +64,14 @@ nnoremap <Leader>/ :call <SID>ToggleWholeWord()<CR>n
 xnoremap <Leader>/ <Esc>/\%V
 
 " Easy grep for current query
-nnoremap <Leader>* :grep -e "<C-r>/" *
+function! <SID>GrepCurrentQuery()
+    if exists('g:notgrep_loaded') && g:notgrep_loaded
+        return notgrep#search#ConvertRegexVimToPerl(@/)
+    else
+        return @/
+    endif
+endfunction
+nnoremap <Leader>* :grep -e "<C-r>=<SID>GrepCurrentQuery()<CR>" *
 
 " Filters the quickfix list to keep results matching pattern. Bang removes
 " remove results matching the pattern. `:QFilter file|folder` and the list
