@@ -76,6 +76,11 @@ function! s:FilterQuickfixList(bang, pattern)
 endfunction
 command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0, <q-args>)
 
+" Do smarter grep by ignoring files we probably don't want to search.
+"
+" Use GREP_OPTIONS within vim. Can't use it globally or it breaks things. If
+" it breaks things within vim, then you can use SmartGrepToggle to turn it
+" back off.
 if executable('grep')
     " We always want grep (not findstr). Use -H so it works on a single file.
     " (Apparently some greps may not support -H. How to fix that?)
@@ -110,11 +115,13 @@ if executable('grep')
         endif
     endfunction
     call SmartGrepToggle(1)
+	command! SmartGrepToggle echo SmartGrepToggle()
 else
     " If grep isn't installed, then use vimgrep instead of falling back on 
     " findstr or other nonsense!
     set grepprg=internal
 endif
+
 
 """""""""""
 " Commands {{{1
