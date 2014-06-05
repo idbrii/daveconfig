@@ -130,9 +130,9 @@ nnoremap <unique> <C-o> <nop>
 
 let g:airline#extensions#ctrlp#show_adjacent_modes = 0
 
-" Like gf but use filelist instead of path
-" You still need to type <C-\>s to populate the name.
-"nnoremap <Leader>gf :let @/ = '\<'. expand('<cfile>:t') .'\>'<Bar> CtrlP<CR>
+" Like gf but use ctrlp instead of path
+command! CtrlPFileUnderCursor call feedkeys(":CtrlP\<cr>". expand('<cfile>:t'), "t")
+nnoremap <Leader>gf :CtrlPFileUnderCursor<CR>
 
 " Open header/implementation from kien -- gives list of files with the same name.
 " Source: https://github.com/kien/ctrlp.vim/issues/412
