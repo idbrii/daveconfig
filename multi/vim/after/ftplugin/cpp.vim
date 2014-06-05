@@ -52,17 +52,24 @@ iabbrev _guard_ #ifndef zzz<CR>#define zzz<CR><CR>#endif<ESC>kO
 " Fast switch between header and implementation (instead of lookup file)
 "
 " Source: http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file#By_modifying_ftplugins
-function SwitchSourceHeader()
-    if (expand ("%:t") == expand ("%:t:r") . ".h")
-		try
-			find %:t:r.cpp
-		catch /^Vim\%((\a\+)\)\=:E345/
-			" Error: Can't find file. Try inline instead.
-			find %:t:r.inl
-		endtry
-    else
-        find %:t:r.h
-    endif
+function <SID>SwitchSourceHeader()
+    try
+        if (expand("%:t") == expand("%:t:r") . ".h")
+            try
+                find %:t:r.cpp
+            catch /^Vim\%((\a\+)\)\=:E345/
+                " Error: Can't find file. Try inline instead.
+                find %:t:r.inl
+            endtry
+        else
+            find %:t:r.h
+        endif
+    catch /^Vim\%((\a\+)\)\=:E345/
+        " If we can't find it in the path, see if it's in ctrlp.
+        if exists(":CtrlPSameName") == 2
+            CtrlPSameName
+        endif
+    endtry
 endfunction
 
-nnoremap <A-o> :call SwitchSourceHeader()<CR>
+nnoremap <silent> <A-o> :call <SID>SwitchSourceHeader()<CR>

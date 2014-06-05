@@ -134,11 +134,13 @@ let g:airline#extensions#ctrlp#show_adjacent_modes = 0
 " You still need to type <C-\>s to populate the name.
 "nnoremap <Leader>gf :let @/ = '\<'. expand('<cfile>:t') .'\>'<Bar> CtrlP<CR>
 
-" Open header/implementation -- gives list of files with the same name using
-" Leader first because cpp.vim has faster <A-o> (and doesn't change last
-" command)
-" You still need to type <C-\>s to populate the name.
-nnoremap <Leader><A-o> :let @/ = '\<'. expand('%:t:r') .'\>'<Bar> CtrlP<CR>
+" Open header/implementation from kien -- gives list of files with the same name.
+" Source: https://github.com/kien/ctrlp.vim/issues/412
+command! CtrlPSameName call feedkeys(":CtrlP\<cr>".expand('%:t:r'), "t")
+" By default use CtrlPSameName, but languages can override this and fallback
+" to CtrlPSameName.
+nnoremap <unique> <A-o> :CtrlPSameName<CR>
+
 
 " Code Search version of find symbol (finds text, not symbol).
 " Faster than cscope.
