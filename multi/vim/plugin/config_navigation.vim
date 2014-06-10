@@ -53,9 +53,13 @@ nnoremap <C-S-PageUp> :prev<CR>
 " Ctrl+PgUp/Dn - Move between quickfix marks
 nnoremap <C-PageDown> :cnext<CR>
 nnoremap <C-PageUp> :cprev<CR>
-" Alt+PgUp/Dn - Move between location window marks
-nnoremap <A-PageDown> :lnext<CR>
-nnoremap <A-PageUp> :lprev<CR>
+" Alt+PgUp/Dn - Move between quickfix files
+nnoremap <A-PageDown> :cnfile<CR>
+nnoremap <A-PageUp> :cpfile<CR>
+" Ctrl+Alt+PgUp/Dn - Move between location window marks
+nnoremap <C-A-PageDown> :lnext<CR>
+nnoremap <C-A-PageUp> :lprev<CR>
+
 
 " Follows <Leader>w convention from togglequickfix. Similar in style to <C-w>,
 " but the maps are totally different.
