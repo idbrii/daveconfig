@@ -5,8 +5,9 @@ if exists('loaded_bufgrep')
 endif
 let loaded_bufgrep = 1
 
-command -nargs=+ BufGrep call <SID>BufGrep(<q-args>)
-function s:BufGrep(query)
+command! -nargs=+ BufGrep call <SID>ListGrep('buf', <q-args>)
+command! -nargs=+ ArgGrep call <SID>ListGrep('arg', <q-args>)
+function! s:ListGrep(list, query)
 	" Using lazyredraw helps speed up drawing, especially since we go through
 	" all of the buffers
 	let save_lazyredraw = &lazyredraw
@@ -19,10 +20,10 @@ function s:BufGrep(query)
 	" Clear the quickfix -- we're adding to it so we want it to start empty
 	call setqflist([])
 
-	" For each buffer, if it has a name, then grep for the query in it. We use
+	" For each buffer/arg, if it has a name, then grep for the query in it. We use
 	" g to get all matches and j to not jump anywhere -- we'll be on our way
 	" to the next buffer anyway.
-	exec 'noautocmd bufdo if !bufname("%") | silent! vimgrepadd/' . a:query . '/gj % | endif'
+	exec 'noautocmd '. a:list .'do if !bufname("%") | silent! vimgrepadd/' . a:query . '/gj % | endif'
 
 	" Go back to start point
 	exec save_bufnr . 'buffer'
