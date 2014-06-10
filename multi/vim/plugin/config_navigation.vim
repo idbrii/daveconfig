@@ -140,7 +140,10 @@ command! CtrlPSameName call feedkeys(":CtrlP\<cr>".expand('%:t:r'), "t")
 " By default use CtrlPSameName, but languages can override this and fallback
 " to CtrlPSameName.
 nnoremap <unique> <A-o> :CtrlPSameName<CR>
-
+" Another implementation that doesn't require feedkeys (which seems pretty
+" hacky). From bohrshaw on reddit. I don't think it works any better.
+" Source: http://www.reddit.com/r/vim/comments/27epkg/switching_between_likenamed_files_with_ctrlp_no/ci0d715
+"nmap <expr> <A-o> ':CtrlP<CR>'.expand('%:t:r')
 
 " Code Search version of find symbol (finds text, not symbol).
 " Faster than cscope.
