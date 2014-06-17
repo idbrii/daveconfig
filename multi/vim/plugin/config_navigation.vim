@@ -138,16 +138,15 @@ let g:airline#extensions#ctrlp#show_adjacent_modes = 0
 command! CtrlPFileUnderCursor call feedkeys(":CtrlP\<cr>". expand('<cfile>:t'), "t")
 nnoremap <Leader>gf :CtrlPFileUnderCursor<CR>
 
-" Open header/implementation from kien -- gives list of files with the same name.
-" Source: https://github.com/kien/ctrlp.vim/issues/412
-command! CtrlPSameName call feedkeys(":CtrlP\<cr>".expand('%:t:r'), "t")
-" By default use CtrlPSameName, but languages can override this and fallback
-" to CtrlPSameName.
-nnoremap <unique> <A-o> :CtrlPSameName<CR>
-" Another implementation that doesn't require feedkeys (which seems pretty
-" hacky). From bohrshaw on reddit. I don't think it works any better.
-" Source: http://www.reddit.com/r/vim/comments/27epkg/switching_between_likenamed_files_with_ctrlp_no/ci0d715
-"nmap <expr> <A-o> ':CtrlP<CR>'.expand('%:t:r')
+" Better solution using a ctrlp option that prevents errors due to input
+" interpretation from bohrshaw.
+" Source: http://www.reddit.com/r/vim/comments/27epkg/switching_between_likenamed_files_with_ctrlp_no/ci5cqig
+function! CtrlPSameName()
+    let g:ctrlp_default_input = expand('%:t:r')
+    call ctrlp#init(0)
+    unlet g:ctrlp_default_input
+endf
+nnoremap <unique> <A-o> :call CtrlPSameName()<CR>
 
 " Code Search version of find symbol (finds text, not symbol).
 " Faster than cscope.
