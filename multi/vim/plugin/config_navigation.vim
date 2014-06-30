@@ -135,16 +135,18 @@ nnoremap <unique> <C-o> <nop>
 let g:airline#extensions#ctrlp#show_adjacent_modes = 0
 
 " Like gf but use ctrlp instead of path
-command! CtrlPFileUnderCursor call feedkeys(":CtrlP\<cr>". expand('<cfile>:t'), "t")
-nnoremap <Leader>gf :CtrlPFileUnderCursor<CR>
+nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
 
 " Better solution using a ctrlp option that prevents errors due to input
 " interpretation from bohrshaw.
 " Source: http://www.reddit.com/r/vim/comments/27epkg/switching_between_likenamed_files_with_ctrlp_no/ci5cqig
-function! CtrlPSameName()
-    let g:ctrlp_default_input = expand('%:t:r')
+function! CtrlPInvokeWithPrefilledQuery(prefill_query)
+    let g:ctrlp_default_input = a:prefill_query
     call ctrlp#init(0)
     unlet g:ctrlp_default_input
+endf
+function! CtrlPSameName()
+    call CtrlPInvokeWithPrefilledQuery(expand('%:t:r'))
 endf
 nnoremap <unique> <A-o> :call CtrlPSameName()<CR>
 
