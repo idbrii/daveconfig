@@ -134,9 +134,6 @@ nnoremap <unique> <C-o> <nop>
 
 let g:airline#extensions#ctrlp#show_adjacent_modes = 0
 
-" Like gf but use ctrlp instead of path
-nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
-
 " Better solution using a ctrlp option that prevents errors due to input
 " interpretation from bohrshaw.
 " Source: http://www.reddit.com/r/vim/comments/27epkg/switching_between_likenamed_files_with_ctrlp_no/ci5cqig
@@ -149,6 +146,9 @@ function! CtrlPSameName()
     call CtrlPInvokeWithPrefilledQuery(expand('%:t:r'))
 endf
 nnoremap <unique> <A-o> :call CtrlPSameName()<CR>
+
+" Like gf but use ctrlp instead of path
+nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
 
 " Code Search version of find symbol (finds text, not symbol).
 " Faster than cscope.
