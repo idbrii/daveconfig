@@ -22,11 +22,7 @@ endif
 
 
 " Invoke external diff for current file {{{
-function s:P4DiffInExternalTool()
-    exec '!p4 set P4DIFF=' . g:external_diff . ' & p4 diff %:p & p4 set P4DIFF='
-endfunction
-command PDiffExternal silent call s:P4DiffInExternalTool()
-
+command PDiffExternal silent call perforce#david#P4DiffInExternalTool()
 
 " Dependent on perforce.vim {{{
 if !exists('g:loaded_perforce') || g:loaded_perforce <= 0
@@ -37,73 +33,15 @@ endif
 " longer descriptions so I can at least see the first line.
 command PChangesThisFile PChanges -L %
 
-" TODO: Support arbitrary revisions?
-function! s:PAnnotate()
-	if exists("g:p4SplitCommand")
-		let p4SplitCommand_bak = g:p4SplitCommand
-	endif
+command PAnnotate call perforce#david#PAnnotate()
 
-	let g:p4SplitCommand = 'vsplit'
-	" -q for no header, so the lines match up.
-	PF annotate -q %
-
-	" Shrink to be an adjacent window. (So we can look in the
-	" syntax-highlighted one instead.)
-	setlocal nowrap
-	vertical resize 20
-	setlocal scrollbind
-	wincmd p
-	setlocal scrollbind
-	syncbind
-	" TODO: Should remove scrollbind when closed.
-
-	if exists("p4SplitCommand_bak")
-		let g:p4SplitCommand = p4SplitCommand_bak
-	endif
-endfunction
-command PAnnotate call s:PAnnotate()
-
-function s:PGDiff()
-	PPrint
-	wincmd H
-	DiffBoth
-endfunction
-command PGDiff silent call <SID>PGDiff()
+" Vimdiff instead of diff output
+command PGDiff silent call perforce#david#PVimDiff()
 
 " p4 edit all args. Useful after doing Qargs and before doing search and
 " replace on the quickfix.
 command PEditArgs argdo wincmd o | PEdit
 
-" Auto-checkout all readonly files. We need nested in the autocmd so filetype
-" stuff commands are still called.
-function! s:P4CheckOutFile(p4_root)
-	let root = substitute(a:p4_root, '/', '.', 'g')
-	let fname = expand('%:p')
-	if len(fname) == 0 || fname !~? root
-		return
-	endif
-
-	PEdit
-	edit
-endfunction
-
-function! s:InvasivePerforceSetup()
-	augroup p4autocheckout
-		au!
-		au FileChangedRO * nested :call <SID>P4CheckOutFile(g:DAVID_local_root)
-	augroup END
-
-	" Perforce shortcuts
-	nnoremap <Leader>fi :PChange<CR>
-	nnoremap <Leader>fd :PGDiff<CR>
-	nnoremap <Leader>fv :exec 'PChanges -L -u '. $USERNAME<CR>
-	nnoremap <Leader>fV :PChangesThisFile<CR>
-	nnoremap <Leader>fb :silent! cd %:p:h<CR>:PBlame<CR>
-
-	delcommand PChange
-endfunction
-
-" Make sure local machine is setup to work before setting autocmds or maps.
 if exists('g:DAVID_local_root')
-	call s:InvasivePerforceSetup()
+	call perforce#david#InvasivePerforceSetup()
 endif
