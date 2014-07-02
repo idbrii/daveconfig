@@ -70,6 +70,10 @@ function s:PGDiff()
 endfunction
 command PGDiff silent call <SID>PGDiff()
 
+" p4 edit all args. Useful after doing Qargs and before doing search and
+" replace on the quickfix.
+command PEditArgs argdo wincmd o | PEdit
+
 " Auto-checkout all readonly files. We need nested in the autocmd so filetype
 " stuff commands are still called.
 function! s:P4CheckOutFile(p4_root)
