@@ -1,3 +1,9 @@
+" Everything requires the p4 executable {{{1
+if !executable('p4')
+	finish
+endif
+
+
 function! perforce#david#P4DiffInExternalTool()
     exec '!p4 set P4DIFF=' . g:external_diff . ' & p4 diff %:p & p4 set P4DIFF='
 endfunction
@@ -11,11 +17,7 @@ function! s:P4Checkout(root, path)
 		" PEdit opens a new buffer, so switch back to the gitcommit buffer.
 		wincmd p
 	else
-		if executable('p4')
-			exec '!p4 edit ' . fname
-		else
-			echoerr 'p4 is not available'
-		endif
+        exec '!p4 edit ' . fname
 	endif
 endfunction
 
