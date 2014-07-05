@@ -96,7 +96,9 @@ let g:ctrlp_max_height = &lines / 2
 
 let g:ctrlp_regexp = 1
 let g:ctrlp_prompt_mappings = { 'PrtAdd(".*")': ['<space>'] }
-let g:ctrlp_lazy_update = 100
+" Bug: Turning on ctrlp_lazy_update allows mappings to expand. Does that occur
+" in the latest ctrlp? Are other plugins conflicting?
+let g:ctrlp_lazy_update = 0
 
 " I don't keep persistent file explorers, so allow them to be re-used (likely
 " I opened them and then decided to use ctrlp instead).
