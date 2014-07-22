@@ -14,6 +14,11 @@ if executable('p4v')
 	endfunction
 	command PVHistory call s:P4VFileHistory()
 
+	function s:P4VRevisionGraph()
+		!start p4v -win 0 -cmd "tree -i %:p"
+	endfunction
+	command PVRevisionGraph call s:P4VRevisionGraph()
+
 	function s:P4VTimeLapse()
 		!start p4v -win 0 -cmd "annotate -i %:p"
 	endfunction
