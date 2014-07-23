@@ -9,19 +9,30 @@ endif
 if executable('p4v')
 	" Open a history window for the current file
 	" Will probably show an open connection dialog
-	function s:P4VFileHistory()
-		!start p4v -win 0 -cmd "history %:p"
-	endfunction
+    function s:P4VFileHistory()
+        !start p4v -win 0 -cmd "history %:p"
+    endfunction
+
+    if executable('p4vc')
+        function s:P4VRevisionGraph()
+            !start p4vc revisiongraph %:p
+        endfunction
+
+        function s:P4VTimeLapse()
+            !start p4vc timelapseview %:p
+        endfunction
+    else
+        function s:P4VRevisionGraph()
+            !start p4v -win 0 -cmd "tree -i %:p"
+        endfunction
+
+        function s:P4VTimeLapse()
+            !start p4v -win 0 -cmd "annotate -i %:p"
+        endfunction
+    endif
+
 	command PVHistory call s:P4VFileHistory()
-
-	function s:P4VRevisionGraph()
-		!start p4v -win 0 -cmd "tree -i %:p"
-	endfunction
 	command PVRevisionGraph call s:P4VRevisionGraph()
-
-	function s:P4VTimeLapse()
-		!start p4v -win 0 -cmd "annotate -i %:p"
-	endfunction
 	command PVTimeLapse call s:P4VTimeLapse()
 endif
 
