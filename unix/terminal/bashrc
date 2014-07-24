@@ -6,12 +6,18 @@ DIR=~/data/settings/daveconfig/unix/terminal
 # If we're using bash we're unix-like
 source $DIR/unix.bashrc
 
-case "`uname -o`" in
-Cygwin*)
+# Used to use uname -o
+# MinGW doesn't support uname -o
+# -s is close (kernel name), so let's try that.
+case "`uname -s`" in
+MINGW*|Cygwin*)
 	source $DIR/cygwin.bashrc
     ;;
-GNU/Linux)
+Linux)
 	source $DIR/ubuntu.bashrc
+    ;;
+Darwin)
+    #
     ;;
 *)
 	echo "bashrc: Platform not supported"
