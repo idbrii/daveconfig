@@ -160,9 +160,6 @@ set wildmode=longest:list,full
 if has("autocmd")
 augroup vimrcEx
 au!
-	" In plain-text files and svn commit buffers, wrap automatically at 78 chars
-"	au FileType text,svn setlocal tw=78 fo+=t
-
 	" In most files, jump back to the last spot cursor was in before exiting
     " (except: git commit)
     " See :help last-position-jump
