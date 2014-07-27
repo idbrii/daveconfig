@@ -544,9 +544,6 @@ let g:notgrep_no_mappings = 1
 let g:editqf_no_mappings = 1
 let g:editqf_no_type_mappings = 1
 
-" Operators
-map <Leader>` <Plug>(operator-camelize-toggle)
-
 "}}}
 
 
