@@ -159,7 +159,10 @@
 	url = git@github.com:ciaranm/detectindent.git
 [submodule "multi/vim/bundle/editqf"]
 	path = multi/vim/bundle/editqf
-	url = git@github.com:jceb/vim-editqf.git
+	url = git@github.com:pydave/vim-editqf.git
+[submodule "multi/vim/bundle/quickfix-reflector"]
+	path = multi/vim/bundle/quickfix-reflector
+	url = git@github.com:stefandtw/quickfix-reflector.vim.git
 [submodule "multi/vim/bundle/abolish"]
 	path = multi/vim/bundle/abolish
 	url = git@github.com:tpope/vim-abolish.git

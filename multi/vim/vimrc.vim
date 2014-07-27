@@ -536,9 +536,12 @@ let g:Powerline#Segments#ctrlp#segments#next = ''
 " NotGrep
 let g:notgrep_no_mappings = 1
 
-" I don't like the default maps and I don't want to define my own.
+" Only use editqf for modifying paths
 let g:editqf_no_mappings = 1
+let g:editqf_no_qf_mappings = 1
 let g:editqf_no_type_mappings = 1
+
+nmap <Leader>we <Plug>QFEdit
 
 "}}}
 
