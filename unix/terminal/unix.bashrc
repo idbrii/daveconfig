@@ -27,6 +27,14 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# Allow block select in terminal vim.
+# Don't use Ctrl-q as resume: http://stackoverflow.com/a/7884226/79125
+stty -ixon
+
+# Don't break my terminal (Ctrl-S should be save!)
+stty start ""
+stty stop ""
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
