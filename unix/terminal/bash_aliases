@@ -165,7 +165,7 @@ fi
 # MinGW doesn't support uname -o
 # -s is close (kernel name), so let's try that.
 case "`uname -s`" in
-MINGW*|Cygwin*)
+MINGW*|CYGWIN*)
 	source $DIR/cygwin.bash_aliases
     ;;
 Linux)
