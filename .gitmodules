@@ -181,3 +181,6 @@
 [submodule "multi/vim/bundle/hiinterestingword"]
 	path = multi/vim/bundle/hiinterestingword
 	url = git@github.com:pydave/vim-hiinterestingword.git
+[submodule "multi/vim/bundle/rsi"]
+	path = multi/vim/bundle/rsi
+	url = git@github.com:tpope/vim-rsi.git

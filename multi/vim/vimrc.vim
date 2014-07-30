@@ -146,10 +146,6 @@ set history=500				" cmdline history
 " key?
 nnoremap <C-g><C-g>  :let last_search=@/<Bar> ?^\w? mark c<Bar> noh<Bar> echo getline("'c")<Bar> let @/ = last_search<CR>
 
-" Esc without straying too far from homerow. Otherwise just inserts ^B. (See i_CTRL-B-gone.)
-" Possible alternative: C-s (used experiementally by surround).
-inoremap <C-b> <Esc>
-
 " Command Line {{{1
 " Autocomplete in cmdline: Give longest completion with list of options then
 " tab through options.
