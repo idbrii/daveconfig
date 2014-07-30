@@ -11,6 +11,8 @@ nnoremap <buffer> <Leader>vso :w<CR>:source %<CR>
 nnoremap <buffer> <Leader>v: 0y$:<C-r>"<CR>
 " ; is easier than :
 nnoremap <buffer> <Leader>v; 0y$:<C-r>"<CR>
+" Source selection
+xnoremap <buffer> <Leader>v; y:execute @"<CR>
 
 " In vimscript, use compl-vim instead of omnicomplete for smart completion.
 inoremap <buffer> <C-Space> <C-x><C-v>
