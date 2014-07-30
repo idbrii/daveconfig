@@ -83,8 +83,9 @@ let g:ctrlp_lazy_update = 0
 " I opened them and then decided to use ctrlp instead).
 let g:ctrlp_reuse_window = 'netrw\|bufexplorer\|Scratch'
 
-" I generate a filelist file in the root of my project that tells me where all
-" the interesting files are. That's far faster than searching.
+" I usually generate a filelist file in the root of my project that tells me
+" where all the interesting files are. That's far faster than searching. For
+" small projects, I don't bother and fallback to .git.
 if has("win32")
     " cygwin cat suddenly stopped working.
     let filelist_cmd = 'type %s\\filelist'
@@ -93,12 +94,12 @@ else
 endif
 let g:ctrlp_user_command = {
             \   'types': {
-            \       1: ['.git', 'cd %s && git ls-files'],
-            \       2: ['filelist', filelist_cmd]
+            \       1: ['filelist', filelist_cmd],
+            \       2: ['.git', 'cd %s && git ls-files'],
             \   }
             \}
 unlet filelist_cmd
-let g:ctrlp_root_markers = ['.git', 'filelist']
+let g:ctrlp_root_markers = ['filelist', '.git']
 
 " don't store temp files or git files
 if has("win32")
