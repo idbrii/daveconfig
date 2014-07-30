@@ -37,6 +37,12 @@ if !exists('$LANG')
     set encoding=utf-8
 endif
 
+" Writing files on Windows doesn't preserve file attributes seen via cygwin
+" (presumably because the created backup copy didn't inherit them correctly).
+if has('win32')
+    set backupcopy=yes
+endif
+
 " Display {{{1
 set background=dark			" I use dark background
 set nolazyredraw				" Don't repaint when scripts are running
