@@ -178,3 +178,6 @@
 [submodule "multi/vim/bundle/searchsavvy"]
 	path = multi/vim/bundle/searchsavvy
 	url = git@github.com:pydave/vim-searchsavvy.git
+[submodule "multi/vim/bundle/hiinterestingword"]
+	path = multi/vim/bundle/hiinterestingword
+	url = git@github.com:pydave/vim-hiinterestingword.git
