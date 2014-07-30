@@ -184,3 +184,6 @@
 [submodule "multi/vim/bundle/rsi"]
 	path = multi/vim/bundle/rsi
 	url = git@github.com:tpope/vim-rsi.git
+[submodule "multi/vim/bundle/gogo"]
+	path = multi/vim/bundle/gogo
+	url = git@github.com:pydave/vim-gogo.git
