@@ -46,6 +46,21 @@
 [submodule "multi/vim/bundle/yankstack"]
 	path = multi/vim/bundle/yankstack
 	url = git://github.com/maxbrunsfeld/vim-yankstack.git
+[submodule "multi/vim/bundle/unite"]
+	path = multi/vim/bundle/unite
+	url = git@github.com:Shougo/unite.vim.git
+[submodule "multi/vim/bundle/unite-david"]
+	path = multi/vim/bundle/unite-david
+	url = git@github.com:idbrii/unite-david.git
+[submodule "multi/vim/bundle/unite-neomru"]
+	path = multi/vim/bundle/unite-neomru
+	url = git@github.com:Shougo/neomru.vim.git
+[submodule "multi/vim/bundle/unite-outline"]
+	path = multi/vim/bundle/unite-outline
+	url = git@github.com:Shougo/unite-outline.git
+[submodule "multi/vim/bundle/unite-history"]
+	path = multi/vim/bundle/unite-history
+	url = git@github.com:thinca/vim-unite-history.git
 [submodule "multi/vim/bundle/ctrlp"]
 	path = multi/vim/bundle/ctrlp
 	url = git://github.com/kien/ctrlp.vim.git

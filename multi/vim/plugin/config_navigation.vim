@@ -10,18 +10,6 @@ noremap gk k
 sunmap j
 sunmap k
 
-" Ctrl + Arrows - Move around quickly
-nnoremap  <c-up>     {
-nnoremap  <c-down>   }
-nnoremap  <c-right>  El
-nnoremap  <c-left>   Bh
-
-" Shift + Arrows - Visually Select text
-"nnoremap  <s-up>     Vk
-"nnoremap  <s-down>   Vj
-"nnoremap  <s-right>  vl
-"nnoremap  <s-left>   vh
-
 " Quick toggle cursor at centre of screen.
 nnoremap <Leader>vc :let &scrolloff=999-&scrolloff<CR>
 " Quick wrap toggle
@@ -152,7 +140,10 @@ nnoremap <unique> <Leader><A-S-g> :NotGrep <C-r>=expand('<cword>')<CR><CR>
 nnoremap <unique> <A-g> :NotGrep \b<C-r>=expand('<cword>')<CR>\b<CR>
 
 " BufExplorer {{{1
-noremap <silent> <Leader>e :BufExplorer<CR>
+if !hasmapto('<Leader>e')
+    " Unite might replace this.
+    nnoremap <silent> <Leader>e :BufExplorer<CR>
+endif
 noremap <silent> <C-w><Leader>e :BufExplorerVerticalSplit<CR>
 
 " Netrw plugin -- Navigate filesystems {{{1
