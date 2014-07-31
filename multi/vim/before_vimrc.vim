@@ -7,7 +7,17 @@
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
 runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#incubate()
+" infect() is the intended entry point for pathogen. I have avoided it before
+" because it cycles filetypes (when applicable). I think cycling has broken
+" something for me in the past (autodetection for git commits from terminal?)
+" Cycling is necessary on the default install of Ubuntu 14.04 LTS, because
+" /etc/vim/vimrc sets `syntax on`. I can comment out that line and cycling is
+" not necessary (g:did_load_filetypes is not true before infect is called).
+if exists('g:did_load_filetypes')
+    echoerr "Doing unnecessary work: g:did_load_filetypes = " . g:did_load_filetypes
+endif
+call pathogen#infect()
+
 
 " Setup filetype and syntax. Doing these right after pathogen because
 " somethings depend on them (colorschemes) and pathogen must come first.
