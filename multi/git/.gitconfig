@@ -41,6 +41,8 @@
     # open all urls for the current git repo
     hub = "!git hublist | while read url ; do xdg-open $url ; done"
 	subupdate = "! git submodule sync ; git submodule update --init"
+    # TODO: Make this work for submodules and add it to subupdate
+    use-branch-if-already-there = "!f() { if [ `git show --oneline --summary $1 HEAD 2> /dev/null | wc -l` -eq 1 ] ; then git checkout $1 ; fi }; f"
 
 
 [merge]
