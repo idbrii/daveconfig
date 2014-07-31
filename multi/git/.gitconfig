@@ -40,9 +40,9 @@
     #   uses 2 sed substitutions:      ^-- change ssh to readonly     ^-- fix protocol and pull out url
     # open all urls for the current git repo
     hub = "!git hublist | while read url ; do xdg-open $url ; done"
-	subupdate = "! git submodule sync ; git submodule update --init"
-    # TODO: Make this work for submodules and add it to subupdate
-    use-branch-if-already-there = "!f() { if [ `git show --oneline --summary $1 HEAD 2> /dev/null | wc -l` -eq 1 ] ; then git checkout $1 ; fi }; f"
+    subupdate = "! git submodule sync ; git submodule update --init --recursive ; git submodule foreach --recursive git use-branch-if-already-there master"
+    # If only one commit head and input branch are the same so switch to input.
+    use-branch-if-already-there = "!f() { branch=$1 ; n_commits=$(git show --oneline --summary $branch HEAD 2> /dev/null | wc -l) ; if [ $n_commits -eq 1 ] ; then git checkout $branch ; else git branch ; fi }; f"
 
 
 [merge]
@@ -68,3 +68,5 @@
 	cmd = difftool.gvim.git.sh $LOCAL $REMOTE $BASE
 [mergetool "gvim"]
 	cmd = mergetool.gvim.git.sh $LOCAL $REMOTE $BASE $MERGED
+
+# vim:sw=4:et:
