@@ -102,10 +102,7 @@ endif
 
 " Load immediately -- it loads other plugins, so do it first.
 runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#runtime_append_all_bundles()
-
-filetype plugin indent on
-syntax on
+call pathogen#infect()
 
 set hlsearch
 colorscheme desert
