@@ -8,7 +8,7 @@
 set nocompatible				" who needs vi, we've got Vim!
 
 " Don't load plugins if we aren't in Vim7
-if version < 700
+if v:version < 700
 	set noloadplugins
 endif
 
@@ -39,7 +39,7 @@ endif
 
 " Writing files on Windows doesn't preserve file attributes seen via cygwin
 " (presumably because the created backup copy didn't inherit them correctly).
-if has('win32')
+if has('win32') && v:version < 704
     set backupcopy=yes
 endif
 
