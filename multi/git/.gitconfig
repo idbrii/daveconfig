@@ -1,30 +1,28 @@
 [user]
-	name = pydave
-	email = pydave@gmail.com
-	signingkey = D4D6822E
+    name = pydave
+    email = pydave@gmail.com
+    signingkey = D4D6822E
 [include]
     # Do not store github or giggle information in this file! Instead, store
     # them in a computer-local config file.
-	path = ~/.gitconfig.local
+    path = ~/.gitconfig.local
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
 [alias]
     h = help
-	st = status
-	ci = commit
-	br = branch
-	ff = merge --ff-only
-	co-branch = checkout
+    st = status
+    ci = commit
+    br = branch
+    ff = merge --ff-only
     purify = checkout
     refloginspect = log --walk-reflogs
-    resolve = add
     diff-staged = diff --cached
     piecemeal = add --patch
-    unstage = reset
-    substat = submodule foreach "git status && echo"
+    unstage = reset HEAD --
+    substat = submodule foreach "git status || :"
     # Pass the commit you want to squash/fixup with.
     commit-fixup-with = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
     commit-squash-with = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
@@ -46,27 +44,27 @@
 
 
 [merge]
-	tool = meld
+    tool = meld
 [diff]
-	renames = copies
+    renames = copies
 [core]
-	excludesfile = ~/.gitignore
-	autocrlf = input
+    excludesfile = ~/.gitignore
+    autocrlf = input
 [branch]
-	autosetupmerge = true
+    autosetupmerge = true
 [web]
-	browser = chromium-browser
+    browser = chromium-browser
 [difftool]
-	prompt = false
+    prompt = false
 [mergetool]
-	prompt = false
+    prompt = false
 [difftool "beyond"]
-	cmd = difftool.beyond.git.sh $LOCAL $REMOTE $BASE
+    cmd = difftool.beyond.git.sh $LOCAL $REMOTE $BASE
 [mergetool "beyond"]
-	cmd = mergetool.beyond.git.sh $LOCAL $REMOTE $BASE $MERGED
+    cmd = mergetool.beyond.git.sh $LOCAL $REMOTE $BASE $MERGED
 [difftool "gvim"]
-	cmd = difftool.gvim.git.sh $LOCAL $REMOTE $BASE
+    cmd = difftool.gvim.git.sh $LOCAL $REMOTE $BASE
 [mergetool "gvim"]
-	cmd = mergetool.gvim.git.sh $LOCAL $REMOTE $BASE $MERGED
+    cmd = mergetool.gvim.git.sh $LOCAL $REMOTE $BASE $MERGED
 
 # vim:sw=4:et:
