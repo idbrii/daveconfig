@@ -15,7 +15,8 @@ endif
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes
 " synchronization across (heterogeneous) systems easier.
 if has('win32')
-    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    set runtimepath^=$HOME/.vim
+    set runtimepath+=$HOME/.vim/after
 endif
 
 " Some things need to be setup before anything else in the vimrc (but after
