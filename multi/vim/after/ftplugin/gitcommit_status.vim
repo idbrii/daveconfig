@@ -40,7 +40,7 @@ nmap <buffer> <silent> s -
 xmap <buffer> <silent> s -
 
 " Include the diff in the commit and expand the window so we can see it.
-nnoremap <buffer> <silent> c :<C-U>Gcommit --verbose<CR><C-w>_
+nnoremap <buffer> <silent> c :<C-U>Gcommit --verbose<CR><C-w>_O<Esc>
 
 " Everything in git-status is line-wise, so use cursorline to make it easier
 " to see what line you're operating on.
