@@ -3,9 +3,9 @@
 
 " Set a different name for this location
 if has('win32')
-	let g:snips_author = '$USERNAME'
+	let g:snips_author = expand('$USERNAME')
 else
-	let g:snips_author = '$USER'
+	let g:snips_author = expand('$USER')
 endif
 
 " If I don't have eclipse, I'll want to turn off eclim. TODO: Use

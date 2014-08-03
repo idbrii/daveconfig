@@ -38,6 +38,12 @@ if !exists('$LANG')
     set encoding=utf-8
 endif
 
+if has('win32')
+	let g:snips_author = expand('$USERNAME')
+else
+	let g:snips_author = expand('$USER')
+endif
+
 " Writing files on Windows doesn't preserve file attributes seen via cygwin
 " (presumably because the created backup copy didn't inherit them correctly).
 if has('win32') && v:version < 704
