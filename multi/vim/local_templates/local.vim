@@ -2,8 +2,6 @@
 "
 
 " Set a different name for this location
-iabbrev _me pydave (pydave@gmail.com)
-iabbrev _company pydave
 if has('win32')
 	let g:snips_author = '$USERNAME'
 else
@@ -22,7 +20,7 @@ let loaded_python_ipy = 0
 let loaded_python_rope = 0
 
 " Perforce
-let g:p4Presets = 'perforce:1666 pydave_client pydave'
+let g:p4Presets = 'perforce:1666 idbrii_client idbrii'
 let g:external_diff = 'bcomp.bat'
 
 " When Perforce is slow:

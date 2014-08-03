@@ -1,7 +1,7 @@
 " Grab vim message text
 "
 " Automates use of the :redir command by putting the output into a new buffer.
-" Author: pydave
+" Author: David Briscoe
 "
 " Dependencies: Uses itchy plugin for REnd
 "

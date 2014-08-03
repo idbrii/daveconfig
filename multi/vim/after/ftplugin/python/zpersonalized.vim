@@ -1,5 +1,5 @@
 " Personalized python settings
-" Author:	DBriscoe (pydave@gmail.com)
+" Author:	DBriscoe (idbrii@gmail.com)
 " Influences:
 "	* JAnderson: http://sontek.net/blog/detail/turning-vim-into-a-modern-python-ide
 

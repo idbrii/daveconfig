@@ -1,5 +1,5 @@
 " File: cpp_header.vim -- Great stuff for headers
-" Maintainer: pydave (pydave@gmail.com)
+" Maintainer: David Briscoe (idbrii@gmail.com)
 " Version: 0.1
 " based on dice.vim by Andreas Fredriksson
 "

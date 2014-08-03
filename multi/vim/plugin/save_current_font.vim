@@ -1,6 +1,6 @@
 " SaveCurrentFont
 "   Adds the current font settings to your gvimrc
-" Author: pydave
+" Author: David Briscoe
 "
 " It's a pain to remember the names of fonts when adding them to your config,
 " so this function automates that process by using the current font settings.
