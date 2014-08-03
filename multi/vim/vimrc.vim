@@ -347,8 +347,8 @@ inoremap <CR> <C-G>u<CR>
 " CTRL-g shows filename and buffer number, too.
 nnoremap <C-g> 2<C-g>
 
-" Q formats paragraphs, instead of entering ex mode
-noremap Q gq
+" Q formats paragraphs (without moving cursor), instead of entering ex mode
+noremap Q gw
 
 " <Shift-space> reloads the file
 nnoremap <S-space> :e<CR>
