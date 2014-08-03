@@ -2,7 +2,7 @@
 "
 " Call either locate function to search for the corresponding tagdatabase and
 " set it.
-" Author: pydave
+" Author: David Briscoe
 "
 if exists("g:loaded_tagfilehelpers")
   finish

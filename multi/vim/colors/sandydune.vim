@@ -1,5 +1,5 @@
 " Vim color file
-" Maintainer:	pydave <pydave@gmail.com>
+" Maintainer:	David Briscoe <idbrii@gmail.com>
 " Last Change:	08 Jul 2012
 " Origin:   Based on desert.vim
 " Version:	0.2

@@ -1,5 +1,5 @@
 " InfoStatusLine
-" Author: pydave
+" Author: David Briscoe
 " Toggles an informative statusbar
 
 if exists('loaded_infostatusline')

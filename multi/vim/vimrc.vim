@@ -1,4 +1,4 @@
-" Author:	DBriscoe (pydave@gmail.com)
+" Author:	DBriscoe (idbrii@gmail.com)
 " Influences:
 "	* MacVim's defaults: http://macvim.org/OSX/index.php
 " Notes:
@@ -388,10 +388,6 @@ command! LargeScreen set lines=59 | set columns=100
 command! VShell runtime scripts/vimsh/vimsh.vim
 
 "" Insert
-" General
-iabbrev _me DBriscoe (pydave@gmail.com)
-iabbrev _company pydave
-
 " Shebangs
 iabbrev shebangpy #! /usr/bin/env python
 iabbrev shebangsh #! /bin/sh

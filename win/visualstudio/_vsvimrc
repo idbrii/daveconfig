@@ -1,6 +1,6 @@
 " bring in all some of vimrc {{{
 
-" Author:	DBriscoe (pydave@gmail.com)
+" Author:	DBriscoe (idbrii@gmail.com)
 " Influences:
 "	* JAnderson: http://blog.sontek.net/2008/05/11/python-with-a-modular-ide-vim/
 "	* MacVim's defaults: http://macvim.org/OSX/index.php
@@ -211,16 +211,10 @@ command! VShell runtime scripts/vimsh/vimsh.vim
 command! DiffSaved vert split original.vimscratch | silent %d | silent r # | silent 0d_ | diffthis | wincmd p | diffthis
 
 "" Insert
-" General
-iabbrev _me DBriscoe (pydave@gmail.com)
-iabbrev _company pydave
-
 " Shebangs
 iabbrev shebangpy #! /usr/bin/env python
 iabbrev shebangsh #! /bin/sh
 iabbrev shebangbash #! /bin/bash
-
-
 
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)

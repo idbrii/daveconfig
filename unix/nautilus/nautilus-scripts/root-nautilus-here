@@ -13,7 +13,7 @@
 #               privs, so running nautilus with sudo will succeed
 #               without asking for a password.
 #
-# 26 Sep 2009 -- pydave - added full paths to ensure we know what's being executed
+# 26 Sep 2009 -- idbrii - added full paths to ensure we know what's being executed
 
 foo=`/usr/bin/gksudo -u root -k -m "Enter your password for nautilus root access" /bin/echo "got r00t?"`
 /usr/bin/sudo /usr/bin/nautilus --no-desktop $NAUTILUS_SCRIPT_CURRENT_URI

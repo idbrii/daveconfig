@@ -2,7 +2,7 @@
 " Language:	    Python
 " Maintainer:	    Eric Mc Sween <em@tomcom.de>
 " Original Author:  David Bustos <bustos@caltech.edu> 
-" Updater:          DBriscoe (pydave@gmail.com)
+" Updater:          DBriscoe (idbrii@gmail.com)
 " Last Change:      28 Feb 2009
 " Retrieved from:   http://www.vim.org/scripts/script.php?script_id=974
 " Updates from:     http://henry.precheur.org/2008/4/18/Indenting_Python_with_VIM.html
