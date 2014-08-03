@@ -42,6 +42,10 @@ xmap <buffer> <silent> s -
 " Include the diff in the commit and expand the window so we can see it.
 nnoremap <buffer> <silent> c :<C-U>Gcommit --verbose<CR><C-w>_O<Esc>
 
+" fugitive uses R to refresh the buffer. Remap C-l (my redraw command)
+" instead.
+nmap <buffer> <silent> <C-l> R<Plug>(david-redraw-screen) 
+
 " Everything in git-status is line-wise, so use cursorline to make it easier
 " to see what line you're operating on.
 setlocal cursorline
