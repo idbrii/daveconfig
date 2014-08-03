@@ -45,5 +45,6 @@ endfunction
 command! REnd call <SID>RedirectEnd()
 
 "" Faster ways to start search redirects. Require REnd once complete.
-cabbrev rg redir @c<CR>:g
-cabbrev rv redir @c<CR>:v
+" I haven't used this in a long time so disable for now.
+"command RG redir @c<CR>:g
+"command RV redir @c<CR>:v

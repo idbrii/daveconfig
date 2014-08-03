@@ -33,12 +33,8 @@ setlocal formatoptions-=o
 runtime cscope_maps.vim
 
 " macros
-iabbrev _poff #pragma optimize("", off)
-iabbrev _pon #pragma optimize("", on)
 iabbrev #i #include
 iabbrev #d #define
-iabbrev D_P DBG_PRINT
-iabbrev _guard_ #ifndef zzz<CR>#define zzz<CR><CR>#endif<ESC>kO
 
 " Header comments (requires formatoptions+=r)
 "  Creates a header with the filename, foldername, author, description, and

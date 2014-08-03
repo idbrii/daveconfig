@@ -275,7 +275,7 @@ nnoremap <A-]> :ptag <C-r><C-w><CR>
 nmap <C-\><C-\> <C-\>s
 
 " AsyncCommand
-cabbrev Cscope AsyncCscopeFindSymbol
+command! -nargs=1 Cscope AsyncCscopeFindSymbol <args>
 let g:asynccommand_statusline_autohide = 1
 
 " Common text {{{1
@@ -393,15 +393,6 @@ command! LargeScreen set lines=59 | set columns=100
 " VimShell - run sh from within a Vim buffer
 command! VShell runtime scripts/vimsh/vimsh.vim
 
-"" Insert
-" Shebangs
-iabbrev shebangpy #! /usr/bin/env python
-iabbrev shebangsh #! /bin/sh
-iabbrev shebangbash #! /bin/bash
-
-" constructs
-iabbrev frepeat for (int i = 0; i < 0; ++i)
-
 "}}}
 " Plugins   {{{1
 
@@ -420,6 +411,7 @@ let g:UltiSnipsListSnippets        = '<C-r><C-j>'
 let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
+let g:UltiSnipsSnippetsDir = '~/.vim/bundle/david-snippets/UltiSnips/'
 
 " Gundo -- visualize the undo tree
 nnoremap <F2> :GundoToggle<CR>
