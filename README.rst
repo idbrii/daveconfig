@@ -3,23 +3,32 @@ daveconfig
 
 daveconfig is a collection of my various settings for different environment
 
-Not everything is contained here; I'm using submodules, so be sure to run this after your clone:
-
-::
-
-    git submodule update --init
-
-
-Sometimes I change the url for a repo (switching from maintainer to me). Try this to fix git pull errors about shas not being a tree:
-
-::
-
-    git submodule sync
-
-If you are going to modify a submodule, be sure to check out a branch first! (You're on no branch by default.)
-
-
 Be aware that I use this repo as a way to share my settings between home and work and anywhere else, so not everything is necessarily stable.
+
+
+Great Renaming
+==============
+
+I used to use daveconfig/multi/vim/.vim/ but the .vim in there is pointless. I
+tried moving everything, but that makes it harder to use filter-branch to
+extract plugins with full history (since they moved. I've used filter-branch to
+rewrite history so it's as if .vim was never there (and everything was always
+just in) daveconfig/multi/vim/.
+
+To update a clone of daveconfig with local changes, you reset to github's
+master and cherry-pick your changes. (Rebasing will apply duplicates of all the
+old commts.) Note that `tac` to ensure the commits are applied in the correct
+order.
+
+The commit adding these instructions doesn't exist in mainline, but I don't
+know how to remove it. Just rebase and delete it yourself.
+
+::
+
+	git branch old-tip
+	git reset --hard github/master
+	for commit in `git log --pretty="%H" github/old-master-before-great-renaming...old-tip | tac` ; do git cherry-pick $commit ; done
+    # Remove first cherry-picked commit
 
 
 environment
