@@ -6,7 +6,6 @@ cunmap <C-B>
 iunmap <C-F>
 cunmap <C-F>
 
-" I like indents.
+" I use the default behavior for indents (and rarely at the end of a line).
 iunmap <C-D>
-cunmap <C-D>
 
