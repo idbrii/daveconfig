@@ -126,7 +126,11 @@ set formatoptions-=o        " I tend to use o for whitespace, not continuing
 set isfname-==              " allow completion in var=/some/path
 set tabstop=4				" 1 tab = x spaces
 set shiftwidth=4			" Used by auto indent (setting to 0 breaks ai)
-set softtabstop=-1			" &sw spaces as a tab for bs/del
+set softtabstop=4           " &sw spaces as a tab for bs/del
+if v:version >= 704
+    " Negative value automatically keeps in sync with shiftwidth in Vim 7.4+.
+    set softtabstop=-1
+endif
 set smarttab				" Use tab button for tabs
 set expandtab				" Use spaces, not tabs (use Ctrl-V+Tab to insert a tab)
 set cinkeys-=0#             " Free # from the first column: It's for more than preprocessors!
