@@ -181,9 +181,9 @@
 [submodule "multi/vim/bundle/searchsavvy"]
 	path = multi/vim/bundle/searchsavvy
 	url = git@github.com:idbrii/vim-searchsavvy.git
-[submodule "multi/vim/bundle/hiinterestingword"]
-	path = multi/vim/bundle/hiinterestingword
-	url = git@github.com:idbrii/vim-hiinterestingword.git
+[submodule "multi/vim/bundle/mark"]
+	path = multi/vim/bundle/mark
+	url = git@github.com:idbrii/vim-mark.git
 [submodule "multi/vim/bundle/rsi"]
 	path = multi/vim/bundle/rsi
 	url = git@github.com:tpope/vim-rsi.git

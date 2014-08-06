@@ -163,4 +163,10 @@ noremap <silent> <C-w><Leader>e :BufExplorerVerticalSplit<CR>
 " Set browsed dir as current dir
 let g:netrw_keepdir = 0
 
+" Mark {{{1
+let g:mark_no_mappings = 1
+nmap <unique> <silent> <Leader>m <Plug>MarkSet
+vmap <unique> <silent> <Leader>m <Plug>MarkSet
+nmap <unique> <silent> <Leader>M <Plug>MarkAllClear
+
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
