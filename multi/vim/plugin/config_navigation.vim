@@ -63,8 +63,15 @@ let g:ctrlp_max_height = &lines / 2
 
 let g:ctrlp_regexp = 1
 let g:ctrlp_prompt_mappings = { 'PrtAdd(".*")': ['<space>'] }
-" Bug: Turning on ctrlp_lazy_update allows mappings to expand. Does that occur
-" in the latest ctrlp? Are other plugins conflicting?
+
+" Bug: Turning on ctrlp_lazy_update allows mappings to expand. Occurs in
+" kien's latest and 5f17a51a16ee9bd63ec1523d08e7c6d6a5ed6016 of ctrlpvim's
+" fork. Are other plugins conflicting?
+" I tried out  out adding `mapclear <buffer` to ctrlp's s:MapNorms() to see if
+" that clears out my leader mappings for the ctrlp buffer. It does not (and
+" it's not just leader mappings. I see it with du too.) I think I'm stuck with
+" the bug or using ctrlp_lazy_update=0.
+"let g:ctrlp_lazy_update = 100
 let g:ctrlp_lazy_update = 0
 
 " I don't keep persistent file explorers, so allow them to be re-used (likely

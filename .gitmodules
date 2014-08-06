@@ -69,7 +69,7 @@
 	url = git@github.com:thinca/vim-unite-history.git
 [submodule "multi/vim/bundle/ctrlp"]
 	path = multi/vim/bundle/ctrlp
-	url = git://github.com/kien/ctrlp.vim.git
+	url = git@github.com:ctrlpvim/ctrlp.vim.git
 [submodule "multi/vim/bundle/ctrlp-funky"]
 	path = multi/vim/bundle/ctrlp-funky
 	url = git@github.com:idbrii/ctrlp-funky.git
