@@ -6,7 +6,13 @@ setlocal formatoptions-=o
 setlocal foldmethod=indent
 
 " Easy source file.
-nnoremap <buffer> <Leader>vso :w<CR>:source %<CR>
+if exists(':Runtime') == 2
+    " Use scriptease's Runtime to auto-disarm load guards.
+    nnoremap <buffer> <Leader>vso :w<CR>:Runtime %<CR>
+else
+    nnoremap <buffer> <Leader>vso :w<CR>:source %<CR>
+endif
+
 " Easy execute line.
 nnoremap <buffer> <Leader>v: 0y$:<C-r>"<CR>
 " ; is easier than :
