@@ -60,7 +60,7 @@
 	url = git://github.com/godlygeek/tabular.git
 [submodule "multi/vim/bundle/textobj-word-column"]
 	path = multi/vim/bundle/textobj-word-column
-	url = git://github.com/coderifous/textobj-word-column.vim.git
+	url = git@github.com:idbrii/textobj-word-column.vim.git
 [submodule "multi/vim/bundle/speeddating"]
 	path = multi/vim/bundle/speeddating
 	url = git@github.com:idbrii/vim-speeddating.git
