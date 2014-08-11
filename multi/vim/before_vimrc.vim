@@ -34,6 +34,7 @@ let mapleader = ' '
 " TODO: Consider let maplocalleader = '\'
 let maplocalleader = mapleader
 noremap <Space> <Nop>
+sunmap <Space>
 
 " : is often used so this seems obvious. Super power it too.
 nnoremap <Leader><Leader> q:a
