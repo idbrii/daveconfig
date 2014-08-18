@@ -285,6 +285,9 @@ let g:asynccommand_statusline_autohide = 1
 " Common text {{{1
 
 nnoremap <C-s> :w<CR>
+" Ignoring errors never seems like a good idea. I'd only hit this by accident.
+" If I still want it, I could :w!
+nmap ZQ <Nop>
 
 " Underscores are like visible spaces. So the alt version of space is
 " underscore.
