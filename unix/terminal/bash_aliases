@@ -112,6 +112,24 @@ EOF
 	echo Basic vim setup complete
 }
 
+function vader
+{
+    # Run vim tests in vader.
+    input=$*
+    if [ "$input" == "." -o "$input" == "" ] ; then
+        input='*'
+    fi
+    vim +"Vader! $input"
+
+    if [ $? -eq 0 ] ; then
+        echo Success
+        return 0
+    else
+        echo Failure
+        return 1
+    fi
+}
+
 # Quick way to view files in vim
 function v { $* | view - ; }
 
