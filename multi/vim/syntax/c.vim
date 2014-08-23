@@ -9,6 +9,10 @@ syn match    cCustomStaticFunc  "::\zs\w\+\s*\ze([^)]*).*[);]" contains=cCustomP
 hi def link cCustomMemberFunc  Function
 hi def link cCustomStaticFunc  Function
 
+" Alternative from Skelton
+"  syn match cppFuncDef "::\~\?\zs\h\w*\ze([^)]*\()\s*\(const\)\?\)\?$"
+"  hi def link cppFuncDef Special
+
 " Constants are all caps with underscores. Minimum 4 characters.
 " Source: http://stackoverflow.com/questions/1512602/highlighting-defined-value-in-vim/1515550#1515550
 syn match cConstant "\<[A-Z][A-Z0-9_]\{3,\}\>"
