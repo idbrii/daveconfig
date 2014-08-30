@@ -1,5 +1,7 @@
 " Source Control
 
+set diffopt+=vertical
+
 " Meld          {{{1
 if executable('meld')
     " Invoke meld to easily diff the current directory
