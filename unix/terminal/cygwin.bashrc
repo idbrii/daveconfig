@@ -7,6 +7,7 @@
 export INPUTRC=$HOME/.inputrc
 
 export PATH=/bin:/usr/local/bin:/usr/bin:$PATH
+export PATH=$PATH:/c/david/settings/daveconfig/win/cygwin/usrlocalbin/
 
 # mingw is dumb about paths, so force vim to be included in the path.
 case "`uname -s`" in
