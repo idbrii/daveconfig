@@ -63,7 +63,7 @@ function <SID>SwitchSourceHeader()
     catch /^Vim\%((\a\+)\)\=:E345/
         " If we can't find it in the path, see if it's in ctrlp.
         if exists("*CtrlPSameName")
-            call CtrlPSameName()
+            call CtrlPSameName(1)
         endif
     endtry
 endfunction

@@ -118,7 +118,8 @@ nnoremap <unique> <C-o>f :call ctrlp#init(ctrlp#funky#id())<CR>
 nnoremap <unique> <C-o>r :CtrlPRegister<CR>
 nnoremap <unique> <C-o>h :CtrlPCmdHistory<CR>
 nnoremap <unique> <C-o>s :CtrlPSearchHistory<CR>
-nnoremap <unique> <C-o>n :call CtrlPSameName()<CR>
+nnoremap <unique> <C-o>n :call CtrlPSameName(0)<CR>
+nnoremap <unique> <C-o>N :call CtrlPSameName(1)<CR>
 " Don't ever do C-o so nothing happens if I take too long.
 nnoremap <unique> <C-o> <nop>
 
@@ -132,10 +133,14 @@ function! CtrlPInvokeWithPrefilledQuery(prefill_query)
     call ctrlp#init(0)
     unlet g:ctrlp_default_input
 endf
-function! CtrlPSameName()
-    call CtrlPInvokeWithPrefilledQuery(expand('%:t:r'))
+function! CtrlPSameName(require_whole_word)
+    let query = expand('%:t:r')
+    if a:require_whole_word
+        let query = '\<'. query .'\>'
+    endif
+    call CtrlPInvokeWithPrefilledQuery(query)
 endf
-nnoremap <unique> <A-o> :call CtrlPSameName()<CR>
+nnoremap <unique> <A-o> :call CtrlPSameName(1)<CR>
 
 " Like gf but use ctrlp instead of path
 nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
