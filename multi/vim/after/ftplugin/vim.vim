@@ -8,9 +8,9 @@ setlocal foldmethod=indent
 " Easy source file.
 if exists(':Runtime') == 2
     " Use scriptease's Runtime to auto-disarm load guards.
-    nnoremap <buffer> <Leader>vso :w<CR>:Runtime %<CR>
+    nnoremap <buffer> <Leader>vso :update<CR>:Runtime %<CR>
 else
-    nnoremap <buffer> <Leader>vso :w<CR>:source %<CR>
+    nnoremap <buffer> <Leader>vso :update<CR>:source %<CR>
 endif
 
 " Easy execute line.
