@@ -33,7 +33,9 @@ if [ $# -eq 1 ] ; then
 	echo
 	echo
 elif [ $# -lt 4 ] ; then
-    echo "Usage: $0 port user workspace files-or-folders-to-reconcile"
+    echo "Usage:"
+	echo "$0 port user workspace files-or-folders-to-reconcile"
+	echo "$0 files-or-folders-to-reconcile"
     exit 1
 fi
 
