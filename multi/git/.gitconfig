@@ -48,7 +48,8 @@
     renames = copies
 [core]
     excludesfile = ~/.gitignore
-    autocrlf = input
+#    This setting overrides a repo's setting so I can't set it here.
+#    autocrlf = input
 [branch]
     autosetupmerge = true
 [web]
