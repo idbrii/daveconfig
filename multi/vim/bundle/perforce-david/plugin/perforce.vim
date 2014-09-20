@@ -55,8 +55,10 @@ command PAnnotate call perforce#david#PAnnotate()
 command PGDiff silent call perforce#david#PVimDiff()
 
 " p4 edit all args. Useful after doing Qargs and before doing search and
-" replace on the quickfix.
-command PEditArgs argdo wincmd o | PEdit
+" replace on the quickfix. This will likely fail if there are hundreds of
+" files in the quickfix.
+command! PEditArgs execute 'PEdit '. join(argv(), ' ')
+nnoremap <Leader>fq :Qargs <Bar> PEditArgs<CR>
 
 if exists('g:DAVID_local_root')
 	call perforce#david#InvasivePerforceSetup()
