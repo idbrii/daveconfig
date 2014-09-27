@@ -20,6 +20,10 @@ nnoremap <buffer> <Leader>v; 0y$:<C-r>"<CR>
 " Source selection
 xnoremap <buffer> <Leader>v; y:execute @"<CR>
 
+" Easy echo.
+nnoremap <buffer> <Leader>ve 0y$:echo <C-r>"<CR>
+xnoremap <buffer> <Leader>ve y:execute 'echo '. @"<CR>
+
 " In vimscript, use compl-vim instead of omnicomplete for smart completion.
 inoremap <buffer> <C-Space> <C-x><C-v>
 
