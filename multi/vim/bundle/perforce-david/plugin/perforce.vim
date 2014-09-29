@@ -47,7 +47,7 @@ endif
 
 " PChanges doesn't default to current file -- so add another option. Also give
 " longer descriptions so I can at least see the first line.
-command PChangesThisFile PChanges -L %
+command PChangesThisFile PChanges -i -L %
 
 command PAnnotate call perforce#david#PAnnotate()
 
