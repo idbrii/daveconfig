@@ -33,6 +33,12 @@ endif
 " ctrlp (fuzzy file finder) cache
 let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 
+" Move viminfo into cache directory
+set viminfo+=n~/.vim-cache/viminfo
+if has("autocmd")
+    autocmd BufRead,BufNewFile */.vim-cache/viminfo set filetype=viminfo
+endif
+
 " Default to utf-8 instead of latin1
 if !exists('$LANG')
     set encoding=utf-8
