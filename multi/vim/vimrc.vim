@@ -177,34 +177,34 @@ set wildmode=longest:list,full
 
 " Autocommands {{{1
 if has("autocmd")
-augroup vimrcEx
-autocmd!
-	" In most files, jump back to the last spot cursor was in before exiting
-    " (except: git commit)
-    " See :help last-position-jump
-	autocmd BufReadPost * if &ft != 'gitcommit' |
-		\ if line("'\"") > 1 && line("'\"") <= line("$") |
-		\   exe "normal g`\"" |
-		\ endif
+    augroup vimrcEx
+        autocmd!
+        " In most files, jump back to the last spot cursor was in before exiting
+        " (except: git commit)
+        " See :help last-position-jump
+        autocmd BufReadPost * if &ft != 'gitcommit' |
+                    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+                    \   exe "normal g`\"" |
+                    \ endif
 
-    " Commenting blocks
-    autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
-    autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
+        " Commenting blocks
+        autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
+        autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
-	" Switch to the directory of the current file, unless it's a help file.
-    " Could use BufEnter instead, but then we have constant changing pwd.
-    " Use <S-space> to reload the buffer if you want to cd.
-	autocmd BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
+        " Switch to the directory of the current file, unless it's a help file.
+        " Could use BufEnter instead, but then we have constant changing pwd.
+        " Use <S-space> to reload the buffer if you want to cd.
+        autocmd BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
 
-    " Disabled: I use the preview window for more than just omnicompletion, so
-    " maybe killing it so easily doesn't make sense.
-	" kill calltip window if we leave insert mode
-	"autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+        " Disabled: I use the preview window for more than just omnicompletion, so
+        " maybe killing it so easily doesn't make sense.
+        " kill calltip window if we leave insert mode
+        "autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
-    " When invoking vim from bash with fc, use sh filetype.
-    autocmd BufRead,BufNewFile /tmp/bash-fc-* set filetype=sh
+        " When invoking vim from bash with fc, use sh filetype.
+        autocmd BufRead,BufNewFile /tmp/bash-fc-* set filetype=sh
 
-	augroup END
+    augroup END
 endif
 
 " Completion {{{1
