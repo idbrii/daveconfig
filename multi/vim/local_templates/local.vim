@@ -8,6 +8,9 @@ else
 	let g:snips_author = expand('$USER')
 endif
 
+" I often don't use perforce
+let loaded_perforce = 0
+
 " If I don't have eclipse, I'll want to turn off eclim. TODO: Use
 " !executable('eclipse')?
 let g:EclimDisabled = 1
@@ -84,4 +87,16 @@ endif
 " from vim need to clear these variables.
 let $PYTHONHOME = $MY_PYTHONHOME
 let $PYTHONPATH = $PYTHONHOME . "/Lib"
-let $PATH = $PATH . ';' . $PYTHONHOME
+if isdirectory($PYTHONHOME)
+    let $PATH = $PATH . ';' . $PYTHONHOME
+endif
+
+" Portable git is installed with Github for Windows and SourceTree
+let PORTABLEGIT = expand('$LocalAppData/Atlassian/SourceTree/git_local/bin')
+let PORTABLEGIT = expand('$LocalAppData/GitHub/PortableGit_69703d1db91577f4c666e767a6ca5ec50a48d243/bin')
+if !isdirectory(PORTABLEGIT)
+    echoerr "Failed to find PortableGit. Did it update and change paths?"
+else
+    let $PATH = $PATH . ';' . PORTABLEGIT
+endif
+
