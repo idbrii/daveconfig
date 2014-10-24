@@ -1,5 +1,7 @@
-:: Creates junctions to allow me to use cygwin paths in Windows tools (like
-:: vim).
+:: Creates links to allow me to use cygwin paths in Windows tools (like vim).
+:: This script needs to be run as Administrator (for mklink).
+::
+:: I recently replaced junction with mklink /D, but haven't tested it.
 @echo off
 
 setlocal
@@ -28,11 +30,11 @@ goto:eof
 :: Make sure the directories leading up to the destination link exist.
 mkdir %1
 rmdir %1
-:: for junction, the second argument is the existing one
-junction %1 %2
+:: for mklink, the second argument is the existing one
+mklink /D %1 %2
 goto:eof
 
 :remove_junction
-:: for junction, the argument is the link
-junction -d %1
+:: unlike junction, mklink has no delete command
+del %1
 goto:eof
