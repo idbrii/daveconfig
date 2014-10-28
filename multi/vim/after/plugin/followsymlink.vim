@@ -13,11 +13,21 @@ function! s:TranslateKnownLinks(fname)
         return a:fname
     endif
 
-    let dot_vim = resolve(expand('~/.vim'))
-    let real_vim = resolve(expand('~/data/settings/daveconfig/multi/vim'))
-    " Require exact match at beginning of string.
     let regex_settings = '^\C\V'
-    return substitute(a:fname, regex_settings . dot_vim, real_vim, '')
+    let fname = a:fname
+    let fname = substitute(fname, regex_settings . 'C:', 'c:', '')
+
+    let known_pairs = [
+                \ [ '~/.vim', '~/data/settings/daveconfig/multi/vim' ],
+                \ [ 'c:/bin', '~/data/settings/daveconfig/multi/vim/bundle/cv/scripts/bin' ]
+                \ ]
+    for pair in known_pairs
+        let link = resolve(expand(pair[0]))
+        let real = resolve(expand(pair[1]))
+        " Require exact match at beginning of string.
+        let fname = substitute(fname, regex_settings . link, real, '')
+    endfor
+    return fname
 endf
 
 function! s:SwitchToActualFile()
