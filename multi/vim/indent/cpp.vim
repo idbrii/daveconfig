@@ -5,6 +5,18 @@
 " Version: 1.0.1
 " Source: http://www.vim.org/scripts/script.php?script_id=2636
 "
+" DavidNote:
+" According to the plugin description, this script is partially designed to do
+" no indentation in a namespace. The behavior doesn't actually work. I'm
+" not sure if I want that anymore.
+"
+" I looked at version 1.1.0 and it's a significant refactor that now does no
+" indentation in a namespace.
+"
+" The script page also notes that indenting of C++ namespaces added in 7.3.202
+" (cino-N).
+" 
+"
 " Changes {{{
 " 1.0.1 2010-05-20
 "   Added some changes. Thanks to Eric Rannaud <eric.rannaud@gmail.com>
@@ -92,7 +104,28 @@ setlocal cindent
 " them.
 setlocal cinoptions=l1,g0,t0,i0,+4,(0,w1,W4
 
-setlocal indentexpr=GoogleCppIndent()
+" Going through indent options to try to figure out what I want.
+" TODO: Finish this and apply it. I can probably remove everything else.
+" 
+" unindented case labels
+" unindented visibility labels
+" match indentation of brace continuations
+" unclosed parentheses mark the indent position...
+" ...unless they end a line (then use previous scope)
+" use "java anonymous classes" aka lambdas
+"setlocal cinoptions=:0,g0,(0,w1,Ws,j1
+
+" To use "java anonymous classes" aka mediocre lambdas
+setlocal cinoptions+=j1
+
+
+"For now, disable this custom indent behavior.
+"" Disable indentation in namespaces:
+"if v:version >= 704
+"    setlocal cinoptions+=N-s
+"else
+"    setlocal indentexpr=GoogleCppIndent()
+"endif
 
 let b:undo_indent = "setl sw< ts< sts< et< tw< wrap< cin< cino< inde<"
 
