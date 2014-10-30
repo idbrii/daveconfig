@@ -18,11 +18,6 @@ let b:surround_100 = "#ifdef \1ifdef condition: \1 \r #endif"
 " inserted.
 let b:surround_indent = 1
 
-if exists('loaded_cpp_extra') || &cp
-    finish
-endif
-let loaded_cpp_extra = 1
-
 " Filetype set fo+=o, but I tend to use o and O to add whitespace, not
 " to continue comments
 setlocal formatoptions-=o
@@ -33,8 +28,8 @@ setlocal formatoptions-=o
 runtime cscope_maps.vim
 
 " macros
-iabbrev #i #include
-iabbrev #d #define
+iabbrev <buffer> #i #include
+iabbrev <buffer> #d #define
 
 " Header comments (requires formatoptions+=r)
 "  Creates a header with the filename, foldername, author, description, and
@@ -43,29 +38,4 @@ iabbrev #d #define
 " Different from generic version because it uses // instead of /**/
 "nmap <Leader>hc ggO//<CR> @file	<C-r>%<CR>@ingroup	<C-r>=expand('%:p:h:t')<CR><CR><CR>@author	_me<CR>@brief	<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
 
-
-
-" Fast switch between header and implementation (instead of lookup file)
-"
-" Source: http://vim.wikia.com/wiki/Easily_switch_between_source_and_header_file#By_modifying_ftplugins
-function <SID>SwitchSourceHeader()
-    try
-        if (expand("%:t") == expand("%:t:r") . ".h")
-            try
-                find %:t:r.cpp
-            catch /^Vim\%((\a\+)\)\=:E345/
-                " Error: Can't find file. Try inline instead.
-                find %:t:r.inl
-            endtry
-        else
-            find %:t:r.h
-        endif
-    catch /^Vim\%((\a\+)\)\=:E345/
-        " If we can't find it in the path, see if it's in ctrlp.
-        if exists("*CtrlPSameName")
-            call CtrlPSameName(1)
-        endif
-    endtry
-endfunction
-
-nnoremap <silent> <A-o> :call <SID>SwitchSourceHeader()<CR>
+nnoremap <buffer> <silent> <A-o> :call david#cpp#SwitchSourceHeader()<CR>
