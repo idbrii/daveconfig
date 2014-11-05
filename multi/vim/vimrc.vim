@@ -63,6 +63,7 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 "set number					" Show line numbering
 "set numberwidth=1			" Use 1 col + 1 space for numbers
 set guioptions-=T			" Disable the toolbar
+set guioptions-=m			" Disable the menu
 set guioptions-=t			" Disable the tearoff menus (don't use 'em)
 if has("win32")
     set guioptions-=e		" Disable fancy tabline (breaks window position in Win32)
