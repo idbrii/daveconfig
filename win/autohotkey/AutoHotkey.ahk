@@ -108,7 +108,10 @@ SlimRight()
 {
 ; Put a window in the space next to my game.
 ; left: 3206     top: 0     width: 636     height: 1080
-  ScreenX := 3206
+; Right Monitor
+;ScreenX := 3206
+; Left Monitor
+  ScreenX := 1286
   ScreenY := GetScreenTop()
   ScreenWidth := 636
   ScreenHeight := GetScreenHeight()
