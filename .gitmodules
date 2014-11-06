@@ -193,3 +193,6 @@
 [submodule "multi/vim/bundle/vader"]
 	path = multi/vim/bundle/vader
 	url = git@github.com:junegunn/vader.vim.git
+[submodule "multi/vim/bundle/sandydune"]
+	path = multi/vim/bundle/sandydune
+	url = git@github.com:idbrii/vim-sandydune.git
