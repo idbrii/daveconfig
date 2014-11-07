@@ -299,7 +299,7 @@ let g:asynccommand_statusline_autohide = 1
 nnoremap <C-s> :w<CR>
 " Ignoring errors never seems like a good idea. I'd only hit this by accident.
 " If I still want it, I could :w!
-nmap ZQ <Nop>
+nnoremap ZQ <Nop>
 
 " Underscores are like visible spaces. So the alt version of space is
 " underscore.
@@ -375,7 +375,10 @@ nnoremap <S-space> :e<CR>
 " Folding {{{1
 
 " Settings
-set foldmethod=syntax		" By default, use syntax to determine folds
+" On vim 7.4, foldmethod=syntax makes line completion really slow. See :h
+" todo.
+"set foldmethod=syntax		" By default, use syntax to determine folds
+set foldmethod=indent		" By default, use indent to determine folds
 set foldlevelstart=99		" All folds open by default
 set foldnestmax=3           " At deepest, fold blocks within class methods
 
