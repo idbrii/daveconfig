@@ -14,8 +14,9 @@ nmap gr 1gdvai:s/<C-R>///gc<left><left><left>
 
 " <C-l> redraws the screen and removes any search highlighting. Define and use
 " a Plug so I can use the same Plug in maps for other plugins.
+" For general case (not other plugins, also regenerate folds).
 nnoremap <silent> <Plug>(david-redraw-screen) :nohl<CR><C-l>
-nmap <silent> <C-l> <Plug>(david-redraw-screen)
+nmap <silent> <C-l> <Plug>(FastFoldUpdate)<Plug>(david-redraw-screen)
 
 " Quick fix slashes
 "	win -> unix

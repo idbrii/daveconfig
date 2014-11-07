@@ -375,12 +375,13 @@ nnoremap <S-space> :e<CR>
 " Folding {{{1
 
 " Settings
-" On vim 7.4, foldmethod=syntax makes line completion really slow. See :h
-" todo.
-"set foldmethod=syntax		" By default, use syntax to determine folds
-set foldmethod=indent		" By default, use indent to determine folds
+" On vim 7.4, foldmethod=syntax makes ins-completion slow (see :h todo). Use
+" indent by default. In zpersonalized.vim we can turn on syntax if fastfold
+" has loaded.
+set foldmethod=indent
 set foldlevelstart=99		" All folds open by default
 set foldnestmax=3           " At deepest, fold blocks within class methods
+let g:fastfold_map = 0
 
 " <Leader>l toggles folds opened and closed
 nnoremap <Leader>l za

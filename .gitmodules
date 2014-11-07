@@ -196,3 +196,6 @@
 [submodule "multi/vim/bundle/sandydune"]
 	path = multi/vim/bundle/sandydune
 	url = git@github.com:idbrii/vim-sandydune.git
+[submodule "multi/vim/bundle/FastFold"]
+	path = multi/vim/bundle/FastFold
+	url = git@github.com:Konfekt/FastFold.git
