@@ -66,7 +66,8 @@ set guioptions-=T			" Disable the toolbar
 set guioptions-=m			" Disable the menu
 set guioptions-=t			" Disable the tearoff menus (don't use 'em)
 if has("win32")
-    set guioptions-=e		" Disable fancy tabline (breaks window position in Win32)
+    set guioptions-=e		" Disable fancy tabline (repositions vim on tab in Win32)
+    set guioptions-=L		" Disable left scrollbar (repositions vim on vsplit in Win32)
 endif
 
 if !has("gui_running")
