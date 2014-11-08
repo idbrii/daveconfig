@@ -1,12 +1,12 @@
 " Windows-style clipboard
 " + is the clipboard and * is the selection buffer. See 'clipboard'
 " Alt switches to use the selection.
-xmap <C-c> "+y
+xnoremap <C-c> "+y
 nnoremap <C-v> "+p
 nnoremap <A-v> "*p
 
 " Make Y work like D and C
-nmap Y y$
+nnoremap Y y$
 
 " Shift-Insert to paste (especially useful in insert). Breaks undo before
 " insert paste.

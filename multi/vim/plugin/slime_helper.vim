@@ -29,10 +29,10 @@ xmap <Leader>r <Plug>SlimeRegionSend
 nmap <Leader>r <Plug>SlimeParagraphSend
 
 " Make it easier to send a newline (useful in python to finish a block)
-"nmap <Leader><Enter> :call Slime_Send_to_Screen("\n")<CR>
+"nnoremap <Leader><Enter> :call Slime_Send_to_Screen("\n")<CR>
 " Maybe this instead: nmap <Leader><Enter> <Plug>SlimeLineSend
 
 " Send entire file
-nmap <Leader>R m`:%SlimeSend<CR>``
+nnoremap <Leader>R m`:%SlimeSend<CR>``
 
 "nmap <c-c>v <Plug>SlimeConfig

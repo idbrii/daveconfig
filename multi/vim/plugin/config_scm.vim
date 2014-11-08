@@ -8,7 +8,7 @@ if executable('meld')
     " Only useful if we're in a version-controlled directory
 
     " :e is used to change to current file's directory. See vimrc.
-    nmap <Leader>gD :e<CR>:!meld . &<CR>
+    nnoremap <Leader>gD :e<CR>:!meld . &<CR>
 endif
 
 " Git          {{{1
