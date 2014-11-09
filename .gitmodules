@@ -199,3 +199,6 @@
 [submodule "multi/vim/bundle/FastFold"]
 	path = multi/vim/bundle/FastFold
 	url = git@github.com:Konfekt/FastFold.git
+[submodule "multi/vim/bundle/vshelp"]
+	path = multi/vim/bundle/vshelp
+	url = git@github.com:idbrii/vim-vshelp.git
