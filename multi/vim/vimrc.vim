@@ -567,6 +567,13 @@ let g:editqf_no_type_mappings = 1
 
 nmap <Leader>we <Plug>QFEdit
 
+" EasyAlign
+" Not sure if alignment is used often enough to get Enter key. Try it for now.
+xmap <Enter> <Plug>(EasyAlign)
+" Enter is commonly mapped in plugin windows (like quickfix), so prefix with
+" leader.
+nmap <Leader><Enter> <Plug>(EasyAlign)
+
 "}}}
 
 

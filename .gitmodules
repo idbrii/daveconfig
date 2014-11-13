@@ -55,9 +55,6 @@
 [submodule "multi/vim/bundle/renamer"]
 	path = multi/vim/bundle/renamer
 	url = git@github.com:idbrii/renamer.vim.git
-[submodule "multi/vim/bundle/tabular"]
-	path = multi/vim/bundle/tabular
-	url = git://github.com/godlygeek/tabular.git
 [submodule "multi/vim/bundle/textobj-word-column"]
 	path = multi/vim/bundle/textobj-word-column
 	url = git@github.com:idbrii/textobj-word-column.vim.git
@@ -202,3 +199,6 @@
 [submodule "multi/vim/bundle/vshelp"]
 	path = multi/vim/bundle/vshelp
 	url = git@github.com:idbrii/vim-vshelp.git
+[submodule "multi/vim/bundle/easy-align"]
+	path = multi/vim/bundle/easy-align
+	url = git@github.com:junegunn/vim-easy-align.git
