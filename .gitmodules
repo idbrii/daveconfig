@@ -202,3 +202,6 @@
 [submodule "multi/vim/bundle/easy-align"]
 	path = multi/vim/bundle/easy-align
 	url = git@github.com:junegunn/vim-easy-align.git
+[submodule "multi/vim/bundle/online-thesaurus"]
+	path = multi/vim/bundle/online-thesaurus
+	url = git@github.com:beloglazov/vim-online-thesaurus.git

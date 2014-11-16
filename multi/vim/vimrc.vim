@@ -580,6 +580,11 @@ xmap <Enter> <Plug>(EasyAlign)
 " leader.
 nmap <Leader><Enter> <Plug>(EasyAlign)
 
+" Thesaurus
+let g:online_thesaurus_map_keys = 0
+" Use the same keys as thesaurus completion.
+nnoremap <unique> <C-x><C-t> :OnlineThesaurusCurrentWord<CR>
+
 "}}}
 
 
