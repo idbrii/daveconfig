@@ -107,13 +107,19 @@ ResizeAndCenter(w, h)
 SlimRight()
 {
 ; Put a window in the space next to my game.
-; left: 3206     top: 0     width: 636     height: 1080
-; Right Monitor
-;ScreenX := 3206
-; Left Monitor
-  ScreenX := 1286
+  UseRightScreen := False
+
+  GameWidth := 1280
+
+  LeftBound := GetScreenLeft()
+  RightBound := A_ScreenWidth
+  if UseRightScreen {
+    LeftBound := A_ScreenWidth
+    RightBound := A_ScreenWidth * 2
+  }
+  ScreenX := LeftBound + GameWidth
   ScreenY := GetScreenTop()
-  ScreenWidth := 636
+  ScreenWidth := RightBound - GameWidth - LeftBound
   ScreenHeight := GetScreenHeight()
 
   WinMove A,,ScreenX,ScreenY,ScreenWidth,ScreenHeight
@@ -272,3 +278,5 @@ return
 ; Remap capslock?
 ; +CapsLock::CapsLock
 ; CapsLock::Escape
+
+; vim:set et sts=-1 sw=2 ts=2 makeprg=%
