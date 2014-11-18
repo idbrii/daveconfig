@@ -9,6 +9,8 @@ setlocal expandtab
 "" c-indenting for python
 "" Would use smartindent, but it indents # at the first column
 setlocal cindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" see # as comments
+setlocal cinoptions+=#1
 
 "" simple indent-based folding
 setlocal foldmethod=indent
