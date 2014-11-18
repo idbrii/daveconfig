@@ -50,7 +50,7 @@ GetTaskbarEdge() {
   }
 }
 
-GetScreenTop() {
+GetDesktopTop() {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
@@ -61,7 +61,7 @@ GetScreenTop() {
   }
 }
 
-GetScreenLeft() {
+GetDesktopLeft() {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
@@ -72,7 +72,7 @@ GetScreenLeft() {
   }
 }
 
-GetScreenWidth() {
+GetDesktopWidth() {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
@@ -83,7 +83,7 @@ GetScreenWidth() {
   }
 }
 
-GetScreenHeight() {
+GetDesktopHeight() {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
@@ -96,10 +96,10 @@ GetScreenHeight() {
 
 ResizeAndCenter(w, h)
 {
-  ScreenX := GetScreenLeft()
-  ScreenY := GetScreenTop()
-  ScreenWidth := GetScreenWidth()
-  ScreenHeight := GetScreenHeight()
+  ScreenX := GetDesktopLeft()
+  ScreenY := GetDesktopTop()
+  ScreenWidth := GetDesktopWidth()
+  ScreenHeight := GetDesktopHeight()
 
   WinMove A,,ScreenX + (ScreenWidth/2)-(w/2),ScreenY + (ScreenHeight/2)-(h/2),w,h
 }
@@ -111,16 +111,16 @@ SlimRight()
 
   GameWidth := 1280
 
-  LeftBound := GetScreenLeft()
+  LeftBound := GetDesktopLeft()
   RightBound := A_ScreenWidth
   if UseRightScreen {
     LeftBound := A_ScreenWidth
     RightBound := A_ScreenWidth * 2
   }
   ScreenX := LeftBound + GameWidth
-  ScreenY := GetScreenTop()
+  ScreenY := GetDesktopTop()
   ScreenWidth := RightBound - GameWidth - LeftBound
-  ScreenHeight := GetScreenHeight()
+  ScreenHeight := GetDesktopHeight()
 
   WinMove A,,ScreenX,ScreenY,ScreenWidth,ScreenHeight
 }
@@ -157,31 +157,31 @@ ToggleMaximized()
 ;return
 
 #0::
-  ScreenWidth := GetScreenWidth()
-  ScreenHeight := GetScreenHeight()
+  ScreenWidth := GetDesktopWidth()
+  ScreenHeight := GetDesktopHeight()
   ResizeAndCenter((ScreenWidth / 2), (ScreenHeight / 2))
 return
 
 ; Move window to left edge of screen
 
 #Numpad7::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
   WinMove A,,SX,SY,,
 return
 
 #Numpad4::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SH := GetScreenHeight()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SH := GetDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX,SY + (SH/2) - (H/2),,
 return
 
 #Numpad1::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SH := GetScreenHeight()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SH := GetDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX,SY + SH - H,,
 return
@@ -189,27 +189,27 @@ return
 ; Move window to center of screen
 
 #Numpad8::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SW := GetScreenWidth()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SW := GetDesktopWidth()
   WinGetPos,,,W,H,A
   WinMove A,,SX + (SW/2)-(W/2),SY,,
 return
 
 #Numpad5::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SW := GetScreenWidth()
-  SH := GetScreenHeight()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SW := GetDesktopWidth()
+  SH := GetDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + (SW/2)-(W/2),SY + (SH/2)-(H/2),,
 return
 
 #Numpad2::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SW := GetScreenWidth()
-  SH := GetScreenHeight()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SW := GetDesktopWidth()
+  SH := GetDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + (SW/2)-(W/2),SY + SH-H,,
 return
@@ -217,27 +217,27 @@ return
 ; Move window to right edge of screen
 
 #Numpad9::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SW := GetScreenWidth()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SW := GetDesktopWidth()
   WinGetPos,,,W,H,A
   WinMove A,,SX + SW-W,SY,,
 return
 
 #Numpad6::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SW := GetScreenWidth()
-  SH := GetScreenHeight()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SW := GetDesktopWidth()
+  SH := GetDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + SW-W,SY + (SH/2)-(H/2),,
 return
 
 #Numpad3::
-  SX := GetScreenLeft()
-  SY := GetScreenTop()
-  SW := GetScreenWidth()
-  SH := GetScreenHeight()
+  SX := GetDesktopLeft()
+  SY := GetDesktopTop()
+  SW := GetDesktopWidth()
+  SH := GetDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + SW-W,SY + SH-H,,
 return
