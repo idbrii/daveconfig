@@ -256,7 +256,7 @@ return
 
 #v::
 	KeyWait LWin
-	Run C:\david\apps\Vim\vim73\gvim.exe
+	Run C:\david\apps\Vim\vim74\gvim.exe
 return
 
 ; Misc -------------------------------------------------------------------------
@@ -279,4 +279,4 @@ return
 ; +CapsLock::CapsLock
 ; CapsLock::Escape
 
-; vim:set et sts=-1 sw=2 ts=2 makeprg=%
+; vim:set et sts=-1 sw=2 ts=2
