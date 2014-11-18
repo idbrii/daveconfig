@@ -104,12 +104,16 @@ ResizeAndCenter(w, h)
   WinMove A,,ScreenX + (ScreenWidth/2)-(w/2),ScreenY + (ScreenHeight/2)-(h/2),w,h
 }
 
-SlimRight()
+SlimBesideGame()
+{
+  UseRightScreen := False
+  GameWidth := 1280
+  FitToRightOfWin(UseRightScreen, GameWidth)
+}
+
+FitToRightOfWin(UseRightScreen, AdjacentWidth)
 {
 ; Put a window in the space next to my game.
-  UseRightScreen := False
-
-  GameWidth := 1280
 
   LeftBound := GetDesktopLeft()
   RightBound := A_ScreenWidth
@@ -117,9 +121,9 @@ SlimRight()
     LeftBound := A_ScreenWidth
     RightBound := A_ScreenWidth * 2
   }
-  ScreenX := LeftBound + GameWidth
+  ScreenX := LeftBound + AdjacentWidth
   ScreenY := GetDesktopTop()
-  ScreenWidth := RightBound - GameWidth - LeftBound
+  ScreenWidth := RightBound - AdjacentWidth - LeftBound
   ScreenHeight := GetDesktopHeight()
 
   WinMove A,,ScreenX,ScreenY,ScreenWidth,ScreenHeight
@@ -247,9 +251,9 @@ return
 	ToggleMaximized()
 return
 
-; maximize the active window.
+; Put window next to game
 #|::
-	SlimRight()
+	SlimBesideGame()
 return
 
 ; Program Shortcuts ------------------------------------------------------------
