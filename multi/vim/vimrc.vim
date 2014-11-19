@@ -581,9 +581,14 @@ xmap <Enter> <Plug>(EasyAlign)
 nmap <Leader><Enter> <Plug>(EasyAlign)
 
 " Thesaurus
-let g:online_thesaurus_map_keys = 0
-" Use the same keys as thesaurus completion.
-nnoremap <unique> <C-x><C-t> :OnlineThesaurusCurrentWord<CR>
+if has("win32")
+    " The shell script doesn't work in Windows.
+    let g:loaded_online_thesaurus = -1
+else
+    let g:online_thesaurus_map_keys = 0
+    " Use the same keys as thesaurus completion.
+    nnoremap <unique> <C-x><C-t> :OnlineThesaurusCurrentWord<CR>
+endif
 
 "}}}
 
