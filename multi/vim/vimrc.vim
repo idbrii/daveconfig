@@ -581,13 +581,13 @@ xmap <Enter> <Plug>(EasyAlign)
 nmap <Leader><Enter> <Plug>(EasyAlign)
 
 " Thesaurus
-if has("win32")
-    " The shell script doesn't work in Windows.
-    let g:loaded_online_thesaurus = -1
-else
+if executable("bash")
     let g:online_thesaurus_map_keys = 0
     " Use the same keys as thesaurus completion.
     nnoremap <unique> <C-x><C-t> :OnlineThesaurusCurrentWord<CR>
+else
+    " The shell script doesn't work in Windows without bash (and cygwin).
+    let g:loaded_online_thesaurus = -1
 endif
 
 "}}}
