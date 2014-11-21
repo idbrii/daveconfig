@@ -11,6 +11,9 @@ xnoremap gs :sm/
 " Go to local definition and replace it in local scope. Uses textobj-indent
 " (for ai map).
 nmap gr 1gdvaio:s/<C-R>///gc<left><left><left>
+" Similar map for selections to turn an expression into a variable. No point
+" of definition so just use indent from textobj-indent. Clobbers @c register.
+xmap gr "cyvaio:s/<C-R>c//gc<left><left><left>
 
 " <C-l> redraws the screen and removes any search highlighting. Define and use
 " a Plug so I can use the same Plug in maps for other plugins.
