@@ -205,3 +205,6 @@
 [submodule "multi/vim/bundle/online-thesaurus"]
 	path = multi/vim/bundle/online-thesaurus
 	url = git@github.com:beloglazov/vim-online-thesaurus.git
+[submodule "multi/vim/bundle/endoscope"]
+	path = multi/vim/bundle/endoscope
+	url = git@github.com:idbrii/vim-endoscope.git
