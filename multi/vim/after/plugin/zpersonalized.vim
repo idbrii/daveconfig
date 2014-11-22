@@ -4,6 +4,9 @@
 " Esc without straying too far from homerow. Otherwise just inserts ^B. (See i_CTRL-B-gone.)
 " Possible alternative: C-s (used experiementally by surround).
 inoremap <C-b> <Esc>
+" Esc without leaving homerow. Also, you can hammer C-l and eventually it
+" redraws the screen.
+inoremap <C-l> <Esc>
 
 " Syntax folding is particularly slow, but if we have fastfold, then it's
 " fast. We defaulted to indent before (which is okay), but syntax is better.
