@@ -3,7 +3,7 @@
     email = idbrii@gmail.com
 [include]
     # Do not store github or giggle information in this file! Instead, store
-    # them in a computer-local config file.
+    # them in a computer-local config file. This works on cygwin git 2.1.1.
     path = ~/.gitconfig.local
 [color]
     diff = auto
