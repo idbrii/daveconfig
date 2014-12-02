@@ -593,6 +593,11 @@ else
     let g:loaded_online_thesaurus = -1
 endif
 
+" table-mode
+" Disable maps that conflict with standard vim { and } commands
+let g:table_mode_motion_up_map = ''
+let g:table_mode_motion_down_map = ''
+
 "}}}
 
 

@@ -211,3 +211,6 @@
 [submodule "multi/vim/bundle/endoscope"]
 	path = multi/vim/bundle/endoscope
 	url = git@github.com:idbrii/vim-endoscope.git
+[submodule "multi/vim/bundle/table-mode"]
+	path = multi/vim/bundle/table-mode
+	url = git@github.com:dhruvasagar/vim-table-mode.git
