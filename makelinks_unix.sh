@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 dconfig_path=~/data/settings/daveconfig
 
@@ -14,6 +14,8 @@ config_dir=$dconfig_path/unix/terminal/
 for a in `ls $config_dir` ;do
     ln -s $config_dir/$a ~/.$a
 done
+
+ln -s --target-directory=$HOME/data/apps/bin/ $dconfig_path/multi/git/submanage/git-*
 
 # bashrc is different on different platforms
 function delete_if_symbolic {

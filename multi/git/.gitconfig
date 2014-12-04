@@ -37,9 +37,7 @@
     #   uses 2 sed substitutions:      ^-- change ssh to readonly     ^-- fix protocol and pull out url
     # open all urls for the current git repo
     hub = "!git hublist | while read url ; do xdg-open $url ; done"
-    subupdate = "! git submodule sync ; git submodule update --init --recursive ; git submodule foreach --recursive git use-branch-if-already-there master"
-    # If only one commit head and input branch are the same so switch to input.
-    use-branch-if-already-there = "!f() { branch=$1 ; n_commits=$(git show --oneline --no-patch $branch HEAD 2> /dev/null | wc -l) ; if [ $n_commits -eq 1 ] ; then git checkout $branch ; else git branch ; fi }; f"
+
 
 
 [merge]

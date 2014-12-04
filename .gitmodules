@@ -1,3 +1,9 @@
+[submodule "multi/git/submanage"]
+	path = multi/git/submanage
+	url = git@github.com:idbrii/git-submanage.git
+[submodule "unix/terminal/bashmarks"]
+	path = unix/terminal/bashmarks
+	url = git@github.com:idbrii/bashmarks.git
 [submodule "multi/vim/bundle/online-thesaurus"]
 	path = multi/vim/bundle/online-thesaurus
 	url = git@github.com:idbrii/vim-online-thesaurus.git
@@ -19,9 +25,6 @@
 [submodule "multi/vim/bundle/gitv"]
 	path = multi/vim/bundle/gitv
 	url = git@github.com:idbrii/gitv.git
-[submodule "unix/terminal/bashmarks"]
-	path = unix/terminal/bashmarks
-	url = git@github.com:idbrii/bashmarks.git
 [submodule "multi/vim/bundle/repeat"]
 	path = multi/vim/bundle/repeat
 	url = git://github.com/tpope/vim-repeat.git
