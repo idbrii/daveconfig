@@ -583,6 +583,15 @@ xmap <C-Enter> <Plug>(EasyAlign)
 " leader.
 nmap <Leader><Enter> <Plug>(EasyAlign)
 
+" Make it easier to align tags
+let g:easy_align_delimiters = {
+            \   '<': {
+            \       'pattern': '<',
+            \       'left_margin':  1,
+            \       'right_margin': 0,
+            \   }
+            \ }
+
 " Thesaurus
 if executable("bash")
     let g:online_thesaurus_map_keys = 0
