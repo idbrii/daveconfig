@@ -578,7 +578,7 @@ nmap <Leader>we <Plug>QFEdit
 " Use Enter as a quickmap for all (common use case) and C-Enter for normal
 " align mode.
 xmap <Enter> <Plug>(EasyAlign)*
-xmap <C-Enter> <Plug>(EasyAlign)
+xmap <Leader><Enter> <Plug>(EasyAlign)
 " Enter is commonly mapped in plugin windows (like quickfix), so prefix with
 " leader.
 nmap <Leader><Enter> <Plug>(EasyAlign)
