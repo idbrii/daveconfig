@@ -66,7 +66,21 @@ function! perforce#david#P4CheckOutFile(p4_root)
 		return
 	endif
 
+    " Sometimes this stops a command from fully completing (I think I've seen
+    " it with :s or dot repeating). I can't repro it now, but I think using
+    " the dialog might fix it. For now, no change.
+
+    " :h FileChangedRO says:
+    "   It is not allowed to change to another buffer
+    "   here.  You can reload the buffer but not edit
+    "   another one.
+    " That's likely why some edits fail. To fix it, I need to prevent PEdit
+    " from opening the the results buffer. The best I can do is force the
+    " dialog to pop. (There's no option to suppress output.)
+    "let old_max = g:p4MaxLinesInDialog
+    "let g:p4MaxLinesInDialog = 500
 	PEdit
+    "let g:p4MaxLinesInDialog = old_max
 	edit
 endfunction
 
