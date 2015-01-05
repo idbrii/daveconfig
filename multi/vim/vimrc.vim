@@ -305,7 +305,7 @@ nnoremap ZQ <Nop>
 
 " Underscores are like visible spaces. So the alt version of space is
 " underscore.
-" TODO: I don't know if this works in ubuntu.
+" Does not work in ubuntu.
 inoremap <A-Space> _
 cnoremap <A-Space> _
 
@@ -318,6 +318,10 @@ let g:speeddating_no_mappings = 1
 
 " select all
 nnoremap <C-a> 1GVG
+
+" Quick sort (haha)
+xnoremap <Leader>s :sort<CR>
+xnoremap <Leader>S :sort 
 
 " Use r for [right-angle braces] and a for <angle braces> like vim-surround
 vnoremap ir i]
