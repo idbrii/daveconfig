@@ -169,6 +169,9 @@
 [submodule "multi/vim/bundle/python-syntax"]
 	path = multi/vim/bundle/python-syntax
 	url = git@github.com:hdima/python-syntax.git
+[submodule "multi/vim/bundle/pydoc"]
+	path = multi/vim/bundle/pydoc
+	url = git@github.com:fs111/pydoc.vim.git
 [submodule "multi/vim/bundle/argumentative"]
 	path = multi/vim/bundle/argumentative
 	url = git@github.com:PeterRincker/vim-argumentative.git
