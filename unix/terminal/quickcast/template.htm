@@ -1,0 +1,60 @@
+<html><head><title></title></head>
+
+<style type="text/css">
+img {
+   display: block; 
+   margin-left: 
+   auto; margin-right: 
+   auto; max-width: 100%; 
+   max-height: 100%; 
+}
+</style>
+
+<body onload="increment(1); setInterval('autoAdvance();', $$interval_delay);">
+
+<script type="text/javascript">
+var file_list = [ 
+    $$file_list
+];
+
+var idx = 0;
+function increment(amount) {
+    idx += amount;
+    idx %= file_list.length;
+    document.getElementById("content").src = file_list[idx];
+}
+
+function autoAdvance() {
+    // Only auto-advance images.
+    if ('$$tag_type' === 'img')
+    {
+        increment(1)
+    }
+}
+
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        // up arrow
+    }
+    else if (e.keyCode == '40') {
+        // down arrow
+    }
+    else if (e.keyCode == '37') {
+        // left arrow
+        increment(-1);
+    }
+    else if (e.keyCode == '39') {
+        // right arrow
+        increment(1);
+    }
+}
+
+</script>
+
+<$$tag_type id="content" autoplay="autoplay" controls="controls" />
+
+</body></html>

@@ -228,8 +228,10 @@ function move_and_link() {
     ln -sv $2 $1
 }
 
-# Start serving the local directory as a website
+# Serve local directory as a website.
 alias webserve='python -m SimpleHTTPServer'
+# Generate html to display image/video slideshow.
+alias webslideshow='python ~/data/settings/daveconfig/unix/terminal/quickcast/cast.py'
 
 
 DIR=~/data/settings/daveconfig/unix/terminal
