@@ -148,8 +148,12 @@ endif
 set smarttab				" Use tab button for tabs
 set expandtab				" Use spaces, not tabs (use Ctrl-V+Tab to insert a tab)
 set cinkeys-=0#             " Free # from the first column: It's for more than preprocessors!
-"set autoindent				" Indent like previous line
-set smartindent				" Try to be clever about indenting
+                            " Possible ftplugin alternative: setlocal cinoptions=#1
+set autoindent				" Indent like previous line
+" Generally, 'smartindent' or 'cindent' should only be set manually if you're
+" not satisfied with how file type based indentation works.
+" Source: http://vim.wikia.com/wiki/Indenting_source_code#Methods_for_automatic_indentation
+"set smartindent				" Try to be clever about indenting
 "set cindent				" Really clever indenting
 if version > 600
     set backspace=start         " backspace can clear up to beginning of line
