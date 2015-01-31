@@ -1,3 +1,7 @@
+" This is my fork of an old version of python indentation. Disable it for now.
+" Not sure if I made any improvements worth keeping.
+finish
+
 " Python indent file
 " Language:	    Python
 " Maintainer:	    Eric Mc Sween <em@tomcom.de>
