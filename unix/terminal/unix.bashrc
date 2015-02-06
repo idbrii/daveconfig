@@ -121,6 +121,8 @@ dumb)
     ;;
 esac
 
+# Path extensions 
+export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage/
 
 ## enable vim-like syntax
 #set -o vi
