@@ -38,7 +38,7 @@ endfunction
 
 " After merges, there are *.orig and *.REMOTE.* *.LOCAL.* files left behind.
 " This function makes it easy to remove them.
-function! DeleteFilesInGitCommit()
+function! s:DeleteFilesInGitCommit()
     let line = getline('.')
     let line = substitute(line, '^#\s*', '', '')
 
@@ -64,6 +64,10 @@ function! DeleteFilesInGitCommit()
         endif
     endtry
 endfunction
+
+" Shadow fugitive's Gremove inside the commit buffer since it's not otherwise
+" useful (it only operates on the current file but the index isn't valid).
+command! -buffer -range Gremove <line1>,<line2>call s:DeleteFilesInGitCommit()
 
 " Use the folding function
 setlocal foldmethod=expr
