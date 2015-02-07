@@ -13,19 +13,20 @@ function! s:TranslateKnownLinks(fname)
         return a:fname
     endif
 
-    let regex_settings = '^\C\V'
+    " Match any character for drive letter (drive letter case is arbitrary)
+    " but otherwise exact match at beginning.
+    let re_prefix = '^.\zs\C\V'
     let fname = a:fname
-    let fname = substitute(fname, regex_settings . 'C:', 'c:', '')
 
     let known_pairs = [
                 \ [ '~/.vim', '~/data/settings/daveconfig/multi/vim' ],
                 \ [ 'c:/bin', '~/data/settings/daveconfig/multi/vim/bundle/cv/scripts/bin' ]
                 \ ]
     for pair in known_pairs
-        let link = resolve(expand(pair[0]))
-        let real = resolve(expand(pair[1]))
-        " Require exact match at beginning of string.
-        let fname = substitute(fname, regex_settings . link, real, '')
+        " Already matching . for the drive letter, so strip actual letter.
+        let link = resolve(expand(pair[0]))[1:]
+        let real = resolve(expand(pair[1]))[1:]
+        let fname = substitute(fname, re_prefix . link, real, '')
     endfor
     return fname
 endf
