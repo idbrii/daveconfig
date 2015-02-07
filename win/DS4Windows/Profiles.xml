@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Profile Configuration Data. 2015-02-07 7:47:39 AM -->
+
+<Profile>
+  <useExclusiveMode>True</useExclusiveMode>
+  <startMinimized>True</startMinimized>
+  <formWidth>546</formWidth>
+  <formHeight>277</formHeight>
+  <Controller1>C:\david\game\DS4Windows\Profiles\normal.xml</Controller1>
+  <Controller2>C:\david\game\DS4Windows\Profiles\normal.xml</Controller2>
+  <Controller3>
+  </Controller3>
+  <Controller4>
+  </Controller4>
+  <LastChecked>2015-02-07 7:47:32 AM</LastChecked>
+  <CheckWhen>0</CheckWhen>
+  <Notifications>True</Notifications>
+  <DisconnectBTAtStop>True</DisconnectBTAtStop>
+  <SwipeProfiles>False</SwipeProfiles>
+  <UseDS4ForMapping>True</UseDS4ForMapping>
+  <QuickCharge>False</QuickCharge>
+  <FirstXinputPort>1</FirstXinputPort>
+  <CloseMinimizes>False</CloseMinimizes>
+</Profile>
