@@ -516,7 +516,7 @@ let g:EclimSignLevel = 2
 let g:no_xml_maps = 1
 
 " Don't have maps for bufkill -- too easy to delete a buffer by accident
-let no_bufkill_maps = 1
+let g:BufKillCreateMappings = 0
 
 " Pydoc
 "  Pydoc maps conflict with \p
