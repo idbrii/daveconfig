@@ -51,3 +51,8 @@ noremap \ :<C-u>echoerr "\\ is not your leader"<CR>
 " applied when yankstack is autoloaded.
 let g:yankstack_map_keys = 0
 call yankstack#setup()
+
+" Unite offers similar functionality to Yankstack, but instead of stepping
+" through yanks, you can incremental search them. This is clumsier if you know
+" you want your previous yank, but far better than :Yanks.
+let g:unite_source_history_yank_enable = 1
