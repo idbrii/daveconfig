@@ -57,19 +57,22 @@ command PGDiff silent call perforce#david#PVimDiff()
 " p4 edit all args. Useful after doing Qargs and before doing search and
 " replace on the quickfix. This will likely fail if there are hundreds of
 " files in the quickfix.
-function! s:perforce_edit_args()
+function! s:perforce_edit_args(only_readonly)
     " Limit input to PFIF to prevent E740: Too many arguments for function
     " perforce#PFIF
     let args = argv()
+    if a:only_readonly
+        let args = filter(args, 'filewritable(v:val) != 1')
+    endif
     let batch = 30
-    for i in range(0, argc(), batch)
+    for i in range(0, len(args), batch)
         exec 'let cmd = args['. i .':'. (i+batch) .']'
         execute 'PEdit '. join(cmd, ' ')
         " Remove the edit windows (so we don't run out of space)
         "silent! wincmd o
     endfor
 endf
-command! PEditArgs call s:perforce_edit_args()
+command! -bang PEditArgs call s:perforce_edit_args(<bang>1)
 nnoremap <Leader>fq :Qargs <Bar> PEditArgs<CR>
 
 if exists('g:DAVID_local_root')
