@@ -54,7 +54,8 @@ command PAnnotate call perforce#david#PAnnotate()
 " Vimdiff instead of diff output
 command PGDiff silent call perforce#david#PVimDiff()
 
-command! -bang PEditArgs call perforce#david#PerforceEditArgs(<bang>1)
+" Use count to determine number of files in a batch.
+command! -bang -count=30 PEditArgs call perforce#david#PerforceEditArgs(<bang>1, <count>)
 nnoremap <Leader>fq :Qargs <Bar> PEditArgs<CR>
 
 if exists('g:DAVID_local_root')
