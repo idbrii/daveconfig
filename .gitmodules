@@ -162,7 +162,7 @@
 	url = git@github.com:idbrii/vim-argedit.git
 [submodule "multi/vim/bundle/qargs"]
 	path = multi/vim/bundle/qargs
-	url = git://github.com/nelstrom/vim-qargs.git
+	url = git://github.com/idbrii/vim-qargs.git
 [submodule "multi/vim/bundle/ctrlp-history"]
 	path = multi/vim/bundle/ctrlp-history
 	url = git@github.com:idbrii/ctrlp-history.git
