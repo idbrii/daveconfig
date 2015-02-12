@@ -280,7 +280,7 @@ set tags=./tags;/
 set cscopepathcomp=3
 
 " Cscope equivalent of :tag
-command! -nargs=1 Ctag cscope find s <args>
+command! -nargs=1 Ctag cscope find g <args>
 
 " Toggle the tag list bar
 nnoremap <F4> :TlistToggle<CR>
