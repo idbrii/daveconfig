@@ -133,9 +133,6 @@
 [submodule "multi/vim/bundle/notgrep"]
 	path = multi/vim/bundle/notgrep
 	url = git@github.com:idbrii/vim-notgrep.git
-[submodule "multi/vim/bundle/LargeFile"]
-	path = multi/vim/bundle/LargeFile
-	url = git@github.com:idbrii/LargeFile.git
 [submodule "multi/vim/bundle/diffusable"]
 	path = multi/vim/bundle/diffusable
 	url = git@github.com:idbrii/vim-diffusable.git
@@ -235,3 +232,6 @@
 [submodule "multi/vim/bundle/table-mode"]
 	path = multi/vim/bundle/table-mode
 	url = git@github.com:dhruvasagar/vim-table-mode.git
+[submodule "multi/vim/bundle/hugefile"]
+	path = multi/vim/bundle/hugefile
+	url = git@github.com:mhinz/vim-hugefile.git
