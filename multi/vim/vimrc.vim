@@ -139,9 +139,13 @@ set formatoptions-=o        " I tend to use o for whitespace, not continuing
                             " comments (some filetypes overwrite)
 set isfname-==              " allow completion in var=/some/path
 set tabstop=4				" 1 tab = x spaces
-set shiftwidth=4			" Used by auto indent (setting to 0 breaks ai)
+set shiftwidth=4			" Used by auto indent (see below for 0)
 set softtabstop=4           " &sw spaces as a tab for bs/del
 if v:version >= 704
+    " Zero keeps in sync with tabstop in Vim 7.4+, but it breaks indentation
+    " (I think especially autoindent).
+    " See: https://github.com/tpope/vim-sleuth/issues/25
+    "set shiftwidth=0
     " Negative value automatically keeps in sync with shiftwidth in Vim 7.4+.
     set softtabstop=-1
 endif
@@ -616,6 +620,13 @@ endif
 " Disable maps that conflict with standard vim { and } commands
 let g:table_mode_motion_up_map = ''
 let g:table_mode_motion_down_map = ''
+
+" DetectIndent isn't automatic, but it should use my settings when it doesn't
+" know what to do.
+let g:detectindent_preferred_when_mixed = 1
+let g:detectindent_preferred_expandtab = &expandtab
+" Zero indent means don't modify (keep it at filetype setting).
+let g:detectindent_preferred_indent = 0
 
 "}}}
 
