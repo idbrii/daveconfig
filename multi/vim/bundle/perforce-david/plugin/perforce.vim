@@ -56,7 +56,9 @@ command PGDiff silent call perforce#david#PVimDiff()
 
 " Use count to determine number of files in a batch.
 command! -bang -count=30 PEditArgs call perforce#david#PerforceEditArgs(<bang>1, <count>)
-nnoremap <Leader>fq :Qargs! <Bar> PEditArgs<CR>
+" Automate p4edit of args.
+" Uses nelstrom's jumplist trick to avoid jumping to first arg.
+nnoremap <Leader>fq :Qargs<CR><C-o>:PEditArgs<CR>
 
 if exists('g:DAVID_local_root')
 	call perforce#david#InvasivePerforceSetup()
