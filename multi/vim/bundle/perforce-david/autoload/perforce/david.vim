@@ -94,7 +94,7 @@ function! perforce#david#PerforceEditArgs(only_readonly, batch_size)
     if a:only_readonly
         let args = filter(args, 'filewritable(v:val) != 1')
     endif
-    for i in range(0, len(args), a:batch_size)
+    for i in range(0, len(args) - 1, a:batch_size)
         exec 'let cmd = args['. i .':'. (i+a:batch_size) .']'
         execute 'PEdit '. join(cmd, ' ')
         " Remove the edit windows (so we don't run out of space)
