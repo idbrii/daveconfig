@@ -45,14 +45,9 @@ cnoremap <C-Space> map <lt>Leader>
 " Until I get used to Space.
 noremap \ :<C-u>echoerr "\\ is not your leader"<CR>
 
-" Yankstack
-" Load immediately -- is clobbers some base commands, so if those are
-" remapped, it will clobber your remapping. Also disable maps since those are
-" applied when yankstack is autoloaded.
-let g:yankstack_map_keys = 0
-call yankstack#setup()
-
 " Unite offers similar functionality to Yankstack, but instead of stepping
-" through yanks, you can incremental search them. This is clumsier if you know
-" you want your previous yank, but far better than :Yanks.
+" through yanks, you can incremental search them. I added
+" unite-history_yank-cycle to completely replace yankstack. It's not as
+" smooth, but now I don't have yank keys mapped, so those macro bugs should be
+" fixed.
 let g:unite_source_history_yank_enable = 1

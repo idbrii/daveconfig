@@ -32,9 +32,5 @@ function! CopyFullPathToClipboard()
     call CopyFilenameToClipboard("%:p")
 endfunction
 
-" Yankstack
-nmap <C-p> <Plug>yankstack_substitute_older_paste
-nmap <C-n> <Plug>yankstack_substitute_newer_paste
-
 
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}

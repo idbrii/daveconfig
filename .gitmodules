@@ -49,15 +49,15 @@
 [submodule "multi/vim/bundle/mw-utils"]
 	path = multi/vim/bundle/mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "multi/vim/bundle/yankstack"]
-	path = multi/vim/bundle/yankstack
-	url = git://github.com/maxbrunsfeld/vim-yankstack.git
 [submodule "multi/vim/bundle/unite"]
 	path = multi/vim/bundle/unite
 	url = git@github.com:Shougo/unite.vim.git
 [submodule "multi/vim/bundle/unite-david"]
 	path = multi/vim/bundle/unite-david
 	url = git@github.com:idbrii/unite-david.git
+[submodule "multi/vim/bundle/unite-history_yank-cycle"]
+	path = multi/vim/bundle/unite-history_yank-cycle
+	url = git@github.com:idbrii/unite-history_yank-cycle.git
 [submodule "multi/vim/bundle/unite-neomru"]
 	path = multi/vim/bundle/unite-neomru
 	url = git@github.com:Shougo/neomru.vim.git
