@@ -41,7 +41,9 @@
 
 
 [merge]
-    tool = meld
+    # meld is also a good option where it's installed, but gvim is a globally
+    # available default.
+    tool = gvim
 [diff]
     renames = copies
 [core]
