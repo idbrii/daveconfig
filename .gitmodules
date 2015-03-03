@@ -93,7 +93,7 @@
 	url = git://github.com/chrisbra/NrrwRgn.git
 [submodule "multi/vim/bundle/eunuch"]
 	path = multi/vim/bundle/eunuch
-	url = git@github.com:idbrii/vim-eunuch.git
+	url = git@github.com:tpope/vim-eunuch.git
 [submodule "multi/vim/bundle/pathogen"]
 	path = multi/vim/bundle/pathogen
 	url = git@github.com:tpope/vim-pathogen.git
