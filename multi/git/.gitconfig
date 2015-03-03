@@ -22,6 +22,7 @@
     piecemeal = add --patch
     unstage = reset HEAD --
     substat = submodule foreach "git status || :"
+    subupdate = sub-update
     # Pass the commit you want to squash/fixup with.
     commit-fixup-with = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
     commit-squash-with = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
