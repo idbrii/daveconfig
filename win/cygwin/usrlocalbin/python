@@ -7,13 +7,14 @@ function w {
     p=
     for ((at=2; at <= $#; at++))
     do
-		if [ -e ${!at} ] ; then
+		if [[ -e ${!at} && ${!at} =~ ^[.~/] ]] ; then
 			arg="`cygpath --windows --absolute ${!at}`"
 		else
 			arg="${!at}"
 		fi
 		p="$p $arg"
     done
+    echo $1 $p
     $1 $p &
 }
 
