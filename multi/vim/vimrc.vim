@@ -375,6 +375,8 @@ inoremap <C-S-Tab> <C-d>
 inoremap <C-U> <C-G>u<C-U>
 " Break to make each line undoable.
 inoremap <CR> <C-G>u<CR>
+" Make it easier to undo after putting from the wrong register.
+inoremap <C-R> <C-G>u<C-R>
 
 " CTRL-g shows filename and buffer number, too.
 nnoremap <C-g> 2<C-g>
