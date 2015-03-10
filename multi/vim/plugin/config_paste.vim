@@ -5,6 +5,12 @@ xnoremap <C-c> "+y
 nnoremap <C-v> "+p
 nnoremap <A-v> "*p
 
+" Easier past without chording
+xnoremap <Leader>bp "_d"+p
+xnoremap <Leader>bP "_d"+P
+nnoremap <Leader>bp "+p
+nnoremap <Leader>bP "+P
+
 " Make Y work like D and C
 nnoremap Y y$
 
