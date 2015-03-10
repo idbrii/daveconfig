@@ -306,6 +306,8 @@ let g:asynccommand_statusline_autohide = 1
 " Common text {{{1
 
 nnoremap <C-s> :w<CR>
+nnoremap <Leader>fs :update<CR>
+
 " Ignoring errors never seems like a good idea. I'd only hit this by accident.
 " If I still want it, I could :w!
 nnoremap ZQ <Nop>
@@ -327,8 +329,8 @@ let g:speeddating_no_mappings = 1
 nnoremap <C-a> 1GVG
 
 " Quick sort (haha)
-xnoremap <Leader>s :sort<CR>
-xnoremap <Leader>S :sort 
+xnoremap <Leader>ss :sort<CR>
+xnoremap <Leader>s; :sort 
 
 " Use r for [right-angle braces] and a for <angle braces> like vim-surround
 vnoremap ir i]
