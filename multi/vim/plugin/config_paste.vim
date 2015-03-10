@@ -19,18 +19,21 @@ cnoremap <A-Insert> <C-r>*
 noremap <Leader>p "0p
 noremap <Leader>P "0P
 
-" CopyFilenameToClipboard
-" Argument: ("%") or ("%:p")
-function! CopyFilenameToClipboard(filename)
+" Argument: ("") for full path, otherwise something like ("%") or ("%:p")
+function! s:CopyFilenameToClipboard(filename)
+    let fname = a:filename
+    if len(fname) == 0
+        " Full path is generally what I need.
+        let fname = "%:p"
+    endif
+
     " TODO: Probably only need to set specific registers on different
     " platforms. Setting both lets me paste into terminals with middle mouse.
-    let @*=expand(a:filename)
+    let @*=expand(fname)
     let @+=@*
 endfunction
-" This is generally what I need
-function! CopyFullPathToClipboard()
-    call CopyFilenameToClipboard("%:p")
-endfunction
+
+command! -nargs=* CopyFilenameToClipboard call s:CopyFilenameToClipboard(<q-args>)
 
 
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
