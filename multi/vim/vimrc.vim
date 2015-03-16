@@ -5,7 +5,6 @@
 " mapping Tab in normal mode breaks cscope -- adds tabs when you jump somewhere
 
 " Initial setup {{{1
-set nocompatible				" who needs vi, we've got Vim!
 
 " Don't load plugins if we aren't in Vim7
 if v:version < 700
