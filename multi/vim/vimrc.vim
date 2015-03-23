@@ -454,11 +454,11 @@ command! LargeScreen set lines=59 | set columns=100
 " VimShell - run sh from within a Vim buffer
 command! VShell runtime scripts/vimsh/vimsh.vim
 
-" Simple evalutor. Would be better to integrate with Ripple (so python and
+" Simple evaluator. Would be better to integrate with Ripple (so python and
 " other built-in languages will maintain state), but this is a good hack for
 " now. Strips the % in case that exists since we want it to process input.
 " Works for python, not sure if it works for much else.
-command -range=% Eval execute '<line1>,<line2>:!'. substitute(&makeprg, '%', '', '')
+command! -range=% Eval execute '<line1>,<line2>:!'. substitute(&makeprg, '%', '', '')
 
 "}}}
 " Plugins   {{{1
