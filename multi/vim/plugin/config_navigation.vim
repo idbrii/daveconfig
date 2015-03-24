@@ -29,6 +29,12 @@ if has('jumplist')
     nnoremap <A-Down> <C-i>
 endif
 
+" Use same mnemonic as motions: b for (block) and B for {BLOCK}.
+nnoremap [b [(
+nnoremap ]b ])
+nnoremap [B [{
+nnoremap ]B ]}
+
 " Between files {{{1
 " Switch files
 nnoremap ^ <C-^>
