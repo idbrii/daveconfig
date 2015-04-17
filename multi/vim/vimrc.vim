@@ -630,6 +630,12 @@ let g:detectindent_preferred_expandtab = &expandtab
 " Zero indent means don't modify (keep it at filetype setting).
 let g:detectindent_preferred_indent = 0
 
+" Let's try always detecting indents.
+augroup DetectIndent
+    autocmd!
+    autocmd BufReadPost * DetectIndent
+augroup END
+
 "}}}
 
 
