@@ -1,3 +1,4 @@
+; Blurb {{{1
 ; Install: Just create a shortcut to this file in Startup
 
 ; IMPORTANT INFO ABOUT GETTING STARTED: Lines that start with a
@@ -21,11 +22,12 @@
 
 
 
+; Config begin {{{1
 
 ; Auto-replace the previous instance
 #SingleInstance force
 
-; Helper Functions -------------------------------------------------------------
+; Helper Functions {{{1
 
 ; Gets the edge that the taskbar is docked to.  Returns:
 ;   "top"
@@ -164,7 +166,7 @@ ToggleMaximized()
 		WinMaximize A
 }
 
-; Window Management ------------------------------------------------------------
+; Window Management {{{1
 
 #a::WinSet AlwaysOnTop, Toggle, A,,,
 
@@ -287,14 +289,14 @@ return
 	SlimBelowGame()
 return
 
-; Program Shortcuts ------------------------------------------------------------
+; Program Shortcuts {{{1
 
 #v::
 	KeyWait LWin
 	Run C:\david\apps\Vim\vim74\gvim.exe
 return
 
-; Misc -------------------------------------------------------------------------
+; Misc {{{1
 
 ;Close (alt+F4) with Win-q
 #q::
@@ -314,4 +316,5 @@ return
 ; +CapsLock::CapsLock
 ; CapsLock::Escape
 
-; vim:set et sts=-1 sw=2 ts=2
+; vim:set et sts=-1 sw=2 ts=2 fdm=marker
+
