@@ -312,6 +312,14 @@ return
 	WinMinimize A
 return
 
+; Easy paste in terminal
+; S-Ins requires Fn mode on my Kinesis. Use the gnome-terminal shortcut C-S-v
+; instead.
+#IfWinActive ahk_class mintty
+{
+	^+v::Send {Shift down}{Insert}{Shift Up}
+}
+
 ; Remap capslock?
 ; +CapsLock::CapsLock
 ; CapsLock::Escape
