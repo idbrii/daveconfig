@@ -328,6 +328,7 @@ let g:speeddating_no_mappings = 1
 nnoremap <C-a> 1GVG
 
 " Quick sort (haha)
+xnoremap <Leader>s  <nop>
 xnoremap <Leader>ss :sort<CR>
 xnoremap <Leader>s; :sort 
 
