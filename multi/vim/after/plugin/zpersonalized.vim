@@ -8,6 +8,9 @@ inoremap <C-b> <Esc>
 " redraws the screen. Also used to complete more characters in popupmenu. See
 " popupmenu-keys.
 inoremap <expr> <C-l> pumvisible() ? '<C-l>' : '<Esc>'
+" Also Esc from visual and select mode. Makes sense for snippets (my only use
+" of select).
+vnoremap <C-l> <Esc>
 
 " Syntax folding is particularly slow, but if we have fastfold, then it's
 " fast. We defaulted to indent before (which is okay), but syntax is better.
