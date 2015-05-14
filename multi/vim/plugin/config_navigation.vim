@@ -151,11 +151,11 @@ nnoremap <unique> <A-o> :call CtrlPSameName(1)<CR>
 " Like gf but use ctrlp instead of path
 nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
 
-" Code Search version of find symbol (finds text, not symbol).
-" Faster than cscope.
-nnoremap <unique> <Leader><A-S-g> :NotGrep <cword><CR>
-" More precise version (\b is word boundary).
+" Code Search analog to find symbol (finds text, not symbol). Generally faster
+" than cscope.
 nnoremap <unique> <A-g> :NotGrep \b<cword>\b<CR>
+" Less precise version (\b is word boundary).
+nnoremap <unique> g<A-g> :NotGrep <cword><CR>
 
 " BufExplorer {{{1
 if !hasmapto('<Leader>e')
