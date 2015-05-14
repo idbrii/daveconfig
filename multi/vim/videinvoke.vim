@@ -30,6 +30,8 @@ if !exists('loaded_videinvoke')
 
     " Use half of the resized screen height.
     let g:ctrlp_max_height = &lines / 2
+	" Quarter screen for preview window.
+	let &previewheight = &lines / 4
 
 
     """"" Load cscope database if we can
