@@ -25,6 +25,28 @@ cnoremap <A-Insert> <C-r>*
 noremap <Leader>p "0p
 noremap <Leader>P "0P
 
+" Unified clipboard
+" Use unnamedplus if available because I think that works how I expect under
+" X. Windows doesn't have a selection clipboard, so there isn't a significant
+" difference.
+"
+" Oddly, this means that `p` will paste from a different register than `""p`.
+" However, I can use <Leader>p to paste my last vim yank.
+"
+" This makes some of the above yank mappings less useful.
+"
+" I don't really want deletes to be put on the system clipboard.
+" Behavior I think I want: I want the system clipboard to be put into @" when
+" I enter vim (if it changed) and my last yank to be put into @+ when I leave
+" (if it changed). I could use FocusGained and FocusLost to manage the
+" clipboard myself. I don't want any other registers to be modified.
+if has('unnamedplus')
+    set clipboard+=unnamedplus
+else
+    set clipboard+=unnamed
+endif
+
+
 " Argument: ("") for full path, otherwise something like ("%") or ("%:p")
 function! s:CopyFilenameToClipboard(filename)
     let fname = a:filename
