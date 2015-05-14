@@ -153,9 +153,9 @@ nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
 
 " Code Search version of find symbol (finds text, not symbol).
 " Faster than cscope.
-nnoremap <unique> <Leader><A-S-g> :NotGrep <C-r>=expand('<cword>')<CR><CR>
+nnoremap <unique> <Leader><A-S-g> :NotGrep <cword><CR>
 " More precise version (\b is word boundary).
-nnoremap <unique> <A-g> :NotGrep \b<C-r>=expand('<cword>')<CR>\b<CR>
+nnoremap <unique> <A-g> :NotGrep \b<cword>\b<CR>
 
 " BufExplorer {{{1
 if !hasmapto('<Leader>e')
