@@ -54,11 +54,14 @@ nnoremap <A-PageUp> :cpfile<CR>
 nnoremap <C-A-PageDown> :lnext<CR>
 nnoremap <C-A-PageUp> :lprev<CR>
 
+" Use <Leader>w for window management.
+" togglequickfix enhances some of these window management maps.
+nnoremap <Leader>w <C-w>
 
-" Follows <Leader>w convention from togglequickfix. Similar in style to <C-w>,
-" but the maps are totally different.
-nnoremap <Leader>wp :pclose<CR>
-nnoremap <Leader>ww :wincmd p<CR>
+" TODO: I used to remap this since I go to the previous more than next. Now
+" that I'm chaining (instead of chording), is that still useful?
+"nnoremap <Leader>ww :wincmd p<CR>
+
 
 " CtrlP plugin -- fuzzy file finder {{{1
 let g:ctrlp_use_caching = 1

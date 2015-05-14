@@ -565,8 +565,11 @@ let g:golden_ratio_autocommand = 0
 " Mnemonic: - is next to =, but instead of resizing equally, all windows are
 " resized to focus on the current.
 nmap <C-w>- <Plug>(golden_ratio_resize)
+nmap <Leader>w- <Plug>(golden_ratio_resize)
 " Fill screen with current window.
-nnoremap <C-w>+ <C-w><Bar><C-w>_
+nnoremap <Plug>(window-fill-screen) <C-w><Bar><C-w>_
+nmap <C-w>+ <Plug>(window-fill-screen)
+nmap <Leader>w+ <Plug>(window-fill-screen)
 
 " Powerline
 " Don't want to need patched fonts everywhere.
@@ -587,8 +590,7 @@ let g:notgrep_no_mappings = 1
 let g:editqf_no_mappings = 1
 let g:editqf_no_qf_mappings = 1
 let g:editqf_no_type_mappings = 1
-
-nmap <Leader>we <Plug>QFEdit
+" editqf mapping is only applied in quickfix buffer.
 
 " EasyAlign
 " Not sure if alignment is used often enough to get Enter key. Try it for now.
