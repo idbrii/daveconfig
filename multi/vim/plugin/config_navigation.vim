@@ -57,6 +57,8 @@ nnoremap <C-A-PageUp> :lprev<CR>
 " Use <Leader>w for window management.
 " togglequickfix enhances some of these window management maps.
 nnoremap <Leader>w <C-w>
+" Close (delete) the buffer, but keep its space.
+nnoremap <Leader>wQ :BD<CR>
 
 " TODO: I used to remap this since I go to the previous more than next. Now
 " that I'm chaining (instead of chording), is that still useful?
