@@ -15,7 +15,9 @@ for a in `ls $config_dir` ;do
     ln -s $config_dir/$a ~/.$a
 done
 
-ln -s --target-directory=$HOME/data/apps/bin/ $dconfig_path/multi/git/submanage/git-*
+# Should these be in bin or PATH?
+#ln -s --target-directory=$HOME/data/apps/bin/ $dconfig_path/multi/git/submanage/git-*
+#ln -s --target-directory=$HOME/data/apps/bin/ $dconfig_path/multi/git/tool/*.git.sh
 
 # bashrc is different on different platforms
 function delete_if_symbolic {
