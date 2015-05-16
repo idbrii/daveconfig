@@ -121,8 +121,8 @@ dumb)
     ;;
 esac
 
-# Path extensions 
-export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage/:~/data/settings/daveconfig/multi/git/tool/
+# Path extensions
+export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool
 
 ## enable vim-like syntax
 #set -o vi
