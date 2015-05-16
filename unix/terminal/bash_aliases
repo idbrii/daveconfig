@@ -159,7 +159,8 @@ set rtp+=$plugin_dir
 set rtp+=~/.vim/bundle/textobj-user/after
 set rtp+=$plugin_dir/after
 filetype plugin indent on
-VIMRC) +"Vader! *"
+VIMRC
+) +"Vader! *"
 
     if [ $? -eq 0 ] ; then
         echo Success
