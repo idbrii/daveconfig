@@ -140,7 +140,7 @@ function vader_isolated
         echo "wd: $cwd"
         echo "I don't think you're in a vim plugin's test directory."
         echo "Expected something like: ~/.vim/bundle/vader/test/"
-        echo 
+        echo
         read -p "Continue? " cont
         if [[ $cont != "y" ]]; then
             return 2
@@ -197,6 +197,44 @@ function vv
     vim --servername VIM `__default_to_scratch $*` 2> ~/.vim-cache/errors.log ;
 }
 
+function ec
+{
+    # Open a client in a frame
+    emacsclient -c $*
+    if [ $? -ne 0 ] ; then
+        # Probably failed to connect to server, just start a new instance
+        # instead.
+        emacs $*
+    fi
+}
+function emacsd
+{
+    # Manage the daemon.
+    # Must be started before calling `ec`.
+    # Killing/restarting will prompt for saving.
+
+    command=$1
+    case $command in
+        restart|kill)
+            echo "Requesting kill in emacsclient..."
+            emacsclient -c --eval '(david-server-shutdown)'
+            if [ $? -eq 0 ] ; then
+                echo "Failed to kill."
+                return
+            fi
+            ;;
+    esac
+
+    case $command in
+        kill)
+            ;;
+        *)
+            echo Starting...
+            emacs --daemon
+            ;;
+    esac
+}
+
 function move_and_link() {
     mv $1 $2
     ln -sv $2 $1
@@ -218,7 +256,7 @@ fi
 #################
 # Platform-specific section
 
-# Used to use uname -o 
+# Used to use uname -o
 # MinGW doesn't support uname -o
 # -s is close (kernel name), so let's try that.
 case "`uname -s`" in
