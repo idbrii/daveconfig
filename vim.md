@@ -17,7 +17,7 @@ See also this [StackOverflow question and answer](http://stackoverflow.com/quest
 Basics
 ======
 
-Use [vim-sensible](https://github.com/tpope/vim-sensible). You can tweak it by creating a ~/.vim/after/plugin/sensible.vim to overwrite settings, but think of it as the new vim settings. I test plugins assuming they have sensible installed.
+Use [vim-sensible](https://github.com/tpope/vim-sensible). You can tweak it by creating a ~/.vim/after/plugin/sensible.vim to overwrite settings, but think of it as the new vim settings. I test plugins assuming users have sensible installed.
 
 Unfortunately, some releases of vim ship with a broken `K` command. Fortunately, [vim-scriptease](https://github.com/tpope/vim-scriptease) fixes it and super powers it. Anyone writing vimscript (which is any vim user) should use scriptease.
 
@@ -56,7 +56,7 @@ Use `<Plug>` if you want a unique prefix. Using `nnoremap [unite] <C-Space>` to 
 autoload
 ========
 
-Use autoload (to reduce load times). Don't bother with "lazy loading" plugin managers. Just read the help for autoload and if plugins that don't need to be loaded on start are slow (using startuptime), then file a bug.
+Use autoload (to reduce load times). Don't bother with "lazy loading" plugin managers. Just read the help for autoload and if plugins that don't need to be loaded on start are slow (using `--startuptime`), then file a bug.
 
 [ref](http://www.reddit.com/r/vim/comments/2ukm62/script_roundup_enabler_vimstay/coaect8)
 
@@ -145,7 +145,7 @@ Some plugins can change the way you use vim or just make it seem way more powerf
 * [ultisnips](https://github.com/SirVer/ultisnips)
 * [vim-easy-align](https://github.com/junegunn/vim-easy-align)
 
-Sometimes you just want a fancy [statusline](https://github.com/bling/vim-airline) to remind you what mode you're in or to show you pretty colours.
+Sometimes you just want a fancy [statusline](https://github.com/bling/vim-airline) to remind you what mode you're in, to make the current window stand out, or to show you pretty colours.
 
 
 Splits
@@ -180,7 +180,33 @@ For me, folding was slowing me down and I used the [FastFold plugin](https://git
 
 Another common cause is syntax highlighting.
 
-[LargeFile](https://github.com/idbrii/LargeFile) can help with loading enormous files.
+[LargeFile](https://github.com/idbrii/LargeFile) can help with loading enormous files by turning off some slow functionality.
+
+
+Startup Performance
+===================
+
+If your vim is slow to start, use `--startuptime` to determine what is taking the most time. Focus on the amount of time to source a specific file (your vimrc may take a long time because it invokes other expensive scripts so you want to solve those scripts).
+
+Most of the time, slowdown is because the of the quantity of code vim needs to process, but it can also be due to bad algorithms. When you find what's slow, there are three main ways to reduce the amount of code sourced in order of increasing benefits:
+
+* Use ftplugin to only source code when editing filetypes that might use it.
+* Use autoload to only source code at the moment of invocation.
+* Don't source the code at all.
+
+The last one is tricky, but "do less work" is the most universal optimization technique. You either need to accept the loss of functionality or find an alternative solution. For example, [FastFold disables automatic fold updating](http://www.reddit.com/r/vim/comments/2ln1hr/my_vim_was_slow_because_of_foldmethodsyntax_and/), but the speed boost is worth it. [vim-easy-align](https://github.com/junegunn/vim-easy-align) is an alternative to [tabular](https://github.com/godlygeek/tabular) that doens't have the high startup cost.
+
+
+Reducing Colorscheme Startup Time
+=================================
+
+Another example of "do less work" is to make dynamic colorschemes static. Some colorschemes (like [Tomorrow](https://github.com/ChrisKempson/Vim-Tomorrow-Theme)) procedurally generate their `:highlight` commands. This generation can be time consuming and, when you have the same settings on every boot, pointless.
+
+You could rewrite these dynamic colorschemes to output a static colorscheme instead of building it on startup. (I'm assuming a static scheme like desert loads much faster -- I assume it does since I only use static themes and I don't remember looking at colorscheme startup time.)
+
+You need to find the function that builds the `:highlight` (often just `:hi`) command and calls `:exec`. Change that function (`<SID>X` in Tomorrow) to echo instead of exec, capture those values (`:redir`), and write them to a new colorscheme (a .vim file in ~/.vim/colors). Then use that colorscheme that file instead of your dynamic colorscheme. It won't be able to adapt to different conditions, but you could invoke that a static one for your most common use case and fall back to the original dynamic one in other cases.
+
+[ref](http://www.reddit.com/r/vim/comments/38xjn3/my_first_plugin_vimdeferred_let_me_know_what_you/cs0ynfo?context=3)
 
 
 Bugs
