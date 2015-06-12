@@ -57,6 +57,10 @@ nnoremap <C-A-PageUp> :lprev<CR>
 " Use <Leader>w for window management.
 " togglequickfix enhances some of these window management maps.
 nnoremap <Leader>w <C-w>
+" Don't close vim with this map. Behave like :close instead of :quit. This is
+" inconsistent, but I got used to wq for quickfix and need to break that
+" habit.
+nnoremap <Leader>wq <C-w>c
 " Close (delete) the buffer, but keep its space.
 nnoremap <Leader>wQ :BD<CR>
 
