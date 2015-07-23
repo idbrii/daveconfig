@@ -238,3 +238,6 @@
 [submodule "multi/vim/bundle/diff-enhanced"]
 	path = multi/vim/bundle/diff-enhanced
 	url = git@github.com:chrisbra/vim-diff-enhanced.git
+[submodule "multi/vim/bundle/focusclip"]
+	path = multi/vim/bundle/focusclip
+	url = git@github.com:idbrii/vim-focusclip.git

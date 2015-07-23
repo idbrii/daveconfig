@@ -40,12 +40,13 @@ noremap <Leader>P "0P
 " I enter vim (if it changed) and my last yank to be put into @+ when I leave
 " (if it changed). I could use FocusGained and FocusLost to manage the
 " clipboard myself. I don't want any other registers to be modified.
-if has('unnamedplus')
-    set clipboard+=unnamedplus
-else
-    set clipboard+=unnamed
-endif
-
+" TODO: Testing FocusClip to provide better behavior. It requires I disable
+" unnamed.
+"if has('unnamedplus')
+"    set clipboard+=unnamedplus
+"else
+"    set clipboard+=unnamed
+"endif
 
 " Argument: ("") for full path, otherwise something like ("%") or ("%:p")
 function! s:CopyFilenameToClipboard(filename)
