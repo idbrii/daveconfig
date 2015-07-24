@@ -422,6 +422,15 @@ omap am  <Plug>(textobj-between-a)
 xmap im  <Plug>(textobj-between-i)
 omap im  <Plug>(textobj-between-i)
 
+" Use textobj-comment to select text in a comment (i/) and comment with
+" delimeters and surrounding whitespace (a/). I'm not using comment with just
+" delimeters.
+let g:textobj_comment_no_default_key_mappings = 1
+xmap i/  <Plug>(textobj-comment-i)
+omap i/  <Plug>(textobj-comment-i)
+xmap a/  <Plug>(textobj-comment-big-a)
+omap a/  <Plug>(textobj-comment-big-a)
+
 """""""""""
 " Abbreviations   {{{1
 "" Command

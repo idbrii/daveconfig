@@ -241,3 +241,6 @@
 [submodule "multi/vim/bundle/focusclip"]
 	path = multi/vim/bundle/focusclip
 	url = git@github.com:idbrii/vim-focusclip.git
+[submodule "multi/vim/bundle/textobj-comment"]
+	path = multi/vim/bundle/textobj-comment
+	url = git@github.com:glts/vim-textobj-comment.git
