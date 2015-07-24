@@ -38,6 +38,7 @@ nnoremap ]B ]}
 " Between files {{{1
 " Switch files
 nnoremap ^ <C-^>
+nnoremap <BS> <C-^>
 nnoremap <A-Left> :bp<CR>
 nnoremap <A-Right> :bn<CR>
 
