@@ -1,7 +1,7 @@
 " Windows-style clipboard
 " + is the clipboard and * is the selection buffer. See 'clipboard'
 " Alt switches to use the selection.
-xnoremap <C-c> "+y
+xnoremap <C-c> "+ygvy
 nnoremap <C-v> "+p
 nnoremap <A-v> "*p
 
