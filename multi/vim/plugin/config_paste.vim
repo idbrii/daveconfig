@@ -1,7 +1,7 @@
 " Windows-style clipboard
 " + is the clipboard and * is the selection buffer. See 'clipboard'
 " Alt switches to use the selection.
-xnoremap <C-c> "+ygvy
+xnoremap <C-c> :<C-U>echoerr "Use regular yanks instead: FocusClip is better."<CR>
 nnoremap <C-v> "+p
 nnoremap <A-v> "*p
 
