@@ -197,6 +197,11 @@ function vv
     vim --servername VIM `__default_to_scratch $*` 2> ~/.vim-cache/errors.log ;
 }
 
+function gvim_isolated
+{
+    gvim -Nu NONE --servername MINVIM +'source ~/.vim/bundle/sensible/plugin/sensible.vim' +'colorscheme desert' $* 2> ~/.vim-cache/errors.log ;
+}
+
 function ec
 {
     # Open a client in a frame
