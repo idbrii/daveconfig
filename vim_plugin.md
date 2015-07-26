@@ -14,15 +14,6 @@
     let loaded_wubwub = 1
 
 * Sometimes you want code to be loaded multiple times in an ftplugin (like buffer/window-local options or mappings), but for commands and global mappings you do not.
-* Always wrap mappings in regular buffers with `no_plugin_maps` and `wubwub_no_mappings`:
-
-	if (! exists("no_plugin_maps") || ! no_plugin_maps) &&
-            \ (! exists("g:wubwub_no_mappings") || ! g:wubwub_no_mappings)
-
- * This doesn't include special buffers that don't have editable text (like the Gstatus and Gblame buffers in fugitive).
- * These options make it easier for users who prefer to have complete control over their mappings.
- * The `wubwub_no_mappings` option is especially useful when you define multiple mappings and a user only wants to use one of them.
-* Use `<Plug>` and [parenthesize <Plug> map names](http://stackoverflow.com/questions/13688022/what-is-the-reason-to-parenthesize-plug-map-names) to prevent delays.
 
 
 # Writing a plugin in python
@@ -94,3 +85,49 @@ Try reading through *all* of `:help if_pyth`.
 ## Alternatives
 
 You could use [snake](https://github.com/amoffat/snake) to make pythonic vim plugins (with less vimscript required), but it's mostly aimed at extending your vimrc.
+
+
+# Creating mappings for your plugin
+
+## Exposing your mappings in a user-friendly way
+
+* Always wrap mappings in regular buffers with `no_plugin_maps` and `wubwub_no_mappings`:
+
+	if (! exists("no_plugin_maps") || ! no_plugin_maps) &&
+            \ (! exists("g:wubwub_no_mappings") || ! g:wubwub_no_mappings)
+
+ * This doesn't include special buffers that don't have editable text (like the Gstatus and Gblame buffers in fugitive).
+ * These options make it easier for users who prefer to have complete control over their mappings.
+ * The `wubwub_no_mappings` option is especially useful when you define multiple mappings and a user only wants to use one of them.
+
+* Use `<Plug>` to expose your mappings so users can customize them. This is not required in special buffers that don't have editable text.
+* [Parenthesize `<Plug>` map names](http://stackoverflow.com/questions/13688022/what-is-the-reason-to-parenthesize-plug-map-names) to prevent delays.
+
+
+## Use C-u for mappings to ex commands
+
+Visual mode maps to ex commands will automatically have the line numbers for the visual selection applied. These prepended markers undesirable when using another method to get the visual selection (`normal! gv` inside a function, `<line1>` and `<line2>`, etc). You can prefix ex commands with `<C-u>` to clear out the range:
+
+    :xnoremap % :<C-u>call Percent_nextline()<CR>
+
+Doing so will make your map run like this:
+
+    :call Percent_nextline()<CR>
+
+Instead of this:
+
+    :'<,'>call Percent_nextline()<CR>
+
+Similarly, normal mode maps to ex commands will have line numbers for the count applied. If you're using another method to get the count (`v:count`) or want to ignore the count, then use `<C-u>`:
+
+    :nnoremap % :<C-u>call Percent_nextline()<CR>
+
+Doing so will make your map run like this:
+
+    :call Percent_nextline()<CR>
+
+Instead of this:
+
+    :.,.+4call Percent_nextline()<CR>
+
+([ref](http://vi.stackexchange.com/questions/4037/is-there-any-point-in-using-c-u-in-an-nmap))
