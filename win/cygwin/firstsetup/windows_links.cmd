@@ -1,7 +1,6 @@
 :: Creates links to allow me to use cygwin paths in Windows tools (like vim).
 :: This script needs to be run as Administrator (for mklink).
 ::
-:: I recently replaced junction with mklink /D, but haven't tested it.
 @echo off
 
 setlocal
