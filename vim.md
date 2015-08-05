@@ -167,6 +167,23 @@ One of the powerful features of Vim is splitting windows. [golden-ratio](https:/
 You're also well-served by a good scratch plugin for writing junk notes or formatting external text. [itchy](https://github.com/idbrii/itchy.vim) will automatically split in the direction you want (so you can see the most text).
 
 
+Diff and Merge
+==============
+vim's diff mode is great once you get used to it. I wrote [vim-diffusable](https://github.com/idbrii/vim-diffusable) to help manage diff panes (mostly to turn off diff once one diff window is closed). I use it a lot now and love it.
+
+I do far less merging, so I just use basic three-way vimdiff. I launch vim with options to make it fullscreen, at the first conflict, and with windows ordered LOCAL, RESULT, REMOTE with [this git mergetool](https://github.com/idbrii/daveconfig/blob/master/multi/git/tool/mergetool.gvim.git.sh) (see [config](https://github.com/idbrii/daveconfig/blob/master/multi/git/.gitconfig#L67-L68) and it depends on [diffusable mappings](https://github.com/idbrii/vim-diffusable/blob/master/after/plugin/diffusable.vim#L19-L21) that are similar to unimpaired):
+
+    gvim --nofork +"set lines=999" +"set columns=9999" +"wincmd =" +"wincmd w" +"normal gg]C" -d "$theirs" "$MERGED" "$mine"
+
+I found splice.vim, but never got into it and feared the advertised incompatibility with vim-fugitive. Also, using a whole new set of maps for an infrequent operation doesn't sound fun. At some point I needed to do a lot of diffs and worked out this configuration that built on existing vim skills.
+
+I can see some allure of using a plugin to automatically switch between window layouts since I often close one pane and re-open it. However, it's not too hard to revive the closed buffer with `:Unite buffer` (there are only three options) and that command re-uses existing functionality instead of creating a special case.
+
+Also, by mostly relying on two pane diff I re-use the same diff key commands that I'm used to (and two-pane is easier for me to understand).
+
+([ref](https://www.reddit.com/r/vim/comments/3fs0q9/is_there_an_active_fork_of_splicevim/ctsovn7))
+
+
 Writing Plugins or Packages
 ===========================
 Don't remap trivial vanilla maps (like `gt` or `<C-w> v`). Encourage users to use existing commands so they learn the consistency built into vim.
