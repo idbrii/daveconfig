@@ -66,5 +66,9 @@
     cmd = difftool.gvim.git.sh $LOCAL $REMOTE $BASE
 [mergetool "gvim"]
     cmd = mergetool.gvim.git.sh $LOCAL $REMOTE $BASE $MERGED
+[mergetool "diffconflicts"]
+    cmd = mergetool.diffconflicts.git.sh gvim $BASE $LOCAL $REMOTE $MERGED
+    trustExitCode = true
+    keepBackup = false
 
 # vim:sw=4:et:
