@@ -3,7 +3,11 @@
 # up to the cloner to get it.)
 
 [alias]
-	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/bundle/$2 ; };f"
+	# Create vim plugin in bundle directory and update remote name.
+	# Args: clone-url name
+	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/bundle/$2 && cd multi/vim/bundle/$2 && git manage-mine master && cd - ; };f"
+	# Pull and update input branch and master to be on top of new HEAD.
+	# Args: input-branch (assumed to be a descendent of master).
 	pullmasterrebase = "!f(){ [ $# -eq 1 ] && git checkout master && git pull --rebase mine master && git checkout $1 && git rebase master ; };f"
 
 # vi: set ft=gitconfig :
