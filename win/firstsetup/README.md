@@ -25,6 +25,11 @@ Use `Windows_ThinWindowBorders.reg`
 http://superuser.com/a/461983/11808
 
 
+Paint.Net
+=========
+
+[Paint.Net](http://www.getpaint.net/index.html) is a free improvement over mspaint that isn't as complex as Photoshop. Use `Windows_OpenWithPaintNet.reg` to change your "Edit" menu on images to use Paint.Net.
+
 Evoluent Vertical Mouse
 =======================
 
