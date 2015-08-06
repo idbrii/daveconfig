@@ -33,6 +33,8 @@ endif
 let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 " unite (fuzzy searcher) cache
 let g:unite_data_directory = s:vim_cache.'/unite'
+" unite-mru cache
+let g:neomru#file_mru_path = g:unite_data_directory .'/neomru/file'
 
 " Move viminfo into cache directory
 set viminfo+=n~/.vim-cache/viminfo
