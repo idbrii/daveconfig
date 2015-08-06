@@ -1,0 +1,4 @@
+# apt-cyg is in daveconfig/win/cygwin/usrlocalbin/apt-cyg
+# Used cygcheck -c to find list of installed apps
+apt-cyg install wget
+apt-cyg install bash bash-completion binutils bzip2 coreutils ctags curl diffutils dos2unix findutils git git-completion grep gzip indent less mintty cscope openssh perl perl-Error sed subversion
