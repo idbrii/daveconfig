@@ -184,6 +184,12 @@ Also, by mostly relying on two pane diff I re-use the same diff key commands tha
 ([ref](https://www.reddit.com/r/vim/comments/3fs0q9/is_there_an_active_fork_of_splicevim/ctsovn7))
 
 
+Similarly, I use vim as a [perforce mergetool](https://github.com/idbrii/daveconfig/blob/master/win/system/bin/vimmerge.cmd).
+
+([ref](https://www.reddit.com/r/vim/comments/32qtjb/vim_as_perforce_merge_tool/))
+
+
+
 Writing Plugins or Packages
 ===========================
 Don't remap trivial vanilla maps (like `gt` or `<C-w> v`). Encourage users to use existing commands so they learn the consistency built into vim.
