@@ -1,25 +1,10 @@
 ; Blurb {{{1
 ; Install: Just create a shortcut to this file in Startup
 
-; IMPORTANT INFO ABOUT GETTING STARTED: Lines that start with a
-; semicolon, such as this one, are comments.  They are not executed.
-
-; This script has a special filename and path because it is automatically
-; launched when you run the program directly.  Also, any text file whose
-; name ends in .ahk is associated with the program, which means that it
-; can be launched simply by double-clicking it.  You can have as many .ahk
-; files as you want, located in any folder.  You can also run more than
-; one .ahk file simultaneously and each will get its own tray icon.
-
-; Note: From now on whenever you run AutoHotkey directly, this script
-; will be loaded.  So feel free to customize it to suit your needs.
-
-; Please read the QUICK-START TUTORIAL near the top of the help file.
-; It explains how to perform common automation tasks such as sending
-; keystrokes and mouse clicks.  It also explains more about hotkeys.
-
-
-
+; !: Sends an ALT keystroke. Send This is text!a would send the keys "This is text" and then press ALT+a.
+; +: Sends a SHIFT keystroke. Send +abC would send the text "AbC", and Send !+a would press ALT+SHIFT+a.
+; ^: Sends a CONTROL keystroke. Send ^!a would press CTRL+ALT+a, and Send ^{Home} would send CONTROL+HOME.
+; #: Sends a WIN keystroke, therefore Send #e would hold down the Windows key and then press the letter "e".
 
 
 ; Config begin {{{1
@@ -317,12 +302,37 @@ return
 ; instead.
 #IfWinActive ahk_class mintty
 {
-	^+v::Send {Shift down}{Insert}{Shift Up}
+	^+v::
+		Send {Shift down}{Insert}{Shift Up}
+	return
 }
+
+; Easy paste in command prompt
+; Might as well be consistent (and convenient).
+#IfWinActive ahk_class ConsoleWindowClass
+{
+	^+v::
+		SendInput {Raw}%clipboard%
+	return
+}
+
+; Easy copy in command prompt
+; More consistency.
+#IfWinActive ahk_class ConsoleWindowClass
+{
+	; Alt-Space e y
+	; Opens the window menu > Edit > Copy
+	^+c::
+		Send !{Space}ey
+	return
+}
+
+
 
 ; Remap capslock?
 ; +CapsLock::CapsLock
 ; CapsLock::Escape
+
 
 ; vim:set et sts=-1 sw=2 ts=2 fdm=marker
 
