@@ -2,20 +2,12 @@
 
 # Bash shortcuts
 
-SMART_GREP_OPTIONS=
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     eval "`dircolors -b`"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-
-	SMART_GREP_OPTIONS=' --color=auto'
 fi
 
 
@@ -31,22 +23,8 @@ llw() {
 }
 
 # Make grep more like ack.
-#	Ignore binary files.
-SMART_GREP_OPTIONS="$SMART_GREP_OPTIONS --binary-files=without-match"
-# Check for exclude-dir to prevent invalid options in older versions of grep.
-# Assume if we have exclude-dir, that we have exclude.
-if /bin/grep --help | /bin/grep -- --exclude-dir &>/dev/null; then
-	# Ignore version control folders.
-    for PATTERN in .cvs .git .hg .svn; do
-        SMART_GREP_OPTIONS="$SMART_GREP_OPTIONS --exclude-dir=$PATTERN"
-    done
-	# Ignore temp files.
-    for PATTERN in *.swp; do
-        SMART_GREP_OPTIONS="$SMART_GREP_OPTIONS --exclude=$PATTERN"
-    done
-fi
 # This alias may override ghostscript. That's not a problem for me.
-alias gs='grep $SMART_GREP_OPTIONS'
+alias gs='~/.vim/bundle/searchsavvy/bin/smartgrep --color=auto'
 
 # windows work-alike
 alias cls='clear'
