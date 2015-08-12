@@ -103,9 +103,12 @@ $GNU_SED -r -e '/^=======\r?$/,/^>>>>>>> /d' -e '/^<<<<<<< /d' "${MERGED}" > "${
 
 # Fire up vimdiff
 $cmd -f -R -d "${LCONFL}" "${RCONFL}" \
-    -c ":set noro" \
+    -c ":set lines=999 columns=9999" \
+    -c ":simalt ~x" \
+    -c ":set noro | wincmd =" \
     -c ":exec 'tabe '. fnameescape('$LOCAL') .' | vert diffs '. fnameescape('$BASE') .' | vert diffs '. fnameescape('$REMOTE')" \
-    -c ":winc t" -c ":tabe $MERGED" -c ":tabfir"
+    -c ":wincmd =" \
+    -c ":wincmd t" -c ":tabe $MERGED" -c ":tabfir"
 
 EC=$?
 
