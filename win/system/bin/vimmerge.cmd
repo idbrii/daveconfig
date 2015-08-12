@@ -12,7 +12,9 @@ set MERGED=%4
 
 :: Diff all files in large fullscreen window with equal width buffers and find
 :: the first conflict.
-gvim.exe +"set lines=999" +"set columns=9999" +"simalt ~x" +"wincmd =" +"wincmd w" +"normal gg]C" -d %LOCAL% %MERGED% %REMOTE%
+REM gvim.exe +"set lines=999" +"set columns=9999" +"simalt ~x" +"wincmd =" +"wincmd w" +"normal gg]C" -d %LOCAL% %MERGED% %REMOTE%
+:: diffconflicts works really well for merging.
+%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
 
 REM Could use videinvoke instead?
 REM gvim.exe -S c:/Users/davidb/.vim/videinvoke.vim -c "wincmd =" -d %*
