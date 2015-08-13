@@ -97,6 +97,26 @@ RCONFL="${MERGED_PATH}/.LOCAL.$$.${MERGED_FILE}"
 # Always delete our temp files; Git will handle it's own temp files
 trap 'rm -f "'"${LCONFL}"'" "'"${RCONFL}"'"' SIGINT SIGTERM EXIT
 
+# I might be using perforce instead of git. Verify by checking for a
+# p4-specific marker.
+if [[ $IS_PERFORCE -eq 1
+    && $(grep "^>>>> ORIGINAL //" ${MERGED}) ]] ; then
+
+    # To work with perforce, we need to remove and fixup perforce merge markers
+    # to look like git.
+    #
+    # Need to remove ORIGINAL (which is BASE), swap < for > (because perforce
+    # changes the order conflicts are displayed), increase number of marker
+    # symbols from 4 to 7, remove text next to conflict separator.
+    $cmd --nofork \
+        -c "set lazyredraw" \
+        -c "%sm/\v^\>{4} ORIGINAL\_.{-}\n^(\=){4}/<<<<<<</" \
+        -c "%sm/\v^(\=){4}.*$/\1\1\1\1\1\1\1/" \
+        -c "%sm/\v^(\<){4}$/>>>>>>> /" \
+        -c "xit" \
+        ${MERGED}
+fi
+
 # Remove the conflict markers for each 'side' and put each into a temp file
 $GNU_SED -r -e '/^<<<<<<< /,/^=======\r?$/d' -e '/^>>>>>>> /d' "${MERGED}" > "${LCONFL}"
 $GNU_SED -r -e '/^=======\r?$/,/^>>>>>>> /d' -e '/^<<<<<<< /d' "${MERGED}" > "${RCONFL}"
