@@ -49,20 +49,18 @@ noremap <Leader>P "0P
 "endif
 
 " Argument: ("") for full path, otherwise something like ("%") or ("%:p")
-function! s:CopyFilenameToClipboard(filename)
+" This is more useful with vim-focusclip installed.
+function! s:YankFilename(filename)
     let fname = a:filename
     if len(fname) == 0
         " Full path is generally what I need.
         let fname = "%:p"
     endif
 
-    " TODO: Probably only need to set specific registers on different
-    " platforms. Setting both lets me paste into terminals with middle mouse.
-    let @*=expand(fname)
-    let @+=@*
+    let @"=expand(fname)
 endfunction
 
-command! -nargs=* CopyFilenameToClipboard call s:CopyFilenameToClipboard(<q-args>)
+command! -nargs=* YankFilename call s:YankFilename(<q-args>)
 
 
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
