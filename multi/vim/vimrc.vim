@@ -59,6 +59,16 @@ if has('win32') && v:version < 704
     set backupcopy=yes
 endif
 
+" Prefer unix on all platforms.
+" This essentially makes Windows and Mac use defaults like Unix. Combined with
+" git's core.autocrlf=input prevents line ending issues on Windows. Probably
+" works better on mac too.
+if has('win32') || has("macunix")
+    " Remove unix to ensure when we prepend it is added at the beginning.
+    set fileformats-=unix
+    set fileformats^=unix
+endif
+
 " Display {{{1
 set background=dark			" I use dark background
 set nolazyredraw				" Don't repaint when scripts are running
