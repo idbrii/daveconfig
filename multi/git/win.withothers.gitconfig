@@ -1,0 +1,11 @@
+# These are settings that I often have applied to git repositories for code
+# used by other windows users. The goal is to avoid pointless changes and to
+# prevent any automatic conversion hijinks.
+[core]
+    filemode = false
+    symlinks = false
+    autocrlf = false
+    eol = native
+    hideDotFiles = dotGitOnly
+
+# vi: et sw=4 ts=4 ft=gitconfig
