@@ -40,13 +40,6 @@
     hub = "!git hublist | while read url ; do xdg-open $url ; done"
 
 
-
-[merge]
-    # meld is also a good option where it's installed, but gvim is a globally
-    # available default.
-    tool = gvim
-[diff]
-    renames = copies
 [core]
     excludesfile = ~/.gitignore
     autocrlf = input
@@ -54,6 +47,13 @@
     autosetupmerge = true
 [web]
     browser = chromium-browser
+
+[merge]
+    # meld is also a good option where it's installed, but gvim is a globally
+    # available default.
+    tool = gvim
+[diff]
+    renames = copies
 [diff "bin"]
     # Allow files to be marked as "diff=bin" in .gitattributes so we can diff
     # the hex output of the files. See "Performing text diffs of binary files"
