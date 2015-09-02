@@ -6,3 +6,4 @@ CursorType=block
 FontSmoothing=none
 Font=ProggySquareTT
 BackgroundColour=0,0,0
+CtrlShiftShortcuts=yes

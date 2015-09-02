@@ -300,12 +300,14 @@ return
 ; Easy paste in terminal
 ; S-Ins requires Fn mode on my Kinesis. Use the gnome-terminal shortcut C-S-v
 ; instead.
-#IfWinActive ahk_class mintty
-{
-	^+v::
-		Send {Shift down}{Insert}{Shift Up}
-	return
-}
+; Disabled. Unnecessary when using Ctrl+Shift+letter shortcuts:
+;	https://code.google.com/p/mintty/issues/detail?id=252
+;#IfWinActive ahk_class mintty
+;{
+;	^+v::
+;		Send {Shift down}{Insert}{Shift Up}
+;	return
+;}
 
 ; Easy paste in command prompt
 ; Might as well be consistent (and convenient).
