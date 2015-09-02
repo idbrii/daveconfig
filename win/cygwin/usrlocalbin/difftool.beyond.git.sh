@@ -8,7 +8,6 @@ BASE=`cygpath -wa $3`
 #echo theirs=$LOCAL >> /tmp/out
 #echo mine=$REMOTE >> /tmp/out
 #echo BASE=$BASE >> /tmp/out
-/c/david/apps/BeyondCompare3/BComp.exe $theirs $mine /leftreadonly
 
-
+BComp.exe $theirs $mine /leftreadonly
 
