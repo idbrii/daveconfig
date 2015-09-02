@@ -64,6 +64,8 @@
     prompt = false
 [mergetool]
     prompt = false
+[mergetool "p4merge"]
+    cmd = mergetool.p4merge.git.sh $LOCAL $REMOTE $BASE $MERGED
 [difftool "beyond"]
     cmd = difftool.beyond.git.sh $LOCAL $REMOTE $BASE
 [mergetool "beyond"]

@@ -6,9 +6,10 @@
     # Update: These are caused by vim and may now be fixed (vim 7.4)
     filemode = false
 
-# At work I use Beyond Compare.
+# At work I use Beyond Compare for diff. If I don't have a Pro license, I use
+# p4merge (or gvim) for merging.
 [merge]
-    tool = beyond
+    tool = p4merge
 [diff]
     tool = beyond
 
