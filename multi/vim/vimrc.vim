@@ -660,6 +660,10 @@ augroup DetectIndent
     autocmd BufReadPost * DetectIndent
 augroup END
 
+" expand-region
+xnoremap iv <Plug>(expand_region_expand)
+xnoremap iV <Plug>(expand_region_shrink)
+
 "}}}
 
 
