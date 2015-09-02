@@ -54,6 +54,12 @@
     autosetupmerge = true
 [web]
     browser = chromium-browser
+[diff "bin"]
+    # Allow files to be marked as "diff=bin" in .gitattributes so we can diff
+    # the hex output of the files. See "Performing text diffs of binary files"
+    # in `git help gitattributes`.
+	textconv = hexdump -v -C
+	binary = true
 [difftool]
     prompt = false
 [mergetool]
