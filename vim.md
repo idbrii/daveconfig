@@ -50,7 +50,11 @@ Use nnoremap instead of noremap for Normal mode. Maps often only make sense in c
 
 Use xnoremap instead of noremap for visual mode. Using xnoremap will only map it in Visual mode (and not Select mode which is something you won't realize you're using until it bites you or you're a master).
 
-Use `<Plug>` if you want a unique prefix. Using `nnoremap [unite] <C-Space>` to let you define a single place for your Unite leader is a bad idea. If you happened to enter the keys `[unite]` in that sequence, vim would invoke `<C-Space>`. Instead, use `<Plug>(unite)`. It's the same except guaranteed not to match any input sequence. (And [parenthesize <Plug> map names](http://stackoverflow.com/questions/13688022/what-is-the-reason-to-parenthesize-plug-map-names) to prevent delays.)
+Use `<Plug>` if you want a unique prefix instead of an arbritrary string of characters. Using something like `nnoremap [unite] <C-Space>` to define a "namespace" for your Unite leader is a bad hack. If you happened to enter the keys `[unite]` in that sequence, vim would invoke `<C-Space>`. Instead, use `<Plug>(unite)`. It works the same except guaranteed not to match any input sequence. (And [parenthesize <Plug> map names](http://stackoverflow.com/questions/13688022/what-is-the-reason-to-parenthesize-plug-map-names) to prevent delays.)
+
+Avoid mapping printable/whitespace characters in insert mode. This includes Leader mappings: they only work if you don't need to insert the leader key in your documents. You could argue that using `,` as leader means `<Leader>n` is an acceptable mapping and will never be encountered in your workflow, but one day you'll write a csv file and write `old_file,new_file,delta_size` and weirdness will occur and some characters will be missing (because your Leader map resolves to `,n` and that character sequence is contained in that input string).Instead, use meta key combinations for insert mode mappings. See `:help insert-index` for a list of vim's insert mode keys so you can determine which are unused. Mapping printable/whitespace characters in insert mode to anything but themselves (like the undobreaking `inoremap <CR> <C-G>u<CR>`) is like writing unsafe code because you can't currently perceive that future use case that would break it. Write robust code everywhere or start writing hatemail to your past self.
+
+([ref](https://www.reddit.com/r/vim/comments/3jzzca/windows_10_and_the_leader_key/cuusmlj))
 
 
 autoload
