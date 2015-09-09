@@ -2,6 +2,9 @@
 "
 
 " Set a different name for this location
+let g:snips_me = 'idbrii (idbrii@.com)'
+let g:snips_company = 'idbrii Inc.'
+
 if has('win32')
 	let g:snips_author = expand('$USERNAME')
 else

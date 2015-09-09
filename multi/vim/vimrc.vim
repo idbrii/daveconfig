@@ -365,8 +365,10 @@ nnoremap <BS> X
 "nnoremap cw dwi
 
 " Generic Header comments (requires formatoptions+=r)
-"  Uses vim's commentstring to figure out the local comment character
-nnoremap <Leader>hc ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>%<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
+"  Uses vim's commentstring to figure out the local comment character.
+nnoremap <Plug>(david-create-header-comment) ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>=expand('%:t')<CR><CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> <C-r>=g:snips_company<CR> All Rights Reserved.<CR><C-u><Esc>o<Esc>3kA<CR>
+nmap <Leader>hc <Plug>(david-create-header-comment)
+
 
 " Indent {{{2
 " Use Ctrl-Tab/Tab and Shift-Tab to change indent in visual
