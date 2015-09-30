@@ -1,22 +1,30 @@
 :: For perforce merge:
 :: Location: path-to-this-file
-:: Arguments in p4v: %b %2 %1 %r
-::		Base file: %b
-::		Your/Target file: %2
+:: Arguments in p4v: %1 %2 %b %r
 ::		Their/Source file: %1
+::		Your/Target file: %2
+::		Base file: %b
 ::		Result file: %r
-set BASE=%1
-set LOCAL=%2
-set REMOTE=%3
+set LOCAL=%1
+set REMOTE=%2
+set BASE=%3
 set MERGED=%4
 
-:: Diff all files in large fullscreen window with equal width buffers and find
-:: the first conflict.
-REM gvim.exe +"set lines=999" +"set columns=9999" +"simalt ~x" +"wincmd =" +"wincmd w" +"normal gg]C" -d %LOCAL% %MERGED% %REMOTE%
+set USE_diffconflicts=1
+:: Always use normal vimdiff for diffs.
+if "%MERGED%" == "" (
+	set USE_diffconflicts=0
+)
 
-:: diffconflicts works well for merging.
-set IS_PERFORCE=1
-%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
+if "%USE_diffconflicts%" == "0" (
+	REM Diff all files in large fullscreen window with equal width buffers and
+	REM find the first conflict.
+	gvim.exe +"set lines=999" +"set columns=9999" +"simalt ~x" +"wincmd =" +"wincmd w" +"normal gg]C" -d %REMOTE% %MERGED% %LOCAL%
+) else (
+	REM diffconflicts works well for merging.
+	set IS_PERFORCE=1
+	%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
+)
 
 REM Could use videinvoke instead?
 REM gvim.exe -S c:/Users/davidb/.vim/videinvoke.vim -c "wincmd =" -d %*
