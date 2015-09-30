@@ -5,19 +5,17 @@
 
 setlocal
 
-set fake_c=c:\cygdrive\c
-
-:: For cygdrive paths
-mkdir %fake_c%
-call :create_junction %fake_c%\david c:\david
-call :create_junction %fake_c%\Users c:\Users
-call :create_junction c:\c %fake_c%
+set destination_drive_letter=c
+set cygwin_install_dir=c:\cygwin
 
 :: Setup tmp to make stuff like fc work from bash.
-call :create_junction c:\tmp c:\cygwin\tmp
+call :create_junction c:\tmp %cygwin_install_dir%\tmp
 
-:: To remove, replace above create_junction with remove_junction (they take the same args).
-REM rmdir %fake_c%
+:: For cygdrive paths
+call :create_junction %destination_drive_letter%:\d d:\
+call :create_junction %destination_drive_letter%:\c c:\
+call :create_junction %destination_drive_letter%:\cygdrive\d d:\
+call :create_junction %destination_drive_letter%:\cygdrive\c c:\
 
 goto:eof
 
@@ -36,4 +34,5 @@ goto:eof
 :remove_junction
 :: unlike junction, mklink has no delete command
 del %1
+goto:eof
 goto:eof
