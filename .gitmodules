@@ -247,3 +247,6 @@
 [submodule "multi/vim/bundle/expand-region"]
 	path = multi/vim/bundle/expand-region
 	url = git@github.com:terryma/vim-expand-region.git
+[submodule "multi/vim/bundle/pastenreplace"]
+	path = multi/vim/bundle/pastenreplace
+	url = git@github.com:idbrii/vim-pastenreplace.git
