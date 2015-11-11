@@ -1,9 +1,14 @@
 #! /bin/bash
 # vim:set fdm=marker:
 
-# Build the LookupFile and cscope databases
+# Build the filelist, tag file, and cscope databases
 # usage:
-#   buildtags.sh cscope lang
+#   buildtags.sh cscope-binary lang [directories to search]
+#
+# example to build C++ in current directory recursively:
+#   buildtags.sh cscope cpp
+# example for the same but only tags (no filelist or cscope):
+#   buildtags.sh tagonly cpp
 
 # Installing dependents:
 #   aptinstall exuberant-ctags cscope
@@ -62,8 +67,9 @@ else
 fi
 
 # convert cygwin paths to windows paths
-sed -i -e"s/.cygdrive.c/c:/g" $tagfile
-
+sed -i -e"s,^/cygdrive/\([[:alpha:]]\)/,\1:/," $tagfile
+# I usually make a link in the root to each drive letter (/c for c:)
+sed -i -e"s,^/\([[:alpha:]]\)/,\1:/," $tagfile
 # }}}
 
 # Build ctags and cscope	{{{
@@ -91,19 +97,27 @@ case $filetype in
         ;;
 esac
 
-if [ "$filetype" == "python" ] ; then
-    # Requires the python package pycscope:
-    #   pip install pycscope
-    pycscope -i filelist
+if [ $cscope == "tagonly" ] ; then
+	rm $tagfile
+
 else
-    # Build cscope database
-    #	-b              Build the database only.
-    #	-k              Kernel Mode - don't use /usr/include for #include files.
-    #	-q              Build an inverted index for quick symbol seaching.
-    # May want to consider these flags
-    #	-m "lang"       Use lang for multi-lingual cscope.
-    #	-R              Recurse directories for files.
-    $cscope -b -q -k -i filelist
+	case $filetype in
+		python)
+			# Requires the python package pycscope:
+			#   pip install pycscope
+			pycscope -i filelist
+			;;
+		*)
+			# Build cscope database
+			#	-b              Build the database only.
+			#	-k              Kernel Mode - don't use /usr/include for #include files.
+			#	-q              Build an inverted index for quick symbol seaching.
+			# May want to consider these flags
+			#	-m "lang"       Use lang for multi-lingual cscope.
+			#	-R              Recurse directories for files.
+			$cscope -b -q -k -i filelist
+			;;
+	esac
 fi
 
 # }}}
