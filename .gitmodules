@@ -250,3 +250,6 @@
 [submodule "multi/vim/bundle/pastenreplace"]
 	path = multi/vim/bundle/pastenreplace
 	url = git@github.com:idbrii/vim-pastenreplace.git
+[submodule "multi/vim/bundle/unreal"]
+	path = multi/vim/bundle/unreal
+	url = git@github.com:idbrii/vim-unreal.git
