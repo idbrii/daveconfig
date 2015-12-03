@@ -366,7 +366,7 @@ nnoremap <BS> X
 
 " Generic Header comments (requires formatoptions+=r)
 "  Uses vim's commentstring to figure out the local comment character.
-nnoremap <Plug>(david-create-header-comment) ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>=expand('%:t')<CR><CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> <C-r>=g:snips_company<CR> All Rights Reserved.<CR><C-u><Esc>o<Esc>3kA<CR>
+nnoremap <Plug>(david-create-header-comment) ggO<C-r>=&commentstring<CR><Esc>0/%s<CR>2cl<CR> <C-r>=expand('%:t')<CR><CR><CR>Copyright <C-R>=strftime("%Y")<CR>, <C-r>=g:snips_company<CR><CR><C-u><Esc>o<Esc>3kA<CR>
 nmap <Leader>hc <Plug>(david-create-header-comment)
 
 
