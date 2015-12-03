@@ -15,6 +15,9 @@
 " that and remote_foreground({server})
 
 if !exists('loaded_videinvoke')
+	" Faster way to open. Should I make this symmetrical with the ide's map?
+	nnoremap <Leader>ii :<C-u>VSOpen<CR>
+
     " If default or smaller screen size then make it bigger
     if &columns<=80 && &lines<=24
         " Decent width
