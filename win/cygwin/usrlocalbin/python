@@ -14,8 +14,17 @@ function w {
 		fi
 		p="$p $arg"
     done
+
     echo $1 $p
-    $1 $p &
+
+    # Is it possible for me to make python's istty return the correct value?
+    # This suggestion doesn't work.
+    # http://stackoverflow.com/questions/911168/how-to-detect-if-my-shell-script-is-running-through-a-pipe
+
+    # TODO: Why was I running in the background? Try not doing that for now.
+    # (Now istty is always false -- even if I could give input.)
+    #$1 $p &
+    $1 $p
 }
 
 # I'm using python for windows (but not using PYTHONHOME because doing so
