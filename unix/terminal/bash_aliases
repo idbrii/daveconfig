@@ -30,6 +30,11 @@ alias gs='~/.vim/bundle/searchsavvy/bin/smartgrep --color=auto'
 alias cls='clear'
 alias tracert='tracepath'
 
+function server_to_ip
+{
+	# Use google's dns server to resolve IPs when local resolver is down.
+	nslookup -domain= $1 8.8.8.8
+}
 
 # python
 
