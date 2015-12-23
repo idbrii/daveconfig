@@ -297,6 +297,18 @@ return
 	WinMinimize A
 return
 
+; P4V
+; Autohotkey keeps swallowing my p4v key inputs. Pass them along.
+#IfWinActive ahk_class Qt5QWindowIcon
+{
+	;;^d::
+	;;	Send ^d
+	;;return
+	;;^r::
+	;;	Send ^r
+	;;return
+}
+
 ; Easy paste in terminal
 ; S-Ins requires Fn mode on my Kinesis. Use the gnome-terminal shortcut C-S-v
 ; instead.
