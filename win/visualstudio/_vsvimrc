@@ -1,4 +1,4 @@
-" bring in all some of vimrc {{{
+" bring in some of vimrc {{{
 
 " Author:	DBriscoe (idbrii@gmail.com)
 " Influences:
@@ -109,6 +109,7 @@ set foldnestmax=3           " At deepest, fold blocks within class methods
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
+" This doesn't work in VsVim - it inserts a ^G character.
 "inoremap <C-U> <C-G>u<C-U>
 
 
@@ -131,6 +132,10 @@ nnoremap <C-a> 1GVG
 " Windows clipboard
 xmap <C-c> "+y
 nnoremap <C-v> "+p
+
+" C-L for esc
+inoremap <C-L> <Esc>:nohl<CR><C-L>
+nnoremap <C-L> :nohl<CR><C-L>
 
 " I've started using Shift-Insert to paste too (especially in insert)
 inoremap <S-Insert> <C-r>+
@@ -218,6 +223,22 @@ iabbrev shebangbash #! /bin/bash
 
 " constructs
 iabbrev frepeat for (int i = 0; i < 0; ++i)
+
+"}}}
+
+
+"""""""""""
+""" Plugin re-implementation   {{{
+
+" Surround
+vnoremap c/ :vsc VAssistX.SelectionToggleLineComment
+vnoremap c* :vsc VAssistX.SelectionToggleBlockComment
+vnoremap c{ :vsc VAssistX.SurroundSelectionWithBraces
+vnoremap cB :vsc VAssistX.SurroundSelectionWithBraces
+vnoremap c( :vsc VAssistX.SurroundSelectionWithParentheses
+vnoremap cb :vsc VAssistX.SurroundSelectionWithParentheses
+vnoremap c# :vsc VAssistX.SurroundSelectionWithIfdefOrRegion
+vnoremap <C-o> :vsc VAssistX.SurroundSelectionWithComment
 
 "}}}
 
