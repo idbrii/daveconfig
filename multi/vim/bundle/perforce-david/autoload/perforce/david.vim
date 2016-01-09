@@ -132,7 +132,7 @@ endfunction
 function! perforce#david#PVimDiff()
     " Output the head revision, push it to the left, and diff against current.
 
-	PPrint
+	PPrint #have
 	wincmd H
 	DiffBoth
 endfunction
