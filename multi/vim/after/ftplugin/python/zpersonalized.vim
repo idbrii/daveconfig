@@ -39,8 +39,8 @@ function! s:set_entrypoint()
     " (ensures any expected relative paths will work).
     let cur_file = expand('%:p')
     let cur_dir = fnamemodify(cur_file, ':h')
-    let cur_file = fnamemodify(cur_file, ':t')
-    exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:set makeprg=python\ -t\ '. cur_file .'<CR>:AsyncMake<CR>'
+    let cur_module = fnamemodify(cur_file, ':t:r')
+    exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:set makeprg=python\ -t\ -m\ '. cur_module .'<CR>:AsyncMake<CR>'
 endf
 command! -buffer PythonSetEntrypoint call s:set_entrypoint()
 
