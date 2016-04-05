@@ -193,7 +193,7 @@ set history=500				" cmdline history
 " for python (to allow nested definitions and to show functions and classes.
 " Can I combine this with <C-g>'s functionality (print both) and override that
 " key?
-nnoremap <C-g><C-g>  :let last_search=@/<Bar> ?^\w? mark c<Bar> noh<Bar> echo getline("'c")<Bar> let @/ = last_search<CR>
+nnoremap <C-g><C-g>  :<C-u>let last_search=@/<Bar> ?^\w? mark c<Bar> noh<Bar> echo getline("'c")<Bar> let @/ = last_search<CR>
 
 " Command Line {{{1
 " Autocomplete in cmdline: Give longest completion with list of options then
@@ -258,15 +258,15 @@ endif
 
 " Write Asides to yourself. (Quick access to a file for random things I want
 " to write down.)
-nnoremap <F1> :sp ~/.vim-aside<CR>
-nnoremap <S-F1> :e ~/.vim-aside<CR>
+nnoremap <F1> :<C-u>sp ~/.vim-aside<CR>
+nnoremap <S-F1> :<C-u>e ~/.vim-aside<CR>
 
 " My Kinesis keyboard has F1 where Esc used to be. I have no use for help in
 " insert mode, so let's try this.
 inoremap <F1> <Esc>
 
 " Similar map for todo.
-nnoremap <Leader><F1> :sp ~/.todo.org<CR>
+nnoremap <Leader><F1> :<C-u>sp ~/.todo.org<CR>
 
 " Building {{{1
 
@@ -274,12 +274,12 @@ nnoremap <Leader><F1> :sp ~/.todo.org<CR>
 "nnoremap <Leader>\ :!<up><CR>
 
 " Easy make
-"nnoremap <Leader>\| :make<up><CR>
+"nnoremap <Leader>\| :<C-u>make<up><CR>
 
 " Using silent prevents possible output that requires hitting enter to clear
 " every time I run make.
-nnoremap <S-F5> :silent make 
-nnoremap <F5> :make 
+nnoremap <S-F5> :<C-u>silent make 
+nnoremap <F5> :<C-u>make 
 
 " If available, use scons instead of make. -u is upward search for root
 " SConstruct.
@@ -301,10 +301,10 @@ set cscopepathcomp=3
 command! -nargs=1 Ctag cscope find g <args>
 
 " Toggle the tag list bar
-nnoremap <F4> :TlistToggle<CR>
+nnoremap <F4> :<C-u>TlistToggle<CR>
 
 " Open preview window for tags (just jump with <C-]>)
-nnoremap <A-]> :ptag <C-r><C-w><CR>
+nnoremap <A-]> :<C-u>ptag <C-r><C-w><CR>
 
 " Simplify most common cscope command
 " (<C-\>s is defined in cscope_maps.vim)
@@ -316,8 +316,8 @@ let g:asynccommand_statusline_autohide = 1
 
 " Common text {{{1
 
-nnoremap <C-s> :w<CR>
-nnoremap <Leader>fs :update<CR>
+nnoremap <C-s> :<C-u>w<CR>
+nnoremap <Leader>fs :<C-u>update<CR>
 
 " Ignoring errors never seems like a good idea. I'd only hit this by accident.
 " If I still want it, I could :w!
@@ -356,7 +356,7 @@ onoremap aa a>
 
 " gc selects previously changed text. (|gv| but for modification.)
 nnoremap gc :<C-U>silent!normal!`[v`]<CR>
-xnoremap gc :<C-U>silent!normal!`[v`]<CR>
+xnoremap gc :silent!normal!`[v`]<CR>
 
 " Make backspace work in normal
 nnoremap <BS> X
@@ -401,7 +401,7 @@ nnoremap <C-g> 2<C-g>
 noremap Q gw
 
 " <Shift-space> reloads the file
-nnoremap <S-space> :e<CR>
+nnoremap <S-space> :<C-u>e<CR>
 
 " Folding {{{1
 
@@ -425,9 +425,9 @@ xnoremap <Leader>l zf
 " enable syntax folding for a variety of languages
 "set g:vimsyn_folding = 'afmpPrt'
 " create text object using [z and ]z
-vnoremap if :<C-U>silent!normal![zjV]zk<CR>
+vnoremap if :silent!normal![zjV]zk<CR>
 onoremap if :normal Vif<CR>
-vnoremap af :<C-U>silent!normal![zV]z<CR>
+vnoremap af :silent!normal![zV]z<CR>
 onoremap af :normal Vaf<CR>
 
 let g:textobj_between_no_default_key_mappings = 1
@@ -483,7 +483,7 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:UltiSnipsSnippetsDir = '~/.vim/bundle/david-snippets/UltiSnips/'
 
 " Gundo -- visualize the undo tree
-nnoremap <F2> :GundoToggle<CR>
+nnoremap <F2> :<C-u>GundoToggle<CR>
 
 " Surround
 " Use c as my surround character (it looks like a hug)
@@ -638,7 +638,7 @@ let g:easy_align_delimiters = {
 if executable("bash")
     let g:online_thesaurus_map_keys = 0
     " Use the same keys as thesaurus completion.
-    nnoremap <unique> <C-x><C-t> :OnlineThesaurusCurrentWord<CR>
+    nnoremap <unique> <C-x><C-t> :<C-u>OnlineThesaurusCurrentWord<CR>
 else
     " The shell script doesn't work in Windows without bash (and cygwin).
     let g:loaded_online_thesaurus = -1

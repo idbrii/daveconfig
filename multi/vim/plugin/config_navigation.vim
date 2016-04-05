@@ -11,13 +11,13 @@ sunmap j
 sunmap k
 
 " Quick toggle cursor at centre of screen.
-nnoremap <Leader>vc :let &scrolloff=999-&scrolloff <Bar> set scrolloff?<CR>
+nnoremap <Leader>vc :<C-u>let &scrolloff=999-&scrolloff <Bar> set scrolloff?<CR>
 " Quick wrap toggle
-nnoremap <Leader>vw :setlocal invwrap <Bar> set wrap?<CR>
+nnoremap <Leader>vw :<C-u>setlocal invwrap <Bar> set wrap?<CR>
 " Quick spelling toggle
-nnoremap <Leader>vs :setlocal invspell <Bar> set spell?<CR>
+nnoremap <Leader>vs :<C-u>setlocal invspell <Bar> set spell?<CR>
 " Show cursor (crosshairs like a t)
-nnoremap <Leader>vt :set invcursorline invcursorcolumn<CR>
+nnoremap <Leader>vt :<C-u>set invcursorline invcursorcolumn<CR>
 
 " Jumplist - navigate previous locations
 if has('jumplist')
