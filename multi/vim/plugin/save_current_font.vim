@@ -6,7 +6,7 @@
 " so this function automates that process by using the current font settings.
 "
 " Just call SaveCurrentFont() to save the current font.
-function SaveCurrentFont()
+function! s:SaveCurrentFont()
     " Copy the current font setting into our a register
     " and modify it to be a :set line
     let @a=&gfn
@@ -23,3 +23,5 @@ function SaveCurrentFont()
     " We don't save the file because we want to make sure the user knows
     " what's changed (using stuff like DiffOrig).
 endfunction
+
+command! ConfigAddCurrentFont call s:SaveCurrentFont()
