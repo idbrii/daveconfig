@@ -14,6 +14,8 @@ if version < 700
 	set noloadplugins
 endif
 
+source ~/.vim/before_vimrc.vim
+
 """ Settings
 """" Searching and Patterns
 set ignorecase					" search is case insensitive
@@ -190,40 +192,6 @@ nnoremap <Leader>] <C-i>
 "xnoremap <space> zf
 
 
-"""""""""""
-""" Abbreviations   {{{
-"" Command
-
-" Diff
-if has("diff")
-    function! <SID>DiffBoth()
-        diffthis
-        wincmd w
-        diffthis
-    endfunction
-    command! DiffBoth call <SID>DiffBoth()
-    command! -nargs=1 -complete=file VDiffSp vert diffsplit <q-args>
-endif
-
-" Windowing (Full screen on my monitor)
-command! VertScreen set lines=59
-command! LargeScreen set lines=59 | set columns=100
-
-" VimShell - run sh from within a Vim buffer
-command! VShell runtime scripts/vimsh/vimsh.vim
-
-" Diff against the file on disk. Useful for recovery. See also :help DiffOrig
-command! DiffSaved vert split original.vimscratch | silent %d | silent r # | silent 0d_ | diffthis | wincmd p | diffthis
-
-"" Insert
-" Shebangs
-iabbrev shebangpy #! /usr/bin/env python
-iabbrev shebangsh #! /bin/sh
-iabbrev shebangbash #! /bin/bash
-
-" constructs
-iabbrev frepeat for (int i = 0; i < 0; ++i)
-
 "}}}
 
 
@@ -240,6 +208,9 @@ vnoremap cb :vsc VAssistX.SurroundSelectionWithParentheses
 vnoremap c# :vsc VAssistX.SurroundSelectionWithIfdefOrRegion
 vnoremap <C-o> :vsc VAssistX.SurroundSelectionWithComment
 
+nnoremap <Leader>ii :vsc Tools.ExternalCommand1<CR>
+" Not sure if leader works in vsvim.
+"nnoremap <Space>ii :vsc Tools.ExternalCommand1<CR>
 "}}}
 
 " =-=-=-=-=-=
