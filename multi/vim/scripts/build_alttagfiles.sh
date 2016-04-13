@@ -45,6 +45,12 @@ if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
     find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -print | sort -f >> $tagfile
 
+elif [ "$filetype" == "unreal" ] ; then
+	# A big unreal c++ project, so use the simple format. Ignore generated code
+	# in the Intermediate folder (a nuisance in plugins that don't have a fixed
+	# path format).
+    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -print | grep -v "Intermediate.Build" | sort -f >> $tagfile
+
 elif [ "$filetype" == "cs" ] ; then
     # C sharp code. don't include examples which are often alongside.
     find $search_dirs -not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print | sort -f >> $tagfile
