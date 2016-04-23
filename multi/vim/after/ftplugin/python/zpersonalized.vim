@@ -15,8 +15,6 @@ setlocal cinoptions+=#1
 "" simple indent-based folding
 setlocal foldmethod=indent
 
-compiler python
-
 function! PyCompileCheck()
     " Finds syntax errors in the current file and adds them to the quickfix.
     " This isn't really necessary with eclim since it does auto syntax
