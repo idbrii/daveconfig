@@ -158,10 +158,17 @@ nnoremap <unique> <A-o> :call CtrlPSameName(1)<CR>
 nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
 
 " Code Search analog to find symbol (finds text, not symbol). Generally faster
-" than cscope.
-nnoremap <unique> <A-g> :NotGrep \b<cword>\b<CR>
+" than cscope. New mnemonic: Jump to word.
+nnoremap <unique> <A-g> :<C-u>NotGrep \b<cword>\b<CR>
+nnoremap <unique> <Leader>jw :<C-u>NotGrep \b<cword>\b<CR>
 " Less precise version (\b is word boundary).
-nnoremap <unique> g<A-g> :NotGrep <cword><CR>
+nnoremap <unique> g<A-g> :<C-u>NotGrep <cword><CR>
+nnoremap <unique> <Leader>jW :<C-u>NotGrep <cword><CR>
+
+" Jump to tag
+nnoremap <unique> <Leader>jt <C-]>
+" Jump to symbol
+nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
 " BufExplorer {{{1
 if !hasmapto('<Leader>e')
