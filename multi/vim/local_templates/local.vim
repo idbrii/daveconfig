@@ -14,9 +14,6 @@ endif
 
 " Loads {{{1
 
-" I often don't use perforce
-let loaded_perforce = 0
-
 " If I don't have eclipse, I'll want to turn off eclim. TODO: Use
 " !executable('eclipse')?
 let g:EclimDisabled = 1
@@ -29,6 +26,8 @@ let loaded_python_ipy = 0
 let loaded_python_rope = 0
 
 " Perforce {{{1
+" I often don't use perforce.
+let loaded_perforce = 0
 " When I do, these need to be setup.
 let g:p4Presets = 'perforce:1666 idbrii_client idbrii'
 let g:external_diff = 'bcomp.bat'
@@ -53,15 +52,17 @@ let loaded_android_ctrlp = 1
 
 " Config {{{1
 
-" If most code has a path like: p4\game\main\packages\core\game\dev\src\
-let g:cpp_header_n_dir_to_trim = 8
-" After first or last include?
-"let g:cpp_header_after_first_include = 1
-
 if has('win32')
 	" Prefer unix even though we're on Windows.
 	set fileformats=unix,dos
 endif
+
+" C++ {{{1
+
+" If most code has a path like: p4\game\main\packages\core\game\dev\src\
+let g:cpp_header_n_dir_to_trim = 8
+" After first or last include?
+"let g:cpp_header_after_first_include = 1
 
 " Setup cscope for general use
 if has("cscope")
@@ -93,6 +94,8 @@ if has("cscope")
 
 endif
 
+" Python {{{1
+
 " If python is not in the path (because that breaks build pipeline), but vim
 " plugins need python, setup python's paths in vim. Any build scripts called
 " from vim need to clear these variables.
@@ -102,7 +105,7 @@ if isdirectory($PYTHONHOME)
     let $PATH = $PATH . ';' . $PYTHONHOME
 endif
 
-" Pick whichever git provider we're using. {{{1
+" Git providers (pick one) {{{1
 
 " Portable git is installed with SourceTree
 let PORTABLEGIT = expand('$LocalAppData/Atlassian/SourceTree/git_local/bin')
