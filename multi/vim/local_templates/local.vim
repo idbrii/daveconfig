@@ -1,7 +1,7 @@
 " Special settings for local environment
 "
 
-" Name {{{1
+" Identity {{{1
 " Set a different name for this location
 let g:snips_me = 'idbrii (idbrii@.com)'
 let g:snips_company = 'idbrii Inc.'
@@ -12,18 +12,19 @@ else
 	let g:snips_author = expand('$USER')
 endif
 
-" Loads {{{1
+" Config {{{1
+
+if has('win32')
+	" Prefer unix even though we're on Windows.
+	set fileformats=unix,dos
+endif
+
+" Turn off plugins {{{1
 
 " If I don't have eclipse, I'll want to turn off eclim. TODO: Use
 " !executable('eclipse')?
 let g:EclimDisabled = 1
 let loaded_taglist = 1
-
-" Some tools that depend on system packages and complain if they're not
-" installed. If you don't use them, then set these to skip loading.
-let loaded_python_bike = 0
-let loaded_python_ipy = 0
-let loaded_python_rope = 0
 
 " Perforce {{{1
 " I often don't use perforce.
@@ -49,13 +50,6 @@ let g:ctrlp_mruf_case_sensitive = 0
 
 " Probably not using android_ctrlp.vim
 let loaded_android_ctrlp = 1
-
-" Config {{{1
-
-if has('win32')
-	" Prefer unix even though we're on Windows.
-	set fileformats=unix,dos
-endif
 
 " C++ {{{1
 
@@ -95,6 +89,12 @@ if has("cscope")
 endif
 
 " Python {{{1
+
+" Some tools that depend on system packages and complain if they're not
+" installed. If you don't use them, then set these to skip loading.
+let loaded_python_bike = 0
+let loaded_python_ipy = 0
+let loaded_python_rope = 0
 
 " If python is not in the path (because that breaks build pipeline), but vim
 " plugins need python, setup python's paths in vim. Any build scripts called
