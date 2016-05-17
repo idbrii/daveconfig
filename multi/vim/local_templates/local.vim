@@ -99,11 +99,7 @@ let loaded_python_rope = 0
 " If python is not in the path (because that breaks build pipeline), but vim
 " plugins need python, setup python's paths in vim. Any build scripts called
 " from vim need to clear these variables.
-let $PYTHONHOME = $MY_PYTHONHOME
-let $PYTHONPATH = $PYTHONHOME . "/Lib"
-if isdirectory($PYTHONHOME)
-    let $PATH = $PATH . ';' . $PYTHONHOME
-endif
+call david#setup_python_paths($MY_PYTHONHOME)
 
 " Git providers (pick one) {{{1
 

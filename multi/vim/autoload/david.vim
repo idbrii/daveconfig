@@ -19,3 +19,15 @@ function! david#load_system_vimscript(vimscript_file)
         return 0
     endif
 endf
+
+function! david#setup_python_paths(pythonhome)
+    " If python is not in the path (because that breaks build pipeline), but
+    " vim plugins need python, setup python's paths in vim. Any build scripts
+    " called from vim need to clear these variables.
+    let $PYTHONHOME = a:pythonhome
+    let $PYTHONPATH = $PYTHONHOME . "/Lib"
+    if isdirectory($PYTHONHOME)
+        let $PATH = $PATH . ';' . $PYTHONHOME
+    endif
+endfunction
+
