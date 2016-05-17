@@ -27,6 +27,14 @@
     commit-fixup-with = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
     commit-squash-with = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 
+
+    # Interactive merging.
+    # Source: http://stackoverflow.com/a/11843922/79125
+    #
+    # Alternatively, consider using --strategy-option theirs (or ours). See http://stackoverflow.com/a/10697551/79125
+    accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
+    accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
+
     what = whatchanged
     who = shortlog -s --
     graph = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'
