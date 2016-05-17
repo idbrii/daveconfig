@@ -1,6 +1,7 @@
 " Special settings for local environment
 "
 
+" Name {{{1
 " Set a different name for this location
 let g:snips_me = 'idbrii (idbrii@.com)'
 let g:snips_company = 'idbrii Inc.'
@@ -10,6 +11,8 @@ if has('win32')
 else
 	let g:snips_author = expand('$USER')
 endif
+
+" Loads {{{1
 
 " I often don't use perforce
 let loaded_perforce = 0
@@ -25,7 +28,8 @@ let loaded_python_bike = 0
 let loaded_python_ipy = 0
 let loaded_python_rope = 0
 
-" Perforce
+" Perforce {{{1
+" When I do, these need to be setup.
 let g:p4Presets = 'perforce:1666 idbrii_client idbrii'
 let g:external_diff = 'bcomp.bat'
 
@@ -36,14 +40,18 @@ let g:p4EnableRuler = 0
 " Enable my p4 customizations
 let g:DAVID_local_root = "c:/p4/main"
 
+" Ctrlp {{{1
 
-" Also exclude logs
+" Exclude logs too
 " TODO: For this to work, local.vim needs to be sourced after
 " config_navigation.vim
 let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\\|\\build\\.*\\logfiles\\'
 let g:ctrlp_mruf_case_sensitive = 0
+
+" Probably not using android_ctrlp.vim
 let loaded_android_ctrlp = 1
 
+" Config {{{1
 
 " If most code has a path like: p4\game\main\packages\core\game\dev\src\
 let g:cpp_header_n_dir_to_trim = 8
@@ -94,12 +102,17 @@ if isdirectory($PYTHONHOME)
     let $PATH = $PATH . ';' . $PYTHONHOME
 endif
 
-" Portable git is installed with Github for Windows and SourceTree
+" Pick whichever git provider we're using. {{{1
+
+" Portable git is installed with SourceTree
 let PORTABLEGIT = expand('$LocalAppData/Atlassian/SourceTree/git_local/bin')
-let PORTABLEGIT = expand('$LocalAppData/GitHub/PortableGit_69703d1db91577f4c666e767a6ca5ec50a48d243/bin')
+
+" Portable git is installed with Github for Windows.
+" Update it with:
+"   rmdir %LocalAppData%\PortableGit_link & mklink /D %LocalAppData%\PortableGit_link %LocalAppData%\GitHub\PortableGit_d76a6a98c9315931ec4927243517bc09e9b731a0
+let PORTABLEGIT = expand('$LocalAppData/PortableGit_link/usr/bin')
 if !isdirectory(PORTABLEGIT)
     echoerr "Failed to find PortableGit. Did it update and change paths?"
-else
-    let $PATH = $PATH . ';' . PORTABLEGIT
 endif
+let $PATH = $PATH . ';' . PORTABLEGIT
 
