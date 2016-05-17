@@ -32,8 +32,8 @@
     # Source: http://stackoverflow.com/a/11843922/79125
     #
     # Alternatively, consider using --strategy-option theirs (or ours). See http://stackoverflow.com/a/10697551/79125
-    accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
-    accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
+    accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u -- \"${@:-.}\"; }; f"
+    accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u -- \"${@:-.}\"; }; f"
 
     what = whatchanged
     who = shortlog -s --
