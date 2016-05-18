@@ -255,4 +255,4 @@
 	url = git@github.com:idbrii/vim-unreal.git
 [submodule "multi/vim/bundle/dirvish"]
 	path = multi/vim/bundle/dirvish
-	url = https://github.com/justinmk/vim-dirvish.git
+	url = git@github.com:idbrii/vim-dirvish.git

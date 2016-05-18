@@ -217,10 +217,11 @@ if has("autocmd")
         autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
         autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
-        " Switch to the directory of the current file, unless it's a help file.
-        " Could use BufEnter instead, but then we have constant changing pwd.
+        " 'autochdir' alternative so I can provide exceptions.
+        " Switch to the directory of the current file, unless it's a help or conflicts with dirvish.
+        " Could use BufEnter to be more like autochdir, but then we have constant changing pwd.
         " Use <S-space> to reload the buffer if you want to cd.
-        autocmd BufReadPost * if &ft != 'help' | silent! cd %:p:h | endif
+        autocmd BufReadPost * if dirvish#can_autochdir() && match(['help', 'dirvish'], &ft) < 0 && filereadable(expand("%")) | silent! cd %:p:h | endif
 
         " Disabled: I use the preview window for more than just omnicompletion, so
         " maybe killing it so easily doesn't make sense.
