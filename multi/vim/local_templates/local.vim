@@ -39,13 +39,14 @@ let g:p4EnableRuler = 0
 
 " Enable my p4 customizations
 let g:DAVID_local_root = "c:/p4/main"
+let g:p4ClientRoot = g:DAVID_local_root
 
 " Ctrlp {{{1
 
 " Exclude logs too
 " TODO: For this to work, local.vim needs to be sourced after
 " config_navigation.vim
-let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\\|\\build\\.*\\logfiles\\'
+let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^\a:\\temp\\.*\|\\AppData\\Local\\Temp\\\|\\build\\.*\\logfiles\\'
 let g:ctrlp_mruf_case_sensitive = 0
 
 " Probably not using android_ctrlp.vim
