@@ -66,10 +66,10 @@ function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
 
     " 'follow' the symlink
     if bufexists(resolvedfile)
-      exec 'buffer ' . resolvedfile . ' | bw '.fpath
+      exec 'buffer ' . resolvedfile . ' | bwipeout '.fpath
     else
-      silent exec 'file ' . resolvedfile . ' | bw '.fpath
-      exec 'file ' . expand('%:p') . ' | w! | doau BufRead'
+      silent exec 'file ' . resolvedfile . ' | bwipeout '.fpath
+      exec 'file ' . expand('%:p') . ' | write! | doautocmd BufRead'
     endif
   endif
 endfunction
