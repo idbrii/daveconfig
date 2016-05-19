@@ -32,32 +32,37 @@ function! s:TranslateKnownLinks(fname)
 endf
 
 function! s:FollowWin32Symlink(...)
-  let filename = a:0 ? a:1 : '%'
+  " First argument is filename - defaults to current file
+  let filename = a:0 > 0 ? a:1 : '%'
+  " Second is remaining depth - defaults to 10
   let allowed_recur_depth = a:0 > 1 ? a:2 : 10
   return s:FollowWin32Symlink_recursive(fnamemodify(expand(filename), ':p'), allowed_recur_depth)
 endfunction
 
 function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
-  let filename = a:filename
+  let fpath = a:filename
   let allowed_recur_depth = a:allowed_recur_depth
-  if !allowed_recur_depth
+  if allowed_recur_depth <= 0
     return
   endif
-  let fpath = expand(filename)
-  let ftail = expand(filename.':t')
+  let ftail = fnamemodify(fpath, ':t')
   let dirstr = system('dir ' . fpath . '*')
 
   " check if current argument is a symlink
   if (match(dirstr, '<SYMLINK..\s\+' . ftail . ' [') == -1)
     " if not, check if parent dir is symlink, up to $allowed_recur_depth directories
-    call s:FollowWin32Symlink_recursive(filename . ':h', allowed_recur_depth-1)
+    let parent = fnamemodify(fpath, ':h')
+    call s:FollowWin32Symlink_recursive(parent, allowed_recur_depth-1)
   else
     " extract symlink path
     let substr = '.*<SYMLINK..\s\+' . ftail . ' \[\(.\{-}\)\].*'
     let sympath = substitute(dirstr, substr, '\1', "")
     " figure out current file's path
-    let resolvedfile = filereadable(sympath) ?  sympath :
-          \ findfile(expand('%:t'), sympath, '**')
+    if filereadable(sympath)
+      let resolvedfile = sympath
+    else
+      let resolvedfile = findfile(expand('%:t'), sympath, '**')
+    endif
 
     " 'follow' the symlink
     if bufexists(resolvedfile)
