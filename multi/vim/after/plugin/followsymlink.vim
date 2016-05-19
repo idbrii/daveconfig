@@ -31,7 +31,7 @@ function! s:TranslateKnownLinks(fname)
     return fname
 endf
 
-function! s:FollowWin32Symlink(...)
+function! FollowWin32Symlink(...)
   let shellslash_save = &shellslash
   " directory separators need to be backslashes so cmd.exe doesn't think
   " they're options.
@@ -57,6 +57,7 @@ function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
   if (match(dirstr, '<SYMLINK..\s\+' . ftail . ' [') == -1)
     " if not, check if parent dir is symlink, up to $allowed_recur_depth directories
     let parent = fnamemodify(fpath, ':h')
+    echo parent
     call s:FollowWin32Symlink_recursive(parent, allowed_recur_depth-1)
   else
     " extract symlink path
@@ -68,6 +69,13 @@ function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
     else
       let resolvedfile = findfile(expand('%:t'), sympath, '**')
     endif
+
+    " TODO: instead of following the link like this, we should store its path
+    " and build the path to the actual file. wiping out buffers like this
+    " failes for me (in the else case because there are multiple buffers
+    " matching fpath).
+    " Try changing these 'exec' to 'echo' to see what it's trying to do.
+    " Also see if we can remove the write! -- that's dangerous.
 
     " 'follow' the symlink
     if bufexists(resolvedfile)
