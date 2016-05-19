@@ -32,25 +32,25 @@ function! s:TranslateKnownLinks(fname)
 endf
 
 function! s:FollowWin32Symlink(...)
-  let filename = a:0 ? a:1 : '%'
-  let should_recurse = a:0 > 1 ? a:2 : 10
-  return s:FollowWin32Symlink_recursive(filename, should_recurse)
+  let filename = a:0 ? a:1 : '%:p'
+  let allowed_recur_depth = a:0 > 1 ? a:2 : 10
+  return s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
 endfunction
 
-function! s:FollowWin32Symlink_recursive(filename, should_recurse)
-  let lit = a:filename
-  let recur = a:should_recurse
-  if !recur
+function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
+  let filename = a:filename
+  let allowed_recur_depth = a:allowed_recur_depth
+  if !allowed_recur_depth
     return
   endif
-  let fpath = expand(lit)
-  let ftail = expand(lit.':t')
+  let fpath = expand(filename)
+  let ftail = expand(filename.':t')
   let dirstr = system('dir ' . fpath . '*')
 
   " check if current argument is a symlink
   if (match(dirstr, '<SYMLINK..\s\+' . ftail . ' [') == -1)
-    " if not, check if parent dir is symlink, up to $recur directories
-    call s:FollowWin32Symlink_recursive(lit . ':h', recur-1)
+    " if not, check if parent dir is symlink, up to $allowed_recur_depth directories
+    call s:FollowWin32Symlink_recursive(filename . ':h', allowed_recur_depth-1)
   else
     " extract symlink path
     let substr = '.*<SYMLINK..\s\+' . ftail . ' \[\(.\{-}\)\].*'
