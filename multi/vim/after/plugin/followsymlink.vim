@@ -32,9 +32,9 @@ function! s:TranslateKnownLinks(fname)
 endf
 
 function! s:FollowWin32Symlink(...)
-  let filename = a:0 ? a:1 : '%:p'
+  let filename = a:0 ? a:1 : '%'
   let allowed_recur_depth = a:0 > 1 ? a:2 : 10
-  return s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
+  return s:FollowWin32Symlink_recursive(fnamemodify(expand(filename), ':p'), allowed_recur_depth)
 endfunction
 
 function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
