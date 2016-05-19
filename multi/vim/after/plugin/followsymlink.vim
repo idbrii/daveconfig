@@ -32,11 +32,16 @@ function! s:TranslateKnownLinks(fname)
 endf
 
 function! s:FollowWin32Symlink(...)
+  let shellslash_save = &shellslash
+  " directory separators need to be backslashes so cmd.exe doesn't think
+  " they're options.
+  set noshellslash
   " First argument is filename - defaults to current file
   let filename = a:0 > 0 ? a:1 : '%'
   " Second is remaining depth - defaults to 10
   let allowed_recur_depth = a:0 > 1 ? a:2 : 10
-  return s:FollowWin32Symlink_recursive(fnamemodify(expand(filename), ':p'), allowed_recur_depth)
+  call s:FollowWin32Symlink_recursive(fnamemodify(expand(filename), ':p'), allowed_recur_depth)
+  let &shellslash = shellslash_save
 endfunction
 
 function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
