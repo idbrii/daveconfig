@@ -31,6 +31,38 @@ function! s:TranslateKnownLinks(fname)
     return fname
 endf
 
+function! s:FollowWin32Symlink(...)
+  let lit = a:0 ? a:1 : '%:p'
+  let recur = a:0 > 1 ? a:2 : 10
+  if !recur
+    return
+  endif
+  let fpath = expand(lit)
+  let ftail = expand(lit.':t')
+  let dirstr = system('dir ' . fpath . '*')
+
+  " check if current argument is a symlink
+  if (match(dirstr, '<SYMLINK..\s\+' . ftail . ' [') == -1)
+    " if not, check if parent dir is symlink, up to $recur directories
+    call MyFollowSymlink(lit . ':h', recur-1)
+  else
+    " extract symlink path
+    let substr = '.*<SYMLINK..\s\+' . ftail . ' \[\(.\{-}\)\].*'
+    let sympath = substitute(dirstr, substr, '\1', "")
+    " figure out current file's path
+    let resolvedfile = filereadable(sympath) ?  sympath :
+          \ findfile(expand('%:t'), sympath, '**')
+
+    " 'follow' the symlink
+    if bufexists(resolvedfile)
+      exec 'buffer ' . resolvedfile . ' | bw '.fpath
+    else
+      silent exec 'file ' . resolvedfile . ' | bw '.fpath
+      exec 'file ' . expand('%:p') . ' | w! | doau BufRead'
+    endif
+  endif
+endfunction
+
 function! s:SwitchToActualFile()
     " Wipe the current buffer and load the file that the symlink points to.
     let fname = resolve(expand('%:p'))
