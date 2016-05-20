@@ -506,6 +506,9 @@ function! s:SetupSurroundForCurrentFiletype()
     " m surrounds with commented foldmarkers
     " Ensure we escape %%s which printf doesn't recognize as %s.
     let comment = substitute(&commentstring, '%%s', '%%%s', 'g')
+    if len(comment) == 0
+        let comment = "%s"
+    endif
     let b:surround_109 = printf(comment, " \1Marker name: \1 {{{") . " \r " . printf(comment, " }}}")
 endf
 augroup SurroundCustom
