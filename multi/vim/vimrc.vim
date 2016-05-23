@@ -466,13 +466,6 @@ command! -range=% Eval execute '<line1>,<line2>:!'. substitute(&makeprg, '%', ''
 "}}}
 " Plugins   {{{1
 
-" Use dirvish instead of netrw
-let g:loaded_netrwPlugin = 0
-" Define gx here since most of netrw is disabled. The autoload stuff still
-" works, but no commands are defined.
-nmap <unique> gx <Plug>NetrwBrowseX
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)<cr>
-
 " Magic make
 " Disable magic make since I'm not using a lot of makefiles these days.
 " TODO: Setup scons files instead.
