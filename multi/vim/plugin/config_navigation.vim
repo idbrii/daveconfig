@@ -177,6 +177,15 @@ if !hasmapto('<Leader>e')
 endif
 noremap <silent> <C-w><Leader>e :BufExplorerVerticalSplit<CR>
 
+" dirvish plugin -- Navigate filesystems {{{1
+
+" Don't disable netrw so I can use gx.
+"let g:loaded_netrw = 0
+" Instead of vinegar (and netrw), I use dirvish.
+let g:loaded_vinegar = 0
+" If I need netrw, do this:
+"let g:loaded_dirvish = 0
+
 " Netrw plugin -- Navigate filesystems {{{1
 
 " This looks like a good idea, but it conflicts with golden-ratio. I don't
