@@ -11,9 +11,7 @@ endfunction
 
 function! s:escaped(first, last) abort
   let files = getline(a:first, a:last)
-  call filter(files, 'v:val !~# "^\" "')
-  call map(files, 'substitute(v:val, "[/*|@=]\\=\\%(\\t.*\\)\\=$", "", "")')
-  return join(map(files, 'fnamemodify(b:netrw_curdir."/".v:val,":~:.")'), ' ')
+  return join(map(files, '<SID>fnameescape(v:val)'), ' ')
 endfunction
 
 nnoremap <buffer> ~ :edit ~/<CR>
@@ -21,5 +19,3 @@ nnoremap <buffer> . :<C-U> <C-R>=<SID>escaped(line('.'), line('.') - 1 + v:count
 xnoremap <buffer> . <Esc>: <C-R>=<SID>escaped(line("'<"), line("'>"))<CR><Home>
 nmap <buffer> ! .!
 xmap <buffer> ! .!
-nnoremap <buffer> <silent> cg :exe 'keepjumps cd ' .<SID>fnameescape(b:netrw_curdir)<CR>
-nnoremap <buffer> <silent> cl :exe 'keepjumps lcd '.<SID>fnameescape(b:netrw_curdir)<CR>
