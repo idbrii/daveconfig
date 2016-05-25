@@ -24,10 +24,12 @@ function! david#setup_python_paths(pythonhome)
     " If python is not in the path (because that breaks build pipeline), but
     " vim plugins need python, setup python's paths in vim. Any build scripts
     " called from vim need to clear these variables.
-    let $PYTHONHOME = a:pythonhome
-    let $PYTHONPATH = $PYTHONHOME . "/Lib"
-    if isdirectory($PYTHONHOME)
+    if isdirectory(a:pythonhome)
+        let $PYTHONHOME = a:pythonhome
+        let $PYTHONPATH = $PYTHONHOME . "/Lib"
         let $PATH = $PATH . ';' . $PYTHONHOME
+    else
+        echoerr "Invalid pythonhome directory: ". a:pythonhome
     endif
 endfunction
 
