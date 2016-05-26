@@ -7,7 +7,7 @@ set guitablabel=%N/\ %t\ %M
 " If we're unix or mac, we probably have the required unix tools
 " and ~/.vim is probably our vim folder
 if has("unix") || has("mac")
-    menu Tools.Build\ Other\ Tags   :source ~/.vim/scripts/buildtags.vim<CR>
+    menu Tools.Build\ Other\ Tags   :BuildAltTags<CR>
 endif
 
 
