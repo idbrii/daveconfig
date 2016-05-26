@@ -466,6 +466,13 @@ command! -range=% Eval execute '<line1>,<line2>:!'. substitute(&makeprg, '%', ''
 "}}}
 " Plugins   {{{1
 
+" Disable some built-in plugins.
+" I don't use these methods of installing vim plugins.
+let g:loaded_getscriptPlugin = 0
+let g:loaded_vimballPlugin = 0
+" LogiPat seems useful, but I've never touched it.
+let g:loaded_logiPat = 0
+
 " Magic make
 " Disable magic make since I'm not using a lot of makefiles these days.
 " TODO: Setup scons files instead.
