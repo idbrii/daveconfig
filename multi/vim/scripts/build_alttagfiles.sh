@@ -40,6 +40,7 @@ cd $tagdir
 
 
 # Build filelist	{{{
+touch $tagfile
 rm $tagfile
 if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
@@ -122,8 +123,16 @@ else
 			#	-m "lang"       Use lang for multi-lingual cscope.
 			#	-R              Recurse directories for files.
 			$cscope -b -q -k -i filelist
-			;;
-	esac
+
+            # While cscope changed from cscope.out.$type to cscope.$type.out [1],
+            # mlcscope will still complain that it cannot find cscope.out.in. Ignore
+            # this error! It's not failing to find cscope.in.out, it's just stupid. If
+            # you try to rename the files (mv cscope.in.out cscope.out.in), cscope will
+            # stop working (you'll get errors about your database being invalid).
+            # [1] https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=602738
+            # TODO: cygwin replaced mlcscope with cscope. Does it still have this problem?
+            ;;
+    esac
 fi
 
 # }}}
