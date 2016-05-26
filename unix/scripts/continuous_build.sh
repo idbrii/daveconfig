@@ -17,15 +17,19 @@ echo -ne "\033]0;continuous build: ${PWD/#$HOME/~}\007"
 
 while true ; do
     echo building...
-    if [ $1 == "android" ] ; then
-        bash ~/.vim/scripts/build_android_tags.sh
-    elif [ $1 == "cpp" ] ; then
-        ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
-        bash ~/.vim/scripts/buildtags cscope $lang
-    else
-        ctags -R .
-        bash ~/.vim/scripts/buildtags cscope $lang
-    fi
+    case $lang in
+        android)
+            bash ~/.vim/scripts/build_android_tags.sh
+            ;;
+        cpp)
+            ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
+            bash ~/.vim/scripts/buildtags cscope $lang
+            ;;
+        *)
+            ctags -R .
+            bash ~/.vim/scripts/buildtags cscope $lang
+            ;;
+    esac
     echo done. sleeping.
     sleep 1m
 done
