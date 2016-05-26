@@ -70,11 +70,10 @@ function LocateAll()
 	call LocateCsearchIndex()
 endfunction
 
-" Call a shell script to build our LookupFile and Cscope databases
-"
-function s:BuildAltTags()
+" Call a shell script to build our filelist, ctags, and cscope databases.
+function s:BuildTags()
     execute '!bash ~/.vim/scripts/buildtags' &cscopeprg &ft
 
     call LocateAll()
 endf
-command! BuildAltTags call s:BuildAltTags()
+command! BuildTags call s:BuildTags()
