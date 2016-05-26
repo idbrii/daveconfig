@@ -21,12 +21,7 @@ while true ; do
         android)
             bash ~/.vim/scripts/build_android_tags.sh
             ;;
-        cpp)
-            ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
-            bash ~/.vim/scripts/buildtags cscope $lang
-            ;;
         *)
-            ctags -R .
             bash ~/.vim/scripts/buildtags cscope $lang
             ;;
     esac
