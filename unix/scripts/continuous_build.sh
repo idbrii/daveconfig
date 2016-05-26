@@ -21,10 +21,10 @@ while true ; do
         bash ~/.vim/scripts/build_android_tags.sh
     elif [ $1 == "cpp" ] ; then
         ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
-        bash ~/.vim/scripts/build_alttagfiles.sh cscope $lang
+        bash ~/.vim/scripts/buildtags cscope $lang
     else
         ctags -R .
-        bash ~/.vim/scripts/build_alttagfiles.sh cscope $lang
+        bash ~/.vim/scripts/buildtags cscope $lang
     fi
     echo done. sleeping.
     sleep 1m

@@ -73,7 +73,7 @@ endfunction
 " Call a shell script to build our LookupFile and Cscope databases
 "
 function s:BuildAltTags()
-    execute '!bash ~/.vim/scripts/build_alttagfiles.sh' &cscopeprg &ft
+    execute '!bash ~/.vim/scripts/buildtags' &cscopeprg &ft
 
     call LocateAll()
 endf

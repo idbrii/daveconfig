@@ -1,4 +1,4 @@
 #! /bin/bash
 
 # Defer to vim tag file builder.
-~/.vim/scripts/build_alttagfiles.sh $*
+~/.vim/scripts/buildtags $*
