@@ -10,6 +10,7 @@ if [ $# -lt 1 ] ; then
     exit -1
 fi
 lang=$1
+shift
 
 # Set the title
 #echo -ne "\033]0;tags -- ${USER::1}@${HOSTNAME::1}:${PWD/#$HOME/~}\007"
@@ -19,10 +20,10 @@ while true ; do
     echo building...
     case $lang in
         android)
-            bash ~/.vim/scripts/build_android_tags.sh
+            bash ~/.vim/scripts/build_android_tags.sh $*
             ;;
         *)
-            bash ~/.vim/scripts/buildtags cscope $lang
+            bash ~/.vim/scripts/buildtags cscope $lang $*
             ;;
     esac
     echo done. sleeping.
