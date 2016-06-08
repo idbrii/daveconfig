@@ -1,3 +1,6 @@
+" Disabling this and trying https://github.com/tommcdo/vim-exchange
+finish
+
 " Transpose words on either side of cursor.
 "
 " Mnemonic: Change-exchange

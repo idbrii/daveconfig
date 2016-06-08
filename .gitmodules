@@ -256,3 +256,6 @@
 [submodule "multi/vim/bundle/dirvish"]
 	path = multi/vim/bundle/dirvish
 	url = git@github.com:idbrii/vim-dirvish.git
+[submodule "multi/vim/bundle/exchange"]
+	path = multi/vim/bundle/exchange
+	url = https://github.com/tommcdo/vim-exchange.git
