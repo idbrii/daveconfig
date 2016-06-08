@@ -9,21 +9,21 @@ endif
 " Disable this file if I want to use network editing/browsing.
 
 " Remove netrw commands
-delcommand Nread
-delcommand Nwrite
-delcommand NetUserPass
-delcommand Nsource
-delcommand Ntree
-delcommand Explore
-delcommand Sexplore
-delcommand Hexplore
-delcommand Vexplore
-delcommand Texplore
-delcommand Nexplore
-delcommand Pexplore
-delcommand Lexplore
-delcommand NetrwSettings
-delcommand NetrwClean
+silent! delcommand Nread
+silent! delcommand Nwrite
+silent! delcommand NetUserPass
+silent! delcommand Nsource
+silent! delcommand Ntree
+silent! delcommand Explore
+silent! delcommand Sexplore
+silent! delcommand Hexplore
+silent! delcommand Vexplore
+silent! delcommand Texplore
+silent! delcommand Nexplore
+silent! delcommand Pexplore
+silent! delcommand Lexplore
+silent! delcommand NetrwSettings
+silent! delcommand NetrwClean
 
 
 " Remove netrw autocmds
