@@ -674,8 +674,10 @@ augroup DetectIndent
 augroup END
 
 " expand-region
-xnoremap iv <Plug>(expand_region_expand)
-xnoremap iV <Plug>(expand_region_shrink)
+" I'm not sure that normal map is very useful since it always select a word.
+" But I'm also not sure of a reasonable use for that map.
+xmap iv <Plug>(expand_region_expand)
+xmap iV <Plug>(expand_region_shrink)
 
 "}}}
 
