@@ -202,6 +202,18 @@ set wildmenu
 set wildmode=longest:list,full
 
 " Autocommands {{{1
+
+" 'autochdir' alternative so I can provide exceptions. See calling autocmd.
+"
+" Switch to the directory of the current file unless it breaks something.
+function! s:autochdir()
+    if dirvish#can_autochdir() " Don't mess with dirvish
+                \ && match(['help', 'dirvish'], printf("\<%s\>", &ft)) < 0 " Not useful for some filetypes
+                \ && filereadable(expand("%")) " Only change to real files.
+        silent! cd %:p:h
+    endif
+endf
+
 if has("autocmd")
     augroup vimrcEx
         autocmd!
@@ -217,11 +229,9 @@ if has("autocmd")
         autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
         autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
 
-        " 'autochdir' alternative so I can provide exceptions.
-        " Switch to the directory of the current file, unless it's a help or conflicts with dirvish.
         " Could use BufEnter to be more like autochdir, but then we have constant changing pwd.
         " Use <S-space> to reload the buffer if you want to cd.
-        autocmd BufReadPost * if dirvish#can_autochdir() && match(['help', 'dirvish'], printf("\<%s\>", &ft)) < 0 && filereadable(expand("%")) | silent! cd %:p:h | endif
+        autocmd BufReadPost * call s:autochdir()
 
         " Disabled: I use the preview window for more than just omnicompletion, so
         " maybe killing it so easily doesn't make sense.
