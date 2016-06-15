@@ -1,3 +1,5 @@
+@setlocal
+
 :: For perforce merge:
 :: Location: path-to-this-file
 :: Arguments in p4v: %1 %2 %b %r
@@ -9,6 +11,10 @@ set LOCAL="%1"
 set REMOTE="%2"
 set BASE="%3"
 set MERGED="%4"
+
+:: Defer echo off to here so we see the inputs.
+@echo off
+title %~n0
 
 :: Always use normal vimdiff for diffs.
 set USE_diffconflicts=%MERGED%
