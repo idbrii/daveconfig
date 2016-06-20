@@ -1,3 +1,6 @@
+" A do-what-I-mean command for exchange. Automatically selects WORDs on either
+" side of the cursor to exchange. Preserves common end statement characters.
+
 " vim-exchange doesn't define a load guard, so use a command instead. (Better
 " would be a Plug, but I don't know how.)
 "if !exists('loaded_exchange')
@@ -7,9 +10,12 @@ if exists(':XchangeClear') != 2
 endif
 
 
-" A do-what-I-mean command for exchange. This preserves
 function! s:back_off_from_separator()
     call search('.\%#[;,]', 'b', line("."))
+endf
+
+function! s:invoke_exchange()
+    exec "norm \<Plug>(Exchange)"
 endf
 
 function! s:exchange_dwim()
@@ -23,15 +29,15 @@ function! s:exchange_dwim()
     normal! viW
     " Ensure we didn't select a semicolon or comma
     call s:back_off_from_separator()
-    " Mark for exchange. TODO: Can I use <Plug> here?
-    normal X
+    " Mark for exchange.
+    call s:invoke_exchange()
     " Go back to start point.
     call winrestview(win_save)
     " Select previous word
     normal! BviW
     call s:back_off_from_separator()
     " Exchange it.
-    normal X
+    call s:invoke_exchange()
 
     " Restore original cursor position.
     call winrestview(win_save)
@@ -45,12 +51,3 @@ endf
 command! XchangeDwim keepjumps keepmarks call s:exchange_dwim()
 nnoremap <Plug>(exchange-dwim) :<C-u>XchangeDwim<CR>
 
-
-" I only want to remap ExchangeLine, so I can just do the one.
-"let g:exchange_no_mappings = 1
-"nmap cx  <Plug>(Exchange)
-"xmap X   <Plug>(Exchange)
-"nmap cxc <Plug>(ExchangeClear)
-nmap cx<CR> <Plug>(ExchangeLine)
-
-nmap cxx <Plug>(exchange-dwim)
