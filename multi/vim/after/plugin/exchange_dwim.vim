@@ -1,4 +1,7 @@
-if !exists('loaded_exchange')
+" vim-exchange doesn't define a load guard, so use a command instead. (Better
+" would be a Plug, but I don't know how.)
+"if !exists('loaded_exchange')
+if exists(':XchangeClear') != 2
     " Requires vim-exchange
     finish
 endif
