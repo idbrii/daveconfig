@@ -227,8 +227,9 @@ if has("autocmd")
                     \ endif
 
         " Commenting blocks
-        autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!--<ESC>'>o--><ESC>
-        autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*<ESC>'>o*/<ESC>
+        " ~ prefix from https://www.reddit.com/r/vim/comments/4ootmz/what_is_your_little_known_secret_vim_shortcut_or/d4ehmql
+        autocmd FileType build,xml,html xnoremap <buffer> <C-o> <ESC>'<O<!-- ~ <ESC>'>o--><ESC>
+        autocmd FileType java,c,cpp,cs  xnoremap <buffer> <C-o> <ESC>'<O/*~ <ESC>'>o*/<ESC>
 
         " Could use BufEnter to be more like autochdir, but then we have constant changing pwd.
         " Use <S-space> to reload the buffer if you want to cd.
