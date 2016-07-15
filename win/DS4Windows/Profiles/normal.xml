@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- DS4Windows Configuration Data. 2015-02-07 7:47:40 AM -->
+<!-- DS4Windows Configuration Data. 2015-10-18 4:30:31 PM -->
 
 <DS4Windows>
   <flushHIDQueue>True</flushHIDQueue>
@@ -7,10 +7,10 @@
   <Color>10,20,10</Color>
   <RumbleBoost>100</RumbleBoost>
   <ledAsBatteryIndicator>True</ledAsBatteryIndicator>
-  <lowBatteryFlash>False</lowBatteryFlash>
-  <flashBatteryAt>0</flashBatteryAt>
+  <FlashType>0</FlashType>
+  <flashBatteryAt>10</flashBatteryAt>
   <touchSensitivity>100</touchSensitivity>
-  <LowColor>14,11,1</LowColor>
+  <LowColor>22,11,1</LowColor>
   <ChargingColor>0,0,0</ChargingColor>
   <ShiftColor>255,255,255</ShiftColor>
   <ShiftColorOn>False</ShiftColorOn>
@@ -40,4 +40,5 @@
   <RSCurve>0</RSCurve>
   <ProfileActions>
   </ProfileActions>
+  <Control />
 </DS4Windows>

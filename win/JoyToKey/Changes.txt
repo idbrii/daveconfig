@@ -1,6 +1,168 @@
 ---------------------------
-  JoyToKey change history  
+  JoyToKey change history
 ---------------------------
+
+Ver 5.7.1
+* Support "Numpad Enter" key assignment via right-click menu.
+
+* Support up to 4 POV inputs.
+
+* Enhanced the right-click menu on the joystick tab and on the button list
+  such that the selected configuration can be copied-to or pasted-from
+  a clipboard.
+
+* Enhanced device configuration to support axis mapping for all 8 axes.
+
+
+Ver 5.7
+* Support for an absolute mouse movement (a.k.a. spring mode)
+  Mouse cursor can be positioned at a configured center location and can
+  be moved within a specified range with an analog input stick. This can
+  be useful for an application like a flight simulator easier.
+
+  A regular button can be also used like a mouse shortcut by jumping the
+  mouse cursor to a preconfigured position, followed by a mouse click.
+
+* Exposed hidden parameter "AnalogDeadZone" (which is used for DirectInput
+  setup) in "Settings -> Configure Joysticks". If you want to minimize the
+  input threshold for your device, please try setting it to zero. If you
+  need a different threshold for Stick1 and Stick2, you can continue to do
+  so in "Options" tab for each profile.
+
+* Enhanced SHIFT key (virtual joystick) function to support delayed switch.
+  Combined with a "Button Number Mapping" feature, for example, one button
+  can be assigned for both a regular key input (for a short press) as well
+  as for a SHIFT function (for a long press).
+
+* Enhanced "Switch depending on how long the button is pressed" in Keyboard2.
+  In case the event emulation is not recognized reliably when you press
+  the button too quickly, JoyToKey can now hold it for a minimum duration.
+  (default 20 msec)
+
+* Other minor bug fixes
+
+
+Ver 5.6
+* Enhanced "Keyboard 2" functionality to support the followings
+  - support 4 keys per definition
+  - support the rotation of 4 input definitions
+  - support auto repeat and toggle configuration
+
+* Upgraded DirectX library version from 7 to 8.
+
+
+Ver 5.5.x
+* bug fixes
+
+
+Ver 5.5
+* Support "Button Alias (Number Mapping)"
+
+  Example Usage1:
+    Swap button numbers if the connected joystick has a different button
+    layout from your favorite one.
+
+  Example Usage2:
+    Associate Button21 with Button1 so that both functions are triggered
+    when Button1 is pressed.
+
+  Example Usage3:
+    It is also possible to configure some button (e.g. Button22) to be
+    triggered when both Button5 and Button6 are pressed simultaneously.
+
+* If some buttons are pressed when profile is changed or SHIFT function
+  is triggered, those button press are likely to trigger both old and new
+  assignments right before/after the switch.
+
+  It is now possible to define certain duration (e.g. 100 msec) to ignore
+  those inputs right after the switch (from preference menu)
+
+* When both mouse cursor movement and mouse click are assigned to a button,
+  click&hold will be processed before cursor movement.
+
+* Improved the reliability after resuming from PC sleep.
+
+* Preferences were moved from menu items to a separate window.
+
+* Added an ability to specify the number of buttons to configure.
+  (by default 16 buttons, MAX 32 buttons)
+
+* Changed the user interface font to Calibri
+
+* Configuration files are now saved in Unicode format (UTF8+BOM).
+  This may fix garbled character issues for the use of non-default
+  language.
+
+
+Ver 5.4.2
+* Fixed garbled characters for some non-Japanese PC and keyboard.
+
+* (only for advanced users)
+  Support specifying "JoyToKey.ini" file path via registry.
+  If you have any reason why you need to forcibly specify "JoyToKey.ini"
+  file path (e.g. you're using some launcher like Hyperlaunch), you can
+  do so via registry editor.
+  1. Run "regedit" program
+  2. Create a key "HKEY_CURRENT_USER\Software\JoyToKey"
+  3. Create a string value "IniFilePath=c:\whateverpath\JoyToKey.ini"
+
+
+Ver 5.4.1
+* Support various file formats (such as mp3) for sound notifications.
+
+
+Ver 5.4
+* Added an ability to play sound or show tasktray balloon when the
+  selected profile is changed.
+
+  - Tasktray balloon can be enabled from "Preferences" menu.
+
+  - Sound notification can be configured for each profile in "Options"
+    tab. (currently, only WAV files are supported)
+
+  For example, sound notification could be useful for visually impaired
+  users, while they step through different profiles to help them to pick
+  the right one.
+
+* The size of profile files is made smaller by eliminating empty lines.
+
+* In case "JoyToKey.ini" file or its directory is not write-able,
+  JoyToKey will try to make them write-able.
+
+
+Ver 5.3.1
+* Homepage URL was changed to http://joytokey.net/
+
+
+Ver 5.3.0
+* Support delayed input for a special function to switch profiles.
+  If you want to keep JoyToKey running while you're playing a game
+  which has a native joystick support, the followings may be useful.
+  - Temporarily switch to a profile, which is basically empty
+  - But it has one button assigned for switching back to the
+    original profile after being pressed for X seconds.
+
+* Control the behaviour when JoyToKey window is active from menu
+  "Preferences" ->
+    "Don't emulate keyboard input when JoyToKey window is active"
+  (by default true)
+
+
+Ver 5.2.3
+* Support emulation for 4th and 5th mouse button.
+  They could be useful if you're using mouse gestures with joysticks.
+
+* Turbo mode was enhanced to support up to x16 processing speed.
+  However, this is experimental and should not be used for regular use
+  as it's very CPU intensive and is likely to slow down the PC.
+
+
+Ver 5.2.2
+* Support for loading configuration files from a common AppData folder
+  when it exists. (e.g. C:\ProgramData\JoyToKey)
+
+* Added a new menu "Open file folder in Explorer"
+
 
 Ver 5.2.1
 * Bug fix: garbled characters for allow keys

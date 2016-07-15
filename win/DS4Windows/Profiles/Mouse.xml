@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- DS4Windows Configuration Data. 2015-09-04 4:36:52 AM -->
+
+<DS4Windows>
+  <flushHIDQueue>True</flushHIDQueue>
+  <idleDisconnectTimeout>300</idleDisconnectTimeout>
+  <Color>0,0,255</Color>
+  <RumbleBoost>100</RumbleBoost>
+  <ledAsBatteryIndicator>False</ledAsBatteryIndicator>
+  <FlashType>0</FlashType>
+  <flashBatteryAt>0</flashBatteryAt>
+  <touchSensitivity>100</touchSensitivity>
+  <LowColor>255,255,255</LowColor>
+  <ChargingColor>255,255,255</ChargingColor>
+  <ShiftColor>255,255,255</ShiftColor>
+  <ShiftColorOn>False</ShiftColorOn>
+  <FlashColor>0,0,0</FlashColor>
+  <touchpadJitterCompensation>True</touchpadJitterCompensation>
+  <lowerRCOn>False</lowerRCOn>
+  <tapSensitivity>100</tapSensitivity>
+  <doubleTap>True</doubleTap>
+  <scrollSensitivity>5</scrollSensitivity>
+  <LeftTriggerMiddle>0</LeftTriggerMiddle>
+  <RightTriggerMiddle>0</RightTriggerMiddle>
+  <ButtonMouseSensitivity>25</ButtonMouseSensitivity>
+  <Rainbow>0</Rainbow>
+  <LSDeadZone>0</LSDeadZone>
+  <RSDeadZone>0</RSDeadZone>
+  <SXDeadZone>0.25</SXDeadZone>
+  <SZDeadZone>0.25</SZDeadZone>
+  <ChargingType>0</ChargingType>
+  <MouseAcceleration>False</MouseAcceleration>
+  <ShiftModifier>-1</ShiftModifier>
+  <LaunchProgram>
+  </LaunchProgram>
+  <DinputOnly>False</DinputOnly>
+  <StartTouchpadOff>False</StartTouchpadOff>
+  <UseTPforControls>False</UseTPforControls>
+  <LSCurve>0</LSCurve>
+  <RSCurve>0</RSCurve>
+  <ProfileActions>Disconnect Controller</ProfileActions>
+  <Control>
+    <Button>
+      <bnCross>Left Mouse Button</bnCross>
+      <bnSquare>Right Mouse Button</bnSquare>
+      <bnL2>Left Trigger</bnL2>
+      <bnL3>Unbound</bnL3>
+      <bnLSUp>Mouse Up</bnLSUp>
+      <bnLSLeft>Mouse Left</bnLSLeft>
+      <bnLSRight>Mouse Right</bnLSRight>
+      <bnLSDown>Mouse Down</bnLSDown>
+    </Button>
+    <Key>
+      <bnCircle>27</bnCircle>
+      <bnTriangle>32</bnTriangle>
+      <bnUp>38</bnUp>
+      <bnDown>40</bnDown>
+      <bnRight>39</bnRight>
+      <bnLeft>37</bnLeft>
+    </Key>
+    <Extras>
+      <bnL2>0,0,1,125,255,255,0,0,0</bnL2>
+    </Extras>
+    <KeyType>
+      <bnL3>Unbound</bnL3>
+    </KeyType>
+  </Control>
+</DS4Windows>

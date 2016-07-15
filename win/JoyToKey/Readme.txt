@@ -1,8 +1,8 @@
 ======================================================================
 
-                        JoyToKey Version 5.2.1
+                        JoyToKey Version 5.7.1
 
-                      Copyright(C) 1999-2012, JTK
+                      Copyright(C) 1999-2015, JTK
 
 ======================================================================
 
@@ -16,10 +16,10 @@ press joystick buttons and sticks, JoyToKey will convert the input into
 keyboard strokes and mouse movements so that the target application works
 as you pre-configured!
 
-NOTE: On Windows Vista or 7, you may not be able to control some appli-
-cations due to enhanced security control.  If you encounter such problems,
-try to launch JoyToKey.exe by opening right-click popup menu and selecting
-"Run As Administrator".
+NOTE: On Windows Vista, 7, 8 or 10, you may not be able to control some
+applications due to enhanced security control.  If you encounter such
+problems, try to launch JoyToKey.exe by opening right-click popup menu
+and selecting "Run As Administrator".
 
 
 2. KEY FEATURES
@@ -58,7 +58,7 @@ Please make sure that the installed folder is not write
 protected as it needs to save configuration files in the same folder.
 
 System requirement:
-  * OS: Windows 7, Vista, XP, 2000
+  * OS: Windows 10, 8.1, 8, 7, Vista, XP
   * DirectX 7.0 or above
 
 
@@ -96,7 +96,7 @@ System requirement:
 
 5. TIPS
 -------
-* "Switch to other joystick mapping temporarily"
+* SHIFT key function (switch to other joystick mapping temporarily)
   At first, this feature (aka virtual joystick) may sound difficult to
   understand, but it is very useful as it enables you to configure many
   key mapping, more than the number of buttons you actually have!
@@ -127,7 +127,7 @@ JoyToKey is a shareware, but you can freely try it until you like it without
 much limitation in functionality.  After trial, if you find it useful, you
 can purchase a license key from the website.
 
-http://www-en.jtksoft.net/purchase
+http://joytokey.net/en/purchase
 
 (or simply go to JoyToKey menu "Help" -> "Purchase License Key")
 
@@ -157,6 +157,6 @@ Best Regards,
 
 JTK
 
-Homepage: http://www-en.jtksoft.net/
+Homepage: http://joytokey.net/
 E-Mail: JoyToKey@jtksoft.net
 

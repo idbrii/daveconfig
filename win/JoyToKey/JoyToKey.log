@@ -1,85 +1,60 @@
-2015-02-07 07:44:49 Info   Windows Version = 6.2
-2015-02-07 07:44:49 Info   Loaded VistaAPI.dll (Utils\Utils.cpp#154)
-2015-02-07 07:44:49 Info   Starting JoyToKey Ver5.2.1 (AppInfo.cpp#21)
-2015-02-07 07:44:49 Info   ExeFile=C:\david\game\JoyToKey\JoyToKey.exe (AppInfo.cpp#22)
-2015-02-07 07:44:49 Info   IniFile=C:\david\game\JoyToKey\JoyToKey.ini (AppInfo.cpp#93)
-2015-02-07 07:44:49 Info   LicenseKey "" is not valid
-2015-02-07 07:44:49 Info   Found a joystick: {BC8FF200-DD71-11E3-8002-444553540000}, Controller (XBOX 360 For Windows), Controller (XBOX 360 For Windows)
-2015-02-07 07:44:49 Info   numAxis = 5
-2015-02-07 07:44:49 Info   numPOVs = 1
-2015-02-07 07:44:49 Info   numButtons = 10
-2015-02-07 07:44:49 Info   EnumDeviceObject: Axis offset=4 type=102 name=Y Axis
-2015-02-07 07:44:49 Info   EnumDeviceObject: Axis offset=0 type=2 name=X Axis
-2015-02-07 07:44:49 Info   EnumDeviceObject: Axis offset=16 type=402 name=Y Rotation
-2015-02-07 07:44:49 Info   EnumDeviceObject: Axis offset=12 type=302 name=X Rotation
-2015-02-07 07:44:49 Info   EnumDeviceObject: Axis offset=8 type=202 name=Z Axis
-2015-02-07 07:44:49 Info   Detected 1 joystick(s)
-2015-02-07 07:44:49 Info   Joystick 1: Controller (XBOX 360 For Windows)
-2015-02-07 07:44:49 Info   1 joysticks are detected (Joystick.cpp#100)
-2015-02-07 07:44:49 Info   ConfigDir=C:\david\game\JoyToKey\*.cfg (ConfigFileManager.cpp#43)
-2015-02-07 07:44:49 Info   --- Loading "AppLink.dat" --- (AppLink\AppLinkManager.cpp#36)
-2015-02-07 07:44:49 Info   Starting in a minimized mode (JoyToKey.cpp#37)
-2015-02-07 07:45:02 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:45:07 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:45:41 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:45:49 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:45:50 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:46:04 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:46:21 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:46:53 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:47:01 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:47:10 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:47:22 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:47:22 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:48:28 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:48:36 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:49:12 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:49:34 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:49:36 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:51:24 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:51:26 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:51:26 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:51:27 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:51:29 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:51:47 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:52:01 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:52:01 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:52:12 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:52:15 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:52:15 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:52:17 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:52:18 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:52:46 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:53:32 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:53:32 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 07:53:39 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 07:53:40 Error  Access is denied.
- (Utils\Utils.cpp#401)
-2015-02-07 07:53:40 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:06:41 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:07:03 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:07:04 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:07:10 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:07:22 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:07:25 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:07:31 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:08:10 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:08:13 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:08:26 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:18:45 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:19:59 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:20:26 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:20:28 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:20:29 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:20:30 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
-2015-02-07 08:20:35 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
-2015-02-07 08:20:48 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:49:31.283 Info   Starting JoyToKey Ver5.7.1
+2016-07-14 21:49:31.283 Info   ExeFile=C:\david\game\JoyToKey\JoyToKey.exe
+2016-07-14 21:49:31.283 Info   ConfigDir=C:\david\game\JoyToKey\
+2016-07-14 21:49:31.283 Info   IniFile=C:\david\game\JoyToKey\JoyToKey.ini
+2016-07-14 21:49:31.283 Info   Windows Version = 6.2
+2016-07-14 21:49:31.611 Info   Loaded VistaAPI.dll (Utils\Utils.cpp#217)
+2016-07-14 21:49:31.611 Info   License Registered : MJAD-R9VJ-YZJR (AppInfo.cpp#149)
+2016-07-14 21:49:31.721 Info   Found a joystick: {BC8FF200-DD71-11E3-8002-444553540000}, Controller (XBOX 360 For Windows), Controller (XBOX 360 For Windows)
+2016-07-14 21:49:31.721 Info   Preferred number = -1
+2016-07-14 21:49:31.721 Info   numAxis = 5
+2016-07-14 21:49:31.721 Info   numPOVs = 1
+2016-07-14 21:49:31.721 Info   numButtons = 10
+2016-07-14 21:49:31.721 Info   EnumDeviceObject: Axis offset=0 type=102 name=Y Axis
+2016-07-14 21:49:31.721 Info   EnumDeviceObject: Axis offset=4 type=2 name=X Axis
+2016-07-14 21:49:31.721 Info   EnumDeviceObject: Axis offset=8 type=402 name=Y Rotation
+2016-07-14 21:49:31.721 Info   EnumDeviceObject: Axis offset=12 type=302 name=X Rotation
+2016-07-14 21:49:31.721 Info   EnumDeviceObject: Axis offset=16 type=202 name=Z Axis
+2016-07-14 21:49:31.736 Info   DetectJoysticks: Detected 1 joystick(s)
+2016-07-14 21:49:31.736 Info   Joystick 1: Controller (XBOX 360 For Windows)
+2016-07-14 21:49:31.736 Info   1 joysticks are detected (Joystick.cpp#115)
+2016-07-14 21:49:31.736 Info   ConfigDir=C:\david\game\JoyToKey\*.cfg (ConfigFileManager.cpp#43)
+2016-07-14 21:49:31.752 Info   --- Loading "AppLink.dat" --- (AppLink\AppLinkManager.cpp#36)
+2016-07-14 21:49:31.768 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
+2016-07-14 21:49:31.799 Info   Starting in a minimized mode (JoyToKey.cpp#34)
+2016-07-14 21:49:31.815 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:49:32.286 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:49:32.427 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:49:37.368 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:50:00.969 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:50:16.136 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:50:18.040 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:50:18.264 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:50:26.457 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:50:28.536 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:51:37.752 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:51:37.832 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:51:41.705 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:51:41.801 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:51:56.760 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:52:05.160 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:52:58.537 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:04.248 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:04.792 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:06.440 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:06.824 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:29.192 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:35.861 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:44.050 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:47.020 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:58.475 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:53:58.491 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:54:23.822 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:54:23.916 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:55:08.397 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:55:09.038 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:55:18.180 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:55:28.760 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:55:40.558 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
+2016-07-14 21:55:41.824 Info   Load config file "Mouse" (ConfigFileManager.cpp#111)
+2016-07-14 21:55:43.168 Info   Load config file "Blank" (ConfigFileManager.cpp#111)
