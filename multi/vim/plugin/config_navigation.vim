@@ -161,9 +161,12 @@ nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
 " than cscope. New mnemonic: Jump to word.
 nnoremap <unique> <A-g> :<C-u>NotGrep \b<cword>\b<CR>
 nnoremap <unique> <Leader>jw :<C-u>NotGrep \b<cword>\b<CR>
-" Less precise version (\b is word boundary).
+nnoremap <unique> <Leader>jW :<C-u>NotGrep \b<cWORD>\b<CR>
+xnoremap <unique> <Leader>jw "cy:<C-u>NotGrep "\b<C-r>c\b"<CR>
+" Less precise version (\b is word boundary). Map is similar to `*` vs `g*`.
 nnoremap <unique> g<A-g> :<C-u>NotGrep <cword><CR>
-nnoremap <unique> <Leader>jW :<C-u>NotGrep <cword><CR>
+nnoremap <unique> <Leader>jgw :<C-u>NotGrep <cword><CR>
+xnoremap <unique> <Leader>jgw "cy:<C-u>NotGrep "<C-r>c"<CR>
 
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
