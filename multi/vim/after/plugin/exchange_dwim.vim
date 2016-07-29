@@ -14,11 +14,32 @@ function! s:back_off_from_separator()
     call search('.\%#[;,]', 'b', line("."))
 endf
 
+function! s:char_under_cursor()
+    " http://stackoverflow.com/questions/23323747/vim-vimscript-get-exact-character-under-the-cursor
+    return matchstr(getline('.'), '\%' . col('.') . 'c.')
+endf
+
 function! s:invoke_exchange()
     exec "norm \<Plug>(Exchange)"
 endf
 
+function! s:try_invoke_argumentative()
+    if exists("g:loaded_argumentative") && g:loaded_argumentative > 0
+        exec "norm \<Plug>Argumentative_MoveRight"
+        return 1
+    endif
+    return 0
+endf
+
 function! s:exchange_dwim()
+    " For commas, use a smarter algorithm: Argumentative!
+    " Ideally, I would also check that I'm inside some braces?
+    if s:char_under_cursor() == ','
+        if s:try_invoke_argumentative()
+            return
+        endif
+    endif
+
     let lazyredraw_bak = &lazyredraw
 
     let win_save = winsaveview()
