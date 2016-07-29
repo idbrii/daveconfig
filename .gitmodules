@@ -259,3 +259,6 @@
 [submodule "multi/vim/bundle/exchange"]
 	path = multi/vim/bundle/exchange
 	url = https://github.com/tommcdo/vim-exchange.git
+[submodule "multi/vim/bundle/sideways"]
+	path = multi/vim/bundle/sideways
+	url = https://github.com/AndrewRadev/sideways.vim.git
