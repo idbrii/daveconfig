@@ -19,6 +19,12 @@ function! s:char_under_cursor()
     return matchstr(getline('.'), '\%' . col('.') . 'c.')
 endf
 
+function! s:is_in_matched_parens()
+    normal! mcvib
+    exec "normal! \<Esc>`c"
+    return getpos("'<") != getpos("'>") 
+endf
+
 function! s:invoke_exchange()
     exec "norm \<Plug>(Exchange)"
 endf
@@ -32,9 +38,8 @@ function! s:try_invoke_argumentative()
 endf
 
 function! s:exchange_dwim()
-    " For commas, use a smarter algorithm: Argumentative!
-    " Ideally, I would also check that I'm inside some braces?
-    if s:char_under_cursor() == ','
+    " For commas in matched braces, use a smarter algorithm: Argumentative!
+    if s:char_under_cursor() == ',' && s:is_in_matched_parens()
         if s:try_invoke_argumentative()
             return
         endif
