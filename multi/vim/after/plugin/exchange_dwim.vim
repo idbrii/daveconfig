@@ -29,18 +29,18 @@ function! s:invoke_exchange()
     exec "norm \<Plug>(Exchange)"
 endf
 
-function! s:try_invoke_argumentative()
-    if exists("g:loaded_argumentative") && g:loaded_argumentative > 0
-        exec "norm \<Plug>Argumentative_MoveRight"
+function! s:try_invoke_sideways()
+    if exists("g:loaded_sideways") && g:loaded_sideways > 0
+        exec "norm \<Plug>SidewaysRight"
         return 1
     endif
     return 0
 endf
 
 function! s:exchange_dwim()
-    " For commas in matched braces, use a smarter algorithm: Argumentative!
+    " For commas in matched braces, use a smarter algorithm: Sideways!
     if s:char_under_cursor() == ',' && s:is_in_matched_parens()
-        if s:try_invoke_argumentative()
+        if s:try_invoke_sideways()
             return
         endif
     endif

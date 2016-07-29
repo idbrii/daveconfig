@@ -17,19 +17,12 @@ nmap cx <Plug>(exchange-dwim)
 
 " Use Sideways over Argumentative. Sideways does nothing when it can't figure
 " out what to do (when there aren't matching braces). It seems to handle some
-" missing braces okay sometimes too (argumentative often jumps wildly to the
-" end of a block several lines away).
+" missing braces okay sometimes too (argumentative often jumped to the end of
+" a block several lines away).
 "
 " Sideways doesn't support visual or operator pending maps for left/right (it
 " clears visual selection when using SidewaysJump), but I've never used that
 " feature of argumentative.
-"
-" The load time for sideways is shorter since it's autoloaded:
-"	208.000  001.000  001.000: sourcing C:/Users/davidb/.vim/bundle/argumentative/plugin/argumentative.vim
-"	413.000  000.000  000.000: sourcing C:/Users/davidb/.vim/bundle/sideways/plugin/sideways.vim
-
-" Disable Argumentative.
-let loaded_argumentative = 0
 
 nnoremap [, :SidewaysJumpLeft<CR>
 nnoremap ], :SidewaysJumpRight<CR>
