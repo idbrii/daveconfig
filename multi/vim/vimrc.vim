@@ -515,9 +515,6 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 let g:UltiSnipsSnippetsDir = '~/.vim/bundle/david-snippets/UltiSnips/'
 
-" Gundo -- visualize the undo tree
-nnoremap <F2> :<C-u>GundoToggle<CR>
-
 " Surround
 " Use c as my surround character (it looks like a hug)
 " TEST: Try using s instead of c. See how it works. c is more useful in

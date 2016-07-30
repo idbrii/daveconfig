@@ -21,7 +21,7 @@
 	url = git@github.com:idbrii/bufkill.vim.git
 [submodule "multi/vim/bundle/gundo"]
 	path = multi/vim/bundle/gundo
-	url = git://github.com/sjl/gundo.vim.git
+	url = https://github.com/simnalamburt/vim-mundo.git
 [submodule "multi/vim/bundle/fugitive"]
 	path = multi/vim/bundle/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
