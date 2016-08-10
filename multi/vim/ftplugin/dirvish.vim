@@ -21,3 +21,7 @@ xnoremap <buffer> \ <Esc>: <C-R>=<SID>escaped(line("'<"), line("'>"))<CR><Home>
 " Prep for shell command on selected files.
 nmap <buffer> !! \!
 xmap <buffer> !  \!
+
+" Dirvish uses R to refresh the buffer. Remap C-l (my redraw command)
+" instead.
+nmap <buffer> <silent> <C-l> R<Plug>(david-redraw-screen) 
