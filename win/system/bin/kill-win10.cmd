@@ -3,6 +3,7 @@ taskkill /im gwx.exe
 
 :: Prevent win 10 upgrade nagging
 :: Source: http://www.tweaking.com/articles/pages/remove_windows_nag_icon_to_upgrade_to_windows_10,1.html
+:: Tried to undo this one
 REM REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\Gwx" /v DisableGWX /d 1 /f
 :: I didn't do these registry changes.
 REM REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v DisableOSUpgrade /d 1 /f
@@ -10,9 +11,10 @@ REM REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\OSUpgr
 REM REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\OSUpgrade" /v ReservationsAllowed /d 0 /f
 REM TASKKILL /IM GWX.exe /T /F 
 REM 
+:: I think I re-installed these
 REM start /wait wusa /uninstall /kb:3035583 /quiet /norestart /log
 REM start /wait wusa /uninstall /kb:3035583 /quiet /norestart /log
-REM exit
+exit
 
 
 :: Greg Smith: https://www.quora.com/Which-Windows-7-updates-should-you-avoid-and-why
