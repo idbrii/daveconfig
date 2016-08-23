@@ -1,5 +1,23 @@
 #! /bin/bash
 
+# <?xml version="1.0" encoding="UTF-8"?>
+# <!--perforce-xml-version=1.0-->
+# <CustomToolDefList varName="customtooldeflist">
+#  <CustomToolDef>
+#   <Definition>
+#    <Name>p4reconcile</Name>
+#    <Command>C:\cygwin\bin\bash.exe</Command>
+#    <Arguments>C:\david\settings\daveconfig\win\cygwin\usrlocalbin\p4reconcile $p $u $c %d</Arguments>
+#    <InitDir>C:\projectroot</InitDir>
+#   </Definition>
+#   <Console>
+#    <CloseOnExit>false</CloseOnExit>
+#   </Console>
+#   <AddToContext>true</AddToContext>
+#   <Refresh>true</Refresh>
+#  </CustomToolDef>
+# </CustomToolDefList>
+
 # define your own ignores with local_ignores this:
 # local_ignores="-e something_ugly"
 my_ignores="-e \.DS_Store -e \.swp -e cscope\. -e [\/]tags -e filenametags"
