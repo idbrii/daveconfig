@@ -29,6 +29,18 @@ if filewritable(s:vim_cache) == 0 && exists("*mkdir")
     call mkdir(s:vim_cache, "p", 0700)
 endif
 
+if has('win32')
+    if !filereadable(expand('~/.vim/bundle/vimproc/lib/vimproc_win64.dll'))
+        " Failed to find built vimproc, so disable vimproc. You can find prebuilts
+        " here:
+        "   https://github.com/Shougo/vimproc.vim/releases
+        let loaded_vimproc = 0
+    endif
+else
+    " For now, don't use vimproc on any other platform
+    let loaded_vimproc = 0
+endif
+
 " ctrlp (fuzzy file finder) cache
 let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 " unite (fuzzy searcher) cache
