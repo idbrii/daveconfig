@@ -37,18 +37,15 @@ if !exists('loaded_videinvoke')
 	let &previewheight = &lines / 4
 
 
-    """"" Load cscope database if we can
-    " Setup cscope for visual studio (game development)
-    if has("cscope")
-        " disable verbose for our initial load
-        set nocscopeverbose
-        " add any database in current directory
-        call LocateCscopeFile()
-        " okay, be verbose from now on
-        set cscopeverbose
-    endif
+    """"" Load cscope and other tag databases if we can
+    " Setup tag files for visual studio (game development)
+	" disable verbose for our initial load
+	set nocscopeverbose
+	" add any database in current directory and all other tag files
+	call LocateAll()
+	" okay, be verbose from now on
+	set cscopeverbose
 
-	call LocateCsearchIndex()
 
 
     " Eclim:

@@ -30,23 +30,23 @@ function! LocateFilelist()
 	endif
 endfunction
 
-if has("cscope")
-    function! LocateCscopeFile()
-        " Database file for cscope.
-        " Assumes that the database was built in its local directory (passes
-        " that directory as the prepend path).
-        " Also setup cscope_maps.
-        let l:tagfile = <SID>FindTagFile('cscope.out')
-        let l:tagpath = fnamemodify(l:tagfile, ':h')
-        if filereadable(l:tagfile)
-            let g:cscope_database = l:tagfile
-            let g:cscope_relative_path = l:tagpath
-            " Set the cscope file relative to where it was found
-            execute 'cs add ' . l:tagfile . ' ' . l:tagpath
-            runtime cscope_maps.vim
-        endif
-    endfunction
-endif
+function! LocateCscopeFile()
+	if has("cscope")
+		" Database file for cscope.
+		" Assumes that the database was built in its local directory (passes
+		" that directory as the prepend path).
+		" Also setup cscope_maps.
+		let l:tagfile = <SID>FindTagFile('cscope.out')
+		let l:tagpath = fnamemodify(l:tagfile, ':h')
+		if filereadable(l:tagfile)
+			let g:cscope_database = l:tagfile
+			let g:cscope_relative_path = l:tagpath
+			" Set the cscope file relative to where it was found
+			execute 'cs add ' . l:tagfile . ' ' . l:tagpath
+			runtime cscope_maps.vim
+		endif
+	endif
+endfunction
 
 " Currently can't check for executable("csearch") because it's not in my path.
 function! LocateCsearchIndex()
