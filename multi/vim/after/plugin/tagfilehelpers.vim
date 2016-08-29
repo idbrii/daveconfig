@@ -1,7 +1,6 @@
 " Quick tagfile locate functions
 "
-" Call either locate function to search for the corresponding tagdatabase and
-" set it.
+" Call locate function to search for the corresponding tagdatabase and set it.
 " Author: David Briscoe
 "
 if exists("g:loaded_tagfilehelpers")
@@ -21,17 +20,15 @@ function <SID>FindTagFile(tag_file_name)
 endfunction
 
 
-if exists('g:loaded_ctrlp')
-    function LocateFilelist()
-        """ List of files for CtrlP
-        " Might be useful if you're using files from different directories.
-        let l:tagfile = <SID>FindTagFile('filelist')
-        if filereadable(l:tagfile)
-            let g:ctrlp_project_root = string(l:tagfile)
-            echomsg 'Filelist=' . g:ctrlp_project_root 
-        endif
-    endfunction
-endif
+function! LocateFilelist()
+	""" List of files for CtrlP/Unite
+	" Might be useful if you're using files from different directories.
+	let l:tagfile = <SID>FindTagFile('filelist')
+	if filereadable(l:tagfile)
+		let g:david_project_filelist = (l:tagfile)
+		echomsg 'Filelist=' . g:david_project_filelist
+	endif
+endfunction
 
 if has("cscope")
     function LocateCscopeFile()
@@ -68,6 +65,8 @@ function LocateAll()
     call LocateCscopeFile()
 	" Locate the nearest cindex
 	call LocateCsearchIndex()
+	" Locate the listing of project files
+	call LocateFilelist()
 endfunction
 
 " Call a shell script to build our filelist, ctags, and cscope databases.
