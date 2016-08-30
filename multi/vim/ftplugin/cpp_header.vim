@@ -26,6 +26,9 @@ end
 if !exists('g:cpp_header_n_dir_to_trim')
     let g:cpp_header_n_dir_to_trim = 0
 end
+if !exists('g:cpp_header_max_element_in_path')
+    let g:cpp_header_max_element_in_path = 0
+end
 if !exists('g:cpp_header_after_first_include')
     let g:cpp_header_after_first_include = 0
 end
@@ -172,6 +175,11 @@ function! s:InsertHeader(path)
     if g:cpp_header_n_dir_to_trim > 0
         exec "normal " . g:cpp_header_n_dir_to_trim . "df/"
     endif
+    if g:cpp_header_max_element_in_path > 0
+		normal! $
+        exec 'normal! ' . g:cpp_header_max_element_in_path . 'T/dT"'
+    endif
+    normal! 0f"l
 
     " Set lastpos mark so you can easily jump back to coding with ``
     call setpos("'`", l:save_cursor)
