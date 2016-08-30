@@ -40,6 +40,10 @@ function! LocateCscopeFile()
 		let l:tagpath = fnamemodify(l:tagfile, ':h')
 		if filereadable(l:tagfile)
 			let g:cscope_database = l:tagfile
+			" The Vim/Cscope tutorial says to set this environment variable to
+			" ensure vim figures out the path correctly:
+			"	http://cscope.sourceforge.net/cscope_vim_tutorial.html
+			let $CSCOPE_DB = l:tagfile
 			let g:cscope_relative_path = l:tagpath
 			" Set the cscope file relative to where it was found
 			execute 'cs add ' . l:tagfile . ' ' . l:tagpath
