@@ -44,7 +44,7 @@ let s:header_extensions = ["h", "hpp", "hh", "hxx"]
 " Purpose: Update the header guards in the current buffer.
 "
 " Given club/barmanager.h, this produces the header guard BARMANAGER_H.
-function s:FixGuard()
+function! s:FixGuard()
 	let l:save_cursor = getpos(".")
 	let l:path = expand("%") 
 
@@ -86,7 +86,7 @@ endfunction
 "
 " TODO: This could be improved to take a skip count so we could cycle between
 " the headers.
-function s:GetHeaderForTag(tag_expr)
+function! s:GetHeaderForTag(tag_expr)
 	let l:tags = taglist(a:tag_expr)
 	for tag in l:tags
 		" Convert to forward slashes.
@@ -103,7 +103,7 @@ function s:GetHeaderForTag(tag_expr)
 endfunction
 
 " Purpose: Add a header path to the file.
-function s:InsertHeader(path)
+function! s:InsertHeader(path)
     " Save the current cursor so we can restore on error or completion
 	let l:save_cursor = getpos(".")
 
@@ -182,7 +182,7 @@ function s:InsertHeader(path)
     endif
 endfunction
 
-function s:AddIncludeForTag_Impl(tag_expr)
+function! s:AddIncludeForTag_Impl(tag_expr)
 	let l:header = s:GetHeaderForTag(a:tag_expr)
 
 	if l:header == ''
