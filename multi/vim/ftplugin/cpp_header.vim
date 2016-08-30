@@ -159,13 +159,16 @@ function s:InsertHeader(path)
         silent exec "pedit +" . l:to_insert_after
     endif
 
+    " We only support quotes! See below.
 	let l:text = '#include "' . a:path . '"'
 	call append(l:to_insert_after, l:text)
     " We inserted a line, so change the cursor position
     let l:save_cursor[1] += 1
 
     " Get in position to fix the include and auto trim some directories.
-    normal jf/
+    " We always insert quotes around include, so we can assume there's a quote
+    " at the start.
+    normal jf"l
     if g:cpp_header_n_dir_to_trim > 0
         exec "normal " . g:cpp_header_n_dir_to_trim . "df/"
     endif
