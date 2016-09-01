@@ -78,7 +78,7 @@
 	url = git://github.com/mattn/ctrlp-register.git
 [submodule "multi/vim/bundle/renamer"]
 	path = multi/vim/bundle/renamer
-	url = git@github.com:idbrii/renamer.vim.git
+	url = git@github.com:idbrii/vim-renamer.git
 [submodule "multi/vim/bundle/textobj-word-column"]
 	path = multi/vim/bundle/textobj-word-column
 	url = git@github.com:idbrii/textobj-word-column.vim.git
