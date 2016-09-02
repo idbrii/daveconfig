@@ -262,3 +262,6 @@
 [submodule "multi/vim/bundle/vimproc"]
 	path = multi/vim/bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "multi/vim/bundle/neoyank"]
+	path = multi/vim/bundle/neoyank
+	url = https://github.com/Shougo/neoyank.vim.git
