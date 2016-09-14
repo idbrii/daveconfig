@@ -182,6 +182,10 @@ set autoindent				" Indent like previous line
 " Source: http://vim.wikia.com/wiki/Indenting_source_code#Methods_for_automatic_indentation
 "set smartindent				" Try to be clever about indenting
 "set cindent				" Really clever indenting
+
+" Vim's built-in python indenting is excessive after open parens.
+let g:pyindent_open_paren = '&sw'
+
 if version > 600
     set backspace=start         " backspace can clear up to beginning of line
 endif
@@ -427,6 +431,7 @@ nnoremap <C-g> 2<C-g>
 noremap Q gw
 
 " <Shift-space> reloads the file
+" TODO: Consider using resolve(expand('%')) to simplify path.
 nnoremap <S-space> :<C-u>e<CR>
 
 " Folding {{{1
