@@ -5,9 +5,11 @@
 " Possible alternative: C-s (used experiementally by surround).
 inoremap <C-b> <Esc>
 " Esc without leaving homerow. Also, you can hammer C-l and eventually it
-" redraws the screen. Also used to complete more characters in popupmenu. See
-" popupmenu-keys.
-inoremap <expr> <C-l> pumvisible() ? '<C-l>' : '<Esc>'
+" redraws the screen.
+inoremap <C-l> <Esc>
+" Use C-j as replacement for popup menu C-l to complete more characters in
+" popupmenu. See popupmenu-keys.
+inoremap <expr> <C-j> pumvisible() ? '<C-l>' : '<C-j>'
 " Also Esc from visual and select mode. Makes sense for snippets (my only use
 " of select).
 vnoremap <C-l> <Esc>
