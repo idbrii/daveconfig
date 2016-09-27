@@ -134,6 +134,8 @@ nnoremap <C-a> 1GVG
 " Windows clipboard
 xmap <C-c> "+y
 nnoremap <C-v> "+p
+" Replacement for focusclip
+set clipboard=unnamed
 
 " C-L for esc
 inoremap <C-L> <Esc>:nohl<CR><C-L>
