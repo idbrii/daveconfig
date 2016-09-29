@@ -29,6 +29,11 @@ if filewritable(s:vim_cache) == 0 && exists("*mkdir")
     call mkdir(s:vim_cache, "p", 0700)
 endif
 
+" Auto-create directories for new files.
+if exists("*mkdir")
+    au BufWritePre,FileWritePre * silent! call mkdir(expand('<afile>:p:h'), 'p')
+endif
+
 if has('win32')
     if !filereadable(expand('~/.vim/bundle/vimproc/lib/vimproc_win64.dll'))
         " Failed to find built vimproc, so disable vimproc. You can find prebuilts
