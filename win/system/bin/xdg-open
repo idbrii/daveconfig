@@ -1,0 +1,11 @@
+#! /bin/sh
+
+# Mingw doesn't provide xdg-open, but some scripts rely on it. Make this
+# bootleg implementation.
+# TODO: Should I try to call the real thing?
+
+if command -v cygstart >/dev/null 2>&1 ; then
+    cygstart $*
+else
+    start $*
+fi
