@@ -302,6 +302,8 @@ inoremap <F1> <Esc>
 
 " Similar map for todo.
 nnoremap <Leader><F1> :<C-u>sp ~/.todo.org<CR>
+" I don't think agenda works, but set it anyway.
+let g:org_agenda_files = ['~/.todo.org']
 
 " Building {{{1
 
