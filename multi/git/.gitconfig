@@ -1,3 +1,4 @@
+# vim:sw=4:et:
 [user]
     name = David Briscoe
     email = idbrii@gmail.com
@@ -87,4 +88,6 @@
     trustExitCode = true
     keepBackup = false
 
-# vim:sw=4:et:
+[push]
+    # Validate that submodules have been pushed before pushing owner repo.
+    recurseSubmodules = check
