@@ -32,13 +32,33 @@ function! PyCompileCheck()
 endfunction
 
 nnoremap <buffer> <F7> :set makeprg=nosetests<CR>:AsyncMake<CR>
+
+function! s:pick_entrypoint_makeprg_safe(desired, fallback)
+    " Cannot use a makeprg that already has a module entrypoint defined.
+    if a:desired =~# '-m'
+        return a:fallback
+    else
+        return a:desired
+    else
+endf
 function! s:set_entrypoint()
     " Use the current file and its directory and jump back there to run
     " (ensures any expected relative paths will work).
+    " You must have a reasonable makeprg before invoking
     let cur_file = expand('%:p')
     let cur_dir = fnamemodify(cur_file, ':h')
     let cur_module = fnamemodify(cur_file, ':t:r')
-    exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:set makeprg=python\ -t\ -m\ '. cur_module .'<CR>:AsyncMake<CR>'
+
+    if !exists("s:original_makeprg")
+        let s:original_makeprg = s:pick_entrypoint_makeprg_safe(&makeprg, 'python')
+    endif
+
+    let python = s:pick_entrypoint_makeprg_safe(&makeprg, s:original_makeprg)
+
+    let entrypoint_makeprg = (python .' -m '. cur_module)
+    let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')
+
+    exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncMake<CR>'
 endf
 command! -buffer PythonSetEntrypoint call s:set_entrypoint()
 
