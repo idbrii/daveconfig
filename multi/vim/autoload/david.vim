@@ -33,3 +33,26 @@ function! david#setup_python_paths(pythonhome)
     endif
 endfunction
 
+function! david#get_comma_pair_list_as_dict(comma_pair_list, delimiter)
+    let list_as_dict = {}
+    for key_and_literal in split(a:comma_pair_list, ',')
+        let pair = split(key_and_literal, a:delimiter)
+        if len(pair) <= 1
+            let key = 'none'
+            let literal = pair[0]
+        else
+            let key = pair[0]
+            let literal = pair[1]
+        endif
+        let list_as_dict[key] = literal
+    endfor
+    return list_as_dict
+endf
+
+function! david#get_single_line_comment_leader()
+    let comments_as_dict = david#get_comma_pair_list_as_dict(&comments, ':')
+
+    " Cannot get try..catch to work with E716, so brute force.
+    return get(comments_as_dict, 'none', printf(&commentstring, ""))
+endf
+
