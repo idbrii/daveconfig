@@ -11,10 +11,15 @@ function! wikisweet#UrlToWikiLink(desired_filetype)
     let url = @c
     let name = wikisweet#UrlToName(url)
     let format_function = s:filetype_to_format_function(a:desired_filetype)
-    if !exists('*'. format_function)
+    try
+        exec 'let @c = '. format_function .'(name, url)'
+    catch /^Vim\%((\a\+)\)\=:E117/	" E117: Unknown function
+        if &verbose > 0
+            echoerr 'Input filetype '. a:desired_filetype .' has no format function. Define '. format_function .'. See :help autoload for more.'
+        endif
 		let format_function = s:filetype_to_format_function('markdown')
-    endif
-	exec 'let @c = '. format_function .'(name, url)'
+        exec 'let @c = '. format_function .'(name, url)'
+    endtry
     normal! viW"cp
 
     let @c = c_backup
