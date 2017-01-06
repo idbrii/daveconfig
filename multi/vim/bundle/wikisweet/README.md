@@ -1,4 +1,4 @@
-wikitype
+wikisweet
 ========
 
 A set of tools for working in wiki syntaxes.

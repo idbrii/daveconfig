@@ -1,15 +1,15 @@
 " Build the name of the function for formatting links for this filetype.
 function! s:filetype_to_format_function(filetype)
-	return 'wikitype#'. a:filetype .'#FormatLinkForFiletype'
+	return 'wikisweet#'. a:filetype .'#FormatLinkForFiletype'
 endfunction
 
 " Convert a url to the input filetype. 
-function! wikitype#UrlToWikiLink(desired_filetype)
+function! wikisweet#UrlToWikiLink(desired_filetype)
     let c_backup = @c
 
     normal! "cyiW
     let url = @c
-    let name = wikitype#UrlToName(url)
+    let name = wikisweet#UrlToName(url)
     let format_function = s:filetype_to_format_function(a:desired_filetype)
     if !exists('*'. format_function)
 		let format_function = s:filetype_to_format_function('markdown')
@@ -24,7 +24,7 @@ endf
 "
 " Essentially truncates to the page name and converts some characters to
 " spaces.
-function! wikitype#UrlToName(url)
+function! wikisweet#UrlToName(url)
     let c_backup = @c
     let lazy_backup = &lazyredraw
 
