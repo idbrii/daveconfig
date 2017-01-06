@@ -33,11 +33,16 @@ function! wikisweet#UrlToName(url)
     let c_backup = @c
     let lazy_backup = &lazyredraw
 
-    Scratch
-    0put =a:url
-    ConvertFromUrlEncoding
-    normal! "cdiW
-    bdelete
+	" If these plugins aren't installed, the names won't be as pretty.
+    if exists(':Scratch') == 2 && exists(':ConvertFromUrlEncoding') == 2
+        " Putting this in a scratch buffer since that's the easiest way to
+        " work with ConvertFromUrlEncoding.
+        Scratch
+        0put =a:url
+        ConvertFromUrlEncoding
+        normal! "cdiW
+        bdelete
+    endif
 	let name = @c
 	let name = substitute(name, '^.*/', '', '')
 	let name = substitute(name, '+', ' ', 'g')
