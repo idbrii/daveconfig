@@ -52,4 +52,12 @@ These are common points I'll raise in a code review.
 	* When defining a minimum speed, use speed >= minSpeed for validation.
 
 
+## Error handling
+* Give enough information in an error to fix it.
+	* If we get a smoke fail because an error fires, the fail text should be sufficient to solve the problem.
+	* Include details of how to fix, the object instance name, etc.
 
+## Unreal Engine
+* DECLARE_LOG_CATEGORY_EXTERN should uses Warning level by default.
+	* DECLARE_LOG_CATEGORY_EXTERN(LogCombat, Warning, All);
+	* You shouldn't expose your Log-level messages to the whole team.
