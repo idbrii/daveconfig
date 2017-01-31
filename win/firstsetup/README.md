@@ -36,3 +36,8 @@ Evoluent Vertical Mouse
 Turn off "accelerated scrolling" in the Evoluent Vertical Mouse wheel settings.
 https://connect.microsoft.com/VisualStudio/feedback/details/870717/evoluent-mouse-manager-4-crashes-with-visual-studio-2013-update-2-rc
 
+sandbox
+=======
+
+Copy the sandbox folder to c:\sandbox.
+Copy the comment from the top of ideone.cpp to any cpp in the sandbox to make it easy to execute.
