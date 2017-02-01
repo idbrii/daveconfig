@@ -10,6 +10,13 @@ These are common points I'll raise in a code review.
 	* See [Game Programming Patterns - Component](http://gameprogrammingpatterns.com/component.html) for an in-depth example.
 
 
+## Implementation
+
+* Call super in overridden functions or comment why you're not calling super.
+	* Distinguishes whether not calling super is an oversight.
+	* If super is called in a called function, then comment.
+
+
 ## Style
 
 * Name booleans (variables and query functions) like a question: IsFollowing, ShouldFollow, WasSuccessful, HasCompleted.
@@ -27,6 +34,7 @@ These are common points I'll raise in a code review.
 	* Often you can massage the name to make the units more natural. SecondsBeforeExplosion vs. PreExplosionDuration.
 * Prefer `static_cast` over c-style casts.
 	* c-style casts don't have typesafety (`reinterpret_cast` vs `static_cast`), get lost in the code, and are hard to find.
+
 
 ## Style nitpicks
 
