@@ -34,6 +34,8 @@ These are common points I'll raise in a code review.
 	* Often you can massage the name to make the units more natural. SecondsBeforeExplosion vs. PreExplosionDuration.
 * Prefer `static_cast` over c-style casts.
 	* c-style casts don't have typesafety (`reinterpret_cast` vs `static_cast`), get lost in the code, and are hard to find.
+* Put a newline after break or return in a switch statement.
+	* This blank line clearly separates each case and makes fallthroughs self-apparent.
 
 
 ## Style nitpicks
