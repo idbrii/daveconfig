@@ -80,3 +80,4 @@ function! s:BuildTags()
     call LocateAll()
 endf
 command! BuildTags call s:BuildTags()
+command! AsyncRebuildTags execute 'AsyncShell bash ~/.vim/scripts/buildtags '. &cscopeprg &ft
