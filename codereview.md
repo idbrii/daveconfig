@@ -8,6 +8,10 @@ These are common points I'll raise in a code review.
 * Prefer customization with aggregation over inheritance.
 	* If we want a different method for Targetter.CalculateWeight, we should have a WeightStrategy instead of subclassing Targetter and overriding CalculateWeight. That different Targetters can mix and match strategies.
 	* See [Game Programming Patterns - Component](http://gameprogrammingpatterns.com/component.html) for an in-depth example.
+* Prefer compile-time errors to runtime errors.
+	* Runtime errors aren't always caught and may not be trivial to reproduce.
+	* Make good use of `static_assert` and compile warnings.
+	* Emit editor warnings instead only checking at runtime.
 
 
 ## Implementation
@@ -15,6 +19,9 @@ These are common points I'll raise in a code review.
 * Call super in overridden functions or comment why you're not calling super.
 	* Distinguishes whether not calling super is an oversight.
 	* If super is called in a called function, then comment.
+* Avoid using `default` in switch statements.
+	* Compiler can output a warning for unhandled enums only if default is omitted. I prefer to return from all cases and assert after the switch (to be extra safe).
+	* Using default to assert converts a compile-time error into a runtime error.
 
 
 ## Style
@@ -36,6 +43,13 @@ These are common points I'll raise in a code review.
 	* c-style casts don't have typesafety (`reinterpret_cast` vs `static_cast`), get lost in the code, and are hard to find.
 * Put a newline after break or return in a switch statement.
 	* This blank line clearly separates each case and makes fallthroughs self-apparent.
+* Include your module name in your include directory.
+	* Put your header files in folders inside the include root.
+	* See next item for why.
+* Use relative paths from the include directory in #includes
+	* Even if including a file in the same directory.
+	* This makes your includes a list of what modules you're using.
+	* Unreal: The words "Public" and "Classes" should not include in an include statement. Delete everything up to them and keep everything after them.
 
 
 ## Style nitpicks
