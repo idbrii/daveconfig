@@ -527,6 +527,13 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 let g:UltiSnipsSnippetsDir = '~/.vim/bundle/david-snippets/UltiSnips/'
 
+" Omnicppcomplete
+"
+" This is slow and doesn't work.
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteScope = 1
+
 " Surround
 " Use c as my surround character (it looks like a hug)
 " TEST: Try using s instead of c. See how it works. c is more useful in
