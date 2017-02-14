@@ -6,6 +6,9 @@ endif
 
 " Instead of netrw, I use dirvish. Remove netrw junk. {{{1
 
+" vinegar is for netrw
+let g:loaded_vinegar = 0
+
 " Disable this file if I want to use network editing/browsing.
 
 " Remove netrw commands
