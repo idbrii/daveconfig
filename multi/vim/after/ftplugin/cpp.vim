@@ -2,6 +2,9 @@
 " Use :make to compile c, even without a makefile
 " This is problematic with deep directories (and I don't understand glob)
 "if glob('Makefile') == "" | let &mp="g++ -o %< %" | endif
+
+" Don't do any other indentation settings here. They're handled in
+" indent/cpp.vim.
 setlocal cindent
 
 " surround key o - Unoptimize region

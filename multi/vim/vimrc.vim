@@ -180,7 +180,7 @@ if v:version >= 704
 endif
 set smarttab				" Use tab button for tabs
 set expandtab				" Use spaces, not tabs (use Ctrl-V+Tab to insert a tab)
-set cinoptions+=#1          " Check if # is a comment
+set cinoptions+=#1          " Allow # to be a comment (Weird behavior when it's not. Fix in indent/cpp.vim)
 set autoindent				" Indent like previous line
 " Generally, 'smartindent' or 'cindent' should only be set manually if you're
 " not satisfied with how file type based indentation works.

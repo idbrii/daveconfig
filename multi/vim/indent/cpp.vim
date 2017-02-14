@@ -118,6 +118,11 @@ setlocal cinoptions=l1,g0,t0,i0,+4,(0,w1,W4
 " To use "java anonymous classes" aka mediocre lambdas
 setlocal cinoptions+=j1
 
+" # is preprocessor and not comment. Without this, we somehow keep the
+" previous value from vimrc (#1) and will indent preprocessor statements by
+" one space (don't know why we would indent by once space).
+setlocal cinoptions+=#0
+
 
 "For now, disable this custom indent behavior.
 "" Disable indentation in namespaces:
