@@ -301,9 +301,9 @@ nnoremap <S-F1> :<C-u>e ~/.vim-aside<CR>
 inoremap <F1> <Esc>
 
 " Similar map for todo.
-nnoremap <Leader><F1> :<C-u>sp ~/.todo.org<CR>
+nnoremap <Leader><F1> :<C-u>sp ~/backlog.org<CR>
 " I don't think agenda works, but set it anyway.
-let g:org_agenda_files = ['~/.todo.org']
+let g:org_agenda_files = ['~/backlog.org', '~/plan.org']
 
 " Building {{{1
 
