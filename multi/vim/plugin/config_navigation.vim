@@ -155,7 +155,9 @@ endf
 nnoremap <unique> <A-o> :call CtrlPSameName(1)<CR>
 
 " Like gf but use ctrlp instead of path
-nnoremap <Leader>gf :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))<CR>
+command! CtrlPGotoFile :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))
+" I use unite for this instead.
+"nnoremap <Leader>gf :<C-u>CtrlPGotoFile<CR>
 
 " Code Search analog to find symbol (finds text, not symbol). Generally faster
 " than cscope. New mnemonic: Jump to word.
