@@ -50,7 +50,8 @@ These are common points I'll raise in a code review.
 	* Even if including a file in the same directory.
 	* This makes your includes a list of what modules you're using.
 	* Unreal: The words "Public" and "Classes" should not include in an include statement. Delete everything up to them and keep everything after them.
-
+* Put a new line between adjacent ifs to clearly distinguish them from else ifs
+	* if-elseif-elseif is a common form and if-if-if looks very similar.
 
 ## Style nitpicks
 
@@ -85,3 +86,6 @@ These are common points I'll raise in a code review.
 * DECLARE_LOG_CATEGORY_EXTERN should uses Warning level by default.
 	* DECLARE_LOG_CATEGORY_EXTERN(LogCombat, Warning, All);
 	* You shouldn't expose your Log-level messages to the whole team.
+* Prefer enums over TEnumAsByte except for storage
+	* UPROPERTY enums must be stored as TEnumAsByte, but pass them around as enums.
+	* TEnumAsByte is extra noise that's not relevant to the reader.
