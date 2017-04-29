@@ -10,3 +10,6 @@ setlocal formatoptions+=r
 " do comment continuation for single-line comments, so we need to setup a
 " multi-line comment.
 setlocal comments^=s1:/*,mb:*,ex:*/
+
+" Default is manual, but marker is more likely in markdown.
+setlocal foldmethod=marker
