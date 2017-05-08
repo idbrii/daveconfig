@@ -9,10 +9,9 @@ ln -s $dconfig_path/multi/vim/gvimrc.vim ~/.gvimrc
 ln -s $dconfig_path/multi/git/.gitconfig ~/.
 ln -s $dconfig_path/multi/git/.gitignore ~/.
 
-
 config_dir=$dconfig_path/unix/terminal/
-for a in `ls $config_dir` ;do
-    ln -s $config_dir/$a ~/.$a
+for a in `find $config_dir -maxdepth 1 -type f` ;do
+    ln -s $a ~/.$(basename $a)
 done
 
 # Should these be in bin or PATH?
