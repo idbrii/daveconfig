@@ -75,8 +75,10 @@ fi
 
 # convert cygwin paths to windows paths
 sed -i -e"s,^/cygdrive/\([[:alpha:]]\)/,\1:/," $tagfile
-# I usually make a link in the root to each drive letter (/c for c:)
-sed -i -e"s,^/\([[:alpha:]]\)/,\1:/," $tagfile
+# I used to make a link in the root to each drive letter (/c for c:). With Bash
+# on Windows, I can just make a c:/mnt folder with all of the drives in it.
+# However, this acts wonky if the local drive isn't c:.
+#sed -i -e"s,^//\([[:alpha:]]\)/,\1:/," $tagfile
 # }}}
 
 # Build ctags and cscope	{{{
