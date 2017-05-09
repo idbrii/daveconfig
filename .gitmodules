@@ -1,6 +1,9 @@
 [submodule "multi/git/submanage"]
 	path = multi/git/submanage
 	url = git@github.com:idbrii/git-submanage.git
+[submodule "multi/vim/bundle/work"]
+	path = multi/vim/bundle/work
+	url = git@github.com:idbrii/vim-work.git
 [submodule "unix/terminal/bashmarks"]
 	path = unix/terminal/bashmarks
 	url = git@github.com:idbrii/bashmarks.git
