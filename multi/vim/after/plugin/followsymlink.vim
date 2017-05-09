@@ -20,7 +20,7 @@ function! s:TranslateKnownLinks(fname)
 
     let known_pairs = [
                 \ [ '~/.vim', '~/data/settings/daveconfig/multi/vim' ],
-                \ [ 'c:/bin', '~/data/settings/daveconfig/multi/vim/bundle/cv/scripts/bin' ],
+                \ [ 'c:/bin', '~/data/settings/daveconfig/multi/vim/bundle/work/scripts/bin' ],
                 \ [ 'c:/mnt/c', 'c:' ],
                 \ [ 'c:/mnt/e', 'e:' ],
                 \ [ 'e:/mnt/c', 'c:' ],
