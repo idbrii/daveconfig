@@ -113,8 +113,6 @@ let PORTABLEGIT = expand('$LocalAppData/Atlassian/SourceTree/git_local/bin')
 " Update it with:
 "   rmdir %LocalAppData%\PortableGit_link & mklink /D %LocalAppData%\PortableGit_link %LocalAppData%\GitHub\PortableGit_d76a6a98c9315931ec4927243517bc09e9b731a0
 let PORTABLEGIT = expand('$LocalAppData/PortableGit_link/usr/bin')
-if !isdirectory(PORTABLEGIT)
+if !david#add_to_path(PORTABLEGIT)
     echoerr "Failed to find PortableGit. Did it update and change paths?"
 endif
-let $PATH = $PATH . ';' . PORTABLEGIT
-

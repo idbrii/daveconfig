@@ -33,6 +33,16 @@ function! david#setup_python_paths(pythonhome)
     endif
 endfunction
 
+function! david#add_to_path(absolute_directory)
+    let success = isdirectory(a:absolute_directory)
+    if success
+        let $PATH = $PATH . ';' . a:absolute_directory
+    else
+        echoerr "Invalid directory: ". a:absolute_directory
+    endif
+    return success
+endfunction
+
 function! david#get_comma_pair_list_as_dict(comma_pair_list, delimiter)
     let list_as_dict = {}
     for key_and_literal in split(a:comma_pair_list, ',')
