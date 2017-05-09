@@ -46,6 +46,10 @@ if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
     find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -print | sort -f >> $tagfile
 
+elif [ "$filetype" == "lua-engine" ] ; then
+	# Lua-based engines use C++ and lua.
+    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.lua" \) -print | sort -f >> $tagfile
+
 elif [ "$filetype" == "unreal" ] ; then
 	# A big unreal c++ project, so use the simple format. Ignore generated code
 	# in the Intermediate folder (a nuisance in plugins that don't have a fixed
