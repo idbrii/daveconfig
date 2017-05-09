@@ -274,6 +274,12 @@
 [submodule "multi/vim/bundle/lua-david/ltags"]
 	path = multi/vim/bundle/lua-david/lib/ltags
 	url = https://github.com/stevedonovan/ltags.git
+[submodule "multi/vim/bundle/lua-xolox"]
+	path = multi/vim/bundle/lua-xolox
+	url = https://github.com/xolox/vim-lua-ftplugin.git
+[submodule "multi/vim/bundle/xolox-misc"]
+	path = multi/vim/bundle/xolox-misc
+	url = https://github.com/xolox/vim-misc.git
 [submodule "multi/vim/bundle/commentary"]
 	path = multi/vim/bundle/commentary
 	url = https://github.com/tpope/vim-commentary.git
