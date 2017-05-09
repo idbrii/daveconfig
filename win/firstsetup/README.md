@@ -41,3 +41,15 @@ sandbox
 
 Copy the sandbox folder to c:\sandbox.
 Copy the comment from the top of ideone.cpp to any cpp in the sandbox to make it easy to execute.
+
+AutoHotKey
+==========
+
+Right click, Compile ActiveWindowInfo.ahk and rename exe to AU3_Spy.exe because it's missing from the zip.
+
+Software
+========
+https://justgetflux.com/
+Make sure to disable hotkeys.
+
+www.proggyfonts.net/download/
