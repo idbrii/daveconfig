@@ -19,6 +19,8 @@ if has('win32')
 	set fileformats=unix,dos
 endif
 
+let g:david_project_filelist = 'c:/p4/main/filelist'
+
 " Turn off plugins {{{1
 
 " If I don't have eclipse, I'll want to turn off eclim. TODO: Use
