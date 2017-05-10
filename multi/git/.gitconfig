@@ -91,3 +91,4 @@
 [push]
     # Validate that submodules have been pushed before pushing owner repo.
     recurseSubmodules = check
+	default = simple
