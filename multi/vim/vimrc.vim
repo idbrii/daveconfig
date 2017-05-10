@@ -103,9 +103,15 @@ endif
 
 if !has("gui_running")
     if 0 < &t_Co && &t_Co <= 8
-        " evening looks decent on low colours, but is hideous in 256-color and
-        " in the gui.
-        colorscheme evening
+        if &t_Co == 8 && $TERM !~# '^linux'
+            " sensible will actually bump t_Co up to 16. evening looks
+            " terrible there, but desert is fine.
+            colorscheme desert
+        else
+            " evening looks decent on low colours, but is hideous in 256-color and
+            " in the gui. Only apply this if not linux
+            colorscheme evening
+        endif
     elseif &t_Co >= 256
         " looks good on my hi-color ubuntu terminal
         colorscheme lucius
