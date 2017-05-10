@@ -4,6 +4,16 @@ vim
 Copy vim-cache, vim-aside, and todo.org to new machine.
 
 
+unix
+====
+
+Setup Bash on Windows: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
+
+Pin the terminal to start bar.
+Open %AppData%\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
+Edit the shortcut and change the second blue to 77,77,255 to make it legible. Be sure to click black again before OK!
+
+
 Office ALL CAPS menus
 =====================
 Run FixCasing batch file from: http://superuser.com/questions/493836/how-do-i-get-rid-of-all-caps-ribbon-titles-in-office-2013
@@ -46,6 +56,7 @@ AutoHotKey
 ==========
 
 Right click, Compile ActiveWindowInfo.ahk and rename exe to AU3_Spy.exe because it's missing from the zip.
+
 
 Software
 ========
