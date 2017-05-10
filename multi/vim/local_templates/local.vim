@@ -19,6 +19,7 @@ if has('win32')
 	set fileformats=unix,dos
 endif
 
+let g:david_project_root = 'c:/p4/main'
 let g:david_project_filelist = 'c:/p4/main/filelist'
 
 " Turn off plugins {{{1
