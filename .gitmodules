@@ -28,6 +28,9 @@
 [submodule "multi/vim/bundle/gitv"]
 	path = multi/vim/bundle/gitv
 	url = git@github.com:idbrii/gitv.git
+[submodule "multi/vim/bundle/vc"]
+	path = multi/vim/bundle/vc
+	url = https://github.com/juneedahamed/vc.vim.git
 [submodule "multi/vim/bundle/repeat"]
 	path = multi/vim/bundle/repeat
 	url = git://github.com/tpope/vim-repeat.git
