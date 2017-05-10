@@ -31,7 +31,7 @@ function! LocateFilelist()
 endfunction
 
 function! LocateCscopeFile()
-	if has("cscope")
+	if has("cscope") && executable(&cscopeprg)
 		" Database file for cscope.
 		" Assumes that the database was built in its local directory (passes
 		" that directory as the prepend path).
@@ -66,6 +66,7 @@ function! LocateAll()
     " Make sure we have the full path
     silent! cd %:p:h
     " Locate all of our files
+	" Currently don't have cscope enabled.
     call LocateCscopeFile()
 	" Locate the nearest cindex
 	call LocateCsearchIndex()
