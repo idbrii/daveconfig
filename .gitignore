@@ -2,3 +2,4 @@ multi/vim/glocal.vim
 multi/vim/local.vim
 multi/vim/.netrwhist
 multi/vim/spell/*.spl
+multi/vim/bundle/lua-david/lib
