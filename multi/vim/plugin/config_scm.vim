@@ -46,9 +46,25 @@ let g:vc_allow_leader_mappings = 0
 
 " Currently, I only use vc for svn.
 if executable('svn')
+
+    function! s:VCDiffWithDiffusable(diff_latest)
+        "" Make VCDiff auto disable diff mode when one window is closed.
+        silent! cd %:p:h
+        if a:diff_latest
+            " Forces diff to start with the revision from the trunk/branch for subversion.
+            " I think this means diff latest instead of diff have revision.
+            VCDiff!
+        else
+            VCDiff
+        endif
+        call diffusable#diff_with_partner(winnr('#'))
+        wincmd p
+        call diffusable#diff_with_partner(winnr('#'))
+    endf
+
     nnoremap <silent> <leader>fb :VCBlame<CR>
-    nnoremap <silent> <leader>fd :VCDiff<CR>
-    nnoremap <silent> <leader>fD :VCDiff!<CR>
+    nnoremap <silent> <leader>fd :call <SID>VCDiffWithDiffusable(0)<CR>
+    nnoremap <silent> <leader>fD :call <SID>VCDiffWithDiffusable(1)<CR>
     nnoremap <silent> <leader>fi :VCStatus<CR>
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
     nnoremap <silent> <leader>fIq :VCStatus -qu<CR>
