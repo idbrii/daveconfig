@@ -33,3 +33,16 @@ xmap i, <Plug>SidewaysArgumentTextobjI
 xmap a, <Plug>SidewaysArgumentTextobjA
 omap i, <Plug>SidewaysArgumentTextobjI
 omap a, <Plug>SidewaysArgumentTextobjA
+
+
+" Commentary {{{2
+" Use common g prefix with / as an easy-to-type comment character.
+xmap <unique> g/  <Plug>Commentary
+nmap <unique> g/  <Plug>Commentary
+omap <unique> g/  <Plug>Commentary
+" Too many conflicts and g/w seems to do the same?
+"nmap <unique> g/c <Plug>CommentaryLine
+" Overlaps with textobj-comment.
+"nmap <unique> cg/ <Plug>ChangeCommentary
+nmap <unique> g/.  <Plug>Commentary<Plug>Commentary
+nmap <unique> g/g/ <Plug>Commentary<Plug>Commentary

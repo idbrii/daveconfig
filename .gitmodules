@@ -274,3 +274,6 @@
 [submodule "multi/vim/bundle/lua-david/ltags"]
 	path = multi/vim/bundle/lua-david/lib/ltags
 	url = https://github.com/stevedonovan/ltags.git
+[submodule "multi/vim/bundle/commentary"]
+	path = multi/vim/bundle/commentary
+	url = https://github.com/tpope/vim-commentary.git
