@@ -51,11 +51,13 @@ if executable('svn')
         "" Make VCDiff auto disable diff mode when one window is closed.
         silent! cd %:p:h
         if a:diff_latest
-            " Forces diff to start with the revision from the trunk/branch for subversion.
-            " I think this means diff latest instead of diff have revision.
-            VCDiff!
-        else
             VCDiff
+        else
+            " 'Forces diff to start with the revision from the trunk/branch for subversion.'
+            " This seems to mean diff have instead of diff latest revision.
+            " This is more generally useful since I'm usually looking for what
+            " *I* changed.
+            VCDiff!
         endif
         call diffusable#diff_with_partner(winnr('#'))
         wincmd p
@@ -63,7 +65,9 @@ if executable('svn')
     endf
 
     nnoremap <silent> <leader>fb :VCBlame<CR>
+    " Diff against have revision.
     nnoremap <silent> <leader>fd :call <SID>VCDiffWithDiffusable(0)<CR>
+    " Diff against head revision.
     nnoremap <silent> <leader>fD :call <SID>VCDiffWithDiffusable(1)<CR>
     nnoremap <silent> <leader>fi :VCStatus<CR>
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
