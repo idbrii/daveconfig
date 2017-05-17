@@ -36,6 +36,9 @@ omap a, <Plug>SidewaysArgumentTextobjA
 
 
 " Commentary {{{2
+
+let g:commentary_marker = '~'
+
 " Use common g prefix with / as an easy-to-type comment character.
 xmap <unique> g/  <Plug>Commentary
 nmap <unique> g/  <Plug>Commentary
