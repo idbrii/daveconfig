@@ -1,0 +1,24 @@
+#! /bin/sh
+
+# Source: http://stackoverflow.com/questions/21720865/how-to-view-changes-made-to-files-on-a-certain-revision-in-subversion
+
+if [ $# -eq 0 ] ; then
+    echo "Error: svn-show requires a revision or revision range."
+    exit
+fi
+
+tempfile=$(mktemp /tmp/svn-show.XXXXXX.diff)
+svn log --verbose   --revision $1 . >> $tempfile
+svn diff            --revision $1 . >> $tempfile
+
+# Check if output is tty.
+# Source: http://stackoverflow.com/questions/911168/how-to-detect-if-my-shell-script-is-running-through-a-pipe
+if [ -t 1 ] ; then 
+    # terminal
+    vim -R $tempfile
+else 
+    # not a terminal
+    cat $tempfile
+fi
+
+rm $tempfile
