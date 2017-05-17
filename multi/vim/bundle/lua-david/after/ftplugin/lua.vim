@@ -7,3 +7,7 @@ setlocal tags+=./lua.tags;/
 xnoremap <buffer> <silent> <C-o> :s/^/--\~ <CR>:silent nohl<CR>
 xnoremap <buffer> <silent> <Leader><C-o> :s/^\([ \t]*\)--\~ /\1/<CR>:silent nohl<CR>
 
+" don't let lua-xolox clobber my map.
+nnoremap <buffer> <F1> :<C-u>sp ~/.vim-aside<CR>
+"inoremap <buffer> <F1> <Esc>
+
