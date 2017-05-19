@@ -47,6 +47,13 @@ let g:vc_allow_leader_mappings = 0
 " Currently, I only use vc for svn.
 if executable('svn')
 
+    " Sometimes VCDiff doesn't work. Give me a backup.
+    function! s:SvnDiff()
+        silent Scratch diff
+        .! svn diff #
+    endf
+    command! SvnDiff :silent call s:SvnDiff()
+
     function! s:VCDiffWithDiffusable(diff_latest)
         "" Make VCDiff auto disable diff mode when one window is closed.
         silent! cd %:p:h
