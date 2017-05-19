@@ -1,1 +1,12 @@
-svn log -l 30 $* | less
+#! /bin/sh
+
+# Check if output is tty.
+# Source: http://stackoverflow.com/questions/911168/how-to-detect-if-my-shell-script-is-running-through-a-pipe
+if [ -t 1 ] ; then 
+    # terminal
+    svn log -l 30 $* | less
+else 
+    # not a terminal
+    svn log -l 30 $*
+fi
+
