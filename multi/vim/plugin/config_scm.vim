@@ -54,8 +54,26 @@ if executable('svn')
     endf
     command! SvnDiff :silent call s:SvnDiff()
 
+    " There's no VCShow like git show.
+    function! s:SvnShow(revision)
+        silent Scratch diff
+        " This is a re-implementation of
+        " ~/data/settings/daveconfig/multi/svn/bin/svn-show because the Bash
+        " on Windows win32-unix interface is flaky.
+        "exec '.! bash.exe -c '. expand('~/data/settings/daveconfig/multi/svn/bin/svn-show') .' '. a:revision
+
+        exec '.!svn log --verbose   --revision '. a:revision .' .'
+        normal! Go
+        exec '.!svn diff            --revision '. a:revision .' .'
+        %s///e
+        normal! gg
+    endf
+    command! -nargs=+ SvnShow :silent call s:SvnShow(<args>)
+
     function! s:VCDiffWithDiffusable(diff_latest)
-        "" Make VCDiff auto disable diff mode when one window is closed.
+        "" Make VCDiff auto-disable diff mode when one window is closed.
+
+        " Ensure the diff window will have a path inside the repo.
         silent! cd %:p:h
         if a:diff_latest
             " 'Forces diff to start with the revision from the trunk/branch for subversion.'
@@ -71,7 +89,8 @@ if executable('svn')
         "call diffusable#diff_with_partner(winnr('#'))
     endf
 
-    nnoremap <silent> <leader>fb :VCBlame<CR>
+    " Ensure the blame window will have a path inside the repo.
+    nnoremap <silent> <leader>fb :silent! cd %:p:h <Bar>VCBlame<CR>
     " Diff against have revision.
     nnoremap <silent> <leader>fd :call <SID>VCDiffWithDiffusable(0)<CR>
     " Diff against head revision.
