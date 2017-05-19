@@ -1,0 +1,1 @@
+svn log -l 30 $* | less
