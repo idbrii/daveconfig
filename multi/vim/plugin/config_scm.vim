@@ -65,9 +65,10 @@ if executable('svn')
             " Seems to diff against have revision.
             silent VCDiff
         endif
-        call diffusable#diff_with_partner(winnr('#'))
+        " My hack to vim-vc calls diffusable for me.
+        "call diffusable#diff_with_partner(winnr('#'))
         wincmd p
-        call diffusable#diff_with_partner(winnr('#'))
+        "call diffusable#diff_with_partner(winnr('#'))
     endf
 
     nnoremap <silent> <leader>fb :VCBlame<CR>
