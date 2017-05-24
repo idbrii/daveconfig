@@ -8,5 +8,5 @@ hi def link luaConstant Define
 
 " Special highlight for method names
 " Source: http://vim.wikia.com/wiki/Highlighting_of_method_names_in_the_definition
-syn match luaFuncDef ":\~\?\zs\h\w*\ze([^)]*\()\s*\)\?$"
+syn match luaFuncDef ":\zs\h\w*\ze([^)]*)"
 hi def link luaFuncDef Function
