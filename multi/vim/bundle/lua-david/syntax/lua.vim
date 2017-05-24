@@ -1,5 +1,10 @@
 " Member function calls require a :
 syn match luaError "\<\l\+\.\u\w\+(" display
+" Lua uses ~= for not equal.
+syn match luaError "!=" display
+" Lua uses 1-indexed arrays
+syn match luaError "\[0]" display
+
 
 " Constants are all caps with underscores. Minimum 4 characters.
 " Source: http://stackoverflow.com/questions/1512602/highlighting-defined-value-in-vim/1515550#1515550
