@@ -62,9 +62,9 @@ if executable('svn')
         " on Windows win32-unix interface is flaky.
         "exec '.! bash.exe -c '. expand('~/data/settings/daveconfig/multi/svn/bin/svn-show') .' '. a:revision
 
-        exec '.!svn log --verbose   --revision '. a:revision .' .'
+        exec '.!svn log --verbose   --change '. a:revision .' .'
         normal! Go
-        exec '.!svn diff            --revision '. a:revision .' .'
+        exec '.!svn diff            --change '. a:revision .' .'
         %s///e
         normal! gg
     endf

@@ -8,8 +8,8 @@ if [ $# -eq 0 ] ; then
 fi
 
 tempfile=$(mktemp /tmp/svn-show.XXXXXX.diff)
-svn log --verbose   --revision $1 . >> $tempfile
-svn diff            --revision $1 . >> $tempfile
+svn log --verbose   --change $1 . >> $tempfile
+svn diff            --change $1 . >> $tempfile
 
 # Check if output is tty.
 # Source: http://stackoverflow.com/questions/911168/how-to-detect-if-my-shell-script-is-running-through-a-pipe
