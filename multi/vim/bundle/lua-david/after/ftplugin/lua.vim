@@ -11,3 +11,9 @@ xnoremap <buffer> <silent> <Leader><C-o> :s/^\([ \t]*\)--\~ /\1/<CR>:silent nohl
 nnoremap <buffer> <F1> :<C-u>sp ~/.vim-aside<CR>
 "inoremap <buffer> <F1> <Esc>
 
+" Files may be opened with diff mode before this 'after' file is sourced.
+" Ensure we don't clobber a more relevant mode.
+if &foldmethod != 'diff'
+    " Vim's lua syntax doesn't include fold information, so use indent instead.
+    setlocal foldmethod=indent
+endif
