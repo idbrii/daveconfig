@@ -65,7 +65,7 @@ if executable('svn')
         exec '.!svn log --verbose   --change '. a:revision .' .'
         normal! Go
         exec '.!svn diff            --change '. a:revision .' .'
-        %s///e
+        %s/\r//e
         normal! gg
     endf
     command! -nargs=+ SvnShow :silent call s:SvnShow(<args>)
