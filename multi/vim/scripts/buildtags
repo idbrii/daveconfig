@@ -109,6 +109,9 @@ function fix_file_prefix_for_tags_on_win32()
     # they're relative paths and can't find anything. (I'm using gvim.exe but
     # building tags with Unix subsystem.)
     sed -i -e"s,/mnt/\([[:alpha:]]\)/,\1:/," $1
+
+    # For reference, opposite transformation.
+    # sed -e"s,\([[:alpha:]]\):/,/mnt/\1/,"
 }
 
 case $filetype in
@@ -121,7 +124,10 @@ case $filetype in
         # Builds separate lua.tags from cpp tags file. Vim must have:
         #   setlocal tags+=./lua.tags;/
         # (See ~/.vim/bundle/lua-david/after/ftplugin/lua.vim)
-        grep lua filelist | xargs lua ~/.vim/bundle/lua-david/lib/ltags/ltags
+        grep lua $tagfile > $tagfile.luaonly
+        lua ~/.vim/bundle/lua-david/lib/ltags/ltags -filelist $tagfile.luaonly
+        rm $tagfile.luaonly
+
         fix_file_prefix_for_tags_on_win32 tags
         mv tags lua.tags
 
