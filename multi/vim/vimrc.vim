@@ -399,7 +399,6 @@ onoremap aa a>
 
 " gc selects previously changed text. (|gv| but for modification.)
 nnoremap gc :<C-U>silent!normal!`[v`]<CR>
-xnoremap gc :silent!normal!`[v`]<CR>
 
 " Make backspace work in normal
 nnoremap <BS> X
@@ -574,6 +573,10 @@ augroup END
 " Don't want menus for cpp.
 let no_plugin_menus = 1
 let c_no_curly_error = 1
+
+" Lua
+" Only want luarefvim for its doc files.
+let loaded_luarefvim = 0
 
 " Ropevim
 " Don't use <C-c> mappings -- I don't use the maps much.

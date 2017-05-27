@@ -283,3 +283,6 @@
 [submodule "multi/vim/bundle/commentary"]
 	path = multi/vim/bundle/commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "multi/vim/bundle/lua-refvim"]
+	path = multi/vim/bundle/lua-refvim
+	url = https://github.com/monkoose/luarefvim.git
