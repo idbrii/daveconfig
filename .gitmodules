@@ -286,3 +286,9 @@
 [submodule "multi/vim/bundle/lua-refvim"]
 	path = multi/vim/bundle/lua-refvim
 	url = https://github.com/monkoose/luarefvim.git
+[submodule "multi/vim/bundle/polyglot"]
+	path = multi/vim/bundle/aaa-polyglot/
+	url = https://github.com/sheerun/vim-polyglot.git
+[submodule "multi/vim/bundle/aaa-polyglot"]
+	path = multi/vim/bundle/aaa-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
