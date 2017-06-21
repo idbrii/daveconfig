@@ -13,9 +13,11 @@ function! s:TranslateKnownLinks(fname)
         return a:fname
     endif
 
-    " Match any character for drive letter (drive letter case is arbitrary)
-    " but otherwise exact match at beginning.
-    let re_prefix = '^.\zs\C\V'
+    " Match any character for drive letter (drive letter case is arbitrary and
+    " content is often linked between drives.) Otherwise exact match entire
+    " filename. Using case sensitive even though it doesn't matter on Win32.
+    " We'll replace the drive letter with what's in the substitution.
+    let re_prefix = '^.\C\V'
     let fname = a:fname
 
     let known_pairs = [
@@ -23,13 +25,12 @@ function! s:TranslateKnownLinks(fname)
                 \ [ 'c:/bin', '~/data/settings/daveconfig/multi/vim/bundle/work/scripts/bin' ],
                 \ [ 'c:/mnt/c', 'c:' ],
                 \ [ 'c:/mnt/e', 'e:' ],
-                \ [ 'e:/mnt/c', 'c:' ],
-                \ [ 'e:/mnt/e', 'e:' ]
                 \ ]
     for pair in known_pairs
         " Already matching . for the drive letter, so strip actual letter.
         let link = resolve(expand(pair[0]))[1:]
-        let real = resolve(expand(pair[1]))[1:]
+        " Don't strip from result.
+        let real = resolve(expand(pair[1]))
         let fname = substitute(fname, re_prefix . link, real, '')
     endfor
     return fname
