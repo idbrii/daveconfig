@@ -9,6 +9,8 @@
 #   buildtags.sh cscope cpp
 # example for the same but only tags (no filelist or cscope):
 #   buildtags.sh tagonly cpp
+# example for the same but no cscope:
+#   buildtags.sh skip-cscope cpp
 
 # Installing dependents:
 #   aptinstall exuberant-ctags cscope
@@ -144,6 +146,10 @@ fix_file_prefix_for_tags_on_win32 tags
 
 if [ $cscope == "tagonly" ] ; then
 	rm $tagfile
+
+elif [ $cscope == "skip-cscope" ] ; then
+    # Make empty cscope files so scripts expecting them don't barf.
+    touch cscope.{in.,po.,}out
 
 else
 	case $filetype in
