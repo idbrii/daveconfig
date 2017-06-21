@@ -46,6 +46,8 @@ let g:vc_allow_leader_mappings = 0
 
 " Currently, I only use vc for svn.
 if executable('svn')
+    " I like to do extra formatting.
+    let g:vc_commit_allow_blank_lines = 1
 
     " Sometimes VCDiff doesn't work. Give me a backup.
     function! s:SvnDiff()
