@@ -12,7 +12,7 @@ export PATH=$PATH:~/data/settings/daveconfig/win/cygwin/usrlocalbin/
 # mingw is dumb about paths, so force vim to be included in the path.
 case "`uname -s`" in
 MINGW*)
-    export PATH=$PATH:/c/david/apps/vim/vim74
+    export PATH=$PATH:/c/david/apps/vim/vim80
     ;;
 esac
 
