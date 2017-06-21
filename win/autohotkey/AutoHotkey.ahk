@@ -334,11 +334,19 @@ return
 ; More consistency.
 #IfWinActive ahk_class ConsoleWindowClass
 {
-	; Alt-Space e y
-	; Opens the window menu > Edit > Copy
-	^+c::
-		Send !{Space}ey
-	return
+    ^+c::
+    {
+        if (WinActive("ahk_exe bash.exe")) {
+            ; Bash prompt uses right click
+            Click right
+        }
+        else {
+            ; Alt-Space e y
+            ; Opens the window menu > Edit > Copy
+            Send !{Space}ey
+        }
+        return
+    }
 }
 
 
