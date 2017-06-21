@@ -12,6 +12,11 @@ else
     MERGED=$4
 fi
 
+# Prefer gvim if available.
+vim=gvim
+which $vim > /dev/null || vim=vim
+
+
 # Diff all files in large window with equal width buffers and find the first
 # conflict.
-gvim --nofork +"set lines=999" +"set columns=9999" +"wincmd =" +"wincmd w" +"normal gg]C" -d "$theirs" "$MERGED" "$mine"
+$vim --nofork +"set lines=999" +"set columns=9999" +"wincmd =" +"wincmd w" +"normal gg]C" -d "$theirs" "$MERGED" "$mine"
