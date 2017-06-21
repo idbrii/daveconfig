@@ -10,6 +10,9 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 export PAGER=less
 
+# Path extensions
+export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -120,9 +123,6 @@ dumb)
 *)
     ;;
 esac
-
-# Path extensions
-export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool
 
 ## enable vim-like syntax
 #set -o vi
