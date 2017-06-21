@@ -26,6 +26,8 @@ llw() {
 # This alias may override ghostscript. That's not a problem for me.
 alias gs='~/.vim/bundle/searchsavvy/bin/smartgrep --color=auto'
 
+alias diffs='diff --exclude="*.git" --exclude="*.svn"'
+
 # windows work-alike
 alias cls='clear'
 alias tracert='tracepath'
