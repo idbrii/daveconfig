@@ -114,7 +114,10 @@ if !has("gui_running")
         endif
     elseif &t_Co >= 256
         " looks good on my hi-color ubuntu terminal
-        colorscheme lucius
+        "colorscheme lucius
+        " Try out apprentice since work went into making it work in
+        " terminals.
+        colorscheme apprentice
     elseif has("macunix")
         " looks good on my mac terminal
         colorscheme elflord
