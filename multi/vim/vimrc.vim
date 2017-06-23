@@ -113,11 +113,17 @@ if !has("gui_running")
             colorscheme evening
         endif
     elseif &t_Co >= 256
-        " looks good on my hi-color ubuntu terminal
-        "colorscheme lucius
-        " Try out apprentice since work went into making it work in
-        " terminals.
-        colorscheme apprentice
+        if system("uname -a") =~ "Microsoft"
+            " This looks better for Bash on Windows. (Not sure why vim isn't
+            " using the right colors.)
+            colorscheme jellybeans
+        else
+            " looks good on my hi-color ubuntu terminal
+            "colorscheme lucius
+            " Try out apprentice since work went into making it work in
+            " terminals.
+            colorscheme apprentice
+        endif
     elseif has("macunix")
         " looks good on my mac terminal
         colorscheme elflord
