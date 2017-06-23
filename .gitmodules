@@ -295,3 +295,6 @@
 [submodule "multi/vim/bundle/apprentice"]
 	path = multi/vim/bundle/apprentice
 	url = https://github.com/romainl/Apprentice.git
+[submodule "multi/vim/bundle/ale"]
+	path = multi/vim/bundle/ale
+	url = https://github.com/w0rp/ale.git
