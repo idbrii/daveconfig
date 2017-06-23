@@ -24,12 +24,19 @@ CompilerSet makeprg=lua53\ %
 "       lua: blah.lua:2: '=' expected near 'var'
 " debug.traceback():
 "       scripts/mainfunctions.lua(198,1) in function 'SpawnPrefab'
+" assert:
+"       [00:00:04]: [string "scripts/gui.lua"]:97: Value() only accepts booleans and numbers
+"       LUA ERROR stack traceback:
+"           =[C]:-1 in (global) assert (C) <-1--1>
+"           scripts/gui.lua:97 in (field) Value (Lua) <85-103>
+"           scripts/update.lua:92 in () ? (Lua) <33-129>
 " debugstack():
 "       [00:29:08]: stack traceback:
 "           scripts/mainfunctions.lua:139 in () ? (Lua) <136-184>
 let &l:efm = join([
       \ '%.lua%#: %f:%l:%m',
       \ '%f:%l in %m',
+      \ '%.%#: [string "%f"]:%l:%m',
       \ '%f(%l%\,%c) in %m',
       \ ], ",")
 
