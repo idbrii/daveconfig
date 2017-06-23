@@ -27,7 +27,12 @@ CompilerSet makeprg=lua53\ %
 " debugstack():
 "       [00:29:08]: stack traceback:
 "           scripts/mainfunctions.lua:139 in () ? (Lua) <136-184>
-setlocal efm=%.lua%#:\ %f:%l:%m,%f:%l\ in\ %m,%f(%l%\\,%c)\ in\ %m
+let &l:efm = join([
+      \ '%.lua%#: %f:%l:%m',
+      \ '%f:%l in %m',
+      \ '%f(%l%\,%c) in %m',
+      \ ], ",")
+
 
 
 let &cpo = s:cpo_save
