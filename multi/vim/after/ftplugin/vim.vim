@@ -29,3 +29,8 @@ inoremap <buffer> <C-Space> <C-x><C-v>
 
 " No tabs in vim files.
 setlocal expandtab
+
+" Jump to file that may have defined this symbol. A bit weird because it's not
+" looking at filenames (vim doesn't have includes), but it's not a tag: we're
+" guessing based on filename like normal gf behaviour.
+nnoremap <buffer> gf :<C-u>call david#vim#GotoFile(expand("<cword>"))<CR>
