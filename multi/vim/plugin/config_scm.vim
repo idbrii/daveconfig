@@ -105,13 +105,14 @@ if executable('svn')
     nnoremap <silent> <leader>fIc :VCStatus .<CR>
     nnoremap <silent> <leader>fv :VCLog! .<CR>
     nnoremap <silent> <leader>fV :VCLog!<CR>
-    nnoremap <silent> <leader>fh :VCBrowse<CR>
-    nnoremap <silent> <leader>fHm :VCBrowse<CR>
-    nnoremap <silent> <leader>fHw :VCBrowseWorkingCopy<CR>
-    nnoremap <silent> <leader>fHr :VCBrowseRepo<CR>
-    nnoremap <silent> <leader>fHl :VCBrowseMyList<CR>
-    nnoremap <silent> <leader>fHb :VCBrowseBookMarks<CR>
-    nnoremap <silent> <leader>fHf :VCBrowseBuffer<CR>
+    " Explore
+    nnoremap <silent> <leader>fe :VCBrowse<CR>
+    nnoremap <silent> <leader>fEm :VCBrowse<CR>
+    nnoremap <silent> <leader>fEw :VCBrowseWorkingCopy<CR>
+    nnoremap <silent> <leader>fEr :VCBrowseRepo<CR>
+    nnoremap <silent> <leader>fEl :VCBrowseMyList<CR>
+    nnoremap <silent> <leader>fEb :VCBrowseBookMarks<CR>
+    nnoremap <silent> <leader>fEf :VCBrowseBuffer<CR>
     nnoremap <silent> <leader>fq :diffoff! <CR> :q<CR>
 endif
 
