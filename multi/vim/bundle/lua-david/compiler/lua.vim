@@ -35,7 +35,7 @@ CompilerSet makeprg=lua53\ %
 "           scripts/mainfunctions.lua:139 in () ? (Lua) <136-184>
 let &l:efm = join([
       \ '%.lua%#: %f:%l:%m',
-      \ '%f:%l in %m',
+      \ '@%\?%f:%l in %m',
       \ '%.%#: [string "%f"]:%l:%m',
       \ '%f(%l%\,%c) in %m',
       \ ], ",")
