@@ -46,17 +46,17 @@ touch $tagfile
 rm $tagfile
 if [ "$filetype" == "cpp" ] ; then
     # Probably a big c++ project, so use the simple format
-    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -print | sort -f >> $tagfile
+    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print | sort -f >> $tagfile
 
 elif [ "$filetype" == "lua-engine" ] ; then
 	# Lua-based engines use C++ and lua.
-    find $search_dirs -type f -not \( -path "*/examples/*" -prune \) -a \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.lua" \) -print | sort -f >> $tagfile
+    find $search_dirs -type f -not \( -path "*/examples/*" -prune \) -a \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" \) -print | sort -f >> $tagfile
 
 elif [ "$filetype" == "unreal" ] ; then
 	# A big unreal c++ project, so use the simple format. Ignore generated code
 	# in the Intermediate folder (a nuisance in plugins that don't have a fixed
 	# path format).
-    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" \) -print | grep -v "Intermediate.Build" | sort -f >> $tagfile
+    find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print | grep -v "Intermediate.Build" | sort -f >> $tagfile
 
 elif [ "$filetype" == "cs" ] ; then
     # C sharp code. don't include examples which are often alongside.
