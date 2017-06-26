@@ -2,8 +2,7 @@
 " This doesn't work on self with polyglot's lua syntax (since it makes self a
 " builtin and I don't know how to handle that in vim syntax). It also shows
 " false-positives on c modules.
-" HACK: Ignore imgui,imguiraw by ignoring modules that end with [iw].
-syn match luaError "\<\l\+[^iw]\.\u\w\+(" display
+"syn match luaError "\<\l\+\.\u\w\+(" display
 " Lua uses ~= for not equal.
 syn match luaError "!=" display
 " Lua does not support assignment-equals
