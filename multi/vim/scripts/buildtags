@@ -50,7 +50,7 @@ if [ "$filetype" == "cpp" ] ; then
 
 elif [ "$filetype" == "lua-engine" ] ; then
 	# Lua-based engines use C++ and lua.
-    find $search_dirs -type f -not \( -path "*/examples/*" -prune \) -a \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" \) -print | sort -f >> $tagfile
+    find $search_dirs -type d -name examples -prune -o -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" \) -print | sort -f >> $tagfile
 
 elif [ "$filetype" == "unreal" ] ; then
 	# A big unreal c++ project, so use the simple format. Ignore generated code
@@ -61,6 +61,8 @@ elif [ "$filetype" == "unreal" ] ; then
 elif [ "$filetype" == "cs" ] ; then
     # C sharp code. don't include examples which are often alongside.
     find $search_dirs -not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print | sort -f >> $tagfile
+    # Should try this:
+    #find $search_dirs \( -type d -name "examples" -o -name "obj" \) -prune -o \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print | sort -f >> $tagfile
 
 elif [ "$filetype" == "android" ] ; then
     # Android uses java and xml. Assume we're in the source directory
