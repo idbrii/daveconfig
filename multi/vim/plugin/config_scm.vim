@@ -50,6 +50,8 @@ let g:vc_allow_leader_mappings = 0
 if executable('svn')
     " I like to do extra formatting.
     let g:vc_commit_allow_blank_lines = 1
+    " I keep thinking this is a "Press Enter to continue" prompt.
+    let g:vc_donot_confirm_cmd = 1
 
     " Sometimes VCDiff doesn't work. Give me a backup.
     function! s:SvnDiff()
