@@ -6,6 +6,10 @@
 " Note: Must have name that comes after slime.vim so that this file is loaded
 " second, otherwise mapping magic won't work.
 
+if !exists("g:loaded_slime") || g:loaded_slime == 0
+    finish
+endif
+
 " TODO: merge into slime.vim
 
 "function Slime_Auto_Screen_Vars()
@@ -24,7 +28,6 @@
 "    echomsg "Using screen session ". b:slime['sessionname'] ." #". b:slime['windowname']
 "endfunction
 
-let g:slime_no_mappings = 1
 xmap <Leader>r <Plug>SlimeRegionSend
 nmap <Leader>r <Plug>SlimeParagraphSend
 

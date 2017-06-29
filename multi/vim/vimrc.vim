@@ -711,6 +711,12 @@ let g:easy_align_delimiters = {
             \   }
             \ }
 
+" Slime
+if !executable('screen') && !executable('tmux')
+    let g:loaded_slime = 0
+endif
+let g:slime_no_mappings = 1
+
 " Thesaurus
 if executable("bash")
     let g:online_thesaurus_map_keys = 0
