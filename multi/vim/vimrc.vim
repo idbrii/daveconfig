@@ -181,6 +181,9 @@ set matchtime=1				" For .1 seconds
 set formatoptions+=r		" magically continue comments
 set formatoptions-=o        " I tend to use o for whitespace, not continuing
                             " comments (some filetypes overwrite)
+if v:version > 703
+    set formatoptions+=j    " Delete comment character when joining commented lines
+endif
 set isfname-==              " allow completion in var=/some/path
 set tabstop=4				" 1 tab = x spaces
 set shiftwidth=4			" Used by auto indent (see below for 0)
