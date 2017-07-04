@@ -16,12 +16,19 @@ set cpo-=C
 " Options:
 "
 CompilerSet makeprg=lua53\ %
+"CompilerSet makeprg=lua51\ %
 
 
 " Combine three different forms of output:
 "
+" Standard lua
 " http://stackoverflow.com/questions/2771919/lua-jump-to-right-line
-"       lua: blah.lua:2: '=' expected near 'var'
+"       lua53: string.lua:7: bad argument #1 to 'find' (string expected, got nil)
+"       stack traceback:
+"       	[C]: in function 'string.find'
+"       	string.lua:7: in function 'string.findall'
+"       	string.lua:21: in main chunk
+"       	[C]: in ?
 " debug.traceback():
 "       scripts/mainfunctions.lua(198,1) in function 'SpawnPrefab'
 " assert:
@@ -34,8 +41,8 @@ CompilerSet makeprg=lua53\ %
 "       [00:29:08]: stack traceback:
 "           scripts/mainfunctions.lua:139 in () ? (Lua) <136-184>
 let &l:efm = join([
-      \ '%.lua%#: %f:%l:%m',
-      \ '@%\?%f:%l in %m',
+      \ 'lua%.%#: %f:%l:%m',
+      \ '@%\?%f:%l:%\? in %m',
       \ '%.%#: #%\?[string "%f"]:%l:%m',
       \ '%f(%l%\,%c) in %m',
       \ ], ",")
