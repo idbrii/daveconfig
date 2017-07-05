@@ -31,19 +31,26 @@ CompilerSet makeprg=lua53\ %
 "       	[C]: in ?
 " debug.traceback():
 "       scripts/mainfunctions.lua(198,1) in function 'SpawnPrefab'
+" hotswap:
+" (Specifically https://github.com/rxi/lume but this might cover any use of
+" `require` at runtime.)
+"       error loading module 'screens/mainscreen' from file 'scripts/screens/mainscreen.lua':
+"              [string "cannot OLDFILEACCESSMETHOD @scripts/screens/mainscreen.lua..."]:234: 'end' expected near 'self'
 " assert:
 "       [00:00:04]: [string "scripts/gui.lua"]:97: Value() only accepts booleans and numbers
 "       LUA ERROR stack traceback:
 "           =[C]:-1 in (global) assert (C) <-1--1>
 "           scripts/gui.lua:97 in (field) Value (Lua) <85-103>
 "           scripts/update.lua:92 in () ? (Lua) <33-129>
+"       [00:19:25]: hotswap : error	#[string "scripts/widget/util.lua"]:77: variable 'Text' is not declared	
 " debugstack():
 "       [00:29:08]: stack traceback:
 "           scripts/mainfunctions.lua:139 in () ? (Lua) <136-184>
 let &l:efm = join([
       \ 'lua%.%#: %f:%l:%m',
       \ '@%\?%f:%l:%\? in %m',
-      \ '%.%#: #%\?[string "%f"]:%l:%m',
+      \ '%.%#[string "cannot OLDFILEACCESSMETHOD @%f"]:%l:%m',
+      \ '%.%#[string "%f"]:%l:%m',
       \ '%f(%l%\,%c) in %m',
       \ ], ",")
 
