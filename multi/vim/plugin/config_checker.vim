@@ -4,14 +4,15 @@ let g:ale_lua_luacheck_options = ''
 "======================================= ================================================================================
 "Option                                  Meaning
 "======================================= ================================================================================
-"let g:ale_lua_luacheck_options .= ' --no-global'                    "                    Filter out warnings related to global variables.
+let g:ale_lua_luacheck_options .= ' --no-global'                    "                    Filter out warnings related to global variables.
 "let g:ale_lua_luacheck_options .= ' --no-unused'                    "                    Filter out warnings related to unused variables and values.
 "let g:ale_lua_luacheck_options .= ' --no-redefined'                    "                 Filter out warnings related to redefined variables.
-"let g:ale_lua_luacheck_options .= ' --no-unused-args'                    "               Filter out warnings related to unused arguments and loop variables.
-"let g:ale_lua_luacheck_options .= ' --no-unused-secondaries'                    "        Filter out warnings related to unused variables set together with used ones.
+let g:ale_lua_luacheck_options .= ' --no-unused-args'                    "               Filter out warnings related to unused arguments and loop variables.
+let g:ale_lua_luacheck_options .= ' --no-unused-secondaries'                    "        Filter out warnings related to unused variables set together with used ones.
 "
 "                                        See :ref:`secondaryvaluesandvariables`
 "let g:ale_lua_luacheck_options .= ' --no-self'                    "                           Filter out warnings related to implicit ``self`` argument.
+let g:ale_lua_luacheck_options .= ' --std lua51'
 "let g:ale_lua_luacheck_options .= ' --std <std>'                    "                         Set standard globals. ``<std>`` can be one of:
 "
 "                                        * ``lua51`` - globals of Lua 5.1 without deprecated ones;
@@ -48,7 +49,7 @@ let g:ale_lua_luacheck_options = ''
 "
 "                                        See :ref:`modules`
 "let g:ale_lua_luacheck_options .= ' --max-line-length <length'                    "           Set maximum allowed line length (default: 120).
-"let g:ale_lua_luacheck_options .= ' --no-max-line-length'                    "                Do not limit line length.
+let g:ale_lua_luacheck_options .= ' --no-max-line-length'                    "                Do not limit line length.
 "let g:ale_lua_luacheck_options .= ' --max-code-line-length <length'                    "      Set maximum allowed length for lines ending with code (default: 120).
 "let g:ale_lua_luacheck_options .= ' --no-max-code-line-length'                    "           Do not limit code line length.
 "let g:ale_lua_luacheck_options .= ' --max-string-line-length <length'                    "    Set maximum allowed length for lines within a string (default: 120).
