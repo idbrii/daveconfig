@@ -16,7 +16,7 @@ set cpo-=C
 " Options:
 "
 CompilerSet makeprg=lua53\ %
-"CompilerSet makeprg=lua51\ %
+CompilerSet makeprg=lua\ %
 
 
 " Combine three different forms of output:
