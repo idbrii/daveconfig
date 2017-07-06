@@ -2,31 +2,20 @@ Download:
 
 * Windows x64 Executables (lua-5.3.4_Win64_bin.zip)
     * http://luabinaries.sourceforge.net/download.html
-* Static Libraries (lua-5.3.4_Win64_vc10_lib.zip)
-    * https://sourceforge.net/projects/luabinaries/files/5.3.4/Windows%20Libraries/Static/
 
 and put them here:
 
     ~/.vim/bundle/lua-david$ tree lib
         lib
         ├── lua-5.3
-        │   ├── include
-        │   │   ├── lauxlib.h
-        │   │   ├── luaconf.h
-        │   │   ├── lua.h
-        │   │   ├── lua.hpp
-        │   │   └── lualib.h
         │   ├── lua53.dll
         │   ├── lua53.exe
-        │   ├── lua53.lib
         │   ├── luac53.exe
         │   └── wlua53.exe
         └── readme.md
 
 
-Includes are for luarocks.
-
-You can install luarocks like so:
+In theory, you can also download the static libs and install luarocks like so:
 
     .\install.bat   /P C:\david\apps\lua\luarocks-5.3 /selfcontained /noadmin /LUA %USERPROFILE%\.vim\bundle\lua-david\lib\lua-5.3
 
@@ -40,6 +29,9 @@ comment [2] to get luarocks to have a more recent version of luafilesystem
 couldn't get luacheck to install, so I used `luarocks install luacheck
 --deps-mode=none` which didn't work on other environments. Now I finally have
 luacheck working.
+
+Since luaforwindows provides lua 5.1 and vim demands lua 5.3, we need both to
+allow if_lua (for lua vim plugins) and run luacheck (via ale).
 
 [1]: https://github.com/keplerproject/luafilesystem/issues/82
 [2]: https://github.com/rjpcomputing/luaforwindows/issues/80#issuecomment-193851597
