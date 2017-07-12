@@ -303,7 +303,7 @@ return
 
 #v::
 	KeyWait LWin
-	Run C:\david\apps\Vim\vim74\gvim.exe
+	Run %vim_bin%\gvim.exe
 return
 
 ; Misc {{{1
