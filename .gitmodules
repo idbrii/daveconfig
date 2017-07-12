@@ -298,3 +298,6 @@
 [submodule "multi/vim/bundle/ale"]
 	path = multi/vim/bundle/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "multi/vim/bundle/autohotkey"]
+	path = multi/vim/bundle/autohotkey
+	url = https://github.com/hnamikaw/vim-autohotkey.git
