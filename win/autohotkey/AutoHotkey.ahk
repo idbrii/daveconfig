@@ -104,8 +104,12 @@ GetActiveMonitorIndex()
 ;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
 
 ;-=---------------------------------------------------=-;
-; Win Ctrl Left          2/3 or 1/3 window resize left ;
+; Win Ctrl Left         golden ratio window resize left ;
 ;-=---------------------------------------------------=-;
+
+golden_ratio := 1.61803398875
+small_golden := 1/golden_ratio
+big_golden := 1 - small_golden
 
 ^#Left::
   WinRestore, A
@@ -113,14 +117,14 @@ GetActiveMonitorIndex()
   workAreaWidth := workAreaRight - workAreaLeft
   workAreaHeight := workAreaBottom - workAreaTop
   WinGetPos, winX, winY, winWidth, winHeight, A
-  if (winX=workAreaLeft && winY=workAreaTop && winWidth=Floor(workAreaWidth*2/3))
-    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * 1 / 3, %workAreaHeight%
+  if (winX=workAreaLeft && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
+    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * small_golden, %workAreaHeight%
   else
-    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * 2 / 3, %workAreaHeight%
+    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * big_golden, %workAreaHeight%
 return
 
 ;-=---------------------------------------------------=-;
-; Win Ctrl Right        2/3 or 1/3 window resize right ;
+; Win Ctrl Right       golden ratio window resize right ;
 ;-=---------------------------------------------------=-;
 
 ^#Right::
@@ -129,10 +133,10 @@ return
   workAreaWidth := workAreaRight - workAreaLeft
   workAreaHeight := workAreaBottom - workAreaTop
   WinGetPos, winX, winY, winWidth, winHeight, A
-  if (winX=workAreaLeft+Floor(workAreaWidth/3) && winY=workAreaTop && winWidth=Floor(workAreaWidth*2/3))
-    WinMove, A, , workAreaLeft + workAreaWidth * 2 / 3, workAreaTop, workAreaWidth / 3, workAreaHeight
+  if (winX=workAreaLeft+Floor(workAreaWidth * small_golden) && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
+    WinMove, A, , workAreaLeft + workAreaWidth * big_golden, workAreaTop, workAreaWidth * small_golden, workAreaHeight
   else
-    WinMove, A, , workAreaLeft + workAreaWidth / 3, workAreaTop, workAreaWidth * 2 / 3, workAreaHeight
+    WinMove, A, , workAreaLeft + workAreaWidth * small_golden, workAreaTop, workAreaWidth * big_golden, workAreaHeight
 return
 
 
