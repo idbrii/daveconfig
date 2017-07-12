@@ -81,6 +81,61 @@ GetDesktopHeight() {
   }
 }
 
+GetActiveMonitorIndex()
+{
+    ;; Which monitor is the active window on? Uses index understood by SysGet.
+    ;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
+
+    SysGet, numberOfMonitors, MonitorCount
+    WinGetPos, winX, winY, winWidth, winHeight, A
+    winMidX := winX + winWidth / 2
+    winMidY := winY + winHeight / 2
+    Loop %numberOfMonitors%
+    {
+        SysGet, monArea, Monitor, %A_Index%
+        if (winMidX > monAreaLeft && winMidX < monAreaRight && winMidY < monAreaBottom && winMidY > monAreaTop)
+            return A_Index
+    }
+    SysGet, primaryMonitor, MonitorPrimary
+    return "No Monitor Found"
+}
+
+;; Movement in thirds.
+;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
+
+;-=---------------------------------------------------=-;
+; Win Ctrl Left          2/3 or 1/3 window resize left ;
+;-=---------------------------------------------------=-;
+
+^#Left::
+  WinRestore, A
+  SysGet, workArea, MonitorWorkArea, GetActiveMonitorIndex()
+  workAreaWidth := workAreaRight - workAreaLeft
+  workAreaHeight := workAreaBottom - workAreaTop
+  WinGetPos, winX, winY, winWidth, winHeight, A
+  if (winX=workAreaLeft && winY=workAreaTop && winWidth=Floor(workAreaWidth*2/3))
+    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * 1 / 3, %workAreaHeight%
+  else
+    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * 2 / 3, %workAreaHeight%
+return
+
+;-=---------------------------------------------------=-;
+; Win Ctrl Right        2/3 or 1/3 window resize right ;
+;-=---------------------------------------------------=-;
+
+^#Right::
+  WinRestore, A
+  SysGet, workArea, MonitorWorkArea, GetActiveMonitorIndex()
+  workAreaWidth := workAreaRight - workAreaLeft
+  workAreaHeight := workAreaBottom - workAreaTop
+  WinGetPos, winX, winY, winWidth, winHeight, A
+  if (winX=workAreaLeft+Floor(workAreaWidth/3) && winY=workAreaTop && winWidth=Floor(workAreaWidth*2/3))
+    WinMove, A, , workAreaLeft + workAreaWidth * 2 / 3, workAreaTop, workAreaWidth / 3, workAreaHeight
+  else
+    WinMove, A, , workAreaLeft + workAreaWidth / 3, workAreaTop, workAreaWidth * 2 / 3, workAreaHeight
+return
+
+
 ResizeAndCenter(w, h)
 {
   ScreenX := GetDesktopLeft()
