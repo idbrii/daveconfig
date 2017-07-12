@@ -91,7 +91,14 @@ ResizeAndCenter(w, h)
   WinMove A,,ScreenX + (ScreenWidth/2)-(w/2),ScreenY + (ScreenHeight/2)-(h/2),w,h
 }
 
-SlimBesideGame()
+SlimOnLeftOfGame()
+{
+  UseRightScreen := True
+  GameWidth := 1100
+  FitToLeftOfWin(UseRightScreen, GameWidth)
+}
+
+SlimOnRightOfGame()
 {
   UseRightScreen := False
   GameWidth := 1280
@@ -117,6 +124,24 @@ FitToRightOfWin(UseRightScreen, AdjacentWidth)
     RightBound := A_ScreenWidth * 2
   }
   ScreenX := LeftBound + AdjacentWidth
+  ScreenY := GetDesktopTop()
+  ScreenWidth := RightBound - AdjacentWidth - LeftBound
+  ScreenHeight := GetDesktopHeight()
+
+  WinMove A,,ScreenX,ScreenY,ScreenWidth,ScreenHeight
+}
+
+FitToLeftOfWin(UseRightScreen, AdjacentWidth)
+{
+; Put a window in the space next to my game.
+
+  LeftBound := GetDesktopLeft()
+  RightBound := A_ScreenWidth
+  if UseRightScreen {
+    LeftBound := A_ScreenWidth
+    RightBound := A_ScreenWidth * 2
+  }
+  ScreenX := LeftBound
   ScreenY := GetDesktopTop()
   ScreenWidth := RightBound - AdjacentWidth - LeftBound
   ScreenHeight := GetDesktopHeight()
@@ -266,7 +291,7 @@ return
 
 ; Put window next to game
 #|::
-	SlimBesideGame()
+	SlimOnLeftOfGame()
 return
 
 ; Put window under game
