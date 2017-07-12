@@ -5,7 +5,7 @@ let g:ale_lua_luacheck_options = ''
 "Option                                  Meaning
 "======================================= ================================================================================
 let g:ale_lua_luacheck_options .= ' --no-global'                    "                    Filter out warnings related to global variables.
-"let g:ale_lua_luacheck_options .= ' --no-unused'                    "                    Filter out warnings related to unused variables and values.
+let g:ale_lua_luacheck_options .= ' --no-unused'                    "                    Filter out warnings related to unused variables and values.
 "let g:ale_lua_luacheck_options .= ' --no-redefined'                    "                 Filter out warnings related to redefined variables.
 let g:ale_lua_luacheck_options .= ' --no-unused-args'                    "               Filter out warnings related to unused arguments and loop variables.
 let g:ale_lua_luacheck_options .= ' --no-unused-secondaries'                    "        Filter out warnings related to unused variables set together with used ones.
