@@ -8,14 +8,14 @@ fun! vc#commit#commitops(meta, cargs)  "{{{2
     let commitargs = {"meta": a:meta, "cargs":a:cargs}
     retu {
         \ "ZZ": {"fn": "vc#commit#commit", "args": commitargs,},
-        \ "<c-q>": {"fn": "vc#commit#done", "args": []}, 
+        \ ":q": {"fn": "vc#commit#done", "args": []}, 
         \ }
 endf
 
 fun! vc#commit#commitopsdscr(meta) 
     retu [
-        \ "ZZ: Commit Files",
-        \ "Ctrl-q: Quit",
+        \ "ZZ  Commit Files",
+        \ ":q  Quit",
         \ ]
 endf
 "2}}}
