@@ -1,11 +1,23 @@
+" Luacheck {{{1
 let g:ale_lua_luacheck_options = ''
+
+" Warning suppression {{{2
+" See http://luacheck.readthedocs.io/en/stable/warnings.html for list.
+
+" We have too much whitespace to manage.
+let g:ale_lua_luacheck_options .= ' --ignore 611' "	A line consists of nothing but whitespace.
+let g:ale_lua_luacheck_options .= ' --ignore 612' "	A line contains trailing whitespace.
+" I like to do `local a = nil`
+let g:ale_lua_luacheck_options .= ' --ignore 311' "	Value assigned to a local variable is unused.
+
+" All options {{{2
 " Get this: https://raw.githubusercontent.com/mpeterv/luacheck/master/docsrc/cli.rst
 " Run this: %sm/\v^"``.*(--[^`]+)``/"let g:ale_lua_luacheck_options .= ' \1'                    "
 "======================================= ================================================================================
 "Option                                  Meaning
 "======================================= ================================================================================
 let g:ale_lua_luacheck_options .= ' --no-global'                    "                    Filter out warnings related to global variables.
-let g:ale_lua_luacheck_options .= ' --no-unused'                    "                    Filter out warnings related to unused variables and values.
+"let g:ale_lua_luacheck_options .= ' --no-unused'                    "                    Filter out warnings related to unused variables and values.
 "let g:ale_lua_luacheck_options .= ' --no-redefined'                    "                 Filter out warnings related to redefined variables.
 let g:ale_lua_luacheck_options .= ' --no-unused-args'                    "               Filter out warnings related to unused arguments and loop variables.
 let g:ale_lua_luacheck_options .= ' --no-unused-secondaries'                    "        Filter out warnings related to unused variables set together with used ones.
