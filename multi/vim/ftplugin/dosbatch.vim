@@ -5,7 +5,9 @@ setlocal isfname-==
 setlocal makeprg=%
 
 " Built-in dosbatch syntax file provides no folding
-setlocal foldmethod=indent
+if &foldmethod != 'diff'
+    setlocal foldmethod=indent
+endif
 
 " :: Is how I insert documentation comments, but commentstring is generally
 " for inserting temporary commments.

@@ -3,7 +3,9 @@
 setlocal formatoptions-=o
 
 " My vim syntax doesn't have folding, so use indent.
-setlocal foldmethod=indent
+if &foldmethod != 'diff'
+    setlocal foldmethod=indent
+endif
 
 " Easy source file.
 if exists(':Runtime') == 2

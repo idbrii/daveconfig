@@ -3,7 +3,9 @@ let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:va
 
 " use indentation to fold since default syntax method doesn't work
 " (Maybe I need to get better syntax for actionscript?)
-set foldmethod=indent
+if &foldmethod != 'diff'
+    set foldmethod=indent
+endif
 set noexpandtab
 
 " Add trace that I can easily find

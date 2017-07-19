@@ -13,7 +13,9 @@ setlocal cindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 setlocal cinoptions+=#1
 
 "" simple indent-based folding
-setlocal foldmethod=indent
+if &foldmethod != 'diff'
+    setlocal foldmethod=indent
+endif
 
 function! PyCompileCheck()
     " Finds syntax errors in the current file and adds them to the quickfix.

@@ -3,6 +3,8 @@ if !&readonly
     set spell
 endif
 
-set foldmethod=marker
+if &foldmethod != 'diff'
+    set foldmethod=marker
+endif
 
 iabbrev CODE <code></code>

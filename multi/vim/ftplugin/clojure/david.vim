@@ -1,6 +1,8 @@
 " syntax doesn't work -- why?
 " g:clj_want_folding is useless?
-setlocal foldmethod=indent
+if &foldmethod != 'diff'
+    setlocal foldmethod=indent
+endif
 " There's probably something in vimclojure to do this, but how does it work?
 nmap <buffer> -- ggVGy<C-w><C-w>Gpi<CR><CR><C-w><C-w>``
 vmap <buffer> -- y<C-w><C-w>Gpi<CR><CR><C-w><C-w>``

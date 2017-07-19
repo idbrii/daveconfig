@@ -4,7 +4,9 @@ if !&readonly && expand('%:t') !~? '[._-]log[._-]'
 endif
 
 " Text files probably have no useful syntax, so use manual
-setlocal foldmethod=manual
+if &foldmethod != 'diff'
+    setlocal foldmethod=manual
+endif
 
 " Text files might have numbered lists
 setlocal formatoptions+=n

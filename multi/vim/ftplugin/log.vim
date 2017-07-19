@@ -2,4 +2,6 @@
 setlocal nospell
 
 " Log files usually have indenting
-set foldmethod=indent
+if &foldmethod != 'diff'
+    set foldmethod=indent
+endif
