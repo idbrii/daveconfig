@@ -131,7 +131,8 @@ case $filetype in
         grep lua $tagfile > $tagfile.luaonly
         # The -nv option is no good for us since we declare classes as locals
         # returned from a file. Don't use it!
-        lua ~/.vim/bundle/lua-david/lib/ltags/ltags -filelist $tagfile.luaonly
+        # However my -nr option works with our way of declaring classes.
+        lua ~/.vim/bundle/lua-david/lib/ltags/ltags -nr -filelist $tagfile.luaonly
         rm $tagfile.luaonly
 
         fix_file_prefix_for_tags_on_win32 tags
