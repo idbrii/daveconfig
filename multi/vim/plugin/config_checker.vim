@@ -15,13 +15,21 @@ let g:ale_lua_luacheck_options .= ' --ignore 612' "	A line contains trailing whi
 " I like to do `local a = nil`
 let g:ale_lua_luacheck_options .= ' --ignore 311' "	Value assigned to a local variable is unused.
 
+" luacheck doesn't know about our globals, so ignore interactions with them.
+"let g:ale_lua_luacheck_options .= ' --ignore 111' "	Setting an undefined global variable.
+"let g:ale_lua_luacheck_options .= ' --ignore 112' "	Mutating an undefined global variable.
+" I want 113 enabled to catch typos in variable names.
+"let g:ale_lua_luacheck_options .= ' --ignore 113' "	Accessing an undefined global variable.
+let g:ale_lua_luacheck_options .= ' --ignore 142' "	Setting an undefined field of a global variable.
+let g:ale_lua_luacheck_options .= ' --ignore 143' "	Accessing an undefined field of a global variable.
+
 " All options {{{2
 " Get this: https://raw.githubusercontent.com/mpeterv/luacheck/master/docsrc/cli.rst
 " Run this: %sm/\v^"``.*(--[^`]+)``/"let g:ale_lua_luacheck_options .= ' \1'                    "
 "======================================= ================================================================================
 "Option                                  Meaning
 "======================================= ================================================================================
-let g:ale_lua_luacheck_options .= ' --no-global'                    "                    Filter out warnings related to global variables.
+"let g:ale_lua_luacheck_options .= ' --no-global'                    "                    Filter out warnings related to global variables.
 "let g:ale_lua_luacheck_options .= ' --no-unused'                    "                    Filter out warnings related to unused variables and values.
 "let g:ale_lua_luacheck_options .= ' --no-redefined'                    "                 Filter out warnings related to redefined variables.
 let g:ale_lua_luacheck_options .= ' --no-unused-args'                    "               Filter out warnings related to unused arguments and loop variables.
@@ -59,7 +67,7 @@ let g:ale_lua_luacheck_options .= ' --std lua51'
 "let g:ale_lua_luacheck_options .= ' --allow-defined'                    "                Allow defining globals implicitly by setting them.
 "
 "                                        See :ref:`implicitlydefinedglobals`
-"let g:ale_lua_luacheck_options .= ' --allow-defined-top'                    "            Allow defining globals implicitly by setting them in the top level scope.
+let g:ale_lua_luacheck_options .= ' --allow-defined-top'                    "            Allow defining globals implicitly by setting them in the top level scope.
 "
 "                                        See :ref:`implicitlydefinedglobals`
 "let g:ale_lua_luacheck_options .= ' --module'                    "                       Limit visibility of implicitly defined globals to their files.
