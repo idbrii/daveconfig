@@ -19,6 +19,7 @@
 ;   "right"
 ;   "bottom"
 ;   "left"
+; Source: https://stackoverflow.com/a/982954/79125
 GetTaskbarEdge() {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
 
@@ -37,6 +38,11 @@ GetTaskbarEdge() {
   }
 }
 
+DoesMonitorHaveTaskbar(monitor_index) {
+    ;; The left-most has the taskbar
+    return monitor_index = 0
+}
+
 GetDesktopTop() {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
@@ -48,33 +54,74 @@ GetDesktopTop() {
   }
 }
 
-GetDesktopLeft() {
-  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
-  TaskbarEdge := GetTaskbarEdge()
+GetDesktopLeft(use_leftmost_monitor := false) {
+    if (use_leftmost_monitor) {
+        ActiveMonitor := 0
+    } else {
+        ActiveMonitor := GetActiveMonitorIndex()
+    }
+    SysGet, work_area_, MonitorWorkArea, ActiveMonitor
+    ActiveMonitor := Convert_LeftToRightMonitorIndex(ActiveMonitor)
 
-  if (TaskbarEdge = "left") {
-    return TW
-  } else {
-    return 0
-  }
+    ;; Skip past screens with the *full* width of a screen (not work_area_Right)
+    offset_x := A_ScreenWidth * ActiveMonitor
+
+    if (DoesMonitorHaveTaskbar(ActiveMonitor)) {
+        offset_x += work_area_Left
+    }
+    return offset_x
 }
 
-GetDesktopWidth() {
+;; TODO: Figure out how to reliably position things inside the current monitor.
+;~ GetDesktopLeft(use_leftmost_monitor := false) {
+;~   ;ActiveMonitor := GetActiveMonitorIndex()
+;~   ;SysGet, workArea, MonitorWorkArea, ActiveMonitor
+
+;~   if (use_leftmost_monitor) {
+;~       ActiveMonitor := 0
+;~   } else {
+;~       ActiveMonitor := Convert_LeftToRightMonitorIndex(GetActiveMonitorIndex())
+;~   }
+;~   offset_x := A_ScreenWidth * ActiveMonitor
+
+;~   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+;~   TaskbarEdge := GetTaskbarEdge()
+
+;~   if (DoesMonitorHaveTaskbar(ActiveMonitor) && TaskbarEdge = "left") {
+;~     return TW + offset_x
+;~   } else {
+;~     return 0 + offset_x
+;~   }
+;~ }
+
+GetDesktopWidth(use_leftmost_monitor := false) {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
-  if (TaskbarEdge = "top" or TaskbarEdge = "bottom") {
-    return A_ScreenWidth
+  if (use_leftmost_monitor) {
+      ActiveMonitor := 0
   } else {
+      ActiveMonitor := Convert_LeftToRightMonitorIndex(GetActiveMonitorIndex())
+  }
+
+  if (DoesMonitorHaveTaskbar(ActiveMonitor) && (TaskbarEdge = "left" or TaskbarEdge = "right")) {
     return A_ScreenWidth - TW
+  } else {
+    return A_ScreenWidth
   }
 }
 
-GetDesktopHeight() {
+GetDesktopHeight(use_leftmost_monitor := false) {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
-  if (TaskbarEdge = "top" or TaskbarEdge = "bottom") {
+  if (use_leftmost_monitor) {
+      ActiveMonitor := 0
+  } else {
+      ActiveMonitor := Convert_LeftToRightMonitorIndex(GetActiveMonitorIndex())
+  }
+
+  if (DoesMonitorHaveTaskbar(ActiveMonitor) && (TaskbarEdge = "top" or TaskbarEdge = "bottom")) {
     return A_ScreenHeight - TH
   } else {
     return A_ScreenHeight
@@ -93,14 +140,90 @@ GetActiveMonitorIndex()
     Loop %numberOfMonitors%
     {
         SysGet, monArea, Monitor, %A_Index%
-        if (winMidX > monAreaLeft && winMidX < monAreaRight && winMidY < monAreaBottom && winMidY > monAreaTop)
-            return A_Index
+        if (monAreaLeft < winMidX && winMidX < monAreaRight && monAreaBottom > winMidY && winMidY > monAreaTop)
+            ;; Monitor indexes start at 0 but loop indexes start at 1.
+            return A_Index - 1
     }
     SysGet, primaryMonitor, MonitorPrimary
     return "No Monitor Found"
 }
 
-;; Movement in thirds.
+; Get the index of the monitor containing the specified x and y co-ordinates.
+GetMonitorAt(x, y, default=1)
+{
+    SysGet, m, MonitorCount
+    ; Iterate through all monitors.
+    Loop, %m%
+    {   ; Check if the window is on this monitor.
+        SysGet, Mon, Monitor, %A_Index%
+        if (x >= MonLeft && x <= MonRight && y >= MonTop && y <= MonBottom)
+            return A_Index
+    }
+
+    return default
+}
+
+GetMonitorIndexFromWindow(windowHandle)
+{
+    ;; Source: //autohotkey.com/board/topic/69464-how-to-determine-a-window-is-in-which-monitor/?p=440355
+
+	; Starts with 1.
+	monitorIndex := 1
+
+	VarSetCapacity(monitorInfo, 40)
+	NumPut(40, monitorInfo)
+
+	if (monitorHandle := DllCall("MonitorFromWindow", "uint", windowHandle, "uint", 0x2))
+		&& DllCall("GetMonitorInfo", "uint", monitorHandle, "uint", &monitorInfo)
+	{
+		monitorLeft   := NumGet(monitorInfo,  4, "Int")
+		monitorTop    := NumGet(monitorInfo,  8, "Int")
+		monitorRight  := NumGet(monitorInfo, 12, "Int")
+		monitorBottom := NumGet(monitorInfo, 16, "Int")
+		workLeft      := NumGet(monitorInfo, 20, "Int")
+		workTop       := NumGet(monitorInfo, 24, "Int")
+		workRight     := NumGet(monitorInfo, 28, "Int")
+		workBottom    := NumGet(monitorInfo, 32, "Int")
+		isPrimary     := NumGet(monitorInfo, 36, "Int") & 1
+
+		SysGet, monitorCount, MonitorCount
+
+		Loop, %monitorCount%
+		{
+			SysGet, tempMon, Monitor, %A_Index%
+
+			; Compare location to determine the monitor index.
+			if ((monitorLeft = tempMonLeft) and (monitorTop = tempMonTop)
+				and (monitorRight = tempMonRight) and (monitorBottom = tempMonBottom))
+			{
+				monitorIndex := A_Index
+				break
+			}
+		}
+	}
+
+	return monitorIndex
+}
+
+#f11::
+    monitor_index_GetActiveMonitorIndex := GetActiveMonitorIndex()
+
+    WinGetPos, winX, winY, winWidth, winHeight, A
+    winMidX := winX + winWidth / 2
+    winMidY := winY + winHeight / 2
+    monitor_index_GetMonitorAt := GetMonitorAt(winMidX, winMidY)
+
+    WinGet, active_handle
+    monitor_index_GetMonitorIndexFromWindow := GetMonitorIndexFromWindow(WinExist("A"))
+
+    SysGet, workArea0_, MonitorWorkArea, 0
+    SysGet, workArea1_, MonitorWorkArea, 1
+    SysGet, workArea2_, MonitorWorkArea, 2
+
+    listvars
+return
+
+;; Golden ratio window movement
 ;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
 
 ;-=---------------------------------------------------=-;
@@ -111,16 +234,35 @@ golden_ratio := 1.61803398875
 small_golden := 1/golden_ratio
 big_golden := 1 - small_golden
 
+Convert_LeftToRightMonitorIndex(ActiveMonitor) {
+    ;; Leftmost monitor is 0.
+
+    ;; Use 0-indexed for calculations
+    ;~ ActiveMonitor := ActiveMonitor - 1
+
+    ;; Hack: My monitors are laid out: 2 1
+    SysGet, monitorCount, MonitorCount
+    ActiveMonitor := monitorCount - ActiveMonitor - 1
+
+    return ActiveMonitor
+}
+
 ^#Left::
   WinRestore, A
-  SysGet, workArea, MonitorWorkArea, GetActiveMonitorIndex()
+  ActiveMonitor := GetActiveMonitorIndex()
+  SysGet, workArea, MonitorWorkArea, ActiveMonitor
   workAreaWidth := workAreaRight - workAreaLeft
   workAreaHeight := workAreaBottom - workAreaTop
+
+  ActiveMonitor := Convert_LeftToRightMonitorIndex(ActiveMonitor)
+  monitorOffsetX := ActiveMonitor * workAreaWidth
+  X := GetDesktopLeft()
+  Y := GetDesktopTop()
   WinGetPos, winX, winY, winWidth, winHeight, A
   if (winX=workAreaLeft && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
-    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * small_golden, %workAreaHeight%
+    WinMove, A, , X,Y, workAreaWidth * small_golden, %workAreaHeight%
   else
-    WinMove, A, , %workAreaLeft%, %workAreaTop%, workAreaWidth * big_golden, %workAreaHeight%
+    WinMove, A, , X,Y, workAreaWidth * big_golden, %workAreaHeight%
 return
 
 ;-=---------------------------------------------------=-;
@@ -129,14 +271,17 @@ return
 
 ^#Right::
   WinRestore, A
-  SysGet, workArea, MonitorWorkArea, GetActiveMonitorIndex()
+  ActiveMonitor := GetActiveMonitorIndex()
+  SysGet, workArea, MonitorWorkArea, ActiveMonitor
   workAreaWidth := workAreaRight - workAreaLeft
   workAreaHeight := workAreaBottom - workAreaTop
   WinGetPos, winX, winY, winWidth, winHeight, A
+  X := GetDesktopLeft()
+  Y := GetDesktopTop()
   if (winX=workAreaLeft+Floor(workAreaWidth * small_golden) && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
-    WinMove, A, , workAreaLeft + workAreaWidth * big_golden, workAreaTop, workAreaWidth * small_golden, workAreaHeight
+    WinMove, A, , X + workAreaWidth * big_golden, Y, workAreaWidth * small_golden, workAreaHeight
   else
-    WinMove, A, , workAreaLeft + workAreaWidth * small_golden, workAreaTop, workAreaWidth * big_golden, workAreaHeight
+    WinMove, A, , X + workAreaWidth * small_golden, Y, workAreaWidth * big_golden, workAreaHeight
 return
 
 
@@ -176,7 +321,9 @@ FitToRightOfWin(UseRightScreen, AdjacentWidth)
 {
 ; Put a window in the space next to my game.
 
-  LeftBound := GetDesktopLeft()
+  ;; TODO: Use GetDesktopLeft(false)? Autodetect active window and position on
+  ;; its monitor?
+  LeftBound := GetDesktopLeft(true)
   RightBound := A_ScreenWidth
   if UseRightScreen {
     LeftBound := A_ScreenWidth
@@ -194,7 +341,7 @@ FitToLeftOfWin(UseRightScreen, AdjacentWidth)
 {
 ; Put a window in the space next to my game.
 
-  LeftBound := GetDesktopLeft()
+  LeftBound := GetDesktopLeft(true)
   RightBound := A_ScreenWidth
   if UseRightScreen {
     LeftBound := A_ScreenWidth
@@ -212,7 +359,7 @@ FitBelowWin(UseRightScreen, AdjacentHeight, AdjacentWidth)
 {
 ; Put a window in the space below to my game.
 
-  LeftBound := GetDesktopLeft()
+  LeftBound := GetDesktopLeft(true)
   RightBound := AdjacentWidth
   if UseRightScreen {
     LeftBound := A_ScreenWidth
