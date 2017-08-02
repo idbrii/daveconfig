@@ -118,5 +118,24 @@ if executable('svn')
     nnoremap <silent> <leader>fq :diffoff! <CR> :q<CR>
 endif
 
+
+if executable('TortoiseProc')
+    function! s:TortoiseCommand(command, optional_path)
+        let path = a:optional_path
+        if len(path) == 0
+            let path = '%'
+        endif
+        exec 'AsyncCommand TortoiseProc /command:'. a:command .' /path:"'. path .'"'
+    endf
+    " A visual version of VC commands (with less capitalization please).
+    " Reference: https://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-automation.html
+    command! -nargs=+ Vcv       call s:TortoiseCommand(<f-args>)
+    command! -nargs=? Vcvlog    call s:TortoiseCommand('log', <q-args>)
+    command! -nargs=? Vcvblame  call s:TortoiseCommand('blame', <q-args>)
+    command! -nargs=? Vcvdiff   call s:TortoiseCommand('diff', <q-args>)
+    command! -nargs=? Vcvswitch call s:TortoiseCommand('switch', g:david_project_root)
+    command! -nargs=? Vcvstatus call s:TortoiseCommand('repostatus', g:david_project_root)
+endif
+
 "}}}
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
