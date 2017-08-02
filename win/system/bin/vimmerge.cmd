@@ -1,12 +1,16 @@
 @setlocal
 
-:: For perforce merge:
+:: Perforce merge:
 :: Location: path-to-this-file
 :: Arguments in p4v: %1 %2 %b %r
 ::		Their/Source file: %1
 ::		Your/Target file: %2
 ::		Base file: %b
 ::		Result file: %r
+::
+:: TortoiseSVN merge:
+:: Arguments in TortoiseSVN: %mine %theirs %base %merged
+::
 set LOCAL="%1"
 set REMOTE="%2"
 set BASE="%3"
@@ -19,12 +23,20 @@ title %~n0
 :: Always use normal vimdiff for diffs.
 set USE_diffconflicts=%MERGED%
 :: Uncomment to disable diffconflicts.
-REM set USE_diffconflicts=
+:: TODO: I can't use diffconflicts because Bash for Windows isn't handling TortoiseSVN filenames.
+set USE_diffconflicts=
 
 if defined USE_diffconflicts (
 	REM diffconflicts works well for merging.
-	set IS_PERFORCE=1
-	%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
+	REM set IS_PERFORCE=1
+	if defined cyg_path (
+		:: Cygwin handles this okay.
+		%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
+	) else (
+		:: Bash for Windows doesn't handle backslashes at all. TortoiseSVN
+		:: sends backslashes. I probably need to rewrite all of this in python.
+		bash.exe ~/data/settings/daveconfig/multi/git/tool/mergetool.diffconflicts.git.sh vim %BASE% %LOCAL% %REMOTE% %MERGED%
+	)
 ) else (
 	REM Diff all files in large fullscreen window with equal width buffers and
 	REM find the first conflict.
