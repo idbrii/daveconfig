@@ -27,9 +27,14 @@ xnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
 "	unix -> win
 xnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
+" Todo: uses prefix <Leader>t
 " Quickly find todo items
-nnoremap <Leader>t :vimgrep "\CTODO" %<CR>
-nnoremap <Leader>T :grep TODO -R .
+nnoremap <Leader>tt :vimgrep "\CTODO" %<CR>
+" Open-ended todo
+nnoremap <Leader>tT :grep TODO -R .
+" Project-wide todos
+nnoremap <Leader>tp :exec 'NotGrep TODO.'. g:snips_author<CR>
+nnoremap <Leader>tl :TodoNew<CR>
 
 " Filters the quickfix list to keep results matching pattern. Bang removes
 " remove results matching the pattern. `:QFilter file|folder` and the list

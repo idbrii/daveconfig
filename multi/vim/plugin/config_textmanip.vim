@@ -49,3 +49,9 @@ omap <unique> g/  <Plug>Commentary
 "nmap <unique> cg/ <Plug>ChangeCommentary
 nmap <unique> g/.  <Plug>Commentary<Plug>Commentary
 nmap <unique> g/g/ <Plug>Commentary<Plug>Commentary
+
+" Table-mode {{{2
+"
+" Change mode -- table mode
+" I use it so frequently, that I don't need it on a short prefix.
+let g:table_mode_map_prefix = '<Leader>ct'
