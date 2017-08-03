@@ -54,11 +54,15 @@ if executable('svn')
     let g:vc_donot_confirm_cmd = 1
 
     " Sometimes VCDiff doesn't work. Give me a backup.
-    function! s:SvnDiff()
+    function! s:SvnDiff(optional_revision)
         silent Scratch diff
-        .! svn diff #
+        let revision = a:optional_revision
+        if len(revision) > 0 && revision[0] != '-'
+            let revision = '-r '. revision
+        endif
+        exec '.! svn diff # '. revision
     endf
-    command! SvnDiff :silent call s:SvnDiff()
+    command! -nargs=? SvnDiff :silent call s:SvnDiff(<q-args>)
 
     " There's no VCShow like git show.
     function! s:SvnShow(revision)
