@@ -151,6 +151,7 @@ if executable('TortoiseProc')
     command! -nargs=? Vcvblame  call s:TortoiseCommand('blame', <q-args>)
     command! -nargs=? Vcvdiff   call s:TortoiseCommand('diff', <q-args>)
     command! -nargs=? Vcvswitch call s:TortoiseCommand('switch', g:david_project_root)
+    command! -nargs=? Vcvrepo call s:TortoiseCommand('repobrowser', g:david_project_root)
     command! -nargs=? Vcvstatus call s:TortoiseCommand('repostatus', g:david_project_root)
 endif
 
