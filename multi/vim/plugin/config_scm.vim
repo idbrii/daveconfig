@@ -19,11 +19,11 @@ if executable('git')
     nnoremap <Leader>gd :Gdiff<CR>
 
     " Gitv
-    " v: visual repo history
-    nnoremap <leader>gv :Gitv --all<CR>
-    " V: visual file history
-    nnoremap <leader>gV :Gitv! --all<CR>
-    xnoremap <leader>gV :Gitv! --all<CR>
+    " V: visual repo history
+    nnoremap <leader>gV :Gitv --all<CR>
+    " v: visual file history
+    nnoremap <leader>gv :Gitv! --all<CR>
+    xnoremap <leader>gv :Gitv! --all<CR>
     nnoremap <Leader>gb :silent! cd %:p:h<CR>:Gblame<CR>
     let g:Gitv_DoNotMapCtrlKey = 1
 
@@ -122,8 +122,8 @@ if executable('svn')
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
     nnoremap <silent> <leader>fIq :VCStatus -qu<CR>
     nnoremap <silent> <leader>fIc :VCStatus .<CR>
-    nnoremap <silent> <leader>fv :VCLog! .<CR>
-    nnoremap <silent> <leader>fV :VCLog!<CR>
+    nnoremap <silent> <leader>fV :VCLog! .<CR>
+    nnoremap <silent> <leader>fv :VCLog!<CR>
     " Explore
     nnoremap <silent> <leader>fe :VCBrowse<CR>
     nnoremap <silent> <leader>fEm :VCBrowse<CR>
