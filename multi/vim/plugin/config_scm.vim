@@ -122,8 +122,8 @@ if executable('svn')
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
     nnoremap <silent> <leader>fIq :VCStatus -qu<CR>
     nnoremap <silent> <leader>fIc :VCStatus .<CR>
-    nnoremap <silent> <leader>fV :VCLog! .<CR>
-    nnoremap <silent> <leader>fv :VCLog!<CR>
+    nnoremap <silent> <leader>fV :exec 'VCLog! '. g:david_project_root<CR>
+    nnoremap <silent> <leader>fv :VCLog! %<CR>
     " Explore
     nnoremap <silent> <leader>fe :VCBrowse<CR>
     nnoremap <silent> <leader>fEm :VCBrowse<CR>
