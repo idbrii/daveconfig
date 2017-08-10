@@ -528,6 +528,29 @@ return
 	WinMinimize A
 return
 
+OrganizeDesktop()
+{
+    ;; Lay out windows for my three monitors with centre as the work machine.
+    ;; Roughly in order of left-to-right appearance.
+    WinMove,ahk_exe slack.exe,, 62, 0, 1140, 1080
+    WinMove,ahk_class Vim,, 1913, -364, 1294, 1447
+    ;; Game and log go here (but they position themselves).
+    WinMove,ahk_exe chrome.exe,, 4480, 0, 974, 1080
+    WinMove,ahk_exe bash.exe,, 5433, 0, 974, 1087
+
+    SetTitleMatchMode 2 ;; A window's title can contain WinTitle anywhere inside it to be a match
+    ;; Tortoise has lots of windows and they all have the same ahk_exe
+    ;; (TortoiseProc.exe) and ahk_class (#32770). We could do try to match on
+    ;; text inside the window, but the title should be pretty consistent so use
+    ;; that instead.
+    WinMove,Working Copy - TortoiseSVN,, 5433, 482, 974, 605
+    SetTitleMatchMode 1 ;; Reset to default: A window's title must start with the specified WinTitle to be a match
+
+}
+#f12::
+    OrganizeDesktop()
+return
+
 ; Easy paste in terminal
 ; S-Ins requires Fn mode on my Kinesis. Use the gnome-terminal shortcut C-S-v
 ; instead.
@@ -569,6 +592,7 @@ return
 }
 
 
+;; Why can't I add new maps here?
 
 ; Remap capslock?
 ; +CapsLock::CapsLock
