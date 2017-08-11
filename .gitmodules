@@ -270,7 +270,7 @@
 	url = git@github.com:idbrii/ltags.git
 [submodule "multi/vim/bundle/lua-xolox"]
 	path = multi/vim/bundle/lua-xolox
-	url = https://github.com/xolox/vim-lua-ftplugin.git
+	url = https://github.com/idbrii/vim-lua-ftplugin.git
 [submodule "multi/vim/bundle/xolox-misc"]
 	path = multi/vim/bundle/xolox-misc
 	url = https://github.com/xolox/vim-misc.git
