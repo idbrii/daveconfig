@@ -32,3 +32,15 @@ function! david#svn#create_resolve_file()
     let @/ = '\vzip|fla|png|exe'
     silent normal! n
 endf
+
+
+" Confirm revert before proceeding.
+function! david#svn#ConfirmRevert(...)
+    let files = join(a:000, ' ')
+    if len(files) == 0
+        let files = expand('%')
+    endif
+    if confirm("Revert?\n". files, "&Yes\n&No") == 1
+        call call('vc#Revert', a:000)
+    endif
+endf

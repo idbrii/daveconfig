@@ -54,18 +54,6 @@ if executable('svn')
     " I keep thinking this is a "Press Enter to continue" prompt.
     let g:vc_donot_confirm_cmd = 1
 
-    " Please do confirm reverts
-    function! s:TryRevert(...)
-        let files = join(a:000, ' ')
-        if len(files) == 0
-            let files = expand('%')
-        endif
-        if confirm("Revert?\n". files, "&Yes\n&No") == 1
-            call call('vc#Revert', a:000)
-        endif
-    endf
-    command! -n=* -com=customlist,vc#cmpt#Revert -bang VCRevert call s:TryRevert(<q-bang>, <f-args>)
-
     " Sometimes VCDiff doesn't work. Give me a backup.
     function! s:SvnDiff(optional_revision)
         silent Scratch diff
