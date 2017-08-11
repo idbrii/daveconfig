@@ -533,7 +533,7 @@ OrganizeDesktop()
     ;; Lay out windows for my three monitors with centre as the work machine.
     ;; Roughly in order of left-to-right appearance.
     WinMove,ahk_exe slack.exe,, 62, 0, 1140, 1080
-    WinMove,ahk_class Vim,, 1913, -364, 1294, 1447
+    WinMove,ahk_class Vim,, 1913, -174, 1294, 1447
     ;; Game and log go here (but they position themselves).
     WinMove,ahk_exe chrome.exe,, 4480, 0, 974, 1080
     WinMove,ahk_exe bash.exe,, 5433, 0, 974, 1087
