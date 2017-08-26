@@ -171,6 +171,7 @@ xnoremap <unique> <Leader>jw "cy:<C-u>NotGrep "\b<C-r>c\b"<CR>
 nnoremap <unique> g<A-g> :<C-u>NotGrep <cword><CR>
 nnoremap <unique> <Leader>jgw :<C-u>NotGrep <cword><CR>
 xnoremap <unique> <Leader>jgw "cy:<C-u>NotGrep "<C-r>c"<CR>
+nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
 
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
