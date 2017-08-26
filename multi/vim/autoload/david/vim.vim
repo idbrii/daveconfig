@@ -22,7 +22,8 @@ function! david#vim#GotoFile(symbol)
             let path = 'plugin/'. pluginname .'.vim'
             exec 'Vopen '. path
         else
-            " Other ideas?
+            " Might be an actual filename
+            normal! gf
             return
         endif
     endif
