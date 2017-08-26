@@ -528,22 +528,27 @@ return
 	WinMinimize A
 return
 
+MoveAndRestore(win_id, x,y, w,h)
+{
+    WinRestore,%win_id%
+    WinMove,%win_id%,, %x%,%y%, %w%,%h%
+}
 OrganizeDesktop()
 {
     ;; Lay out windows for my three monitors with centre as the work machine.
     ;; Roughly in order of left-to-right appearance.
-    WinMove,ahk_exe slack.exe,, 62, 0, 1140, 1080
-    WinMove,ahk_class Vim,, 1913, -174, 1294, 1447
+    MoveAndRestore("ahk_exe slack.exe", 62, 0, 1140, 1080)
+    MoveAndRestore("ahk_class Vim", 1913, -174, 1294, 1447)
     ;; Game and log go here (but they position themselves).
-    WinMove,ahk_exe chrome.exe,, 4480, 0, 974, 1080
-    WinMove,ahk_exe bash.exe,, 5433, 0, 974, 1087
+    MoveAndRestore("ahk_exe chrome.exe", 4480, 0, 974, 1080)
+    MoveAndRestore("ahk_exe bash.exe", 5433, 0, 974, 1087)
 
     SetTitleMatchMode 2 ;; A window's title can contain WinTitle anywhere inside it to be a match
     ;; Tortoise has lots of windows and they all have the same ahk_exe
     ;; (TortoiseProc.exe) and ahk_class (#32770). We could do try to match on
     ;; text inside the window, but the title should be pretty consistent so use
     ;; that instead.
-    WinMove,Working Copy - TortoiseSVN,, 5433, 482, 974, 605
+    MoveAndRestore("Working Copy - TortoiseSVN", 5433, 482, 974, 605)
     SetTitleMatchMode 1 ;; Reset to default: A window's title must start with the specified WinTitle to be a match
 
 }
@@ -607,20 +612,41 @@ TileGame() {
     ;; Instead, we minimize everything, restore the game windows,
     ; and then tile everything.
 
+    host_id := 0
+    is_client := false
     WinMinimizeAll
     Loop, Parse, windows, |
     {
-        WinRestore, ahk_id %A_LoopField%
-        ;; Move to first monitor
-        WinMove, ahk_id %A_LoopField%,,100,100
+        if is_client {
+            ;; Unminimize
+            WinRestore, ahk_id %A_LoopField%
+            ;; Move to first monitor
+            WinMove, ahk_id %A_LoopField%,,100,100
+        } else {
+            host_id := ahk_id %A_LoopField%
+        }
+        ;; Unfortunantely, host doens't distinguish themself. Hopefully, they're
+        ;; the first in the list.
+        is_client := true
     }
 
+    ;; Seems like some things don't occur synchronously, so these sleeps are to
+    ;; ensure we've finished restoring before we tile.
+    Sleep, 200
     DllCall("TileWindows",Int,0,UInt,WinArrange_HORIZONTAL,UInt,0,Int,0,Int,0)
+
+    ;; Bring back the host.
+    Sleep, 100
+    WinRestore, %host_id%
 }
 
 
 #f11::
     TileGame()
+    Sleep, 500
+    OrganizeDesktop()
+    ;; Slack is positioned on top of the clients.
+    WinMinimize,ahk_exe slack.exe
 return
 
 ; Easy paste in terminal
