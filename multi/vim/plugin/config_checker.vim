@@ -3,6 +3,50 @@
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 
+" Python {{{1
+
+let s:python_exe = ''
+for p in ['python', 'python3']
+    if has(p)
+        let s:python_exe = p
+        break
+    endif
+endfor
+
+" Install: AsyncPython -m pip install --user flake8
+let g:ale_python_flake8_executable = s:python_exe
+let g:ale_python_flake8_options = '-m flake8'
+
+" Expansive set for my code.
+let g:ale_python_flake8_options .= ' --ignore E302' " expected 2 blank lines, found 1
+let g:ale_python_flake8_options .= ',E501' " line too long
+let g:ale_python_flake8_options .= ',E225' " missing whitespace around operator -- I like 'sdf'+ val
+
+" Minimal set for other people's code.
+" https://pycodestyle.readthedocs.io/en/latest/intro.html#error-codes
+" Things that are likely bugs:
+let g:ale_python_flake8_options .= ' --select C90'  " mccabe
+let g:ale_python_flake8_options .= ',F'             " flake errors
+let g:ale_python_flake8_options .= ',E999'          " SyntaxError
+let g:ale_python_flake8_options .= ',E7'            " Statement
+let g:ale_python_flake8_options .= ',E9'            " Runtime error
+let g:ale_python_flake8_options .= ',W6'            " Deprecation
+" Worthwhile style:
+let g:ale_python_flake8_options .= ',E1'            " Indentation
+let g:ale_python_flake8_options .= ',W291'          " trailing whitespace
+let g:ale_python_flake8_options .= ',W293'          " blank line contains whitespace
+
+" Fall back on syntax if python isn't setup (unfortunately, we can't really
+" check for flake8's existence).
+let g:python_highlight_space_errors = executable(g:ale_python_flake8_executable) == 0
+
+" Install: AsyncPython -m pip install --user pylint
+let g:ale_python_pylint_executable = '' "s:python_exe
+let g:ale_python_pylint_options = '-m pylint -rcfile ~/data/settings/daveconfig/multi/python/pylint.rc'
+" The virtualenv detection needs to be disabled.
+let g:ale_python_pylint_use_global = 0
+
+
 " Luacheck {{{1
 let g:ale_lua_luacheck_options = ''
 
