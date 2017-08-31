@@ -556,6 +556,34 @@ OrganizeDesktop()
     OrganizeDesktop()
 return
 
+TileGame() {
+    WinGet, window_list,List, ahk_class opengles2.0
+    width := 943
+    height := width * 9/16
+    start_x := 57
+    x := start_x
+    y := 0
+    WinMove, dontstarve r,,x,100
+    WinMinimize, dontstarve r
+    Loop %window_list%
+    {
+        if (A_Index == window_list) {
+            continue
+        }
+        w := window_list%A_Index%
+        WinMove, ahk_id %w%,,x,y,width,height
+        x += width
+        if (x > 1600) {
+            x := start_x
+            y += height
+        }
+    }
+    ; not sure if there's a fixed order to which is my main game window?
+    w := window_list1
+    w := window_list%window_list%,
+    WinMove, ahk_id %w%,,3192,-196,1296,759
+}
+
 ;; https://autohotkey.com/board/topic/80580-how-to-programmatically-tile-cascade-windows/
 WinArrange( TC=1, aStr="", VH=0x1, Rect="", hWnd=0x0 )  {
     CreateArray( aRect, Rect )                  ; Create a RECT structure.
@@ -595,7 +623,10 @@ WinArrange_CLIENTAREA   := "200|25|1000|700"    ; for Param 4
 ; ALLWINDOWS (Param 2), ARRAYORDER (Param 3), FULLSCREEN (Param 4)
 ; are undeclared variables simulating NULL content.
 
-TileGame() {
+TileGame_WindowsMethod() {
+    ; Using the Windows-native DLL method seems like a good idea, but it's
+    ; laggy (sometimes hangs until one of the cascaded processes is killed) and
+    ; error prone. When it fails, it leaves some windows minimized.
     WinGet, window_list,List, ahk_class opengles2.0
 
     ; StringJoin - can't be a function and work in local scope.
@@ -638,15 +669,17 @@ TileGame() {
     ;; Bring back the host.
     Sleep, 100
     WinRestore, %host_id%
+
+    ;; Since we messed with other windows, we need to restore them.
+    Sleep, 500
+    OrganizeDesktop()
+    ;; Slack is positioned on top of the clients.
+    WinMinimize,ahk_exe slack.exe
 }
 
 
 #f11::
     TileGame()
-    Sleep, 500
-    OrganizeDesktop()
-    ;; Slack is positioned on top of the clients.
-    WinMinimize,ahk_exe slack.exe
 return
 
 ; Easy paste in terminal
