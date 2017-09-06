@@ -559,8 +559,9 @@ return
 TileGame() {
     WinGet, window_list,List, ahk_class opengles2.0
     width := 940
-    height := width * 9/16 + 31
-    start_x := 57
+    titlebar_height := 31
+    height := width * 9/16 + titlebar_height
+    start_x := 1920 - width
     x := start_x
     y := 0
     WinMove, dontstarve r,,x,100
@@ -573,14 +574,15 @@ TileGame() {
         w := window_list%A_Index%
         WinMove, ahk_id %w%,,x,y,width,height
         ; For some reason window isn't positioned at right edge of previous
-        ; one!
-        x += width - 10
-        if (x > 1600) {
+        ; one! Include some padding.
+        x -= width - 10
+        if (x < 0) {
             x := start_x
             y += height - 10
         }
     }
     ; not sure if there's a fixed order to which is my main game window?
+    ; I thought it should be the first, but last seems to work?
     w := window_list1
     w := window_list%window_list%,
     WinMove, ahk_id %w%,,3192,-196,1296,759
