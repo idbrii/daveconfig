@@ -92,3 +92,13 @@
     # Validate that submodules have been pushed before pushing owner repo.
     recurseSubmodules = check
 	default = simple
+
+# No more entering passwords for each go repo.
+# Get a token, give repo access, and do:
+#   echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" >> ~/.git-credentials
+# Source: https://gist.github.com/shurcooL/6927554#gistcomment-1986695
+[credential]
+    helper = store
+# "git:// protocol is less secure"
+#[url "https://github.com"]
+#    insteadOf = git://github.com
