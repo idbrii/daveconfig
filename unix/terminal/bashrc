@@ -25,3 +25,8 @@ Darwin)
 	echo "bashrc: Platform not supported"
     ;;
 esac
+
+work_settings=~/data/settings/daveconfig/multi/vim/bundle/work/scripts/work.bashrc
+if [ -f $work_settings ] ; then
+    source $work_settings
+fi
