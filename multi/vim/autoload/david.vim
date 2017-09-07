@@ -28,6 +28,9 @@ function! david#setup_python_paths(pythonhome)
         let $PYTHONHOME = a:pythonhome
         let $PYTHONPATH = $PYTHONHOME . "/Lib"
         let $PATH = $PATH . ';' . $PYTHONHOME
+
+        " Make sure pydoc is using our configured python.
+        let g:pydoc_cmd = $PYTHONHOME .'/python -m pydoc'
     else
         echoerr "Invalid pythonhome directory: ". a:pythonhome
     endif
