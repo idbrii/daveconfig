@@ -108,5 +108,5 @@
 [credential]
     helper = store
 # "git:// protocol is less secure"
-#[url "https://github.com"]
-#    insteadOf = git://github.com
+[url "https://github.com"]
+    insteadOf = git://github.com
