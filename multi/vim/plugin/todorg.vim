@@ -13,8 +13,8 @@ function! s:NewTodo()
 	exec "normal G\<Plug>OrgNewHeadingBelowAfterChildrenNormal"
 
     " Boilerplate
-	call append(line('.'), "Effort: 0h")
-	call append(line('.'), "Estimate: 4h")
+	"call append(line('.'), "Effort: 0h")
+	"call append(line('.'), "Estimate: 4h")
 	normal =G
 endf
 command! TodoNew call s:NewTodo()
