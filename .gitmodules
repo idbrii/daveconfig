@@ -301,3 +301,6 @@
 [submodule "multi/vim/bundle/autohotkey"]
 	path = multi/vim/bundle/autohotkey
 	url = https://github.com/hnamikaw/vim-autohotkey.git
+[submodule "multi/vim/bundle/inclement"]
+	path = multi/vim/bundle/inclement
+	url = git@github.com:idbrii/vim-inclement.git
