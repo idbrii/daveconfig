@@ -37,9 +37,9 @@ function! wikisweet#UrlToName(url)
     if exists(':Scratch') == 2 && exists(':ConvertFromUrlEncoding') == 2
         " Putting this in a scratch buffer since that's the easiest way to
         " work with ConvertFromUrlEncoding.
-        Scratch
-        0put =a:url
-        ConvertFromUrlEncoding
+        silent Scratch
+        silent 0put =a:url
+        silent ConvertFromUrlEncoding
         normal! "cdiW
         bdelete
     endif

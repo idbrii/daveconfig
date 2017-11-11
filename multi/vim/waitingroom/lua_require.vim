@@ -1,61 +1,43 @@
-" File: inclement.vim -- Great stuff for headers
+" File: luarequire.vim -- Great stuff for headers
 " Maintainer: David Briscoe (idbrii@gmail.com)
 " Version: 0.1
-" based on dice.vim by Andreas Fredriksson
+" based on cpp_header.vim
 "
 " Functionality:
-"   * Fix header guards
-"   * Add the header for a tag
-"
-" TODO: Add forward declare
-"       Jump to include on insert? -- need something since the includes are
-"       big ugly paths since my tags aren't awesome.
+"   * Add the require for a tag
 "
 
 if (! exists('no_plugin_maps') || ! no_plugin_maps) &&
-      \ (! exists('no_inclement_maps') || ! no_inclement_maps)
+      \ (! exists('no_luarequire_maps') || ! no_luarequire_maps)
 
-    if !hasmapto('<Plug>CppAddIncludeForTag')
-        nmap <buffer> <unique> <Leader>hi <Plug>CppAddIncludeForTag
+    if !hasmapto('<Plug>LuaAddRequireForTag')
+        nmap <buffer> <unique> <Leader>hi <Plug>LuaAddRequireForTag
     endif
 
-    if !hasmapto('<Plug>CppFixHeaderGuard')
-        nmap <buffer> <unique> <Leader>hg <Plug>CppFixHeaderGuard
-    endif
-
-    noremap <script> <Plug>CppAddIncludeForTag <SID>AddIncludeForTag
-    noremap <script> <Plug>CppFixHeaderGuard <SID>FixHeaderGuard
+    noremap <script> <Plug>LuaAddRequireForTag <SID>AddIncludeForTag
 
     noremap <SID>AddIncludeForTag :call <SID>AddIncludeForTag_Impl(expand("<cword>"))<CR>
-    noremap <SID>FixHeaderGuard :call <SID>FixGuard()<CR>
-endif
-
-if (! exists('no_plugin_menus') || ! no_plugin_menus) &&
-      \ (! exists('no_inclement_menus') || ! no_inclement_menus)
-
-    noremenu <script> Cpp.Add\ Include\ for\ Symbol <SID>AddIncludeForTag
-    noremenu <script> Cpp.Fix\ Header\ Guard <SID>FixHeaderGuard
 endif
 
 " Protect against multiple reloads
-if exists("loaded_inclement")
+if exists("loaded_luarequire")
 	finish
 endif
-let loaded_inclement = 1
+let loaded_luarequire = 1
 
 
 " Ensure our settings variables exist and set defaults
-if !exists('g:inclement_use_preview')
-    let g:inclement_use_preview = 0
+if !exists('g:luarequire_use_preview')
+    let g:luarequire_use_preview = 0
 end
-if !exists('g:inclement_n_dir_to_trim')
-    let g:inclement_n_dir_to_trim = 0
+if !exists('g:luarequire_n_dir_to_trim')
+    let g:luarequire_n_dir_to_trim = 0
 end
-if !exists('g:inclement_max_element_in_path')
-    let g:inclement_max_element_in_path = 0
+if !exists('g:luarequire_max_element_in_path')
+    let g:luarequire_max_element_in_path = 0
 end
-if !exists('g:inclement_after_first_include')
-    let g:inclement_after_first_include = 0
+if !exists('g:luarequire_after_first_include')
+    let g:luarequire_after_first_include = 0
 end
 
 
@@ -64,48 +46,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 " Configurable options
-let s:header_extensions = ["h", "hpp", "hh", "hxx"]
-
-
-
-" Function: FixGuard()
-" Purpose: Update the header guards in the current buffer.
-"
-" Given club/barmanager.h, this produces the header guard BARMANAGER_H.
-function! s:FixGuard()
-	let l:save_cursor = getpos(".")
-	let l:path = expand("%") 
-
-	" Compute the guard value
-	let l:guard = substitute(l:path, '\([a-z]\)', '\u\1', 'g')
-	let l:guard = substitute(l:guard, '\.', '_', 'g')
-	let l:guard = substitute(l:guard, '^[^A-Z0-9_].*', '', 'g')
-
-	" See if we can find the #ifndef/#define pair
-	call cursor(1, 1)
-
-	let l:guard_found = 0
-	let l:gline = search('^\s*#ifndef\s\+[A-Za-z0-9_]\+\s*', 'nc')
-
-	if l:gline > 0
-		let l:oldguard = substitute(getline(l:gline), '^#\s*ifndef\s\+\([A-Za-z0-9_]\+\)\s*$', '\1', '')
-		let l:dpat = '^#\s*define\s\+' . l:oldguard . '\s*$'
-		let l:dline = search(l:dpat, 'Wn')
-
-		if l:dline == l:gline + 1
-			let l:guard_found = 1
-			call setline(l:gline, '#ifndef ' . l:guard)
-			call setline(l:dline, '#define ' . l:guard)
-		endif
-	endif
-
-	if 0 == l:guard_found
-		echo "Failed to find header guard"
-	endif
-
-	" Restore cursor position
-	call setpos('.', l:save_cursor)
-endfunction
+let s:header_extensions = ["lua"]
 
 
 
@@ -123,20 +64,32 @@ function! s:GetHeaderForTag(tag_expr)
 
 		" Use header files straight away.
 		if index(s:header_extensions, l:fnext) >= 0
-			return l:fn
+			return [l:fn, tag]
 		endif
 
 	endfor
-	return ''
+	return []
 endfunction
 
+function! s:GetPrefix(tag_dict)
+    if a:tag_dict["kind"] == "v"
+        return "local ". a:tag_dict["name"] ." = "
+    else
+        return ""
+    endif
+endf
+
 " Purpose: Add a header path to the file.
-function! s:InsertHeader(path)
+function! s:InsertHeader(taginfo)
     " Save the current cursor so we can restore on error or completion
 	let l:save_cursor = getpos(".")
+    
+    " Extension is not relevant part of path.
+    let l:path = fnamemodify(a:taginfo[0], ':r')
+    let l:require_prefix = s:GetPrefix(a:taginfo[1])
 
     " Only use the base name for higher likelihood of matches
-    let l:filename = fnamemodify(a:path, ':t')
+    let l:filename = fnamemodify(l:path, ':t')
 
     " Check if including the current file
     let l:currentfile = expand('%:b')
@@ -148,13 +101,13 @@ function! s:InsertHeader(path)
     endif
 
     " Check if include already exists
-	let l:pattern = '\v^\s*#\s*include\s*["<](.*[\/\\])?' . l:filename . '[">]'
+	let l:pattern = '\v^.*<require>[^"]*"(.*[\/\\])?' . l:filename . '"'
 	let l:iline = search(l:pattern)
 	if l:iline > 0
         " Include already exists. Inform the user.
 
         call setpos(".", l:save_cursor)
-        if ( g:inclement_use_preview )
+        if ( g:luarequire_use_preview )
             " Use the preview window to show the include
             set previewheight=1
             silent exec "pedit +" . l:iline
@@ -166,7 +119,7 @@ function! s:InsertHeader(path)
         return
 	endif
 
-	if ( g:inclement_after_first_include )
+	if ( g:luarequire_after_first_include )
 		" Search forwards for the first include.
 		normal 0G
 		let l:flags = ''
@@ -177,9 +130,9 @@ function! s:InsertHeader(path)
 	endif
 	" search() will return 0 if there are no matches, which will make the
 	" append append on the first line in the file.
-	let l:to_insert_after = search('^\s*#\s*include', l:flags)
+	let l:to_insert_after = search('\v^.*<require>', l:flags)
 
-    if ( g:inclement_use_preview )
+    if ( g:luarequire_use_preview )
         " Use the preview window to show the include
         " Use height=2 because we open preview before we put line (to
         " avoid unsaved error). So we show the line before and the include.
@@ -188,7 +141,7 @@ function! s:InsertHeader(path)
     endif
 
     " We only support quotes! See below.
-	let l:text = '#include "' . a:path . '"'
+	let l:text = l:require_prefix. 'require "' . l:path . '"'
 	call append(l:to_insert_after, l:text)
     " We inserted a line, so change the cursor position
     let l:save_cursor[1] += 1
@@ -197,19 +150,19 @@ function! s:InsertHeader(path)
     " We always insert quotes around include, so we can assume there's a quote
     " at the start.
     normal jf"l
-    if g:inclement_n_dir_to_trim > 0
-        exec "normal " . g:inclement_n_dir_to_trim . "df/"
+    if g:luarequire_n_dir_to_trim > 0
+        exec "normal " . g:luarequire_n_dir_to_trim . "df/"
     endif
-    if g:inclement_max_element_in_path > 0
+    if g:luarequire_max_element_in_path > 0
 		normal! $
-        exec 'normal! ' . g:inclement_max_element_in_path . 'T/dT"'
+        exec 'normal! ' . g:luarequire_max_element_in_path . 'T/dT"'
     endif
     normal! 0f"l
 
     " Set lastpos mark so you can easily jump back to coding with ``
     call setpos("'`", l:save_cursor)
 
-    if ( g:inclement_use_preview )
+    if ( g:luarequire_use_preview )
         " We have the preview window, so main doesn't need to show include
         call setpos(".", l:save_cursor)
     endif
@@ -218,7 +171,7 @@ endfunction
 function! s:AddIncludeForTag_Impl(tag_expr)
 	let l:header = s:GetHeaderForTag(a:tag_expr)
 
-	if l:header == ''
+	if len(l:header) == 0
 		echo "No header declaring '" . a:tag_expr . "' found in tags"
 		return
 	endif
