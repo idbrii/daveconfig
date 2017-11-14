@@ -7,15 +7,12 @@ command! DisableAutoSetCompiler let b:autocompiler_skip_detection = 1
 command! -nargs=1 ForceSetCompiler let g:compiler_buildsystem = <q-args>
 
 function! s:AutoSetCompiler(ftype)
-    if exists('b:autocompiler_skip_detection') && b:autocompiler_skip_detection
+    if get(b:, 'autocompiler_skip_detection')
         return
     endif
 
-    let c = a:ftype
     " If I'm using a buildsystem, then use it instead.
-    if exists('g:compiler_buildsystem')
-        let c = g:compiler_buildsystem
-    endif
+    let c = get(g:, 'compiler_buildsystem', a:ftype)
     exe 'silent! compiler '. c
 endf
 augroup AutoCompiler
