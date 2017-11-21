@@ -5,7 +5,7 @@
 "syn match luaError "\<\l\+\.\u\w\+(" display
 " Our class system uses _base as the parent class. We want the instance passed
 " as self and not the class.
-syn match luaError "_base:" display
+syn match luaError "\<_base:" display
 " Lua uses ~= for not equal.
 syn match luaError "!=" display
 " Lua does not support assignment-equals
