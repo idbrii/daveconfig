@@ -46,24 +46,30 @@ function! david#svn#ConfirmRevert(...)
 endf
 
 function! david#svn#get_branch()
-    let lazyredraw_bak = &lazyredraw
-    set lazyredraw
+    if exists("b:svndavid_branch")
+        return b:svndavid_branch
+    endif
 
-    " TODO: Do this without buffer
-    silent cd %:p:h
-    silent Scratch
+    " airline needs us to track our svn directory for some reason.
+    let b:svn_dir = finddir(".svn", '.;/') " somewhere above us
+
+    " Always define it so we don't keep retrying. Clear it when we leave the
+    " buffer so it's somewhat up to date.
+    let b:svndavid_branch = ""
+    augroup svndavid
+        au!
+        autocmd BufWinLeave <buffer> unlet! b:svndavid_branch
+    augroup END
 
     " Based on: https://stackoverflow.com/a/39516489/79125
-    silent .!svn info
-    let url_line = search('^URL:')
-    let url = getline(url_line)
-    bdelete
-    let &lazyredraw = lazyredraw_bak
-    if url_line > 0
-        let branch = substitute(url, '\v.*((tags|branches)/[^/]+|trunk).*', '\1', '')
+    for line in systemlist("svn info ". expand("%:p:h"))
+        let branch = matchstr(line, '\v^URL:.*\zs((tags|branches)/[^/]+|trunk)', 0, 1)
         let branch = substitute(branch, '\v^[^/]+/', '', '')
-        return branch
-    endif
+        if len(branch) > 0
+            let b:svndavid_branch = branch
+            return branch
+        endif
+    endfor
     return ""
 endf
 
