@@ -44,3 +44,26 @@ function! david#svn#ConfirmRevert(...)
         call call('vc#Revert', a:000)
     endif
 endf
+
+function! david#svn#get_branch()
+    let lazyredraw_bak = &lazyredraw
+    set lazyredraw
+
+    " TODO: Do this without buffer
+    silent cd %:p:h
+    silent Scratch
+
+    " Based on: https://stackoverflow.com/a/39516489/79125
+    silent .!svn info
+    let url_line = search('^URL:')
+    let url = getline(url_line)
+    bdelete
+    let &lazyredraw = lazyredraw_bak
+    if url_line > 0
+        let branch = substitute(url, '\v.*((tags|branches)/[^/]+|trunk).*', '\1', '')
+        let branch = substitute(branch, '\v^[^/]+/', '', '')
+        return branch
+    endif
+    return ""
+endf
+
