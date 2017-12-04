@@ -305,6 +305,11 @@ set complete-=i
 " Always use forward slashes.
 if exists('+shellslash')
     set shellslash
+    " This breaks some plugins because it changes slashes and quoting. (But
+    " disabling it breaks other plugins and filepath completion (#1274).)
+    " Using a unix-like shell ("C:\Windows\System32\bash.exe") could work (and
+    " needs to be done with an environment variable to autoset other shell
+    " variables), but breaks other things.
 endif
 
 " Asides {{{1
