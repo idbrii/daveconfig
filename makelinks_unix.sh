@@ -27,9 +27,7 @@ function delete_if_symbolic {
 }
 if [ `uname` = 'Linux' ] ; then
     # linux uses bashrc, get rid of the profile or it will interfere
+    # mac uses profile and bashrc
     delete_if_symbolic ~/.profile
-else
-    # mac uses profile, get rid of the bashrc
-    delete_if_symbolic ~/.bashrc
 fi
 

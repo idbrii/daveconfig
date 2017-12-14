@@ -18,7 +18,8 @@ Linux)
 	source $DIR/ubuntu.bashrc
     ;;
 Darwin)
-    #
+	source $DIR/ubuntu.bashrc
+	source $DIR/mac.bashrc
     ;;
 *)
 	echo "bashrc: Platform not supported"
