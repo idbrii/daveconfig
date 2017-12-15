@@ -273,7 +273,7 @@
 	url = https://github.com/hynek/vim-python-pep8-indent.git
 [submodule "multi/vim/bundle/lua-david/ltags"]
 	path = multi/vim/bundle/lua-david/lib/ltags
-	url = https://github.com/idbrii/ltags.git
+	url = git@github.com:idbrii/ltags.git
 [submodule "multi/vim/bundle/lua-xolox"]
 	path = multi/vim/bundle/lua-xolox
 	url = https://github.com/xolox/vim-lua-ftplugin.git
@@ -282,7 +282,7 @@
 	url = https://github.com/xolox/vim-misc.git
 [submodule "multi/vim/bundle/commentary"]
 	path = multi/vim/bundle/commentary
-	url = https://github.com/idbrii/vim-commentary.git
+	url = git@github.com:idbrii/vim-commentary.git
 [submodule "multi/vim/bundle/lua-refvim"]
 	path = multi/vim/bundle/lua-refvim
 	url = https://github.com/monkoose/luarefvim.git
