@@ -56,7 +56,9 @@ function! david#svn#get_branch()
     " Always define it so we don't keep retrying. Clear it when we leave the
     " buffer so it's somewhat up to date.
     let b:svndavid_branch = ""
-    augroup svndavid
+    " Use a buffer-unique group name to prevent clearing autocmds for other
+    " buffers.
+    exec 'augroup svndavid-'. bufnr("%")
         au!
         autocmd BufWinLeave <buffer> unlet! b:svndavid_branch
     augroup END
