@@ -117,7 +117,7 @@ let g:ctrlp_root_markers = ['filelist', '.git']
 
 " don't store temp files or git files
 if has("win32")
-    let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^c:\\temp\\.*\|\\AppData\\Local\\Temp\\'
+    let g:ctrlp_mruf_exclude = '.*\\\.git\\.*\|^\a:\\temp\\.*\|\\AppData\\Local\\Temp\\'
 else
     let g:ctrlp_mruf_exclude = '.*/\.git/.*\|^/tmp/.*\|^/var/tmp/.*'
 endif
