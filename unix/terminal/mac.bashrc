@@ -27,6 +27,23 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# We failed to load bash_completion in unix.bashrc because homebrew installs to /usr/local. Use brew to find the right spot.
+# Source: https://github.com/bobthecow/git-flow-completion/issues/46#issuecomment-332724240
+# Dropped
+# https://github.com/bobthecow/git-flow-completion/blob/master/git-flow-completion.bash
+# into completion dir.
+# Linked git completion:
+# ln -s /usr/local/git/contrib/completion/git-completion.bash /usr/local/etc/bash_completion.d/git-completion.bash
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
+  . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+fi
+if [ -f `brew --prefix`/etc/bash_completion.d/git-flow-completion.bash ]; then
+  . `brew --prefix`/etc/bash_completion.d/git-flow-completion.bash
+fi
+
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
 
