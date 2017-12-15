@@ -3,6 +3,32 @@
 " This file is sourced at the beginning of the vimrc. Put anything here that
 " many other things depend on and must be done first.
 
+" Must setup blacklist before calling infect().
+let g:pathogen_blacklist = []
+
+if !executable('p4')
+    let g:pathogen_blacklist += ["perforce"]
+    let g:pathogen_blacklist += ["perforce-david"]
+endif
+if !executable('eclipse')
+    let g:pathogen_blacklist += ["eclim"]
+endif
+" Cannot do git since it's added to the path in local.vim
+"if !executable('git')
+"    let g:pathogen_blacklist += ["fugitive"]
+"    let g:pathogen_blacklist += ["gitv"]
+"endif
+if !executable(get(g:, 'slime_target', 'screen'))
+    let g:pathogen_blacklist += ["slime"]
+endif
+if !has('clientserver')
+    " Console vim doesn't have clientserver, so we can't use asynccommand. Do
+    " this to prevent loading and squelch the warning.
+    let g:pathogen_blacklist += ["asynccommand"]
+endif
+if !executable('ctags') || 1 " I'm not using taglist recently. 
+    let g:pathogen_blacklist += ["taglist"]
+endif
 
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
