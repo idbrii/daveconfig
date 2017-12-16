@@ -55,8 +55,8 @@ export HISTCONTROL=ignoreboth:erasedups
 # Don't blindly execute history
 shopt -s histverify
 
-# Bigger history
-export HISTSIZE=10000
+# Bigger history. Seems to automatically get sync'd with HISTFILESIZE.
+export HISTSIZE=100000
 
 # Don't store these little commands
 export HISTIGNORE="&:ls:[bf]g:exit"
