@@ -4,11 +4,13 @@
 "   --servername Vide --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime videinvoke.vim" $(ItemFileName)$(ItemExt)
 " Eclipse passes:
 "   --servername Vide --remote-silent "+runtime videinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
-" Unity passes (to vide):
-"   +"call cursor($(Line),0)" +"runtime videinvoke.vim" +"set path+=$(ProjectPath)/**" "$(File)"
-"
+" Unity passes nothing on Mac and on Win:
+"   --servername Vide --remote-silent +"runtime videinvoke.vim" +"call cursor($(Line),0)" +"set path+=$(ProjectPath)/**" "$(File)"
+"   (Mac programs calling a .app have their own protocol for passing line
+"   numbers. So configure them to pass nothing.)
 
 " It might be useful to include: +"set path+=$(SolutionDir)/**" 
+
 
 "According to this: http://vim.wikia.com/wiki/VimTip716
 "<c-z> brings gvim to foreground - on win2k, gvim gets focus but won't bring
