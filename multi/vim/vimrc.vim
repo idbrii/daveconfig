@@ -251,7 +251,7 @@ set wildmode=longest:list,full
 function! s:autochdir()
     if (!exists("v:vim_did_enter") || v:vim_did_enter) " Don't mess with vim on startup.
                 \ && dirvish#can_autochdir() " Don't mess with dirvish
-                \ && match(['help', 'dirvish'], printf("\\v<%s>", &ft)) < 0 " Not useful for some filetypes
+                \ && david#init#find_ft_match(['help', 'dirvish']) < 0 " Not useful for some filetypes
                 \ && filereadable(expand("%")) " Only change to real files.
         silent! cd %:p:h
     endif
@@ -263,7 +263,7 @@ if has("autocmd")
         " In most files, jump back to the last spot cursor was in before exiting
         " (except: git commit)
         " See :help last-position-jump
-        autocmd BufReadPost * if match(['gitcommit', 'svn'], printf("\\v<%s>", &ft)) < 0 |
+        autocmd BufReadPost * if david#init#find_ft_match(['gitcommit', 'svn']) < 0 |
                     \ if line("'\"") > 1 && line("'\"") <= line("$") |
                     \   exe "normal g`\"" |
                     \ endif
