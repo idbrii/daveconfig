@@ -4,10 +4,43 @@
 # https://brew.sh/
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# latest git comes with git-completion!
-brew install wget bash-completion git
+packages=
+casks=
 
-# automatically installs cask
-# install unity
-brew cask install unity
+
+#
+# terminal basics
+packages="$packages wget"
+# latest git comes with git-completion!
+packages="$packages bash-completion git"
+
+#
+# vim
+# install my own python for pip
+packages="$packages python"
+packages="$packages cscope ctags"
+packages="$packages opensharp-mono"
+casks="$casks vimr"
+pip2 install neovim
+
+#
+# work
+packages="$packages subversion"
+casks="$casks macpass"
+
+brew install $packages
+
+
+# Special case to avoid gsed
+brew install --with-default-names gnu-sed
+
+# using cask automatically installs it
+
 brew cask install google-chrome
+
+# make window fill half screen with keyboard
+brew cask install spectacle
+
+# gamedev
+brew cask install unity steam
+
