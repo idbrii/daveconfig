@@ -20,6 +20,8 @@ packages="$packages bash-completion git"
 packages="$packages python"
 packages="$packages cscope ctags"
 packages="$packages opensharp-mono"
+# TODO: Which one to use:
+packages="$packages macvim"
 casks="$casks vimr"
 pip2 install neovim
 
