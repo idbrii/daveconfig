@@ -10,7 +10,7 @@ if has("unix") || has("mac")
     menu Tools.Build\ David\ Tags   :BuildTags<CR>
 endif
 
-if has("mac")
+if has("mac") && !has("nvim")
     set guifont=Menlo\ Regular:h13
 endif
 
