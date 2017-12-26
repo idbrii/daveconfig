@@ -2,6 +2,7 @@
 "
 " VS passes the following arguments to vim:
 "   --servername Vide --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime videinvoke.vim" $(ItemFileName)$(ItemExt)
+"   It might be useful to include: +"set path+=$(SolutionDir)/**"
 " Eclipse passes:
 "   --servername Vide --remote-silent "+runtime videinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
 " Unity passes nothing on Mac and on Win:
@@ -9,7 +10,6 @@
 "   (Mac programs calling a .app have their own protocol for passing line
 "   numbers. So configure them to pass nothing.)
 
-" It might be useful to include: +"set path+=$(SolutionDir)/**" 
 
 
 "According to this: http://vim.wikia.com/wiki/VimTip716
