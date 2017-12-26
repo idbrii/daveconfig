@@ -6,6 +6,10 @@ CurColumn=$3
 
 # must use single [] to use bourne evaluation that requires numbers for -eq.
 if [ -n "$CurLine" -a $CurLine -eq $CurLine ] ; then
+    # Passing these quoted strings causes some command text to appear (cal
+    # foreground) and requires press enter. Doesn't occur if I paste the
+    # printed text into this script.
+
     # zero makes no column a column
     cursor_jump="call cursor($CurLine,0$CurColumn)"
 else
@@ -34,6 +38,7 @@ fi
 # files in new/existing server.
 if [[ -z "$FileName" ]] ; then
     if [[ -z "$($vim --serverlist | grep -e "\bVIDE\b")" ]] ; then
+        # No existing server! No remote command creates a new one with no file.
         remote="+ScratchNoSplit"
     else
         # videinvoke probably foregrounds, but not much else useful to put
@@ -45,18 +50,19 @@ else
 fi
 
 
+# TODO: videinvoke does not work here!
+# Fork editexisting and make something that handles this logic within vim
+# instead.
+# Vopen pack/dist/opt/editexisting/plugin/editexisting.vim
+vim="$vim +\"runtime videinvoke.vim\""
 if [[ $is_neovim == 1 ]] ; then
     vim="$vim $remote --cmd \"let g:server_addr = serverstart('vide')\""
 else
     vim="$vim --servername Vide $remote"
 fi
 
-# Passing these quoted strings causes some command text to appear (cal
-# foreground) and requires press enter. Doesn't occur if I paste the printed
-# text into this script.
-vim="$vim +\"$cursor_jump\" +\"runtime videinvoke.vim\" $FileName"
-# TODO: MacVim fails to source videinvoke and tries to edit it instead.
-#~ vim="$vim +\"$cursor_jump\" $FileName"
+# --remote says it only accepts one command!
+vim="$vim +\"$cursor_jump\" $FileName"
 echo $vim
 $vim
 
