@@ -175,7 +175,7 @@ function ge
 }
 function vide
 {
-    gvim --servername VIDE `__default_to_scratch $*` 2> ~/.vim-cache/errors.log ;
+    ~/data/settings/daveconfig/multi/vim/scripts/vide $* 2> ~/.vim-cache/errors.log ;
 }
 function vv
 {

@@ -4,13 +4,8 @@ FileName=$1
 CurLine=$2
 CurColumn=$3
 
-if [[ -z "$FileName" ]] ; then
-    # always have a file or remote will complain
-    FileName=hello
-fi
-
 # must use single [] to use bourne evaluation that requires numbers for -eq.
-if [ $CurLine -eq $CurLine ] ; then
+if [ -n "$CurLine" -a $CurLine -eq $CurLine ] ; then
     # zero makes no column a column
     cursor_jump="call cursor($CurLine,0$CurColumn)"
 else
@@ -18,7 +13,7 @@ else
     FileName=$*
     CurLine=
     CurColumn=
-    cursor_jump='let junk=0'
+    cursor_jump="echo"
 fi
 
 is_neovim=0
@@ -35,16 +30,33 @@ elif [[ -x "/usr/local/bin/nvim" ]] ; then
     is_neovim=1
 fi
 
-if [[ $is_neovim == 1 ]] ; then
-    vim="$vim --remote-silent --cmd \"let g:server_addr = serverstart('vide')\""
+# Support opening new server or focusing vim with no filename and opening
+# files in new/existing server.
+if [[ -z "$FileName" ]] ; then
+    if [[ -z "$($vim --serverlist | grep -e "\bVIDE\b")" ]] ; then
+        remote="+ScratchNoSplit"
+    else
+        # videinvoke probably foregrounds, but not much else useful to put
+        # here.
+        remote="--remote-expr foreground()"
+    fi
 else
-    vim="$vim --servername Vide --remote-silent"
+    remote="--remote-silent"
+fi
+
+
+if [[ $is_neovim == 1 ]] ; then
+    vim="$vim $remote --cmd \"let g:server_addr = serverstart('vide')\""
+else
+    vim="$vim --servername Vide $remote"
 fi
 
 # Passing these quoted strings causes some command text to appear (cal
 # foreground) and requires press enter. Doesn't occur if I paste the printed
 # text into this script.
 vim="$vim +\"$cursor_jump\" +\"runtime videinvoke.vim\" $FileName"
+# TODO: MacVim fails to source videinvoke and tries to edit it instead.
+#~ vim="$vim +\"$cursor_jump\" $FileName"
 echo $vim
 $vim
 
