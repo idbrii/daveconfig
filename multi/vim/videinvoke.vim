@@ -11,13 +11,9 @@
 "   numbers. So configure them to pass nothing.)
 
 
-
-"According to this: http://vim.wikia.com/wiki/VimTip716
-"<c-z> brings gvim to foreground - on win2k, gvim gets focus but won't bring
-"itself to foreground otherwise. You can remove it if you don't have this
-"bring-to-foreground problem.
-" This doesn't work, but it calls foreground() which does something. Look into
-" that and remote_foreground({server})
+" videinvoke is intended to be used from external programs, so we probably
+" don't have focus. Take it.
+call foreground()
 
 if !exists('loaded_videinvoke')
 	" Faster way to open. Should I make this symmetrical with the ide's map?
