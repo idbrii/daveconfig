@@ -9,6 +9,8 @@
 "   --servername Vide --remote-silent +"runtime videinvoke.vim" +"call cursor($(Line),0)" +"set path+=$(ProjectPath)/**" "$(File)"
 "   (Mac programs calling a .app have their own protocol for passing line
 "   numbers. So configure them to pass nothing.)
+" Monodevelop uses:
+"   --servername Vide --remote-silent +"call cursor(${CurLine},${CurColumn}) | runtime videinvoke.vim | set path+=${SolutionDir}/**" ${FilePath} 
 
 
 " videinvoke is intended to be used from external programs, so we probably
