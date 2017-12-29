@@ -1,0 +1,59 @@
+#! /bin/bash
+
+# Determine relevant point to start git clone.
+# Sources:
+# * http://divby0.blogspot.ca/2011/01/howto-partially-clone-svn-repo-to-git.html
+# * https://stackoverflow.com/questions/3239759/checkout-remote-branch-using-git-svn
+
+die() {
+    echo $(basename $0) $1
+    exit -1
+}
+
+# Figure out the revision number based on when a branch was created, then 
+# from r28571, returns -r28571:HEAD
+f() {
+    branch_url=$1
+    if [[ -z "$branch_url" ]] ; then
+        die "requires a branch url"
+    fi
+
+    ERRLOG="$(mktemp -t git_svn_branchroot)"
+    trap "rm -f '$ERRLOG'" 0               # EXIT
+    trap "rm -f '$ERRLOG'; exit 1" 2       # INT
+    trap "rm -f '$ERRLOG'; exit 1" 1 15    # HUP TERM
+
+
+    rev=$(svn log --stop-on-copy \
+        $branch_url \
+        2> $ERRLOG \
+        | egrep "r[0-9]+" | tail -1 | sed -e "s#\(r[0-9]\+\).\+#-\1:HEAD#")
+
+    # Look for errors and output them.
+    egrep "^svn: E[0-9]+:" $ERRLOG
+    if [ $? -ne 0 ] ; then
+        # Error finder found no errors. Show git svn general usage.
+        branches=$(basename $(dirname $branch_url))
+        branch_name=$(basename $branch_url)
+        echo " Fetch repo with only branch's relevant revisions ${rev/#-/}:"
+        if [[ $branches == "branches" ]] ; then
+            echo "   git svn clone --prefix=svn/ --stdlayout $rev $(dirname $(dirname $branch_url)) $branch_name"
+        else
+            echo "   git svn clone --prefix=svn/ -T trunk -t tags -b branches $rev $branch_url $branch_name"
+        fi
+        echo "   cd $branch_name"
+        echo "   git svn show-ignore >> .git/info/exclude"
+        echo
+        echo " Grab a branch:"
+        echo "   git checkout -b -t remotes/svn/$branch_name"
+        echo " Make changes and then put your work on top (linear history):"
+        echo "   git svn rebase"
+        echo " And push your changes back up:"
+        echo "   git svn dcommit"
+        return 0
+    else
+        return -1
+    fi
+}
+
+f $*
