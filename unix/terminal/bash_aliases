@@ -230,6 +230,19 @@ function move_and_link() {
     ln -sv $2 $1
 }
 
+unity_folderstructure() {
+    cd Assets/
+    if [ $? -ne 0 ] ; then
+        echo Error: Should be in Unity project root.
+        return
+    fi
+    mkdir -p Scripts/ Sprites/ Prefabs/
+    # These ones I don't normally need.
+    #~ mkdir -p Editor/
+    cd -
+    ls -d Assets/*
+}
+
 # Serve local directory as a website.
 alias webserve='python -m SimpleHTTPServer'
 # Generate html to display image/video slideshow.
