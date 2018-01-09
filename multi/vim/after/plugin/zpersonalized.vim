@@ -19,5 +19,18 @@ vnoremap <C-l> <Esc>
 " fast. We defaulted to indent before (which is okay), but syntax is better.
 " See vimrc.vim.
 if exists("g:loaded_fastfold") && g:loaded_fastfold
-    set foldmethod=syntax		" By default, use syntax to determine folds
+    " By default, use syntax to determine folds
+    set foldmethod=syntax
+
+    " Setup handler to use indent if we don't have a filetype.
+    function! s:SetupFiletypelessFolding()
+        if len(&ft) == 0 && &foldmethod != 'diff'
+            setlocal foldmethod=indent
+        endif
+    endf
+
+    augroup david_fdm
+        au!
+        autocmd BufNewFile,BufRead * call s:SetupFiletypelessFolding()
+    augroup end
 endif
