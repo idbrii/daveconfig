@@ -100,12 +100,50 @@ if executable('svn')
         "call diffusable#diff_with_partner(winnr('#'))
     endf
 
+    " For some reason VCDiff takes ~5 seconds to do a diff, but !svn diff
+    " and cat are instant. This one takes about 2 seconds.
+    function! s:VCDiffFast(revision)
+        let lazyredraw_bak = &lazyredraw
+        set lazyredraw
+        let itchy_bak = g:itchy_split_direction
+        let g:itchy_split_direction = 1
+
+        mark c
+
+        " Ensure svn will have a path inside the repo.
+        silent! cd %:p:h
+
+        " Get a nice name for the diff file. No noticeable affect on perf.
+        let repo_file = expand('%:p')
+        for line in systemlist('svn info '. repo_file)
+            if line =~# '^URL'
+                let repo_file = substitute(line, 'URL: svn', '', '')
+                let repo_file = repo_file[:-2] " remove newline
+                break
+            endif
+        endfor
+
+        let base_file = system('svn cat -r'. a:revision .' '. expand('%'))
+        silent exec 'Scratch '. &filetype
+        0put =base_file
+        " Remove blank line at end of buffer
+        normal! Gdd
+
+        exec 'file '. bufname('%') .'-'. repo_file .'\#'. a:revision
+        setlocal readonly
+        DiffBoth
+        normal! `czz
+
+        let g:itchy_split_direction = itchy_bak
+        let &lazyredraw = lazyredraw_bak
+    endf
+
     " Ensure the blame window will have a path inside the repo.
     nnoremap <silent> <leader>fb :silent! cd %:p:h <Bar>VCBlame<CR>
     " Diff against have revision.
-    nnoremap <silent> <leader>fd :call <SID>VCDiffWithDiffusable(0)<CR>
+    nnoremap <silent> <leader>fd :call <SID>VCDiffFast('BASE')<CR>
     " Diff against head revision.
-    nnoremap <silent> <leader>fD :call <SID>VCDiffWithDiffusable(1)<CR>
+    nnoremap <silent> <leader>fD :call <SID>VCDiffFast('HEAD')<CR>
     nnoremap <silent> <leader>fi :VCStatus<CR>
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
     nnoremap <silent> <leader>fIq :VCStatus -qu<CR>
