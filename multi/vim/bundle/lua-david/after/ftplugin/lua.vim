@@ -18,9 +18,18 @@ nnoremap <buffer> <F1> :<C-u>sp ~/.vim-aside<CR>
 " targetting a different lua. Use tags instead (no scope intelligence, but
 " better than nothing). Omnicompletion is helpful in expanding modules, but
 " that kicks in automatically, so that's good enough.
-" For some reason tag completion clears what we've inserted (I guess to show
-" partial tag matches), but I don't want that, so restore it.
-inoremap <buffer> <C-Space> <C-o>"cyb<C-o>e<Right><C-x><C-]><C-r>c
+"
+" Tag completion clears what we've inserted (because some tags are functions
+" and they start with 'function' instead of the function name), but I don't
+" want that, so restore it.
+function! s:LuaGrabCompletionWord()
+    let q_bak = @"
+    normal! yiw
+    let g:lua_david_yanked = @"
+
+    let @" = q_bak
+endf
+inoremap <buffer> <C-Space> <C-o>:call <SID>LuaGrabCompletionWord()<CR><C-o>e<Right><C-x><C-]><C-r>=g:lua_david_yanked<CR>
 
 " Files may be opened with diff mode before this 'after' file is sourced.
 " Ensure we don't clobber a more relevant mode.
