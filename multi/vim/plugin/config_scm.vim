@@ -132,10 +132,19 @@ if executable('svn')
         exec 'file '. bufname('%') .'-'. repo_file .'\#'. a:revision
         setlocal readonly
         DiffBoth
-        normal! `czz
+        " Try to ensure cursor is at the same position. Also close up folds
+        " and centre cursor.
+        normal! `czMzz
 
         let g:itchy_split_direction = itchy_bak
         let &lazyredraw = lazyredraw_bak
+
+        " Sometimes when cursor was on unchanged text, base window isn't on
+        " the right line and you see no content. Flipping over to it fixes it,
+        " but we want to end in local file. I think this must be done while
+        " we're redrawing?
+        wincmd p
+        wincmd p
     endf
 
     " Ensure the blame window will have a path inside the repo.
