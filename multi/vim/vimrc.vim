@@ -459,9 +459,8 @@ nnoremap <C-g> 2<C-g>
 " Q formats paragraphs (without moving cursor), instead of entering ex mode
 noremap Q gw
 
-" <Shift-space> reloads the file
-" TODO: Consider using resolve(expand('%')) to simplify path.
-nnoremap <S-space> :<C-u>e<CR>
+" <Shift-space> reloads the file using actual and simplified filename.
+nnoremap <S-space> :<C-u>e <C-r>=resolve(expand('%:p'))<CR><CR>
 
 " Folding {{{1
 
