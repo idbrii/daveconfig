@@ -124,14 +124,11 @@ if executable('svn')
         endfor
 
         let base_file = system('svn cat -r'. a:revision .' '. expand('%'))
-        silent exec 'Scratch '. &filetype
-        0put =base_file
-        " Remove blank line at end of buffer
-        normal! Gdd
+        call diffusable#diff_this_against_text(base_file)
 
+        wincmd p
         exec 'file '. bufname('%') .'-'. repo_file .'\#'. a:revision
-        setlocal readonly
-        DiffBoth
+        wincmd p
         " Try to ensure cursor is at the same position. Also close up folds
         " and centre cursor.
         normal! `czMzz
@@ -143,8 +140,9 @@ if executable('svn')
         " the right line and you see no content. Flipping over to it fixes it,
         " but we want to end in local file. I think this must be done while
         " we're redrawing?
-        wincmd p
-        wincmd p
+        " TODO: Still need to flip around? With the above wincmds?
+        "wincmd p
+        "wincmd p
     endf
 
     " Ensure the blame window will have a path inside the repo.
