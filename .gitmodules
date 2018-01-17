@@ -307,3 +307,6 @@
 [submodule "multi/vim/bundle/omnisharp"]
 	path = multi/vim/bundle/omnisharp
 	url = https://github.com/OmniSharp/omnisharp-vim.git
+[submodule "multi/vim/bundle/unity-docs"]
+	path = multi/vim/bundle/unity-docs
+	url = https://github.com/idbrii/ctrlp-unity3d-docs.git
