@@ -310,3 +310,6 @@
 [submodule "multi/vim/bundle/unity-docs"]
 	path = multi/vim/bundle/unity-docs
 	url = https://github.com/idbrii/ctrlp-unity3d-docs.git
+[submodule "multi/vim/bundle/unite-help"]
+	path = multi/vim/bundle/unite-help
+	url = https://github.com/tsukkee/unite-help.git
