@@ -304,3 +304,6 @@
 [submodule "multi/vim/bundle/inclement"]
 	path = multi/vim/bundle/inclement
 	url = git@github.com:idbrii/vim-inclement.git
+[submodule "multi/vim/bundle/omnisharp"]
+	path = multi/vim/bundle/omnisharp
+	url = https://github.com/OmniSharp/omnisharp-vim.git
