@@ -46,6 +46,11 @@ function! david#svn#ConfirmRevert(...)
 endf
 
 function! david#svn#get_branch()
+    if !exists("*systemlist")
+        " Could implement it ourself...
+        return ""
+    endif
+
     if exists("b:svndavid_branch")
         return b:svndavid_branch
     endif
