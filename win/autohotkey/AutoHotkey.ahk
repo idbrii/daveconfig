@@ -726,6 +726,30 @@ return
     }
 }
 
+; More shortcuts in Unity
+#IfWinActive ahk_exe Unity.exe
+{
+    ; See Window in docs for numbers: https://docs.unity3d.com/Manual/UnityHotkeys.html
+
+    ; Ctrl-o - find filter in Project (like unite or Visual Assist)
+    ^o::
+    {
+        Send ^5^f
+        return
+    }
+    ; Alt-Shift-o - open file (vanilla Ctrl-o behavior)
+    !+o::
+    {
+        Send ^o
+        return
+    }
+    ; Ctrl-Shift-o - find filter in Hierarchy
+    ^+o::
+    {
+        Send ^4^f
+        return
+    }
+}
 
 ;; Why can't I add new maps here?
 
