@@ -180,13 +180,6 @@ nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
 " Jump to symbol
 nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
-" BufExplorer {{{1
-if !hasmapto('<Leader>e')
-    " Unite might replace this.
-    nnoremap <silent> <Leader>e :BufExplorer<CR>
-endif
-noremap <silent> <C-w><Leader>e :BufExplorerVerticalSplit<CR>
-
 " dirvish plugin -- Navigate filesystems {{{1
 
 " Don't disable netrw so I can use gx.
