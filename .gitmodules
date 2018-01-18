@@ -313,3 +313,6 @@
 [submodule "multi/vim/bundle/unite-help"]
 	path = multi/vim/bundle/unite-help
 	url = https://github.com/tsukkee/unite-help.git
+[submodule "multi/vim/bundle/unityengine"]
+	path = multi/vim/bundle/unityengine
+	url = git@github.com:idbrii/vim-unityengine.git
