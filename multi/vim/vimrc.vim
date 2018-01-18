@@ -739,17 +739,22 @@ endif
 let g:table_mode_motion_up_map = ''
 let g:table_mode_motion_down_map = ''
 
-" DetectIndent isn't automatic, but it should use my settings when it doesn't
-" know what to do.
+" DetectIndent should use my settings when it doesn't know what to do.
 let g:detectindent_preferred_when_mixed = 1
 let g:detectindent_preferred_expandtab = &expandtab
 " Zero indent means don't modify (keep it at filetype setting).
 let g:detectindent_preferred_indent = 0
 
-" Let's try always detecting indents.
+" Always detect indents.
+function! s:DetectIndent()
+    if !exists("b:david_detected_indent") || b:david_detected_indent == 0
+        DetectIndent
+        let b:david_detected_indent = 1
+    endif
+endf
 augroup DetectIndent
     autocmd!
-    autocmd BufReadPost * DetectIndent
+    autocmd BufReadPost * call s:DetectIndent()
 augroup END
 
 " expand-region
