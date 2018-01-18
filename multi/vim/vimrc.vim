@@ -227,13 +227,15 @@ set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 set history=500				" cmdline history
 
 " Figure out what function we're in. This relies on a coding standard where
-" functions start in the first column and their signature is on one line.
+" functions start in the first column (max_indents=0) and their signature is
+" on one line.
 " Mapped to the similar <C-g> (which I don't use very often).
-" TODO: Should this be language-specific? There's definitely a better version
-" for python (to allow nested definitions and to show functions and classes.
-" Can I combine this with <C-g>'s functionality (print both) and override that
-" key?
-nnoremap <C-g><C-g>  :<C-u>let last_search=@/<Bar> ?^\w? mark c<Bar> noh<Bar> echo getline("'c")<Bar> let @/ = last_search<CR>
+"
+" This is overridden in ftplugins with better versions for some languages.
+" (Either changing the max_indents or completely new logic.)
+" Consider combining this with <C-g>'s functionality (print both) and override
+" that key? Would need cmdheight=2.
+nnoremap <C-g><C-g> :<C-u>call david#search#FindScope(0)<CR>
 
 " Command Line {{{1
 " Autocomplete in cmdline: Give longest completion with list of options then
