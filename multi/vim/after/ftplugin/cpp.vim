@@ -21,6 +21,9 @@ let b:surround_100 = "#ifdef \1ifdef condition: \1 \r #endif"
 " inserted.
 let b:surround_indent = 1
 
+" Blocks of C++-style comments look much better than C-style.
+let b:commentary_format = '//~ %s'
+
 " Filetype set fo+=o, but I tend to use o and O to add whitespace, not
 " to continue comments
 setlocal formatoptions-=o
