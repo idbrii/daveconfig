@@ -151,7 +151,7 @@ if executable('svn')
     nnoremap <silent> <leader>fd :call <SID>VCDiffFast('BASE')<CR>
     " Diff against head revision.
     nnoremap <silent> <leader>fD :call <SID>VCDiffFast('HEAD')<CR>
-    nnoremap <silent> <leader>fi :VCStatus<CR>
+    nnoremap <silent> <leader>fi :VCStatus <C-r>=g:david_project_root<CR><CR>
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
     nnoremap <silent> <leader>fIq :VCStatus -qu<CR>
     nnoremap <silent> <leader>fIc :VCStatus .<CR>
