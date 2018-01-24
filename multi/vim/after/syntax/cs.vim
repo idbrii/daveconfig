@@ -10,6 +10,9 @@
 let s:cs_cpo_save = &cpo
 set cpo&vim
 
+" Highlight basic errors with syntax
+syn match csBadCodeError display "\d\.f"
+hi def link csBadCodeError Error
 
 " idbrii Removed xml:
 "syntax include @csXml syntax/xml.vim
