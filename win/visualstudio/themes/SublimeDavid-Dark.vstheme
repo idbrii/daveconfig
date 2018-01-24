@@ -1,5 +1,5 @@
 <Themes>
-  <Theme Name="Sublime Material (Dark)" GUID="{bacdda6b-0187-4262-8a05-2f083f0ff473}">
+  <Theme Name="Sublime David (Dark)" GUID="{38d7a127-31ff-4cff-8406-85e88adf5676}">
     <Category Name="ACDCOverview" GUID="{c8887ac6-3c60-4209-9d69-8f4c12a60044}">
       <Color Name="Body">
         <Background Type="CT_RAW" Source="FF252526" />
@@ -4562,8 +4562,8 @@
         <Background Type="CT_RAW" Source="FF434346" />
       </Color>
       <Color Name="MainWindowActiveCaption">
-        <Background Type="CT_RAW" Source="FF252526" />
-        <Foreground Type="CT_RAW" Source="FF999999" />
+        <Background Type="CT_RAW" Source="FF002D4A" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
       </Color>
       <Color Name="MainWindowInactiveCaption">
         <Background Type="CT_RAW" Source="FF252526" />
@@ -4679,13 +4679,13 @@
         <Background Type="CT_RAW" Source="FFFFFFFF" />
       </Color>
       <Color Name="MainWindowActiveIconBuilding">
-        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Background Type="CT_RAW" Source="FFEAFF36" />
       </Color>
       <Color Name="MainWindowActiveIconDebugging">
-        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Background Type="CT_RAW" Source="FFCA5100" />
       </Color>
       <Color Name="MainWindowActiveIconNoSolution">
-        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Background Type="CT_RAW" Source="FF68217A" />
       </Color>
       <Color Name="MainWindowInactiveIconDefault">
         <Background Type="CT_RAW" Source="66FFFFFF" />
