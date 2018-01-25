@@ -5,7 +5,7 @@
 " Eclipse passes:
 "   --servername Vide --remote-silent "+runtime videinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
 " Unity passes (to vide):
-"   +"runtime videinvoke.vim" +"call cursor($(Line),0)" +"set path+=$(ProjectPath)/**" "$(File)"
+"   +"call cursor($(Line),0)" +"runtime videinvoke.vim" +"set path+=$(ProjectPath)/**" "$(File)"
 "
 
 " It might be useful to include: +"set path+=$(SolutionDir)/**" 
