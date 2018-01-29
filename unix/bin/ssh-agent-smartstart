@@ -1,27 +1,28 @@
 #! /bin/bash
 # Run ssh-agent and load default identity.
+# Source: http://rabexc.org/posts/pitfalls-of-ssh-agents
 
 # Ensure agent is running
-pid=$SSH_AGENT_PID
-if [ -n "$pid" ] ; then
-    if ps -p $SSH_AGENT_PID > /dev/null ; then
-        # Agent is running and we have its pid (ssh-add should work).
-        echo > /dev/null # noop
-    else
-        pid=
-    fi
-fi
-if [ -z "$pid" ] ; then
-    # No known agent.
-    if [ $(ps ax | grep "\sssh-agent\s" | wc -l) -gt 0 ] ; then
-        echo "ssh-agent is already running but not associated with this session. Terminate it and try again."
-        exit -1
-    else
-        eval $(ssh-agent -s)
+ssh-add -l &>/dev/null
+if [ "$?" == 2 ]; then
+    # Could not open a connection to your authentication agent.
+
+    # Load stored agent connection info.
+    test -r ~/.ssh-agent && \
+        eval "$(<~/.ssh-agent)" >/dev/null
+
+    ssh-add -l &>/dev/null
+    if [ "$?" == 2 ]; then
+        # Start agent and store agent connection info.
+        (umask 066; ssh-agent > ~/.ssh-agent)
+        eval "$(<~/.ssh-agent)" >/dev/null
     fi
 fi
 
 # Load identities
-if [ "$(ssh-add -l)" == "The agent has no identities." ] ; then
-    ssh-add -t 8 ~/.ssh/id_rsa
+ssh-add -l &>/dev/null
+if [ "$?" == 1 ]; then
+    # The agent has no identities.
+    # Time to add one.
+    ssh-add -t 4h
 fi
