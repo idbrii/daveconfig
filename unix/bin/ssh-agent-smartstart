@@ -1,0 +1,27 @@
+#! /bin/bash
+# Run ssh-agent and load default identity.
+
+# Ensure agent is running
+pid=$SSH_AGENT_PID
+if [ -n "$pid" ] ; then
+    if ps -p $SSH_AGENT_PID > /dev/null ; then
+        # Agent is running and we have its pid (ssh-add should work).
+        echo > /dev/null # noop
+    else
+        pid=
+    fi
+fi
+if [ -z "$pid" ] ; then
+    # No known agent.
+    if [ $(ps ax | grep "\sssh-agent\s" | wc -l) -gt 0 ] ; then
+        echo "ssh-agent is already running but not associated with this session. Terminate it and try again."
+        exit -1
+    else
+        eval $(ssh-agent -s)
+    fi
+fi
+
+# Load identities
+if [ "$(ssh-add -l)" == "The agent has no identities." ] ; then
+    ssh-add -t 8 ~/.ssh/id_rsa
+fi

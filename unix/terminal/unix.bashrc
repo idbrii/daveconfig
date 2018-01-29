@@ -11,7 +11,7 @@ export EDITOR="$VISUAL"
 export PAGER=less
 
 # Path extensions
-export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool
+export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool:~/data/settings/daveconfig/unix/bin
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
