@@ -79,10 +79,11 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 # note that linux uses xterm even though it supports colour!
 case "$TERM" in
-xterm-256color)
-    # [cyan]hostname:[grey]path
-    PS1='\[\033[01;36m\]\h\[\033[00m\]:\[\033[01;30m\]\w\[\033[00m\]\$ '
-    ;;
+    # HEY! If the PWD on Bash on Windows looks bad, follow my firstsetup instructions!
+#~ xterm-256color)
+#~     # [cyan]hostname:[grey]path
+#~     PS1='\[\033[01;36m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\030[00m\]\$ '
+#~     ;;
 xterm*)
     # [cyan]hostname:[blue]path
     PS1='\[\033[01;36m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
