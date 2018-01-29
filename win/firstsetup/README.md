@@ -70,7 +70,17 @@ Right click, Compile ActiveWindowInfo.ahk and rename exe to AU3_Spy.exe because 
 
 Software
 ========
+
+## Flux - tint screen at night
 https://justgetflux.com/
 Make sure to disable hotkeys.
 
+
+## Fonts
+
+Proggy Clean (for size 12):
 www.proggyfonts.net/download/
+
+Fira Mono (for different sizes):
+https://github.com/mozilla/Fira/releases
+
