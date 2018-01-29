@@ -68,8 +68,13 @@ function! david#svn#get_branch()
         autocmd BufWinLeave <buffer> unlet! b:svndavid_branch
     augroup END
 
+    let shellslash_bak = &shellslash
+    let &shellslash = 0
     " Based on: https://stackoverflow.com/a/39516489/79125
-    for line in systemlist("svn info ". expand("%:p:h"))
+    let svninfo = systemlist("svn info ". shellescape(expand("%:p:h")))
+    let &shellslash = shellslash_bak
+
+    for line in svninfo
         let branch = matchstr(line, '\v^URL:.*\zs((tags|branches)/[^/]+|trunk)', 0, 1)
         let branch = substitute(branch, '\v^[^/]+/', '', '')
         if len(branch) > 0
