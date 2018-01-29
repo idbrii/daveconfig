@@ -1,3 +1,10 @@
+Windows
+=======
+
+## Differentiate active window
+Personalization (Themes) > Colors > Title bars
+
+
 vim
 ===
 
