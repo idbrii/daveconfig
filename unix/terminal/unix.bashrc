@@ -79,14 +79,21 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 # note that linux uses xterm even though it supports colour!
 case "$TERM" in
+xterm-256color)
+    # [cyan]hostname:[grey]path
+    PS1='\[\033[01;36m\]\h\[\033[00m\]:\[\033[01;30m\]\w\[\033[00m\]\$ '
+    ;;
 xterm*)
+    # [cyan]hostname:[blue]path
     PS1='\[\033[01;36m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    # [grey]hostname:[white]path
     #PS1='\[\033[01;30m\]\h\[\033[00m\]:\[\033[01;38m\]\w\[\033[00m\]\$ '
     ;;
 dumb)
     # Don't do anything for a dumb terminal -- like :shell in vim
     ;;
 screen*)
+    # [cyan]hostname:[blue]path
     # put square brackets around hostname to indicate a screen session
     PS1='\[\033[01;36m\][\h]\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     ;;
