@@ -17,7 +17,10 @@ unix
 Setup Bash on Windows: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
 
 Pin the terminal to start bar.
-Open %AppData%\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
+Open %AppData%\Roaming
+Add to location: \Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
+(Yeah, you can't just paste the full path because MS are putting your kid gloves on.)
+
 Edit the shortcut and change the second blue to 77,77,255 to make it legible. Be sure to click black again before OK!
 
 
