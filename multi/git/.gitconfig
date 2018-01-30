@@ -28,6 +28,9 @@
     commit-fixup-with = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
     commit-squash-with = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 
+    # If recurseSubmodules doesn't work, use this to check if submodules were updated.
+    # TODO: Should process all submodules? Look in history for modified ones? Should be in submanage?
+    check-submodule = "!f() { cd $1; git manage-mine master; cd -; }; f"
 
     # Interactive merging.
     # Source: http://stackoverflow.com/a/11843922/79125
