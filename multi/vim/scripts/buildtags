@@ -119,8 +119,18 @@ function fix_file_prefix_for_tags_on_win32()
 }
 
 case $filetype in
-    cpp|cs|c)
+    cpp|c)
         ctags --c++-kinds=+p --fields=+iaS --extra=+q -L $tagfile
+        ;;
+    cs)
+        # Originally started with:
+        # http://www.mad-computer-scientist.com/blog/2011/10/06/in-search-of-c-omnicomplete-for-vim/
+        # But it doesn't get structs. Need namespace kind for inclement. Trying
+        # all kinds except:
+        # e  enumerators (enumeration values) -- just jump to enum instead
+        # f  fields -- adds 70% more bytes
+        # l  local variables -- adds 90% more bytes
+        ctags --c#-kinds=cismpdngtE --fields=+ianmzS --extra=+fq -L $tagfile
         ;;
     lua-engine)
         # ltags makes for better lua tags and doesn't bloat the database with
