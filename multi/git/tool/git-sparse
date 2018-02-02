@@ -1,0 +1,46 @@
+#! /bin/bash
+
+# Setup sparse checkouts in git
+#
+# Sources:
+# * http://www.marcoyuen.com/articles/2016/06/07/git-sparse.html
+
+sparse_config=.git/info/sparse-checkout
+md5sum=md5sum
+command -v $md5sum || md5sum=md5
+
+__die() {
+    echo $(basename $0) $1
+    exit -1
+}
+
+__add_line() {
+    echo $* >> $sparse_config
+}
+
+f() {
+    touch $sparse_config
+    before_sum=$($md5sum "$sparse_config")
+
+    git config core.sparsecheckout true
+
+    branch_url=$1
+    if [[ "$1" == "add" ]] ; then
+        shift
+        __add_line $*
+    else
+        vim $sparse_config
+    fi
+
+    if [ "$before_sum" != "$($md5sum "$sparse_config")" ] ; then
+        # File was modified!
+        echo Updating tree to match sparse config...
+        echo
+        git read-tree -mu HEAD
+    else
+        echo No changes detected. Skipping tree update.
+        echo
+    fi
+}
+
+f $*

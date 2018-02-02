@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # Determine relevant point to start git clone.
+#
 # Sources:
 # * http://divby0.blogspot.ca/2011/01/howto-partially-clone-svn-repo-to-git.html
 # * https://stackoverflow.com/questions/3239759/checkout-remote-branch-using-git-svn
@@ -43,9 +44,12 @@ f() {
         fi
         echo "   cd $branch_name"
         echo "   git svn show-ignore >> .git/info/exclude"
+
+        echo " For sparse checkout:"
+        echo "   git sparse"
         echo
         echo " Grab a branch:"
-        echo "   git checkout -b -t remotes/svn/$branch_name"
+        echo "   git checkout -t -b svn/$branch_name"
         echo " Make changes and then put your work on top (linear history):"
         echo "   git svn rebase"
         echo " And push your changes back up:"
