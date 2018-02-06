@@ -736,7 +736,7 @@ return
     {
         ; t:Scene will look for scenes which is my common use case.
         ; Ctrl-a to select all for easy search of anything else.
-        Send ^5^ft:Scene ^a
+        Send ^5^f^at:Scene ^a
         return
     }
     ; Alt-Shift-o - open file (vanilla Ctrl-o behavior)
