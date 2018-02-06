@@ -15,22 +15,12 @@ inoremap <expr> <C-y> pumvisible() ? '<C-l>' : '<C-y>'
 " of select).
 vnoremap <C-l> <Esc>
 
-" Syntax folding is particularly slow, but if we have fastfold, then it's
-" fast. We defaulted to indent before (which is okay), but syntax is better.
-" See vimrc.vim.
+" Syntax folding is particularly slow, but fastfold reduces the cost (manually
+" recomputed). vimrc.vim defines indent as default foldmethod, but since we
+" have fastfold, we can use syntax for filetypes that support it.
 if exists("g:loaded_fastfold") && g:loaded_fastfold
-    " By default, use syntax to determine folds
-    set foldmethod=syntax
-
-    " Setup handler to use indent if we don't have a filetype.
-    function! s:SetupFiletypelessFolding()
-        if len(&ft) == 0 && &foldmethod != 'diff'
-            setlocal foldmethod=indent
-        endif
-    endf
-
     augroup david_fdm
         au!
-        autocmd BufNewFile,BufRead * call s:SetupFiletypelessFolding()
+        autocmd BufNewFile,BufRead * call david#indent#try_use_syntax_folds()
     augroup end
 endif
