@@ -40,8 +40,9 @@ function! david#indent#try_use_syntax_folds()
         if len(&filetype) > 0
             if david#gen#foldfiletypes#has_foldable_syntax(&filetype)
                 setlocal foldmethod=syntax
-                let b:fold_toggle_options += ["syntax"]
-                call uniq(b:fold_toggle_options)
+                if match(b:fold_toggle_options, "syntax") < 0
+                    let b:fold_toggle_options += ["syntax"]
+                endif
             endif
         endif
     endif
