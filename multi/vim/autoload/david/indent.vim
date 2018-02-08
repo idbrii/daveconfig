@@ -30,18 +30,19 @@ function! david#indent#build_fold_syntax_script()
 endf
 
 function! david#indent#try_use_syntax_folds()
-    " ficklefold uses these options and builds them on demand. Force build
-    " them so we can add syntax.
-    call ficklefold#init_options()
-
     " Still at default fold method. (Plugin didn't change to something else
     " and not in diff mode.)
     if &foldmethod == 'indent'
         if len(&filetype) > 0
             if david#gen#foldfiletypes#has_foldable_syntax(&filetype)
                 setlocal foldmethod=syntax
+
+                " ficklefold uses these options and builds them on demand.
+                " Force build them so we can add syntax.
+                call ficklefold#init_options()
                 if match(b:fold_toggle_options, "syntax") < 0
-                    let b:fold_toggle_options += ["syntax"]
+                    " Syntax at the start.
+                    let b:fold_toggle_options = ["syntax"] + b:fold_toggle_options
                 endif
             endif
         endif
