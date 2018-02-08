@@ -1,5 +1,5 @@
 " Call this manually when adding new syntax files.
-function! david#indent#build_fold_syntax_script()
+function! david#folding#build_fold_syntax_script()
     let syntax_folders = []
     for path in split(&runtimepath, ',')
         let syn = path . '/syntax/'
@@ -29,7 +29,7 @@ function! david#indent#build_fold_syntax_script()
     endif
 endf
 
-function! david#indent#try_use_syntax_folds()
+function! david#folding#try_use_syntax_folds()
     " Still at default fold method. (Plugin didn't change to something else
     " and not in diff mode.)
     if &foldmethod == 'indent'

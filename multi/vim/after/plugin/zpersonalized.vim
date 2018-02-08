@@ -21,6 +21,6 @@ vnoremap <C-l> <Esc>
 if exists("g:loaded_fastfold") && g:loaded_fastfold
     augroup david_fdm
         au!
-        autocmd BufNewFile,BufRead * call david#indent#try_use_syntax_folds()
+        autocmd BufNewFile,BufRead * call david#folding#try_use_syntax_folds()
     augroup end
 endif
