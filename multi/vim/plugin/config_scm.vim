@@ -166,6 +166,8 @@ if executable('svn')
     nnoremap <silent> <leader>fEb :VCBrowseBookMarks<CR>
     nnoremap <silent> <leader>fEf :VCBrowseBuffer<CR>
     nnoremap <silent> <leader>fq :diffoff! <CR> :q<CR>
+    nnoremap <silent> <leader>f* :<C-u>call vc#grep#do("*".fnamemodify(expand('%'), ':e'), expand("<cword>")) <CR>
+    vnoremap <silent> <leader>f* :<C-u>call vc#grep#do("*".fnamemodify(expand('%'), ':e'), expand("<cword>")) <CR>
 endif
 
 
