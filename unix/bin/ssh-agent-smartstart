@@ -7,10 +7,12 @@ ssh-add -l &>/dev/null
 if [ "$?" == 2 ]; then
     # Could not open a connection to your authentication agent.
 
-    echo "Load config to connect this shell to agent:"
-    echo "   . ~/.ssh-agent" 
-    echo "Or setup this alias:"
-    echo "   alias ssh-agent-smartstart=\"$0 ; . ~/.ssh-agent\""
+    if alias ssh-agent-smartstart &>/dev/null ; then
+        echo "Load config to connect this shell to agent:"
+        echo "   . ~/.ssh-agent" 
+        echo "Or setup this alias:"
+        echo "   alias ssh-agent-smartstart=\"$0 ; . ~/.ssh-agent\""
+    fi
 
     # Load stored agent connection info.
     test -r ~/.ssh-agent && \
