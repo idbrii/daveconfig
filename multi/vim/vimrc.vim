@@ -656,6 +656,8 @@ let python_highlight_space_errors = 1
 let python_highlight_string_format = 1
 let python_highlight_string_formatting = 1
 let python_highlight_string_templates = 1
+" Let !python and :py output utf-8.
+let $PYTHONIOENCODING = "utf-8"
 
 " Calendar
 let g:calendar_no_mappings = 1
