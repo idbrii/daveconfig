@@ -751,7 +751,7 @@ let g:detectindent_preferred_indent = 0
 
 " Always detect indents.
 function! s:DetectIndent()
-    if !exists("b:david_detected_indent") || b:david_detected_indent == 0
+    if !exists("b:david_detected_indent")
         DetectIndent
         let b:david_detected_indent = 1
     endif
