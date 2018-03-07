@@ -46,12 +46,6 @@
 [submodule "multi/vim/bundle/perforce"]
 	path = multi/vim/bundle/perforce
 	url = git@github.com:idbrii/vim-perforce.git
-[submodule "multi/vim/bundle/tlib"]
-	path = multi/vim/bundle/tlib
-	url = git://github.com/tomtom/tlib_vim.git
-[submodule "multi/vim/bundle/mw-utils"]
-	path = multi/vim/bundle/mw-utils
-	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
 [submodule "multi/vim/bundle/unite"]
 	path = multi/vim/bundle/unite
 	url = git@github.com:Shougo/unite.vim.git
