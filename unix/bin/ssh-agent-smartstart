@@ -7,11 +7,13 @@ ssh-add -l &>/dev/null
 if [ "$?" == 2 ]; then
     # Could not open a connection to your authentication agent.
 
-    if alias ssh-agent-smartstart &>/dev/null ; then
+    # aliases are not inherited into subshells, so we suggest an argument
+    # instead.
+    if [ "$1" != "--no-alias" ] ; then
         echo "Load config to connect this shell to agent:"
         echo "   . ~/.ssh-agent" 
         echo "Or setup this alias:"
-        echo "   alias ssh-agent-smartstart=\"$0 ; . ~/.ssh-agent\""
+        echo "   alias ssh-agent-smartstart=\"$0 --no-alias ; . ~/.ssh-agent\""
     fi
 
     # Load stored agent connection info.
