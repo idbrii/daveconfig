@@ -1,7 +1,6 @@
 # Login shells execute .profile instead of .bashrc.
 
-# I should probably rename this to bash_profile.
-# https://serverfault.com/a/500071/47985
+# Usage: https://serverfault.com/a/500071/47985
 
 
 if [ -f ~/.bashrc ]; then
