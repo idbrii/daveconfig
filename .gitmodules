@@ -120,7 +120,7 @@
 	url = git@github.com:idbrii/golden-ratio.git
 [submodule "multi/vim/bundle/airline"]
 	path = multi/vim/bundle/airline
-	url = git@github.com:bling/vim-airline.git
+	url = https://github.com/vim-airline/vim-airline.git
 [submodule "multi/vim/bundle/airline-themes"]
 	path = multi/vim/bundle/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git

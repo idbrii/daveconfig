@@ -35,3 +35,7 @@ endfunction
 "    \ 'S'  : 'S',
 "    \ '' : 'S',
 "    \ }
+
+if executable('svn')
+    let g:airline#extensions#branch#custom_head = 'david#svn#get_branch'
+endif
