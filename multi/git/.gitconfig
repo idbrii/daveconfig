@@ -39,6 +39,11 @@
     accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u -- \"${@:-.}\"; }; f"
     accept-theirs = "!f() { git checkout --theirs -- \"${@:-.}\"; git add -u -- \"${@:-.}\"; }; f"
 
+    # https://help.github.com/articles/checking-out-pull-requests-locally/
+    # https://gist.github.com/berkus/8225683
+    pr-fetch = "!f() { if [ -z \"$2\" ] ; then echo 'Error: PR fetch requires remote and pull request number.\nExample: git pr-fetch origin 23' ; else git fetch $1 refs/pull/$2/head:refs/remotes/pr/$2 ; fi;  }; f"
+    pr-cherry-pick = "!f() { re='^[0-9]+$'; if [ -z \"$1\" -o -z \"${1##*[!0-9]*}\" ] ; then echo 'Error: PR fetch requires pull request number.\nExample: git pr-rebase 23' ; else ( git checkout -b pr_$1 pr/$1 || ( echo 'Hint: Forget to pr-fetch?' && false ) ) && git rebase @{-1} && git checkout @{-1} && git merge --ff-only @{-1} ; fi; }; f"
+
     what = whatchanged
     who = shortlog -s --
     graph = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'
