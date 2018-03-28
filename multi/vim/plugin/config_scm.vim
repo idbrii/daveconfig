@@ -73,13 +73,15 @@ if executable('svn')
         " on Windows win32-unix interface is flaky.
         "exec '.! bash.exe -c '. expand('~/data/settings/daveconfig/multi/svn/bin/svn-show') .' '. a:revision
 
-        exec '.!svn log --verbose   --change '. a:revision .' .'
+        " This only works on changes within our current branch. You need the
+        " svn url instead of project root to see changes from other branches.
+        exec '.!svn log --verbose   --change '. a:revision .' '. g:david_project_root
         normal! Go
-        exec '.!svn diff            --change '. a:revision .' .'
+        exec '.!svn diff            --change '. a:revision .' '. g:david_project_root
         %s/\r//e
         normal! gg
     endf
-    command! -nargs=+ SvnShow :silent call s:SvnShow(<args>)
+    command! -nargs=+ SvnShow :silent call s:SvnShow(<q-args>)
 
     " VCMove often fails. Requires relative or repo paths, but even then it
     " thinks I'm moving to the filesystem. This is probably not as safe, but
