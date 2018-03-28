@@ -310,3 +310,6 @@
 [submodule "multi/vim/bundle/unityengine"]
 	path = multi/vim/bundle/unityengine
 	url = git@github.com:idbrii/vim-unityengine.git
+[submodule "multi/vim/bundle/jumpmethod"]
+	path = multi/vim/bundle/jumpmethod
+	url = git@github.com:idbrii/vim-jumpmethod.git
