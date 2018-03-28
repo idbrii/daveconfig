@@ -737,8 +737,7 @@ return
         ; Ctrl-5 focuses project. Do it twice because sometimes Animator
         ; shows instead or current window is used.
         ; t:Scene will look for scenes which is my common use case.
-        ; Ctrl-a to select all for easy search of anything else.
-        Send ^5^5^f^at:Scene ^a
+        Send ^5^5^f^a t:Scene {Home}
         return
     }
     ; Alt-Shift-o - open file (vanilla Ctrl-o behavior)
