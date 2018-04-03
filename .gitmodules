@@ -313,3 +313,6 @@
 [submodule "multi/vim/bundle/jumpmethod"]
 	path = multi/vim/bundle/jumpmethod
 	url = git@github.com:idbrii/vim-jumpmethod.git
+[submodule "multi/vim/bundle/cs-oranget"]
+	path = multi/vim/bundle/cs-oranget
+	url = https://github.com/OrangeT/vim-csharp.git
