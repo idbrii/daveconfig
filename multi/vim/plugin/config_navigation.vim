@@ -64,7 +64,7 @@ nnoremap <Leader>w <C-w>
 " habit.
 nnoremap <Leader>wq <C-w>c
 " Close (delete) the buffer, but keep its space.
-nnoremap <Leader>wQ :BD<CR>
+nnoremap <Leader>wQ :Bdelete<CR>
 
 nnoremap <Leader>wN :tabedit<CR>
 

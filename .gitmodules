@@ -16,9 +16,9 @@
 [submodule "multi/vim/bundle/asynccommand"]
 	path = multi/vim/bundle/asynccommand
 	url = git@github.com:idbrii/AsyncCommand.git
-[submodule "multi/vim/bundle/bufkill"]
-	path = multi/vim/bundle/bufkill
-	url = git@github.com:idbrii/bufkill.vim.git
+[submodule "multi/vim/bundle/bbye"]
+	path = multi/vim/bundle/bbye
+	url = https://github.com/moll/vim-bbye.git
 [submodule "multi/vim/bundle/gundo"]
 	path = multi/vim/bundle/gundo
 	url = https://github.com/simnalamburt/vim-mundo.git

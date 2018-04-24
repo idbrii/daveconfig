@@ -102,8 +102,11 @@ function! s:SwitchToActualFile()
         return
     endif
 
-    if exists("loaded_bufkill")
-        " Use bufkill to clear the buffer, but not close the window.
+    if exists("loaded_bbye")
+        " Use bbye to clear the buffer, but not close the window.
+        Bwipeout
+    elseif exists("loaded_bufkill")
+        " or bufkill
         BW
     else
         " We'll lose the current window, but it's better than nothing.
