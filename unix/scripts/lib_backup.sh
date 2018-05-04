@@ -39,17 +39,32 @@ function backup_to_media()
 {
     write_log_header $backup_log
 
+    # jwz recommends -vaxAX. this is expanded names, but without -AX
+    rsync_args="--verbose --archive --one-file-system --delete --ignore-errors"
+    # These seem useful to me.
+    rsync_args="$rsync_args --human-readable --progress"
+    case "`uname -s`" in
+        Darwin)
+            # macOS does not support AX
+            ;;
+        *)
+            rsync_args=$rsync_args -AX
+            ;;
+    esac
+
     for d in $folders; do
         echo .
-        echo rsync -vaxAX --delete --ignore-errors $backup_src/$d $backup_dst >> $backup_log
-             rsync -vaxAX --delete --ignore-errors $backup_src/$d $backup_dst >> $backup_log
+        echo rsync $rsync_args $backup_src/$d $backup_dst >> $backup_log
+             rsync $rsync_args $backup_src/$d $backup_dst >> $backup_log
     done
 
     echo >> $backup_log
     echo Archiving Complete  >> $backup_log
 }
 
+echo "Collecting data from $backup_src:"
 show_sizes $folders
+echo "Writing data to $backup_dst."
 
 backup_to_media
 
