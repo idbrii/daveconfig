@@ -22,6 +22,8 @@ llw() {
     ls -l $(which $1)
 }
 
+alias ssh-agent-smartstart="~/data/settings/daveconfig/unix/bin/ssh-agent-smartstart --no-alias ; . ~/.ssh-agent"
+
 # Make grep more like ack.
 # This alias may override ghostscript. That's not a problem for me.
 alias gs='~/.vim/bundle/searchsavvy/bin/smartgrep --color=auto'
