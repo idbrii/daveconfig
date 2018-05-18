@@ -62,7 +62,7 @@ function! s:exchange_dwim()
     endif
 
     let lazyredraw_bak = &lazyredraw
-
+    let &lazyredraw = 1
     let win_save = winsaveview()
 
     " Find first word at or after cursor
