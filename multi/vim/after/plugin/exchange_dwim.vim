@@ -13,15 +13,18 @@ endif
 "   bool do_test = true; // false
 "   if (had_focus && lost_focus)
 "   bool canTouch = timeToAcceptBallTouch < Time.time;
+"   bool changed_focus = selected != GetSelection();
 
-function! s:back_off_from_separator()
+function! s:back_off_from_separator(has_matched_parens)
     " \%# is cursor position, so we're looking for the cursor on a separator
     " and then the search will jump us to the character before the separator.
     call search('.\%#[;,]', 'b', line("."))
-    " Do I need to check is_in_matched_parens (can't call it here).
-    call search('.\%#)', 'b', line("."))
-    normal! o
-    call search('\%#(.', 'e', line("."))
+    " Back off from parens only if they're matched.
+    if a:has_matched_parens
+        call search('.\%#)', 'b', line("."))
+        normal! o
+        call search('\%#(.', 'e', line("."))
+    endif
 endf
 
 function! s:char_under_cursor()
@@ -48,8 +51,9 @@ function! s:try_invoke_sideways()
 endf
 
 function! s:exchange_dwim()
+    let has_matched_parens = s:is_in_matched_parens()
     " For commas in matched braces, use a smarter algorithm: Sideways!
-    if s:char_under_cursor() == ',' && s:is_in_matched_parens()
+    if s:char_under_cursor() == ',' && has_matched_parens
         if s:try_invoke_sideways()
             return
         endif
@@ -64,14 +68,14 @@ function! s:exchange_dwim()
     " Select it
     normal! viW
     " Ensure we didn't select a semicolon or comma
-    call s:back_off_from_separator()
+    call s:back_off_from_separator(has_matched_parens)
     " Mark for exchange.
     call s:invoke_exchange()
     " Go back to start point.
     call winrestview(win_save)
     " Select previous word
     normal! BviW
-    call s:back_off_from_separator()
+    call s:back_off_from_separator(has_matched_parens)
     " Exchange it.
     call s:invoke_exchange()
 
