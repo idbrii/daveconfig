@@ -43,8 +43,10 @@ function! s:invoke_exchange()
 endf
 
 function! s:try_invoke_sideways()
-    if exists("g:loaded_sideways") && g:loaded_sideways > 0
-        exec "norm \<Plug>SidewaysRight"
+    " sideways uses a string version for its loaded value, but I'd probably
+    " use 0 to disable it.
+    if exists("g:loaded_sideways") && type(g:loaded_sideways) == v:t_string
+        exec "norm w\<Plug>SidewaysRight"
         return 1
     endif
     return 0
