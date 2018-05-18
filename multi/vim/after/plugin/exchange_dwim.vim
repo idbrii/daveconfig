@@ -9,9 +9,19 @@ if exists(':XchangeClear') != 2
     finish
 endif
 
+" Test cases:
+"   bool do_test = true; // false
+"   if (had_focus && lost_focus)
+"   bool canTouch = timeToAcceptBallTouch < Time.time;
 
 function! s:back_off_from_separator()
+    " \%# is cursor position, so we're looking for the cursor on a separator
+    " and then the search will jump us to the character before the separator.
     call search('.\%#[;,]', 'b', line("."))
+    " Do I need to check is_in_matched_parens (can't call it here).
+    call search('.\%#)', 'b', line("."))
+    normal! o
+    call search('\%#(.', 'e', line("."))
 endf
 
 function! s:char_under_cursor()
