@@ -13,15 +13,25 @@ function! s:snakecase(word)
   return word
 endfunction
 
-" Easily convert into sentences: words separated by sentences.
+" Convert for sentences: words separated by spaces.
 function! s:spacecase(word)
   return substitute(s:snakecase(a:word),'_',' ','g')
 endfunction
+" Convert for titles: capitalized words separated by spaces.
+function! s:titlecase(word)
+  let word = s:snakecase(a:word)
+  " Capitalize first and after underscore
+  let word = substitute(word,'\v^.|_\zs.','\u&','g')
+  " Space case
+  let word = substitute(word,'_',' ','g')
+  return word
+endfunction
 
 call extend(Abolish, {
-      \ 'spacecase':  s:function('s:spacecase')
+      \ 'spacecase':  s:function('s:spacecase'),
+      \ 'titlecase':  s:function('s:titlecase'),
       \})
-
 call extend(Abolish.Coercions, {
-      \ ' ': Abolish.spacecase
+      \ ' ': Abolish.spacecase,
+      \ 't': Abolish.titlecase,
       \})
