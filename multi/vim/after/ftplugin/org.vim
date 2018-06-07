@@ -4,3 +4,7 @@ silent! nunmap <buffer> <Tab>
 silent! nunmap <buffer> <S-Tab>
 " Don't shadow gi. Also crw is more vim-like.
 silent! nunmap <buffer> gil
+
+" New bullets on CR and nothing on C-CR (like Slack).
+imap <silent> <buffer> <CR> <Plug>OrgNewHeadingBelowInsert
+inoremap <buffer> <C-CR> <CR>

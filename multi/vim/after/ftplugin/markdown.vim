@@ -3,6 +3,8 @@
 " they aren't meaningful in markdown.
 nnoremap <buffer> <silent> <Leader>hc :copy .<CR>Vr=
 
+" Newline without any bullets
+inoremap <buffer> <C-CR> <CR><C-u>
 
 " Automatically add more bullets in a list.
 setlocal formatoptions+=r
