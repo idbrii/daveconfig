@@ -45,6 +45,8 @@ let g:p4MaxLinesInDialog = 0	" 0 = Don't show the dialog, but do I want that?
 " one initial leader - f. (The same that perforce uses, but I don't use vc
 " with perforce.)
 let g:vc_allow_leader_mappings = 0
+" Randomly maps a common key globally for grep.
+let g:no_vc_maps = 1
 
 " Currently, I only use vc for svn.
 if executable('svn')
