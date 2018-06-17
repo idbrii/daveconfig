@@ -544,7 +544,8 @@ let g:RenamerSupportColonWToRename = 1
 " Snippets -- Simplify commands. I rarely Expand. Instead I usually list and
 " then complete.
 let g:UltiSnipsExpandTrigger       = '<C-j>'
-let g:UltiSnipsListSnippets        = '<C-r><C-j>'
+" Use unite instead of built-in list. See unite-david.
+let g:UltiSnipsListSnippets        = '<Nop>'
 let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
