@@ -535,12 +535,17 @@ MoveAndRestore(win_id, x,y, w,h)
 }
 OrganizeDesktop()
 {
+    avoid_right_monitor := true
     ;; Lay out windows for my three monitors with centre as the work machine.
     ;; Roughly in order of left-to-right appearance.
     MoveAndRestore("ahk_exe slack.exe", 62, 0, 1140, 1080)
     MoveAndRestore("ahk_class Vim", 1913, -174, 1294, 1447)
     ;; Game and log go here (but they position themselves).
-    MoveAndRestore("ahk_exe chrome.exe", 4480, 0, 974, 1080)
+    if (avoid_right_monitor) {
+        MoveAndRestore("ahk_exe chrome.exe", 62+1140, 0, 732, 1080)
+    } else {
+        MoveAndRestore("ahk_exe chrome.exe", 4480, 0, 974, 1080)
+    }
     MoveAndRestore("ahk_exe bash.exe", 5433, 0, 974, 1087)
 
     SetTitleMatchMode 2 ;; A window's title can contain WinTitle anywhere inside it to be a match
@@ -548,7 +553,11 @@ OrganizeDesktop()
     ;; (TortoiseProc.exe) and ahk_class (#32770). We could do try to match on
     ;; text inside the window, but the title should be pretty consistent so use
     ;; that instead.
-    MoveAndRestore("Working Copy - TortoiseSVN", 5433, 482, 974, 605)
+    if (avoid_right_monitor) {
+        MoveAndRestore("Working Copy - TortoiseSVN", 4473, 482, 974, 605)
+    } else {
+        MoveAndRestore("Working Copy - TortoiseSVN", 5433, 482, 974, 605)
+    }
     SetTitleMatchMode 1 ;; Reset to default: A window's title must start with the specified WinTitle to be a match
 
 }
