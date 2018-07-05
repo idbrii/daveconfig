@@ -730,14 +730,12 @@ endif
 let g:slime_no_mappings = 1
 
 " Thesaurus
-if executable("bash")
-    let g:online_thesaurus_map_keys = 0
-    " Use the same keys as thesaurus completion.
-    nnoremap <unique> <C-x><C-t> :<C-u>OnlineThesaurusCurrentWord<CR>
-else
-    " The shell script doesn't work in Windows without bash (and cygwin).
-    let g:loaded_online_thesaurus = -1
-endif
+let g:tq_map_keys = 0
+" Use the same keys as thesaurus completion. Doesn't actually complete words
+" in insert mode.
+inoremap <silent> <C-x><C-t> <C-o>:ThesaurusQueryReplaceCurrentWord<CR>
+vnoremap <silent> <C-x><C-t> "cy:<C-u>ThesaurusQueryReplace <C-r>c<CR>
+nnoremap <silent> <C-x><C-t> :<C-u>ThesaurusQueryReplaceCurrentWord<CR>
 
 " table-mode
 " Disable maps that conflict with standard vim { and } commands
