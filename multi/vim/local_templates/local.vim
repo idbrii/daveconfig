@@ -16,7 +16,17 @@ endif
 
 if has('win32')
 	" Prefer unix even though we're on Windows.
-	set fileformats=unix,dos
+	"~ set fileformats=unix,dos
+    " OR
+    " Prefer to avoid line ending changes with other Windows users. Overrides
+    " scriptease (not sure where it sets?)
+	set fileformats=dos,unix
+    " Use unix for vimfiles and my other config.
+    augroup FileFormatDaveconfig
+        au!
+        au BufNewFile */daveconfig/* setlocal fileformat=unix
+        au BufNewFile */.vim/* setlocal fileformat=unix
+    augroup END
 endif
 
 let g:david_project_root = 'c:/p4/main'
