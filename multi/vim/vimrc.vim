@@ -486,9 +486,9 @@ xnoremap <Leader>l zf
 " enable syntax folding for a variety of languages
 "set g:vimsyn_folding = 'afmpPrt'
 " create text object using [z and ]z
-vnoremap if :silent!normal![zjV]zk<CR>
+vnoremap if :<C-u>silent!normal![zjV]zk<CR>
 onoremap if :normal Vif<CR>
-vnoremap af :silent!normal![zV]z<CR>
+vnoremap af :<C-u>silent!normal![zV]z<CR>
 onoremap af :normal Vaf<CR>
 
 let g:textobj_between_no_default_key_mappings = 1
