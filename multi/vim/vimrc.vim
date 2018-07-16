@@ -419,9 +419,6 @@ onoremap aa a>
 " gc selects previously changed text. (|gv| but for modification.)
 nnoremap gc :<C-U>silent!normal!`[v`]<CR>
 
-" Make backspace work in normal
-nnoremap <BS> X
-
 " Make cw consistent with dw?
 "nnoremap cw dwi
 
