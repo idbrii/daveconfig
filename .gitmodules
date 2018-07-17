@@ -138,7 +138,7 @@
 	url = git@github.com:idbrii/vim-diffusable.git
 [submodule "multi/vim/bundle/ultisnips"]
 	path = multi/vim/bundle/ultisnips
-	url = git://github.com/SirVer/ultisnips.git
+	url = git@github.com:idbrii/ultisnips.git
 [submodule "multi/vim/bundle/snippets"]
 	path = multi/vim/bundle/snippets
 	url = https://github.com/honza/vim-snippets.git

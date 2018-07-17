@@ -553,7 +553,7 @@ let g:matchup_matchparen_status_offscreen = 0
 " then complete.
 let g:UltiSnipsExpandTrigger       = '<C-j>'
 " Use unite instead of built-in list. See unite-david.
-let g:UltiSnipsListSnippets        = '<Nop>'
+let g:UltiSnipsListSnippets        = ''
 let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
