@@ -542,7 +542,7 @@ OrganizeDesktop()
     MoveAndRestore("ahk_class Vim", 1913, -174, 1294, 1447)
     ;; Game and log go here (but they position themselves).
     if (avoid_right_monitor) {
-        MoveAndRestore("ahk_exe chrome.exe", 62+1140, 0, 732, 1080)
+        MoveAndRestore("ahk_exe chrome.exe", 62+1133, 0, 732, 1080)
     } else {
         MoveAndRestore("ahk_exe chrome.exe", 4480, 0, 974, 1080)
     }
