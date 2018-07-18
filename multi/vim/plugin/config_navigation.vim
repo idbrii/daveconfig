@@ -182,24 +182,17 @@ nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
 " dirvish plugin -- Navigate filesystems {{{1
 
-" Don't disable netrw so I can use gx.
-"let g:loaded_netrw = 0
-" Instead of vinegar (and netrw), I use dirvish.
-let g:loaded_vinegar = 0
-" If I need netrw, do this:
-"let g:loaded_dirvish = 0
+" dirvish and open-browser replace netrw.
+" My only use for Netrw is browsing remote
+" filesystems, but I can turn it back on when necessary.
+let g:loaded_netrw       = 0
+let g:loaded_netrwPlugin = 0
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+" netrw support for fugitive's Browse
+command! -nargs=1 Browse Gogo <args>
 
-" Netrw plugin -- Navigate filesystems {{{1
-
-" This looks like a good idea, but it conflicts with golden-ratio. I don't
-" think I'd use it that much, so forget about it.
-"if exists("g:loaded_vinegar") && g:loaded_vinegar > 0
-"    nmap <unique> <C-w>- <C-w>v<Plug>VinegarUp
-"else
-"    nnoremap <unique> <C-w>- :Vexplore<CR>
-"endif
-
-" Set browsed dir as current dir
+" Set browsed dir as current dir.
 let g:netrw_keepdir = 0
 
 " Mark {{{1

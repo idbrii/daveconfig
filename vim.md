@@ -137,6 +137,7 @@ Generally, you should install plugins to fill a need instead of just grabbing ev
 Some plugins just fit in so well to how vim already works:
 
 * [vim-vinegar](https://github.com/tpope/vim-vinegar) makes using the built-in netrw a bit easier.
+dirvish and open-browser replace netrw. Even better, replace netrw with [dirvish](https://github.com/justinmk/vim-dirvish) and [open-browser](https://github.com/tyru/open-browser.vim).
 * [vim-speeddating](https://github.com/idbrii/vim-speeddating) isn't always useful, but since it just makes vim's `<C-a>`/`<C-x>` handle more types of numbers for incrementing you might as well have it.
 
 Some plugins can change the way you use vim or just make it seem way more powerful:
