@@ -1,3 +1,9 @@
+# Local marks are not natively supported. You can jump to them, but not modify
+# them.
+if [ -e ~/.bashmarks.local.sdirs ]; then
+    source ~/.bashmarks.local.sdirs
+fi
+
 export DIR_dave="$HOME/data/settings/daveconfig"
 export DIR_and="$HOME/data/code/android"
 export DIR_vim="$HOME/data/settings/daveconfig/multi/vim"
@@ -7,5 +13,3 @@ export DIR_code="$HOME/data/code"
 export DIR_home="/mnt/c/Users/David"
 export DIR_pod="$HOME/data/code/python/podcastmagic"
 export DIR_mur="$HOME/data/code/python/murmuration"
-export DIR_input="$HOME/data/code/huntress/Assets/ThirdParty/InputManager"
-export DIR_hunt="$HOME/data/code/huntress"
