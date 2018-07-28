@@ -25,9 +25,6 @@
 [submodule "multi/vim/bundle/fugitive"]
 	path = multi/vim/bundle/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
-[submodule "multi/vim/bundle/gitv"]
-	path = multi/vim/bundle/gitv
-	url = git@github.com:idbrii/gitv.git
 [submodule "multi/vim/bundle/vc"]
 	path = multi/vim/bundle/vc
 	url = git@github.com:idbrii/vc.vim.git
@@ -319,3 +316,6 @@
 [submodule "multi/vim/bundle/cs-oranget"]
 	path = multi/vim/bundle/cs-oranget
 	url = https://github.com/OrangeT/vim-csharp.git
+[submodule "multi/vim/bundle/git-gv"]
+	path = multi/vim/bundle/git-gv
+	url = https://github.com/junegunn/gv.vim.git

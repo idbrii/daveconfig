@@ -18,12 +18,13 @@ if executable('git')
     nnoremap <Leader>gi :Gstatus<CR>gg<C-n>
     nnoremap <Leader>gd :Gdiff<CR>
 
-    " Gitv
+    " GV
     " V: visual repo history
-    nnoremap <leader>gV :Gitv --all<CR>
+    nnoremap <leader>gV :GV<CR>
     " v: visual file history
-    nnoremap <leader>gv :Gitv! --all<CR>
-    xnoremap <leader>gv :Gitv! --all<CR>
+    nnoremap <leader>gv :GV!<CR>
+    xnoremap <leader>gv :GV!<CR>
+
     nnoremap <Leader>gb :silent! cd %:p:h<CR>:Gblame<CR>
     let g:Gitv_DoNotMapCtrlKey = 1
 
