@@ -10,7 +10,7 @@ endif
 function! FoldGitCommit(lnum)
     let text = getline(a:lnum)
 
-    if      text=~'^# \u'
+    if      text=~'^# \u.*:$'
         " heading -- starts fold so it's used as the title
         return '>1'
     elseif  text=~'^#\t'
@@ -20,7 +20,7 @@ function! FoldGitCommit(lnum)
         " blank line or help text
         return '='
     endif
-    return 0
+    return david#folding#diff#Fold_CmdsAndHunks(v:lnum)
 endfunction
 
 " Locate the trash folder.
