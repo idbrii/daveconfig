@@ -123,14 +123,36 @@ case $filetype in
         ctags --c++-kinds=+p --fields=+iaS --extra=+q -L $tagfile
         ;;
     cs)
-        # Originally started with:
-        # http://www.mad-computer-scientist.com/blog/2011/10/06/in-search-of-c-omnicomplete-for-vim/
-        # But it doesn't get structs. Need namespace kind for inclement. Trying
-        # all kinds except:
-        # e  enumerators (enumeration values) -- just jump to enum instead
-        # f  fields -- adds 70% more bytes
-        # l  local variables -- adds 90% more bytes
-        ctags --c#-kinds=cismpdngtE --fields=+ianmzS --extra=+fq -L $tagfile
+        # Need namespace kind for inclement.
+        # Need fields for tag completion.
+        #
+        # Using all kinds except:
+        #   e  enumerators (enumeration values) -- just jump to enum instead
+        #   f  fields -- adds 70% more bytes
+        #   l  local variables -- adds 90% more bytes
+        #
+        # Using minimal field info:
+        #   k Kind of tag as a single letter [enabled]
+        #   s Scope of tag definition
+        #   t Type and name of a variable or typedef as "typeref:" field
+        # (excludes f from defaults because it didn't seem useful)
+        #
+        # Other fields:
+        #   a Access (or export) of class members 
+        #   f File-restricted scoping
+        #   i Inheritance information
+        #   K Kind of tag as full name
+        #   l Language of source file containing tag
+        #   m Implementation information
+        #   n Line number of tag definition
+        #   S Signature of routine (e.g. prototype or parameter list)
+        #   z Include the "kind:" key in kind field
+        # 
+        # Trying out removing extra because it increases size by 1.2x.
+        #
+        # .\ctags.exe --extra=+fq --fields=+ianmzS --c#-kinds=cimnp
+        #
+        ctags --c#-kinds=cismpdngtEf --fields=kst -L $tagfile
         ;;
     lua-engine)
         # ltags makes for better lua tags and doesn't bloat the database with
