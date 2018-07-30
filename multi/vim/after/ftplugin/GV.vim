@@ -1,5 +1,5 @@
-" gv doesn't have a refresh. Should figure that out and remap C-l (my redraw command).
-"~ nmap <buffer> <silent> <C-l> u<Plug>(david-redraw-screen) 
+" I added refresh to gv.
+nmap <silent> <buffer> <C-l>     <Plug>(gv-refresh)<Plug>(david-redraw-screen)
 
 " Yank commit sha.
 if has('mac') || !has('unix') || has('xterm_clipboard')
