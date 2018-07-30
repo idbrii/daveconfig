@@ -555,6 +555,16 @@ let OmniCpp_MayCompleteDot = 1
 let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteScope = 1
 
+" OmniSharp
+"
+" Either use the autoinstaller or define g:OmniSharp_server_path in local.vim
+" as the path to extracted omnisharp.http-win-x64.zip from
+" https://github.com/OmniSharp/omnisharp-roslyn/releases Must get http
+" variant!
+"
+let g:OmniSharp_selector_ui = 'unite'
+"~ let g:OmniSharp_typeLookupInPreview = 1
+
 " Surround
 " Use c as my surround character (it looks like a hug)
 " TEST: Try using s instead of c. See how it works. c is more useful in

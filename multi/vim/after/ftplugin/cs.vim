@@ -21,3 +21,21 @@ let b:commentary_format = '//~ %s'
 setlocal cinoptions+=j1
 " #defines in first column (not second)
 setlocal cinoptions+=#0
+
+
+setlocal foldmarker=region,endregion
+
+compiler msvc
+nnoremap <buffer> <F5> :AsyncMake 
+
+" Don't search tags with basic completion -- it's too slow. insert completion
+" should be super fast and mostly ignore context. I can do other
+" omnicompletion for smartness (C-x, C-] or C-space).
+setlocal complete-=t
+setlocal complete-=]
+
+" OmniSharp's omnicompletion requires the server to work. If there's no
+" server, use tags instead.
+if !david#cs#has_omnisharp_server()
+    inoremap <buffer> <C-space> <C-x><C-]>
+endif
