@@ -25,12 +25,18 @@ function! david#setup_python_paths(pythonhome)
     " vim plugins need python, setup python's paths in vim. Any build scripts
     " called from vim need to clear these variables.
     if isdirectory(a:pythonhome)
-        let $PYTHONHOME = a:pythonhome
-        let $PYTHONPATH = $PYTHONHOME . "/Lib"
-        let $PATH = $PATH . ';' . $PYTHONHOME
+        if !exists('s:david_default_python')
+            " We don't want py2 in py3's PYTHONPATH and probably makes the
+            " most sense to have PYTHONHOME match the first python found in
+            " PATH.
+            let s:david_default_python = a:pythonhome
+            let $PYTHONHOME = a:pythonhome
+            let $PYTHONPATH = $PYTHONHOME . "/Lib"
 
-        " Make sure pydoc is using our configured python.
-        let g:pydoc_cmd = $PYTHONHOME .'/python -m pydoc'
+            " Make sure pydoc is using our configured python.
+            let g:pydoc_cmd = $PYTHONHOME .'/python -m pydoc'
+        endif
+        let $PATH = $PATH . ';' . a:pythonhome
     else
         echoerr "Invalid pythonhome directory: ". a:pythonhome
     endif
