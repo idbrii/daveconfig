@@ -151,7 +151,7 @@ if executable('svn')
         call diffusable#diff_this_against_text(base_file)
 
         wincmd p
-        exec 'file '. bufname('%') .'-'. repo_file .'\#'. a:revision
+        exec 'silent file '. bufname('%') .'-'. repo_file .'\#'. a:revision
         wincmd p
         " Try to ensure cursor is at the same position. Also close up folds
         " and centre cursor.
