@@ -112,10 +112,24 @@ let loaded_python_ipy = 0
 let loaded_python_rope = 0
 
 if has('win32')
-    " If python is not in the path (because that breaks build pipeline), but vim
-    " plugins need python, setup python's paths in vim. Any build scripts called
-    " from vim need to clear these variables.
-    call david#setup_python_paths($MY_PYTHONHOME)
+    " Python's usually not in the path (so builds can use their specific
+    " python version), but vim plugins need python, setup python in vim.
+    " Hopefully we can avoid setting PYTHONHOME/PATH otherwise build scripts
+    " called from vim need to clear these variables.
+    "
+    " Do I use python2.7 x64 for any plugins?
+    " Denite requires py3.
+
+    "~ let g:can_set_pythonhome = 0
+    "~ call david#setup_python_paths('2.7', $MY_PYTHONHOME)
+    call david#setup_python_paths('2.7', 'c:/david/apps/Python/Python27')
+    call david#setup_python_paths('3.6', 'c:/david/apps/Python/Python36')
+
+    " If these calls succeed, then uncomment can_set_pythonhome above and
+    " delete these tests.
+    call david#python_version(2)
+    call david#python_version(3)
+
 
     " Git providers (pick one) {{{1
 
