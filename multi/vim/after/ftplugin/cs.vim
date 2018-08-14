@@ -34,8 +34,10 @@ nnoremap <buffer> <F5> :AsyncMake
 setlocal complete-=t
 setlocal complete-=]
 
-" OmniSharp's omnicompletion requires the server to work. If there's no
-" server, use tags instead.
-if !david#cs#has_omnisharp_server()
+if david#cs#has_omnisharp_server()
+    nnoremap <buffer> <Leader>jT :<C-u> :OmniSharpGotoDefinition<CR>
+else
+    " OmniSharp's omnicompletion requires the server to work. If there's no
+    " server, use tags instead.
     inoremap <buffer> <C-space> <C-x><C-]>
 endif
