@@ -322,3 +322,6 @@
 [submodule "multi/vim/bundle/tagimposter"]
 	path = multi/vim/bundle/tagimposter
 	url = git@github.com:idbrii/vim-tagimposter.git
+[submodule "multi/vim/bundle/unite-tag"]
+	path = multi/vim/bundle/unite-tag
+	url = https://github.com/tsukkee/unite-tag.git
