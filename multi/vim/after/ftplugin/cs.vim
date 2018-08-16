@@ -35,7 +35,7 @@ setlocal complete-=t
 setlocal complete-=]
 
 if david#cs#has_omnisharp_server()
-    nnoremap <buffer> <Leader>jT :<C-u> :OmniSharpGotoDefinition<CR>
+    nnoremap <buffer> <Leader>jT :<C-u> TagImposterAnticipateJump <Bar> OmniSharpGotoDefinition<CR>
 else
     " OmniSharp's omnicompletion requires the server to work. If there's no
     " server, use tags instead.

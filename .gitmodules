@@ -319,3 +319,6 @@
 [submodule "multi/vim/bundle/git-gv"]
 	path = multi/vim/bundle/git-gv
 	url = https://github.com/junegunn/gv.vim.git
+[submodule "multi/vim/bundle/tagimposter"]
+	path = multi/vim/bundle/tagimposter
+	url = git@github.com:idbrii/vim-tagimposter.git
