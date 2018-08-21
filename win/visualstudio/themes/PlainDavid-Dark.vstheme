@@ -1,5 +1,5 @@
 <Themes>
-  <Theme Name="Plain Dark" GUID="{ebed94bb-2cbe-413a-87ad-8bed2b19d350}">
+  <Theme Name="PlainDavid Dark" GUID="{24c5c0eb-a9f9-470f-b677-542e455cdab9}">
     <Category Name="ACDCOverview" GUID="{c8887ac6-3c60-4209-9d69-8f4c12a60044}">
       <Color Name="Body">
         <Background Type="CT_RAW" Source="FF252526" />
@@ -4592,8 +4592,8 @@
         <Background Type="CT_RAW" Source="FF434346" />
       </Color>
       <Color Name="MainWindowActiveCaption">
-        <Background Type="CT_RAW" Source="FF2D2D30" />
-        <Foreground Type="CT_RAW" Source="FF999999" />
+        <Background Type="CT_RAW" Source="FF002D4A" />
+        <Foreground Type="CT_RAW" Source="FFFFFFFF" />
       </Color>
       <Color Name="MainWindowInactiveCaption">
         <Background Type="CT_RAW" Source="FF2D2D30" />
@@ -4709,13 +4709,13 @@
         <Background Type="CT_RAW" Source="FFFFFFFF" />
       </Color>
       <Color Name="MainWindowActiveIconBuilding">
-        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Background Type="CT_RAW" Source="FFEAFF36" />
       </Color>
       <Color Name="MainWindowActiveIconDebugging">
-        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Background Type="CT_RAW" Source="FFCA5100" />
       </Color>
       <Color Name="MainWindowActiveIconNoSolution">
-        <Background Type="CT_RAW" Source="FFFFFFFF" />
+        <Background Type="CT_RAW" Source="FF68217A" />
       </Color>
       <Color Name="MainWindowInactiveIconDefault">
         <Background Type="CT_RAW" Source="66FFFFFF" />
