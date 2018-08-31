@@ -325,3 +325,6 @@
 [submodule "multi/vim/bundle/unite-tag"]
 	path = multi/vim/bundle/unite-tag
 	url = https://github.com/tsukkee/unite-tag.git
+[submodule "multi/vim/bundle/remarkjs"]
+	path = multi/vim/bundle/remarkjs
+	url = git@github.com:idbrii/vim-remarkjs.git
