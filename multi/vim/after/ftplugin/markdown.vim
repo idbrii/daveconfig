@@ -15,3 +15,13 @@ setlocal comments^=s1:/*,mb:*,ex:*/
 
 " Default is manual, but marker is more likely in markdown.
 setlocal foldmethod=marker
+
+
+" https://www.reddit.com/r/vim/comments/99veey/semantic_linefeeds_anyone_using_semantic/
+" https://vi.stackexchange.com/questions/2846/how-to-set-up-vim-to-work-with-one-sentence-per-line/2848#2848
+function! SemanticLineBreakFormatExpr(start, end)
+    silent execute a:start.','.a:end.'s/[.!?]\zs /\r/g'
+endfunction
+
+setlocal formatexpr=SemanticLineBreakFormatExpr(v:lnum,v:lnum+v:count-1)
+
