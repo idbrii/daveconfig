@@ -10,11 +10,12 @@
 ::
 :: TortoiseSVN merge:
 :: Arguments in TortoiseSVN: %mine %theirs %base %merged
+:: (TortoiseSVN does its own quoting so below values are unquoted!)
 ::
-set LOCAL="%1"
-set REMOTE="%2"
-set BASE="%3"
-set MERGED="%4"
+set LOCAL=%1
+set REMOTE=%2
+set BASE=%3
+set MERGED=%4
 
 :: Defer echo off to here so we see the inputs.
 @echo off
