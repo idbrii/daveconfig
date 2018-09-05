@@ -36,6 +36,11 @@ setlocal complete-=]
 
 if david#cs#has_omnisharp_server()
     nnoremap <buffer> <Leader>jT :<C-u> TagImposterAnticipateJump <Bar> OmniSharpGotoDefinition<CR>
+    " Even with g:omnicomplete_fetch_full_documentation, omnisharp isn't
+    " providing any documentation (probably because we don't use ///
+    " comments). Not sure why, but the preview window is annoying me (maybe
+    " because it opens when there's no content?)
+    setlocal completeopt-=preview
 else
     " OmniSharp's omnicompletion requires the server to work. If there's no
     " server, use tags instead.
