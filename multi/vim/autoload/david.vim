@@ -74,7 +74,11 @@ function! david#setup_python_paths(py_version, pythonhome)
             lockvar g:david_default_python
 
             " Make pydoc use the default (first in path, first configured) python.
-            let g:pydoc_cmd = $PYTHONHOME .'/python -m pydoc'
+            let python_folder = ''
+            if len($PYTHONHOME) > 0
+                let python_folder = $PYTHONHOME .'/'
+            endif
+            let g:pydoc_cmd = python_folder .'python -m pydoc'
         endif
         let $PATH = $PATH . ';' . a:pythonhome
     else
