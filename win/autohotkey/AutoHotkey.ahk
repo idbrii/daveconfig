@@ -218,9 +218,15 @@ return
 ; Win Ctrl Left         golden ratio window resize left ;
 ;-=---------------------------------------------------=-;
 
-golden_ratio := 1.61803398875
-small_golden := 1/golden_ratio
-big_golden := 1 - small_golden
+BigGolden() {
+    golden_ratio := 1.61803398875
+    return 1/golden_ratio
+}
+
+SmallGolden() {
+    golden_ratio := 1.61803398875
+    return 1 - BigGolden()
+}
 
 Convert_LeftToRightToMonitorIndex(ActiveMonitor) {
     ;; Convert 0,1,2 layout to monitor index so input 0 gives index of leftmost monitor.
@@ -257,22 +263,41 @@ Convert_MonitorIndexToLeftToRight(ActiveMonitor) {
     return -1
 }
 
-^#Left::
-  WinRestore, A
-  ActiveMonitor := GetActiveMonitorIndex()
-  SysGet, workArea, MonitorWorkArea, ActiveMonitor
-  workAreaWidth := workAreaRight - workAreaLeft
-  workAreaHeight := workAreaBottom - workAreaTop
+ToggleGoldenRatio(use_right_side) {
+    WinRestore, A
+    MonitorIndex := GetActiveMonitorIndex()
+    ;; TODO: Can I figure out how to make this work on other monitors?
+    ;; HACK: Only monitor 1. If I use active montior, it seems to change
+    ;; monitors between toggles.
+    MonitorIndex := Convert_LeftToRightToMonitorIndex(1)
+    SysGet, workArea, MonitorWorkArea, MonitorIndex
+    workAreaWidth := workAreaRight - workAreaLeft
+    workAreaHeight := workAreaBottom - workAreaTop
 
-  ActiveMonitor := Convert_MonitorIndexToLeftToRight(ActiveMonitor)
-  monitorOffsetX := ActiveMonitor * workAreaWidth
-  X := GetCurrentDesktopLeft()
-  Y := GetCurrentDesktopTop()
-  WinGetPos, winX, winY, winWidth, winHeight, A
-  if (winX=workAreaLeft && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
-    WinMove, A, , X,Y, workAreaWidth * small_golden, %workAreaHeight%
-  else
-    WinMove, A, , X,Y, workAreaWidth * big_golden, %workAreaHeight%
+    ActiveMonitor := Convert_MonitorIndexToLeftToRight(MonitorIndex)
+    X := GetDesktopLeft(ActiveMonitor)
+    Y := GetDesktopTop(ActiveMonitor)
+    WinGetPos, winX, winY, winWidth, winHeight, A
+    small_width := Floor(workAreaWidth * SmallGolden())
+    my_golden := 0
+    if (winWidth < small_width + 1)
+    {
+        my_golden := BigGolden()
+    }
+    else
+    {
+        my_golden := SmallGolden()
+    }
+    other_golden := 1 - my_golden
+    width := workAreaWidth * my_golden
+    if (use_right_side) {
+        X := X + workAreaRight - width
+    }
+    WinMove, A, , X, Y, width, workAreaHeight
+}
+
+^#Left::
+    ToggleGoldenRatio(false)
 return
 
 ;-=---------------------------------------------------=-;
@@ -280,18 +305,7 @@ return
 ;-=---------------------------------------------------=-;
 
 ^#Right::
-  WinRestore, A
-  ActiveMonitor := GetActiveMonitorIndex()
-  SysGet, workArea, MonitorWorkArea, ActiveMonitor
-  workAreaWidth := workAreaRight - workAreaLeft
-  workAreaHeight := workAreaBottom - workAreaTop
-  WinGetPos, winX, winY, winWidth, winHeight, A
-  X := GetCurrentDesktopLeft()
-  Y := GetCurrentDesktopTop()
-  if (winX=workAreaLeft+Floor(workAreaWidth * small_golden) && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
-    WinMove, A, , X + workAreaWidth * big_golden, Y, workAreaWidth * small_golden, workAreaHeight
-  else
-    WinMove, A, , X + workAreaWidth * small_golden, Y, workAreaWidth * big_golden, workAreaHeight
+    ToggleGoldenRatio(true)
 return
 
 
