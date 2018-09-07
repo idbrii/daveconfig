@@ -43,7 +43,7 @@ DoesMonitorHaveTaskbar(monitor_index) {
     return monitor_index = 0
 }
 
-GetDesktopTop() {
+GetCurrentDesktopTop() {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
@@ -54,7 +54,7 @@ GetDesktopTop() {
   }
 }
 
-GetDesktopLeft(use_leftmost_monitor := false) {
+GetCurrentDesktopLeft(use_leftmost_monitor := false) {
     if (use_leftmost_monitor) {
         ActiveMonitor := 0
     } else {
@@ -73,7 +73,7 @@ GetDesktopLeft(use_leftmost_monitor := false) {
 }
 
 ;; TODO: Figure out how to reliably position things inside the current monitor.
-;~ GetDesktopLeft(use_leftmost_monitor := false) {
+;~ GetCurrentDesktopLeft(use_leftmost_monitor := false) {
 ;~   ;ActiveMonitor := GetActiveMonitorIndex()
 ;~   ;SysGet, workArea, MonitorWorkArea, ActiveMonitor
 
@@ -94,7 +94,7 @@ GetDesktopLeft(use_leftmost_monitor := false) {
 ;~   }
 ;~ }
 
-GetDesktopWidth(use_leftmost_monitor := false) {
+GetCurrentDesktopWidth(use_leftmost_monitor := false) {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
@@ -111,7 +111,7 @@ GetDesktopWidth(use_leftmost_monitor := false) {
   }
 }
 
-GetDesktopHeight(use_leftmost_monitor := false) {
+GetCurrentDesktopHeight(use_leftmost_monitor := false) {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
   TaskbarEdge := GetTaskbarEdge()
 
@@ -256,8 +256,8 @@ Convert_LeftToRightMonitorIndex(ActiveMonitor) {
 
   ActiveMonitor := Convert_LeftToRightMonitorIndex(ActiveMonitor)
   monitorOffsetX := ActiveMonitor * workAreaWidth
-  X := GetDesktopLeft()
-  Y := GetDesktopTop()
+  X := GetCurrentDesktopLeft()
+  Y := GetCurrentDesktopTop()
   WinGetPos, winX, winY, winWidth, winHeight, A
   if (winX=workAreaLeft && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
     WinMove, A, , X,Y, workAreaWidth * small_golden, %workAreaHeight%
@@ -276,8 +276,8 @@ return
   workAreaWidth := workAreaRight - workAreaLeft
   workAreaHeight := workAreaBottom - workAreaTop
   WinGetPos, winX, winY, winWidth, winHeight, A
-  X := GetDesktopLeft()
-  Y := GetDesktopTop()
+  X := GetCurrentDesktopLeft()
+  Y := GetCurrentDesktopTop()
   if (winX=workAreaLeft+Floor(workAreaWidth * small_golden) && winY=workAreaTop && winWidth=Floor(workAreaWidth*big_golden))
     WinMove, A, , X + workAreaWidth * big_golden, Y, workAreaWidth * small_golden, workAreaHeight
   else
@@ -287,10 +287,10 @@ return
 
 ResizeAndCenter(w, h)
 {
-  ScreenX := GetDesktopLeft()
-  ScreenY := GetDesktopTop()
-  ScreenWidth := GetDesktopWidth()
-  ScreenHeight := GetDesktopHeight()
+  ScreenX := GetCurrentDesktopLeft()
+  ScreenY := GetCurrentDesktopTop()
+  ScreenWidth := GetCurrentDesktopWidth()
+  ScreenHeight := GetCurrentDesktopHeight()
 
   WinMove A,,ScreenX + (ScreenWidth/2)-(w/2),ScreenY + (ScreenHeight/2)-(h/2),w,h
 }
@@ -321,18 +321,18 @@ FitToRightOfWin(UseRightScreen, AdjacentWidth)
 {
 ; Put a window in the space next to my game.
 
-  ;; TODO: Use GetDesktopLeft(false)? Autodetect active window and position on
+  ;; TODO: Use GetCurrentDesktopLeft(false)? Autodetect active window and position on
   ;; its monitor?
-  LeftBound := GetDesktopLeft(true)
+  LeftBound := GetCurrentDesktopLeft(true)
   RightBound := A_ScreenWidth
   if UseRightScreen {
     LeftBound := A_ScreenWidth
     RightBound := A_ScreenWidth * 2
   }
   ScreenX := LeftBound + AdjacentWidth
-  ScreenY := GetDesktopTop()
+  ScreenY := GetCurrentDesktopTop()
   ScreenWidth := RightBound - AdjacentWidth - LeftBound
-  ScreenHeight := GetDesktopHeight()
+  ScreenHeight := GetCurrentDesktopHeight()
 
   WinMove A,,ScreenX,ScreenY,ScreenWidth,ScreenHeight
 }
@@ -341,16 +341,16 @@ FitToLeftOfWin(UseRightScreen, AdjacentWidth)
 {
 ; Put a window in the space next to my game.
 
-  LeftBound := GetDesktopLeft(true)
+  LeftBound := GetCurrentDesktopLeft(true)
   RightBound := A_ScreenWidth
   if UseRightScreen {
     LeftBound := A_ScreenWidth
     RightBound := A_ScreenWidth * 2
   }
   ScreenX := LeftBound
-  ScreenY := GetDesktopTop()
+  ScreenY := GetCurrentDesktopTop()
   ScreenWidth := RightBound - AdjacentWidth - LeftBound
-  ScreenHeight := GetDesktopHeight()
+  ScreenHeight := GetCurrentDesktopHeight()
 
   WinMove A,,ScreenX,ScreenY,ScreenWidth,ScreenHeight
 }
@@ -359,7 +359,7 @@ FitBelowWin(UseRightScreen, AdjacentHeight, AdjacentWidth)
 {
 ; Put a window in the space below to my game.
 
-  LeftBound := GetDesktopLeft(true)
+  LeftBound := GetCurrentDesktopLeft(true)
   RightBound := AdjacentWidth
   if UseRightScreen {
     LeftBound := A_ScreenWidth
@@ -368,7 +368,7 @@ FitBelowWin(UseRightScreen, AdjacentHeight, AdjacentWidth)
   ScreenX := LeftBound
   ScreenY := AdjacentHeight
   ScreenWidth := AdjacentWidth
-  ScreenHeight := GetDesktopHeight() - AdjacentHeight
+  ScreenHeight := GetCurrentDesktopHeight() - AdjacentHeight
 
   WinMove A,,ScreenX,ScreenY,ScreenWidth,ScreenHeight
 }
@@ -405,31 +405,31 @@ ToggleMaximized()
 ;return
 
 #0::
-  ScreenWidth := GetDesktopWidth()
-  ScreenHeight := GetDesktopHeight()
+  ScreenWidth := GetCurrentDesktopWidth()
+  ScreenHeight := GetCurrentDesktopHeight()
   ResizeAndCenter((ScreenWidth / 2), (ScreenHeight / 2))
 return
 
 ; Move window to left edge of screen
 
 #Numpad7::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
   WinMove A,,SX,SY,,
 return
 
 #Numpad4::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SH := GetDesktopHeight()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SH := GetCurrentDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX,SY + (SH/2) - (H/2),,
 return
 
 #Numpad1::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SH := GetDesktopHeight()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SH := GetCurrentDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX,SY + SH - H,,
 return
@@ -437,27 +437,27 @@ return
 ; Move window to center of screen
 
 #Numpad8::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SW := GetDesktopWidth()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SW := GetCurrentDesktopWidth()
   WinGetPos,,,W,H,A
   WinMove A,,SX + (SW/2)-(W/2),SY,,
 return
 
 #Numpad5::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SW := GetDesktopWidth()
-  SH := GetDesktopHeight()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SW := GetCurrentDesktopWidth()
+  SH := GetCurrentDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + (SW/2)-(W/2),SY + (SH/2)-(H/2),,
 return
 
 #Numpad2::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SW := GetDesktopWidth()
-  SH := GetDesktopHeight()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SW := GetCurrentDesktopWidth()
+  SH := GetCurrentDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + (SW/2)-(W/2),SY + SH-H,,
 return
@@ -465,27 +465,27 @@ return
 ; Move window to right edge of screen
 
 #Numpad9::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SW := GetDesktopWidth()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SW := GetCurrentDesktopWidth()
   WinGetPos,,,W,H,A
   WinMove A,,SX + SW-W,SY,,
 return
 
 #Numpad6::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SW := GetDesktopWidth()
-  SH := GetDesktopHeight()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SW := GetCurrentDesktopWidth()
+  SH := GetCurrentDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + SW-W,SY + (SH/2)-(H/2),,
 return
 
 #Numpad3::
-  SX := GetDesktopLeft()
-  SY := GetDesktopTop()
-  SW := GetDesktopWidth()
-  SH := GetDesktopHeight()
+  SX := GetCurrentDesktopLeft()
+  SY := GetCurrentDesktopTop()
+  SW := GetCurrentDesktopWidth()
+  SH := GetCurrentDesktopHeight()
   WinGetPos,,,W,H,A
   WinMove A,,SX + SW-W,SY + SH-H,,
 return
