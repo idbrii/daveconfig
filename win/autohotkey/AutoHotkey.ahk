@@ -211,23 +211,6 @@ return
     listvars
 return
 
-;; Golden ratio window movement
-;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
-
-;-=---------------------------------------------------=-;
-; Win Ctrl Left         golden ratio window resize left ;
-;-=---------------------------------------------------=-;
-
-BigGolden() {
-    golden_ratio := 1.61803398875
-    return 1/golden_ratio
-}
-
-SmallGolden() {
-    golden_ratio := 1.61803398875
-    return 1 - BigGolden()
-}
-
 Convert_LeftToRightToMonitorIndex(ActiveMonitor) {
     ;; Convert 0,1,2 layout to monitor index so input 0 gives index of leftmost monitor.
 
@@ -263,6 +246,19 @@ Convert_MonitorIndexToLeftToRight(ActiveMonitor) {
     return -1
 }
 
+;; Golden ratio window movement
+;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
+
+BigGolden() {
+    golden_ratio := 1.61803398875
+    return 1/golden_ratio
+}
+
+SmallGolden() {
+    golden_ratio := 1.61803398875
+    return 1 - BigGolden()
+}
+
 ToggleGoldenRatio(use_right_side) {
     WinRestore, A
     MonitorIndex := GetActiveMonitorIndex()
@@ -295,6 +291,10 @@ ToggleGoldenRatio(use_right_side) {
     }
     WinMove, A, , X, Y, width, workAreaHeight
 }
+
+;-=---------------------------------------------------=-;
+; Win Ctrl Left         golden ratio window resize left ;
+;-=---------------------------------------------------=-;
 
 ^#Left::
     ToggleGoldenRatio(false)
