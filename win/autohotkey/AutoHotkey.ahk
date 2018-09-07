@@ -40,7 +40,7 @@ GetTaskbarEdge() {
 
 DoesMonitorHaveTaskbar(monitor_index) {
     ;; The left-most has the taskbar
-    return monitor_index = 0
+    return monitor_index = Convert_LeftToRightToMonitorIndex(0)
 }
 
 GetCurrentDesktopTop() {
@@ -54,45 +54,33 @@ GetCurrentDesktopTop() {
   }
 }
 
+GetDesktopTop(ActiveMonitor) {
+    if (ActiveMonitor = 0 || ActiveMonitor = 2) {
+        ; TODO: Figure this out programmatically? Different because these
+        ; monitors are smaller than #1.
+        return 174
+    }
+    else ; (ActiveMonitor = 1)
+    {
+        return 0
+    }
+}
+
 GetCurrentDesktopLeft(use_leftmost_monitor := false) {
     if (use_leftmost_monitor) {
         ActiveMonitor := 0
     } else {
-        ActiveMonitor := GetActiveMonitorIndex()
+        ActiveMonitor := Convert_MonitorIndexToLeftToRight(GetActiveMonitorIndex())
     }
-    SysGet, work_area_, MonitorWorkArea, ActiveMonitor
-    ActiveMonitor := Convert_LeftToRightMonitorIndex(ActiveMonitor)
-
-    ;; Skip past screens with the *full* width of a screen (not work_area_Right)
-    offset_x := A_ScreenWidth * ActiveMonitor
-
-    if (DoesMonitorHaveTaskbar(ActiveMonitor)) {
-        offset_x += work_area_Left
-    }
-    return offset_x
+    return GetDesktopLeft(ActiveMonitor)
 }
 
-;; TODO: Figure out how to reliably position things inside the current monitor.
-;~ GetCurrentDesktopLeft(use_leftmost_monitor := false) {
-;~   ;ActiveMonitor := GetActiveMonitorIndex()
-;~   ;SysGet, workArea, MonitorWorkArea, ActiveMonitor
+GetDesktopLeft(ActiveMonitor) {
+    MonitorIndex := Convert_LeftToRightToMonitorIndex(ActiveMonitor)
+    SysGet, work_area_, MonitorWorkArea, %MonitorIndex%
 
-;~   if (use_leftmost_monitor) {
-;~       ActiveMonitor := 0
-;~   } else {
-;~       ActiveMonitor := Convert_LeftToRightMonitorIndex(GetActiveMonitorIndex())
-;~   }
-;~   offset_x := A_ScreenWidth * ActiveMonitor
-
-;~   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
-;~   TaskbarEdge := GetTaskbarEdge()
-
-;~   if (DoesMonitorHaveTaskbar(ActiveMonitor) && TaskbarEdge = "left") {
-;~     return TW + offset_x
-;~   } else {
-;~     return 0 + offset_x
-;~   }
-;~ }
+    return work_area_Left
+}
 
 GetCurrentDesktopWidth(use_leftmost_monitor := false) {
   WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
@@ -101,7 +89,7 @@ GetCurrentDesktopWidth(use_leftmost_monitor := false) {
   if (use_leftmost_monitor) {
       ActiveMonitor := 0
   } else {
-      ActiveMonitor := Convert_LeftToRightMonitorIndex(GetActiveMonitorIndex())
+      ActiveMonitor := Convert_MonitorIndexToLeftToRight(GetActiveMonitorIndex())
   }
 
   if (DoesMonitorHaveTaskbar(ActiveMonitor) && (TaskbarEdge = "left" or TaskbarEdge = "right")) {
@@ -118,7 +106,7 @@ GetCurrentDesktopHeight(use_leftmost_monitor := false) {
   if (use_leftmost_monitor) {
       ActiveMonitor := 0
   } else {
-      ActiveMonitor := Convert_LeftToRightMonitorIndex(GetActiveMonitorIndex())
+      ActiveMonitor := Convert_MonitorIndexToLeftToRight(GetActiveMonitorIndex())
   }
 
   if (DoesMonitorHaveTaskbar(ActiveMonitor) && (TaskbarEdge = "top" or TaskbarEdge = "bottom")) {
@@ -130,7 +118,7 @@ GetCurrentDesktopHeight(use_leftmost_monitor := false) {
 
 GetActiveMonitorIndex()
 {
-    ;; Which monitor is the active window on? Uses index understood by SysGet.
+    ;; Which monitor is the active window on? Returns index understood by SysGet.
     ;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
 
     SysGet, numberOfMonitors, MonitorCount
@@ -205,6 +193,20 @@ GetMonitorIndexFromWindow(windowHandle)
 	return monitorIndex
 }
 
+#f9::
+    ;; Do experimentation here.
+    Left0 := GetDesktopLeft(0)
+    Left1 := GetDesktopLeft(1)
+    Left2 := GetDesktopLeft(2)
+    mindex0 := Convert_LeftToRightToMonitorIndex(0)
+    mindex1 := Convert_LeftToRightToMonitorIndex(1)
+    mindex2 := Convert_LeftToRightToMonitorIndex(2)
+    SysGet, work0_area_, MonitorWorkArea, %mindex0%
+    SysGet, work1_area_, MonitorWorkArea, %mindex1%
+    SysGet, work2_area_, MonitorWorkArea, %mindex2%
+    listvars
+return
+
 #f10::
     monitor_index_GetActiveMonitorIndex := GetActiveMonitorIndex()
 
@@ -234,17 +236,39 @@ golden_ratio := 1.61803398875
 small_golden := 1/golden_ratio
 big_golden := 1 - small_golden
 
-Convert_LeftToRightMonitorIndex(ActiveMonitor) {
-    ;; Leftmost monitor is 0.
+Convert_LeftToRightToMonitorIndex(ActiveMonitor) {
+    ;; Convert 0,1,2 layout to monitor index so input 0 gives index of leftmost monitor.
 
-    ;; Use 0-indexed for calculations
-    ;~ ActiveMonitor := ActiveMonitor - 1
+    if (ActiveMonitor = 0) {
+        return 1
+    }
+    else if (ActiveMonitor = 1) {
+        ;; Middle is my primary.
+        return 0
+    }
+    else if (ActiveMonitor = 2) {
+        ;; Why not 2 AHK? 2 gives the same values as 1. WHY?
+        return 3
+    }
+    return -1
+}
 
-    ;; Hack: My monitors are laid out: 2 1
-    SysGet, monitorCount, MonitorCount
-    ActiveMonitor := monitorCount - ActiveMonitor - 1
+Convert_MonitorIndexToLeftToRight(ActiveMonitor) {
+    ;; Convert monitor index to 0,1,2 layout so leftmost monitor is 0.
 
-    return ActiveMonitor
+    ; Current layout:
+    ; [1][0][2]
+
+    if (ActiveMonitor = 0) {
+        return 1
+    }
+    else if (ActiveMonitor = 1) {
+        return 0
+    }
+    else if (ActiveMonitor = 2) {
+        return 2
+    }
+    return -1
 }
 
 ^#Left::
@@ -254,7 +278,7 @@ Convert_LeftToRightMonitorIndex(ActiveMonitor) {
   workAreaWidth := workAreaRight - workAreaLeft
   workAreaHeight := workAreaBottom - workAreaTop
 
-  ActiveMonitor := Convert_LeftToRightMonitorIndex(ActiveMonitor)
+  ActiveMonitor := Convert_MonitorIndexToLeftToRight(ActiveMonitor)
   monitorOffsetX := ActiveMonitor * workAreaWidth
   X := GetCurrentDesktopLeft()
   Y := GetCurrentDesktopTop()
@@ -538,15 +562,15 @@ OrganizeDesktop()
     avoid_right_monitor := true
     ;; Lay out windows for my three monitors with centre as the work machine.
     ;; Roughly in order of left-to-right appearance.
-    MoveAndRestore("ahk_exe slack.exe", 62, 0, 1140, 1080)
-    MoveAndRestore("ahk_class Vim", 1913, -174, 1294, 1447)
+    MoveAndRestore("ahk_exe slack.exe", GetDesktopLeft(0), GetDesktopTop(0), 1140, 1080)
+    MoveAndRestore("ahk_class Vim", GetDesktopLeft(1), GetDesktopTop(1), 1294, 1447)
     ;; Game and log go here (but they position themselves).
     if (avoid_right_monitor) {
-        MoveAndRestore("ahk_exe chrome.exe", 62+1133, 0, 732, 1080)
+        MoveAndRestore("ahk_exe chrome.exe", GetDesktopLeft(0)+1133, GetDesktopTop(0), 732, 1080)
     } else {
-        MoveAndRestore("ahk_exe chrome.exe", 4480, 0, 974, 1080)
+        MoveAndRestore("ahk_exe chrome.exe", GetDesktopLeft(2), GetDesktopTop(0), 974, 1080)
     }
-    MoveAndRestore("ahk_exe bash.exe", 5433, 0, 974, 1087)
+    MoveAndRestore("ahk_exe bash.exe", GetDesktopLeft(2)+953, GetDesktopTop(0), 974, 1087)
 
     SetTitleMatchMode 2 ;; A window's title can contain WinTitle anywhere inside it to be a match
     ;; Tortoise has lots of windows and they all have the same ahk_exe
@@ -554,7 +578,7 @@ OrganizeDesktop()
     ;; text inside the window, but the title should be pretty consistent so use
     ;; that instead.
     if (avoid_right_monitor) {
-        MoveAndRestore("Working Copy - TortoiseSVN", 4473, 482, 974, 605)
+        MoveAndRestore("Working Copy - TortoiseSVN", GetDesktopLeft(2), 482, 974, 605)
     } else {
         MoveAndRestore("Working Copy - TortoiseSVN", 5433, 482, 974, 605)
     }
