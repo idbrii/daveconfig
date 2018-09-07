@@ -42,6 +42,8 @@ if david#cs#has_omnisharp_server()
     " comments). Not sure why, but the preview window is annoying me (maybe
     " because it opens when there's no content?)
     setlocal completeopt-=preview
+    " longest doesn't work and just clears what I've typed so far.
+    setlocal completeopt-=longest
 else
     " OmniSharp's omnicompletion requires the server to work. If there's no
     " server, use tags instead.
