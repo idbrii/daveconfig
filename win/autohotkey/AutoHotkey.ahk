@@ -44,26 +44,13 @@ DoesMonitorHaveTaskbar(monitor_index) {
 }
 
 GetCurrentDesktopTop() {
-  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
-  TaskbarEdge := GetTaskbarEdge()
-
-  if (TaskbarEdge = "top") {
-    return TH
-  } else {
-    return 0
-  }
+    return GetDesktopTop(Convert_MonitorIndexToLeftToRight(GetActiveMonitorIndex()))
 }
 
 GetDesktopTop(ActiveMonitor) {
-    if (ActiveMonitor = 0 || ActiveMonitor = 2) {
-        ; TODO: Figure this out programmatically? Different because these
-        ; monitors are smaller than #1.
-        return 174
-    }
-    else ; (ActiveMonitor = 1)
-    {
-        return 0
-    }
+    MonitorIndex := Convert_LeftToRightToMonitorIndex(ActiveMonitor)
+    SysGet, work_area_, MonitorWorkArea, %MonitorIndex%
+    return work_area_Top
 }
 
 GetCurrentDesktopLeft(use_leftmost_monitor := false) {
@@ -78,7 +65,6 @@ GetCurrentDesktopLeft(use_leftmost_monitor := false) {
 GetDesktopLeft(ActiveMonitor) {
     MonitorIndex := Convert_LeftToRightToMonitorIndex(ActiveMonitor)
     SysGet, work_area_, MonitorWorkArea, %MonitorIndex%
-
     return work_area_Left
 }
 
