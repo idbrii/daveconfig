@@ -36,6 +36,7 @@ setlocal complete-=]
 
 if david#cs#has_omnisharp_server()
     nnoremap <buffer> <Leader>jT :<C-u> TagImposterAnticipateJump <Bar> OmniSharpGotoDefinition<CR>
+    nnoremap <buffer> <Leader>jP :<C-u> TagImposterAnticipateJump <Bar> OmniSharpPreviewDefinition<CR>
     " Even with g:omnicomplete_fetch_full_documentation, omnisharp isn't
     " providing any documentation (probably because we don't use ///
     " comments). Not sure why, but the preview window is annoying me (maybe
