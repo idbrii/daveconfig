@@ -65,7 +65,12 @@ GetCurrentDesktopLeft(use_leftmost_monitor := false) {
 GetDesktopLeft(ActiveMonitor) {
     MonitorIndex := Convert_LeftToRightToMonitorIndex(ActiveMonitor)
     SysGet, work_area_, MonitorWorkArea, %MonitorIndex%
-    return work_area_Left
+    if (ActiveMonitor != 0)
+    {
+        ; For some reason it's not accurate.
+        offset := -7
+    }
+    return work_area_Left + offset
 }
 
 GetCurrentDesktopWidth(use_leftmost_monitor := false) {
@@ -568,9 +573,9 @@ OrganizeDesktop()
     if (avoid_right_monitor) {
         MoveAndRestore("ahk_exe chrome.exe", GetDesktopLeft(0)+1133, GetDesktopTop(0), 732, 1080)
     } else {
-        MoveAndRestore("ahk_exe chrome.exe", GetDesktopLeft(2), GetDesktopTop(0), 974, 1080)
+        MoveAndRestore("ahk_exe chrome.exe", GetDesktopLeft(2), GetDesktopTop(2), 974, 1080)
     }
-    MoveAndRestore("ahk_exe bash.exe", GetDesktopLeft(2)+953, GetDesktopTop(0), 974, 1087)
+    MoveAndRestore("ahk_exe bash.exe", GetDesktopLeft(2)+953, GetDesktopTop(2), 974, 1087)
 
     SetTitleMatchMode 2 ;; A window's title can contain WinTitle anywhere inside it to be a match
     ;; Tortoise has lots of windows and they all have the same ahk_exe
@@ -578,7 +583,7 @@ OrganizeDesktop()
     ;; text inside the window, but the title should be pretty consistent so use
     ;; that instead.
     if (avoid_right_monitor) {
-        MoveAndRestore("Working Copy - TortoiseSVN", GetDesktopLeft(2), 482, 974, 605)
+        MoveAndRestore("Working Copy - TortoiseSVN", GetDesktopLeft(2), GetDesktopTop(2) + 482, 974, 605)
     } else {
         MoveAndRestore("Working Copy - TortoiseSVN", 5433, 482, 974, 605)
     }
