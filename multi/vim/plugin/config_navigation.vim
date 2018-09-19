@@ -180,6 +180,14 @@ nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
 " Jump to symbol
 nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
+if exists("##BufWinEnter")
+    " Show cursorline in preview window to make symbol we jumped to stand out.
+    augroup David_PreviewWindow
+        au!
+        autocmd BufWinEnter * if &previewwindow | setlocal cursorline | endif
+    augroup end
+endif
+
 " dirvish plugin -- Navigate filesystems {{{1
 
 " dirvish and open-browser replace netrw.
