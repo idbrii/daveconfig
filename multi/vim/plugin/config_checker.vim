@@ -2,6 +2,18 @@
 
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_delay = 1000
+
+" C# {{{1
+
+" Disabling mcsc to see if that makes vim more responsive. I've got omnisharp
+" so that should be equivalent.
+let g:ale_linters = {
+            \ 'cs': [
+            \       'OmniSharp',
+            \       'mcs',
+            \   ]
+            \ }
 
 " Python {{{1
 
