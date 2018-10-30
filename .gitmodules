@@ -31,9 +31,6 @@
 [submodule "multi/vim/bundle/repeat"]
 	path = multi/vim/bundle/repeat
 	url = git://github.com/tpope/vim-repeat.git
-[submodule "multi/vim/bundle/ack"]
-	path = multi/vim/bundle/ack
-	url = git@github.com:idbrii/vim-ack.git
 [submodule "multi/vim/bundle/xmledit"]
 	path = multi/vim/bundle/xmledit
 	url = git@github.com:idbrii/xmledit.git
