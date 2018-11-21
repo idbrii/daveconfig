@@ -4,7 +4,7 @@
 
 " Preamble {{{1
 
-" Don't exit! I'm adding to existing syntax (omnisharp's setup).
+" Don't exit! I'm adding to existing syntax (vim-cs's setup in aaa-cs-official).
 "if exists("b:current_syntax")
 "    finish
 "endif
