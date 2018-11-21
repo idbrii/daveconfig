@@ -7,7 +7,15 @@ let g:ale_lint_delay = 1000
 " C# {{{1
 
 " Disabling mcsc to see if that makes vim more responsive. I've got omnisharp
-" so that should be equivalent.
+" so that should be equivalent. I'm not sure mcs adds much (it's for syntax
+" checking whereas OmniSharp is semantic checking), but it doesn't seem to
+" cause problems.
+"
+" I often have incorrect double definition (after moving) or not defined
+" (after adding something new) errors. I have to restart omnisharp servers to
+" fix (sometimes that doesn't work). Suggested fix is to get Unity to regen
+" the sln:
+" https://github.com/OmniSharp/omnisharp-vim/issues/405#issuecomment-419291942
 let g:ale_linters = {
             \ 'cs': [
             \       'OmniSharp',
