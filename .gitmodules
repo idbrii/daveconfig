@@ -315,7 +315,7 @@
 	url = git@github.com:idbrii/vim-jumpmethod.git
 [submodule "multi/vim/bundle/aaa-cs-official"]
 	path = multi/vim/bundle/aaa-cs-official
-	url = https://github.com/nickspoons/vim-cs.git
+	url = git@github.com:idbrii/vim-cs.git
 [submodule "multi/vim/bundle/cs-oranget"]
 	path = multi/vim/bundle/cs-oranget
 	url = https://github.com/OrangeT/vim-csharp.git
