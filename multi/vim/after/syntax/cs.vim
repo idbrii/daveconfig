@@ -24,6 +24,17 @@ hi def link csBadCodeError Error
 "syntax include @csXml syntax/xml.vim
 "hi def link xmlRegion Comment
 
+" Don't add special highlight to end colons.
+hi link	csEndColon	NONE
+" Don't like operators looking like constants.
+hi link	csLogicSymbols	Operator
+" Don't highlight same type two different ways:
+" static List<string> m_Stuff = new List<string>();
+hi link	csNewType	NONE
+" I don't think these should be highlighted differently or brightly.
+hi link	csParens	Delimiter
+hi link	csBraces	Delimiter
+
 
 " Fold Code blocks {{{1
 syn region	csBlock		start="{" end="}" transparent fold
