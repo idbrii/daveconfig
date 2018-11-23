@@ -16,11 +16,13 @@ else
 endif
 
 " Easy execute line.
-nnoremap <buffer> <Leader>v: 0y$:<C-r>"<CR>
+" https://stackoverflow.com/a/20262740/79125
+command! -buffer -bar -range Eval silent <line1>,<line2>yank c | let @c = substitute(@c, '\n\s*\\', '', 'g') | @c
+nnoremap <buffer> <Leader>v: :<C-u>Eval<CR>
 " ; is easier than :
-nnoremap <buffer> <Leader>v; 0y$:<C-r>"<CR>
+nnoremap <buffer> <Leader>v; :<C-u>Eval<CR>
 " Source selection
-xnoremap <buffer> <Leader>v; y:execute @"<CR>
+xnoremap <buffer> <Leader>v; :Eval<CR>
 
 " Easy echo.
 nnoremap <buffer> <Leader>ve 0y$:echo <C-r>"<CR>
