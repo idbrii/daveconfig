@@ -1,6 +1,4 @@
 " Swapping text {{{1
-
-
 " Exchange {{{2
 
 " I only want to remap ExchangeLine, so I can just do the one.
@@ -35,7 +33,7 @@ omap i, <Plug>SidewaysArgumentTextobjI
 omap a, <Plug>SidewaysArgumentTextobjA
 
 
-" Commentary {{{2
+" Commentary {{{1
 
 let g:commentary_marker = '~'
 
@@ -50,7 +48,7 @@ omap <unique> g/  <Plug>Commentary
 nmap <unique> g/.  <Plug>Commentary<Plug>Commentary
 nmap <unique> g/g/ <Plug>Commentary<Plug>Commentary
 
-" Table-mode {{{2
+" Table-mode {{{1
 "
 " Change mode -- table mode
 " I use it so frequently, that I don't need it on a short prefix.
