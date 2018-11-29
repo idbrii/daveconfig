@@ -399,6 +399,8 @@ cnoremap <A-Space> _
 " change increment to allow select all
 nnoremap <C-x><C-s> <C-a>
 nnoremap <C-x><C-x> <C-x>
+xnoremap g<C-x><C-s> g<C-a>
+xnoremap g<C-x><C-x> g<C-x>
 " Don't let speeddating override the above. (They'll be properly mapped later
 " if speeddating loads.)
 let g:speeddating_no_mappings = 1
