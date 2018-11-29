@@ -3,6 +3,11 @@ let g:airline_right_sep=''
 let g:airline_powerline_fonts=0
 let g:airline_symbols_ascii = 1
 
+" I don't actively use eclim
+let g:airline#extensions#eclim#enabled = 0
+" Don't add CursorMoved events
+let g:airline#extensions#wordcount#enabled = 0
+
 " Only enable these locally since I don't want to see them for files written
 " by other people.
 let g:airline#extensions#whitespace#checks = []
