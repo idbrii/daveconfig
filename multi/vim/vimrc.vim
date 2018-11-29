@@ -188,6 +188,11 @@ set isfname-==              " allow completion in var=/some/path
 set tabstop=4				" 1 tab = x spaces
 set shiftwidth=4			" Used by auto indent (see below for 0)
 set softtabstop=4           " &sw spaces as a tab for bs/del
+if exists('&breakindent')
+    " Show line wraps as lines with one additional indent.
+    set breakindent
+    set breakindentopt=shift:4
+endif
 if v:version >= 704
     " Zero keeps in sync with tabstop in Vim 7.4+, but it breaks indentation
     " (I think especially autoindent).
