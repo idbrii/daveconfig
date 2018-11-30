@@ -256,6 +256,9 @@
 [submodule "multi/vim/bundle/sideways"]
 	path = multi/vim/bundle/sideways
 	url = https://github.com/AndrewRadev/sideways.vim.git
+[submodule "multi/vim/bundle/matchup"]
+	path = multi/vim/bundle/matchup
+	url = https://github.com/andymass/vim-matchup.git
 [submodule "multi/vim/bundle/vimproc"]
 	path = multi/vim/bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
