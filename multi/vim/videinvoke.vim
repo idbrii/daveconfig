@@ -11,6 +11,8 @@
 "   numbers. So configure them to pass nothing.)
 " Monodevelop uses:
 "   --servername Vide --remote-silent +"call cursor(${CurLine},${CurColumn}) | runtime videinvoke.vim | set path+=${SolutionDir}/**" ${FilePath} 
+" Godot uses:
+"   vide.cmd "+call cursor({line},{col})" "+runtime videinvoke.vim" "+set path+={project}/**" {file}
 
 
 " videinvoke is intended to be used from external programs, so we probably
