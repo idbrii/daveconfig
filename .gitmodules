@@ -24,7 +24,7 @@
 	url = https://github.com/simnalamburt/vim-mundo.git
 [submodule "multi/vim/bundle/fugitive"]
 	path = multi/vim/bundle/fugitive
-	url = git@github.com:tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "multi/vim/bundle/vc"]
 	path = multi/vim/bundle/vc
 	url = git@github.com:idbrii/vc.vim.git
@@ -45,7 +45,7 @@
 	url = git@github.com:idbrii/vim-perforce.git
 [submodule "multi/vim/bundle/unite"]
 	path = multi/vim/bundle/unite
-	url = git@github.com:Shougo/unite.vim.git
+	url = https://github.com/Shougo/unite.vim.git
 [submodule "multi/vim/bundle/unite-david"]
 	path = multi/vim/bundle/unite-david
 	url = git@github.com:idbrii/unite-david.git
@@ -54,16 +54,16 @@
 	url = git@github.com:idbrii/unite-history_yank-cycle.git
 [submodule "multi/vim/bundle/unite-neomru"]
 	path = multi/vim/bundle/unite-neomru
-	url = git@github.com:Shougo/neomru.vim.git
+	url = https://github.com/Shougo/neomru.vim.git
 [submodule "multi/vim/bundle/unite-outline"]
 	path = multi/vim/bundle/unite-outline
-	url = git@github.com:Shougo/unite-outline.git
+	url = https://github.com/Shougo/unite-outline.git
 [submodule "multi/vim/bundle/unite-history"]
 	path = multi/vim/bundle/unite-history
-	url = git@github.com:thinca/vim-unite-history.git
+	url = https://github.com/thinca/vim-unite-history.git
 [submodule "multi/vim/bundle/ctrlp"]
 	path = multi/vim/bundle/ctrlp
-	url = git@github.com:ctrlpvim/ctrlp.vim.git
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
 [submodule "multi/vim/bundle/ctrlp-funky"]
 	path = multi/vim/bundle/ctrlp-funky
 	url = git@github.com:idbrii/ctrlp-funky.git
@@ -78,7 +78,7 @@
 	url = git@github.com:idbrii/textobj-word-column.vim.git
 [submodule "multi/vim/bundle/speeddating"]
 	path = multi/vim/bundle/speeddating
-	url = git@github.com:tpope/vim-speeddating.git
+	url = https://github.com/tpope/vim-speeddating.git
 [submodule "multi/vim/bundle/textconv"]
 	path = multi/vim/bundle/textconv
 	url = git@github.com:idbrii/textconv.vim.git
@@ -87,10 +87,10 @@
 	url = git://github.com/chrisbra/NrrwRgn.git
 [submodule "multi/vim/bundle/eunuch"]
 	path = multi/vim/bundle/eunuch
-	url = git@github.com:tpope/vim-eunuch.git
+	url = https://github.com/tpope/vim-eunuch.git
 [submodule "multi/vim/bundle/pathogen"]
 	path = multi/vim/bundle/pathogen
-	url = git@github.com:tpope/vim-pathogen.git
+	url = https://github.com/tpope/vim-pathogen.git
 [submodule "multi/vim/bundle/man"]
 	path = multi/vim/bundle/man
 	url = git@github.com:idbrii/vim-man.git
@@ -102,7 +102,7 @@
 	url = git://github.com/kana/vim-textobj-indent.git
 [submodule "multi/vim/bundle/textobj-between"]
 	path = multi/vim/bundle/textobj-between
-	url = git@github.com:thinca/vim-textobj-between.git
+	url = https://github.com/thinca/vim-textobj-between.git
 [submodule "multi/vim/bundle/operator-user"]
 	path = multi/vim/bundle/operator-user
 	url = git://github.com/kana/vim-operator-user.git
@@ -138,7 +138,7 @@
 	url = git://github.com/SirVer/ultisnips.git
 [submodule "multi/vim/bundle/snippets"]
 	path = multi/vim/bundle/snippets
-	url = git@github.com:honza/vim-snippets.git
+	url = https://github.com/honza/vim-snippets.git
 [submodule "multi/vim/bundle/david-snippets"]
 	path = multi/vim/bundle/david-snippets
 	url = git@github.com:idbrii/vim-david-snippets.git
@@ -159,13 +159,13 @@
 	url = git://github.com/idbrii/vim-qargs.git
 [submodule "multi/vim/bundle/ctrlp-history"]
 	path = multi/vim/bundle/ctrlp-history
-	url = git@github.com:ompugao/ctrlp-history.git
+	url = https://github.com/ompugao/ctrlp-history.git
 [submodule "multi/vim/bundle/python-syntax"]
 	path = multi/vim/bundle/python-syntax
-	url = git@github.com:hdima/python-syntax.git
+	url = https://github.com/hdima/python-syntax.git
 [submodule "multi/vim/bundle/pydoc"]
 	path = multi/vim/bundle/pydoc
-	url = git@github.com:fs111/pydoc.vim.git
+	url = https://github.com/fs111/pydoc.vim.git
 [submodule "multi/vim/bundle/detectindent"]
 	path = multi/vim/bundle/detectindent
 	url = git@github.com:idbrii/detectindent.git
@@ -174,10 +174,10 @@
 	url = git@github.com:idbrii/vim-editqf.git
 [submodule "multi/vim/bundle/quickfix-reflector"]
 	path = multi/vim/bundle/quickfix-reflector
-	url = git@github.com:stefandtw/quickfix-reflector.vim.git
+	url = https://github.com/stefandtw/quickfix-reflector.vim.git
 [submodule "multi/vim/bundle/abolish"]
 	path = multi/vim/bundle/abolish
-	url = git@github.com:tpope/vim-abolish.git
+	url = https://github.com/tpope/vim-abolish.git
 [submodule "multi/vim/bundle/simplebisect"]
 	path = multi/vim/bundle/simplebisect
 	url = git@github.com:idbrii/vim-simplebisect.git
@@ -198,19 +198,19 @@
 	url = git@github.com:idbrii/vim-mark.git
 [submodule "multi/vim/bundle/rsi"]
 	path = multi/vim/bundle/rsi
-	url = git@github.com:tpope/vim-rsi.git
+	url = https://github.com/tpope/vim-rsi.git
 [submodule "multi/vim/bundle/gogo"]
 	path = multi/vim/bundle/gogo
 	url = git@github.com:idbrii/vim-gogo.git
 [submodule "multi/vim/bundle/vader"]
 	path = multi/vim/bundle/vader
-	url = git@github.com:junegunn/vader.vim.git
+	url = https://github.com/junegunn/vader.vim.git
 [submodule "multi/vim/bundle/sandydune"]
 	path = multi/vim/bundle/sandydune
 	url = git@github.com:idbrii/vim-sandydune.git
 [submodule "multi/vim/bundle/FastFold"]
 	path = multi/vim/bundle/FastFold
-	url = git@github.com:Konfekt/FastFold.git
+	url = https://github.com/Konfekt/FastFold.git
 [submodule "multi/vim/bundle/markdown-folding"]
 	path = multi/vim/bundle/markdown-folding
 	url = https://github.com/nelstrom/vim-markdown-folding.git
@@ -219,28 +219,28 @@
 	url = git@github.com:idbrii/vim-vshelp.git
 [submodule "multi/vim/bundle/easy-align"]
 	path = multi/vim/bundle/easy-align
-	url = git@github.com:junegunn/vim-easy-align.git
+	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "multi/vim/bundle/endwise"]
 	path = multi/vim/bundle/endwise
-	url = git@github.com:tpope/vim-endwise.git
+	url = https://github.com/tpope/vim-endwise.git
 [submodule "multi/vim/bundle/endoscope"]
 	path = multi/vim/bundle/endoscope
 	url = git@github.com:idbrii/vim-endoscope.git
 [submodule "multi/vim/bundle/table-mode"]
 	path = multi/vim/bundle/table-mode
-	url = git@github.com:dhruvasagar/vim-table-mode.git
+	url = https://github.com/dhruvasagar/vim-table-mode.git
 [submodule "multi/vim/bundle/diff-enhanced"]
 	path = multi/vim/bundle/diff-enhanced
-	url = git@github.com:chrisbra/vim-diff-enhanced.git
+	url = https://github.com/chrisbra/vim-diff-enhanced.git
 [submodule "multi/vim/bundle/focusclip"]
 	path = multi/vim/bundle/focusclip
 	url = git@github.com:idbrii/vim-focusclip.git
 [submodule "multi/vim/bundle/textobj-comment"]
 	path = multi/vim/bundle/textobj-comment
-	url = git@github.com:glts/vim-textobj-comment.git
+	url = https://github.com/glts/vim-textobj-comment.git
 [submodule "multi/vim/bundle/expand-region"]
 	path = multi/vim/bundle/expand-region
-	url = git@github.com:terryma/vim-expand-region.git
+	url = https://github.com/terryma/vim-expand-region.git
 [submodule "multi/vim/bundle/pastenreplace"]
 	path = multi/vim/bundle/pastenreplace
 	url = git@github.com:idbrii/vim-pastenreplace.git
