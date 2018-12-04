@@ -101,13 +101,17 @@
     recurseSubmodules = check
 	default = simple
 
-# No more entering passwords for each go repo.
+[credential]
+# To skip entering passwords for each golang repo, use:
+#	helper = store
 # Get a token, give repo access, and do:
 #   echo "https://${GITHUB_TOKEN}:x-oauth-basic@github.com" >> ~/.git-credentials
 # Source: https://gist.github.com/shurcooL/6927554#gistcomment-1986695
 # Archive: http://archive.is/7DQCc
-[credential]
-    helper = store
+# However, I probably will forget that it's writing credentials in plaintext
+# and enter a password, so use manager instead.
+	helper = manager
+
 [url "https://github.com"]
 # "git:// protocol is less secure." Use https instead.
 # https://gist.github.com/grawity/4392747
