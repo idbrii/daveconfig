@@ -1,6 +1,10 @@
 " Source Control
 
 set diffopt+=vertical
+if has("patch-8.1.0360")
+    set diffopt+=internal,algorithm:patience,indent-heuristic
+endif
+
 
 " Meld          {{{1
 if executable('meld')
