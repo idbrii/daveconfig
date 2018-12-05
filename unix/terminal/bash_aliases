@@ -55,7 +55,7 @@ alias and_go_sdk='cd $android_sdks/android-sdk-linux/platform-tools'
 #alias and_ndk_build='$android_sdks/android-ndk-r4b/ndk-build'
 
 # Version control
-alias giv='vim +GV +tabonly'
+alias giv='vim +"GV --all" +tabonly'
 alias g=git
 # Completion: http://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
 complete -o default -o nospace -F _git g
