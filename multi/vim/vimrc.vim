@@ -545,6 +545,10 @@ let b:loaded_magic_make = 1
 " Renamer
 let g:RenamerSupportColonWToRename = 1
 
+" matchup
+" I find replacing statusline with match line distracting and confusing.
+let g:matchup_matchparen_status_offscreen = 0
+
 " Snippets -- Simplify commands. I rarely Expand. Instead I usually list and
 " then complete.
 let g:UltiSnipsExpandTrigger       = '<C-j>'
