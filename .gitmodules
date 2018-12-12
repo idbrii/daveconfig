@@ -340,3 +340,6 @@
 [submodule "multi/vim/bundle/remarkjs"]
 	path = multi/vim/bundle/remarkjs
 	url = git@github.com:idbrii/vim-remarkjs.git
+[submodule "multi/vim/bundle/dirdiff"]
+	path = multi/vim/bundle/dirdiff
+	url = https://github.com/will133/vim-dirdiff.git

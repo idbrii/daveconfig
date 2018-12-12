@@ -100,6 +100,15 @@ EOF
 	echo Basic vim setup complete
 }
 
+function gvim_or_vim
+{
+    if command -v gvim 2>/dev/null; then
+        gvim "$@"
+    else
+        vim "$@"
+    fi
+}
+
 function vader
 {
     # Run vim tests in vader.
@@ -161,6 +170,20 @@ VIMRC
 
 # Quick way to view files in vim
 function v { $* | view - ; }
+
+function vdiff {
+    if [ $# -ne 2 ] ; then
+        echo "vdiff requires two arguments."
+        return
+    fi
+    left=$1
+    right=$2
+    if [ -d $left -o -d $right ]; then
+        gvim_or_vim +"DirDiff $left $right"
+    else
+        gvim_or_vim -d $left $right
+    fi
+}
 
 function __default_to_scratch
 {
