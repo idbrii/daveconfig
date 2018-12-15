@@ -10,8 +10,8 @@ endif
 
 " Cycle between refs.
 " Regex: Graph dots, date, sha, ref/msg.
-nnoremap <silent> <buffer> r /\v^.*\d\S*\s\w{7} \(<CR>:nohl<CR>
-nnoremap <silent> <buffer> R ?\v^.*\d\S*\s\w{7} \(<CR>:nohl<CR>
+nnoremap <silent> <buffer> r /\v^[* \\/<Bar>]*[0-9-]{10}\s\x{7,8} \(<CR>:nohl<CR>
+nnoremap <silent> <buffer> R ?\v^[* \\/<Bar>]*[0-9-]{10}\s\x{7,8} \(<CR>:nohl<CR>
 function! s:search_for_head(direction, count)
     " TODO: How to save the search register? this doesn't search for any but
     " the first.
