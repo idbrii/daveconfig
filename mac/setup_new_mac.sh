@@ -4,6 +4,9 @@
 # https://brew.sh/
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# Brew needs code tools.
+xcode-select --install
+
 packages=
 casks=
 
@@ -17,7 +20,8 @@ packages="$packages bash-completion git"
 #
 # vim
 # install my own python for pip
-packages="$packages python"
+packages="$packages python python3"
+packages="$packages luarocks"
 packages="$packages cscope ctags"
 packages="$packages opensharp-mono"
 # TODO: Which one to use:
@@ -42,6 +46,9 @@ brew cask install google-chrome
 
 # make window fill half screen with keyboard
 brew cask install spectacle
+
+# I think I need to do this?
+brew unlink vim
 
 # gamedev
 brew cask install unity steam
