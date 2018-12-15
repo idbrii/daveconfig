@@ -38,6 +38,6 @@ export PATH
 if [ $SHLVL -eq 1 ]; then
     # we invoked from a Terminal window, not somewhere else.
     # note that this is really slow :(
-    osascript ~/data/settings/daveconfig/mac/terminal/RandomColorTerminal.scpt
+    /usr/bin/osascript ~/data/settings/daveconfig/mac/terminal/RandomColorTerminal.applescript
 fi
 
