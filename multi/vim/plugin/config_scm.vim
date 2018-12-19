@@ -34,6 +34,25 @@ if executable('git')
 
     command! Ghistory Gitv! --all
 
+    function! s:GitRevert(commit)
+        try
+            exec 'Git revert --no-commit '. a:commit
+            if v:shell_error <= 1
+                " No problems measn we can go straight to commit.
+                " On Windows
+                Gcommit -v
+                return
+            endif
+        catch /^fugitive:/
+            " TODO: How to get fugitive hint to draw?
+            " It shows in terminal, so should be okay.
+            echo v:exception
+        endtry
+        " How to open status regardless of fugitive errors?
+        Gstatus
+    endf
+    command! -nargs=1 Grevert call s:GitRevert(<f-args>)
+
     " Delete Fugitive buffers when I leave them so they don't pollute BufExplorer
     augroup FugitiveCustom
         autocmd BufReadPost fugitive://* set bufhidden=delete
