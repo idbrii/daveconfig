@@ -328,9 +328,6 @@
 [submodule "multi/vim/bundle/aaa-cs-official"]
 	path = multi/vim/bundle/aaa-cs-official
 	url = git@github.com:idbrii/vim-cs.git
-[submodule "multi/vim/bundle/cs-oranget"]
-	path = multi/vim/bundle/cs-oranget
-	url = https://github.com/OrangeT/vim-csharp.git
 [submodule "multi/vim/bundle/git-gv"]
 	path = multi/vim/bundle/git-gv
 	url = git@github.com:idbrii/gv.vim.git
