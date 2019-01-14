@@ -38,6 +38,10 @@ fi
 tagdir=$PWD
 tagfile=$tagdir/filelist
 
+# debugging info
+#~ echo cscope=$cscope filetype=$filetype tagfile=$tagfile
+#~ echo search_dirs=$search_dirs
+
 cd $tagdir
 
 
