@@ -204,7 +204,7 @@ command! -nargs=1 Browse Gogo <args>
 let g:netrw_keepdir = 0
 
 " Mark {{{1
-let g:mark_no_maps = 1
+let g:mw_no_mappings = 1
 nmap <unique> <silent> <Leader>m <Plug>MarkSet
 vmap <unique> <silent> <Leader>m <Plug>MarkSet
 nmap <unique> <silent> <Leader>M <Plug>MarkAllClear
