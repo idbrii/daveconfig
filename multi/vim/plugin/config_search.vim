@@ -29,11 +29,12 @@ xnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
 " Todo: uses prefix <Leader>t
 " Quickly find todo items
-nnoremap <Leader>tt :vimgrep "\CTODO" %<CR>
+nnoremap <Leader>tt :vimgrep "\C\v(TODO<Bar>HACK)" %<CR>
+
 " Open-ended todo
-nnoremap <Leader>tT :grep TODO -R .
+nnoremap <Leader>tT :grep -e TODO -e HACK -R .
 " Project-wide todos
-nnoremap <Leader>tp :exec 'NotGrep TODO.'. g:snips_author<CR>
+nnoremap <Leader>tp :exec 'NotGrep "TODO\<Bar>HACK.'. g:snips_author .'"'<CR>
 nnoremap <Leader>tl :TodoNew<CR>
 
 " Filters the quickfix list to keep results matching pattern. Bang removes
