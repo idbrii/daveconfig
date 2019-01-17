@@ -180,11 +180,29 @@ nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
 " Jump to symbol
 nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
-if exists("##BufWinEnter")
+if exists("##BufWinEnter") && exists("##BufEnter")
     " Show cursorline in preview window to make symbol we jumped to stand out.
+    " Hide cursorline when we enter that window to avoid annoyance.
+    function! s:ClearCursorLineIfAutoSet()
+        if exists('w:david_cursorline')
+            unlet w:david_cursorline
+            setlocal nocursorline
+            exec 'augroup David_PreviewWindow_'. winnr()
+                au!
+            augroup end
+        endif
+    endf
+    function! s:ShowCursorLineUntilEnter()
+        setlocal cursorline
+        let w:david_cursorline = 1
+        exec 'augroup David_PreviewWindow_'. winnr()
+            au!
+            autocmd BufEnter <buffer> call s:ClearCursorLineIfAutoSet()
+        augroup end
+    endf
     augroup David_PreviewWindow
         au!
-        autocmd BufWinEnter * if &previewwindow | setlocal cursorline | endif
+        autocmd BufWinEnter * if &previewwindow | call s:ShowCursorLineUntilEnter() | endif
     augroup end
 endif
 
