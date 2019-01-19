@@ -37,3 +37,31 @@ if &foldmethod != 'diff'
     " Vim's lua syntax doesn't include fold information, so use indent instead.
     setlocal foldmethod=indent
 endif
+
+
+" Global entrypoint
+function! s:set_entrypoint(makeprg)
+    " Use the current file and its directory and jump back there to run
+    " (ensures any expected relative paths will work).
+    let cur_file = expand('%:p')
+    let cur_dir = fnamemodify(cur_file, ':h')
+    let cur_module = fnamemodify(cur_file, ':t:r')
+
+    if !exists("s:original_makeprg")
+        let s:original_makeprg = &makeprg
+    endif
+
+    if len(a:makeprg)
+        let lua = a:makeprg
+    else
+        let lua = s:original_makeprg
+    endif
+    
+
+    let entrypoint_makeprg = (lua .' '. cur_dir)
+    let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')
+
+    exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncMake<CR>'
+endf
+command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint('love %')
+command! -buffer LuaSetEntrypoint call s:set_entrypoint('')
