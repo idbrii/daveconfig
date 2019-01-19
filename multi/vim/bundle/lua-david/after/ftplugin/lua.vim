@@ -64,6 +64,12 @@ function! s:set_entrypoint(makeprg)
     else
         let lua = s:original_makeprg
     endif
+
+    if a:makeprg =~# '^love\>'
+        " Don't have a better way to distinguish love files, so use this to
+        " configure checker properly.
+        let g:ale_lua_luacheck_options .= ' --std love'
+    endif
     
 
     let entrypoint_makeprg = (lua .' '. cur_dir)
