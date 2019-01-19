@@ -53,3 +53,5 @@ brew unlink vim
 # gamedev
 brew cask install unity steam
 
+
+echo "Get NTFS driver for mac for Seagate drives: https://www.seagate.com/ca/en/support/downloads/item/ntfs-driver-for-mac-os-master-dl/"
