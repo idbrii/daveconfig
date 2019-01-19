@@ -11,7 +11,7 @@ if has('win32')
     " Config lua-xolox's compiler for CheckSyntax.
     let g:lua_compiler_name = lua_compiler_folder .'/luac53.exe'
 
-    if filereadable(g:lua_compiler_name)
+    if executable(g:lua_compiler_name)
         " Add lua binaries to path so vim will find the dll (and I can access
         " compiler and interpreter).
         let $PATH .= ';'. lua_compiler_folder
