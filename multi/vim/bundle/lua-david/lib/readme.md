@@ -31,7 +31,7 @@ couldn't get luacheck to install, so I used `luarocks install luacheck
 luacheck working.
 
 Since luaforwindows provides lua 5.1 and vim demands lua 5.3, we need both to
-allow if_lua (for lua vim plugins) and run luacheck (via ale).
+run luacheck (via ale) and allow if_lua (for lua vim plugins).
 
 [1]: https://github.com/keplerproject/luafilesystem/issues/82
 [2]: https://github.com/rjpcomputing/luaforwindows/issues/80#issuecomment-193851597
