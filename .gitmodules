@@ -346,3 +346,9 @@
 [submodule "multi/vim/bundle/lookup"]
 	path = multi/vim/bundle/lookup
 	url = https://github.com/mhinz/vim-lookup.git
+[submodule "multi/vim/bundle/lsp"]
+	path = multi/vim/bundle/lsp
+	url = https://github.com/prabirshrestha/vim-lsp.git
+[submodule "multi/vim/bundle/lib-async"]
+	path = multi/vim/bundle/lib-async
+	url = https://github.com/prabirshrestha/async.vim.git

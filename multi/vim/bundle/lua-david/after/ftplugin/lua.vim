@@ -31,6 +31,14 @@ function! s:LuaGrabCompletionWord()
 endf
 inoremap <buffer> <C-Space> <C-o>:call <SID>LuaGrabCompletionWord()<CR><C-o>e<Right><C-x><C-]><C-r>=g:lua_david_yanked<CR>
 
+if lsp#get_server_status('lua-lsp') == 'running'
+    setlocal omnifunc=lsp#complete
+    " fall back to default omnicompletion
+    iunmap <buffer> <C-Space>
+    " remove xoloc map
+    silent! iunmap <buffer> .
+endif
+
 " Files may be opened with diff mode before this 'after' file is sourced.
 " Ensure we don't clobber a more relevant mode.
 if &foldmethod != 'diff'
