@@ -36,7 +36,7 @@ if lsp#get_server_status('lua-lsp') == 'running'
     " fall back to default omnicompletion
     iunmap <buffer> <C-Space>
     " remove xoloc map
-    silent! iunmap <buffer> .
+    "~ silent! iunmap <buffer> .
 endif
 
 " Files may be opened with diff mode before this 'after' file is sourced.
@@ -68,7 +68,7 @@ function! s:set_entrypoint(makeprg)
     if a:makeprg =~# '^love\>'
         " Don't have a better way to distinguish love files, so use this to
         " configure checker properly.
-        let g:ale_lua_luacheck_options .= ' --std love'
+        let g:ale_lua_luacheck_options .= ' --std love --read-globals require math print table ipairs pairs'
     endif
     
 
@@ -77,5 +77,5 @@ function! s:set_entrypoint(makeprg)
 
     exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncMake<CR>'
 endf
-command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint('love %')
+command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint('love --console %')
 command! -buffer LuaSetEntrypoint call s:set_entrypoint('')
