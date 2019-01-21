@@ -175,6 +175,7 @@ nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
 
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
+nmap     <unique> <Leader>jT <plug>(lsp-definition)
 " Preview window for tags
 nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
 " Jump to symbol
