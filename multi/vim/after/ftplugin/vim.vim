@@ -38,3 +38,6 @@ setlocal expandtab
 " looking at filenames (vim doesn't have includes), but it's not a tag: we're
 " guessing based on filename like normal gf behaviour.
 nnoremap <buffer> gf :<C-u>call david#vim#GotoFile(expand("<cword>"))<CR>
+
+" Automatic tag jumping?!
+nnoremap <buffer> <silent> <Leader>jt :call lookup#lookup()<CR>
