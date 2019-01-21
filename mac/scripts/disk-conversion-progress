@@ -1,0 +1,142 @@
+#!/bin/bash
+# Source: https://gist.github.com/lukasbesch/d579c5670ea81d1064cc8f3d5e796a9d
+
+echo Polls for progress once per minute to estimate time remaining in
+echo diskutil encryption conversion.
+
+
+function displaytime {
+  local T=$1
+  local D=$((T/60/60/24))
+  local H=$((T/60/60%24))
+  local M=$((T/60%60))
+  local S=$((T%60))
+  (( $D > 0 )) && printf '%3s' $D && printf ' days '
+  (( $H > 0 )) && printf '%2s' $H && printf ' hours '
+  (( $M > 0 )) && printf '%2s' $M && printf ' minutes '
+  if [ $D -lt 1 -a $H -lt 1 ]
+  then
+  	printf '%2s' $S && printf ' seconds'
+  fi
+}
+
+function writeToLog {
+  local date="$1"
+  local progress="$2"
+  local message="$3"
+  local duration=$4
+  local total=$5
+  local average=$6
+  
+  printf "%19s" "$date"
+  printf " | progress: "
+  printf "%4s" "$progress%"
+  
+  if [ ! -z "$message" -a "$message" != " " ]
+  then
+  	printf " | "
+  	printf "%-32s %s" "$message"
+  fi
+  
+  if [ $output == "full" ]
+  then
+	if [ ! -z "$duration" -a "$duration" != " " ]
+	then
+	  printf " | duration: "
+	  printf "%-25s%s" "$(displaytime $((duration)))"
+	fi
+	
+	if [ ! -z "$total" -a "$total" != " " ]
+	then
+	  printf " | total: "
+	  printf "%-25s%s" "$(displaytime $((total)))"
+	fi
+	
+	if [ ! -z "$average" -a "$average" != " " ]
+	then
+	  	printf " | avg: "
+	  	printf "%-25s%s" "$(displaytime $((average)))"
+	fi
+  fi
+  
+  if [ ! -z "$average" -a "$average" != " " ]
+  then
+  	printf " | approx: "
+  	approxSecs=$((average * (100 - progress)))
+  	printf "$(displaytime $approxSecs)"
+  	printf " ( $(date -v "+"$approxSecs"S" +%Y-%m-%d\ %H:%M:%S) )"
+  	
+  fi
+  
+  printf "\n"
+}
+
+output="default"
+
+if [ $# -eq 1 -a "$1" == "--full-output" ]
+then
+	output="full"
+fi
+
+currentPercent=0
+totalDuration=0
+averageDuration=0
+index=0
+status="searchStatus"
+
+SECONDS=0
+
+while
+	[ $currentPercent -lt 100 ]
+do
+	
+	percentIteration=0
+	
+	while
+		diskutil cs list | grep -m 1 "Conversion Progress:   $currentPercent%" > /dev/null;
+	do
+		
+		if [ $percentIteration -eq 0 ]
+		then
+			
+			old_date=$(date +%Y-%m-%d\ %H:%M:%S)
+			SECONDS=0
+			
+			if [ $status == "searchStatus" ]
+			then
+				writeToLog "$old_date" "$currentPercent" "waiting for the next full percent …"
+				status="waitForEntry"
+			fi
+			
+		fi
+		
+		percentIteration=$((percentIteration+1))
+		
+		sleep 60
+	done
+	
+	currentPercent=$((currentPercent+1))
+	
+	duration=$SECONDS
+	
+	if [ $status == "searchStatus" ]
+	then
+	    continue
+	elif [ $status == "waitForEntry" ]
+	then
+		writeToLog "$(date +%Y-%m-%d\ %H:%M:%S)" "$currentPercent" "start counting now …"
+		status="counting"
+		continue
+	elif [ $status == "counting" ]
+	then
+		index=$((index+1))
+		totalDuration=$((totalDuration+duration))
+		averageDuration=$((totalDuration / index))
+	
+		writeToLog "$(date +%Y-%m-%d\ %H:%M:%S)" "$currentPercent" "" "$duration" "$totalDuration" "$averageDuration"
+	fi
+
+	
+done
+
+echo "finished!"
