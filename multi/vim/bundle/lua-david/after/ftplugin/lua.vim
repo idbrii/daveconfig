@@ -24,6 +24,8 @@ if lsp#get_server_status('lua-lsp') == 'running'
     setlocal omnifunc=lsp#complete
     " fall back to default omnicompletion
     iunmap <buffer> <C-Space>
+elseif LSCServerStatus() == 'running'
+    setlocal omnifunc=lsc#complete#complete
 endif
 
 " Files may be opened with diff mode before this 'after' file is sourced.
@@ -57,7 +59,7 @@ function! s:set_entrypoint(makeprg)
         " configure checker properly.
         let g:ale_lua_luacheck_options .= ' --std love+luajit'
     endif
-    
+
 
     let entrypoint_makeprg = (lua .' '. cur_dir)
     let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')

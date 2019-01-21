@@ -37,3 +37,21 @@ augroup david_lsp
     endif
 
 augroup END
+
+function! s:bind_if_executable(ft, server)
+    if executable(a:server)
+        let g:lsc_server_commands[a:ft] = a:server
+    endif
+endf
+
+let g:lsc_server_commands = {}
+call s:bind_if_executable('dart', 'dart_language_server')
+call s:bind_if_executable('python', 'pyls')
+call s:bind_if_executable('lua', 'lua-lsp')
+
+
+let g:lsc_auto_map = {
+    \ 'GoToDefinition': '<C-space>jT',
+    \ 'ShowHover': 'v:true',
+    \ 'Completion': 'completefunc',
+    \}

@@ -173,12 +173,15 @@ nnoremap <unique> <Leader>jgw :<C-u>NotGrep <cword><CR>
 xnoremap <unique> <Leader>jgw "cy:<C-u>NotGrep "<C-r>c"<CR>
 nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
 
+" Use lsc instead of lsp.
+let g:lsp_loaded = 0
+
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
-nmap     <unique> <Leader>jT <Plug>(lsp-definition)
+nmap     <unique> <Leader>jT :<C-u>LSClientGoToDefinition<CR>
 " Preview window for tags
 nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
-nmap     <unique> <Leader>jP :<C-u>call david#tag#preview_jump({ -> execute('LspDefinition')})<CR>
+nmap     <unique> <Leader>jP :<C-u>call david#tag#preview_jump({ -> execute('LSClientGoToDefinition')})<CR>
 " Jump to symbol
 nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
