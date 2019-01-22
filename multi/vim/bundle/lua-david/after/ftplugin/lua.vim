@@ -35,8 +35,6 @@ if lsp#get_server_status('lua-lsp') == 'running'
     setlocal omnifunc=lsp#complete
     " fall back to default omnicompletion
     iunmap <buffer> <C-Space>
-    " remove xoloc map
-    "~ silent! iunmap <buffer> .
 endif
 
 " Files may be opened with diff mode before this 'after' file is sourced.

@@ -18,6 +18,8 @@ augroup david_lsp
     " luarocks install luacheck
     " luarocks install --server=http://luarocks.org/dev lua-lsp
     if executable('lua-lsp')
+        let g:lua_define_omnifunc = 0
+        let g:lua_define_completion_mappings = 0
         au User lsp_setup call lsp#register_server({
                     \ 'name': 'lua-lsp',
                     \ 'cmd': {server_info->['lua-lsp']},
