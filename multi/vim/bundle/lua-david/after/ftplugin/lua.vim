@@ -18,18 +18,7 @@ nnoremap <buffer> <F1> :<C-u>sp ~/.vim-aside<CR>
 " targetting a different lua. Use tags instead (no scope intelligence, but
 " better than nothing). Omnicompletion is helpful in expanding modules, but
 " that kicks in automatically, so that's good enough.
-"
-" Tag completion clears what we've inserted (because some tags are functions
-" and they start with 'function' instead of the function name), but I don't
-" want that, so restore it.
-function! s:LuaGrabCompletionWord()
-    let q_bak = @"
-    normal! yiw
-    let g:lua_david_yanked = @"
-
-    let @" = q_bak
-endf
-inoremap <buffer> <C-Space> <C-o>:call <SID>LuaGrabCompletionWord()<CR><C-o>e<Right><C-x><C-]><C-r>=g:lua_david_yanked<CR>
+inoremap <buffer> <C-Space> <C-x><C-]>
 
 if lsp#get_server_status('lua-lsp') == 'running'
     setlocal omnifunc=lsp#complete
