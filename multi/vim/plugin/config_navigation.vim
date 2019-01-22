@@ -175,9 +175,10 @@ nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
 
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
-nmap     <unique> <Leader>jT <plug>(lsp-definition)
+nmap     <unique> <Leader>jT <Plug>(lsp-definition)
 " Preview window for tags
 nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
+nmap     <unique> <Leader>jP :<C-u>call david#tag#preview_jump({ -> execute('LspDefinition')})<CR>
 " Jump to symbol
 nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
