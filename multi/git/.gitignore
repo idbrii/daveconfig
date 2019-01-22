@@ -5,6 +5,7 @@ cscope.*
 *.swp
 filelist
 tags
+lua.tags
 .ropeproject
 en.latin1.add.spl
 obj/
