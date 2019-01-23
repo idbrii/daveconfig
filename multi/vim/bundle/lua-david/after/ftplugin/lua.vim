@@ -56,10 +56,12 @@ function! s:set_entrypoint(makeprg)
         " Don't have a better way to distinguish love files, so use this to
         " configure checker properly.
         let g:ale_lua_luacheck_options .= ' --std love+luajit'
+        let entrypoint_makeprg = (lua .' '. cur_dir)
+    else
+        let entrypoint_makeprg = (lua .' '. cur_file)
     endif
     
 
-    let entrypoint_makeprg = (lua .' '. cur_dir)
     let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')
 
     exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncMake<CR>'
