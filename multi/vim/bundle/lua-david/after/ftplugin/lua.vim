@@ -55,7 +55,7 @@ function! s:set_entrypoint(makeprg)
     if a:makeprg =~# '^love\>'
         " Don't have a better way to distinguish love files, so use this to
         " configure checker properly.
-        let g:ale_lua_luacheck_options .= ' --std love --read-globals require math print table ipairs pairs'
+        let g:ale_lua_luacheck_options .= ' --std love+luajit'
     endif
     
 

@@ -127,7 +127,7 @@ let g:ale_lua_luacheck_options .= ' --std lua51'
 "let g:ale_lua_luacheck_options .= ' --new-globals [<name>] ...'                    "          Set custom global variables or fields. Removes custom globals added previously.
 "let g:ale_lua_luacheck_options .= ' --new-read-globals [<name>] ...'                    "     Set read-only global variables or fields. Removes read-only globals added previously.
 "let g:ale_lua_luacheck_options .= ' --not-globals [<name>] ...'                    "          Remove custom and standard global variables or fields.
-"let g:ale_lua_luacheck_options .= ' --std max'                    ".
+"let g:ale_lua_luacheck_options .= ' --std max+love'                    ".
 "let g:ale_lua_luacheck_options .= ' --allow-defined'                    "                Allow defining globals implicitly by setting them.
 "
 "                                        See :ref:`implicitlydefinedglobals`
