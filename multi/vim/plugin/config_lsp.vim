@@ -1,6 +1,9 @@
 " I'm using ALE, so I don't want things to conflict
 let g:lsp_diagnostics_enabled = 0
 
+"~ let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/.vim-cache/lsp.log')
+
 " To make lsp replace ALE:
 "~ let g:lsp_diagnostics_enabled = 1
 "~ let g:lsp_signs_enabled = 1         " enable signs
@@ -35,6 +38,7 @@ augroup david_lsp
             au User lsp_setup call lsp#register_server({
                         \ 'name': 'lua-lsp',
                         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
+                        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'main.lua'))},
                         \ 'whitelist': ['lua'],
                         \ })
         endif
