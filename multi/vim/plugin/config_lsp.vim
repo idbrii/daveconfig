@@ -2,7 +2,7 @@
 let g:lsp_diagnostics_enabled = 0
 
 "~ let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/.vim-cache/lsp.log')
+let g:lsp_log_file = g:david_cache_root .'/lsp.log'
 
 " To make lsp replace ALE:
 "~ let g:lsp_diagnostics_enabled = 1
