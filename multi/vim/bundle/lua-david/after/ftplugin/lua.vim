@@ -5,6 +5,10 @@ setlocal tags+=./lua.tags;/
 " lua-xolox turns this on but I find it annoying.
 setlocal fo-=o
 
+" Lua uses lots of : so assume no URIs.
+nmap <buffer> gx <Plug>(openbrowser-search)
+vmap <buffer> gx <Plug>(openbrowser-search)
+
 "" Quick commenting/uncommenting.
 " ~ prefix from https://www.reddit.com/r/vim/comments/4ootmz/what_is_your_little_known_secret_vim_shortcut_or/d4ehmql
 xnoremap <buffer> <silent> <C-o> :s/^/--\~ <CR>:silent nohl<CR>
