@@ -166,11 +166,12 @@ command! CtrlPGotoFile :call CtrlPInvokeWithPrefilledQuery(expand('<cfile>:t'))
 nnoremap <unique> <A-g> :<C-u>NotGrep \b<cword>\b<CR>
 nnoremap <unique> <Leader>jw :<C-u>NotGrep \b<cword>\b<CR>
 nnoremap <unique> <Leader>jW :<C-u>NotGrep \b<cWORD>\b<CR>
-xnoremap <unique> <Leader>jw "cy:<C-u>NotGrep "\b<C-r>c\b"<CR>
+xnoremap <unique> <Leader>jw "cy:<C-u>call notgrep#search#NotGrep('grep', '\b'. @c .'\b')<CR>
 " Less precise version (\b is word boundary). Map is similar to `*` vs `g*`.
 nnoremap <unique> g<A-g> :<C-u>NotGrep <cword><CR>
 nnoremap <unique> <Leader>jgw :<C-u>NotGrep <cword><CR>
-xnoremap <unique> <Leader>jgw "cy:<C-u>NotGrep "<C-r>c"<CR>
+nnoremap <unique> <Leader>jgW :<C-u>NotGrep <cWORD><CR>
+xnoremap <unique> <Leader>jgw "cy:<C-u>call notgrep#search#NotGrep('grep', @c)<CR>
 nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
 
 " Jump to tag
