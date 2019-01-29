@@ -13,11 +13,11 @@
 
 setlocal indentexpr=DavidGetLuaIndent(v:lnum)
 
-function s:IsBlankLine(lnum)
+function! s:IsBlankLine(lnum)
     return getline(a:lnum) =~# '^\s*$'
 endfunction
 
-function s:IsChainedLine(lnum)
+function! s:IsChainedLine(lnum)
     return getline(a:lnum) =~# '^\s*:\w'
 endfunction
 
