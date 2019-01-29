@@ -6,8 +6,8 @@ if !exists('g:loaded_fugitive')
     finish
 endif
 
-if expand('%:t') !=# 'index'
-    " Only want these settings for GStatus -- that's when we're editing the
+if b:fugitive_type != 'index'
+    " Only want these settings for Gstatus -- that's when we're editing the
     " index.
     finish
 endif
