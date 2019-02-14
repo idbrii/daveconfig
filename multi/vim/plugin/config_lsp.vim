@@ -22,7 +22,7 @@ augroup david_lsp
         let g:lua_define_completion_mappings = 0
         au User lsp_setup call lsp#register_server({
                     \ 'name': 'lua-lsp',
-                    \ 'cmd': {server_info->['lua-lsp']},
+                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
                     \ 'whitelist': ['lua'],
                     \ })
     endif
