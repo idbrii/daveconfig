@@ -784,6 +784,10 @@ augroup END
 xmap iv <Plug>(expand_region_expand)
 xmap iV <Plug>(expand_region_shrink)
 
+let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
+" I have two python syntax plugins. One I got and one from polyglot.
+call add(g:polyglot_disabled, 'python')
+
 "}}}
 
 
