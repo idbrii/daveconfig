@@ -738,13 +738,13 @@ let g:editqf_no_type_mappings = 1
 
 " EasyAlign
 " Not sure if alignment is used often enough to get Enter key. Try it for now.
-" Use Enter as a quickmap for all (common use case) and C-Enter for normal
-" align mode.
-xmap <Enter> <Plug>(EasyAlign)*
-xmap <Leader><Enter> <Plug>(EasyAlign)
+" Use Enter as a map and Space+Enter for live align mode. Maps default to
+" align all delimiters because anything else is surprising.
+xmap <Enter> <Plug>(LiveEasyAlign)*
+xmap <Leader><Enter> <Plug>(LiveEasyAlign)
 " Enter is commonly mapped in plugin windows (like quickfix), so prefix with
-" leader.
-nmap <Leader><Enter> <Plug>(EasyAlign)
+" leader. This is an operator, so it doesn't default to all delimiters (*).
+nmap <Leader><Enter> <Plug>(LiveEasyAlign)
 
 " Make it easier to align tags
 let g:easy_align_delimiters = {
