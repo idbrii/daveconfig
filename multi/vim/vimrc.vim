@@ -228,6 +228,11 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 " Show these file types at the end while using :edit command
 set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 
+" Don't clobber my maps with Apple HIG movement.
+let macvim_skip_cmd_opt_movement = 1
+" I have my own. Don't waste time on macvim scheme.
+let macvim_skip_colorscheme = 1
+
 " Coding {{{1
 set history=500				" cmdline history
 
