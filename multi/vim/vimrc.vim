@@ -18,6 +18,9 @@ if has('win32')
     set runtimepath+=$HOME/.vim/after
 endif
 
+" Must occur before syntax/filetype on (which pathogen triggers).
+set guioptions+=M			" Don't bother sourcing the menu
+
 " Some things need to be setup before anything else in the vimrc (but after
 " the above path setup since it uses those paths).
 runtime before_vimrc.vim
@@ -94,7 +97,6 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 "set numberwidth=1			" Use 1 col + 1 space for numbers
 set guioptions-=T			" Disable the toolbar
 set guioptions-=m			" Disable the menu
-set guioptions+=M			" Don't bother sourcing the menu
 set guioptions-=t			" Disable the tearoff menus (don't use 'em)
 if has("win32")
     set guioptions-=e		" Disable fancy tabline (repositions vim on tab in Win32)
