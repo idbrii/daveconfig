@@ -1,3 +1,5 @@
+" If profiling startup, you'll find applying colorschemes very expensive! We
+" shouldn't have applied one in vimrc, so it's okay.
 colorscheme sandydune
 
 " tab labels show the filename without path(tail)
