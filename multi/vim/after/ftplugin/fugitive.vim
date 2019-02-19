@@ -39,6 +39,16 @@ nnoremap <buffer> <silent> <F1> :call <SID>PrintGitStatusHelp()<CR>
 nmap <buffer> <silent> s -
 xmap <buffer> <silent> s -
 
+if !exists("g:david_toggle_fold_cmd")
+    " Can't try to get this more than once or it might be our remap.
+    let g:david_toggle_fold_cmd = maparg('<Leader>l', 'n')
+endif
+" Toggle diff "folds" on status items with our fold toggle map. If we're not
+" on a status item, use default behavior.
+nmap <buffer> <expr> <Leader>l getline('.') =~# '^\u \S' ? '=' : g:david_toggle_fold_cmd
+" Unconditional toggle is like toggle all.
+nmap <buffer>        <Leader>L =
+
 " Include the diff in the commit and expand the window so we can see it.
 nnoremap <buffer> <silent> c :<C-U>Gcommit --verbose<CR><C-w>_O<Esc>
 
