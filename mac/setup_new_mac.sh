@@ -49,6 +49,17 @@ brew cask install google-chrome
 # make window fill half screen with keyboard
 brew cask install spectacle
 
+# Map Cmd-1,3,4 to Vim,Terminal,Chrome
+brew cask install apptivate
+
+# I don't think I really have much use for this. I don't even remember why I
+# installed it. It's useful to make CapsLock into Cmd or to get mac Fn keys on
+# external keyboard, but those aren't very attractive.
+#~ brew cask install karabiner-elements
+
+# Make scroll wheel behave like Windows.
+brew cask install scroll-reverser
+
 # I think I need to do this?
 brew unlink vim
 
