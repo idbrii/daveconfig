@@ -34,7 +34,14 @@ endif
 
 " Auto-create directories for new files.
 if exists("*mkdir")
-    au BufWritePre,FileWritePre * silent! call mkdir(expand('<afile>:p:h'), 'p')
+    function! s:CreateDir()
+        " Plugins like fugitive's diff won't use buftype=nofile/nowrite to
+        " allow :write to apply. They probably use noswapfile or bufhidden.
+        if &swapfile && len(&bufhidden) == 0
+            call mkdir(expand('<afile>:p:h'), 'p')
+        endif
+    endf
+    au BufWritePre,FileWritePre * silent! call s:CreateDir()
 endif
 
 if has('win32')
