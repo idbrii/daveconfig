@@ -1,15 +1,15 @@
 " Catch errors
 " Highlight missing :
-syn match pythonBadStyle "^\s*def\s\+\w\+(.*)\s*$" display
-syn match pythonBadStyle "^\s*class\s\+\w\+(.*)\s*$" display
-syn match pythonBadStyle "^\s*for\s.*[^:]$" display
-syn match pythonBadStyle "^\s*except\s*$" display
-syn match pythonBadStyle "^\s*finally\s*$" display
-syn match pythonBadStyle "^\s*try\s*$" display
-syn match pythonBadStyle "^\s*else\s*$" display
+syn match pythonBadStyle "^\s*def\s\+\w\+(.*)\s*(#.*)$" display
+syn match pythonBadStyle "^\s*class\s\+\w\+(.*)\s*(#.*)$" display
+syn match pythonBadStyle "^\s*for\s.*[^:](#.*)$" display
+syn match pythonBadStyle "^\s*except\s*(#.*)$" display
+syn match pythonBadStyle "^\s*finally\s*(#.*)$" display
+syn match pythonBadStyle "^\s*try\s*(#.*)$" display
+syn match pythonBadStyle "^\s*else\s*(#.*)$" display
 syn match pythonBadStyle "^\s*else\s*[^:].*" display
-syn match pythonBadStyle "^\s*if\s[^#]*[^\:]$" display
-syn match pythonBadStyle "^\s*except\s.*[^\:]$" display
+syn match pythonBadStyle "^\s*if\s[^#]*[^\:](#.*)$" display
+syn match pythonBadStyle "^\s*except\s.*[^\:](#.*)$" display
 
 " For Style
 " ; is valid but ugly python, and I use it by accident.
