@@ -95,5 +95,8 @@ let g:eclim_python_pyflakes_warn = 0
 if &pyxversion == 3 && &makeprg !~# 'python3' && executable('python3')
     let &l:makeprg = substitute(&l:makeprg, 'python', 'python3', '')
     let b:autocompiler_skip_detection = 1
+    if executable('pydoc3')
+        let g:pydoc_cmd = 'pydoc3'
+    endif
 endif
 
