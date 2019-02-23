@@ -89,3 +89,11 @@ setlocal tags+=$HOME/.vim/tags/python.ctags
 " Don't bother with pyflakes, it usually doesn't work anyway.
 " See: https://groups.google.com/d/msg/eclim-user/KAXASg8t9MM/3HZn3fqZnJMJ
 let g:eclim_python_pyflakes_warn = 0
+
+" Use python3 if I asked for it.
+" TODO: Would be better to look at shebang to figure out what to do.
+if &pyxversion == 3 && &makeprg !~# 'python3' && executable('python3')
+    let &l:makeprg = substitute(&l:makeprg, 'python', 'python3', '')
+    let b:autocompiler_skip_detection = 1
+endif
+
