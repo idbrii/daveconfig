@@ -556,6 +556,10 @@ let g:loaded_vimballPlugin = 0
 " LogiPat seems useful, but I've never touched it.
 let g:loaded_logiPat = 0
 
+" Rumours that largefile sometimes causes changes in cursor position and undo
+" loss: https://www.reddit.com/r/vim/comments/as0w1p/has_anyone_ran_into_the_problem_of_vim_losing/egqy00p/
+let g:loaded_LargeFile = 0
+
 " Magic make
 " Disable magic make since I'm not using a lot of makefiles these days.
 " TODO: Setup scons files instead.
