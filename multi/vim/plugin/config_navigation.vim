@@ -230,4 +230,19 @@ nmap <unique> <silent> <Leader>m <Plug>MarkSet
 vmap <unique> <silent> <Leader>m <Plug>MarkSet
 nmap <unique> <silent> <Leader>M <Plug>MarkAllClear
 
+
+" Nrrwrgn {{{1
+
+" Default is full screen narrow. I usually narrow to limit the application of
+" substitutions without worrying about setting the range. Also, use n as the
+" narrow prefix.
+xmap <unique> <Leader>nr <Plug>NrrwrgnBangDo
+nmap <unique> <Leader>nr <Plug>NrrwrgnBangDo
+xmap <unique> <Leader>nR <Plug>NrrwrgnDo
+
+" Narrow multiple regions
+xmap <unique> <Leader>nm :NRPrepare<CR>
+nmap <unique> <Leader>nm :<C-u>NRMulti<CR>
+
+
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
