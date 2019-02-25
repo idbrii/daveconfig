@@ -362,6 +362,11 @@ let g:org_agenda_files = ['~/backlog.org', '~/plan.org']
 nnoremap <S-F5> :<C-u>silent make 
 nnoremap <F5> :<C-u>make 
 
+" Usually mapped to open-ended make.
+nmap <Leader>ib <F5>
+" Usually mapped to smart run.
+nmap <Leader>ir <F6>
+
 " If available, use scons instead of make. -u is upward search for root
 " SConstruct.
 if executable('scons')
