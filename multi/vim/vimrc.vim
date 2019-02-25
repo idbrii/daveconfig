@@ -755,6 +755,13 @@ let g:easy_align_delimiters = {
             \   }
             \ }
 
+
+" Provide a / delimiter for the current filetype's comment marker.
+augroup easyalign_david
+    au!
+    au BufEnter * let g:easy_align_delimiters['/'] = { 'pattern': substitute(&commentstring, '%s.*', '', ''), 'ignore_groups': ['!Comment'] }
+augroup END
+
 " Slime
 if !executable('screen') && !executable('tmux')
     let g:loaded_slime = 0
