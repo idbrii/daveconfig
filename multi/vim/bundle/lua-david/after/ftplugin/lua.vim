@@ -71,6 +71,9 @@ function! s:set_entrypoint(makeprg)
     exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncMake<CR>'
     call LocateAll()
     NotGrepUseGrepRecursiveFrom .
+    " I put code in ./src/
+    let g:inclement_n_dir_to_trim = 2
+    let g:inclement_after_first_include = 1
 endf
 command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint('love --console %')
 command! -buffer LuaSetEntrypoint call s:set_entrypoint('')
