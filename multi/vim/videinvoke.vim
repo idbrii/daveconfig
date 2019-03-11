@@ -23,6 +23,9 @@ if !exists('loaded_videinvoke')
 	" Faster way to open. Should I make this symmetrical with the ide's map?
 	nnoremap <Leader>ii :<C-u>VSOpen<CR>
 
+    call david#window#layout_restore()
+    call david#window#layout_save_on_exit()
+
     " If default or smaller screen size then make it bigger
     if &columns<=80 && &lines<=24
         " Decent width
@@ -31,10 +34,11 @@ if !exists('loaded_videinvoke')
         set lines=9999
     endif
 
-    if has("win32")
-        " Maximize
-        simalt ~x
-    endif
+    " On small screens maximize is good, but on big monitors it's pointless.
+    "~ if has("win32")
+    "~     " Maximize
+    "~     simalt ~x
+    "~ endif
 
     " Use half of the resized screen height.
     let g:ctrlp_max_height = &lines / 2
