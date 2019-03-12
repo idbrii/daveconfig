@@ -106,6 +106,7 @@ if executable('svn')
         exec '.!svn diff            --change '. a:revision .' '. g:david_project_root
         %s/\r//e
         normal! gg
+        nnoremap <buffer> q :<C-u>close<CR>
     endf
     command! -nargs=+ SvnShow :silent call s:SvnShow(<q-args>)
 
