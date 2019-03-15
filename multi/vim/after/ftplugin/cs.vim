@@ -8,8 +8,8 @@ nnoremap <buffer> <C-g><C-g> :<C-u>call david#search#FindScope(2)<CR>
 call david#mappings#map_next_function_instead_of_zero_column()
 
 " C# code is usually contained within a namespace and a class, so allow for
-" more folding depth. (My normal is 3, so +2 = 5.)
-let &l:foldnestmax = max([5, &l:foldnestmax])
+" more folding depth. (+2)
+let &l:foldnestmax = max([g:david_foldnestmax + 2, &l:foldnestmax])
 
 " Blocks of C++-style comments look much better than C-style.
 let b:commentary_format = '//~ %s'
