@@ -5,6 +5,9 @@ silent! nunmap <buffer> <S-Tab>
 " Don't shadow gi. Also crw is more vim-like.
 silent! nunmap <buffer> gil
 
+" I think I use both C-t and C-Tab to indent. orgmode only maps C-t.
+imap <buffer> <C-Tab> <Plug>OrgDemoteOnHeadingInsert
+
 " New bullets on CR and nothing on C-CR (like Slack).
 function! s:NewHeadingAtEndOfLine()
     let is_at_end_of_line = col(".") >= col("$")-1
