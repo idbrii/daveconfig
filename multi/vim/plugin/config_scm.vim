@@ -88,6 +88,9 @@ if executable('svn')
             let revision = '-r '. revision
         endif
         exec '.! svn diff '. a:fname .' '. revision
+        if has('mac')
+            %sm/\r$//
+        endif
     endf
     command! -nargs=? SvnDiff :silent call s:SvnDiff(expand("%"), <q-args>)
 
@@ -142,6 +145,9 @@ if executable('svn')
             " Seems to diff against have revision.
             silent VCDiff
         endif
+        if has('mac')
+            %sm/\r$//
+        endif
         " My hack to vim-vc calls diffusable for me.
         "call diffusable#diff_with_partner(winnr('#'))
         wincmd p
@@ -172,6 +178,11 @@ if executable('svn')
         endfor
 
         let base_file = system('svn cat -r'. a:revision .' '. expand('%'))
+        if has('mac')
+            " Line endings are messed up on mac, but I'm not sure why. Let's
+            " just hide them so my diffs are useable.
+            let base_file = substitute(base_file, '\r\n', '\n', 'g')
+        endif
         call diffusable#diff_this_against_text(base_file)
 
         wincmd p
