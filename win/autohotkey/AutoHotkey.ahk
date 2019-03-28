@@ -184,6 +184,11 @@ GetMonitorIndexFromWindow(windowHandle)
 	return monitorIndex
 }
 
+;; Disable Windows Language selector
+#space::
+    Send {LWin}
+return
+
 #f9::
     ;; Do experimentation here.
     Left0 := GetDesktopLeft(0)
