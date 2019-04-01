@@ -578,7 +578,7 @@ let g:matchup_matchparen_status_offscreen = 0
 
 " Show current scope
 let g:matchup_matchparen_deferred = 1
-let g:matchup_matchparen_hi_surround_always = 1
+
 
 " Snippets -- Simplify commands. I rarely Expand. Instead I usually list and
 " then complete.

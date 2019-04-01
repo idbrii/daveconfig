@@ -13,5 +13,8 @@ function! david#search#FindScope(max_indents)
 
     let @/ = last_search
 
+    " Also highlight current scope.
+    call matchup#matchparen#highlight_surrounding()
+
     return line
 endf
