@@ -4,6 +4,7 @@ cscope.*
 *.pyc
 *.swp
 filelist
+filelist.luaonly
 tags
 lua.tags
 .ropeproject
