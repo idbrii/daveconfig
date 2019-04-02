@@ -27,6 +27,7 @@ function! LocateFilelist()
 	if filereadable(l:tagfile)
 		let g:david_project_filelist = (l:tagfile)
 		echomsg 'Filelist=' . g:david_project_filelist
+        call notgrep#setup#NotGrepUseGrepRecursiveFrom(fnamemodify(g:david_project_filelist, ':h'))
 	endif
 endfunction
 
