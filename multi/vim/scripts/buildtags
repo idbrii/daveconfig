@@ -44,6 +44,11 @@ tagfile=$tagdir/filelist
 
 cd $tagdir
 
+# Use a tempfile to prevent them from appearing in the current directory.
+TMPFILE="$(mktemp -t buildtags.XXXXXX)"
+trap "rm -f '$TMPFILE'" 0               # EXIT
+trap "rm -f '$TMPFILE'; exit 1" 2       # INT
+trap "rm -f '$TMPFILE'; exit 1" 1 15    # HUP TERM
 
 # Build filelist	{{{
 touch $tagfile
@@ -86,7 +91,8 @@ else
 fi
 
 # convert cygwin paths to windows paths
-sed -i -e"s,^/cygdrive/\([[:alpha:]]\)/,\1:/," $tagfile
+sed -e"s,^/cygdrive/\([[:alpha:]]\)/,\1:/," $tagfile > $TMPFILE
+mv $TMPFILE $tagfile
 # I used to make a link in the root to each drive letter (/c for c:). With Bash
 # on Windows, I can just make a c:/mnt folder with all of the drives in it.
 # However, this acts wonky if the local drive isn't c:.
