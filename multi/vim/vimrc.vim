@@ -576,8 +576,12 @@ let g:RenamerSupportColonWToRename = 1
 " I find replacing statusline with match line distracting and confusing.
 let g:matchup_matchparen_status_offscreen = 0
 
-" Show current scope
-let g:matchup_matchparen_deferred = 1
+" Defer to improve cursor movement performance.
+if has('timers')
+    let g:matchup_matchparen_deferred = 1
+    let g:matchup_matchparen_deferred_show_delay = 150
+    let g:matchup_matchparen_deferred_fade_delay = 500
+endif
 
 
 " Snippets -- Simplify commands. I rarely Expand. Instead I usually list and
