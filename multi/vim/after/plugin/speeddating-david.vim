@@ -8,4 +8,7 @@ if exists("g:loaded_speeddating") && g:loaded_speeddating
     xmap  <C-x><C-x>     <Plug>SpeedDatingDown
     nmap d<C-x><C-s>     <Plug>SpeedDatingNowUTC
     nmap d<C-x><C-x>     <Plug>SpeedDatingNowLocal
+    " Ensure speeddating knows vim's commands for increment/decrement
+    nnoremap <Plug>SpeedDatingFallbackUp   <C-A>
+    nnoremap <Plug>SpeedDatingFallbackDown <C-X>
 endif
