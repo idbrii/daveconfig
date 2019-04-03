@@ -25,9 +25,15 @@ function! LocateFilelist()
     " Might be useful if you're using files from different directories.
     let l:tagfile = <SID>FindTagFile('filelist')
     if filereadable(l:tagfile)
+        let is_new_project = !exists('g:david_project_filelist')
         let g:david_project_filelist = (l:tagfile)
         echomsg 'Filelist=' . g:david_project_filelist
-        call notgrep#setup#NotGrepUseGrepRecursiveFrom(fnamemodify(g:david_project_filelist, ':h'))
+        " Only change grep mode when first setting up a project (so if we
+        " already configured it, we don't stomp it with a worse
+        " configuration).
+        if is_new_project
+            call notgrep#setup#NotGrepUseGrepRecursiveFrom(fnamemodify(g:david_project_filelist, ':h'))
+        endif
     endif
 endfunction
 
