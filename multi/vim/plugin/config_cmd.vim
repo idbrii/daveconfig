@@ -11,3 +11,11 @@ cnoremap <C-k> <C-g>
 cnoremap <C-y> <C-l>
 " C-l to back out like esc from insert.
 cnoremap <C-l> <C-c>
+
+
+" AsyncRun {{{1
+let g:asyncrun_open = 3
+
+" Replace TailMinusF
+command! -nargs=1 -complete=file Tail AsyncRun tail -f <q-args>
+

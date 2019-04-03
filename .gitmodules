@@ -16,6 +16,9 @@
 [submodule "multi/vim/bundle/asynccommand"]
 	path = multi/vim/bundle/asynccommand
 	url = git@github.com:idbrii/AsyncCommand.git
+[submodule "multi/vim/bundle/asyncrun"]
+	path = multi/vim/bundle/asyncrun
+	url = git@github.com:idbrii/asyncrun.vim.git
 [submodule "multi/vim/bundle/bbye"]
 	path = multi/vim/bundle/bbye
 	url = https://github.com/moll/vim-bbye.git
@@ -124,9 +127,6 @@
 [submodule "multi/vim/bundle/airline-themes"]
 	path = multi/vim/bundle/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule "multi/vim/bundle/TailMinusF"]
-	path = multi/vim/bundle/TailMinusF
-	url = git@github.com:idbrii/TailMinusF.git
 [submodule "multi/vim/bundle/notgrep"]
 	path = multi/vim/bundle/notgrep
 	url = git@github.com:idbrii/vim-notgrep.git
