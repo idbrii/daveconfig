@@ -16,10 +16,11 @@ let g:ale_lint_delay = 1000
 " fix (sometimes that doesn't work). Suggested fix is to get Unity to regen
 " the sln:
 " https://github.com/OmniSharp/omnisharp-vim/issues/405#issuecomment-419291942
+" If using mono, then add 'mcs' linter. Otherwise, exclude it because mono is missing
+" later C# features and will give false positives.
 let g:ale_linters = {
             \ 'cs': [
             \       'OmniSharp',
-            \       'mcs',
             \   ]
             \ }
 
