@@ -22,13 +22,14 @@ function! s:TranslateKnownLinks(fname)
 
     let known_pairs = [
                 \ [ '~/.vim', '~/data/settings/daveconfig/multi/vim' ],
+                \ [ ($USERPROFILE .'/.vim'), '~/data/settings/daveconfig/multi/vim' ],
                 \ [ 'c:/bin', '~/data/settings/daveconfig/multi/vim/bundle/work/scripts/bin' ],
                 \ [ 'c:/mnt/c', 'c:' ],
                 \ [ 'c:/mnt/e', 'e:' ],
                 \ ]
     for pair in known_pairs
         " Already matching . for the drive letter, so strip actual letter.
-        let link = resolve(expand(pair[0]))[1:]
+        let link = expand(pair[0])[1:]
         " Don't strip from result.
         let real = resolve(expand(pair[1]))
         let fname = substitute(fname, re_prefix . link, real, '')
@@ -50,6 +51,7 @@ function! FollowWin32Symlink(...)
 endfunction
 
 function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
+  " Based on auwsmit's MyFollowSymlink: https://github.com/tpope/vim-fugitive/issues/147#issuecomment-203389621
   let fpath = a:filename
   let allowed_recur_depth = a:allowed_recur_depth
   if allowed_recur_depth <= 0
@@ -59,7 +61,8 @@ function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
   let dirstr = system('dir ' . fpath . '*')
 
   " check if current argument is a symlink
-  if (match(dirstr, '<SYMLINK..\s\+' . ftail . ' [') == -1)
+  let is_symlink = match(dirstr, '<SYMLINK..\s\+' . ftail . ' [') != -1
+  if !is_symlink
     " if not, check if parent dir is symlink, up to $allowed_recur_depth directories
     let parent = fnamemodify(fpath, ':h')
     echo parent
@@ -77,7 +80,7 @@ function! s:FollowWin32Symlink_recursive(filename, allowed_recur_depth)
 
     " TODO: instead of following the link like this, we should store its path
     " and build the path to the actual file. wiping out buffers like this
-    " failes for me (in the else case because there are multiple buffers
+    " fails for me (in the else case because there are multiple buffers
     " matching fpath).
     " Try changing these 'exec' to 'echo' to see what it's trying to do.
     " Also see if we can remove the write! -- that's dangerous.
