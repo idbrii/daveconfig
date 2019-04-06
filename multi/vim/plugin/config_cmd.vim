@@ -14,7 +14,7 @@ cnoremap <C-l> <C-c>
 
 
 " AsyncRun {{{1
-let g:asyncrun_open = 3
+let g:asyncrun_open = max([3, &lines / 10])
 
 " Replace TailMinusF
 command! -nargs=1 -complete=file Tail AsyncRun tail -f <q-args>

@@ -45,6 +45,7 @@ if !exists('loaded_videinvoke')
 	" Quarter screen for preview window.
 	let &previewheight = &lines / 4
 
+    let g:asyncrun_open = max([3, &lines / 10])
 
     """"" Load cscope and other tag databases if we can
     " Setup tag files for visual studio (game development)
