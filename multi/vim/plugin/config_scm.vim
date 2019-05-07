@@ -5,6 +5,8 @@ if has("patch-8.1.0360")
     set diffopt+=internal,algorithm:patience,indent-heuristic
 endif
 
+" Remote vs Merged since merged contains changes on top of what's in remote.
+let g:mergetool_layout = 'rm'
 
 " Meld          {{{1
 if executable('meld')

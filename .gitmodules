@@ -358,3 +358,6 @@
 [submodule "multi/vim/bundle/textbeat"]
 	path = multi/vim/bundle/textbeat
 	url = https://github.com/idbrii/vim-textbeat.git
+[submodule "multi/vim/bundle/mergetool"]
+	path = multi/vim/bundle/mergetool
+	url = https://github.com/samoshkin/vim-mergetool.git

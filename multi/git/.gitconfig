@@ -66,9 +66,10 @@
     browser = chromium-browser
 
 [merge]
-    # meld is also a good option where it's installed, but gvim is a globally
-    # available default.
-    tool = gvim
+    # meld is also a good option where it's installed, but diffconflicts is a
+    # globally available default.
+    tool = diffconflicts
+    conflictStyle = diff3
 [diff]
     renames = copies
 [diff "bin"]

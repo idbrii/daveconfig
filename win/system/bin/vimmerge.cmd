@@ -24,8 +24,7 @@ title %~n0
 :: Always use normal vimdiff for diffs.
 set USE_diffconflicts=%MERGED%
 :: Uncomment to disable diffconflicts.
-:: TODO: I can't use diffconflicts because Bash for Windows isn't handling TortoiseSVN filenames.
-set USE_diffconflicts=
+REM set USE_diffconflicts=
 
 if defined USE_diffconflicts (
 	REM diffconflicts works well for merging.
@@ -34,9 +33,7 @@ if defined USE_diffconflicts (
 		:: Cygwin handles this okay.
 		%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
 	) else (
-		:: Bash for Windows doesn't handle backslashes at all. TortoiseSVN
-		:: sends backslashes. I probably need to rewrite all of this in python.
-		bash.exe ~/data/settings/daveconfig/multi/git/tool/mergetool.diffconflicts.git.sh vim %BASE% %LOCAL% %REMOTE% %MERGED%
+		gvim -f -c "MergetoolStart" "%MERGED%" "%BASE%" "%LOCAL%" "%REMOTE%"
 	)
 ) else (
 	REM Diff all files in large fullscreen window with equal width buffers and
