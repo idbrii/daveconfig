@@ -205,6 +205,11 @@ return
     SysGet, work0_area_, MonitorWorkArea, %mindex0%
     SysGet, work1_area_, MonitorWorkArea, %mindex1%
     SysGet, work2_area_, MonitorWorkArea, %mindex2%
+
+    winMidX := (work1_area_Right -  work1_area_Left) / 2
+    winMidY := (work1_area_Bottom - work1_area_Top) / 2
+    monitor_index_GetMonitorAt := GetMonitorAt(winMidX, winMidY)
+
     listvars
 return
 
@@ -219,9 +224,9 @@ return
     WinGet, active_handle
     monitor_index_GetMonitorIndexFromWindow := GetMonitorIndexFromWindow(WinExist("A"))
 
-    SysGet, workArea0_, MonitorWorkArea, 0
-    SysGet, workArea1_, MonitorWorkArea, 1
-    SysGet, workArea2_, MonitorWorkArea, 2
+    SysGet, work0_area_, MonitorWorkArea, 0
+    SysGet, work1_area_, MonitorWorkArea, 1
+    SysGet, work2_area_, MonitorWorkArea, 2
 
     listvars
 return
