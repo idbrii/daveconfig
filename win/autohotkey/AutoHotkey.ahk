@@ -191,6 +191,11 @@ return
 
 #f9::
     ;; Do experimentation here.
+    monitor_index_GetActiveMonitorIndex := GetActiveMonitorIndex()
+    monitor_index_GetActiveLeftToRight := Convert_MonitorIndexToLeftToRight(monitor_index_GetActiveMonitorIndex)
+    lrindex0 := Convert_MonitorIndexToLeftToRight(0)
+    lrindex1 := Convert_MonitorIndexToLeftToRight(1)
+    lrindex2 := Convert_MonitorIndexToLeftToRight(2)
     Left0 := GetDesktopLeft(0)
     Left1 := GetDesktopLeft(1)
     Left2 := GetDesktopLeft(2)
@@ -225,14 +230,14 @@ Convert_LeftToRightToMonitorIndex(ActiveMonitor) {
     ;; Convert 0,1,2 layout to monitor index so input 0 gives index of leftmost monitor.
 
     if (ActiveMonitor = 0) {
+        ;; Why not 0-indexed AHK? 2 gives the same values as 1. WHY?
         return 1
     }
     else if (ActiveMonitor = 1) {
         ;; Middle is my primary.
-        return 0
+        return 2
     }
     else if (ActiveMonitor = 2) {
-        ;; Why not 2 AHK? 2 gives the same values as 1. WHY?
         return 3
     }
     return -1
@@ -241,14 +246,15 @@ Convert_LeftToRightToMonitorIndex(ActiveMonitor) {
 Convert_MonitorIndexToLeftToRight(ActiveMonitor) {
     ;; Convert monitor index to 0,1,2 layout so leftmost monitor is 0.
 
-    ; Current layout:
-    ; [1][0][2]
+    ; Current layout (must be determined experimentally. may not match Display
+    ; Properties):
+    ; [0][1][2]
 
     if (ActiveMonitor = 0) {
-        return 1
+        return 0
     }
     else if (ActiveMonitor = 1) {
-        return 0
+        return 1
     }
     else if (ActiveMonitor = 2) {
         return 2
