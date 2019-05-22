@@ -34,7 +34,9 @@ nnoremap <Leader>tt :vimgrep "\C\v(TODO<Bar>HACK)" %<CR>
 " Open-ended todo
 nnoremap <Leader>tT :grep -e TODO -e HACK -R .
 " Project-wide todos
-nnoremap <Leader>tp :exec 'NotGrep "TODO\<Bar>HACK.'. g:snips_author .'"'<CR>
+" Using character classes to avoid quote or Bar which aren't playing nice with
+" AsyncRun.
+nnoremap <Leader>tp :exec 'NotGrep [TH][OA][DC][OK].'. g:snips_author<CR>
 nnoremap <Leader>tl :TodoNew<CR>
 
 " Filters the quickfix list to keep results matching pattern. Bang removes
