@@ -591,6 +591,8 @@ let g:UltiSnipsExpandTrigger       = '<C-j>'
 let g:UltiSnipsListSnippets        = ''
 let g:UltiSnipsJumpForwardTrigger  = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+" Don't want undocumented and duplicate snippets from vim-snippets
+let g:UltiSnipsEnableSnipMate = 0
 
 let g:UltiSnipsSnippetsDir = '~/.vim/bundle/david-snippets/UltiSnips/'
 
