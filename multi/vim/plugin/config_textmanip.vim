@@ -13,6 +13,8 @@ nmap cx <Plug>(exchange-dwim)
 
 " Augment Abolish's Coerce to work in visual mode to change
 " whitespace-separated content into something usable with coerce.
+" Using setreg instead of expr register ensures proper newline handling (for
+" comments and bullets) and maintaining selection region.
 vnoremap <Leader>crt "cy:call setreg('c', david#editing#ToTitleCase(@c), getregtype(''))<CR>gv"cPgv
 vnoremap <Leader>crs "cy:call setreg('c', david#editing#ToSnakeCase(@c), getregtype(''))<CR>gv"cPgv
 
