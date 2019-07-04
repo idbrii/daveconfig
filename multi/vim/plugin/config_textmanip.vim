@@ -11,6 +11,11 @@ nmap <Leader>x<CR> <Plug>(ExchangeLine)
 nmap cx <Plug>(exchange-dwim)
 
 
+" Augment Abolish's Coerce to work in visual mode to change
+" whitespace-separated content into something usable with coerce.
+vnoremap <Leader>crt "cy:call setreg('c', david#editing#ToTitleCase(@c), getregtype(''))<CR>gv"cPgv
+vnoremap <Leader>crs "cy:call setreg('c', david#editing#ToSnakeCase(@c), getregtype(''))<CR>gv"cPgv
+
 " Sideways {{{2
 
 " Use Sideways over Argumentative. Sideways does nothing when it can't figure
