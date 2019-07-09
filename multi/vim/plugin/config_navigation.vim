@@ -237,7 +237,7 @@ nmap <unique> <silent> <Leader>M <Plug>MarkAllClear
 " substitutions without worrying about setting the range. Also, use n as the
 " narrow prefix.
 xmap <unique> <Leader>nr <Plug>NrrwrgnBangDo
-nmap <unique> <Leader>nr <Plug>NrrwrgnBangDo
+nmap <unique> <Leader>nr :<C-u>WidenRegion!<CR>
 xmap <unique> <Leader>nR <Plug>NrrwrgnDo
 
 " Narrow multiple regions
