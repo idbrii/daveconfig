@@ -118,11 +118,11 @@ if executable('svn')
     " VCMove often fails. Requires relative or repo paths, but even then it
     " thinks I'm moving to the filesystem. This is probably not as safe, but
     " works.
-    function! s:SvnMove(dest)
+    function! s:SvnMove(src, dest) abort
         let shellslash_bak = &shellslash
         let &shellslash = 0
 
-        let src = shellescape(expand("%:p"))
+        let src = shellescape(a:src)
         let output = system('svn mv '. src .' '. shellescape(a:dest))
         if v:shell_error
             echo output
@@ -131,8 +131,18 @@ if executable('svn')
         endif
 
         let &shellslash = shellslash_bak
+        return !v:shell_error
     endf
-    command! -nargs=1 -complete=file SvnMove :call s:SvnMove(<q-args>)
+    command! -nargs=1 -complete=file MoveSvn :call s:SvnMove(expand("%:p"), <q-args>)
+    function! s:SvnMoveUnity(src, dest) abort
+        let success = s:SvnMove(a:src .'.meta', a:dest .'.meta')
+        if success
+            call s:SvnMove(a:src, a:dest)
+        else
+            echo 'Try MoveSvn instead.'
+        endif
+    endf
+    command! -nargs=1 -complete=file MoveUnity :call s:SvnMoveUnity(expand("%:p"), <q-args>)
 
     function! s:VCDiffWithDiffusable(diff_latest)
         "" Make VCDiff auto-disable diff mode when one window is closed.
