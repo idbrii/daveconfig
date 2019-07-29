@@ -127,7 +127,7 @@ if executable('svn')
         if v:shell_error
             echo output
         else
-            exec 'edit '. a:dest
+            exec 'keepalt edit '. a:dest
         endif
 
         let &shellslash = shellslash_bak
