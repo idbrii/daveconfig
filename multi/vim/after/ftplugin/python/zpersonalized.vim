@@ -91,8 +91,19 @@ setlocal tags+=$HOME/.vim/tags/python.ctags
 let g:eclim_python_pyflakes_warn = 0
 
 " Use python3 if I asked for it.
-" TODO: Would be better to look at shebang to figure out what to do.
-if &pyxversion == 3 && &makeprg !~# 'python3' && executable('python3')
+function! s:DoesWantPy3()
+    let first_line = getline(1)
+    let is_shebang = first_line =~# '^#!'
+    if is_shebang
+        if match(first_line, 'python3') >= 0 
+            return v:true
+        elseif match(first_line, 'python2') >= 0 
+            return v:false
+        endif
+    endif
+    return &pyxversion == 3
+endf
+if s:DoesWantPy3() && &makeprg !~# 'python3' && executable('python3')
     let &l:makeprg = substitute(&l:makeprg, 'python', 'python3', '')
     let b:autocompiler_skip_detection = 1
     if executable('pydoc3')
