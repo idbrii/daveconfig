@@ -216,6 +216,27 @@ if executable('svn')
         "wincmd p
     endf
 
+    function! s:VCUpdate(...)
+        let shellslash_bak = &shellslash
+        let &shellslash = 0
+        
+        let files = a:000
+        if a:0 == 0
+            let files = [expand('%')]
+        endif
+        
+        for i in range(0, len(files)-1)
+            let files[i] = shellescape(fnamemodify(files[i], ':p'))
+        endfor
+
+        let result = system('svn update '. join(files))
+        echo result
+
+        let &shellslash = shellslash_bak
+    endf
+
+    command! -nargs=? VCUpdate call s:VCUpdate(<f-args>)
+
     " Ensure the blame window will have a path inside the repo.
     nnoremap <silent> <leader>fb :silent! cd %:p:h <Bar>VCBlame<CR>
     " Diff against have revision.
