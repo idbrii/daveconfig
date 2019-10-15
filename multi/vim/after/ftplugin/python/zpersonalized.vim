@@ -101,7 +101,7 @@ function! s:DoesWantPy3()
             return v:false
         endif
     endif
-    return &pyxversion == 3
+    return exists('&pyxversion') && &pyxversion == 3
 endf
 if s:DoesWantPy3() && &makeprg !~# 'python3' && executable('python3')
     let &l:makeprg = substitute(&l:makeprg, 'python', 'python3', '')
