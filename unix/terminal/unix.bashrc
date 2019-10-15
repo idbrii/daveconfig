@@ -55,6 +55,9 @@ export HISTCONTROL=ignoreboth:erasedups
 # Don't blindly execute history
 shopt -s histverify
 
+# Make **/*.py search recursively
+shopt -s globstar
+
 # Bigger history. Seems to automatically get sync'd with HISTFILESIZE.
 export HISTSIZE=100000
 
