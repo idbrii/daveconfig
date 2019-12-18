@@ -56,7 +56,7 @@ function! s:set_entrypoint(makeprg)
         let lua = s:original_makeprg
     endif
 
-    if a:makeprg =~# '^love\>'
+    if a:makeprg =~# '^lovec\?\>'
         " Don't have a better way to distinguish love files, so use this to
         " configure checker properly.
         let g:ale_lua_luacheck_options .= ' --std love+luajit'
@@ -75,5 +75,6 @@ function! s:set_entrypoint(makeprg)
     let g:inclement_n_dir_to_trim = 2
     let g:inclement_after_first_include = 1
 endf
-command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint('love --console %')
+" Lovec does a better job of outputting to the console.
+command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint('lovec --console %')
 command! -buffer LuaSetEntrypoint call s:set_entrypoint('')
