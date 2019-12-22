@@ -3,10 +3,10 @@
 
 # Build the filelist, tag file, and cscope databases
 # usage:
-#   buildtags.sh cscope-binary lang [directories to search]
+#   buildtags.sh [--continuous] cscope-binary lang [directories to search]
 #
 # example to build C++ in current directory recursively:
-#   buildtags.sh cscope cpp
+#   buildtags.sh --continous cscope cpp
 # example for the same but only tags (no filelist or cscope):
 #   buildtags.sh tagonly cpp
 # example for the same but no cscope:
@@ -15,6 +15,13 @@
 # Installing dependents:
 #   aptinstall exuberant-ctags cscope
 #   pip install pycscope
+
+continuous=0
+if [ "$1" == "--continuous" ] ; then
+    # assume plain cscope if we got no input
+    continuous=1
+    shift
+fi
 
 cscope=$1
 if [ $# -lt 1 ] ; then
@@ -33,6 +40,14 @@ if [ $# -gt 2 ] ; then
 	shift
 	# use remaining parameters
     search_dirs=$*
+fi
+
+
+if [[ $continuous -eq 1 ]]; then
+    while inotifywait --event close_write,moved_to,create --recursive $search_dirs ; do
+        $0 $cscope $filetype $search_dirs
+    done
+    exit
 fi
 
 tagdir=$PWD
@@ -229,4 +244,3 @@ fi
 fix_file_prefix_for_tags_on_win32 $tagfile
 
 cd -
-
