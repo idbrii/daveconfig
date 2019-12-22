@@ -361,6 +361,9 @@ let g:org_agenda_files = ['~/backlog.org', '~/plan.org']
 " every time I run make.
 nnoremap <S-F5> :<C-u>silent make 
 nnoremap <F5> :<C-u>make 
+" IDE make. I often bind F6 to save and build, but I can type this without
+" leaving home.
+nmap <Leader>im <F6>
 
 " Usually mapped to open-ended make.
 nmap <Leader>ib <F5>
