@@ -14,7 +14,12 @@ cnoremap <C-l> <C-c>
 
 
 " AsyncRun {{{1
-let g:asyncrun_open = max([3, &lines / 10])
+" Need enough lines to see error, 'stack traceback', and first line of error
+" at the middle of the screen.
+augroup david_resize_qf
+    au!
+    autocmd VimEnter,VimResized * let g:asyncrun_open = max([5, &lines / 10])
+augroup END
 
 " Replace TailMinusF
 command! -nargs=1 -complete=file Tail AsyncRun tail -f <q-args>
