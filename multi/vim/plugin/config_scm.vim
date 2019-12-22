@@ -32,9 +32,8 @@ if executable('git')
     xnoremap <leader>gv :GV!<CR>
 
     nnoremap <Leader>gb :silent! cd %:p:h<CR>:Gblame<CR>
-    let g:Gitv_DoNotMapCtrlKey = 1
 
-    command! Ghistory Gitv! --all
+    command! Ghistory GV! --all
 
     function! s:GitRevert(commit)
         try
