@@ -813,9 +813,9 @@ let g:detectindent_preferred_expandtab = &expandtab
 " Zero indent means don't modify (keep it at filetype setting).
 let g:detectindent_preferred_indent = 0
 
-" Always detect indents.
+" Always detect indents on editable files.
 function! s:DetectIndent()
-    if !exists("b:david_detected_indent")
+    if !exists("b:david_detected_indent") && !&readonly && &modifiable
         DetectIndent
         let b:david_detected_indent = 1
     endif
