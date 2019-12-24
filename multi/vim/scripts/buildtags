@@ -15,10 +15,12 @@
 # Installing dependents:
 #   aptinstall exuberant-ctags cscope
 #   pip install pycscope
+#   brew install fswatch
+#   aptinstall fswatch # (requires universe)
 
 continuous=0
 if [ "$1" == "--continuous" ] ; then
-    # assume plain cscope if we got no input
+    echo Doing continuous build...
     continuous=1
     shift
 fi
@@ -44,9 +46,23 @@ fi
 
 
 if [[ $continuous -eq 1 ]]; then
-    while inotifywait --event close_write,moved_to,create --recursive $search_dirs ; do
-        $0 $cscope $filetype $search_dirs
-    done
+    if [[ -x "$(command -v fswatch)" ]]; then
+        fswatch --print0 $search_dirs | while read -d "" event
+        do
+            # Ignore vim swap file changes
+            if [[ $event == *.*.sw* ]]; then
+                echo Ignoring change to file $event
+            else
+                echo Rebuild tags...
+                $0 $cscope $filetype $search_dirs
+            fi
+        done
+    else
+        # Only linux seems to have watch support by default.
+        while inotifywait --event close_write,moved_to,create --recursive $search_dirs ; do
+            $0 $cscope $filetype $search_dirs
+        done
+    fi
     exit
 fi
 
