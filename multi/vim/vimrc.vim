@@ -634,8 +634,12 @@ let g:surround_92 = "\1Surround with: \1 \r \1\1"
 
 function! s:SetupSurroundForCurrentFiletype()
     " m surrounds with commented foldmarkers
-    " Ensure we escape %%s which printf doesn't recognize as %s.
-    let comment = substitute(&commentstring, '%%s', '%%%s', 'g')
+    let comment = &commentstring
+    " Escape % since they're interpreted by printf (tex, markdown use them in
+    " commentstring).
+    let comment = substitute(comment, '%', '%%', 'g')
+    " Revert our %s target back.
+    let comment = substitute(comment, '%%s', '%s', 'g')
     if len(comment) == 0
         let comment = "%s"
     endif
