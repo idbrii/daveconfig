@@ -358,3 +358,6 @@
 [submodule "multi/vim/bundle/mergetool"]
 	path = multi/vim/bundle/mergetool
 	url = git@github.com:idbrii/vim-mergetool.git
+[submodule "multi/vim/bundle/searchlight"]
+	path = multi/vim/bundle/searchlight
+	url = https://github.com/PeterRincker/vim-searchlight.git

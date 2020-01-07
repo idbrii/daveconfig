@@ -49,4 +49,8 @@ function! s:FilterQuickfixList(bang, pattern)
 endfunction
 command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0, <q-args>)
 
+
+" vim-searchlight
+highlight link Searchlight Incsearch
+
 " vi: et sw=4 ts=4 fdm=marker fmr={{{,}}}
