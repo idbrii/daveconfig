@@ -346,6 +346,9 @@
 [submodule "multi/vim/bundle/lsp"]
 	path = multi/vim/bundle/lsp
 	url = https://github.com/prabirshrestha/vim-lsp.git
+[submodule "multi/vim/bundle/lsp-settings"]
+	path = multi/vim/bundle/lsp-settings
+	url = https://github.com/mattn/vim-lsp-settings.git
 [submodule "multi/vim/bundle/lib-async"]
 	path = multi/vim/bundle/lib-async
 	url = https://github.com/prabirshrestha/async.vim.git
