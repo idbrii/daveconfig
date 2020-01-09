@@ -4,13 +4,21 @@
 " Esc without straying too far from homerow. Otherwise just inserts ^B. (See i_CTRL-B-gone.)
 " Possible alternative: C-s (used experiementally by surround).
 inoremap <C-b> <Esc>
-" Esc without leaving homerow. Also, you can hammer C-l and eventually it
-" redraws the screen. Exits popupmenu when applicable.
-inoremap <expr> <C-l> pumvisible() ? '<C-y>' : '<Esc>'
+
 " Use C-y as replacement for C-l to complete more characters in popupmenu.
 " it behaves similarly to its normal insert mode behavior (inserting from
 " above line). See popupmenu-keys.
 inoremap <expr> <C-y> pumvisible() ? '<C-l>' : '<C-y>'
+
+if g:asyncomplete_loaded
+    inoremap <expr> <C-l> pumvisible() ? asyncomplete#close_popup() : '<Esc>'
+    inoremap <expr> <C-e> pumvisible() ? asyncomplete#cancel_popup() : '<C-e>'
+else
+    " Esc without leaving homerow. Also, you can hammer C-l and eventually it
+    " redraws the screen. Exits popupmenu when applicable.
+    inoremap <expr> <C-l> pumvisible() ? '<C-y>' : '<Esc>'
+endif
+
 " Also Esc from visual and select mode. Makes sense for snippets (my only use
 " of select).
 vnoremap <C-l> <Esc>

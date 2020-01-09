@@ -349,6 +349,15 @@
 [submodule "multi/vim/bundle/lib-async"]
 	path = multi/vim/bundle/lib-async
 	url = https://github.com/prabirshrestha/async.vim.git
+[submodule "multi/vim/bundle/asyncomplete"]
+	path = multi/vim/bundle/asyncomplete
+	url = https://github.com/prabirshrestha/asyncomplete.vim.git
+[submodule "multi/vim/bundle/asyncomplete-lsp"]
+	path = multi/vim/bundle/asyncomplete-lsp
+	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim.git
+[submodule "multi/vim/bundle/asyncomplete-tags"]
+	path = multi/vim/bundle/asyncomplete-tags
+	url = https://github.com/prabirshrestha/asyncomplete-tags.vim.git
 [submodule "multi/vim/bundle/dirvish-repo"]
 	path = multi/vim/bundle/dirvish-repo
 	url = git@github.com:idbrii/vim-dirvish-repo.git
