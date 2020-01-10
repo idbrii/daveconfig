@@ -116,4 +116,17 @@
 [url "https://github.com"]
 # "git:// protocol is less secure." Use https instead.
 # https://gist.github.com/grawity/4392747
+# This does not change the fact that most of my repos use git@github.com which
+# uses ssh and requires sshkey authentication for every remote action.
     insteadOf = git://github.com
+
+# In theory this might work, but doesn't for git version 2.20.1
+; [url "https://github.com/"]
+; # Don't prompt for password on pull.
+; # > https uses password authentication for pushing, and still allows anonymous
+; # > pull.
+; # >
+; # > ssh authentication is needed for all connections, so you always need a
+; # > GitHub account – even to pull or clone.
+; # https://gist.github.com/grawity/4392747
+;     pullInsteadOf = git@github.com:
