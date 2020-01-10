@@ -13,7 +13,7 @@ let g:mergetool_layout = 'rm'
 augroup david_mergetool
   au!
   autocmd User MergetoolStart command! MergetoolThreeWay MergetoolToggleLayout LmR
-  autocmd User MergetoolStop delcommand! MergetoolThreeWay
+  autocmd User MergetoolStop delcommand MergetoolThreeWay
 augroup END
 
 " Meld          {{{1
