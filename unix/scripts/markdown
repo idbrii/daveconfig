@@ -1,13 +1,13 @@
-#! /bin/sh
+#! /bin/bash
 
 # Depedencies:
 # brew install pandoc
 #
 # Using pandoc instead of markdown or discount because pandoc handles tables.
 
-if [ $# == 1 ] ; then 
+if [[ $# == 1 ]] ; then 
     output=$1.html
-elif [ $# == 2 ] ; then 
+elif [[ $# == 2 ]] ; then 
     output=$2
 else
   echo "Usage: $0 input.md [output.html]"
@@ -15,7 +15,7 @@ else
 fi
 
 
-pandoc -o $1.html $1
+pandoc -o $output $1
 
 # https://gist.github.com/davisford/01b4eea0f1ddfb858d89
 # markdown $1 | htmldoc --cont --headfootsize 8.0 --linkcolor blue --linkstyle plain --format pdf14 - > $2
