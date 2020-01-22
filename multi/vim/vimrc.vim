@@ -817,18 +817,6 @@ let g:detectindent_preferred_expandtab = &expandtab
 " Zero indent means don't modify (keep it at filetype setting).
 let g:detectindent_preferred_indent = 0
 
-" Always detect indents on editable files.
-function! s:DetectIndent()
-    if !exists("b:david_detected_indent") && !&readonly && &modifiable
-        DetectIndent
-        let b:david_detected_indent = 1
-    endif
-endf
-augroup DetectIndent
-    autocmd!
-    autocmd BufReadPost * call s:DetectIndent()
-augroup END
-
 " expand-region
 " I'm not sure that normal map is very useful since it always select a word.
 " But I'm also not sure of a reasonable use for that map.

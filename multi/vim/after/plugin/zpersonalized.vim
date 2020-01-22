@@ -24,3 +24,6 @@ if exists("g:loaded_fastfold") && g:loaded_fastfold
         autocmd BufNewFile,BufRead * call david#folding#try_use_syntax_folds()
     augroup end
 endif
+
+" DetectIndent should now be loaded.
+AutoDetectIndent
