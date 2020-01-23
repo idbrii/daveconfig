@@ -18,7 +18,7 @@ function! s:set_entrypoint(makeprg)
     " Must use :cd or closing main.rs will put us in the wrong directory and
     " our quickfix jumps to the wrong place.
     exec 'nnoremap <F6> :update<Bar>split '. cur_file .'<Bar>compiler cargo<Bar>cd '. parent_dir .'<CR>:AsyncRun -program=make -auto=make -cwd='. parent_dir .' @ build<CR>:close<CR>'
-    exec 'nnoremap <F7> :update<Bar>split '. cur_file .'<Bar>compiler cargo<Bar>cd '. parent_dir .'<CR>:AsyncRun -program=make -auto=make -cwd='. parent_dir .' @ run<CR>:close<CR>'
+    exec 'nnoremap <Leader>ir :update<Bar>split '. cur_file .'<Bar>compiler cargo<Bar>cd '. parent_dir .'<CR>:AsyncRun -program=make -auto=make -cwd='. parent_dir .' @ run<CR>:close<CR>'
     call LocateAll()
     NotGrepUseGrepRecursiveFrom .
     " I put code in ./src/
