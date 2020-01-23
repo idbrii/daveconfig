@@ -13,6 +13,9 @@ export PAGER=less
 # Path extensions
 export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool:~/data/settings/daveconfig/unix/bin
 
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
