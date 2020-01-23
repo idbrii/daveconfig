@@ -112,6 +112,10 @@ elif [ "$filetype" == "java" ] ; then
     # The only types we're interested in are java
     find $search_dirs -type f -iname "*.java" -print | sort -f >> $tagfile
 
+elif [ "$filetype" == "rust" ] ; then
+    # Rust code.
+    find $search_dirs -type f \( -iname "*.rs" -o -iname "*.md" \) -print | sort -f >> $tagfile
+
 else
     # Don't know what we are so include anything that's not binary or junk (from vimdoc)
     # DavidAdd: Files: .git tags filelist
