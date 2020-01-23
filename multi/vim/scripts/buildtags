@@ -114,7 +114,12 @@ elif [ "$filetype" == "java" ] ; then
 
 elif [ "$filetype" == "rust" ] ; then
     # Rust code.
-    find $search_dirs -type f \( -iname "*.rs" -o -iname "*.md" \) -print | sort -f >> $tagfile
+    if [[ $search_dirs = . ]]; then
+        # Usually keep code in src and want to access the cargo and any
+        # documentation.
+        search_dirs="src/ ./Cargo.toml ./*.md"
+    fi
+    find $search_dirs -type f \( -iname "*.rs" -o -iname "*.toml" -o -iname "*.md" \) -print | sort -f >> $tagfile
 
 else
     # Don't know what we are so include anything that's not binary or junk (from vimdoc)
