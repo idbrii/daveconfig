@@ -9,6 +9,9 @@ let g:lsp_diagnostics_enabled = 0
 "~ let g:lsp_signs_warning = {'text': '‼', 'icon': '/path/to/some/icon'} " icons require GUI
 "~ let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
 
+" Default omnifunc to lsp.
+set omnifunc=lsp#complete
+
 augroup david_lsp
     au!
 
