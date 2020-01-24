@@ -1,5 +1,7 @@
 " Ale general {{{1
 
+let g:ale_linters = {}
+let g:ale_fixers = {}
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_delay = 1000
@@ -18,11 +20,9 @@ let g:ale_lint_delay = 1000
 " https://github.com/OmniSharp/omnisharp-vim/issues/405#issuecomment-419291942
 " If using mono, then add 'mcs' linter. Otherwise, exclude it because mono is missing
 " later C# features and will give false positives.
-let g:ale_linters = {
-            \ 'cs': [
+let g:ale_linters.cs = [
             \       'OmniSharp',
             \   ]
-            \ }
 
 " Python {{{1
 
@@ -67,6 +67,16 @@ let g:ale_python_pylint_options = '-m pylint -rcfile ~/data/settings/daveconfig/
 " The virtualenv detection needs to be disabled.
 let g:ale_python_pylint_use_global = 0
 
+" Rust {{{1
+let g:ale_linters.rust = [
+            \       'rls',
+            \   ]
+
+let g:ale_fixers.rust = [
+            \       'rustfmt',
+            \       'remove_trailing_lines',
+            \       'trim_whitespace',
+            \   ]
 
 " Luacheck {{{1
 let g:ale_lua_luacheck_options = ''
