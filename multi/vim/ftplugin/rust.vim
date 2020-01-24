@@ -29,7 +29,11 @@ function! s:set_entrypoint(makeprg)
         update
         exec '5split '. s:main_file
         compiler cargo
-        call chdir(s:parent_dir)
+        if exists('*chdir')
+            call chdir(s:parent_dir)
+        else
+            exec 'cd '. s:parent_dir
+        endif
         exec 'AsyncRun -program=make -auto=make -cwd='. s:parent_dir .' @ '. a:target
         close
 
