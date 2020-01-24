@@ -31,8 +31,8 @@ function! s:set_entrypoint(makeprg)
 
         let &lazyredraw = lazyredraw_bak
     endf
-    exec 'nnoremap <F6>       :<C-u>call DavidRustBuild("build")<CR>'
-    exec 'nnoremap <Leader>ir :<C-u>call DavidRustBuild("run")<CR>'
+    exec 'nnoremap <F6>       :<C-u>call DavidRustBuild("build --release")<CR>'
+    exec 'nnoremap <Leader>ir :<C-u>call DavidRustBuild("run --release")<CR>'
     call LocateAll()
     NotGrepUseGrepRecursiveFrom .
     " I put code in ./src/
