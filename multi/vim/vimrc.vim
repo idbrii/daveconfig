@@ -232,8 +232,9 @@ if has('mouse')
   set mouse=a
 endif
 
-" we don't want to edit these type of files
-set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
+" We don't want to edit these type of files.
+" But using .exe breaks vim-lsp. See vim-lsp/issues/685
+set wildignore=*.o,*.obj,*.bak,*.pyc,*.swp
 " Show these file types at the end while using :edit command
 set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
 
