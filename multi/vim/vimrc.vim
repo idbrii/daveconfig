@@ -385,9 +385,6 @@ set cscopepathcomp=3
 " Cscope equivalent of :tag
 command! -nargs=1 Ctag cscope find g <args>
 
-" Toggle the tag list bar
-nnoremap <F4> :<C-u>TlistToggle<CR>
-
 " Open preview window for tags (just jump with <C-]>)
 nnoremap <A-]> :<C-u>ptag <C-r><C-w><CR>
 
@@ -665,18 +662,6 @@ let g:ropevim_enable_shortcuts = 0
 let g:ropevim_local_prefix = '<LocalLeader>r'
 let g:ropevim_global_prefix = '<LocalLeader>r'
 
-" SuperTab   {{{2
-"let g:SuperTabDefaultCompletionType = 'context'
-"let g:SuperTabMappingForward = '<c-space>'
-"let g:SuperTabMappingBackward = '<s-c-space>'
-" supertab + eclim == java win
-"let g:SuperTabDefaultCompletionTypeDiscovery = [
-"            \ "&completefunc:<c-x><c-u>",
-"            \ "&omnifunc:<c-x><c-o>",
-"            \ ]
-"let g:SuperTabLongestHighlight = 1
-"let g:SuperTabMappingTabLiteral = '<tab>'
-
 " Eclim   {{{2
 " Eclim was trying to connect on startup because it sees loaded_taglist
 " Either one of these flags to fixed it, but now it doesn't happen anymore.
@@ -699,10 +684,6 @@ let g:EclimSignLevel = 2
 " Xml   {{{2
 " Reduce the amount of automatic stuff from xml.vim
 let g:no_xml_maps = 1
-
-" BufKill   {{{2
-" Don't have maps for bufkill -- too easy to delete a buffer by accident
-let g:BufKillCreateMappings = 0
 
 " Pydoc   {{{2
 "  Pydoc maps conflict with \p
@@ -748,27 +729,8 @@ nnoremap <Plug>(window-fill-screen) <C-w><Bar><C-w>_
 nmap <C-w>+ <Plug>(window-fill-screen)
 nmap <Leader>w+ <Plug>(window-fill-screen)
 
-" Powerline   {{{2
-" Don't want to need patched fonts everywhere.
-let Powerline_symbols = 'compatible'
-let Powerline_stl_path_style = 'relative'
-" Use my theme
-let Powerline_theme = 'sanity'
-let Powerline_colorscheme = 'sanity'
-
-let g:Powerline#Segments#ctrlp#segments#focus = ''
-let g:Powerline#Segments#ctrlp#segments#prev = ''
-let g:Powerline#Segments#ctrlp#segments#next = ''
-
 " NotGrep   {{{2
 let g:notgrep_no_mappings = 1
-
-" editqf   {{{2
-" Only use editqf for modifying paths
-let g:editqf_no_mappings = 1
-let g:editqf_no_qf_mappings = 1
-let g:editqf_no_type_mappings = 1
-" editqf mapping is only applied in quickfix buffer.
 
 " EasyAlign   {{{2
 " Not sure if alignment is used often enough to get Enter key. Try it for now.
