@@ -517,6 +517,7 @@ onoremap if :normal Vif<CR>
 vnoremap af :<C-u>silent!normal![zV]z<CR>
 onoremap af :normal Vaf<CR>
 
+" TextObj {{{1
 let g:textobj_between_no_default_key_mappings = 1
 xmap am  <Plug>(textobj-between-a)
 omap am  <Plug>(textobj-between-a)
@@ -552,6 +553,7 @@ command! -range=% Eval execute '<line1>,<line2>:!'. substitute(&makeprg, '%', ''
 "}}}
 " Plugins   {{{1
 
+" Built-in   {{{2
 " Disable some built-in plugins.
 " I don't use these methods of installing vim plugins.
 let g:loaded_getscriptPlugin = 0
@@ -559,16 +561,17 @@ let g:loaded_vimballPlugin = 0
 " LogiPat seems useful, but I've never touched it.
 let g:loaded_logiPat = 0
 
+" LargeFile   {{{2
 " Rumours that largefile sometimes causes changes in cursor position and undo
 " loss: https://www.reddit.com/r/vim/comments/as0w1p/has_anyone_ran_into_the_problem_of_vim_losing/egqy00p/
 let g:loaded_LargeFile = 0
 
-" Magic make
+" Magic make   {{{2
 " Disable magic make since I'm not using a lot of makefiles these days.
 " TODO: Setup scons files instead.
 let b:loaded_magic_make = 1
 
-" Renamer
+" Renamer   {{{2
 let g:RenamerSupportColonWToRename = 1
 
 " matchup {{{2
@@ -583,6 +586,7 @@ if has('timers')
 endif
 
 
+" Ultisnips   {{{2
 " Snippets -- Simplify commands. I rarely Expand. Instead I usually list and
 " then complete.
 let g:UltiSnipsExpandTrigger       = '<C-j>'
@@ -595,14 +599,14 @@ let g:UltiSnipsEnableSnipMate = 0
 
 let g:UltiSnipsSnippetsDir = '~/.vim/bundle/david-snippets/UltiSnips/'
 
-" Omnicppcomplete
+" Omnicppcomplete   {{{2
 "
 " This is slow and doesn't work.
 let OmniCpp_MayCompleteDot = 1
 let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteScope = 1
 
-" OmniSharp
+" OmniSharp   {{{2
 "
 " Either use the autoinstaller or define g:OmniSharp_server_path in local.vim
 " as the path to extracted omnisharp.http-win-x64.zip from
@@ -612,7 +616,7 @@ let OmniCpp_MayCompleteScope = 1
 let g:OmniSharp_selector_ui = 'unite'
 "~ let g:OmniSharp_typeLookupInPreview = 1
 
-" Surround
+" Surround   {{{2
 " Use c as my surround character (it looks like a hug)
 " TEST: Try using s instead of c. See how it works. c is more useful in
 " general, so I should get use to using it consistently.
@@ -646,22 +650,22 @@ augroup SurroundCustom
     au FileType * call s:SetupSurroundForCurrentFiletype()
 augroup END
 
-" Cpp
+" Cpp   {{{2
 " Don't want menus for cpp.
 let no_plugin_menus = 1
 let c_no_curly_error = 1
 
-" Lua
+" Lua   {{{2
 " Only want luarefvim for its doc files.
 let loaded_luarefvim = 0
 
-" Ropevim
+" Ropevim   {{{2
 " Don't use <C-c> mappings -- I don't use the maps much.
 let g:ropevim_enable_shortcuts = 0
 let g:ropevim_local_prefix = '<LocalLeader>r'
 let g:ropevim_global_prefix = '<LocalLeader>r'
 
-" SuperTab
+" SuperTab   {{{2
 "let g:SuperTabDefaultCompletionType = 'context'
 "let g:SuperTabMappingForward = '<c-space>'
 "let g:SuperTabMappingBackward = '<s-c-space>'
@@ -673,6 +677,7 @@ let g:ropevim_global_prefix = '<LocalLeader>r'
 "let g:SuperTabLongestHighlight = 1
 "let g:SuperTabMappingTabLiteral = '<tab>'
 
+" Eclim   {{{2
 " Eclim was trying to connect on startup because it sees loaded_taglist
 " Either one of these flags to fixed it, but now it doesn't happen anymore.
 "let g:EclimTaglistEnabled = 0
@@ -691,13 +696,15 @@ let g:EclimXmlValidate = 0
 " Don't show todo markers in margin
 let g:EclimSignLevel = 2
 
+" Xml   {{{2
 " Reduce the amount of automatic stuff from xml.vim
 let g:no_xml_maps = 1
 
+" BufKill   {{{2
 " Don't have maps for bufkill -- too easy to delete a buffer by accident
 let g:BufKillCreateMappings = 0
 
-" Pydoc
+" Pydoc   {{{2
 "  Pydoc maps conflict with \p
 let no_pydoc_maps = 1
 "  Highlighting is ugly
@@ -718,10 +725,10 @@ let python_highlight_string_templates = 1
 " Let !python and :py output utf-8.
 let $PYTHONIOENCODING = "utf-8"
 
-" Calendar
+" Calendar   {{{2
 let g:calendar_no_mappings = 1
 
-" Scratch
+" Scratch   {{{2
 let g:itchy_always_split = 1
 
 " Quick access to a Scratch and a Scratch of the current filetype
@@ -741,7 +748,7 @@ nnoremap <Plug>(window-fill-screen) <C-w><Bar><C-w>_
 nmap <C-w>+ <Plug>(window-fill-screen)
 nmap <Leader>w+ <Plug>(window-fill-screen)
 
-" Powerline
+" Powerline   {{{2
 " Don't want to need patched fonts everywhere.
 let Powerline_symbols = 'compatible'
 let Powerline_stl_path_style = 'relative'
@@ -753,16 +760,17 @@ let g:Powerline#Segments#ctrlp#segments#focus = ''
 let g:Powerline#Segments#ctrlp#segments#prev = ''
 let g:Powerline#Segments#ctrlp#segments#next = ''
 
-" NotGrep
+" NotGrep   {{{2
 let g:notgrep_no_mappings = 1
 
+" editqf   {{{2
 " Only use editqf for modifying paths
 let g:editqf_no_mappings = 1
 let g:editqf_no_qf_mappings = 1
 let g:editqf_no_type_mappings = 1
 " editqf mapping is only applied in quickfix buffer.
 
-" EasyAlign
+" EasyAlign   {{{2
 " Not sure if alignment is used often enough to get Enter key. Try it for now.
 " Use Enter as a map and Space+Enter for live align mode. Maps default to
 " align all delimiters because anything else is surprising.
@@ -788,13 +796,13 @@ augroup easyalign_david
     au BufEnter * let g:easy_align_delimiters['/'] = { 'pattern': substitute(&commentstring, '%s.*', '', ''), 'ignore_groups': ['!Comment'] }
 augroup END
 
-" Slime
+" Slime   {{{2
 if !executable('screen') && !executable('tmux')
     let g:loaded_slime = 0
 endif
 let g:slime_no_mappings = 1
 
-" Thesaurus
+" Thesaurus   {{{2
 let g:tq_map_keys = 0
 " Use the same keys as thesaurus completion. Doesn't actually complete words
 " in insert mode.
@@ -819,6 +827,7 @@ let g:detectindent_preferred_indent = 0
 xmap iv <Plug>(expand_region_expand)
 xmap iV <Plug>(expand_region_shrink)
 
+" polyglot   {{{2
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
 " I have two python syntax plugins. One I got and one from polyglot.
 call add(g:polyglot_disabled, 'python')
