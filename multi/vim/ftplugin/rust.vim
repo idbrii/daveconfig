@@ -3,6 +3,10 @@
 compiler cargo
 DisableAutoSetCompiler
 
+" rustfmt on save. I don't like the way it formats, but if everyone is doing
+" it then I'll get fewer merge conflicts.
+let b:ale_fix_on_save = 1
+
 
 " Global entrypoint
 function! s:set_entrypoint(makeprg)
