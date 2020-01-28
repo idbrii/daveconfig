@@ -142,6 +142,10 @@ if !has("gui_running")
     endif
 endif
 
+" Windowing (Full screen on my monitor)
+command! VertScreen set lines=59
+command! LargeScreen set lines=59 | set columns=100
+
 " Undo {{{1
 if has("persistent_undo")
     " Enable undo that lasts between sessions.
@@ -372,6 +376,12 @@ if executable('scons')
     set makeprg=scons\ -u
 endif
 
+" Simple evaluator. Would be better to integrate with Ripple (so python and
+" other built-in languages will maintain state), but this is a good hack for
+" now. Strips the % in case that exists since we want it to process input.
+" Works for python, not sure if it works for much else.
+command! -range=% Eval execute '<line1>,<line2>:!'. substitute(&makeprg, '%', '', '')
+
 " Tags {{{1
 
 " read tags 4 directories deep
@@ -485,19 +495,6 @@ vnoremap af :<C-u>silent!normal![zV]z<CR>
 onoremap af :normal Vaf<CR>
 
 """""""""""
-" Commands   {{{1
-
-" Windowing (Full screen on my monitor)
-command! VertScreen set lines=59
-command! LargeScreen set lines=59 | set columns=100
-
-" Simple evaluator. Would be better to integrate with Ripple (so python and
-" other built-in languages will maintain state), but this is a good hack for
-" now. Strips the % in case that exists since we want it to process input.
-" Works for python, not sure if it works for much else.
-command! -range=% Eval execute '<line1>,<line2>:!'. substitute(&makeprg, '%', '', '')
-
-"}}}
 " Plugins   {{{1
 
 " Built-in   {{{2
