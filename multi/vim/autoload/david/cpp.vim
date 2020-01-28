@@ -19,9 +19,9 @@ function! david#cpp#SwitchSourceHeader()
             find %:t:r.h
         endif
     catch /^Vim\%((\a\+)\)\=:E345/
-        " If we can't find it in the path, see if it's in ctrlp.
-        if exists("*CtrlPSameName")
-            call CtrlPSameName(1)
+        " If we can't find it in the path, see if it's in unite.
+        if exists(":UniteSameName")
+            UniteSameName
         endif
     endtry
 endfunction

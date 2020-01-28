@@ -40,8 +40,6 @@ if !exists('loaded_videinvoke')
     "~     simalt ~x
     "~ endif
 
-    " Use half of the resized screen height.
-    let g:ctrlp_max_height = &lines / 2
 	" Quarter screen for preview window.
 	let &previewheight = &lines / 4
 
@@ -79,5 +77,5 @@ normal zz
 setlocal autoread
 
 " We'll be opened with the full path, but jump to the local directory so
-" ctrlp, etc work better.
+" anything that wants the cwd works better.
 cd %:p:h

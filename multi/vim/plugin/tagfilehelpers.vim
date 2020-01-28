@@ -21,7 +21,7 @@ endfunction
 
 
 function! LocateFilelist()
-    """ List of files for CtrlP/Unite
+    """ List of files for Unite
     " Might be useful if you're using files from different directories.
     let l:tagfile = <SID>FindTagFile('filelist')
     if filereadable(l:tagfile)

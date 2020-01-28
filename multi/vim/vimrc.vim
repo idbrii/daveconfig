@@ -56,8 +56,6 @@ else
     let loaded_vimproc = 0
 endif
 
-" ctrlp (fuzzy file finder) cache
-let g:ctrlp_cache_dir = s:vim_cache.'/ctrlp'
 " unite (fuzzy searcher) cache
 let g:unite_data_directory = s:vim_cache.'/unite'
 " unite-mru cache

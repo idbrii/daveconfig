@@ -67,15 +67,6 @@
 [submodule "multi/vim/bundle/unite-history"]
 	path = multi/vim/bundle/unite-history
 	url = https://github.com/thinca/vim-unite-history.git
-[submodule "multi/vim/bundle/ctrlp"]
-	path = multi/vim/bundle/ctrlp
-	url = https://github.com/ctrlpvim/ctrlp.vim.git
-[submodule "multi/vim/bundle/ctrlp-funky"]
-	path = multi/vim/bundle/ctrlp-funky
-	url = git@github.com:idbrii/ctrlp-funky.git
-[submodule "multi/vim/bundle/ctrlp-register"]
-	path = multi/vim/bundle/ctrlp-register
-	url = git://github.com/mattn/ctrlp-register.git
 [submodule "multi/vim/bundle/renamer"]
 	path = multi/vim/bundle/renamer
 	url = git@github.com:idbrii/vim-renamer.git
@@ -160,9 +151,6 @@
 [submodule "multi/vim/bundle/qargs"]
 	path = multi/vim/bundle/qargs
 	url = git@github.com:idbrii/vim-qargs.git
-[submodule "multi/vim/bundle/ctrlp-history"]
-	path = multi/vim/bundle/ctrlp-history
-	url = https://github.com/ompugao/ctrlp-history.git
 [submodule "multi/vim/bundle/python-syntax"]
 	path = multi/vim/bundle/python-syntax
 	url = https://github.com/hdima/python-syntax.git
