@@ -485,15 +485,11 @@ vnoremap af :<C-u>silent!normal![zV]z<CR>
 onoremap af :normal Vaf<CR>
 
 """""""""""
-" Abbreviations   {{{1
-"" Command
+" Commands   {{{1
 
 " Windowing (Full screen on my monitor)
 command! VertScreen set lines=59
 command! LargeScreen set lines=59 | set columns=100
-
-" VimShell - run sh from within a Vim buffer
-command! VShell runtime scripts/vimsh/vimsh.vim
 
 " Simple evaluator. Would be better to integrate with Ripple (so python and
 " other built-in languages will maintain state), but this is a good hack for
