@@ -1,3 +1,17 @@
+" Selection {{{1
+" gc selects previously changed text. (|gv| but for modification.)
+nnoremap gc :<C-U>silent!normal!`[v`]<CR>
+
+" select all
+nnoremap <C-a> 1GVG
+
+
+" Quick sort (haha) {{{1
+xnoremap <Leader>s  <nop>
+xnoremap <Leader>ss :sort<CR>
+xnoremap <Leader>s; :sort 
+
+
 " Swapping text {{{1
 " Exchange {{{2
 
@@ -10,6 +24,7 @@ nmap <Leader>x<CR> <Plug>(ExchangeLine)
 
 nmap cx <Plug>(exchange-dwim)
 
+" Coerce {{{2
 
 " Augment Abolish's Coerce to work in visual mode to change
 " whitespace-separated content into something usable with coerce.
@@ -17,6 +32,7 @@ nmap cx <Plug>(exchange-dwim)
 " comments and bullets) and maintaining selection region.
 vnoremap <Leader>crt "cy:call setreg('c', david#editing#ToTitleCase(@c), getregtype(''))<CR>gv"cPgv
 vnoremap <Leader>crs "cy:call setreg('c', david#editing#ToSnakeCase(@c), getregtype(''))<CR>gv"cPgv
+
 
 " Sideways {{{2
 
@@ -40,6 +56,30 @@ omap i, <Plug>SidewaysArgumentTextobjI
 omap a, <Plug>SidewaysArgumentTextobjA
 
 
+" speeddating {{{1
+" change increment to allow select all
+nnoremap <C-x><C-s> <C-a>
+nnoremap <C-x><C-x> <C-x>
+xnoremap g<C-x><C-s> g<C-a>
+xnoremap g<C-x><C-x> g<C-x>
+" Don't let speeddating override the above. (They'll be properly mapped later
+" if speeddating loads.)
+let g:speeddating_no_mappings = 1
+
+
+" Surround {{{1
+
+" Use r for [right-angle braces] and a for <angle braces> like vim-surround
+vnoremap ir i]
+vnoremap ar a]
+vnoremap ia i>
+vnoremap aa a>
+onoremap ir i]
+onoremap ar a]
+onoremap ia i>
+onoremap aa a>
+
+
 " Commentary {{{1
 
 let g:commentary_marker = '~'
@@ -60,3 +100,21 @@ nmap <unique> g/g/ <Plug>Commentary<Plug>Commentary
 " Change mode -- table mode
 " I use it so frequently, that I don't need it on a short prefix.
 let g:table_mode_map_prefix = '<Leader>ct'
+
+
+" text_obj {{{1
+let g:textobj_between_no_default_key_mappings = 1
+xmap am  <Plug>(textobj-between-a)
+omap am  <Plug>(textobj-between-a)
+xmap im  <Plug>(textobj-between-i)
+omap im  <Plug>(textobj-between-i)
+
+" Use textobj-comment to select text in a comment (i/) and comment with
+" delimeters and surrounding whitespace (a/). I'm not using comment with just
+" delimeters.
+let g:textobj_comment_no_default_key_mappings = 1
+xmap i/  <Plug>(textobj-comment-i)
+omap i/  <Plug>(textobj-comment-i)
+xmap a/  <Plug>(textobj-comment-big-a)
+omap a/  <Plug>(textobj-comment-big-a)
+
