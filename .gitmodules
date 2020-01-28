@@ -82,6 +82,9 @@
 [submodule "multi/vim/bundle/NrrwRgn"]
 	path = multi/vim/bundle/NrrwRgn
 	url = git://github.com/chrisbra/NrrwRgn.git
+[submodule "multi/vim/bundle/context"]
+	path = multi/vim/bundle/context
+	url = https://github.com/wellle/context.vim.git
 [submodule "multi/vim/bundle/eunuch"]
 	path = multi/vim/bundle/eunuch
 	url = https://github.com/tpope/vim-eunuch.git

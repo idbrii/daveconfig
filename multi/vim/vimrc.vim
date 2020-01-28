@@ -703,6 +703,13 @@ augroup easyalign_david
     au BufEnter * let g:easy_align_delimiters['/'] = { 'pattern': substitute(&commentstring, '%s.*', '', ''), 'ignore_groups': ['!Comment'] }
 augroup END
 
+" context   {{{2
+" I don't like extra mappings
+let g:context_add_mappings = 0
+" Disable by default and use mapping to access.
+let g:context_enabled = 0
+nnoremap <silent> <Leader>ic :<C-u>ContextToggle<CR>:echo g:context.enabled ? "with context" : "no context"<CR>
+
 " Slime   {{{2
 if !executable('screen') && !executable('tmux')
     let g:loaded_slime = 0
