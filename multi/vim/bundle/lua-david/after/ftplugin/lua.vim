@@ -68,11 +68,18 @@ function! s:set_entrypoint(makeprg)
 
     let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')
 
-    " Use AsyncRun instead of AsyncMake so we can pass cwd and ensure
-    " callstacks are loaded properly.
-    exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncRun -program=make -auto=make -cwd='. cur_dir .' @<CR>'
-    " Make and run are the same thing in lua.
-    nmap <Leader>ir <F6>
+    function! DavidProjectBuild() closure
+        update
+        call execute('lcd '. cur_dir)
+        let &makeprg = entrypoint_makeprg
+        " Use AsyncRun instead of AsyncMake so we can pass cwd and ensure
+        " callstacks are loaded properly.
+        call execute('Verbose AsyncRun -program=make -auto=make -cwd='. cur_dir .' @')
+    endf
+
+    command! ProjectMake call DavidProjectBuild()
+    command! ProjectRun  call DavidProjectBuild()
+
     call LocateAll()
     NotGrepUseGrepRecursiveFrom .
     " I put code in ./src/

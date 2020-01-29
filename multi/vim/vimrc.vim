@@ -361,14 +361,9 @@ let g:org_agenda_files = ['~/backlog.org', '~/plan.org']
 " every time I run make.
 nnoremap <S-F5> :<C-u>silent make 
 nnoremap <F5> :<C-u>make 
-" IDE make. I often bind F6 to save and build, but I can type this without
-" leaving home.
-nmap <Leader>im <F6>
-
-" Usually mapped to open-ended make.
-nmap <Leader>ib <F5>
-" Usually mapped to smart run.
-nmap <Leader>ir <F6>
+" IDE make. Setup with <filetype>SetEntrypoint commands.
+nnoremap <Leader>im :<C-u>ProjectMake<CR>
+nnoremap <Leader>ir :<C-u>ProjectRun<CR>
 
 " If available, use scons instead of make. -u is upward search for root
 " SConstruct.

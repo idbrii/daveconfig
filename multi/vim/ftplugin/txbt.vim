@@ -1,2 +1,3 @@
 
-nnoremap <buffer> <F6> :<C-u>TextbeatPlay<CR>
+command -buffer ProjectMake TextbeatPlay
+command -buffer ProjectRun TextbeatPlay

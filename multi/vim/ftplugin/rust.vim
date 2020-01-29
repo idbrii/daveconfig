@@ -16,7 +16,7 @@ function! s:set_entrypoint(makeprg)
     " I put stuff in an src/ folder -- go up one from there.
     let s:parent_dir = fnamemodify(s:main_file, ':h:h')
 
-    function! DavidRustBuild(target)
+    function! DavidProjectBuild(target)
         let lazyredraw_bak = &lazyredraw
         let &lazyredraw = 1
 
@@ -39,8 +39,8 @@ function! s:set_entrypoint(makeprg)
 
         let &lazyredraw = lazyredraw_bak
     endf
-    exec 'nnoremap <F6>       :<C-u>call DavidRustBuild("build --release")<CR>'
-    exec 'nnoremap <Leader>ir :<C-u>call DavidRustBuild("run --release")<CR>'
+    command! ProjectMake call DavidProjectBuild("build --release")
+    command! ProjectRun  call DavidProjectBuild("run --release")
     call LocateAll()
     NotGrepUseGrepRecursiveFrom .
     " I put code in ./src/

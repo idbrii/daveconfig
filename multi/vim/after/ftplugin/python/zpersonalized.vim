@@ -60,7 +60,14 @@ function! s:set_entrypoint()
     let entrypoint_makeprg = (python .' -m '. cur_module)
     let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')
 
-    exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncMake<CR>'
+    function! DavidProjectBuild() closure
+        update
+        call execute('lcd '. cur_dir)
+        let &makeprg = entrypoint_makeprg
+        AsyncMake
+    endf
+    command! ProjectMake call DavidProjectBuild()
+    command! ProjectRun  call DavidProjectBuild()
 endf
 command! -buffer PythonSetEntrypoint call s:set_entrypoint()
 
