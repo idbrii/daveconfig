@@ -71,12 +71,21 @@ function! s:set_entrypoint(makeprg)
     " Use AsyncRun instead of AsyncMake so we can pass cwd and ensure
     " callstacks are loaded properly.
     exec 'nnoremap <F6> :update<Bar>lcd '. cur_dir .'<CR>:let &makeprg="'. entrypoint_makeprg .'"<CR>:AsyncRun -program=make -auto=make -cwd='. cur_dir .' @<CR>'
+    " Make and run are the same thing in lua.
+    nmap <Leader>ir <F6>
     call LocateAll()
     NotGrepUseGrepRecursiveFrom .
     " I put code in ./src/
     let g:inclement_n_dir_to_trim = 2
     let g:inclement_after_first_include = 1
 endf
-" Lovec does a better job of outputting to the console.
-command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint('lovec --console %')
+function! s:GetLoveCmd()
+    if has('win32')
+        " Lovec does a better job of outputting to the console on Windows.
+        return 'lovec'
+    else
+        return 'love'
+    endif
+endf
+command! -buffer LuaLoveSetEntrypoint call s:set_entrypoint(s:GetLoveCmd() .' --console %')
 command! -buffer LuaSetEntrypoint call s:set_entrypoint('')
