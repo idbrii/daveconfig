@@ -6,7 +6,14 @@ command! DisableAutoSetCompiler let b:autocompiler_skip_detection = 1
 " kill all autodetection except in after/ftplugin/.
 command! -nargs=1 ForceSetCompiler let g:compiler_buildsystem = <q-args>
 
+" By default, exclude some built-in filetypes.
+let g:autocompiler_blacklist = get(g:, 'autocompiler_blacklist', ['vim', 'help', 'qf'])
+
 function! s:AutoSetCompiler(ftype)
+    if index(g:autocompiler_blacklist, &filetype) >= 0
+        return
+    endif
+
     if get(b:, 'autocompiler_skip_detection')
         return
     endif
