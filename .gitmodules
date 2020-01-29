@@ -34,6 +34,9 @@
 [submodule "multi/vim/bundle/apathy"]
 	path = multi/vim/bundle/apathy
 	url = https://github.com/tpope/vim-apathy.git
+[submodule "multi/vim/bundle/lastplace"]
+	path = multi/vim/bundle/lastplace
+	url = https://github.com/farmergreg/vim-lastplace.git
 [submodule "multi/vim/bundle/vc"]
 	path = multi/vim/bundle/vc
 	url = git@github.com:idbrii/vc.vim.git

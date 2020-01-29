@@ -282,13 +282,6 @@ endf
 if has("autocmd")
     augroup vimrcEx
         autocmd!
-        " In most files, jump back to the last spot cursor was in before exiting
-        " (except: git commit)
-        " See :help last-position-jump
-        autocmd BufReadPost * if david#init#find_ft_match(['gitcommit', 'svn']) < 0 |
-                    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-                    \   exe "normal g`\"" |
-                    \ endif
 
         " Commenting blocks
         " ~ prefix from https://www.reddit.com/r/vim/comments/4ootmz/what_is_your_little_known_secret_vim_shortcut_or/d4ehmql
@@ -502,6 +495,9 @@ let g:loaded_getscriptPlugin = 0
 let g:loaded_vimballPlugin = 0
 " LogiPat seems useful, but I've never touched it.
 let g:loaded_logiPat = 0
+
+" lastplace   {{{2
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit,dirvish"
 
 " LargeFile   {{{2
 " Rumours that largefile sometimes causes changes in cursor position and undo
