@@ -24,3 +24,23 @@ augroup END
 " Replace TailMinusF
 command! -nargs=1 -complete=file Tail AsyncRun tail -f <q-args>
 
+function! s:CompleteCmdline()
+    let cmd = getcmdtype()
+    if cmd =~# '[/?]'
+        " Open cmdline-window and complete.
+        return "\<C-f>A\<C-n>"
+    elseif cmd =~# ':'
+        let line = getcmdline()
+        if line =~# '^\w*$' || line =~# '^Verb(\w*) \w\?$'
+            " For initial commands (n<C-space>) and Verbose, do quick leader
+            " mappings.
+            return 'map <Leader>'
+        else
+            " if there's any whitespace aside from verbose, do completion.
+            return "\<C-f>A\<C-x>\<C-v>"
+        endif
+    endif
+    " Attempt vim completion.
+    return "\\<Tab>"
+endf
+cnoremap <expr> <C-space> <SID>CompleteCmdline()

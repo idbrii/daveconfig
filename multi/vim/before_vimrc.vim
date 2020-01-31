@@ -65,9 +65,6 @@ sunmap <Space>
 " : is often used so this seems obvious. Super power it too.
 nnoremap <Leader><Leader> q:a
 
-" Quick show leader mappings (can't type Space since it's a separator).
-cnoremap <C-Space> map <lt>Leader>
-
 " Until I get used to Space.
 noremap \ :<C-u>echoerr "\\ is not your leader"<CR>
 
