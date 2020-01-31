@@ -189,7 +189,13 @@ if executable('svn')
         " Get a nice name for the diff file. No noticeable affect on perf.
         let repo_file = expand('%:p')
         for line in systemlist('svn info '. repo_file)
-            if line =~# '^URL'
+            if line =~# 'is not a working copy'
+                echohl WarningMsg
+                echomsg trim(line)
+                echohl None
+                return
+
+            elseif line =~# '^URL'
                 let repo_file = substitute(line, 'URL: svn', '', '')
                 let repo_file = repo_file[:-2] " remove newline
                 break
