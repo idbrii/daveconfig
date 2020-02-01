@@ -127,7 +127,7 @@ else
     # DavidAdd: Files: .git tags filelist
     # DavidAdd: Filetypes: pyc out
     # DavidAdd: Folder: v (for virtualenv)
-    find $search_dirs \( -name .git -o -name v -o -name .svn -o -name .bzr -o -name tags -o -name filelist -o -wholename ./classes \) -prune -o -not -iregex '.*\.\(pyc\|jar\|gif\|jpg\|class\|exe\|dll\|pdd\|sw[op]\|xls\|doc\|pdf\|zip\|tar\|ico\|ear\|war\|dat\|out\).*' -type f -print | sort -f >> $tagfile
+    find -E $search_dirs \( -name .git -o -name v -o -name .svn -o -name .bzr -o -name tags -o -name filelist -o -wholename ./classes \) -prune -o -not -iregex '.*\.(pyc|jar|gif|jpg|class|exe|dll|pdd|sw[op]|xls|doc|pdf|zip|tar|ico|ear|war|dat|out)' -type f -print | sort -f >> $tagfile
 
 fi
 
