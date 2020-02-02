@@ -138,6 +138,12 @@ function vader_isolated
 {
     # Run all vim tests in current director for containing plugin in isolated vader.
 
+    exit_bang="!"
+    if [[ $1 == '--no-quit' ]]; then
+        # Helpful to stay in vim to debug failing tests.
+        exit_bang=
+    fi
+
     cwd=$(pwd)
     plugin_dir=$(dirname $cwd)
     if [[ $(basename $(dirname $plugin_dir)) != "bundle" ]]; then
@@ -154,6 +160,7 @@ function vader_isolated
     # Include the current directory since that's what we're testing. Sensible
     # is most common options and textobj-user is a common dependency.
     # Could also use gvim --nofork.
+    # Setting a colorscheme because the default is unusable.
     vim -Nu <(cat << VIMRC
 filetype off
 set rtp+=~/.vim/bundle/vader
@@ -163,8 +170,9 @@ set rtp+=$plugin_dir
 set rtp+=~/.vim/bundle/textobj-user/after
 set rtp+=$plugin_dir/after
 filetype plugin indent on
+colorscheme industry
 VIMRC
-) +"Vader! *"
+) +"Vader$exit_bang *"
 
     if [ $? -eq 0 ] ; then
         echo Success
