@@ -161,7 +161,7 @@ function vader_isolated
     # is most common options and textobj-user is a common dependency.
     # Could also use gvim --nofork.
     # Setting a colorscheme because the default is unusable.
-    vim -Nu <(cat << VIMRC
+    vim --clean -Nu <(cat << VIMRC
 filetype off
 set rtp+=~/.vim/bundle/vader
 set rtp+=~/.vim/bundle/sensible
