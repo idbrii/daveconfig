@@ -27,12 +27,24 @@ let g:ale_linters.cs = [
 " Python {{{1
 
 let s:python_exe = ''
-for p in ['python', 'python3']
+for p in ['python3', 'python']
     if has(p)
         let s:python_exe = p
         break
     endif
 endfor
+
+" Language server is probably best, but mypy does type annotation checking.
+
+let g:ale_linters.python = [
+            \     'pyls',
+            \     'flake8',
+            \     'mypy',
+            \     'pylint'
+            \ ]
+
+" pyls -> :LspInstallServer
+let g:ale_python_pyls_executable = expand('~/.vim/bundle/lsp-settings/servers/pyls/venv/Scripts/pyls')
 
 " Install: AsyncPython -m pip install --user flake8
 let g:ale_python_flake8_executable = s:python_exe
@@ -66,6 +78,17 @@ let g:ale_python_pylint_executable = '' "s:python_exe
 let g:ale_python_pylint_options = '-m pylint -rcfile ~/data/settings/daveconfig/multi/python/pylint.rc'
 " The virtualenv detection needs to be disabled.
 let g:ale_python_pylint_use_global = 0
+
+
+let g:ale_fixers.python = [
+            \     'black',
+            \     'isort',
+            \ ]
+
+" black -> :! python3 -m pip install black
+
+" Use Vertical Hanging Indent
+let g:ale_python_isort_options = '--multi-line 3 --use-parentheses'
 
 " Rust {{{1
 let g:ale_linters.rust = [

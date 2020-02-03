@@ -81,6 +81,11 @@ function! david#setup_python_paths(py_version, pythonhome)
             let g:pydoc_cmd = python_folder .'python -m pydoc'
         endif
         let $PATH = $PATH . ';' . a:pythonhome
+        " Add Scripts to path so tools like black and mypy are available.
+        let py_scripts = a:pythonhome .'/Scripts'
+        if isdirectory(py_scripts)
+            let $PATH = $PATH . ';' . py_scripts
+        endif
     else
         echoerr "Invalid pythonhome directory: ". a:pythonhome
     endif
