@@ -1,5 +1,7 @@
 cscope.*
 .DS_STORE
+.mypy_cache
+.pytest_cache
 *~
 *.pyc
 *.swp
