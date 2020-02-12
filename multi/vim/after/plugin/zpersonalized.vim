@@ -10,8 +10,11 @@ inoremap <C-b> <Esc>
 " above line). See popupmenu-keys.
 inoremap <expr> <C-y> pumvisible() ? '<C-l>' : '<C-y>'
 
+" TODO: I'm not sure if I want C-L to exit the popupmenu or just exit insert
+" mode. It's annoying to use it to exit popupmenu for asynccomplete because
+" it's almost always visible.
 if g:asyncomplete_loaded
-    inoremap <expr> <C-l> pumvisible() ? asyncomplete#close_popup() : '<Esc>'
+    inoremap <expr> <C-l> pumvisible() ? asyncomplete#close_popup() . '<Esc>' : '<Esc>'
     inoremap <expr> <C-e> pumvisible() ? asyncomplete#cancel_popup() : '<C-e>'
 else
     " Esc without leaving homerow. Also, you can hammer C-l and eventually it
