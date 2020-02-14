@@ -50,6 +50,8 @@ let g:ale_python_pyls_executable = expand('~/.vim/bundle/lsp-settings/servers/py
 let g:ale_python_flake8_executable = s:python_exe
 let g:ale_python_flake8_options = '-m flake8'
 
+let g:ale_python_mypy_options = printf('--cache-dir %s/mypy_cache/', g:david_cache_root)
+
 " Expansive set for my code.
 let g:ale_python_flake8_options .= ' --ignore E302' " expected 2 blank lines, found 1
 let g:ale_python_flake8_options .= ',E501' " line too long

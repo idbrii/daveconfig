@@ -27,9 +27,9 @@ runtime before_vimrc.vim
 
 " Storage {{{1
 " I put most vim temp files in their own directory.
-let s:vim_cache = expand('$HOME/.vim-cache')
-if filewritable(s:vim_cache) == 0 && exists("*mkdir")
-    call mkdir(s:vim_cache, "p", 0700)
+let g:david_cache_root = expand('$HOME/.vim-cache')
+if filewritable(g:david_cache_root) == 0 && exists("*mkdir")
+    call mkdir(g:david_cache_root, "p", 0700)
 endif
 
 " Auto-create directories for new files.
@@ -57,7 +57,7 @@ else
 endif
 
 " unite (fuzzy searcher) cache
-let g:unite_data_directory = s:vim_cache.'/unite'
+let g:unite_data_directory = g:david_cache_root.'/unite'
 " unite-mru cache
 let g:neomru#file_mru_path = g:unite_data_directory .'/neomru/file'
 
@@ -149,7 +149,7 @@ if has("persistent_undo")
     " Enable undo that lasts between sessions.
     " TODO: how/when to clean up undo files?
     set undofile
-    let &undodir = s:vim_cache.'/undo'
+    let &undodir = g:david_cache_root.'/undo'
     if filewritable(&undodir) == 0 && exists("*mkdir")
         " If the directory doesn't exist try to create undo dir, because vim
         " 703 doesn't do it even though this change should make it work:
