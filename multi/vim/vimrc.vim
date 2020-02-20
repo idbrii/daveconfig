@@ -273,7 +273,7 @@ set wildmode=longest:list,full
 function! s:autochdir()
     let can_autochdir = (!exists("v:vim_did_enter") || v:vim_did_enter) " Don't mess with vim on startup.
     let can_autochdir = can_autochdir && dirvish#can_autochdir() " Don't mess with dirvish
-    let can_autochdir = can_autochdir && david#init#find_ft_match(['help', 'dirvish']) < 0 " Not useful for some filetypes
+    let can_autochdir = can_autochdir && david#init#find_ft_match(['help', 'dirvish', 'qf']) < 0 " Not useful for some filetypes
     let can_autochdir = can_autochdir && filereadable(expand("%")) " Only change to real files.
     if can_autochdir
         silent! cd %:p:h
