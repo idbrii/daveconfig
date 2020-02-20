@@ -271,10 +271,11 @@ set wildmode=longest:list,full
 "
 " Switch to the directory of the current file unless it breaks something.
 function! s:autochdir()
-    if (!exists("v:vim_did_enter") || v:vim_did_enter) " Don't mess with vim on startup.
-                \ && dirvish#can_autochdir() " Don't mess with dirvish
-                \ && david#init#find_ft_match(['help', 'dirvish']) < 0 " Not useful for some filetypes
-                \ && filereadable(expand("%")) " Only change to real files.
+    let can_autochdir = (!exists("v:vim_did_enter") || v:vim_did_enter) " Don't mess with vim on startup.
+    let can_autochdir = can_autochdir && dirvish#can_autochdir() " Don't mess with dirvish
+    let can_autochdir = can_autochdir && david#init#find_ft_match(['help', 'dirvish']) < 0 " Not useful for some filetypes
+    let can_autochdir = can_autochdir && filereadable(expand("%")) " Only change to real files.
+    if can_autochdir
         silent! cd %:p:h
     endif
 endf
