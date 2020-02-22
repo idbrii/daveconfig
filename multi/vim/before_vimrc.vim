@@ -29,6 +29,11 @@ endif
 if !executable('ctags') || 1 " I'm not using taglist recently. 
     let g:pathogen_blacklist += ["taglist"]
 endif
+if has("patch-8.1.0360")
+    " Diff functionality is built-in to newer vim except
+    " EnhancedDiffIgnorePat, but I can't get that to work.
+    let g:pathogen_blacklist += ["diff-enhanced"]
+endif
 
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
