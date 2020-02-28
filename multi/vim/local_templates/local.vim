@@ -21,7 +21,7 @@ if has('win32')
     " Prefer to avoid line ending changes with other Windows users. Overrides
     " scriptease (not sure where it sets?)
 	set fileformats=dos,unix
-    " Use unix for vimfiles and my other config.
+    " I want unix for vimfiles, so switch to that for my config.
     augroup FileFormatDaveconfig
         au!
         au BufNewFile */daveconfig/* setlocal fileformat=unix
@@ -118,29 +118,44 @@ if has('win32')
     " called from vim need to clear these variables.
     "
     " Do I use python2.7 x64 for any plugins?
-    " Denite requires py3.
+    " Denite requires py3. Latest ultisnips requires py3.
+
+    " If this doesn't work, try setting up registry:
+    " HKEY_CURRENT_USER\Software\Python\PythonCore\3.8\PythonPath
+    " (Default) REG_SZ c:\Users\David\scoop\apps\python\3.8.2\Lib\;c:\Users\David\scoop\apps\python\3.8.2\DLLs\
 
     "~ let g:can_set_pythonhome = 0
     "~ call david#setup_python_paths('2.7', $MY_PYTHONHOME)
     call david#setup_python_paths('2.7', 'c:/david/apps/Python/Python27')
     call david#setup_python_paths('3.6', 'c:/david/apps/Python/Python36')
+    "~ call david#setup_python_paths('3.8', 'c:/Users/David/scoop/apps/python/3.8.2')
 
     " If these calls succeed, then uncomment can_set_pythonhome above and
     " delete these tests.
     call david#python_version(2)
     call david#python_version(3)
 
+    " My version of vim wants 5.3
+    let lua_53 = expand('C:/david/apps/lua/lua53/bin')
+    if !david#add_to_path(lua_53)
+        echoerr "Failed to find lua."
+    endif
+    if len($LUA_PATH_5_3) == 0
+        let $LUA_PATH_5_3 = lua_53
+    endif
+    let $LUA_PATH_5_3 .= ';'. expand('E:/david/clones/love/Penlight/lua/pl')
+
 
     " Git providers (pick one) {{{1
 
+    " git-for-windows inside cmder
+    if !david#add_to_path(expand('C:/david/apps/cmder/vendor/git-for-windows/usr/bin'))
+        echoerr "Failed to find git-for-windows. Did it update and change paths?"
+    endif
+    if !david#add_to_path(expand('C:/david/apps/cmder/vendor/git-for-windows/cmd'))
+        echoerr "Failed to find git-for-windows. Did it update and change paths?"
+    endif
+
     " Portable git is installed with SourceTree
     let PORTABLEGIT = expand('$LocalAppData/Atlassian/SourceTree/git_local/bin')
-
-    " Portable git is installed with Github for Windows.
-    " Update it with:
-    "   rmdir %LocalAppData%\PortableGit_link & mklink /D %LocalAppData%\PortableGit_link %LocalAppData%\GitHub\PortableGit_d76a6a98c9315931ec4927243517bc09e9b731a0
-    let PORTABLEGIT = expand('$LocalAppData/PortableGit_link/usr/bin')
-    if !david#add_to_path(PORTABLEGIT)
-        echoerr "Failed to find PortableGit. Did it update and change paths?"
-    endif
 endif
