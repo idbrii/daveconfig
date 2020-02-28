@@ -99,9 +99,13 @@ endif
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-set hlsearch
-set wildmenu
 colorscheme desert
+
+" Hard to live without these
+let mapleader=' '
+inoremap <C-l> <Esc>
+nnoremap <Leader>w <C-w>
+nnoremap <Leader>fs :update<CR>
 EOF
 
 	echo Basic vim setup complete
