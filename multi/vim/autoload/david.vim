@@ -63,6 +63,7 @@ function! david#setup_python_paths(py_version, pythonhome)
                 " We don't want py2 in py3's PYTHONPATH and probably makes the
                 " most sense to have PYTHONHOME match the first python found in
                 " PATH.
+                echomsg "Setting PYTHONPATH. Things might go wrong. Better to setup python in registry."
                 let g:can_set_pythonhome = 0
                 let $PYTHONHOME = a:pythonhome
                 let $PYTHONPATH = $PYTHONHOME . "/Lib"
