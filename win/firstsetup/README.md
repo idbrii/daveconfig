@@ -1,3 +1,25 @@
+Installation
+============
+
+use scoop.sh:
+
+    scoop bucket add extras
+    scoop install
+        7zip
+        autohotkey
+        flux
+        git
+        imageglass
+        love
+        paint.net
+        python
+        ripgrep
+        vim-nightly
+        workrave
+
+
+But do the workaround here for gvim: https://github.com/ScoopInstaller/Main/issues/848
+
 Windows
 =======
 
