@@ -34,6 +34,13 @@ CompilerSet errorformat+=%-G*%\\{70%\\}
 CompilerSet errorformat+=%-G%*\\d\ items\ had\ failures:
 CompilerSet errorformat+=%-G%*\\s%*\\d\ of%*\\s%*\\d\ in%.%#
 
+" SyntaxErrors (%p is for the pointer to the error column).
+" Source: http://www.vim.org/scripts/script.php?script_id=477
+CompilerSet errorformat+=%A\ \ File\ \"%f\"\\\,\ line\ %l
+CompilerSet errorformat+=%+C\ \ %.%#
+CompilerSet errorformat+=%-C%p^
+CompilerSet errorformat+=%Z%m
+
 " I don't use \%-G%.%# to remove extra output because most of it is useful as
 " context for the actual error message. I also don't include %+G because
 " they're unnecessary if I'm not squelching most output.
@@ -44,19 +51,6 @@ CompilerSet errorformat+=%-G%*\\s%*\\d\ of%*\\s%*\\d\ in%.%#
 "      \%+G***Test\ Failed***%.%#
 "      \%+GExpected%.%#,
 "      \%+GGot:%.%#,
-
-" Found this in .vim/after/plugin/asynccommand_python.vim. It has extra stuff
-" for SyntaxErrors (%p is for the pointer to the error column). I can't get it
-" to work.
-" " Source: http://www.vim.org/scripts/script.php?script_id=477
-" setlocal errorformat=
-"     \%A\ \ File\ \"%f\"\\\,\ line\ %l\\\,%m,
-"     \%C\ \ \ \ %.%#,
-"     \%+Z%.%#Error\:\ %.%#,
-"     \%A\ \ File\ \"%f\"\\\,\ line\ %l,
-"     \%+C\ \ %.%#,
-"     \%-C%p^,
-"     \%Z%m
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
