@@ -22,9 +22,8 @@ set cpo-=C
 "
 CompilerSet makeprg=python\ -t\ %
 
-CompilerSet errorformat=
 " Use each file and line of Tracebacks (to see and step through the code executing).
-CompilerSet errorformat+=%A%\\s%#File\ \"%f\"\\,\ line\ %l\\,\ in%.%#
+CompilerSet errorformat=%A%\\s%#File\ \"%f\"\\,\ line\ %l\\,\ in%.%#
 " Include failed toplevel doctest example.
 CompilerSet errorformat+=%+CFailed\ example:%.%#
 CompilerSet errorformat+=%Z%*\\s\ \ \ %m
