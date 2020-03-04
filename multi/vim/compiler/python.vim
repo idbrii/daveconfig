@@ -22,17 +22,17 @@ set cpo-=C
 "
 CompilerSet makeprg=python\ -t\ %
 
-" Use each file and line of Tracebacks (to see and step through the code executing).
-" Include failed toplevel doctest example.
-" Ignore big star lines from doctests.
-" Ignore most of doctest summary. x2
 CompilerSet errorformat=
-      \%A%\\s%#File\ \"%f\"\\,\ line\ %l\\,\ in%.%#,
-      \%+CFailed\ example:%.%#,
-      \%Z%*\\s\ \ \ %m,
-      \%-G*%\\{70%\\},
-      \%-G%*\\d\ items\ had\ failures:,
-      \%-G%*\\s%*\\d\ of%*\\s%*\\d\ in%.%#
+" Use each file and line of Tracebacks (to see and step through the code executing).
+CompilerSet errorformat+=%A%\\s%#File\ \"%f\"\\,\ line\ %l\\,\ in%.%#
+" Include failed toplevel doctest example.
+CompilerSet errorformat+=%+CFailed\ example:%.%#
+CompilerSet errorformat+=%Z%*\\s\ \ \ %m
+" Ignore big star lines from doctests.
+CompilerSet errorformat+=%-G*%\\{70%\\}
+" Ignore most of doctest summary. x2
+CompilerSet errorformat+=%-G%*\\d\ items\ had\ failures:
+CompilerSet errorformat+=%-G%*\\s%*\\d\ of%*\\s%*\\d\ in%.%#
 
 " I don't use \%-G%.%# to remove extra output because most of it is useful as
 " context for the actual error message. I also don't include %+G because
