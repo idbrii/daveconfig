@@ -43,7 +43,7 @@ function! s:pick_entrypoint_makeprg_safe(desired, fallback)
         return a:desired
     else
 endf
-function! s:set_entrypoint()
+function! s:set_entrypoint(should_be_async)
     " Use the current file and its directory and jump back there to run
     " (ensures any expected relative paths will work).
     " You must have a reasonable makeprg before invoking
@@ -60,16 +60,28 @@ function! s:set_entrypoint()
     let entrypoint_makeprg = (python .' -m '. cur_module)
     let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')
 
+    let should_be_async = a:should_be_async
+
     function! DavidProjectBuild() closure
         update
         call execute('lcd '. cur_dir)
         let &makeprg = entrypoint_makeprg
-        AsyncMake
+        if should_be_async
+            " asyncrun doesn't correctly handle errors, but sometimes async is
+            " nice.
+            AsyncMake
+        else
+            make!
+            " Tracebacks have most recent call last.
+            copen
+            clast
+        endif
     endf
     command! ProjectMake call DavidProjectBuild()
     command! ProjectRun  call DavidProjectBuild()
 endf
-command! -buffer PythonSetEntrypoint call s:set_entrypoint()
+" Defaults to async. Use bang for :make.
+command! -bang -buffer PythonSetEntrypoint call s:set_entrypoint(<bang>1)
 
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
 if exists(':Pydoc') == 2
