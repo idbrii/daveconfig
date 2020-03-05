@@ -44,3 +44,8 @@ endfunction
 if executable('svn')
     let g:airline#extensions#branch#custom_head = 'david#svn#get_branch'
 endif
+
+
+" Show jobs in airline next to fileencoding.
+let g:airline_section_y = "%{david#init#asyncrun_status()}%{airline#util#wrap(airline#parts#ffenc(),0)}"
+
