@@ -405,6 +405,10 @@ let g:asyncrun_open = 3
 " Provide a :Make so fugitive will use asyncrun.
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
+augroup david-asyncrun
+    au!
+    au User AsyncRunStop call david#window#copen_without_moving_cursor()
+augroup END
 
 " Common text {{{1
 

@@ -62,3 +62,12 @@ function! david#window#layout_save_on_exit()
         autocmd VimLeavePre * call david#window#layout_save()
     augroup end
 endfunction
+
+
+function! david#window#copen_without_moving_cursor()
+    let must_go_back = &buftype != 'quickfix'
+    copen
+    if must_go_back
+        wincmd p
+    endif
+endf
