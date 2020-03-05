@@ -398,6 +398,14 @@ nmap <C-\><C-\> <C-\>s
 command! -nargs=1 Cscope AsyncCscopeFindSymbol <args>
 let g:asynccommand_statusline_autohide = 1
 
+
+" AsyncRun
+let g:asyncrun_open = 3
+
+" Provide a :Make so fugitive will use asyncrun.
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+
 " Common text {{{1
 
 nnoremap <C-s> :<C-u>w<CR>
