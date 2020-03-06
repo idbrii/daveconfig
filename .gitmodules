@@ -361,3 +361,6 @@
 [submodule "multi/vim/bundle/searchlight"]
 	path = multi/vim/bundle/searchlight
 	url = https://github.com/PeterRincker/vim-searchlight.git
+[submodule "multi/vim/bundle/sovereign"]
+	path = multi/vim/bundle/sovereign
+	url = git@github.com:idbrii/vim-sovereign.git
