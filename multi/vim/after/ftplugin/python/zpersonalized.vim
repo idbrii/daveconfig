@@ -66,15 +66,16 @@ function! s:set_entrypoint(should_be_async)
         update
         call execute('lcd '. cur_dir)
         let &makeprg = entrypoint_makeprg
+        " Tracebacks have most recent call last.
+        let g:asyncrun_exit = 'call david#window#show_last_error_without_jump()'
         if should_be_async
-            " asyncrun doesn't correctly handle errors, but sometimes async is
-            " nice.
+            " asyncrun doesn't correctly handle my multi-line errors, but
+            " sometimes async is nice.
             AsyncMake
         else
             make!
-            " Tracebacks have most recent call last.
             copen
-            clast
+            exec g:asyncrun_exit
         endif
     endf
     command! ProjectMake call DavidProjectBuild()

@@ -66,8 +66,20 @@ endfunction
 
 function! david#window#copen_without_moving_cursor()
     let must_go_back = &buftype != 'quickfix'
-    copen
+    keepjumps copen
     if must_go_back
-        wincmd p
+        keepjumps wincmd p
     endif
 endf
+
+
+function! david#window#show_last_error_without_jump()
+    let winview = winsaveview()
+    clast
+    try
+        keepjumps cprev
+    catch /^Vim\%((\a\+)\)\=:E553/	" Error: No more items
+    endtry
+    call winrestview(winview) 
+endf
+
