@@ -752,33 +752,35 @@ return
 ;	return
 ;}
 
-; Easy paste in command prompt
-; Might as well be consistent (and convenient).
-#IfWinActive ahk_class ConsoleWindowClass
-{
-	^+v::
-		SendInput {Raw}%clipboard%
-	return
-}
+; If you think you want copy/paste, turn on "Use Ctrl+Shift+C/V" in defaults instead.
+;
+;~ ; Easy paste in command prompt
+;~ ; Might as well be consistent (and convenient).
+;~ #IfWinActive ahk_class ConsoleWindowClass
+;~ {
+;~ 	^+v::
+;~ 		SendInput {Raw}%clipboard%
+;~ 	return
+;~ }
 
-; Easy copy in command prompt
-; More consistency.
-#IfWinActive ahk_class ConsoleWindowClass
-{
-    ^+c::
-    {
-        if (WinActive("ahk_exe bash.exe")) {
-            ; Bash prompt uses right click
-            Click right
-        }
-        else {
-            ; Alt-Space e y
-            ; Opens the window menu > Edit > Copy
-            Send !{Space}ey
-        }
-        return
-    }
-}
+;~ ; Easy copy in command prompt
+;~ ; More consistency.
+;~ #IfWinActive ahk_class ConsoleWindowClass
+;~ {
+;~     ^+c::
+;~     {
+;~         if (WinActive("ahk_exe bash.exe")) {
+;~             ; Bash prompt uses right click
+;~             Click right
+;~         }
+;~         else {
+;~             ; Alt-Space e y
+;~             ; Opens the window menu > Edit > Copy
+;~             Send !{Space}ey
+;~         }
+;~         return
+;~     }
+;~ }
 
 ; More shortcuts in Unity
 #IfWinActive ahk_exe Unity.exe

@@ -4,6 +4,7 @@ Installation
 use scoop.sh:
 
     scoop bucket add extras
+    scoop bucket add nerd-fonts
     scoop install
         7zip
         autohotkey
@@ -14,8 +15,16 @@ use scoop.sh:
         paint.net
         python
         ripgrep
+        sudo
         vim-nightly
         workrave
+    sudo scoop install firacode firamono-nf ProggyClean-NF
+
+Possibly also:
+
+    scoop install
+        slack
+        tortoisesvn
 
 
 But do the workaround here for gvim: https://github.com/ScoopInstaller/Main/issues/848
@@ -25,6 +34,9 @@ Windows
 
 ## Differentiate active window
 Personalization (Themes) > Colors > Title bars
+
+Settings > Search > snap
+"When I snap a window, show what I can snap next to it"
 
 
 vim
@@ -38,12 +50,13 @@ unix
 
 Setup Bash on Windows: https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
 
-Pin the terminal to start bar.
-Open %AppData%\Roaming
-Add to location: \Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
-(Yeah, you can't just paste the full path because MS are putting your kid gloves on.)
+Launch ubuntu
+Right click top left icon
+Defaults
+Turn on "Use Ctrl+Shift+C/V"
+Turn off insert mode and ctrl key shortcuts
 
-Edit the shortcut and change the second blue to 77,77,255 to make it legible. Be sure to click black again before OK!
+In Colors, change the second blue to 77,77,255 to make it legible. Be sure to click black again before OK! (Do I still need to do this?)
 
 
 Office ALL CAPS menus
