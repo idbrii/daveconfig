@@ -1,11 +1,13 @@
 #! /bin/sh
 
-# Mingw doesn't provide xdg-open, but some scripts rely on it. Make this
+# WSL doesn't provide xdg-open, but some scripts rely on it. Make this
 # bootleg implementation.
-# TODO: Should I try to call the real thing?
+# TODO: see if xdg-open exists first and call that.
 
 if command -v cygstart >/dev/null 2>&1 ; then
     cygstart $*
+elif command -v wsl-start >/dev/null 2>&1 ; then
+    wsl-start $*
 else
-    start $*
+    cmd.exe /c start $*
 fi
