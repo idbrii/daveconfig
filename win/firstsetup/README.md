@@ -16,6 +16,7 @@ use scoop.sh:
         python
         ripgrep
         sudo
+        universal-ctags
         vim-nightly
         workrave
     sudo scoop install firacode firamono-nf ProggyClean-NF
@@ -31,6 +32,14 @@ But do the workaround here for gvim: https://github.com/ScoopInstaller/Main/issu
 
 Windows
 =======
+
+## Dark mode
+
+Turn it on in settings.
+
+Fix white line in File Explorer.
+Open File Explorer -> Right click the Title bar -> Check Lock the toolbars. Try open File Explorer again.
+
 
 ## Differentiate active window
 Personalization (Themes) > Colors > Title bars

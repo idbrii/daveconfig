@@ -3,6 +3,10 @@
 @echo off
 setlocal
 
+:: If using scoop, try this.
+:: set PYTHONHOME=%USERPROFILE%\scoop\apps\python\current
+:: set PYTHONPATH=%USERPROFILE%\scoop\apps\python\current\Lib
+
 call :check_path PYTHONHOME %PYTHONHOME%
 if not %ERRORLEVEL% == 0 (
 	exit /b -1

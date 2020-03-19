@@ -14,6 +14,11 @@ for a in `find $config_dir -maxdepth 1 -type f` ;do
     ln -s $a ~/.$(basename $a)
 done
 
+if [[ -d $dconfig_path/multi/vim/bundle/work/scripts/bin ]] && [[ ! -e ~/bin ]]; then
+    echo "Linking ~/bin"
+    ln -s $dconfig_path/multi/vim/bundle/work/scripts/bin ~/bin
+fi
+
 # Should these be in bin or PATH?
 #ln -s --target-directory=$HOME/data/apps/bin/ $dconfig_path/multi/git/submanage/git-*
 #ln -s --target-directory=$HOME/data/apps/bin/ $dconfig_path/multi/git/tool/*.git.sh
