@@ -13,7 +13,8 @@
 #   buildtags.sh skip-cscope cpp
 
 # Installing dependents:
-#   aptinstall exuberant-ctags cscope
+#   aptinstall universal-ctags cscope
+#   scoop install universal-ctags
 #   pip install pycscope
 #   brew install fswatch
 #   aptinstall fswatch # (requires universe)
@@ -171,7 +172,7 @@ function fix_file_prefix_for_tags_on_win32()
 
 case $filetype in
     cpp|c)
-        ctags --c++-kinds=+p --fields=+iaS --extra=+q -L $tagfile
+        ctags --c++-kinds=+p --fields=+iaS --extras=+q -L $tagfile
         ;;
     cs)
         # Need namespace kind for inclement.
@@ -199,9 +200,9 @@ case $filetype in
         #   S Signature of routine (e.g. prototype or parameter list)
         #   z Include the "kind:" key in kind field
         # 
-        # Trying out removing extra because it increases size by 1.2x.
+        # Trying out removing extras because it increases size by 1.2x.
         #
-        # .\ctags.exe --extra=+fq --fields=+ianmzS --c#-kinds=cimnp
+        # .\ctags.exe --extras=+fq --fields=+ianmzS --c#-kinds=cimnp
         #
         ctags --c#-kinds=cismpdngtEf --fields=kst -L $tagfile
         ;;
@@ -221,7 +222,7 @@ case $filetype in
         fix_file_prefix_for_tags_on_win32 tags
         mv tags lua.tags
 
-        ctags --c++-kinds=+p --fields=+iaS --extra=+q -L $tagfile --exclude=*.lua
+        ctags --c++-kinds=+p --fields=+iaS --extras=+q -L $tagfile --exclude=*.lua
         ;;
     *)
         ctags -L $tagfile
