@@ -19,6 +19,12 @@ function! s:SendRegisterToTerm(reg_arg, reg_count)
 endf
 
 
+
+" Some limbo exists where terminal is partially implemented. : (
+if !exists('#TerminalOpen')
+    finish
+endif
+
 function! TryApplyTerminalMappings()
     if &hidden
         " Probably don't want mappings for hidden jobs?
