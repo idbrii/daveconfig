@@ -28,8 +28,12 @@ runtime before_vimrc.vim
 " Storage {{{1
 " I put most vim temp files in their own directory.
 let g:david_cache_root = expand('$HOME/.vim-cache')
-if filewritable(g:david_cache_root) == 0 && exists("*mkdir")
-    call mkdir(g:david_cache_root, "p", 0700)
+if exists("*mkdir")
+    for folder in [g:david_cache_root, g:david_cache_root.'/temp']
+        if filewritable(folder) == 0
+            call mkdir(folder, "p", 0700)
+        endif
+    endfor
 endif
 
 " Auto-create directories for new files.
