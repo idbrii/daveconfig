@@ -16,6 +16,7 @@ use scoop.sh:
         python
         ripgrep
         sudo
+        sysinternals
         universal-ctags
         vim-nightly
         workrave
@@ -27,8 +28,17 @@ Possibly also:
         slack
         tortoisesvn
 
+    sudo scoop install
+        ProggyClean-NF
+        firacode
+        firamono-nf
 
-But do the workaround here for gvim: https://github.com/ScoopInstaller/Main/issues/848
+* Do the workaround for gvim: https://github.com/ScoopInstaller/Main/issues/848
+* Run the reg for python (scoop info python)
+* Run workrave, setup timers, enable run on startup
+* Run imageglass and enable file association
+* Run Windows_OpenWithPaintNet.reg
+* Run flux; add shortcut to startup menu
 
 Windows
 =======
@@ -92,7 +102,7 @@ http://superuser.com/a/461983/11808
 Paint.Net
 =========
 
-[Paint.Net](http://www.getpaint.net/index.html) is a free improvement over mspaint that isn't as complex as Photoshop. Use `Windows_OpenWithPaintNet.reg` to change your "Edit" menu on images to use Paint.Net.
+[Paint.Net](http://www.getpaint.net/index.html) is a free improvement over mspaint that isn't as complex as Photoshop. Use `Windows_OpenWithPaintNet.reg` to change your "Edit" menu on images to use Paint.Net installed with scoop. It changes the application in `Computer\HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\edit\command` to `C:\Users\dbriscoe\scoop\apps\paint.net\current\PaintDotNet.exe` (make sure that file exists).
 
 Evoluent Vertical Mouse
 =======================
