@@ -30,8 +30,10 @@ Possibly also:
 
     sudo scoop install
         ProggyClean-NF
-        firacode
+        FiraCode@1.207
         firamono-nf
+
+(firacode 2 has ligatures for all kinds of things and not just symbols)
 
 * Do the workaround for gvim: https://github.com/ScoopInstaller/Main/issues/848
 * Run the reg for python (scoop info python)
