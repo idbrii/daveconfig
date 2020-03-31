@@ -1,16 +1,20 @@
 #! /bin/bash
 # vim:set fdm=marker:
 
-# Build the filelist, tag file, and cscope databases
-# usage:
-#   buildtags.sh [--continuous] cscope-binary lang [directories to search]
-#
-# example to build C++ in current directory recursively:
-#   buildtags.sh --continous cscope cpp
-# example for the same but only tags (no filelist or cscope):
-#   buildtags.sh tagonly cpp
-# example for the same but no cscope:
-#   buildtags.sh skip-cscope cpp
+if [ $# -eq 0 || "$1" == "--help" ] ; then
+    echo "Build the filelist, tag file, and cscope databases"
+    echo "Usage:"
+    echo "  buildtags.sh [--continuous] cscope-binary lang [directories to search]"
+    echo ""
+    echo "example to build C++ in current directory recursively:"
+    echo "  buildtags.sh --continous cscope cpp"
+    echo "example for the same but only tags (no filelist or cscope):"
+    echo "  buildtags.sh tagonly cpp"
+    echo "example for the same but no cscope:"
+    echo "  buildtags.sh skip-cscope cpp"
+    echo ""
+    exit 0
+fi
 
 # Installing dependents:
 #   aptinstall universal-ctags cscope
