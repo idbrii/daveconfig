@@ -31,7 +31,7 @@ function! s:CompleteCmdline()
         return "\<C-f>A\<C-n>"
     elseif cmd =~# ':'
         let line = getcmdline()
-        if line =~# '^\w*$' || line =~# '^Verb(\w*) \w\?$'
+        if line =~# '^\w*$' || line =~# '\v^Verb(\w*) \w?$'
             " For initial commands (n<C-space>) and Verbose, do quick leader
             " mappings.
             return 'map <Leader>'
