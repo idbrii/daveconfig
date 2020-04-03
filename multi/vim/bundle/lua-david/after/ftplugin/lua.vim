@@ -24,7 +24,7 @@ nnoremap <buffer> <F1> :<C-u>sp ~/.vim-aside<CR>
 " that kicks in automatically, so that's good enough.
 inoremap <buffer> <C-Space> <C-x><C-]>
 
-if lsp#get_server_status('lua-lsp') == 'running'
+if lsp#get_server_status('lua-lsp') == 'running' || lsp#get_server_status('emmylua-ls') == 'running'
     setlocal omnifunc=lsp#complete
     " fall back to default omnicompletion
     iunmap <buffer> <C-Space>
@@ -74,7 +74,7 @@ function! s:set_entrypoint(makeprg)
         let &makeprg = entrypoint_makeprg
         " Use AsyncRun instead of AsyncMake so we can pass cwd and ensure
         " callstacks are loaded properly.
-        call execute('Verbose AsyncRun -program=make -auto=make -cwd='. cur_dir .' @')
+        call execute('AsyncRun -program=make -auto=make -cwd='. cur_dir .' @')
     endf
 
     command! ProjectMake call DavidProjectBuild()

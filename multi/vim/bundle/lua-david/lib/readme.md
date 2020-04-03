@@ -1,7 +1,8 @@
 Download:
 
-* Windows x64 Executables (lua-5.3.4_Win64_bin.zip)
+* Windows x64 Executables (lua-5.3.5_Win64_bin.zip)
     * http://luabinaries.sourceforge.net/download.html
+    * MUST be x64. If you get win32 with x64 vim, it will give "E370: Could not load library lua53.dll"
 
 and put them here:
 

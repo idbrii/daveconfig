@@ -18,19 +18,27 @@ command! HoverUnderCursor LspHover expand('<cword>')
 augroup david_lsp
     au!
 
+    " # lua-lsp
     " brew install luarocks
     "   or
     " scoop install luarocks # also requires visual studio for cl.exe
     " luarocks install luacheck
     " luarocks install --server=http://luarocks.org/dev lua-lsp
-    if executable('lua-lsp')
+    "
+    " # emmylua-ls
+    " install openjdk
+    " LspInstallServer
+    if executable('lua-lsp') || executable(lsp_settings#servers_dir() .'/emmylua-ls/emmylua-ls')
         let g:lua_define_omnifunc = 0
         let g:lua_define_completion_mappings = 0
-        au User lsp_setup call lsp#register_server({
-                    \ 'name': 'lua-lsp',
-                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
-                    \ 'whitelist': ['lua'],
-                    \ })
+        if executable('lua-lsp')
+            au User lsp_setup call lsp#register_server({
+                        \ 'name': 'lua-lsp',
+                        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
+                        \ 'whitelist': ['lua'],
+                        \ })
+        endif
+        " vim-lsp-settings handles setup for emmylua
     endif
 
     " pip install python-language-server
