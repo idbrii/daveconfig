@@ -7,6 +7,7 @@ let s:plugins = ['sensible']
 " Vimscript debugging tools.
 let s:plugins += ['lookup']
 let s:plugins += ['scriptease']
+let s:plugins += ['vader']
 
 " Plugins to test here ------------------------------------------
 let s:plugins += ['matchup']
@@ -31,3 +32,5 @@ nnoremap <Leader>w <C-w>
 nnoremap <Leader>fs :update<CR>
 set ignorecase smartcase
 
+source ~/.vim/plugin/config_display.vim
+FontDefault
