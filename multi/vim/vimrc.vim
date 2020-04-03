@@ -757,7 +757,7 @@ xmap iV <Plug>(expand_region_shrink)
 
 " polyglot   {{{2
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
-" I have two python syntax plugins. One I got and one from polyglot.
+" I have two different python syntax plugins. Prefer mine over polyglot's.
 call add(g:polyglot_disabled, 'python')
 
 "}}}
