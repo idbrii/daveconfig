@@ -688,8 +688,15 @@ nnoremap <Plug>(window-fill-screen) <C-w><Bar><C-w>_
 nmap <C-w>+ <Plug>(window-fill-screen)
 nmap <Leader>w+ <Plug>(window-fill-screen)
 
-" NotGrep   {{{2
+" NotGrep/searchsavvy   {{{2
 let g:notgrep_no_mappings = 1
+
+if executable('rg')
+    let g:searchsavvy_smartgrep_auto_enable = 0
+    let &grepprg = 'rg --vimgrep'
+    let &grepformat = "%f:%l:%c:%m"
+endif
+
 
 " EasyAlign   {{{2
 " Not sure if alignment is used often enough to get Enter key. Try it for now.
