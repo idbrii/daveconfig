@@ -103,6 +103,12 @@ let g:ale_fixers.rust = [
             \       'trim_whitespace',
             \   ]
 
+" golang {{{1
+let g:ale_fixers.go = [
+            \     'gofmt',
+            \     'goimports',
+            \ ]
+
 " Luacheck {{{1
 let g:ale_lua_luacheck_options = ''
 
