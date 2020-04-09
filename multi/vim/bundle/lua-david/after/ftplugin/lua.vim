@@ -81,7 +81,7 @@ function! s:set_entrypoint(makeprg)
     command! ProjectRun  call DavidProjectBuild()
 
     call LocateAll()
-    NotGrepUseGrepRecursiveFrom .
+    NotGrepRecursiveFrom .
     " I put code in ./src/
     let g:inclement_n_dir_to_trim = 2
     let g:inclement_after_first_include = 1

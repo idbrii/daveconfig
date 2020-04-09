@@ -695,6 +695,11 @@ if executable('rg')
     let g:searchsavvy_smartgrep_auto_enable = 0
     let &grepprg = 'rg --vimgrep'
     let &grepformat = "%f:%l:%c:%m"
+    call notgrep#setup#NotGrepUseRipgrep()
+else
+    " Fallback to grep so NotGrepRecursiveFrom will work.
+    let g:notgrep_prg = &grepprg
+    let g:notgrep_efm = &grepformat
 endif
 
 

@@ -32,7 +32,7 @@ function! LocateFilelist()
         " already configured it, we don't stomp it with a worse
         " configuration).
         if is_new_project
-            call notgrep#setup#NotGrepUseGrepRecursiveFrom(fnamemodify(g:david_project_filelist, ':h'))
+            call notgrep#setup#NotGrepRecursiveFrom(fnamemodify(g:david_project_filelist, ':h'))
         endif
     endif
 endfunction
