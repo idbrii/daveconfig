@@ -1,7 +1,7 @@
 #! /bin/bash
 # vim:set fdm=marker:
 
-if [ $# -eq 0 || "$1" == "--help" ] ; then
+if [[ $# -eq 0 || "$1" == "--help" ]] ; then
     echo "Build the filelist, tag file, and cscope databases"
     echo "Usage:"
     echo "  buildtags.sh [--continuous] cscope-binary lang [directories to search]"
