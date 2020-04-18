@@ -1,7 +1,6 @@
 " Author:	DBriscoe (idbrii@gmail.com)
-" Influences:
-"	* MacVim's defaults: http://macvim.org/OSX/index.php
 " Notes:
+" Probably doesn't work well on old (<7.4) vim.
 " mapping Tab in normal mode breaks cscope -- adds tabs when you jump somewhere
 
 " Initial setup {{{1
