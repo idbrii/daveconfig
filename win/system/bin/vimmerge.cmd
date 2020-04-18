@@ -33,7 +33,8 @@ if defined USE_diffconflicts (
 		:: Cygwin handles this okay.
 		%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
 	) else (
-		gvim -f -c "MergetoolStart" "%MERGED%" "%BASE%" "%LOCAL%" "%REMOTE%"
+		:: Need to set columns so `wincmd =` works.
+		gvim --nofork +"set columns=9999" +"simalt ~x" +"let g:mergetool_args_order = 'MBLR'" +"Merge" "%MERGED%" "%BASE%" "%LOCAL%" "%REMOTE%"
 	)
 ) else (
 	REM Diff all files in large fullscreen window with equal width buffers and

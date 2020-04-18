@@ -10,6 +10,17 @@ endif
 " Remote vs Merged since merged contains changes on top of what's in remote.
 let g:mergetool_layout = 'rm'
 
+" I want equal sized windows.
+function s:on_mergetool_set_layout(split)
+    " Relayout windows too.
+    wincmd =
+    " Ensure filetypes are set.
+    if empty(&filetype)
+        execute 'setfiletype' a:split.filetype
+    endif
+endfunction
+let g:MergetoolSetLayoutCallback = function('s:on_mergetool_set_layout')
+
 " Meld          {{{1
 if executable('meld')
     " Invoke meld to easily diff the current directory
