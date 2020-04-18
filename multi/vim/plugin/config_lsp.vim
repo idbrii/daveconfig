@@ -18,6 +18,10 @@ set omnifunc=lsp#complete
 " vim-lsp doesn't do anything smart to find what to hover, so make our own.
 command! HoverUnderCursor LspHover expand('<cword>')
 
+let g:lsp_settings = {}
+let g:lsp_settings['omnisharp-lsp'] = {}
+" See after_lsp.vim
+
 augroup david_lsp
     au!
 
