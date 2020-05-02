@@ -70,6 +70,9 @@
 [submodule "multi/vim/bundle/unite-history"]
 	path = multi/vim/bundle/unite-history
 	url = https://github.com/thinca/vim-unite-history.git
+[submodule "multi/vim/bundle/unite-tselect"]
+	path = multi/vim/bundle/unite-tselect
+	url = https://github.com/idbrii/unite-tselect.git
 [submodule "multi/vim/bundle/renamer"]
 	path = multi/vim/bundle/renamer
 	url = git@github.com:idbrii/vim-renamer.git
