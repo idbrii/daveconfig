@@ -6,7 +6,7 @@
 " Eclipse passes:
 "   --servername Vide --remote-silent "+runtime videinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
 " Unity passes nothing on Mac and on Win:
-"   --servername Vide --remote-silent +"runtime videinvoke.vim" +"call cursor($(Line),0)" +"set path+=$(ProjectPath)/**" "$(File)"
+"   --servername Vide --remote-silent +"runtime videinvoke.vim" +"call cursor($(Line),0)" +"set path+=$(ProjectPath)/**" $(File)
 "   (Mac programs calling a .app have their own protocol for passing line
 "   numbers. So configure them to pass nothing.)
 " Monodevelop uses:
