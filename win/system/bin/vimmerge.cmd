@@ -10,7 +10,7 @@
 ::
 :: TortoiseSVN merge:
 :: Arguments in TortoiseSVN: %mine %theirs %base %merged
-:: (TortoiseSVN does its own quoting so below values are unquoted!)
+:: (TortoiseSVN does its own quoting so don't add more quotes!)
 ::
 set LOCAL=%1
 set REMOTE=%2
@@ -34,7 +34,7 @@ if defined USE_diffconflicts (
 		%cyg_path%\bash %~dp0\..\..\..\multi\git\tool\mergetool.diffconflicts.git.sh gvim %BASE% %LOCAL% %REMOTE% %MERGED%
 	) else (
 		:: Need to set columns so `wincmd =` works.
-		gvim --nofork +"set columns=9999" +"simalt ~x" +"let g:mergetool_args_order = 'MBLR'" +"Merge" "%MERGED%" "%BASE%" "%LOCAL%" "%REMOTE%"
+		gvim --nofork +"set columns=9999" +"simalt ~x" +"let g:mergetool_args_order = 'MBLR'" +"Merge" %MERGED% %BASE% %LOCAL% %REMOTE%
 	)
 ) else (
 	REM Diff all files in large fullscreen window with equal width buffers and
