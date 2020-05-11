@@ -1,5 +1,4 @@
 " Compiler:	python
-" Last Change:	2013-02-16
 
 if exists("current_compiler")
   finish
