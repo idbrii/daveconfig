@@ -24,14 +24,14 @@ fi
 #   aptinstall fswatch # (requires universe)
 
 continuous=0
-if [ "$1" == "--continuous" ] ; then
+if [[ "$1" == "--continuous" ]] ; then
     echo Doing continuous build...
     continuous=1
     shift
 fi
 
 cscope=$1
-if [ $# -lt 1 ] ; then
+if [[ $# -lt 1 ]] ; then
     # assume plain cscope if we got no input
     cscope=cscope
 fi
@@ -39,7 +39,7 @@ fi
 filetype=$2
 
 search_dirs=.
-if [ $# -gt 2 ] ; then
+if [[ $# -gt 2 ]] ; then
     # search directories passed in
 
 	# ignore cscope and filetype
@@ -89,35 +89,35 @@ trap "rm -f '$TMPFILE'; exit 1" 1 15    # HUP TERM
 # Build filelist	{{{
 touch $tagfile
 rm $tagfile
-if [ "$filetype" == "cpp" ] ; then
+if [[ "$filetype" == "cpp" ]] ; then
     # Probably a big c++ project, so use the simple format
     find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print | sort -f >> $tagfile
 
-elif [ "$filetype" == "lua-engine" ] ; then
+elif [[ "$filetype" == "lua-engine" ]] ; then
 	# Lua-based engines use C++ and lua.
     find $search_dirs -type d -name examples -prune -o -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" \) -print | sort -f >> $tagfile
 
-elif [ "$filetype" == "unreal" ] ; then
+elif [[ "$filetype" == "unreal" ]] ; then
 	# A big unreal c++ project, so use the simple format. Ignore generated code
 	# in the Intermediate folder (a nuisance in plugins that don't have a fixed
 	# path format).
     find $search_dirs -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print | grep -v "Intermediate.Build" | sort -f >> $tagfile
 
-elif [ "$filetype" == "cs" ] ; then
+elif [[ "$filetype" == "cs" ]] ; then
     # C sharp code. don't include examples which are often alongside.
     find $search_dirs -not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print | sort -f >> $tagfile
     # Should try this:
     #find $search_dirs \( -type d -name "examples" -o -name "obj" \) -prune -o \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print | sort -f >> $tagfile
 
-elif [ "$filetype" == "android" ] ; then
+elif [[ "$filetype" == "android" ]] ; then
     # Android uses java and xml. Assume we're in the source directory
     find $tagdir ../res -type f \( -iname "*.xml" -o -iname "*.java" \) -print | sort -f >> $tagfile
 
-elif [ "$filetype" == "java" ] ; then
+elif [[ "$filetype" == "java" ]] ; then
     # The only types we're interested in are java
     find $search_dirs -type f -iname "*.java" -print | sort -f >> $tagfile
 
-elif [ "$filetype" == "rust" ] ; then
+elif [[ "$filetype" == "rust" ]] ; then
     # Rust code.
     if [[ $search_dirs = src ]]; then
         # Usually keep code in src and want to access the cargo and any
@@ -235,10 +235,10 @@ esac
 
 fix_file_prefix_for_tags_on_win32 tags
 
-if [ $cscope == "tagonly" ] ; then
+if [[ $cscope == "tagonly" ]] ; then
 	rm $tagfile
 
-elif [ $cscope == "skip-cscope" ] ; then
+elif [[ $cscope == "skip-cscope" ]] ; then
     # Make empty cscope files so scripts expecting them don't barf.
     touch cscope.{in.,po.,}out
 
