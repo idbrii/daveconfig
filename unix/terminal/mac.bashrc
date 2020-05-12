@@ -7,6 +7,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# Apple wants me to switch to zsh
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Mac doesn't have bash_completion where unix.bashrc is looking. homebrew
 # installs to /usr/local. Use brew to find the right spot.
@@ -16,24 +18,34 @@
 # https://github.com/bobthecow/git-flow-completion/blob/master/git-flow-completion.bash
 #
 # Source: https://github.com/bobthecow/git-flow-completion/issues/46#issuecomment-332724240
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+# TODO: Assert "$(brew --prefix)" == "/usr/local"
+if [ -r /usr/local/etc/profile.d/bash_completion.sh ] ; then
+  # Will invoke /usr/local/etc/bash_completion Not sure why the indirection, but brew suggests this is best.
+  . /usr/local/etc/profile.d/bash_completion.sh
 fi
-if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
-  . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+if [ -r /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  . /usr/local/etc/bash_completion.d/git-completion.bash
 fi
-if [ -f $(brew --prefix)/etc/bash_completion.d/git-flow-completion.bash ]; then
-  . $(brew --prefix)/etc/bash_completion.d/git-flow-completion.bash
+if [ -r /usr/local/etc/bash_completion.d/git-flow-completion.bash ]; then
+  . /usr/local/etc/bash_completion.d/git-flow-completion.bash
 fi
 
-# Setting PATH for MacPython 2.4
-#python_bin="/Library/Frameworks/Python.framework/Versions/Current/bin"
 
 ## add bin
 bin=$HOME/bin
-#PATH=$bin:$python_bin:$PATH
 PATH=$bin:$PATH
 export PATH
+
+# Use brew versions of applications.
+#~ export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+
+# For compilers to find ruby you may need to set:
+#   export LDFLAGS="-L/usr/local/opt/ruby/lib"
+#   export CPPFLAGS="-I/usr/local/opt/ruby/include"
+# For compilers to find python@3.8 you may need to set:
+#   export LDFLAGS="-L/usr/local/opt/python@3.8/lib"
 
 if [ $SHLVL -eq 1 ]; then
     # we invoked from a Terminal window, not somewhere else.

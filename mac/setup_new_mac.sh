@@ -20,16 +20,17 @@ packages="$packages bash-completion git"
 #
 # vim
 # install my own python for pip
-packages="$packages python python3"
+packages="$packages python3"
 packages="$packages luarocks"
 packages="$packages cscope ctags"
-packages="$packages opensharp-mono"
+# Installs as gsed, but we put a shim in our path
+packages="$packages gnu-sed"
 # Markdown preview
 packages="$packages pandoc"
 # TODO: Which one to use:
 packages="$packages macvim"
 casks="$casks vimr"
-pip2 install neovim
+pip3 install neovim
 
 #
 # work
@@ -37,10 +38,6 @@ packages="$packages subversion"
 casks="$casks macpass"
 
 brew install $packages
-
-
-# Special case to avoid gsed
-brew install --with-default-names gnu-sed
 
 # using cask automatically installs it
 
@@ -60,6 +57,9 @@ brew cask install apptivate
 # Make scroll wheel behave like Windows.
 brew cask install scroll-reverser
 
+# Support back/forward buttons on external mice
+brew cask install sensiblesidebuttons
+
 # I think I need to do this?
 brew unlink vim
 
@@ -67,14 +67,12 @@ brew unlink vim
 brew cask install steam
 
 brew tap wooga/unityversions
+# TODO: Must change this version!!!
 brew cask install unity@version_here
 
 
 # Lua/Love
 luarocks install love
-
-brew install openssl
-luarocks install loverboy CRYPTO_DIR=/usr/local/opt/openssl/ OPENSSL_DIR=/usr/local/opt/openssl
 
 brew install libzip
 brew install p7zip
