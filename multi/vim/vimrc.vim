@@ -770,6 +770,8 @@ xmap iV <Plug>(expand_region_shrink)
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
 " I have two different python syntax plugins. Prefer mine over polyglot's.
 call add(g:polyglot_disabled, 'python')
+" I have my own python compiler.
+call add(g:polyglot_disabled, 'python-compiler')
 
 "}}}
 
