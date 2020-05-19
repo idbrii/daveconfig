@@ -774,6 +774,9 @@ let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
 call add(g:polyglot_disabled, 'python')
 " I have my own python compiler.
 call add(g:polyglot_disabled, 'python-compiler')
+" Scala causes lots of files to be sourced for help filetype (tries to add
+" scala syntax for help which loads html, javascript, vb, css).
+call add(g:polyglot_disabled, 'scala')
 
 "}}}
 
