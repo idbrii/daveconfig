@@ -270,12 +270,14 @@ set wildmode=longest:list,full
 
 " Autocommands {{{1
 
+" Need to set this so dirvish will autochdir.
+let g:dirvish_autochdir = 1
+
 " 'autochdir' alternative so I can provide exceptions. See calling autocmd.
 "
 " Switch to the directory of the current file unless it breaks something.
 function! s:autochdir()
     let can_autochdir = (!exists("v:vim_did_enter") || v:vim_did_enter) " Don't mess with vim on startup.
-    let can_autochdir = can_autochdir && dirvish#can_autochdir() " Don't mess with dirvish
     let can_autochdir = can_autochdir && david#init#find_ft_match(['help', 'dirvish', 'qf']) < 0 " Not useful for some filetypes
     let can_autochdir = can_autochdir && filereadable(expand("%")) " Only change to real files.
     if can_autochdir
