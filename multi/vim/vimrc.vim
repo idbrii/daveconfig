@@ -571,6 +571,10 @@ let OmniCpp_MayCompleteScope = 1
 " variant!
 "
 let g:OmniSharp_selector_ui = 'unite'
+" popup prevents me from using the preview window which is useful to look
+" around in that window.
+let g:OmniSharp = {}
+let g:OmniSharp.popup = 0
 "~ let g:OmniSharp_typeLookupInPreview = 1
 
 " Surround   {{{2
