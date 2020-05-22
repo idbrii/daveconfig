@@ -29,6 +29,10 @@ elif [[ -x "/usr/local/bin/vimr" ]] ; then
     # VimR is a mac frontend for neovim.
     vim="vimr --nvim"
     is_neovim=1
+elif [[ -x "/Applications/NeoVimR.app/Contents/Resources/vimr" ]] ; then
+    # VimR is a mac frontend for neovim.
+    vim="/Applications/NeoVimR.app/Contents/Resources/vimr --nvim"
+    is_neovim=1
 elif [[ -x "/usr/local/bin/nvim" ]] ; then
     vim="nvim"
     is_neovim=1
