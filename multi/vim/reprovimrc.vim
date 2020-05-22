@@ -9,6 +9,11 @@ let s:plugins += ['lookup']
 let s:plugins += ['scriptease']
 let s:plugins += ['vader']
 
+augroup reprovim
+    au!
+    autocmd FileType vim source ~/.vim/after/ftplugin/vim.vim
+augroup END
+
 " Plugins to test here ------------------------------------------
 let s:plugins += ['matchup']
 " /end ----------------------------------------------------------
