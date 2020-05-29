@@ -114,7 +114,7 @@ def get_monitor_layout():
     # import win32api
     # return [Monitor(index, *dimensions) for index,(h1,h2,dimensions) in enumerate(win32api.EnumDisplayMonitors())]
     return [
-        Monitor(0, -2799, 773, 2811, 1644),
+        Monitor(0, -2799, 785, 2811, 1619),
         Monitor(1, 1,  -11,  3862,  2182),
     ]
 
@@ -125,16 +125,17 @@ def organize_desktop():
     organize_desktop() -> None
     """
     monitor = get_monitor_layout()
-    pretty.pprint([str(m) for m in monitor])
+    # pretty.pprint([str(m) for m in monitor])
     avoid_right_monitor = len(monitor) == 2
     # Lay out windows for my three monitors with centre as the work machine.
     # Roughly in order of left-to-right appearance.
-    move_and_restore(exe_match("slack.exe"), monitor[0].x, monitor[0].y, 1140, 1080)
+    move_and_restore(exe_match("slack.exe"), monitor[0].x + 22, monitor[0].y, 1554, monitor[0].height)
     move_and_restore(window_class_match("Vim"), monitor[1].x, monitor[1].y, monitor[1].width//2, monitor[1].height)
     # Game and log go here (but they position themselves).
     if avoid_right_monitor:
-        move_and_restore(exe_match("chrome.exe"), monitor[0].x+1133, monitor[0].y, 732, 1080)
-        move_and_restore(exe_match("ubuntu.exe"), monitor[0].x+953, monitor[0].y, 974, 1087)
+        # height values don't make sense for chrome, so we can't use monitor height
+        move_and_restore(exe_match("chrome.exe"), monitor[0].x+1442, monitor[0].y, 1368, 830)
+        # move_and_restore(exe_match("ubuntu.exe"), monitor[0].x+1410, monitor[0].y, 1419, monitor[0].height-50)
     else:
         move_and_restore(exe_match("chrome.exe"), monitor[2].x, monitor[2].y, 974, 1080)
         move_and_restore(exe_match("ubuntu.exe"), monitor[2].x+953, monitor[2].y, 974, 1087)
@@ -145,7 +146,7 @@ def organize_desktop():
     # text inside the window, but the title should be pretty consistent so use
     # that instead.
     if avoid_right_monitor:
-        move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[0].x, monitor[0].y + 482, 974, 605)
+        move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[0].x + 1424, monitor[0].y + 916, 1395,  722)
     else:
         # Shouldn't this be here?
         # move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[2].x, monitor[2].y + 482, 974, 605)
