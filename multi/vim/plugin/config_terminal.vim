@@ -21,6 +21,7 @@ endf
 
 
 " Some limbo exists where terminal is partially implemented. : (
+" TerminalOpen is needed to map normal mode commands only in terminal windows.
 if !exists('#TerminalOpen')
     finish
 endif
