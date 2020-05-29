@@ -606,9 +606,9 @@ OrganizeDesktop()
     SetTitleMatchMode 1 ;; Reset to default: A window's title must start with the specified WinTitle to be a match
 
 }
-#f12::
-    OrganizeDesktop()
-return
+;~ #f12::
+;~     OrganizeDesktop()
+;~ return
 
 TileGame() {
     WinGet, window_list,List, ahk_class opengles2.0
