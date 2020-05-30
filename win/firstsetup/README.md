@@ -39,11 +39,18 @@ Possibly also:
 * Run the reg for python (scoop info python)
 * Run workrave, setup timers, enable run on startup
 * Run imageglass and enable file association
-* Run Windows_OpenWithPaintNet.reg
 * Run flux; add shortcut to startup menu
+* Clean up context menus (below)
 
 Windows
 =======
+
+## Context Menus
+
+Remove 'Edit with 3D paint' and 'Edit with photos':
+https://www.windowscentral.com/how-remove-edit-photos-and-edit-paint-3d-context-menu-windows-10
+
+Run Windows_OpenWithPaintNet.reg to make paint.net the default image editor.
 
 ## Dark mode
 
