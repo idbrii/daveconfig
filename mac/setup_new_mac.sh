@@ -22,7 +22,7 @@ packages="$packages bash-completion git"
 # install my own python for pip
 packages="$packages python3"
 packages="$packages luarocks"
-packages="$packages cscope ctags"
+packages="$packages cscope"
 # Installs as gsed, but we put a shim in our path
 packages="$packages gnu-sed"
 # Markdown preview
@@ -38,6 +38,10 @@ packages="$packages subversion"
 casks="$casks macpass"
 
 brew install $packages
+
+
+# No stable universal-ctags yet.
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 
 # using cask automatically installs it
 
