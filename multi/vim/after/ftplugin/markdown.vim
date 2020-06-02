@@ -25,3 +25,5 @@ endfunction
 
 setlocal formatexpr=SemanticLineBreakFormatExpr(v:lnum,v:lnum+v:count-1)
 
+" Remap this here because vim-markdown clobbers it.
+nmap gx <Plug>(openbrowser-smart-search)
