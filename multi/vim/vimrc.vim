@@ -781,6 +781,9 @@ call add(g:polyglot_disabled, 'python-compiler')
 " Scala causes lots of files to be sourced for help filetype (tries to add
 " scala syntax for help which loads html, javascript, vb, css).
 call add(g:polyglot_disabled, 'scala')
+" "generic log" highlighting is not generic enough. makes logs that didn't
+" come from a webserver look like rainbow garbage.
+call add(g:polyglot_disabled, 'log')
 
 "}}}
 
