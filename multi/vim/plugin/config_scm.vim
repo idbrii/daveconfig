@@ -289,16 +289,23 @@ if executable('TortoiseProc')
         endif
         exec 'AsyncCommand TortoiseProc /command:'. a:command .' /path:"'. path .'"'
     endf
+    function! s:TortoiseCommandOnInputPathOrRoot(command, path) abort
+        let path = a:path
+        if empty(path)
+            let path = g:david_project_root
+        endif
+        return s:TortoiseCommand(a:command, path)
+    endfunction
     " A visual version of VC commands (with less capitalization please).
     " Reference: https://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-automation.html
     command! -nargs=+ Vcv       call s:TortoiseCommand(<f-args>)
     command! -nargs=? Vcvlog    call s:TortoiseCommand('log', <q-args>)
     command! -nargs=? Vcvblame  call s:TortoiseCommand('blame', <q-args>)
     command! -nargs=? Vcvdiff   call s:TortoiseCommand('diff', <q-args>)
-    command! -nargs=? Vcvswitch call s:TortoiseCommand('switch', g:david_project_root)
-    command! -nargs=? Vcvrepo call s:TortoiseCommand('repobrowser', g:david_project_root)
-    command! -nargs=? Vcvrepolog call s:TortoiseCommand('log', g:david_project_root)
-    command! -nargs=? Vcvstatus call s:TortoiseCommand('repostatus', g:david_project_root)
+    command! -nargs=? Vcvswitch call s:TortoiseCommandOnInputPathOrRoot('switch', <q-args>)
+    command! -nargs=? Vcvrepo call s:TortoiseCommandOnInputPathOrRoot('repobrowser', <q-args>)
+    command! -nargs=? Vcvrepolog call s:TortoiseCommandOnInputPathOrRoot('log', <q-args>)
+    command! -nargs=? Vcvstatus call s:TortoiseCommandOnInputPathOrRoot('repostatus', <q-args>)
 endif
 
 "}}}
