@@ -1,12 +1,15 @@
 " Settings for when vim is invoked from an IDE.
 "
+" Be sure to call cursor() before :runtime, or you won't consistently jump to
+" the line.
+"
 " VS passes the following arguments to vim:
 "   --servername Vide --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime videinvoke.vim" $(ItemFileName)$(ItemExt)
 "   It might be useful to include: +"set path+=$(SolutionDir)/**"
 " Eclipse passes:
 "   --servername Vide --remote-silent "+runtime videinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
 " Unity passes nothing on Mac and on Win:
-"   --servername Vide --remote-silent +"runtime videinvoke.vim" +"call cursor($(Line),0)" +"set path+=$(ProjectPath)/**" $(File)
+"   --servername Vide --remote-silent +"call cursor($(Line),$(Column))" +"runtime videinvoke.vim" +"set path+=$(ProjectPath)/**" $(File)
 "   (Mac programs calling a .app have their own protocol for passing line
 "   numbers. So configure them to pass nothing.)
 " Monodevelop uses:
