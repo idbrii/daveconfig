@@ -785,6 +785,19 @@ call add(g:polyglot_disabled, 'scala')
 " come from a webserver look like rainbow garbage.
 call add(g:polyglot_disabled, 'log')
 
+" csv comes with polyglot.
+" I use BackSpace for switching buffers.
+let g:csv_nomap_bs = 1
+" I use Space for leader.
+let g:csv_nomap_space = 1
+let g:csv_nomap_localleaderspace = 1
+" These don't seem like useful remaps.
+let g:csv_nomap_h = 1
+let g:csv_nomap_j = 1
+let g:csv_nomap_k = 1
+let g:csv_nomap_l = 1
+
+
 "}}}
 
 
