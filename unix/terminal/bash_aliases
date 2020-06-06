@@ -75,6 +75,8 @@ function init_skeleton {
     git ci -m'Project skeleton'
 }
 
+alias librarian=~/code/tool/librarian/librarian.py
+
 
 function set_aside_vim {
 	if [ -d ~/vimarchive ] ; then
@@ -292,6 +294,8 @@ unity_folderstructure() {
 alias webserve='python -m SimpleHTTPServer'
 # Generate html to display image/video slideshow.
 alias webslideshow='python ~/data/settings/daveconfig/unix/terminal/quickcast/cast.py'
+
+alias buildtag-love='~/.vim/scripts/buildtags --continuous skip-cscope lua-engine src.lua > /tmp/buildtags.log &'
 
 # Tell svn about manual moves: https://stackoverflow.com/a/23541323/79125
 svn-repairmove() { mv -n -- "$2" "$1" && svn mv -- "$1" "$2"; }
