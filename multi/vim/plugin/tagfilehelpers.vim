@@ -8,7 +8,7 @@ if exists("g:loaded_tagfilehelpers")
 endif
 let g:loaded_tagfilehelpers = 1
 
-function! <SID>FindTagFile(tag_file_name)
+function! <SID>FindTagFile(tag_file_name) abort
     " From our current directory, search up for tagfile
     let l:tag_file = findfile(a:tag_file_name, '.;/') " must be somewhere above us
     let l:tag_file = fnamemodify(l:tag_file, ':p')      " get the full path
@@ -20,7 +20,7 @@ function! <SID>FindTagFile(tag_file_name)
 endfunction
 
 
-function! LocateFilelist()
+function! LocateFilelist() abort
     """ List of files for Unite
     " Might be useful if you're using files from different directories.
     let l:tagfile = <SID>FindTagFile('filelist')
@@ -37,7 +37,7 @@ function! LocateFilelist()
     endif
 endfunction
 
-function! LocateCscopeFile()
+function! LocateCscopeFile() abort
     if has("cscope") && executable(&cscopeprg)
         " Database file for cscope.
         " Assumes that the database was built in its local directory (passes
@@ -52,6 +52,8 @@ function! LocateCscopeFile()
             "	http://cscope.sourceforge.net/cscope_vim_tutorial.html
             let $CSCOPE_DB = l:tagfile
             let g:cscope_relative_path = l:tagpath
+            " Ensure we don't already have a database
+            silent! cscope kill 0
             " Set the cscope file relative to where it was found
             execute 'cs add ' . l:tagfile . ' ' . l:tagpath
             runtime cscope_maps.vim
@@ -60,7 +62,7 @@ function! LocateCscopeFile()
 endfunction
 
 " Currently can't check for executable("csearch") because it's not in my path.
-function! LocateCsearchIndex()
+function! LocateCsearchIndex() abort
     let l:tagfile = <SID>FindTagFile('csearch.index')
     if filereadable(l:tagfile)
         let $CSEARCHINDEX = l:tagfile
@@ -69,7 +71,7 @@ function! LocateCsearchIndex()
 endfunction
 
 " Just call them all -- don't use this if you don't have access to all of them
-function! LocateAll()
+function! LocateAll() abort
     " Make sure we have the full path
     silent! cd %:p:h
     " Locate all of our files
@@ -82,7 +84,7 @@ function! LocateAll()
 endfunction
 
 " Call a shell script to build our filelist, ctags, and cscope databases.
-function! s:BuildTags()
+function! s:BuildTags() abort
     execute '!bash ~/.vim/scripts/buildtags' &cscopeprg &ft
 
     call LocateAll()
