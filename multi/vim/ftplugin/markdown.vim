@@ -1,0 +1,3 @@
+
+" Workaround for vim-markdown#488: gx gets clobbered even though netrw isn't installed.
+nmap <Leader>gx <Plug>Markdown_OpenUrlUnderCursor
