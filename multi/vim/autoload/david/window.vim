@@ -1,17 +1,19 @@
+" Window layout and management functions
+
+" Automatic layout restoration {{{1
 " Source: http://vim.1045645.n5.nabble.com/Initial-Window-Position-tp1165538p1165539.html
 "
 " Restore screen size and position
 " Courtesy of Steve Hall.
 " Modified by David Fishburn to base it on gvim servername.
-if !has("gui_running")
-    finish
-endif
 
 function! david#window#layout_restore()
     " - Remembers and restores winposition, columns and lines stored in
     "   global variables written to viminfo
     " - Must follow font settings so that columns and lines are accurate
     "   based on font size.
+
+    call david#must(has('gui_running'), 'layout management requires gui')
 
     " initialize
     if !exists("g:COLS_".v:servername)
@@ -39,6 +41,8 @@ endfunction
 function! david#window#layout_save()
     " used on exit to retain window position and size
 
+    call david#must(has('gui_running'), 'layout management requires gui')
+
     let g:COLS_{v:servername} = &columns
     let g:LINES_{v:servername} = &lines
 
@@ -57,12 +61,16 @@ function! david#window#layout_save()
 endfunction
 
 function! david#window#layout_save_on_exit()
+    call david#must(has('gui_running'), 'layout management requires gui')
+
     augroup david_window
         au!
         autocmd VimLeavePre * call david#window#layout_save()
     augroup end
 endfunction
 
+
+" Quickfix convenience {{{1
 
 function! david#window#copen_without_moving_cursor()
     let must_go_back = &buftype != 'quickfix'

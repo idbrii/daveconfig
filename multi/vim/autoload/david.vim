@@ -1,5 +1,30 @@
-" File: david.vim
 " Description: Generic vimscript helpers (not for use in real plugins).
+
+
+" Message helpers {{{1
+
+function! david#warn(msg)
+    echohl WarningMsg
+    echo a:msg
+    echohl None
+endf
+
+" Call for assertions that you want to be true, but sometimes they're not.
+function! david#should(expr, msg)
+    if !a:expr
+        return david#warn(a:msg)
+    endif
+endf
+
+" Call for assertions that must always be true, and you should rewrite code if they're not.
+function! david#must(expr, msg)
+    if !a:expr
+        echoerr a:msg
+    endif
+endf
+
+
+" Loading helpers {{{1
 
 function! david#load_system_vimscript(vimscript_file)
     " Some tools offer vim integration and provide their own vimscript.
@@ -102,6 +127,9 @@ function! david#add_to_path(absolute_directory)
     return success
 endfunction
 
+
+" Parsing helpers {{{1
+
 function! david#get_comma_pair_list_as_dict(comma_pair_list, delimiter)
     let list_as_dict = {}
     for key_and_literal in split(a:comma_pair_list, ',')
@@ -124,4 +152,5 @@ function! david#get_single_line_comment_leader()
     " Cannot get try..catch to work with E716, so brute force.
     return get(comments_as_dict, 'none', printf(&commentstring, ""))
 endf
+
 
