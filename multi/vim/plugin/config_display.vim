@@ -42,3 +42,14 @@ command! FontNoFancy call s:SetFont('Fira_Mono:h11:cANSI:qDRAFT', 0)
 " Alternatively, we can use an uglier font that's better at nonenglish (arabic).
 command! FontForForeign  call s:SetFont('DejaVu_Sans_Mono:h11:cANSI:qDRAFT', 1)
 
+
+
+" cpp-dosini are the default set.
+let g:vim_markdown_fenced_languages = [
+            \ "c++=cpp",
+            \ "viml=vim",
+            \ "vim=vim",
+            \ "bash=sh",
+            \ "ini=dosini",
+            \ "lua=lua",
+            \ ]
