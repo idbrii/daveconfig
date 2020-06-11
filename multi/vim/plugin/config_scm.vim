@@ -15,7 +15,7 @@ function s:on_mergetool_set_layout(split)
     " Relayout windows too.
     wincmd =
     " Ensure filetypes are set.
-    if empty(&filetype)
+    if empty(&filetype) && !empty(a:split.filetype)
         execute 'setfiletype' a:split.filetype
     endif
 endfunction
