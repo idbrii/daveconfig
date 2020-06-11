@@ -180,7 +180,7 @@ if executable('svn')
 
     " For some reason VCDiff takes ~5 seconds to do a diff, but !svn diff
     " and cat are instant. This one takes about 2 seconds.
-    function! s:VCDiffFast(revision)
+    function! s:VCDiffFast(revision) abort
         let lazyredraw_bak = &lazyredraw
         set lazyredraw
         let itchy_bak = g:itchy_split_direction
@@ -192,7 +192,10 @@ if executable('svn')
         silent! cd %:p:h
 
         " Get a nice name for the diff file. No noticeable affect on perf.
-        let repo_file = expand('%:p')
+        let shellslash_bak = &shellslash
+        let &shellslash = 0
+        let repo_file = shellescape(expand('%:p'))
+        let &shellslash = shellslash_bak
         for line in systemlist('svn info '. repo_file)
             if line =~# 'is not a working copy'
                 echohl WarningMsg
@@ -201,7 +204,9 @@ if executable('svn')
                 return
 
             elseif line =~# '^URL'
-                let repo_file = substitute(line, 'URL: svn', '', '')
+                let repo_file = substitute(line, '\vURL: (https?://.{-}.com/)?svn', '', '')
+                let repo_file = substitute(repo_file, '%20', ' ', 'g') " url-encoded
+                let repo_file = substitute(repo_file, '[%#]', '', 'g') " not allowed
                 let repo_file = repo_file[:-2] " remove newline
                 break
             endif
