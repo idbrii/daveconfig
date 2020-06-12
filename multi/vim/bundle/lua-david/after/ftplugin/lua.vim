@@ -85,6 +85,7 @@ function! s:set_entrypoint(makeprg)
     " I put code in ./src/
     let g:inclement_n_dir_to_trim = 2
     let g:inclement_after_first_include = 1
+    let g:inclement_src_root = g:david_project_root ..'/src/'
 endf
 function! s:GetLoveCmd()
     if has('win32')
