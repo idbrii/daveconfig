@@ -70,9 +70,6 @@ nnoremap <Leader>wN :tabedit<CR>
 " Make it easy to open in a tab. I often prefer this over wT (move to tab).
 nnoremap <Leader>w<Space> :<C-u>split <Bar> wincmd T<CR>
 
-" TODO: I used to remap this since I go to the previous more than next. Now
-" that I'm chaining (instead of chording), is that still useful?
-"nnoremap <Leader>ww :wincmd p<CR>
 
 
 " Code Search analog to find symbol (finds text, not symbol). Generally faster
