@@ -87,7 +87,10 @@ nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
 
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
+" Tselect is from unite-david
+nnoremap <unique> <Leader>jl :Tselect <C-r><C-w><CR>
 nmap     <unique> <Leader>jT <Plug>(lsp-definition)
+nmap     <unique> <Leader>jL <Plug>(lsp-references)
 " Preview window for tags
 nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
 nmap     <unique> <Leader>jP :<C-u>call david#tag#preview_jump({ -> execute('LspDefinition')})<CR>
