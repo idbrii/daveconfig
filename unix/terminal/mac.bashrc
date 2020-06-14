@@ -53,3 +53,9 @@ if [ $SHLVL -eq 1 ]; then
     /usr/bin/osascript ~/data/settings/daveconfig/mac/terminal/RandomColorTerminal.applescript
 fi
 
+# macOS Terminal inserts control codes for Ctrl-left/right instead of doing
+# anything. begin/end of line is consistent with the rest of macOS, but
+# probably what I intended was Alt-left/right. Be consistent.
+# https://rakhesh.com/mac/macos-terminal-make-ctrl-left-go-to-beginning-of-the-line/
+bind '"\033[1;5D": beginning-of-line'
+bind '"\033[1;5C": end-of-line'
