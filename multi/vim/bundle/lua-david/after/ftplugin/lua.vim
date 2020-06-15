@@ -80,6 +80,9 @@ function! s:set_entrypoint(makeprg)
     command! ProjectMake call DavidProjectBuild()
     command! ProjectRun  call DavidProjectBuild()
 
+    " Clobber current project settings.
+    silent! unlet g:david_project_filelist
+    let g:david_project_root = fnamemodify(cur_file, ':h')
     call LocateAll()
     NotGrepRecursiveFrom .
     " I put code in ./src/
