@@ -95,7 +95,7 @@ if [[ "$filetype" == "cpp" ]] ; then
 
 elif [[ "$filetype" == "lua-engine" ]] ; then
 	# Lua-based engines use C++ and lua.
-    find $search_dirs -type d -name examples -prune -o -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" \) -print | sort -f >> $tagfile
+    find $search_dirs -type d -name examples -prune -o -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" -o -iname "README.md" \) -print | sort -f >> $tagfile
 
 elif [[ "$filetype" == "unreal" ]] ; then
 	# A big unreal c++ project, so use the simple format. Ignore generated code
