@@ -88,7 +88,14 @@ nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
 " Tselect is from unite-david
-nnoremap <unique> <Leader>jl :Tselect <C-r><C-w><CR>
+function! s:TselectCurrentWord() abort
+    let word = expand('<cword>')
+    " We're likely to jump from this list, so push it onto the stack -- unite
+    " does not do it for us.
+    call david#tag#pushtagstack(word)
+    exec 'Tselect' word
+endf
+nnoremap <Leader>jl :call <SID>TselectCurrentWord()<CR>
 nmap     <unique> <Leader>jT <Plug>(lsp-definition)
 nmap     <unique> <Leader>jL <Plug>(lsp-references)
 " Preview window for tags
