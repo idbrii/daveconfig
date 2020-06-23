@@ -262,6 +262,9 @@ set history=500				" cmdline history
 " that key? Would need cmdheight=2.
 nnoremap <C-g><C-g> :<C-u>call david#search#FindScope(0)<CR>
 
+" Debugging vimscript {{{1
+command! -nargs=+    VisualizeVimscript call david#fn_visualizer#visualize_every_line({line, lnum -> <args>})
+
 " Command Line {{{1
 " Autocomplete in cmdline: Give longest completion with list of options then
 " tab through options.
