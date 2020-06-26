@@ -12,7 +12,7 @@ import keyboard
 
 import logging
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     filename='c:/scratch/ahk.log',
     filemode='w')
 
@@ -124,6 +124,7 @@ def organize_desktop():
 
     organize_desktop() -> None
     """
+    logging.info('organize_desktop')
     monitor = get_monitor_layout()
     # pretty.pprint([str(m) for m in monitor])
     avoid_right_monitor = len(monitor) == 2
@@ -157,9 +158,16 @@ def shim(fn):
         fn()
     except Exception as e:
         raise e
+
+logging.info('Starting...')
+
+# suppress=True seems to work better, but prevents any shortcut with the
+# windows key from working. Seems like this just stops working after some time.
 keyboard.add_hotkey('windows+f12', organize_desktop, suppress=False)
 
 # Wait for hotkeys to get hit.
 keyboard.wait()
 
 # organize_desktop()
+
+logging.info('Exiting')
