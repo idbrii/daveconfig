@@ -336,7 +336,7 @@
 	url = https://github.com/will133/vim-dirdiff.git
 [submodule "multi/vim/bundle/lookup"]
 	path = multi/vim/bundle/lookup
-	url = https://github.com/mhinz/vim-lookup.git
+	url = git@github.com:idbrii/vim-lookup.git
 [submodule "multi/vim/bundle/lsp"]
 	path = multi/vim/bundle/lsp
 	url = https://github.com/prabirshrestha/vim-lsp.git
