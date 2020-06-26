@@ -243,7 +243,7 @@ if executable('svn')
         let shellslash_bak = &shellslash
         let &shellslash = 0
         
-        let files = a:000
+        let files = a:000[:]
         if a:0 == 0
             let files = [expand('%')]
         endif
