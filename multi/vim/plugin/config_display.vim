@@ -43,6 +43,10 @@ command! FontNoFancy call s:SetFont('Fira_Mono:h11:cANSI:qDRAFT', 0)
 command! FontForForeign  call s:SetFont('DejaVu_Sans_Mono:h11:cANSI:qDRAFT', 1)
 
 
+" I find ~= confusing every time I come back and ligatures make it worse
+" because they focus on math symbols instead of code operators.
+let g:lua_syntax_fancynotequal = 1
+
 
 " cpp-dosini are the default set.
 let g:vim_markdown_fenced_languages = [
