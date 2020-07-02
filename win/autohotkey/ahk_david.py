@@ -164,9 +164,12 @@ logging.info('Starting...')
 # suppress=True seems to work better, but prevents any shortcut with the
 # windows key from working. Seems like this just stops working after some time.
 keyboard.add_hotkey('windows+f12', organize_desktop, suppress=False)
+keyboard.add_hotkey('windows+ctrl+f11', organize_desktop, suppress=False)
 
 # Wait for hotkeys to get hit.
-keyboard.wait()
+while True:
+    keyboard.wait()
+    logging.info('Done waiting')
 
 # organize_desktop()
 
