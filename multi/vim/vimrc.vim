@@ -330,7 +330,7 @@ set complete-=i
 
 " Always use forward slashes.
 if exists('+shellslash')
-    set shellslash
+    "~ set shellslash
     " shellslash breaks some plugins because it changes slashes and quoting. (But
     " disabling it breaks other plugins and filepath completion (#1274).)
     " Using a unix-like shell ("C:\Windows\System32\bash.exe") could work (and
@@ -338,6 +338,24 @@ if exists('+shellslash')
     " variables), but breaks other things.
 	let g:pydoc_allow_shellescape = 0
 endif
+
+" The problem with using wsl as shell is that it doesn't understand C:
+" so all my paths are broken.
+"~ if has("win32")
+"~     set shell=wsl.exe
+"~     set shellpipe=|
+"~     set shellredir=>
+"~     set shellcmdflag=
+"~ endif
+"~ if has("win32")
+"~     set shell=cmd.exe
+"~     set shelltype=
+"~     set shellpipe=>
+"~     let &shellredir = ">%s 2>&1"
+"~     set shellcmdflag=/c
+"~     set shellquote=
+"~     set shellxquote=(
+"~ endif
 
 " Asides {{{1
 
