@@ -28,6 +28,8 @@
     commit-fixup-with = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
     commit-squash-with = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 
+    get-ignore = "!f() { if [ -z \"$1\" ] ; then echo 'Error: get-ignore requires repo type.\nExample: git get-ignore Unity' ; else curl --fail https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore > .gitignore || return ; git add .gitignore; git commit -m'Initial commit: add gitignore' ; fi; }; f"
+
     # If recurseSubmodules doesn't work, use this to check if submodules were updated.
     # TODO: Should process all submodules? Look in history for modified ones? Should be in submanage?
     check-submodule = "!f() { cd $1; git manage-mine master; cd -; }; f"
