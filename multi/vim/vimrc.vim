@@ -106,6 +106,7 @@ set scrolloff=3				" Keep 3 lines below and above cursor
 set guioptions-=T			" Disable the toolbar
 set guioptions-=m			" Disable the menu
 set guioptions-=t			" Disable the tearoff menus (don't use 'em)
+set guioptions+=c			" Use curses prompt instead of gui prompt (has better shortcuts)
 if has("win32")
     set guioptions-=e		" Disable fancy tabline (repositions vim on tab in Win32)
     set guioptions-=L		" Disable left scrollbar (repositions vim on vsplit in Win32)
