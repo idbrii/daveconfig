@@ -90,3 +90,8 @@ luarocks install penlight
 
 
 echo "Get NTFS driver for mac for Seagate drives: https://www.seagate.com/ca/en/support/downloads/item/ntfs-driver-for-mac-os-master-dl/"
+
+# Necessary for WiseSvn integration in Unity
+echo "Setup path for Dock-launched apps to include brew apps:"
+echo "https://apple.stackexchange.com/a/198282/268725"
+echo "sudo launchctl config user path /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
