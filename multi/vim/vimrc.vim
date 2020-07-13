@@ -599,14 +599,15 @@ let g:OmniSharp.popup = 0
 "~ let g:OmniSharp_typeLookupInPreview = 1
 
 " Surround   {{{2
-" Use c as my surround character (it looks like a hug)
-" TEST: Try using s instead of c. See how it works. c is more useful in
-" general, so I should get use to using it consistently.
-xmap s <Plug>VSurround
-xmap S <Plug>VSurround
-" Use s so I don't have to use ys. This is weird since I use c in visual
-" mode, but it doesn't make sense to change c in normal since it's more
-" useful than c. Also other stuff is added to the end of it.
+let g:surround_no_mappings = 1
+" Lowercase s tries to wrap only selected text.
+" Uppercase S tries to add newlines.
+nmap ds  <Plug>Dsurround
+nmap cs  <Plug>Csurround
+nmap cS  <Plug>CSurround
+xmap s :call david#editing#xsurround()<CR>
+xmap S <Plug>VgSurround
+" Be consistent in normal mode instead of using ys.
 nmap s <Plug>Ysurround
 nmap S <Plug>YSurround
 

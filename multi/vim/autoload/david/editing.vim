@@ -12,3 +12,17 @@ function! david#editing#ToSnakeCase(str)
     let result = substitute(a:str,'\v +', '_', 'g')
     return result
 endfunction
+
+" For xmap s: Behave like yss if single line is selected.
+" Allows me to use s for no newlines and S for add newlines.
+function! david#editing#xsurround() abort range
+    let is_linewise = visualmode() ==# 'V'
+    let cmd = nr2char(getchar())
+    let line_count = a:lastline - a:firstline + 1
+    if is_linewise && line_count == 1
+        exec "normal \<Plug>Yssurround" .. cmd
+    else
+        exec "normal gv\<Plug>VSurround" .. cmd
+    endif
+endf
+
