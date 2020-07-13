@@ -6,6 +6,8 @@ set path+=./**
 " Magic global search (see smagic)
 nnoremap gs :%sm/
 xnoremap gs :sm/
+nnoremap gS :%S/
+xnoremap gS :S/
 
 " Refactor remap.
 " Go to local definition and replace it in local scope. Uses textobj-indent
