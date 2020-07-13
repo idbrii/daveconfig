@@ -6,8 +6,9 @@ setlocal tags+=./lua.tags;/
 setlocal fo-=o
 
 " Lua uses lots of : so assume no URIs.
+" TODO: iskeyword-=: before calling?
 nmap <buffer> gx <Plug>(openbrowser-search)
-vmap <buffer> gx <Plug>(openbrowser-search)
+" Let vmap use smart search since I'm being explicit.
 
 "" Quick commenting/uncommenting.
 " ~ prefix from https://www.reddit.com/r/vim/comments/4ootmz/what_is_your_little_known_secret_vim_shortcut_or/d4ehmql
