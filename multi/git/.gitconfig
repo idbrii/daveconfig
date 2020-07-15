@@ -103,6 +103,8 @@
     # Validate that submodules have been pushed before pushing owner repo.
     recurseSubmodules = check
 	default = simple
+[pull]
+	ff = only
 
 [credential]
 # To skip entering passwords for each golang repo, use:
