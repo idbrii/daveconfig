@@ -529,6 +529,10 @@ onoremap af :normal Vaf<CR>
 """""""""""
 " Plugins   {{{1
 
+" For any plugins that take functions and I want them to do nothing.
+function! David_noop(...)
+endf
+
 " Built-in   {{{2
 " Disable some built-in plugins.
 " I don't use these methods of installing vim plugins.
@@ -536,6 +540,38 @@ let g:loaded_getscriptPlugin = 0
 let g:loaded_vimballPlugin = 0
 " LogiPat seems useful, but I've never touched it.
 let g:loaded_logiPat = 0
+
+" dirdiff   {{{2
+let g:ZFDirDiffKeymap_update = ['<C-L>']
+let g:ZFDirDiffKeymap_open = ['<cr>', 'o', '>']
+let g:ZFDirDiffKeymap_foldOpenAll = ['zR']
+let g:ZFDirDiffKeymap_foldClose = ['<']
+let g:ZFDirDiffKeymap_foldCloseAll = ['zM']
+" Go up one level on both left and right.
+let g:ZFDirDiffKeymap_goParent = ['U']
+" Change directory on this side of diff.
+let g:ZFDirDiffKeymap_diffThisDir = ['cd']
+let g:ZFDirDiffKeymap_diffParentDir = ['-']
+" Mark this and then another file to open in diff. Maybe useful for renames?
+let g:ZFDirDiffKeymap_markToDiff = ['x']
+let g:ZFDirDiffKeymap_quit = ['gq']
+let g:ZFDirDiffKeymap_nextDiff = [']c']
+let g:ZFDirDiffKeymap_prevDiff = ['[c']
+let g:ZFDirDiffKeymap_syncToHere = ['do']
+let g:ZFDirDiffKeymap_syncToThere = ['dp']
+let g:ZFDirDiffKeymap_deleteFile = ['X']
+let g:ZFDirDiffKeymap_getPath = ['p']
+let g:ZFDirDiffKeymap_getFullPath = ['P']
+
+function! David_DirDiff_headerText()
+    return david#diff#DirDiff_headerText()
+endf
+let g:ZFDirDiffUI_headerTextFunc = 'David_DirDiff_headerText'
+let g:ZFDirDiffHLFunc_resetHL = 'ZF_DirDiffHL_resetHL_matchadd'
+augroup david_dirdiff
+    au!
+    autocmd User ZFDirDiff_DirDiffEnter call david#diff#DirDiff_DirDiffEnter()
+augroup END
 
 " lastplace   {{{2
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit,dirvish"

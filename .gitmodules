@@ -334,6 +334,9 @@
 [submodule "multi/vim/bundle/dirdiff"]
 	path = multi/vim/bundle/dirdiff
 	url = https://github.com/will133/vim-dirdiff.git
+[submodule "multi/vim/bundle/zfdirdiff"]
+	path = multi/vim/bundle/zfdirdiff
+	url = git@github.com:idbrii/ZFVimDirDiff.git
 [submodule "multi/vim/bundle/lookup"]
 	path = multi/vim/bundle/lookup
 	url = git@github.com:idbrii/vim-lookup.git
