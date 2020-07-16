@@ -4,3 +4,4 @@ multi/vim/after/plugin/local_later.vim
 multi/vim/.netrwhist
 multi/vim/spell/*.spl
 multi/vim/bundle/lua-david/lib
+/.gtm/
