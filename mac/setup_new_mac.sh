@@ -77,6 +77,9 @@ brew tap wooga/unityversions
 # TODO: Must change this version!!!
 #~ brew cask install unity@version_here
 
+# Automatic time tracking
+brew tap git-time-metric/gtm
+brew install gtm
 
 # Lua/Love
 luarocks install love

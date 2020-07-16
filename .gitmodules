@@ -322,6 +322,9 @@
 [submodule "multi/vim/bundle/git-gv"]
 	path = multi/vim/bundle/git-gv
 	url = git@github.com:idbrii/gv.vim.git
+[submodule "multi/vim/bundle/git-time-metric"]
+	path = multi/vim/bundle/git-time-metric
+	url = https://github.com/git-time-metric/gtm-vim-plugin.git
 [submodule "multi/vim/bundle/tagimposter"]
 	path = multi/vim/bundle/tagimposter
 	url = git@github.com:idbrii/vim-tagimposter.git
