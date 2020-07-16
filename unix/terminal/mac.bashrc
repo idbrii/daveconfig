@@ -31,9 +31,10 @@ if [ -r /usr/local/etc/bash_completion.d/git-flow-completion.bash ]; then
 fi
 
 
-## add bin
+## add bin dirs
 bin=$HOME/bin
-PATH=$bin:$PATH
+mac_bin=$HOME/data/settings/daveconfig/mac/bin
+PATH=$bin:$mac_bin:$PATH
 export PATH
 
 # Use brew versions of applications.

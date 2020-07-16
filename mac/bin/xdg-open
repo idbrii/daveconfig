@@ -1,0 +1,4 @@
+#! /bin/sh
+
+# darwin open isn't identical, but it's close enough.
+open $*
