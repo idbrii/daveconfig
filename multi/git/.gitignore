@@ -4,7 +4,14 @@ cscope.*
 .pytest_cache
 *~
 *.pyc
-*.swp
+
+# Vim swap file for files
+[._]*.sw[a-p]
+# Vim swap file for directories
+[._]sw[a-p]
+# Vim undo
+[._]*.un~
+
 filelist
 filelist.luaonly
 tags
