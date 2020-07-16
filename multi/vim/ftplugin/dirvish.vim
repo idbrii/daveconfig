@@ -25,3 +25,6 @@ xmap <buffer> !  \!
 " Dirvish uses R to refresh the buffer. Remap C-l (my redraw command)
 " instead.
 nmap <buffer> <silent> <C-l> R<Plug>(david-redraw-screen) 
+
+" Mark directories for delete (zfdirdiff).
+nnoremap <buffer> X :<C-u>ZFDirMark <C-r><C-l><CR>
