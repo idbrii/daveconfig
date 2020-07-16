@@ -36,8 +36,11 @@ pip3 install neovim
 # work
 packages="$packages subversion"
 casks="$casks macpass"
+# muzzle stops notifications and stretchly when fullscreen or screensharing.
+casks="$casks stretchly muzzle"
 
 brew install $packages
+brew cask install $casks
 
 
 # No stable universal-ctags yet.
@@ -72,7 +75,7 @@ brew cask install steam
 
 brew tap wooga/unityversions
 # TODO: Must change this version!!!
-brew cask install unity@version_here
+#~ brew cask install unity@version_here
 
 
 # Lua/Love
