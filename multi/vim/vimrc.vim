@@ -546,6 +546,8 @@ let g:loaded_logiPat = 0
 command! -nargs=+ -complete=file DirDiff :call ZF_DirDiff(<f-args>)
 command! -nargs=* -complete=file DirMarkDiff :call ZF_DirDiffMark(<q-args>)
 
+let g:ZFDirDiffMark_needConfirm = 1
+
 let g:ZFDirDiffKeymap_update = ['<C-L>']
 let g:ZFDirDiffKeymap_open = ['<cr>', 'o', '>']
 let g:ZFDirDiffKeymap_foldOpenAll = ['zR']
@@ -571,7 +573,12 @@ function! David_DirDiff_headerText()
     return david#diff#DirDiff_headerText()
 endf
 let g:ZFDirDiffUI_headerTextFunc = 'David_DirDiff_headerText'
+function! David_DirDiff_confirmHintHeaderText(fileLeft, fileRight, type)
+    return david#diff#DirDiff_confirmHintHeader(a:fileLeft, a:fileRight, a:type)
+endf
+let g:ZFDirDiffUI_confirmHintHeaderFunc = 'David_DirDiff_confirmHintHeaderText'
 let g:ZFDirDiffHLFunc_resetHL = 'ZF_DirDiffHL_resetHL_matchadd'
+
 augroup david_dirdiff
     au!
     autocmd User ZFDirDiff_DirDiffEnter call david#diff#DirDiff_DirDiffEnter()
