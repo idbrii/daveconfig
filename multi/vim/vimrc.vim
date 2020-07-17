@@ -557,7 +557,7 @@ let g:ZFDirDiffKeymap_goParent = ['U']
 let g:ZFDirDiffKeymap_diffThisDir = ['cd']
 let g:ZFDirDiffKeymap_diffParentDir = ['-']
 " Mark this and then another file to open in diff. Maybe useful for renames?
-let g:ZFDirDiffKeymap_markToDiff = ['x']
+let g:ZFDirDiffKeymap_markToDiff = ['X']
 let g:ZFDirDiffKeymap_quit = ['gq']
 let g:ZFDirDiffKeymap_nextDiff = [']c']
 let g:ZFDirDiffKeymap_prevDiff = ['[c']
