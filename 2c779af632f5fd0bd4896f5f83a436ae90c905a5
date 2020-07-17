@@ -1,3 +1,7 @@
 [ver:1,total:120]
 multi/vim/vimrc.vim:60,1595016000:60,m
 .git/rebase-merge/git-rebase-todo:60,1595016000:60,r
+
+[ver:1,total:120]
+multi/vim/vimrc.vim:60,1595016000:60,m
+.git/COMMIT_EDITMSG:60,1595016000:60,r
