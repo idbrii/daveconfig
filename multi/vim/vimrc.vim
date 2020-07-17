@@ -636,14 +636,15 @@ let OmniCpp_MayCompleteScope = 1
 "
 " Either use the autoinstaller or define g:OmniSharp_server_path in local.vim
 " as the path to extracted omnisharp.http-win-x64.zip from
-" https://github.com/OmniSharp/omnisharp-roslyn/releases Must get http
-" variant!
-"
+" https://github.com/OmniSharp/omnisharp-roslyn/releases
+" vim-omnisharp recently added support for the stdio version, but in the past
+" I used the http version (which often resulted in http errors).
+
+let g:OmniSharp_highlighting = 0
 let g:OmniSharp_selector_ui = 'unite'
 " popup prevents me from using the preview window which is useful to look
 " around in that window.
-let g:OmniSharp = {}
-let g:OmniSharp.popup = 0
+let g:OmniSharp_popup = 0
 "~ let g:OmniSharp_typeLookupInPreview = 1
 
 " Surround   {{{2
