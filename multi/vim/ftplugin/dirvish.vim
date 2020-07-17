@@ -27,4 +27,4 @@ xmap <buffer> !  \!
 nmap <buffer> <silent> <C-l> R<Plug>(david-redraw-screen) 
 
 " Mark directories for delete (zfdirdiff).
-nnoremap <buffer> X :<C-u>ZFDirMark <C-r><C-l><CR>
+nnoremap <buffer> X :<C-u>DirMarkDiff <C-r><C-l><CR>

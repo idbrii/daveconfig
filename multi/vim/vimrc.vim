@@ -542,6 +542,10 @@ let g:loaded_vimballPlugin = 0
 let g:loaded_logiPat = 0
 
 " dirdiff   {{{2
+" Copied out of zfdirdiff, but renamed.
+command! -nargs=+ -complete=file DirDiff :call ZF_DirDiff(<f-args>)
+command! -nargs=* -complete=file DirMarkDiff :call ZF_DirDiffMark(<q-args>)
+
 let g:ZFDirDiffKeymap_update = ['<C-L>']
 let g:ZFDirDiffKeymap_open = ['<cr>', 'o', '>']
 let g:ZFDirDiffKeymap_foldOpenAll = ['zR']
