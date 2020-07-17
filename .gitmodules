@@ -334,9 +334,6 @@
 [submodule "multi/vim/bundle/remarkjs"]
 	path = multi/vim/bundle/remarkjs
 	url = git@github.com:idbrii/vim-remarkjs.git
-[submodule "multi/vim/bundle/dirdiff"]
-	path = multi/vim/bundle/dirdiff
-	url = https://github.com/will133/vim-dirdiff.git
 [submodule "multi/vim/bundle/zfdirdiff"]
 	path = multi/vim/bundle/zfdirdiff
 	url = git@github.com:idbrii/ZFVimDirDiff.git
