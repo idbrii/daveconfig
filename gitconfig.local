@@ -10,4 +10,9 @@
 	# Args: input-branch (assumed to be a descendent of master).
 	pullmasterrebase = "!f(){ [ $# -eq 1 ] && git checkout master && git pull --rebase mine master && git checkout $1 && git rebase master ; };f"
 
+[remote "mine"]
+    # add these as new lines (don't replace) for gtm notes
+    fetch = +refs/notes/*:refs/notes/*
+    push = +refs/notes/*:refs/notes/*
+
 # vi: set ft=gitconfig :
