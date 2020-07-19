@@ -46,7 +46,12 @@ CompilerSet makeprg=lua\ %
 " debugstack():
 "       [00:29:08]: stack traceback:
 "           scripts/mainfunctions.lua:139 in () ? (Lua) <136-184>
+" love2d:
+"       stack traceback:
+"       	[string "boot.lua"]:637: in function '__lt'
+"       	src/lib/flux/init.lua:91: in function 'new'
 let &l:efm = join([
+      \ '%+G%.%#[string "boot.lua"]%.%#',
       \ 'lua%.%#: %f:%l:%m',
       \ '@%\?%f:%l:%\? in %m',
       \ '%.%#[string "cannot OLDFILEACCESSMETHOD @%f"]:%l:%m',
