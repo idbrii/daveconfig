@@ -600,6 +600,12 @@ let b:loaded_magic_make = 1
 " Renamer   {{{2
 let g:RenamerSupportColonWToRename = 1
 
+" colorizer {{{2
+let g:colorizer_auto_map = 0
+"~ let g:colorizer_auto_filetype = "vim,css"
+xmap <silent> <Leader>vcol <Plug>Colorizer
+nmap <silent> <Leader>vcol <Plug>Colorizer
+
 " matchup {{{2
 " I find replacing statusline with match line distracting and confusing.
 let g:matchup_matchparen_status_offscreen = 0

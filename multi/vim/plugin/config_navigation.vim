@@ -11,7 +11,7 @@ sunmap j
 sunmap k
 
 " Quick toggle cursor at centre of screen.
-nnoremap <Leader>vc :<C-u>let &scrolloff=999-&scrolloff <Bar> set scrolloff?<CR>
+nnoremap <Leader>vcen :<C-u>let &scrolloff=999-&scrolloff <Bar> set scrolloff?<CR>
 " Quick wrap toggle
 nnoremap <Leader>vw :<C-u>setlocal invwrap <Bar> set wrap?<CR>
 " Quick spelling toggle
