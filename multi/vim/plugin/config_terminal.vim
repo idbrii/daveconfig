@@ -18,15 +18,7 @@ function! s:SendRegisterToTerm(reg_arg, reg_count)
     normal! A
 endf
 
-
-
-" Some limbo exists where terminal is partially implemented. : (
-" TerminalOpen is needed to map normal mode commands only in terminal windows.
-if !exists('#TerminalOpen')
-    finish
-endif
-
-function! TryApplyTerminalMappings()
+function! s:TryApplyTerminalMappings()
     if &hidden
         " Probably don't want mappings for hidden jobs?
         return
@@ -37,7 +29,14 @@ function! TryApplyTerminalMappings()
     nnoremap <buffer> p :SendRegisterToTerm<CR>
 endf
 
-augroup david_terminal
-    au!
-    au TerminalOpen * call TryApplyTerminalMappings()
-augroup END
+
+" Some limbo exists where terminal is partially implemented. : (
+" TerminalOpen is needed to map normal mode commands only in terminal windows.
+if exists('#TerminalOpen')
+    augroup david_terminal
+        au!
+        au TerminalOpen * call s:TryApplyTerminalMappings()
+    augroup END
+else
+    command! TerminalApplyMappings call s:TryApplyTerminalMappings()
+endif
