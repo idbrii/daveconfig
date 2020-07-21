@@ -21,3 +21,6 @@ en.latin1.add.spl
 obj/
 *.vspscc
 .sconsign.dblite
+
+# git-time-metric
+/.gtm/
