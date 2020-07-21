@@ -1,0 +1,6 @@
+[ver:1,total:960]
+multi\git\.gitignore:420,1595307600:240,1595311200:180,d
+multi\vim\reprovimrc.vim:240,1595314800:240,d
+.git/config:160,1595278800:160,r
+gitconfig.local:80,1595278800:80,r
+multi\vim\plugin\config_textmanip.vim:60,1595361600:60,d
