@@ -42,6 +42,7 @@ Possibly also:
 * Run flux; add shortcut to startup menu
 * Clean up context menus (below)
 * Install gtm: https://github.com/git-time-metric/gtm/releases/
+* If using C#, do :OmniSharpOpenLog and install the .NET Framework Developer Pack it complains about.
 
 Windows
 =======
