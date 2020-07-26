@@ -1,6 +1,10 @@
 " I added refresh to gv.
 nmap <silent> <buffer> <C-l>     <Plug>(gv-refresh)<Plug>(david-redraw-screen)
 
+" Expand commit like in a fugitive-gitcommit buffer.
+" nowait because of vim-sideways.
+nmap <nowait><silent> <buffer> > <CR>
+
 " Yank commit sha.
 if has('mac') || !has('unix') || has('xterm_clipboard')
     nnoremap <silent> <buffer> yc :<C-u>let @+ = gv#sha()<CR>
