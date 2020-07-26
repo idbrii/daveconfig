@@ -12,3 +12,6 @@ function trash
 {
     mv $* ~/.Trash/.
 }
+
+
+alias takenap="osascript -e 'tell application \"Finder\" to sleep'"
