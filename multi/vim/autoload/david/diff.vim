@@ -1,3 +1,39 @@
+" For vimdiff {{{1
+
+" Only diff the first two args. Does it make sense to diff more?
+function! david#diff#close_tabs_containing_args() abort
+    " Close existing tabs with these files.
+    let arg_bufnrs = map(argv(), { k,v -> bufnr(v) })
+    let last_tab = tabpagenr('$')
+    " Reverse iteration so tabclose doesn't change index.
+    for i in range(last_tab)
+        let tab_index = last_tab - i
+        let bufs_in_tab = tab_index->tabpagebuflist()
+        let contained_args = filter(bufs_in_tab, { k,v -> index(arg_bufnrs, v) != -1 })
+        if !empty(contained_args)
+            call execute(tab_index ..'tabclose')
+        endif
+    endfor
+endf
+
+" Only diff the first two args. Does it make sense to diff more?
+function! david#diff#diff_args_in_tab(should_close_first)
+    let lazyredraw_bak = &lazyredraw
+    let &lazyredraw = 1
+
+    tabnew
+
+    if a:should_close_first
+        call david#diff#close_tabs_containing_args()
+    endif
+
+    rewind
+    botright vsplit +next
+    DiffBoth
+    redraw!
+
+    let &lazyredraw = lazyredraw_bak
+endf
 
 " For plugin ZFDirDiff {{{1
 
