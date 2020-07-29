@@ -1,0 +1,9 @@
+[ver:1,total:60]
+.git/index:60,1595376000:60,r
+
+[ver:1,total:240]
+.git/rebase-merge/git-rebase-todo:180,1595376000:180,d
+.gitmodules:30,1595523600:30,r
+multi/vim/plugin/config_textmanip.vim:30,1595523600:30,r
+
+[ver:1,total:0]
