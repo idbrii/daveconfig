@@ -569,6 +569,10 @@ let g:ZFDirDiffKeymap_deleteFile = ['X']
 let g:ZFDirDiffKeymap_getPath = ['p']
 let g:ZFDirDiffKeymap_getFullPath = ['P']
 
+" Add my own mappings in ~/.vim/ftplugin/ZFDirDiff.vim
+let g:ZFDirDiffUI_filetypeLeft = 'ZFDirDiff'
+let g:ZFDirDiffUI_filetypeRight = 'ZFDirDiff'
+
 function! David_DirDiff_headerText()
     return david#diff#DirDiff_headerText()
 endf
