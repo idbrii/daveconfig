@@ -124,8 +124,9 @@ function! s:DoesWantPy3()
     return exists('&pyxversion') && &pyxversion == 3
 endf
 if s:DoesWantPy3() && &makeprg !~# 'python3' && executable('python3')
-    let &l:makeprg = substitute(&l:makeprg, 'python', 'python3', '')
     let b:autocompiler_skip_detection = 1
+    compiler python
+    let &l:makeprg = substitute(&l:makeprg, 'python', 'python3', '')
     let g:ale_python_flake8_executable = 'python3'
     if executable('pydoc3')
         let g:pydoc_cmd = 'pydoc3'
