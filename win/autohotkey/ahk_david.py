@@ -166,11 +166,14 @@ logging.info('Starting...')
 keyboard.add_hotkey('windows+f12', organize_desktop, suppress=False)
 keyboard.add_hotkey('windows+ctrl+f11', organize_desktop, suppress=False)
 
+run_loop = True # False
+
 # Wait for hotkeys to get hit.
-while True:
+while run_loop:
     keyboard.wait()
     logging.info('Done waiting')
 
-# organize_desktop()
+if not run_loop:
+    organize_desktop()
 
 logging.info('Exiting')
