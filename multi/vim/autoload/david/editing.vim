@@ -26,3 +26,6 @@ function! david#editing#xsurround() abort range
     endif
 endf
 
+function! david#editing#get_word_from_relative_line(offset)
+    return matchstr(getline(line('.') + a:offset), '\v%'. virtcol('.') .'v%(\k+|.)')
+endf
