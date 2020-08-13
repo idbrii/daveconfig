@@ -46,6 +46,8 @@ if executable('git')
 
     nnoremap <Leader>gb :silent! cd %:p:h<CR>:Gblame<CR>
 
+    command! -range Gpopupblame call setbufvar(winbufnr(popup_atcursor(systemlist("git -C ".. shellescape(expand('%:p:h')) .." log --no-merges -n 1 -L <line1>,<line2>:" .. shellescape(resolve(expand("%:t")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")
+
     command! Ghistory GV! --all
 
     function! s:GitRevert(commit)
