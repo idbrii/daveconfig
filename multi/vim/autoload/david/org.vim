@@ -1,16 +1,15 @@
 " Take several estimates and find the sum.
 "
-" Assumes estimates are one per line, at the beginning of the line, and are in
-" days.
+" Assumes estimates are the first number in a line and are in days or hours.
 function! david#org#sum_estimates() range
     let range = a:firstline .','. a:lastline
     " Clear lines without estimates
-    '<,'>v/\dd/normal! 0C
+    '<,'>v/\d[hd]/normal! 0D
     " Extract numbers
-    '<,'>sm/\v^[^0-9-]+(.*\d)d.*/+\1
+    '<,'>sm/\v^[^0-9-]+(.*\d)d.*/+\1*8h/e
+    '<,'>sm/\v^[^0-9-]+(.*\d)h.*/+\1/e
     " Use scriptease to add
     '<,'>normal gvg!
-    " Re-add the d suffix
-    normal! Ad
+    '<,'>sm/\v(\d+)/\=printf("%.1fd", submatch(1) * 0.125) ..' or '.. submatch(1) ..'h'/
     nohl
 endf
