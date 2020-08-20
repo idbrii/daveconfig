@@ -1,6 +1,8 @@
-" Use org to make todos
+" Use markdown to make todos
+"
+" Name made more sense when I was using orgmode.
 
-let s:todorg_plan_file = "~/plan.org"
+let s:todorg_plan_file = "~/plan.md"
 
 exec "command! Todo split ". s:todorg_plan_file
 
@@ -10,11 +12,8 @@ function! s:NewTodo()
     endif
 
     " New task
-	exec "normal G\<Plug>OrgNewHeadingBelowAfterChildrenNormal"
-
-    " Boilerplate
-	"call append(line('.'), "Effort: 0h")
-	"call append(line('.'), "Estimate: 4h")
-	normal =G
+	call append(line('$'), "* ")
+	normal! G$
+    startinsert!
 endf
 command! TodoNew call s:NewTodo()
