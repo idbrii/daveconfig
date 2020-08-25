@@ -35,3 +35,8 @@ function! david#vim#GotoFile(symbol)
     " Declaration search (for functions).
     call search('function[! ]*'. a:symbol .'(')
 endf
+
+function! david#vim#eval(input)
+    let @c = substitute(a:input, '\n\s*\\', '', 'g')
+    @c
+endf

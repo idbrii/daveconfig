@@ -17,12 +17,12 @@ endif
 
 " Easy execute line.
 " https://stackoverflow.com/a/20262740/79125
-command! -buffer -bar -range Eval silent <line1>,<line2>yank c | let @c = substitute(@c, '\n\s*\\', '', 'g') | @c
+command! -buffer -bar -range Eval silent <line1>,<line2>yank c | call david#vim#eval(@c)
 nnoremap <buffer> <Leader>v: :<C-u>Eval<CR>
 " ; is easier than :
 nnoremap <buffer> <Leader>v; :<C-u>Eval<CR>
 " Source selection
-xnoremap <buffer> <Leader>v; :Eval<CR>
+xnoremap <buffer> <Leader>v; "cy: call david#vim#eval(@c)<CR>
 
 " Easy echo.
 nnoremap <buffer> <Leader>ve 0"cy$:echo <C-r>c<CR>
