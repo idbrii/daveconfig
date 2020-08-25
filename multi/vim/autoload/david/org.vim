@@ -28,10 +28,16 @@ function! david#org#clear_popups()
         call popup_close(winid)
     endfor
     let s:popup_ids = []
-    call prop_remove({ 'type' : s:textprop_type }, 1, line('$'))
+    try
+        call prop_remove({ 'type' : s:textprop_type }, 1, line('$'))
+    catch /^Vim\%((\a\+)\)\=:E971/	" Property type estimate-marker does not exist
+        " Ignore
+    endtry
 endf
 
 function! david#org#compute_sums(firstlnum, lastlnum) abort
+    let winview = winsaveview()
+
     let range = getline(a:firstlnum, a:lastlnum)
     let unit_to_hours = {
                 \ 'h' : 1,
@@ -77,6 +83,8 @@ function! david#org#compute_sums(firstlnum, lastlnum) abort
         endif
         call add(sums, r)
     endfor
+
+    call winrestview(winview)
     return sums
 endf
 
