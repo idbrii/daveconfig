@@ -25,8 +25,9 @@ nnoremap <buffer> <Leader>v; :<C-u>Eval<CR>
 xnoremap <buffer> <Leader>v; :Eval<CR>
 
 " Easy echo.
-nnoremap <buffer> <Leader>ve 0y$:echo <C-r>"<CR>
-xnoremap <buffer> <Leader>ve y:execute 'echo '. @"<CR>
+nnoremap <buffer> <Leader>ve 0"cy$:echo <C-r>c<CR>
+" Silent so remap isn't visible.
+xnoremap <buffer><silent> <Leader>ve "cy:execute 'echo '. @c<CR>
 
 " In vimscript, use compl-vim instead of omnicomplete for smart completion.
 inoremap <buffer> <C-Space> <C-x><C-v>
