@@ -39,7 +39,7 @@ nnoremap <Leader>tT :grep -e TODO -e HACK -R .
 " Using character classes to avoid quote or Bar which aren't playing nice with
 " AsyncRun.
 nnoremap <Leader>tp :exec 'NotGrep [TH][OA][DC][OK].'. g:snips_author<CR>
-nnoremap <Leader>tl :TodoNew<CR>
+nnoremap <Leader>tl :Todo<CR>
 
 " Filters the quickfix list to keep results matching pattern. Bang removes
 " remove results matching the pattern. `:QFilter file|folder` and the list
