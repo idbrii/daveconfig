@@ -35,6 +35,11 @@ if has("patch-8.1.0360")
     let g:pathogen_blacklist += ["diff-enhanced"]
 endif
 
+" gdscript3 and unity both try to set .shader files.
+let g:pathogen_blacklist += ["gdscript3"]
+let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
+call add(g:polyglot_disabled, 'gdscript')
+
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
 runtime bundle/pathogen/autoload/pathogen.vim
