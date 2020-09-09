@@ -82,6 +82,12 @@ endf
 
 
 function! david#window#show_last_error_without_jump()
+    let only_errors = filter(getqflist(), { k,v -> v.bufnr != 0 })
+    if empty(only_errors)
+        " Avoid jumping anywhere if there's no error to jump to.
+        echo "No errors"
+        return
+    endif
     let winview = winsaveview()
     clast
     try
