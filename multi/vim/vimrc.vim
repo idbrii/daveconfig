@@ -812,7 +812,8 @@ let g:easy_align_delimiters = {
 " Provide a / delimiter for the current filetype's comment marker.
 augroup easyalign_david
     au!
-    au BufEnter * let g:easy_align_delimiters['/'] = { 'pattern': substitute(&commentstring, '%s.*', '', ''), 'ignore_groups': ['!Comment'] }
+    " Escape * because they're unescaped in cpp comments.
+    au BufEnter * let g:easy_align_delimiters['/'] = { 'pattern': substitute(escape(&commentstring, '*'), '%s.*', '', ''), 'ignore_groups': ['!Comment'] }
 augroup END
 
 " context   {{{2
