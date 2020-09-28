@@ -1,10 +1,10 @@
 " I'm using ALE, so I don't want things to conflict
 let g:lsp_diagnostics_enabled = 0
 
-" Don't like this highlighting popping up.
-let g:lsp_highlight_references_enabled = 0
-" In theory, this might be nice, but the delay configuration doesn't work.
-let g:lsp_highlight_references_delay = 5000
+" Try out highlighting with a big delay.
+let g:lsp_highlight_references_enabled = 1
+" This cannot be modified at runtime.
+let g:lsp_highlight_references_delay = 1000
 
 "~ let g:lsp_log_verbose = 1
 let g:lsp_log_file = g:david_cache_root .'/lsp.log'
