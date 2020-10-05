@@ -657,6 +657,12 @@ let g:OmniSharp_selector_ui = 'unite'
 let g:OmniSharp_popup = 0
 "~ let g:OmniSharp_typeLookupInPreview = 1
 
+if has('mac')
+    " https://github.com/OmniSharp/omnisharp-vscode/issues/4007#issuecomment-677405332
+    let g:OmniSharp_server_use_mono = 1
+endif
+
+
 " Surround   {{{2
 let g:surround_no_mappings = 1
 " Lowercase s tries to wrap only selected text.
