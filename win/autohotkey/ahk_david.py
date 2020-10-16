@@ -89,11 +89,15 @@ def exe_match(expected_name):
 def move_and_restore(win_filter_fn, x, y, w, h):
     """Move window to x,y and resize to w,h.
 
-    move_and_restore(string, int, int, int, int) -> None
+    Returns True if the window was found.
+
+    move_and_restore(string, int, int, int, int) -> bool
     """
     win = ahk.find_window(win_filter_fn)
-    win.restore()
-    win.move(x, y, w, h)
+    if win:
+        win.restore()
+        win.move(x, y, w, h)
+    return win is not None
 
 class Monitor(object):
     def __init__(self, index, x,y, w, h):
