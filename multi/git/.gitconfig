@@ -2,10 +2,6 @@
 [user]
     name = David Briscoe
     email = idbrii@gmail.com
-[include]
-    # Do not store github or giggle information in this file! Instead, store
-    # them in a computer-local config file. This works on cygwin git 2.1.1.
-    path = ~/.gitconfig.local
 [color]
     diff = auto
     status = auto
@@ -64,8 +60,9 @@
     autocrlf = input
 [branch]
     autosetupmerge = true
-[web]
-    browser = chromium-browser
+; Specify web options in gitconfig.local
+; [web]
+;     browser = chromium-browser
 
 [merge]
     # meld is also a good option where it's installed, but diffconflicts is a
@@ -134,3 +131,9 @@
 ; # > GitHub account – even to pull or clone.
 ; # https://gist.github.com/grawity/4392747
 ;     pullInsteadOf = git@github.com:
+
+[include]
+    # Do not store github or giggle information in this file! Instead, store
+    # them in a computer-local config file. This works on cygwin git 2.1.1.
+    # This include must be a the end so clobbers options set above.
+    path = ~/.gitconfig.local
