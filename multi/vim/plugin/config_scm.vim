@@ -126,6 +126,7 @@ if executable('svn')
         %s/\r//e
         normal! gg
         nnoremap <buffer> q :<C-u>close<CR>
+        nnoremap <buffer> gq :<C-u>close<CR>
     endf
     command! -nargs=+ SvnShow :silent call s:SvnShow(<q-args>)
 
