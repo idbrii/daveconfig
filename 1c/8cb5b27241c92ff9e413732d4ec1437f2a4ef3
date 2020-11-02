@@ -1,0 +1,14 @@
+[ver:1,total:1440]
+multi/vim/autoload/david/diff.vim:420,1602997200:420,r
+multi/git/tool/mergetool.diffconflicts.git.sh:240,1603116000:240,m
+.git/COMMIT_EDITMSG:200,1603116000:140,1603119600:60,r
+win/cygwin/usrlocalbin/python:152,1603116000:152,r
+multi/git/win.gitconfig.local:150,1602936000:150,r
+win/cygwin/rxvt.bat:92,1603116000:92,r
+win/cygwin/usrlocalbin/xdg-open:60,1603116000:60,r
+multi/git/.gitconfig:50,1602936000:30,1603116000:20,r
+win/cygwin/usrlocalbin/buildtags:20,1603116000:20,r
+multi/git/tool/mergetool.gvim.git.sh:20,1603116000:20,r
+win/cygwin/usrlocalbin/ack:12,1603116000:12,r
+win/cygwin/usrlocalbin/p4shelvedchange:12,1603116000:12,r
+win/cygwin/usrlocalbin/apt-cyg:12,1603116000:12,r
