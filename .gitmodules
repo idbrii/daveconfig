@@ -159,7 +159,7 @@
 	url = git@github.com:idbrii/vim-qargs.git
 [submodule "multi/vim/bundle/python-syntax"]
 	path = multi/vim/bundle/python-syntax
-	url = https://github.com/hdima/python-syntax.git
+	url = https://github.com/vim-python/python-syntax.git
 [submodule "multi/vim/bundle/pydoc"]
 	path = multi/vim/bundle/pydoc
 	url = git@github.com:idbrii/pydoc.vim.git
