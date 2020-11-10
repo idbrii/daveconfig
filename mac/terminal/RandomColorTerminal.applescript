@@ -14,7 +14,7 @@
 -- This nasty constant might as well be a global
 global kColorValueMaximum
 set kColorValueMaximum to 65535
--- (kalos) Use a different maximum to keep our background dark
+-- (idbrii) Use a different maximum to keep our background dark
 global kDarkColorValueMaximum
 set kDarkColorValueMaximum to 5000
 

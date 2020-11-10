@@ -48,9 +48,11 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 # For compilers to find python@3.8 you may need to set:
 #   export LDFLAGS="-L/usr/local/opt/python@3.8/lib"
 
-if [ $SHLVL -eq 1 ]; then
-    # we invoked from a Terminal window, not somewhere else.
-    # note that this is really slow :(
+if [[ $SHLVL -eq 1 ]] && [[ -z "$VIMRUNTIME" ]]; then
+    # we invoked from a Terminal window, not somewhere else. Vim's background
+    # shell seems to invoke as interactive, so check for its environment
+    # variable.
+    # This is really slow :(
     /usr/bin/osascript ~/data/settings/daveconfig/mac/terminal/RandomColorTerminal.applescript
 fi
 
