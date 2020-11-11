@@ -35,7 +35,10 @@ if has("patch-8.1.0360")
     let g:pathogen_blacklist += ["diff-enhanced"]
 endif
 
-" gdscript3 and unity both try to set .shader files.
+" gdscript3 and vim-unityengine both try to set .shader files.
+" When using godot, add to local.vim:
+" call remove(g:polyglot_disabled, index(g:polyglot_disabled, 'gdscript'))
+" call pathogen#cycle_filetype()
 let g:pathogen_blacklist += ["gdscript3"]
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
 call add(g:polyglot_disabled, 'gdscript')
