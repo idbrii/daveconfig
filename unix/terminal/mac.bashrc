@@ -38,15 +38,15 @@ PATH=$bin:$mac_bin:$PATH
 export PATH
 
 # Use brew versions of applications.
+export PATH="/usr/local/bin:$PATH"
 #~ export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 
 # For compilers to find ruby you may need to set:
 #   export LDFLAGS="-L/usr/local/opt/ruby/lib"
 #   export CPPFLAGS="-I/usr/local/opt/ruby/include"
-# For compilers to find python@3.8 you may need to set:
-#   export LDFLAGS="-L/usr/local/opt/python@3.8/lib"
+# For compilers to find python@3.9 you may need to set:
+#   export LDFLAGS="-L/usr/local/opt/python@3.9/lib"
 
 if [[ $SHLVL -eq 1 ]] && [[ -z "$VIMRUNTIME" ]]; then
     # we invoked from a Terminal window, not somewhere else. Vim's background
