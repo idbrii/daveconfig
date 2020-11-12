@@ -1,0 +1,9 @@
+[ver:1,total:3660]
+multi/vim/plugin/config_lsp.vim:2910,1605114000:360,1605200400:540,1605204000:1640,1605207600:370,m
+.git/index:240,1605110400:180,1605207600:60,r
+multi/vim/scripts/vide:150,1605110400:150,r
+multi/vim/ftplugin/gdscript3.vim:120,1605204000:100,1605207600:20,d
+multi/vim/videinvoke.vim:120,1605110400:120,r
+multi/vim/vimrc.vim:60,1605114000:60,r
+.git/COMMIT_EDITMSG:30,1605207600:30,r
+unix/terminal/bash_aliases:30,1605110400:30,r
