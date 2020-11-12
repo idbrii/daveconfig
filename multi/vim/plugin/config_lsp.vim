@@ -55,5 +55,15 @@ augroup david_lsp
     endif
 
     " pip install python-language-server
+    " vim-lsp-settings handles setup for pyls
 
+    " brew cask install godot
+    if executable('/Applications/Godot.app/Contents/MacOS/Godot')
+        au User lsp_setup 
+                    \ call lsp#register_server({
+                    \ 'name': 'godot',
+                    \ 'cmd': ["nc", "localhost", "6008"],
+                    \ 'allowlist': ['gdscript3', 'gdscript']
+                    \ })
+    endif
 augroup END
