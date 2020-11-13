@@ -25,6 +25,11 @@
     commit-squash-with = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 
     get-ignore = "!f() { if [ -z \"$1\" ] ; then echo 'Error: get-ignore requires repo type.\nExample: git get-ignore Unity' ; else curl --fail https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore > .gitignore || return ; git add .gitignore; git commit -m'Initial commit: add gitignore' ; fi; }; f"
+    # https://stackoverflow.com/a/9370094/79125
+    list-tracked-ignored = ls-files -i --exclude-standard
+    # https://stackoverflow.com/a/12080920/79125
+    list-untracked-ignored = status --ignored
+    why-ignore = "!f() { if [ -z \"$*\" ] ; then echo 'Error: why-ignore requires a path.\nExample: git get-ignore *' ; else git check-ignore -v $* | $EDITOR - +'set buftype=nofile' +cgetbuffer +copen +'wincmd o' +cfirst ; fi; }; f"
 
     # If recurseSubmodules doesn't work, use this to check if submodules were updated.
     # TODO: Should process all submodules? Look in history for modified ones? Should be in submanage?
