@@ -1,0 +1,6 @@
+[ver:1,total:420]
+multi/vim/local.vim:180,1605207600:180,r
+multi/git/.gitconfig:100,1605308400:100,m
+.git/index:90,1605207600:90,r
+multi/vim/plugin/config_lsp.vim:30,1605207600:30,r
+.git/COMMIT_EDITMSG:20,1605308400:20,r
