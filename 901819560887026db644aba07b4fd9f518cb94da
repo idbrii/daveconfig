@@ -1,0 +1,5 @@
+[ver:1,total:360]
+multi/vim/spell/en.utf-8.add:150,1605110400:60,1605549600:90,m
+multi/vim/local.vim:150,1605412800:150,r
+.git/COMMIT_EDITMSG:30,1605549600:30,r
+multi/vim/after/ftplugin/sovereign.vim:30,1605412800:30,r
