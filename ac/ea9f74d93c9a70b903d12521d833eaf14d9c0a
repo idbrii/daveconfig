@@ -1,0 +1,6 @@
+[ver:1,total:300]
+multi/vim/plugin/config_textmanip.vim:150,1605549600:150,r
+.git/index:55,1605567600:55,r
+.git/COMMIT_EDITMSG:48,1605567600:48,r
+multi/vim/vimrc.vim:30,1605549600:30,r
+multi/git/tool/difftool.gvimtab.git.sh:17,1605567600:17,m
