@@ -28,5 +28,5 @@ fi
 gvim --servername DIFF --remote-tab-silent "$theirs" "$mine"
 # Vim takes a moment to process the files. Less than this and the diff might
 # not work or syntax highlighting missing.
-sleep 0.75
+sleep 0.995
 gvim --servername DIFF --remote-expr 'david#diff#diff_args_in_tab(1)'
