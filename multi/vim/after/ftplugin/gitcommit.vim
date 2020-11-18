@@ -77,3 +77,6 @@ setlocal foldexpr=FoldGitCommit(v:lnum)
 " message.
 setlocal spell
 
+" verbose commit messages are full of diffs which have nonsense indentation.
+" Stick with defaults and don't detect.
+let b:detectindent_has_tried_to_detect = 1
