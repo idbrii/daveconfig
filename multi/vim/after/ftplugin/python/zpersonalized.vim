@@ -33,7 +33,8 @@ function! PyCompileCheck()
     endif
 endfunction
 
-nnoremap <buffer> <F7> :set makeprg=nosetests<CR>:AsyncMake<CR>
+" pip3 install nose2
+nnoremap <buffer> <F7> :set makeprg=nose2<CR>:AsyncMake<CR>
 
 function! s:pick_entrypoint_makeprg_safe(desired, fallback)
     " Cannot use a makeprg that already has a module entrypoint defined.
@@ -43,29 +44,51 @@ function! s:pick_entrypoint_makeprg_safe(desired, fallback)
         return a:desired
     else
 endf
-function! s:set_entrypoint(should_be_async)
-    " Use the current file and its directory and jump back there to run
-    " (ensures any expected relative paths will work).
-    " You must have a reasonable makeprg before invoking
-    let cur_file = expand('%:p')
-    let cur_dir = fnamemodify(cur_file, ':h')
-    let cur_module = fnamemodify(cur_file, ':t:r')
 
+function! s:get_python_makeprg(module_and_args)
     if !exists("s:original_makeprg")
         let s:original_makeprg = s:pick_entrypoint_makeprg_safe(&makeprg, 'python')
     endif
 
     let python = s:pick_entrypoint_makeprg_safe(&makeprg, s:original_makeprg)
 
-    let entrypoint_makeprg = (python .' -m '. cur_module)
+    let entrypoint_makeprg = (python .. ' -m' .. a:module_and_args)
     let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', '', '')
+    return entrypoint_makeprg
+endf
 
+function! s:set_module_entrypoint(should_be_async)
+    " Use the current file as module. Will be invoked from this directory too.
+    let cur_file = expand('%:p')
+    let cur_module = fnamemodify(cur_file, ':t:r')
+
+    call s:set_entrypoint(a:should_be_async, s:get_python_makeprg(cur_module))
+endf
+
+function! s:set_test_entrypoint(should_be_async, test_name)
+    let cur_file = expand('%:p')
+    let cur_dir = fnamemodify(cur_file, ':h')
+    let cur_module = fnamemodify(cur_file, ':t:r')
+    let specific_test = ''
+    if !empty(a:test_name)
+        let specific_test = printf(" %s.%s", cur_module, a:test_name)
+    endif
+    
+    call s:set_entrypoint(a:should_be_async, 'nose2 -s '.. cur_dir .. specific_test)
+endf
+
+function! s:set_entrypoint(should_be_async, entrypoint_makeprg)
     let should_be_async = a:should_be_async
+
+    " Will jump back current directory to run (ensures any expected relative
+    " paths will work). You must have a reasonable makeprg before invoking.
+    let cur_file = expand('%:p')
+    let cur_dir = fnamemodify(cur_file, ':h')
 
     function! DavidProjectBuild() closure
         update
         call execute('lcd '. cur_dir)
-        let &makeprg = entrypoint_makeprg
+        let &makeprg = a:entrypoint_makeprg
         " Tracebacks have most recent call last.
         let g:asyncrun_exit = 'call david#window#show_last_error_without_jump()'
         if should_be_async
@@ -82,7 +105,9 @@ function! s:set_entrypoint(should_be_async)
     command! ProjectRun  call DavidProjectBuild()
 endf
 " Defaults to async. Use bang for :make.
-command! -bang -buffer PythonSetEntrypoint call s:set_entrypoint(<bang>1)
+command! -bang -buffer PythonSetEntrypoint call s:set_module_entrypoint(<bang>1)
+" Pass "TestClass.test_function" to run that specific test.
+command! -bang -buffer -nargs=* PythonTest call s:set_test_entrypoint(<bang>1, <q-args>)
 
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
 if exists(':PyDoc') == 2
