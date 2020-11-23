@@ -85,9 +85,10 @@ endf
 command! -bang -buffer PythonSetEntrypoint call s:set_entrypoint(<bang>1)
 
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
-if exists(':Pydoc') == 2
+if exists(':PyDoc') == 2
+    command! -nargs=1 Pydoc     PyDoc <args>
     " nnoremap K covered by pydoc
-    xnoremap <buffer> K "cy:PydocSearch <C-R>c<CR>
+    xnoremap <buffer> K "cy:PyDocGrep <C-R>c<CR>
     " Approximate unity-docs. Not sure how to get pydoc in unite.
     nnoremap <buffer> <Leader>ok :Pydoc <C-R><C-W>
 endif
