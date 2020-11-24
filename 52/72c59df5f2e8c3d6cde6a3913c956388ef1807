@@ -1,0 +1,9 @@
+[ver:1,total:60]
+multi/vim/autoload/david/window.vim:30,1606255200:30,m
+.git/COMMIT_EDITMSG:30,1606255200:30,r
+
+[ver:1,total:1980]
+multi/vim/autoload/david/window.vim:1140,1606255200:1140,m
+multi/git/tool/difftool.gvimtab.git.sh:480,1606240800:360,1606244400:120,r
+multi/vim/after/ftplugin/python/zpersonalized.vim:290,1606172400:240,1606255200:50,r
+.git/COMMIT_EDITMSG:70,1606255200:70,r
