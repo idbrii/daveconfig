@@ -89,11 +89,17 @@ function! david#window#show_last_error_without_jump()
         return
     endif
     let winview = winsaveview()
-    clast
+    let winnr = winnr()
+    let bufnr = bufnr()
+    " to last line
+    keepjumps clast
     try
+        " to last actual error
         keepjumps cprev
     catch /^Vim\%((\a\+)\)\=:E553/	" Error: No more items
     endtry
+    call execute(winnr ..'wincmd w')
+    call execute(bufnr ..'buffer')
     call winrestview(winview) 
 endf
 
