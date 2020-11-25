@@ -300,6 +300,19 @@ alias buildtag-love='~/.vim/scripts/buildtags --continuous skip-cscope lua-engin
 # Tell svn about manual moves: https://stackoverflow.com/a/23541323/79125
 svn-repairmove() { mv -n -- "$2" "$1" && svn mv -- "$1" "$2"; }
 
+# Add files that have changed to a changelist (useful to add a directory
+# without adding lots of unmodified).
+# https://stackoverflow.com/a/43665976/79125
+svn-modified-to-changelist() {
+    if [[ $# -lt 2 ]]; then
+        echo '[ERROR] expected arguments: directory changelist-name'
+        return
+    fi
+    directory=$1
+    cl_name=$2
+    eval "svn changelist $cl_name $(svn status $directory | grep '^[ADMRC]' | cut -c9- | sed 's/ /\\ /' | tr '\n' ' ')"
+}
+
 
 DIR=~/data/settings/daveconfig/unix/terminal
 
