@@ -43,6 +43,9 @@ let g:pathogen_blacklist += ["gdscript3"]
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
 call add(g:polyglot_disabled, 'gdscript')
 
+" I'm more likely to use objc than mathematica (both use .m)
+call add(g:polyglot_disabled, 'mathematica')
+
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
 runtime bundle/pathogen/autoload/pathogen.vim
