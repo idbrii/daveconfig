@@ -16,6 +16,8 @@ augroup END
 
 " Plugins to test here ------------------------------------------
 let s:plugins += ['matchup']
+" To add all plugins:
+"~ put =map(systemlist('ls ~/.vim/bundle'), { i,p -> printf('let s:plugins += [\"%s\"]', p)})
 " /end ----------------------------------------------------------
 
 set runtimepath-=~/.vim
