@@ -266,15 +266,15 @@ if executable('svn')
     " Ensure the blame window will have a path inside the repo.
     nnoremap <silent> <leader>fb :silent! cd %:p:h <Bar>VCBlame<CR>
     " Diff against have revision.
-    nnoremap <silent> <leader>fd :call <SID>VCDiffFast('BASE')<CR>
+    nnoremap <silent> <leader>fd :Sdiff<CR>
     " Diff against head revision.
-    nnoremap <silent> <leader>fD :call <SID>VCDiffFast('HEAD')<CR>
-    nnoremap <silent> <leader>fi :VCStatus <C-r>=g:david_project_root<CR><CR>
+    nnoremap <silent> <leader>fD :Sdiff % HEAD<CR>
+    nnoremap <silent> <leader>fi :Sstatus<CR>
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
     nnoremap <silent> <leader>fIq :VCStatus -qu<CR>
     nnoremap <silent> <leader>fIc :VCStatus .<CR>
-    nnoremap <silent> <leader>fV :exec 'VCLog! '. g:david_project_root<CR>
-    nnoremap <silent> <leader>fv :VCLog! %<CR>
+    nnoremap <silent> <leader>fV :exec 'Slog! '. g:david_project_root<CR>
+    nnoremap <silent> <leader>fv :Slog<CR>
     " Explore
     nnoremap <silent> <leader>fe :VCBrowse<CR>
     nnoremap <silent> <leader>fEm :VCBrowse<CR>
