@@ -1,1 +1,6 @@
 [ver:1,total:0]
+
+[ver:1,total:2520]
+multi/vim/after/ftplugin/python/zpersonalized.vim:2160,1606161600:1380,1606165200:780,m
+multi/vim/plugin/config_terminal.vim:240,1606158000:60,1606161600:180,r
+.git/COMMIT_EDITMSG:120,1606165200:120,r
