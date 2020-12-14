@@ -41,8 +41,9 @@ Possibly also:
 * Run imageglass and enable file association
 * Run flux; add shortcut to startup menu
 * Clean up context menus (below)
-* Install [gtm](https://github.com/git-time-metric/gtm/releases/) to %USERPROFILE%\AppData\Local\Microsoft\WindowsApps and ~/apps/bin
+* Install Win64 and Linux versions of [gtm](https://github.com/git-time-metric/gtm/releases/) to %USERPROFILE%\AppData\Local\Microsoft\WindowsApps and ~/apps/bin
 * If using C#, do :OmniSharpOpenLog and install the .NET Framework Developer Pack it complains about.
+* Install [vimproc](https://github.com/Shougo/vimproc.vim/releases/) to ~/.vim/bundle/vimproc/lib/ for unite and open-browser.
 
 Windows
 =======
