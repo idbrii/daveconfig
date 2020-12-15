@@ -15,4 +15,11 @@
     fetch = +refs/notes/*:refs/notes/*
     push = +refs/notes/*:refs/notes/*
 
+[core]
+    # On Windows, I clone daveconfig from within WSL to
+    # /mnt/c/david/settings/daveconfig (~/data is symlink to c:/david). Since
+    # I'm cloning to NTFS from Linux, I need to use filemode. Otherwise my
+    # files are 755 (even after chmod).
+    # filemode = false
+
 # vi: set ft=gitconfig :
