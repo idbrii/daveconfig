@@ -117,23 +117,27 @@ if has('win32')
     " Hopefully we can avoid setting PYTHONHOME/PATH otherwise build scripts
     " called from vim need to clear these variables.
     "
-    " Do I use python2.7 x64 for any plugins?
+    " TODO:
+    " Do I use python2.7 x64 for any plugins? (I don't think so)
     " Denite requires py3. Latest ultisnips requires py3.
-
-    " If this doesn't work, try setting up registry:
+    "
+    " 1. Run `:ec david#python_version(3)` and see which dll vim complains about.
+    " 2. Install the corresponding python from scoop versions bucket.
+    " 3. Run the pep-514.reg for that python.
+    " 4. In theory, it should just work. Test with david#python_version(3)
+    " 5. If it doesn't work, setup david#setup_python_paths.
+    " 6. As a last ditch attempt, try setting up registry (the above .reg
+    "    should do that):
     " HKEY_CURRENT_USER\Software\Python\PythonCore\3.8\PythonPath
-    " (Default) REG_SZ c:\Users\David\scoop\apps\python\3.8.2\Lib\;c:\Users\David\scoop\apps\python\3.8.2\DLLs\
+    " (Default) REG_SZ c:\Users\dbriscoe\scoop\apps\python38\3.8.6\Lib\;c:\Users\dbriscoe\scoop\apps\python38\3.8.6\DLLs\
 
     "~ let g:can_set_pythonhome = 0
     "~ call david#setup_python_paths('2.7', $MY_PYTHONHOME)
-    call david#setup_python_paths('2.7', 'c:/david/apps/Python/Python27')
-    call david#setup_python_paths('3.6', 'c:/david/apps/Python/Python36')
-    "~ call david#setup_python_paths('3.8', 'c:/Users/David/scoop/apps/python/3.8.2')
+    call david#setup_python_paths('3.8', expand('$USERPROFILE/scoop/apps/python38/3.8.6'))
 
-    " If these calls succeed, then uncomment can_set_pythonhome above and
-    " delete these tests.
-    call david#python_version(2)
-    call david#python_version(3)
+    " If these calls succeed, try uncommenting can_set_pythonhome above.
+    "~ call david#python_version(2)
+    "~ call david#python_version(3)
 
     " My version of vim wants 5.3
     let lua_53 = expand('C:/david/apps/lua/lua53/bin')
@@ -156,6 +160,16 @@ if has('win32')
         echoerr "Failed to find git-for-windows. Did it update and change paths?"
     endif
 
-    " Portable git is installed with SourceTree
-    let PORTABLEGIT = expand('$LocalAppData/Atlassian/SourceTree/git_local/bin')
+    " git-for-windows inside scoop install
+    if !david#add_to_path(expand('$USERPROFILE/scoop/apps/git/current/usr/bin'))
+        echoerr "Failed to find scoop's git. Did it change paths?"
+    endif
+    if !david#add_to_path(expand('$USERPROFILE/scoop/apps/git/current/mingw64/bin'))
+        echoerr "Failed to find mingw inside scoop's git. Did it change paths?"
+    endif
+
+    " Portable git comes with SourceTree
+    if !david#add_to_path(expand('$LocalAppData/Atlassian/SourceTree/git_local/bin'))
+        echoerr "Failed to find Portable Git inside SourceTree git. Did it change paths?"
+    endif
 endif
