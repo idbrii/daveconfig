@@ -36,24 +36,43 @@ Possibly also:
 (firacode 2 has ligatures for all kinds of things and not just symbols)
 
 * Do the workaround for gvim: https://github.com/ScoopInstaller/Main/issues/848
-* Run the reg for python (scoop info python)
+* Run the .reg for python (scoop info python)
 * Run workrave, setup timers, enable run on startup
 * Run imageglass and enable file association
 * Run flux; add shortcut to startup menu
 * Clean up context menus (below)
 * Install Win64 and Linux versions of [gtm](https://github.com/git-time-metric/gtm/releases/) to %USERPROFILE%\AppData\Local\Microsoft\WindowsApps and ~/apps/bin
+    * WindowsApps is already in the PATH.
 * If using C#, do :OmniSharpOpenLog and install the .NET Framework Developer Pack it complains about.
 * Install [vimproc](https://github.com/Shougo/vimproc.vim/releases/) to ~/.vim/bundle/vimproc/lib/ for unite and open-browser.
+* Install WSL (below)
+* Install Lua (below)
 
 Windows
 =======
+
+# PATH
+
+Add some paths to PATH:
+
+    C:\david\settings\daveconfig\win\system\bin
+    %USERPROFILE%\scoop\apps\git\current\usr\bin
+
+## WSL
+
+* [Enable the windows subsystem for linux](https://docs.microsoft.com/en-ca/windows/wsl/install-win10#step-1---enable-the-windows-subsystem-for-linux)
+    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+* Skip WSL2 -- I don't want a segregated linux install. I use linux to process files on Windows.
+* Install Ubuntu from Windows Store
+* [Generate a new ssh key and add to github](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 
 ## Context Menus
 
 Remove 'Edit with 3D paint' and 'Edit with photos':
 https://www.windowscentral.com/how-remove-edit-photos-and-edit-paint-3d-context-menu-windows-10
 
-Run Windows_OpenWithPaintNet.reg to make paint.net the default image editor.
+Run Windows_OpenWithPaintNet.reg to make paint.net (via scoop) the default image editor.
 
 ## Dark mode
 
@@ -70,10 +89,30 @@ Settings > Search > snap
 "When I snap a window, show what I can snap next to it"
 
 
+## Startup
+
+Create shortcuts in `shell:startup`:
+
+* AutoHotkey.ahk
+* vide.cmd
+
+
 vim
 ===
 
-Copy vim-cache, vim-aside, and todo.org to new machine.
+Copy vim-cache, vim-aside, and plan.md to new machine.
+
+
+lua
+===
+
+* ~/.vim/bundle/lua-david/lib/readme.md
+* For luarocks download hererocks with
+
+```
+    wget https://raw.githubusercontent.com/mpeterv/hererocks/latest/hererocks.py
+    python hererocks.py --lua 5.4 -r latest
+```
 
 
 unix
@@ -86,6 +125,8 @@ Right click top left icon
 Defaults
 Turn on "Use Ctrl+Shift+C/V"
 Turn off insert mode and ctrl key shortcuts
+Change font to Fira Code and size to 14
+    * makes gtm report display properly
 
 In Colors, change the second blue to 77,77,255 to make it legible. Be sure to click black again before OK! (Do I still need to do this?)
 
@@ -149,4 +190,5 @@ www.proggyfonts.net/download/
 
 Fira Mono (for different sizes):
 https://github.com/mozilla/Fira/releases
+
 

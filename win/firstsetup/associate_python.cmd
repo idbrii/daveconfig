@@ -26,6 +26,7 @@ assoc .pyc=Python.CompiledFile
 assoc .pyo=Python.CompiledFile
 assoc .pyw=Python.NoConFile
 
+pause
 goto:eof
 
 

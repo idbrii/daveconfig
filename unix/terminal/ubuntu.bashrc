@@ -17,6 +17,7 @@ if [ ! -d $OTHER_HOME ] ; then
     export OTHER_HOME=/media/munge$HOME
 fi
 
+# I put manually installed apps in apps and link to their binaries in bin.
 export PATH=$PATH:~/data/apps/bin
 
 if [[ -r /proc/version ]]; then
