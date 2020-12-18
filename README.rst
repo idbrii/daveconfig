@@ -44,3 +44,31 @@ terminal
 
 I use bash and like to be in the terminal a lot. I use cygwin on windows.
 
+
+Cloning on Windows with WSL
+===========================
+
+* Use WSL1 for faster access between linux <-> ntfs.
+* Clone daveconfig onto windows filesystem
+    * Don't want two separate trees to maintain.
+    * Checkout from Linux so line endings are Unix (and unix scripts don't fail)
+```
+
+    mkdir -p /mnt/c/david/settings
+    ln -s /mnt/c/david ~/data
+    cd ~/data/settings
+    git clone --recurse-submodules git@github.com:idbrii/daveconfig.git
+    cd daveconfig
+    git manage-mine master
+    cat gitconfig.local >> .git/config 
+    # see gitconfig.local for filemode rationale
+    git config core.filemode false
+
+    # WSL comes with a bashrc. Move to allow symlink creation.
+    mkdir ~/junk
+    mv ~/.bash* ~/junk
+    ./makelinks_unix.sh 
+```
+
+Then run makelinks_win.cmd as admin.
+
