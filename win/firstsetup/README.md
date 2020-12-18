@@ -78,10 +78,6 @@ Run Windows_OpenWithPaintNet.reg to make paint.net (via scoop) the default image
 
 Turn it on in settings.
 
-Fix white line in File Explorer.
-Open File Explorer -> Right click the Title bar -> Check Lock the toolbars. Try open File Explorer again.
-
-
 ## Differentiate active window
 Personalization (Themes) > Colors > Title bars
 
@@ -141,15 +137,6 @@ Visual Studio ALL CAPS menus
 Use `VisualStudio_SentenceCaseMenus.reg` for VS2012.
 
 http://stackoverflow.com/questions/10859173/how-to-disable-all-caps-menu-titles-in-visual-studio
-
-
-Window Borders
-==============
-You should export WindowMetrics to WindowMetrics.original.reg before running.
-
-Use `Windows_ThinWindowBorders.reg`
-
-http://superuser.com/a/461983/11808
 
 
 Paint.Net
