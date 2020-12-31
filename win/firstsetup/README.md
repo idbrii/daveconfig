@@ -43,7 +43,7 @@ Possibly also:
 * Clean up context menus (below)
 * Install Win64 and Linux versions of [gtm](https://github.com/git-time-metric/gtm/releases/) to %USERPROFILE%\AppData\Local\Microsoft\WindowsApps and ~/apps/bin
     * WindowsApps is already in the PATH.
-* If using C#, do :OmniSharpOpenLog and install the .NET Framework Developer Pack it complains about.
+* If using C#, do :OmniSharpOpenLog and install the .NET Framework Developer Pack it complains about. If there are still errors, [install a recent MSBuild](https://docs.microsoft.com/en-us/visualstudio/msbuild/walkthrough-using-msbuild?view=vs-2019#install-msbuild).
 * Install [vimproc](https://github.com/Shougo/vimproc.vim/releases/) to ~/.vim/bundle/vimproc/lib/ for unite and open-browser.
 * Install WSL (below)
 * Install Lua (below)
