@@ -1,3 +1,4 @@
+# vim: set ft=sh :
 # Local marks are not natively supported. You can jump to them, but not modify
 # them.
 if [ -e ~/.bashmarks.local.sdirs ]; then
@@ -5,12 +6,9 @@ if [ -e ~/.bashmarks.local.sdirs ]; then
 fi
 
 export DIR_dave="$HOME/data/settings/daveconfig"
-export DIR_and="$HOME/data/code/android"
 export DIR_vim="$HOME/data/settings/daveconfig/multi/vim"
 export DIR_bun="$HOME/data/settings/daveconfig/multi/vim/bundle"
 export DIR_bundle="$HOME/data/settings/daveconfig/multi/vim/bundle"
 export DIR_code="$HOME/data/code"
 export DIR_home="/mnt/c/Users/$USER"
-export DIR_pod="$HOME/data/code/python/podcastmagic"
-export DIR_mur="$HOME/data/code/python/murmuration"
 export DIR_love="$HOME/data/code/gamedev-love"
