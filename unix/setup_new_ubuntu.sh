@@ -93,6 +93,16 @@ programs="$programs geogebra"
 #programs="$programs moto4lin " #gmobilemedia "
 # }}}
 
+# Games {{{2
+    programs="$programs steam playonlinux wine gnotravex scummvm"
+    # controller support
+    programs="$programs wminput"
+    # free games
+    programs="$programs beneath-a-steel-sky flight-of-the-amazon-queen"
+    # open source games
+    #programs="$programs spring-mods-kernelpanic glob2 hedgewars freealchemist frozen-bubble teeworlds "
+    #programs="$programs glest warsow freedroid freedroidrpg "
+
 # Small install only includes the packages below.
 if [ $small == "true" ] ; then
     programs=""
@@ -115,15 +125,6 @@ fi
 # complaining about missing src.zip
 # programs="$programs openjdk-6-source sun-java6-source"
 
-# Games {{{2
-    programs="$programs steam playonlinux wine gnotravex scummvm"
-    # controller support
-    programs="$programs wminput"
-    # free games
-    programs="$programs beneath-a-steel-sky flight-of-the-amazon-queen"
-    # open source games
-    #programs="$programs spring-mods-kernelpanic glob2 hedgewars freealchemist frozen-bubble teeworlds "
-    #programs="$programs glest warsow freedroid freedroidrpg "
 # Primary {{{2
     # from ppas
     programs="$programs ubuntu-tweak handbrake-gtk faenza-icon-theme" # requires ppa
