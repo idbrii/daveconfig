@@ -140,7 +140,10 @@ fi
     programs="$programs chromium-codecs-ffmpeg-extra"
     
     # Tools
-    programs="$programs p7zip ack-grep"
+    programs="$programs p7zip ack-grep lame"
+
+    # Some of these don't come with a server install? (Or maybe this list came from cygwin.)
+    programs="$programs bash bash-completion binutils bzip2 coreutils cscope ctags curl diffutils dos2unix findutils git git-completion grep gzip indent less openssh sed subversion universal-ctags"
 
 # I use parcellite as a workaround for a bug in chromium:
 #   http://code.google.com/p/chromium/issues/detail?id=67074
