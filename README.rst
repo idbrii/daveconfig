@@ -60,9 +60,6 @@ Cloning on Windows with WSL
     git clone --recurse-submodules git@github.com:idbrii/daveconfig.git
     cd daveconfig
     git manage-mine master
-    cat gitconfig.local >> .git/config 
-    # see gitconfig.local for filemode rationale
-    git config core.filemode false
 
     # WSL comes with a bashrc. Move to allow symlink creation.
     mkdir ~/junk

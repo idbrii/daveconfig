@@ -36,3 +36,11 @@ if [ `uname` = 'Linux' ] ; then
     delete_if_symbolic ~/.profile
 fi
 
+if [[ -r /proc/version ]]; then
+    if grep --quiet --max-count=1 Microsoft /proc/version; then
+        ln -s $dconfig_path/multi/git/wsl.gitconfig.local ~/.gitconfig.local
+    fi
+fi
+
+
+

@@ -1,0 +1,10 @@
+# Git configuration for Windows Subsystem for Linux
+
+[core]
+    # Ignore file mode changes in git for cygwin/windows.
+    # Windows (ntfs) cannot store permissions properly, so it changes
+    # permissions on files. (644 -> 755) Make git ignore these changes.
+    # Source: http://stackoverflow.com/q/1580596/79125
+    filemode = false
+
+# vi: et sw=4 ts=4 ft=gitconfig
