@@ -17,7 +17,7 @@ if [[ $# -eq 0 || "$1" == "--help" ]] ; then
 fi
 
 # Installing dependents:
-#   aptinstall universal-ctags cscope fswatch
+#   aptinstall universal-ctags cscope inotify-tools fswatch
 #    -- fswatch requires universe (although it wasn't working for me under WSL)
 #   scoop install universal-ctags
 #   pip install pycscope
