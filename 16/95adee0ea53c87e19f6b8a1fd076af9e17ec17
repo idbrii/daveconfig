@@ -1,1 +1,8 @@
 [ver:1,total:0]
+
+[ver:1,total:1080]
+win/firstsetup/README.md:480,1609117200:360,1609405200:120,m
+.git/index:360,1608321600:300,1608339600:20,1609405200:40,r
+unix/setup_new_ubuntu.sh:140,1608339600:140,r
+.git/COMMIT_EDITMSG:80,1609405200:80,r
+unix/setup-new-ubuntu:20,1608339600:20,r

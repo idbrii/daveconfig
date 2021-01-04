@@ -1,1 +1,12 @@
 [ver:1,total:0]
+
+[ver:1,total:448]
+.git/COMMIT_EDITMSG:135,1609779600:135,r
+makelinks_unix.sh:118,1609779600:118,m
+multi/git/wsl.gitconfig.local:47,1609779600:47,m
+README.rst:45,1609779600:45,m
+unix/terminal/unix.bashrc:24,1609779600:24,r
+unix/terminal/ubuntu.bashrc:24,1609779600:24,r
+multi/git/win.withothers.gitconfig:20,1609779600:20,r
+unix/setup_new_ubuntu.sh:20,1609779600:20,r
+makelinks_win.cmd:15,1609779600:15,r
