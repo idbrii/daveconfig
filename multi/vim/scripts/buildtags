@@ -17,11 +17,11 @@ if [[ $# -eq 0 || "$1" == "--help" ]] ; then
 fi
 
 # Installing dependents:
-#   aptinstall universal-ctags cscope
+#   aptinstall universal-ctags cscope fswatch
+#    -- fswatch requires universe (although it wasn't working for me under WSL)
 #   scoop install universal-ctags
 #   pip install pycscope
 #   brew install fswatch
-#   aptinstall fswatch # (requires universe)
 
 continuous=0
 if [[ "$1" == "--continuous" ]] ; then
@@ -52,8 +52,8 @@ fi
 
 if [[ $continuous -eq 1 ]]; then
     if [[ -x "$(command -v fswatch)" ]]; then
-        echo fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude *.*.sw*
-             fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude *.*.sw* | while read -d "" event
+        echo fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude .*.sw*
+             fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude .*.sw* | while read -d "" event
         do
             # Ignore vim swap file changes
             if [[ $event == *.*.sw* ]]; then
