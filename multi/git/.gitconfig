@@ -59,6 +59,8 @@
     # open all urls for the current git repo
     hub = "!git hublist | while read url ; do xdg-open $url ; done"
 
+    gtm-report = "!echo 'Last month:' ; gtm report -last-month -format project -all"
+    gtm-chart = "!echo 'Last month:' ; gtm report -last-month -format timeline-hours -all"
 
 [core]
     excludesfile = ~/.gitignore
