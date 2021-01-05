@@ -1,2 +1,7 @@
 [ver:1,total:60]
 .git/rebase-merge/git-rebase-todo:60,1609837200:60,r
+
+[ver:1,total:480]
+README.rst:260,1609801200:240,1609819200:20,d
+README.md:200,1609819200:200,m
+.git/COMMIT_EDITMSG:20,1609819200:20,r
