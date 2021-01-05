@@ -5,14 +5,10 @@ daveconfig is a collection of my various settings for different environment
 
 Not everything is contained here; I'm using submodules, so be sure to run this after your clone:
 
-::
-
     git submodule update --init
 
 
 Sometimes I change the url for a repo (switching from maintainer to me). Try this to fix git pull errors about shas not being a tree:
-
-::
 
     git submodule sync
 
@@ -52,8 +48,8 @@ Cloning on Windows with WSL
 * Clone daveconfig onto windows filesystem
     * Don't want two separate trees to maintain.
     * Checkout from Linux so line endings are Unix (and unix scripts don't fail)
-```
 
+```bash
     mkdir -p /mnt/c/david/settings
     ln -s /mnt/c/david ~/data
     cd ~/data/settings
