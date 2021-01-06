@@ -24,7 +24,7 @@ if &pyxversion < 3
     command! -bar -buffer PythonReloadInVim exec 'python print(reload(__import__("'. s:GetQualifiedModuleName() .'")))'
 else
     " vimtools is mine
-    command! -bar -buffer PythonReloadInVim exec printf('pyx import vimtools; vimtools.reload_module("%s", "%s")', s:GetQualifiedModuleName(), expand("%:p"))
+    command! -bar -buffer PythonReloadInVim exec printf('pyx import vimtools; vimtools.reload_module(r"%s", r"%s")', s:GetQualifiedModuleName(), expand("%:p"))
 endif
 
 nnoremap <buffer> <Leader>vso :<C-u>update<Bar> PythonReloadInVim<CR>
