@@ -12,6 +12,11 @@ else
 	let g:snips_author = expand('$USER')
 endif
 
+" Rhubarb says to get a personal access token with repo permissions, but it
+" seems to be unnecessary. Maybe only if gh is installed?
+"~ let g:RHUBARB_TOKEN = ''
+
+
 " Config {{{1
 
 if has('win32')

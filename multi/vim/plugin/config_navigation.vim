@@ -140,8 +140,8 @@ let g:loaded_netrw       = 0
 let g:loaded_netrwPlugin = 0
 nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
-" netrw support for fugitive's Browse
-command! -nargs=1 Browse Gogo <args>
+" netrw support for fugitive's Gbrowse
+command! -nargs=1 Browse OpenBrowser <args>
 
 " Set browsed dir as current dir.
 let g:netrw_keepdir = 0

@@ -376,3 +376,6 @@
 [submodule "multi/vim/bundle/colorizer"]
 	path = multi/vim/bundle/colorizer
 	url = https://github.com/chrisbra/Colorizer.git
+[submodule "multi/vim/bundle/rhubarb"]
+	path = multi/vim/bundle/rhubarb
+	url = https://github.com/tpope/vim-rhubarb.git
