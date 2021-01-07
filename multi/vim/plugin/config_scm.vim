@@ -241,6 +241,8 @@ if executable('svn')
         "wincmd p
         "wincmd p
     endf
+    " We're loaded before vc, so we can't clobber VCDiff
+    command! VCDiffFast call s:VCDiffFast('HEAD')
 
     function! s:VCUpdate(...)
         let shellslash_bak = &shellslash
