@@ -92,8 +92,8 @@ function! s:set_entrypoint(should_be_async, entrypoint_makeprg)
         " Tracebacks have most recent call last.
         let g:asyncrun_exit = 'call david#window#show_last_error_without_jump()'
         if should_be_async
-            " asyncrun doesn't correctly handle my multi-line errors, but
-            " sometimes async is nice.
+            " With Vim 8.2.1982, asyncrun correctly handles my multi-line
+            " errors. No problems here.
             AsyncMake
         else
             make!

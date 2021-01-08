@@ -433,10 +433,15 @@ let g:asyncrun_open = 3
 " Provide a :Make so fugitive will use asyncrun.
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
-augroup david-asyncrun
-    au!
-    au User AsyncRunStop call david#window#copen_without_moving_cursor()
-augroup END
+if !has('patch-8.2.1982')
+    " Workaround 'Duplicate/missing quickfix lines when combining caddexpr and
+    " multi-line errorformat (%A,%Z)'
+    augroup david-asyncrun
+        au!
+        au User AsyncRunStop call david#window#copen_without_moving_cursor()
+    augroup END
+endif
+
 
 " Common text {{{1
 
