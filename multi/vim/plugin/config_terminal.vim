@@ -32,7 +32,13 @@ endf
 
 " Some limbo exists where terminal is partially implemented. : (
 " TerminalOpen is needed to map normal mode commands only in terminal windows.
-if exists('#TerminalOpen')
+if exists('##TerminalWinOpen')
+    " Only apply to terminals that have windows -- if vim is new enough.
+    augroup david_terminal
+        au!
+        au TerminalWinOpen * call s:TryApplyTerminalMappings()
+    augroup END
+elseif exists('##TerminalOpen')
     augroup david_terminal
         au!
         au TerminalOpen * call s:TryApplyTerminalMappings()
