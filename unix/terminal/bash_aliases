@@ -56,12 +56,15 @@ alias and_go_sdk='cd $android_sdks/android-sdk-linux/platform-tools'
 
 # Version control
 function giv {
+    # Usage:
+    #   giv -- ./subdir
+    #   giv dev
     args=$*
     if [[ -z $args ]]; then
-        args=.
+        # Ignoring gtm since it pumps out all kinds of commits.
+        args=--all --not refs/notes/gtm-data .
     fi
-    # Ignoring gtm since it pumps out all kinds of commits.
-    vim +"GV --all --not refs/notes/gtm-data" +tabonly $args
+    vim +"GV $args" +tabonly 
 }
 alias g=git
 # Completion: http://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
