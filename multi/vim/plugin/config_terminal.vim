@@ -8,14 +8,12 @@ endif
 tnoremap <silent> <C-l> <C-w>N
 tnoremap <silent> <C-w><C-l> <C-l>
 
-function! s:SendRegisterToTerm(reg_arg, reg_count)
-    let reg = a:reg_count
+function! s:SendRegisterToTerm(reg_arg)
+    let reg = v:register
     if len(a:reg_arg) > 0
         let reg = a:reg_arg
     endif
-    exec 'let content = @'. reg
-    call term_sendkeys('', content)
-    normal! A
+    call term_sendkeys('', getreg(reg))
 endf
 
 function! s:TryApplyTerminalMappings()
@@ -23,10 +21,8 @@ function! s:TryApplyTerminalMappings()
         " Probably don't want mappings for hidden jobs?
         return
     endif
-    command! -buffer -nargs=* -count=0 SendRegisterToTerm call s:SendRegisterToTerm(<q-args>, <count>)
-    " Will pass count so you can use registers 0-1. Not quite the same as
-    " normal p, but a good approximation.
-    nnoremap <buffer> p :SendRegisterToTerm<CR>
+    command! -buffer -nargs=* TerminalSendRegister call s:SendRegisterToTerm(<q-args>)
+    nnoremap <buffer> p :TerminalSendRegister<CR>
 endf
 
 
