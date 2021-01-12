@@ -1,3 +1,7 @@
 [ver:1,total:60]
 .git/rebase-merge/git-rebase-todo:30,1610409600:30,r
 unix\terminal\bash_aliases:30,1610409600:30,d
+
+[ver:1,total:420]
+multi/vim/plugin/config_terminal.vim:210,1610409600:210,m
+.git/COMMIT_EDITMSG:210,1610409600:210,r
