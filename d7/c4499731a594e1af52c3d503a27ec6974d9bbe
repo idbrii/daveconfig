@@ -1,1 +1,13 @@
 [ver:1,total:0]
+
+[ver:1,total:0]
+
+[ver:1,total:360]
+multi\vim\autoload\netrw.vim:180,1610229600:180,d
+unix\terminal\cygwin.bash_aliases:75,1610229600:75,d
+unix\terminal\mac.bash_aliases:35,1610229600:35,d
+unix\terminal\ubuntu.bash_aliases:35,1610229600:35,d
+unix\terminal\ubuntu.bashrc:20,1610229600:20,d
+unix\terminal\unix.bashrc:15,1610229600:15,d
+
+[ver:1,total:0]
