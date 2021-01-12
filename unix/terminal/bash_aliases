@@ -60,7 +60,8 @@ function giv {
     if [[ -z $args ]]; then
         args=.
     fi
-    vim +"GV --all" +tabonly $args
+    # Ignoring gtm since it pumps out all kinds of commits.
+    vim +"GV --all --not refs/notes/gtm-data" +tabonly $args
 }
 alias g=git
 # Completion: http://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
