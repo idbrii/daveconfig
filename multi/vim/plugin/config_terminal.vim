@@ -30,10 +30,6 @@ function! s:SnapCursor(to_end)
 endf
 
 function! s:TryApplyTerminalMappings()
-    if &hidden
-        " Probably don't want mappings for hidden jobs?
-        return
-    endif
     command! -buffer -nargs=* TerminalSendRegister call s:SendRegisterToTerm(<q-args>)
     nnoremap <buffer> p :TerminalSendRegister<CR>
     nnoremap <buffer> I :<C-u>call <sid>SnapCursor(0)<CR>I
