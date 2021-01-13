@@ -1,2 +1,9 @@
 [ver:1,total:60]
 .git/rebase-merge/git-rebase-todo:60,1610496000:60,r
+
+[ver:1,total:480]
+multi/git/.gitconfig:180,1610409600:60,1610413200:120,r
+.git/config:150,1610434800:150,r
+multi/vim/plugin/config_terminal.vim:60,1610496000:60,m
+.git/COMMIT_EDITMSG:60,1610496000:60,r
+unix/terminal/bashrc:30,1610434800:30,r
