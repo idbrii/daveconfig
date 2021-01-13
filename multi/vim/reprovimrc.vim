@@ -9,13 +9,6 @@ let s:plugins += ['lookup']
 let s:plugins += ['scriptease']
 let s:plugins += ['vader']
 
-" My vim filetype
-augroup reprovim
-    au!
-    autocmd FileType vim source ~/.vim/after/ftplugin/vim.vim
-augroup END
-
-
 " Plugins to test here ------------------------------------------
 
 let s:plugins += ['matchup']
@@ -46,6 +39,12 @@ set ignorecase smartcase
 set wildmode=list:longest
 set tag=./tags;/
 source ~/.vim/plugin/config_navigation.vim
+
+" My vim filetype
+augroup reprovim
+    au!
+    autocmd FileType vim source ~/.vim/after/ftplugin/vim.vim
+augroup END
 
 source ~/.vim/plugin/config_display.vim
 FontDefault
