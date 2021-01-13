@@ -31,7 +31,7 @@ endf
 
 function! s:TryApplyTerminalMappings()
     command! -buffer -nargs=* TerminalSendRegister call s:SendRegisterToTerm(<q-args>)
-    nnoremap <buffer> p :TerminalSendRegister<CR>
+    nnoremap <buffer> p :<C-u>TerminalSendRegister<CR>
     nnoremap <buffer> I :<C-u>call <sid>SnapCursor(0)<CR>I
     nnoremap <buffer> A :<C-u>call <sid>SnapCursor(1)<CR>A
 endf
