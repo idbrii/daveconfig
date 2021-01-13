@@ -14,6 +14,19 @@ function! s:SendRegisterToTerm(reg_arg)
         let reg = a:reg_arg
     endif
     call term_sendkeys('', getreg(reg))
+
+    " Vim doesn't update from job when in Terminal-Normal, so we won't see our
+    " paste until we enter Terminal-Job to see our pasted text. Unfortunately,
+    " we can't just feedkeys("A\<C-w>N") to do that, because vim needs to do
+    " an update in Terminal-Job.
+endf
+
+function! s:SnapCursor(to_end)
+    if a:to_end
+        call term_sendkeys('', "\<End>")
+    else
+        call term_sendkeys('', "\<Home>")
+    endif
 endf
 
 function! s:TryApplyTerminalMappings()
@@ -23,6 +36,8 @@ function! s:TryApplyTerminalMappings()
     endif
     command! -buffer -nargs=* TerminalSendRegister call s:SendRegisterToTerm(<q-args>)
     nnoremap <buffer> p :TerminalSendRegister<CR>
+    nnoremap <buffer> I :<C-u>call <sid>SnapCursor(0)<CR>I
+    nnoremap <buffer> A :<C-u>call <sid>SnapCursor(1)<CR>A
 endf
 
 
