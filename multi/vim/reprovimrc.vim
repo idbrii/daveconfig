@@ -9,13 +9,17 @@ let s:plugins += ['lookup']
 let s:plugins += ['scriptease']
 let s:plugins += ['vader']
 
+" My vim filetype
 augroup reprovim
     au!
     autocmd FileType vim source ~/.vim/after/ftplugin/vim.vim
 augroup END
 
+
 " Plugins to test here ------------------------------------------
+
 let s:plugins += ['matchup']
+
 " To add all plugins:
 "~ put =map(systemlist('ls ~/.vim/bundle'), { i,p -> printf('let s:plugins += [\"%s\"]', p)})
 " /end ----------------------------------------------------------
@@ -33,11 +37,15 @@ set viminfofile=NONE
 set hlsearch
 colorscheme desert
 
+" Core mappings that are hard to use vim without
 let mapleader=' '
 inoremap <C-l> <Esc>
 nnoremap <Leader>w <C-w>
 nnoremap <Leader>fs :update<CR>
 set ignorecase smartcase
+set wildmode=list:longest
+set tag=./tags;/
+source ~/.vim/plugin/config_navigation.vim
 
 source ~/.vim/plugin/config_display.vim
 FontDefault
