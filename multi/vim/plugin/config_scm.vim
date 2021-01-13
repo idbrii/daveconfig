@@ -44,7 +44,18 @@ if executable('git')
     nnoremap <leader>gv :GV!<CR>
     xnoremap <leader>gv :GV!<CR>
 
-    nnoremap <Leader>gb :silent! cd %:p:h<CR>:Gblame<CR>
+    function! s:Gblame(args)
+        " :Gblame scrollbinds the blame window but doesn't support time travel.
+        " :%Gblame uses a disconnected blame window and supports C-i/o to
+        " travel through time (even across reblames).
+        let winview = winsaveview()
+        exec '%Gblame '.. a:args
+        wincmd T
+        call winrestview(winview)
+        " Offset to the right past the commit info column.
+        normal! 64l
+    endf
+    nnoremap <Leader>gb :silent! cd %:p:h<CR>:call <sid>Gblame('')<CR>
 
     command! -range Gpopupblame call setbufvar(winbufnr(popup_atcursor(systemlist("git -C ".. shellescape(expand('%:p:h')) .." log --no-merges -n 1 -L <line1>,<line2>:" .. shellescape(resolve(expand("%:t")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")
 
@@ -54,7 +65,7 @@ if executable('git')
         try
             exec 'Git revert --no-commit '. a:commit
             if v:shell_error <= 1
-                " No problems measn we can go straight to commit.
+                " No problems means we can go straight to commit.
                 " On Windows
                 Gcommit -v
                 return
