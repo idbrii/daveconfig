@@ -1,3 +1,12 @@
 [ver:1,total:240]
 unix/terminal/bash_aliases:190,1610751600:190,m
 .git/COMMIT_EDITMSG:50,1610751600:50,r
+
+[ver:1,total:60]
+unix/terminal/bash_aliases:30,1610740800:30,m
+.git/COMMIT_EDITMSG:30,1610740800:30,r
+
+[ver:1,total:720]
+unix/terminal/bash_aliases:460,1610740800:460,m
+.git/COMMIT_EDITMSG:230,1610740800:230,r
+multi/git/.gitconfig:30,1610740800:30,r
