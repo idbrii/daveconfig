@@ -61,10 +61,17 @@ function giv {
     #   giv dev
     args=$*
     if [[ -z $args ]]; then
-        # Ignoring gtm since it pumps out all kinds of commits.
-        args=--all --not refs/notes/gtm-data .
+        # Show all branches by default.
+        git log --max-count=1 --all --not refs/notes/gtm-data -- 1> /dev/null 2> /dev/null
+        if [ $? -eq 0 ] ; then
+            # But ignore gtm since it dumps lots of commits.
+            vim +"GV --all --not refs/notes/gtm-data" +tabonly
+        else
+            vim +"GV --all" +tabonly
+        fi
+    else
+        vim +"GV $args" +tabonly
     fi
-    vim +"GV $args" +tabonly 
 }
 alias g=git
 # Completion: http://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
