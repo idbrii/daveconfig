@@ -55,14 +55,11 @@ Windows
 
 Add some paths to PATH:
 
-    %USERPROFILE%\scoop\apps\git\current\usr\bin
-    %USERPROFILE%\scoop\apps\mono\current\bin
-    %USERPROFILE%\scoop\apps\python38\current\scripts
     %USERPROFILE%\scoop\apps\tortoisesvn\current\bin
     C:\david\apps\bin
     C:\david\settings\daveconfig\win\system\bin
 
-(Does scoop add some of these to path itself?)
+(scoop doesn't add tortoisesvn to path itself.)
 
 ## WSL
 
