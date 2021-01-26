@@ -77,11 +77,14 @@ https://www.windowscentral.com/how-remove-edit-photos-and-edit-paint-3d-context-
 
 Run Windows_OpenWithPaintNet.reg to make paint.net (via scoop) the default image editor.
 
+
 ## Dark mode
 
 Turn it on in settings.
 
+
 ## Differentiate active window
+
 Personalization (Themes) > Colors > Title bars
 
 Settings > Search > snap
@@ -94,6 +97,12 @@ Create shortcuts in `shell:startup`:
 
 * AutoHotkey.ahk
 * vide.cmd
+
+
+## python
+
+Turn off python in Manage App Execution Aliases.
+[To prevent 'python' from opening Windows Store](https://stackoverflow.com/questions/58754860/cmd-opens-window-store-when-i-type-python)
 
 
 vim
