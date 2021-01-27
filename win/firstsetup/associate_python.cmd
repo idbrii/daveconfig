@@ -3,9 +3,9 @@
 @echo off
 setlocal
 
-:: If using scoop, try this.
-:: set PYTHONHOME=%USERPROFILE%\scoop\apps\python\current
-:: set PYTHONPATH=%USERPROFILE%\scoop\apps\python\current\Lib
+:: For scoop. Be sure to update version number!
+set PYTHONHOME=%USERPROFILE%\scoop\apps\python39\current
+set PYTHONPATH=%USERPROFILE%\scoop\apps\python39\current\Lib
 
 call :check_path PYTHONHOME %PYTHONHOME%
 if not %ERRORLEVEL% == 0 (
