@@ -138,6 +138,8 @@ Change font to Fira Code and size to 14
 
 In Colors, change the second blue to 77,77,255 to make it legible. Be sure to click black again before OK! (Do I still need to do this?)
 
+Fix [errors setting permissions](https://stackoverflow.com/questions/52846489/cant-clone-repository-from-mounted-drive#), if applicable.
+
 
 Office ALL CAPS menus
 =====================
