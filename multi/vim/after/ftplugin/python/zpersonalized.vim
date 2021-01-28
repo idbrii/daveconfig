@@ -111,11 +111,12 @@ command! -bang -buffer -nargs=* PythonTest call s:set_test_entrypoint(<bang>1, <
 
 "" PyDoc commands (requires pydoc and python_pydoc.vim)
 if exists(':PyDoc') == 2
-    command! -nargs=1 Pydoc     PyDoc <args>
+    " Generic doc command that works everywhere?
+    command! -buffer -nargs=1 Doc     PyDoc <args>
     " nnoremap K covered by pydoc
     xnoremap <buffer> K "cy:PyDocGrep <C-R>c<CR>
     " Approximate unity-docs. Not sure how to get pydoc in unite.
-    nnoremap <buffer> <Leader>ok :Pydoc <C-R><C-W>
+    nnoremap <buffer> <Leader>ok :PyDoc <C-R><C-W>
 endif
 
 "" Quick commenting/uncommenting.
