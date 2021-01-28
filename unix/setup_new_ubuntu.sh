@@ -113,13 +113,8 @@ fi
     # Python refactoring
     programs="$programs python-rope bicyclerepair"
 
-    # Android coding
-    programs="$programs sqliteman"
-    # podcastmagic
-    programs="$programs podget poc-streamer"
-    
     # Python
-    programs="$programs python-pip python-optcomplete python-docutils python-pygame"
+    programs="$programs python-pip python-optcomplete python-docutils"
 
 # Can install one of these jre source packages to prevent eclim from
 # complaining about missing src.zip
@@ -141,7 +136,7 @@ fi
     programs="$programs chromium-codecs-ffmpeg-extra"
     
     # Tools
-    programs="$programs p7zip ack-grep lame"
+    programs="$programs p7zip lame"
 
     # Some of these don't come with a server install? (Or maybe this list came from cygwin.)
     programs="$programs bash bash-completion binutils bzip2 coreutils cscope ctags curl diffutils dos2unix findutils git git-completion grep gzip indent less openssh sed subversion universal-ctags"
@@ -163,8 +158,6 @@ sudo pip install $packages
 if [ ! -e ~/.done_setup_new_ubuntu ] ; then
     echo
 # Post-install {{{1
-    # ack-grep should be ack to be useful.
-    sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
 
     # TODO: migrate windowbindings to gsettings
     #sh gconf_windowbindings.sh
