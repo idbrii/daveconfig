@@ -1,29 +1,31 @@
-#! /bin/sh
+#! /bin/bash
 
 # TODO: Setup for gnome-shell instead of ubuntu-unity.
 
 small='true'
 #~ small='false'
+#~ gui='true'
+gui='false'
 
-if [ ! -e ~/.done_setup_new_ubuntu ] ; then
-# Settings {{{
-    mkdir -p ~/.local/share/applications
+#~ if [ ! -e ~/.done_setup_new_ubuntu ] ; then
+#~ # Settings {{{
+#~     mkdir -p ~/.local/share/applications
     
-    settings_path=~/data/settings
+#~     settings_path=~/data/settings
     
-    # Pull in settings
-    bash $settings_path/link_dotfiles.sh
-    bash $settings_path/link_firefox.sh
-    bash $settings_path/link_otherconf.sh
-    bash $settings_path/link_menuitems.sh
-    bash $settings_path/daveconfig/makelinks_unix.sh
+#~     # Pull in settings
+#~     bash $settings_path/link_dotfiles.sh
+#~     bash $settings_path/link_firefox.sh
+#~     bash $settings_path/link_otherconf.sh
+#~     bash $settings_path/link_menuitems.sh
+#~     bash $settings_path/daveconfig/makelinks_unix.sh
     
-    # nautilus scripts
-    cd $settings_path/daveconfig/unix/nautilus
-    bash $settings_path/daveconfig/unix/nautilus/copy_files.sh
-    cd -
-# }}}
-fi
+#~     # nautilus scripts
+#~     cd $settings_path/daveconfig/unix/nautilus
+#~     bash $settings_path/daveconfig/unix/nautilus/copy_files.sh
+#~     cd -
+#~ # }}}
+#~ fi
 
 if [ ! -e ~/.done_setup_new_ubuntu ] ; then
 
@@ -32,7 +34,15 @@ if [ ! -e ~/.done_setup_new_ubuntu ] ; then
 
     # Enable disabled remote repos. I usually run with all of them on
     # In precise, this enables partner.
-    sudo sed -i.backup -e"s/^# \(deb http\)/\1/" /etc/apt/sources.list
+    sed -e"s/^# \(deb http\)/\1/" /etc/apt/sources.list | diff --color -u /etc/apt/sources.list -
+    read -p"Does that diff look good? "
+    case $REPLY in
+        y|yes)
+            sudo sed -i.backup -e"s/^# \(deb http\)/\1/" /etc/apt/sources.list
+            ;;
+        *)
+            ;;
+    esac
 
 # Add repositories {{{1
 # use nautilus-elementary. (changes the version of nautilus used)
@@ -54,14 +64,14 @@ if [ ! -e ~/.done_setup_new_ubuntu ] ; then
 # }}}
 fi
 
-sudo aptitude update
+#~ sudo aptitude update
 
 if [ ! -e ~/.done_setup_new_ubuntu ] ; then
 # Remove Junk Programs {{{1
 # For some reason, you have to remove several packages to completely get rid of openoffice
 office="evolution libreoffice libreoffice-core libreoffice-l10n-en-gb libreoffice-l10n-en-za"
 scopes="unity-scope-virtualbox unity-scope-gourmet unity-scope-colourlovers unity-scope-yelp unity-scope-musicstores unity-scope-musique unity-scope-audacious unity-scope-gmusicbrowser unity-scope-guayadeque unity-scope-clementine unity-scope-tomboy unity-scope-texdoc unity-scope-openclipart unity-scope-video-remote unity-scope-devhelp unity-scope-gdrive unity-scope-chromiumbookmarks unity-scope-firefoxbookmarks unity-scope-zotero unity-scope-manpages"
-sudo aptitude -y remove --purge $office $scopes
+sudo aptitude -y remove --purge-unused $office $scopes
 sudo aptitude -y autoclean
 # }}}
 fi
@@ -109,21 +119,19 @@ if [ $small == "true" ] ; then
 fi
 
 # Code {{{2
-    programs="$programs build-essential scons cmake exuberant-ctags cscope meld git giggle mercurial mercurial-git ipython screen"
-    # Python refactoring
-    programs="$programs python-rope bicyclerepair"
-
-    # Python
-    programs="$programs python-pip python-optcomplete python-docutils"
+    programs="$programs build-essential scons cmake universal-ctags cscope meld git mercurial screen inotify-tools"
 
 # Can install one of these jre source packages to prevent eclim from
 # complaining about missing src.zip
 # programs="$programs openjdk-6-source sun-java6-source"
 
 # Primary {{{2
+if [ $gui == "true" ]; then
     # from ppas
     programs="$programs ubuntu-tweak handbrake-gtk faenza-icon-theme" # requires ppa
     
+    # Code
+    programs="$programs giggle"
     # Essential
     programs="$programs vim-gnome chromium-browser pepperflashplugin-nonfree openssh-server"
     # Media
@@ -134,12 +142,13 @@ fi
     # Need libdvdcss libdvdread4 libdvdnav4?
     # Fix chromium videos: http://askubuntu.com/a/390187/9411 http://askubuntu.com/a/378182
     programs="$programs chromium-codecs-ffmpeg-extra"
+fi
     
     # Tools
     programs="$programs p7zip lame"
 
     # Some of these don't come with a server install? (Or maybe this list came from cygwin.)
-    programs="$programs bash bash-completion binutils bzip2 coreutils cscope ctags curl diffutils dos2unix findutils git git-completion grep gzip indent less openssh sed subversion universal-ctags"
+    programs="$programs bash bash-completion binutils bzip2 coreutils curl diffutils dos2unix findutils git git-completion grep gzip indent less sed subversion universal-ctags"
 
 # I use parcellite as a workaround for a bug in chromium:
 #   http://code.google.com/p/chromium/issues/detail?id=67074
@@ -152,7 +161,9 @@ sudo aptitude install -y $programs
 # Installing Python Packages {{{1
 # Development tool packages -- for deployed packages, I should use virtualenv.
 packages="ropevim pycscope virtualenv"
-sudo pip install $packages
+packages="$packages rope bicyclerepair"
+packages="$packages pip optcomplete docutils"
+#~ sudo pip install $packages
 # }}}
 
 if [ ! -e ~/.done_setup_new_ubuntu ] ; then

@@ -19,6 +19,8 @@ fi
 
 # I put manually installed apps in apps and link to their binaries in bin.
 export PATH=$PATH:~/data/apps/bin
+# On WSL, I put unix-only apps in ~/apps/bin.
+export PATH=$PATH:~/apps/bin
 
 if [[ -r /proc/version ]]; then
     if grep --quiet --max-count=1 Microsoft /proc/version; then

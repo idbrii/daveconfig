@@ -140,6 +140,8 @@ In Colors, change the second blue to 77,77,255 to make it legible. Be sure to cl
 
 Fix [errors setting permissions](https://stackoverflow.com/questions/52846489/cant-clone-repository-from-mounted-drive#), if applicable.
 
+Run ~/data/settings/daveconfig/unix/setup_new_ubuntu.sh
+
 
 Office ALL CAPS menus
 =====================
