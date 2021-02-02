@@ -1,0 +1,136 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Manage forks
+#
+# Looks for your system user name and git email username in remotes and ensures that
+# the remote name is 'mine'. For any repo with a remote 'mine', syncs local
+# input branch with mine (ex. master and mine/master).
+
+import argparse
+import os
+import sys
+import re
+import subprocess
+import pprint
+
+pprint = pprint.PrettyPrinter().pprint
+
+DEBUG_DISABLE_EDIT = False
+#DEBUG_DISABLE_EDIT = True
+
+
+
+def parse_args():
+    p = argparse.ArgumentParser()
+    p.add_argument("repo", type=str, help="Repo to fork.")
+    p.add_argument("--remote-name", type=str, help="Name of the remote. Defaults to 'mine' for repos owned by local users or 'upstream' for other repos.")
+    p.add_argument("--force", action="store_true", help="Write data even if remote exists.")
+
+    args = p.parse_args()
+
+    return args
+
+
+# Functions {{{1
+
+def _git(*git_args):
+    """
+    Execute git command and return the output.
+
+    _git(list(str)) -> Popen.Process
+    """
+    cmd = ["git"] + list(git_args)
+    p = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True, # treat as text
+    )
+    return p
+
+git_query = _git
+git_edit = _git
+
+
+def get_return_code(process):
+    return process.wait()
+
+
+def get_output(process):
+    result = process.communicate()
+    return [r.strip().split('\n') for r in result]
+
+
+def log(output_list):
+    for o in output_list:
+        print("\n".join(o))
+    
+
+
+def _get_git_user():
+    out,err = get_output(git_query("config", "user.email"))
+    git_user_guess = out
+    try:
+        # Assume only one user.
+        git_user_guess = git_user_guess[0]
+        # Pull out username from email address.
+        at_sign = git_user_guess.index('@')
+        return git_user_guess[:at_sign]
+
+    except IndexError:
+        pass
+    except ValueError:
+        pass
+    return None
+
+
+def has_git_repo():
+    p = git_query("rev-parse", "--git-dir")
+    return get_return_code(p) == 0
+
+
+def _add_remote(args, url):
+    p = git_edit("remote", "add", args.remote_name, url)
+    if get_return_code(p) > 0:
+        p = git_edit("remote", "set-url", args.remote_name, url)
+    log(get_output(p))
+
+
+def _clone(args, remote, url):
+    repo = remote[remote.find('/') + 1:]
+    p = git_edit("clone", url)
+    log(get_output(p))
+    p = git_edit("-C", repo, "remote", "rename", "origin", args.remote_name)
+    log(get_output(p))
+
+
+def main():
+    args = parse_args()
+
+    git_user = _get_git_user()
+
+    remote = args.repo
+    if '/' not in remote:
+        if git_user:
+            remote = f"{git_user}/{remote}"
+        else:
+            raise RuntimeError("No username detected. Please pass it as part of remote.")
+
+    if git_user in remote:
+        url = f"git@github.com:{remote}.git"
+        remote_name = 'mine'
+    else:
+        url = f"https://github.com/{remote}.git"
+        remote_name = 'upstream'
+
+    if not args.remote_name:
+        args.remote_name = remote_name
+
+    if has_git_repo():
+        _add_remote(args, url)
+    else:
+        _clone(args, remote, url)
+    
+    
+main()
