@@ -2,7 +2,13 @@
 # Local marks are not natively supported. You can jump to them, but not modify
 # them.
 if [ -e ~/.bashmarks.local.sdirs ]; then
+    # Ensure this file uses ff=unix or it will fail with a confusing message!
     source ~/.bashmarks.local.sdirs
+fi
+if [ -e /mnt/c/Users/$USER/.bashmarks.local.sdirs ]; then
+    # WSL doesn't share a home directory and I can't edit its files easily in
+    # gvim, so let it find the above file.
+    source "/mnt/c/Users/$USER/.bashmarks.local.sdirs"
 fi
 
 export DIR_dave="$HOME/data/settings/daveconfig"
