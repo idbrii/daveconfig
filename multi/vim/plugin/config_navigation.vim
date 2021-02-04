@@ -105,6 +105,8 @@ nnoremap <unique> <Leader>ji :<C-u>HoverUnderCursor<CR>
 " Jump to symbol
 nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
 
+command -nargs=1 EditUpwards call david#path#edit_upwards_from_current_file(<q-args>)
+
 if exists("##BufWinEnter") && exists("##BufEnter")
     " Show cursorline in preview window to make symbol we jumped to stand out.
     " Hide cursorline when we enter that window to avoid annoyance.

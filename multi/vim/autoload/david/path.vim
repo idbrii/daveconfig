@@ -14,3 +14,24 @@ else
         return expand(a:path)
     endf
 endif
+
+function! david#path#find_upwards_from_current_file(fname)
+    let current_file_dir = expand('%:h')
+    let found = findfile(a:fname, ';'.. current_file_dir)
+    return found
+endf
+
+function! david#path#edit_upwards_from_current_file(fname)
+    if stridx(a:fname, '*') >= 0
+        echomsg "Glob is not supported"
+        return
+    endif
+    let found = david#path#find_upwards_from_current_file(a:fname)
+    if empty(found)
+        echomsg printf("Failed to find file '%s' in directory above current file.", a:fname)
+    else
+        " Using execute() causes ale to fire errors
+        "~ call execute('edit '.. found)
+        execute 'edit '.. found
+    endif
+endf
