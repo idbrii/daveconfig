@@ -1,3 +1,10 @@
 [ver:1,total:240]
 .git/index:135,1612461600:135,r
 .git/COMMIT_EDITMSG:105,1612461600:105,r
+
+[ver:1,total:1200]
+multi\vim\reprovimrc.vim:700,1612461600:700,d
+multi\vim\vimrc.vim:240,1612458000:220,1612461600:20,d
+win\firstsetup\README.md:180,1612285200:180,d
+.git\index:60,1612461600:60,d
+multi\vim\plugin\config_display.vim:20,1612458000:20,d
