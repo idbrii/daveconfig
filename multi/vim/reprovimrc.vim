@@ -46,5 +46,9 @@ augroup reprovim
     autocmd FileType vim source ~/.vim/after/ftplugin/vim.vim
 augroup END
 
+" Load python and unix tools from local.vim
+source ~/.vim/autoload/david.vim
+source ~/.vim/local.vim
+
 source ~/.vim/plugin/config_display.vim
 FontDefault
