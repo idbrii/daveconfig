@@ -95,6 +95,7 @@ def _add_remote(args, url):
     if get_return_code(p) > 0:
         p = git_edit("remote", "set-url", args.remote_name, url)
     log(get_output(p))
+    print(f"Set remote '{args.remote_name}' to {url}")
 
 
 def _clone(args, remote, url):
