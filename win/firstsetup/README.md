@@ -35,6 +35,13 @@ Possibly also:
 
 (firacode 2 has ligatures for all kinds of things and not just symbols)
 
+pip:
+
+    pip install
+        ahk
+        keyboard
+
+
 * Do the workaround for gvim: https://github.com/ScoopInstaller/Main/issues/848
 * Run the .reg for python (scoop info python)
 * Run workrave, setup timers, enable run on startup
