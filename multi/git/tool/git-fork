@@ -9,10 +9,10 @@
 
 import argparse
 import os
-import sys
+import pprint
 import re
 import subprocess
-import pprint
+import sys
 import urllib.request
 
 pprint = pprint.PrettyPrinter().pprint
@@ -103,6 +103,9 @@ def _add_remote(args, url):
         p = git_edit("remote", "set-url", args.remote_name, url)
     log(get_output(p))
     print(f"Set remote '{args.remote_name}' to {url}")
+    p = git_edit("fetch", args.remote_name)
+    if get_return_code(p) > 0:
+        log(get_output(p))
 
 
 def _clone(args, remote, url):
