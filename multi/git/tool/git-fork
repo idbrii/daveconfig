@@ -13,6 +13,7 @@ import sys
 import re
 import subprocess
 import pprint
+import urllib.request
 
 pprint = pprint.PrettyPrinter().pprint
 
@@ -91,6 +92,12 @@ def has_git_repo():
 
 
 def _add_remote(args, url):
+    try:
+        urllib.request.urlopen(url)
+    except:
+        print(f"Url for remote '{args.remote_name}' was not reachable: {url}")
+        return
+
     p = git_edit("remote", "add", args.remote_name, url)
     if get_return_code(p) > 0:
         p = git_edit("remote", "set-url", args.remote_name, url)
