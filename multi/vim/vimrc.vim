@@ -554,9 +554,9 @@ command! -nargs=* -complete=file DirMarkDiff :call ZF_DirDiffMark(<q-args>)
 let g:ZFDirDiffMark_needConfirm = 1
 
 let g:ZFDirDiffKeymap_update = ['<C-L>']
-let g:ZFDirDiffKeymap_open = ['<cr>', 'o', '>']
+let g:ZFDirDiffKeymap_open = ['<cr>', 'o', '>>']
 let g:ZFDirDiffKeymap_foldOpenAll = ['zR']
-let g:ZFDirDiffKeymap_foldClose = ['<']
+let g:ZFDirDiffKeymap_foldClose = ['<<', "<Leader>l"]
 let g:ZFDirDiffKeymap_foldCloseAll = ['zM']
 " Go up one level on both left and right.
 let g:ZFDirDiffKeymap_goParent = ['U']
