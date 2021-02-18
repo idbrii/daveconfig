@@ -2,11 +2,17 @@ if !has('terminal')
     finish
 endif
 
-" I want terminal to behave more like a normal buffer.
+" Goal: Make terminal-insert behave like normal bash and terminal-normal to
+" behave more like a normal buffer.
+
+" Use C-w to delete a word in bash. Bash C-j is newline which I never use and
+" vim C-j is snippets, which don't exist in :terminal.
+set termwinkey=<C-J>
 
 " Exit insert mode like a normal buffer.
-tnoremap <silent> <C-l> <C-w>N
-tnoremap <silent> <C-w><C-l> <C-l>
+tnoremap <silent> <C-l> <C-j>N
+tnoremap <silent> <C-j><C-l> <C-l>
+
 
 function! s:SendRegisterToTerm(reg_arg)
     let reg = v:register
@@ -17,7 +23,7 @@ function! s:SendRegisterToTerm(reg_arg)
 
     " Vim doesn't update from job when in Terminal-Normal, so we won't see our
     " paste until we enter Terminal-Job to see our pasted text. Unfortunately,
-    " we can't just feedkeys("A\<C-w>N") to do that, because vim needs to do
+    " we can't just feedkeys("A\<C-j>N") to do that, because vim needs to do
     " an update in Terminal-Job.
 endf
 
