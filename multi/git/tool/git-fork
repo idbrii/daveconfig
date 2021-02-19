@@ -91,9 +91,12 @@ def has_git_repo():
     return get_return_code(p) == 0
 
 
+def _to_https(url):
+    return url.replace('git@github.com:', 'https://github.com/')
+
 def _add_remote(args, url):
     try:
-        urllib.request.urlopen(url)
+        urllib.request.urlopen(_to_https(url))
     except:
         print(f"Url for remote '{args.remote_name}' was not reachable: {url}")
         return
