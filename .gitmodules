@@ -316,6 +316,9 @@
 [submodule "multi/vim/bundle/aaa-cs-official"]
 	path = multi/vim/bundle/aaa-cs-official
 	url = git@github.com:idbrii/vim-cs.git
+[submodule "multi/vim/bundle/objc"]
+	path = multi/vim/bundle/objc
+	url = git@github.com:idbrii/vim-objc.git
 [submodule "multi/vim/bundle/git-gv"]
 	path = multi/vim/bundle/git-gv
 	url = git@github.com:idbrii/gv.vim.git
