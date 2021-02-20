@@ -69,7 +69,7 @@ function! david#fn_visualizer#visualize_every_line(fn) abort
             au BufWinLeave <buffer> call david#fn_visualizer#on_closed_child(expand('<afile>'))
         augroup END
         setlocal scrollbind cursorbind
-        setlocal buftype=nofile nowrap
+        setlocal buftype=nofile bufhidden=wipe nowrap
     endif
 
     vertical resize 7
@@ -90,16 +90,19 @@ endf
 
 " Visualized window closed.
 function! david#fn_visualizer#on_closed_parent(parent_bufname) abort
+    au! fn_visualizer * <buffer>
     let child_bufnr = getbufvar(a:parent_bufname, 'fn_visualizer_partner')
     if len(child_bufnr) == 0
         return
     endif
+
     " Visualizer window now has no use. Close it.
-    exec "bdelete ". child_bufnr
+    silent! exec "bwipeout ". child_bufnr
 endf
 
 " Visualizer (scratch) window closed.
 function! david#fn_visualizer#on_closed_child(child_bufname) abort
+    au! fn_visualizer * <buffer>
     let parent_bufnr = getbufvar(a:child_bufname, 'fn_visualizer_partner')
     if len(parent_bufnr) == 0
         return
