@@ -302,7 +302,9 @@ unity_folderstructure() {
 }
 
 # Serve local directory as a website.
-alias webserve='python -m SimpleHTTPServer'
+# Assume 8000 because that's default, but allow it to autopick to avoid errors.
+alias webserve='gogo http://localhost:8000 && (python3 -m http.server --bind localhost || python -m SimpleHTTPServer)'
+
 # Generate html to display image/video slideshow.
 alias webslideshow='python ~/data/settings/daveconfig/unix/terminal/quickcast/cast.py'
 
