@@ -277,6 +277,15 @@ set wildmode=longest:list,full
 " Need to set this so dirvish will autochdir.
 let g:dirvish_autochdir = 1
 
+" Using autochdir requires a preamble or scripts execute from tmp.
+if has('win32')
+    " work across hard drives
+    let g:dirvish_shdo_preamble = 'pushd {}'
+else
+    let g:dirvish_shdo_preamble = 'cd {}'
+endif
+
+
 " 'autochdir' alternative so I can provide exceptions. See calling autocmd.
 "
 " Switch to the directory of the current file unless it breaks something.
