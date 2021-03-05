@@ -26,6 +26,10 @@ nmap <silent> <C-l> <Plug>(FastFoldUpdate)<Plug>(david-redraw-screen)
 " Quick fix slashes
 "	win -> unix
 xnoremap <A-/> :s/\\/\//g<CR>:nohl<CR>
+if has('mac')
+    " A-/ isn't mappable on mac.
+    xnoremap <D-/> :s/\\/\//g<CR>:nohl<CR>
+endif
 "	unix -> win
 xnoremap <A-?> :s/\//\\/g<CR>:nohl<CR>
 
