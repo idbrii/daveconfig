@@ -26,7 +26,8 @@ function! LocateFilelist() abort
     let l:tagfile = <SID>FindTagFile('filelist')
     if filereadable(l:tagfile)
         let is_new_project = !exists('g:david_project_filelist')
-        let g:david_project_filelist = (l:tagfile)
+        " unite requires unix-style slashes
+        let g:david_project_filelist = david#path#to_unix(l:tagfile)
         echomsg 'Filelist=' . g:david_project_filelist
         " Only change grep mode when first setting up a project (so if we
         " already configured it, we don't stomp it with a worse
