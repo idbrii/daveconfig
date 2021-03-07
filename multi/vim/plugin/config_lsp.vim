@@ -4,7 +4,9 @@ let g:lsp_diagnostics_enabled = 0
 " Try out highlighting with a big delay.
 let g:lsp_highlight_references_enabled = 1
 " This cannot be modified at runtime.
-let g:lsp_highlight_references_delay = 1000
+let g:lsp_diagnostics_highlights_delay = 4000
+let g:lsp_diagnostics_signs_delay = 4000
+let g:lsp_document_highlight_delay = 4000
 
 "~ let g:lsp_log_verbose = 1
 let g:lsp_log_file = g:david_cache_root .'/lsp.log'
