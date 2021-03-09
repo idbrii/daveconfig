@@ -42,7 +42,7 @@ augroup david_lsp
     " # emmylua-ls
     " install openjdk
     " LspInstallServer
-    if executable('lua-lsp') || executable(lsp_settings#servers_dir() .'/emmylua-ls/emmylua-ls')
+    if executable('lua-lsp') || executable(lsp_settings#servers_dir() .'/emmylua-ls/emmylua-ls') || executable(lsp_settings#servers_dir() .'/sumneko-lua-language-server/sumneko-lua-language-server')
         let g:lua_define_omnifunc = 0
         let g:lua_define_completion_mappings = 0
         if executable('lua-lsp')
