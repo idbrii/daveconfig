@@ -1,6 +1,15 @@
 # vim: set ft=sh :
+
+export DIR_dave="$HOME/data/settings/daveconfig"
+export DIR_vim="$HOME/data/settings/daveconfig/multi/vim"
+export DIR_bun="$HOME/data/settings/daveconfig/multi/vim/bundle"
+export DIR_bundle="$HOME/data/settings/daveconfig/multi/vim/bundle"
+export DIR_code="$HOME/data/code"
+export DIR_home="/mnt/c/Users/$USER"
+export DIR_love="$HOME/data/code/gamedev-love"
+
 # Local marks are not natively supported. You can jump to them, but not modify
-# them.
+# them. Load them last to allow overwriting above marks.
 if [ -e ~/.bashmarks.local.sdirs ]; then
     # Ensure this file uses ff=unix or it will fail with a confusing message!
     source ~/.bashmarks.local.sdirs
@@ -11,10 +20,3 @@ if [ -e /mnt/c/Users/$USER/.bashmarks.local.sdirs ]; then
     source "/mnt/c/Users/$USER/.bashmarks.local.sdirs"
 fi
 
-export DIR_dave="$HOME/data/settings/daveconfig"
-export DIR_vim="$HOME/data/settings/daveconfig/multi/vim"
-export DIR_bun="$HOME/data/settings/daveconfig/multi/vim/bundle"
-export DIR_bundle="$HOME/data/settings/daveconfig/multi/vim/bundle"
-export DIR_code="$HOME/data/code"
-export DIR_home="/mnt/c/Users/$USER"
-export DIR_love="$HOME/data/code/gamedev-love"
