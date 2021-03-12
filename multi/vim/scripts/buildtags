@@ -56,8 +56,8 @@ if [[ $continuous -eq 1 ]]; then
 
     if [[ -x "$(command -v fswatch)" ]]; then
         # fswatch runs in a loop, so it needs to ignore the results of our builds (tags file).
-        echo fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude .*.sw*
-             fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude .*.sw* | while read -d "" event
+        echo fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude ".*.sw*"
+             fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude ".*.sw*" | while read -d "" event
         do
             # Ignore vim swap file changes
             if [[ $event == *.*.sw* ]]; then
@@ -251,6 +251,8 @@ if [[ $cscope == "tagonly" ]] ; then
 elif [[ $cscope == "skip-cscope" ]] ; then
     # Make empty cscope files so scripts expecting them don't barf.
     touch cscope.{in.,po.,}out
+    # Old cscope (15.9 on macOS) complains it can't read these empty files. May
+    # want to disable touching in that case.
 
 else
 	case $filetype in
