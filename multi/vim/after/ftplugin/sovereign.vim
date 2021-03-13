@@ -56,7 +56,8 @@ nmap <buffer> <expr> <Leader>l getline('.') =~# '^\u \S' ? '=' : g:david_toggle_
 nmap <buffer>        <Leader>L =
 
 " Include the diff in the commit and expand the window so we can see it.
-nnoremap <buffer> <silent> c :<C-U>Scommit --verbose<CR><C-w>_O<Esc>
+" Sovereign is always verbose, so we don't include --verbose
+nnoremap <buffer> <silent> ci :<C-U>Scommit<Bar>wincmd _<CR>O
 
 " sovereign uses R to refresh the buffer. Remap C-l (my redraw command)
 " instead.
