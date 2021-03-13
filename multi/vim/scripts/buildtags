@@ -52,6 +52,7 @@ fi
 
 if [[ $continuous -eq 1 ]]; then
     if [[ -x "$(command -v fswatch)" ]]; then
+        # fswatch runs in a loop, so it needs to ignore the results of our builds (tags file).
         echo fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude .*.sw*
              fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude .*.sw* | while read -d "" event
         do
@@ -65,7 +66,12 @@ if [[ $continuous -eq 1 ]]; then
         done
     else
         # Only linux seems to have watch support by default.
-        while inotifywait --event close_write,moved_to,create --recursive $search_dirs ; do
+        # --quiet to avoid "Setting up watches" print on each invocation.
+        # --exclude to ignore .gtm and vim .swp -- prevent build on opening
+        #     file. Only one exclude is allowed, additions need to extend the
+        #     regex.
+        while inotifywait --quiet --event close_write,moved_to,create --exclude '/\.' --recursive $search_dirs ; do
+            echo Rebuild tags...
             $0 $cscope $filetype $search_dirs
         done
     fi
