@@ -33,6 +33,10 @@ endif
 " Git          {{{1
 if executable('git')
 
+    " I almost always do verbose, so define my own Gcommit that uses full
+    " vertical height. See vim-fugitive#1519.
+    command! -bar -bang -nargs=* -range=-1 -complete=customlist,fugitive#CommitComplete Gcommit <range>Git<bang> commit <args>|wincmd _
+
     " Fugitive
     nnoremap <Leader>gi :Gstatus<CR>gg<C-n>
     nnoremap <Leader>gd :Gdiff<CR>

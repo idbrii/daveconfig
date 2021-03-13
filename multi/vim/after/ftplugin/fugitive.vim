@@ -53,8 +53,8 @@ nmap <buffer> <expr> <Leader>l getline('.') =~# '^\u \S' ? '=' : g:david_toggle_
 " Unconditional toggle is like toggle all.
 nmap <buffer>        <Leader>L =
 
-" Include the diff in the commit and expand the window so we can see it.
-nnoremap <buffer> <silent> c :<C-U>Gcommit --verbose<CR><C-w>_O<Esc>
+" Include the diff in the commit. I've redefined Gcommit to always expand the window.
+nnoremap <buffer> <silent> ci :<C-U>Gcommit --verbose<CR>O
 
 " fugitive uses R to refresh the buffer. Remap C-l (my redraw command)
 " instead.
