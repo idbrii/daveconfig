@@ -35,7 +35,15 @@ if executable('git')
 
     " I almost always do verbose, so define my own Gcommit that uses full
     " vertical height. See vim-fugitive#1519.
-    command! -bar -bang -nargs=* -range=-1 -complete=customlist,fugitive#CommitComplete Gcommit <range>Git<bang> commit <args>|wincmd _
+    function! s:GitCommit(line1, line2, range, bang, mods, args) abort
+        let bufnr = bufnr()
+        exec fugitive#Command(a:line1, a:line2, a:range, a:bang, a:mods, a:args)
+        if bufnr != bufnr()
+            wincmd _
+        endif
+    endf
+
+    command! -bang -nargs=? -range=-1 -complete=customlist,fugitive#CommitComplete Gcommit call s:GitCommit(<line1>, <count>, +"<range>", <bang>0, "<mods>", "commit " .. <q-args>)
 
     " Fugitive
     nnoremap <Leader>gi :Gstatus<CR>gg<C-n>
