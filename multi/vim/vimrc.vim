@@ -242,7 +242,11 @@ endif
 " But using .exe breaks vim-lsp. See vim-lsp/issues/685
 set wildignore=*.o,*.obj,*.bak,*.pyc,*.swp
 " Show these file types at the end while using :edit command
-set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch
+" These also show at the bottom of Dirvish
+set suffixes+=.class,.exe,.o,.obj,.dat,.dll,.aux,.pdf,.gch,.tags,.out
+" These will match files like 'nametags', but it just deprioritizes them so I
+" think that's fine.
+set suffixes+=filelist,tags
 
 " Don't clobber my maps with Apple HIG movement.
 let macvim_skip_cmd_opt_movement = 1
