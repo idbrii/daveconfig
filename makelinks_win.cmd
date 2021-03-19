@@ -31,6 +31,8 @@ mklink    %USERPROFILE%\.inputrc         %daveconfig%\win\cygwin\.inputrc
 mklink    %USERPROFILE%\.minttyrc        %daveconfig%\win\cygwin\.minttyrc
 mklink    %USERPROFILE%\_vsvimrc         %daveconfig%\win\visualstudio\_vsvimrc
 
+mklink /D %USERPROFILE%\.zbstudio         %daveconfig%\multi\zbstudio
+
 :: Bash on Windows puts drives in mnt. For cygwin, I could probably replace mnt
 :: with cygdrive.
 mkdir c:\mnt

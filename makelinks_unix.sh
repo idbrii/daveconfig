@@ -9,6 +9,8 @@ ln -s $dconfig_path/multi/vim/gvimrc.vim ~/.gvimrc
 ln -s $dconfig_path/multi/git/.gitconfig ~/.
 ln -s $dconfig_path/multi/git/.gitignore ~/.
 
+ln -s $dconfig_path/multi/zbstudio ~/.zbstudio
+
 config_dir=$dconfig_path/unix/terminal/
 for a in `find $config_dir -maxdepth 1 -type f` ;do
     ln -s $a ~/.$(basename $a)
