@@ -91,7 +91,15 @@ function! s:set_entrypoint(makeprg)
     " I put code in ./src/
     let g:inclement_n_dir_to_trim = 2
     let g:inclement_after_first_include = 1
-    let g:inclement_src_root = g:david_project_root ..'/src/'
+    let g:inclement_include_directories = "lib|src"
+    " Must match tags file which uses no drive and forward slashes
+
+    let src_root = g:david_project_root ..'/src/'
+    if has('win32')
+        let src_root = substitute(src_root, '\\', '/', 'g')
+        let src_root = substitute(src_root, '^\w:', '', '')
+    endif
+    let g:inclement_src_root = src_root
 endf
 function! s:GetLoveCmd()
     if has('win32')
