@@ -77,6 +77,8 @@ function! s:set_entrypoint(makeprg)
         " callstacks are loaded properly.
         call execute('AsyncRun -program=make -auto=make -cwd='. cur_dir .' @')
     endf
+    " Don't let python settings leak into lua.
+    let g:asyncrun_exit = ''
 
     command! ProjectMake call DavidProjectBuild()
     command! ProjectRun  call DavidProjectBuild()
