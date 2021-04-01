@@ -298,8 +298,8 @@ if executable('svn')
     nnoremap <silent> <leader>fIu :VCStatus -u<CR>
     nnoremap <silent> <leader>fIq :VCStatus -qu<CR>
     nnoremap <silent> <leader>fIc :VCStatus .<CR>
-    nnoremap <silent> <leader>fV :exec 'Slog! '. g:david_project_root<CR>
-    nnoremap <silent> <leader>fv :Slog<CR>
+    nnoremap <silent> <leader>fV :exec 'Sclog! '. g:david_project_root<CR>
+    nnoremap <silent> <leader>fv :Sclog<CR>
     " Explore
     nnoremap <silent> <leader>fe :VCBrowse<CR>
     nnoremap <silent> <leader>fEm :VCBrowse<CR>
