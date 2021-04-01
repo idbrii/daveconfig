@@ -1,1 +1,7 @@
 [ver:1,total:0]
+
+[ver:1,total:2880]
+multi/vim/autoload/david/search.vim:2250,1616979600:840,1616983200:1230,1617048000:180,m
+unix/terminal/bash_aliases:360,1616997600:180,1617004800:180,r
+.git/index:210,1616983200:30,1616986800:180,r
+.git/COMMIT_EDITMSG:60,1617048000:60,r

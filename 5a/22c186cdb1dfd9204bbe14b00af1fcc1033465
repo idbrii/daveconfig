@@ -1,1 +1,8 @@
 [ver:1,total:0]
+
+[ver:1,total:1620]
+multi/vim/bundle/lua-david/after/ftplugin/lua_makelove.vim:900,1617213600:900,m
+multi/vim/bundle/lua-david/after/ftplugin/toml_makelove.vim:210,1617213600:150,1617217200:60,m
+.git/index:210,1617213600:180,1617217200:30,r
+multi/vim/bundle/lua-david/after/ftplugin/lua.vim:210,1617213600:210,r
+.git/COMMIT_EDITMSG:90,1617217200:90,r
