@@ -144,6 +144,8 @@ if executable('svn')
         " This only works on changes within our current branch. You need the
         " svn url instead of project root to see changes from other branches.
         exec '.!svn log --verbose   --change '. a:revision .' '. g:david_project_root
+        " Indent one space to avoid interpreting text as part of diff.
+        %s/^/ /g
         normal! Go
         exec '.!svn diff            --change '. a:revision .' '. g:david_project_root
         %s/\r//e
