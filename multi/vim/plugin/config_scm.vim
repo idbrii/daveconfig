@@ -134,26 +134,7 @@ if executable('svn')
     command! -nargs=? SvnDiff :silent call s:SvnDiff(expand("%"), <q-args>)
 
     " There's no VCShow like git show.
-    function! s:SvnShow(revision)
-        silent Scratch diff
-        " This is a re-implementation of
-        " ~/data/settings/daveconfig/multi/svn/bin/svn-show because the Bash
-        " on Windows win32-unix interface is flaky.
-        "exec '.! bash.exe -c '. expand('~/data/settings/daveconfig/multi/svn/bin/svn-show') .' '. a:revision
-
-        " This only works on changes within our current branch. You need the
-        " svn url instead of project root to see changes from other branches.
-        exec '.!svn log --verbose   --change '. a:revision .' '. g:david_project_root
-        " Indent one space to avoid interpreting text as part of diff.
-        %s/^/ /g
-        normal! Go
-        exec '.!svn diff            --change '. a:revision .' '. g:david_project_root
-        %s/\r//e
-        normal! gg
-        nnoremap <buffer> q :<C-u>close<CR>
-        nnoremap <buffer> gq :<C-u>close<CR>
-    endf
-    command! -nargs=+ SvnShow :silent call s:SvnShow(<q-args>)
+    command! -nargs=+ SvnShow :Sedit <args>
 
     " VCMove often fails. Requires relative or repo paths, but even then it
     " thinks I'm moving to the filesystem. This is probably not as safe, but
