@@ -13,6 +13,8 @@ set termwinkey=<C-J>
 tnoremap <silent> <C-l> <C-j>N
 tnoremap <silent> <C-j><C-l> <C-l>
 
+" https://github.com/vim/vim/issues/6040
+tnoremap <S-space> <space>
 
 function! s:SendRegisterToTerm(reg_arg)
     let reg = v:register
