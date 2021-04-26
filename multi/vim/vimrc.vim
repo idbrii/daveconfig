@@ -692,7 +692,7 @@ let g:surround_no_mappings = 1
 nmap ds  <Plug>Dsurround
 nmap cs  <Plug>Csurround
 nmap cS  <Plug>CSurround
-xmap s :call david#editing#xsurround()<CR>
+xmap <expr> s david#editing#xsurround()
 xmap S <Plug>VgSurround
 " Be consistent in normal mode instead of using ys.
 nmap s <Plug>Ysurround

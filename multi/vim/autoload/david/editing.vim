@@ -16,13 +16,12 @@ endfunction
 " For xmap s: Behave like yss if single line is selected.
 " Allows me to use s for no newlines and S for add newlines.
 function! david#editing#xsurround() abort range
-    let is_linewise = visualmode() ==# 'V'
-    let cmd = nr2char(getchar())
-    let line_count = a:lastline - a:firstline + 1
+    let is_linewise = mode() ==# 'V'
+    let line_count = line(".") - line("v") + 1
     if is_linewise && line_count == 1
-        exec "normal \<Plug>Yssurround" .. cmd
+        return "\<Esc>\<Plug>Yssurround"
     else
-        exec "normal gv\<Plug>VSurround" .. cmd
+        return "\<Plug>VSurround"
     endif
 endf
 
