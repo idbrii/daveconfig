@@ -130,6 +130,11 @@
 # uses ssh and requires sshkey authentication for every remote action.
     insteadOf = git://github.com
 
+[url "git@github.com:idbrii"]
+    # Use ssh instead of https for github so I can use ssh-agent.
+    # pip, gh, and other tools default to https.
+    insteadOf = https://github.com/idbrii
+
 # In theory this might work, but doesn't for git version 2.20.1
 ; [url "https://github.com/"]
 ; # Don't prompt for password on pull.
