@@ -57,12 +57,12 @@ function! s:get_python_makeprg(module_and_args)
     return entrypoint_makeprg
 endf
 
-function! s:set_module_entrypoint(should_be_async)
+function! s:set_module_entrypoint(should_be_async, args)
     " Use the current file as module. Will be invoked from this directory too.
     let cur_file = expand('%:p')
     let cur_module = fnamemodify(cur_file, ':t:r')
 
-    call s:set_entrypoint(a:should_be_async, s:get_python_makeprg(cur_module))
+    call s:set_entrypoint(a:should_be_async, s:get_python_makeprg(cur_module ..' '.. a:args))
 endf
 
 function! s:set_test_entrypoint(should_be_async, test_name)
@@ -105,7 +105,7 @@ function! s:set_entrypoint(should_be_async, entrypoint_makeprg)
     command! ProjectRun  call DavidProjectBuild()
 endf
 " Defaults to async. Use bang for :make.
-command! -bang -buffer PythonSetEntrypoint call s:set_module_entrypoint(<bang>1)
+command! -bang -buffer -nargs=* PythonSetEntrypoint call s:set_module_entrypoint(<bang>1, <q-args>)
 " Pass "TestClass.test_function" to run that specific test.
 command! -bang -buffer -nargs=* PythonTest call s:set_test_entrypoint(<bang>1, <q-args>)
 
