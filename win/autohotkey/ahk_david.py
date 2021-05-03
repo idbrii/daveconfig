@@ -116,11 +116,13 @@ class Monitor(object):
 def get_monitor_layout():
     # This returns incorrect numbers. Sometimes height is 0. Positions are off.
     # Maybe because of text scaling?
+    # maximized window on left monitor (next to task bar)
+    # x: -2989	y: 282	w: 3000	h: 1750
     # import win32api
     # return [Monitor(index, *dimensions) for index,(h1,h2,dimensions) in enumerate(win32api.EnumDisplayMonitors())]
     return [
         # width doesn't include task bar and is shrunk until it doesn't overlap with next monitor.
-        Monitor(0, -2978, 0, 3005 - 10, 1750-5),
+        Monitor(0, -2978, 282, 3005 - 10, 1750-5),
         Monitor(1, 1,  -11,  3862,  2182),
     ]
 
@@ -133,10 +135,10 @@ def organize_desktop():
     logging.info('organize_desktop')
     monitor = get_monitor_layout()
     # pretty.pprint([str(m) for m in monitor])
-    avoid_right_monitor = len(monitor) == 2
+    avoid_right_monitor = len(monitor) <= 2
     # Lay out windows for my three monitors with centre as the work machine.
     # Roughly in order of left-to-right appearance.
-    left_slack_width = 1554
+    left_slack_width = monitor[0].width * 0.5
     move_and_restore(exe_match("slack.exe"), monitor[0].x + 22, monitor[0].y, left_slack_width, monitor[0].height)
     move_and_restore(window_class_match("Vim"), monitor[1].x, monitor[1].y, monitor[1].width//2, monitor[1].height)
     # Game and log go here (but they position themselves).
@@ -155,7 +157,9 @@ def organize_desktop():
     # text inside the window, but the title should be pretty consistent so use
     # that instead.
     if avoid_right_monitor:
-        move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[0].x + 1424, monitor[0].y + 916, 1395,  722)
+        w = 1395
+        h = 722
+        move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[0].x + monitor[0].width - w, monitor[0].y + monitor[0].height - h, w, h)
     else:
         # Shouldn't this be here?
         # move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[2].x, monitor[2].y + 482, 974, 605)
