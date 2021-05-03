@@ -87,13 +87,14 @@ def exe_match(expected_name):
 #     print(f"{win.title} {win.engine} {win.id} {win.text}")
 
 
-def move_and_restore(win_filter_fn, x, y, w, h):
+def move_and_restore(win_filter_fn, xywh):
     """Move window to x,y and resize to w,h.
 
     Returns True if the window was found.
 
-    move_and_restore(string, int, int, int, int) -> bool
+    move_and_restore(string, [int*4]) -> bool
     """
+    x, y, w, h = xywh[0], xywh[1], xywh[2], xywh[3]
     win = ahk.find_window(win_filter_fn)
     if win:
         win.restore()
@@ -111,6 +112,26 @@ class Monitor(object):
 
     def __str__(self):
         return "Monitor[{}] at ({},{}) dimensions ({},{})".format(self.index, self.x, self.y, self.width, self.height)
+
+    def topright(self, w,h):
+        x = self.x + self.width - w
+        y = self.y
+        return [x,y, w,h]
+
+    def botright(self, w,h):
+        x = self.x + self.width - w
+        y = self.y + self.height - h
+        return [x,y, w,h]
+
+    def botleft(self, w,h):
+        x = self.x
+        y = self.y + self.height - h
+        return [x,y, w,h]
+
+    def topleft(self, w,h):
+        x = self.x
+        y = self.y
+        return [x,y, w,h]
 
 
 def get_monitor_layout():
@@ -139,17 +160,17 @@ def organize_desktop():
     # Lay out windows for my three monitors with centre as the work machine.
     # Roughly in order of left-to-right appearance.
     left_slack_width = monitor[0].width * 0.5
-    move_and_restore(exe_match("slack.exe"), monitor[0].x + 22, monitor[0].y, left_slack_width, monitor[0].height)
-    move_and_restore(window_class_match("Vim"), monitor[1].x, monitor[1].y, monitor[1].width//2, monitor[1].height)
+    move_and_restore(exe_match("slack.exe"), monitor[0].topleft(left_slack_width, monitor[0].height))
+    move_and_restore(window_class_match("Vim"), monitor[1].topleft(monitor[1].width//2, monitor[1].height))
     # Game and log go here (but they position themselves).
     if avoid_right_monitor:
-        move_and_restore(exe_match("chrome.exe"), monitor[0].x + left_slack_width, monitor[0].y, monitor[0].width - left_slack_width, monitor[0].height)
+        move_and_restore(exe_match("chrome.exe"), monitor[0].topright(monitor[0].width - left_slack_width, monitor[0].height))
         # Using Chrome size on terminal doesn't produce the same size window?
         # move_and_restore(exe_match("ubuntu.exe"), monitor[0].x + left_slack_width, monitor[0].y, monitor[0].width - left_slack_width, monitor[0].height - 200)
-        move_and_restore(exe_match("ubuntu.exe"), monitor[0].x+1610, monitor[0].y, 1419, monitor[0].height-50)
+        move_and_restore(exe_match("ubuntu.exe"), monitor[0].topright(1419, monitor[0].height-50))
     else:
-        move_and_restore(exe_match("chrome.exe"), monitor[2].x, monitor[2].y, 974, 1080)
-        move_and_restore(exe_match("ubuntu.exe"), monitor[2].x+953, monitor[2].y, 974, 1087)
+        move_and_restore(exe_match("chrome.exe"), monitor[2].topleft(974, 1080))
+        move_and_restore(exe_match("ubuntu.exe"), monitor[2].topright(974, 1087))
 
 
     # Tortoise has lots of windows and they all have the same ahk_exe
@@ -157,13 +178,9 @@ def organize_desktop():
     # text inside the window, but the title should be pretty consistent so use
     # that instead.
     if avoid_right_monitor:
-        w = 1395
-        h = 722
-        move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[0].x + monitor[0].width - w, monitor[0].y + monitor[0].height - h, w, h)
+        move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[0].botright(1395,722))
     else:
-        # Shouldn't this be here?
-        # move_and_restore(title_contains("Working Copy - TortoiseSVN"), monitor[2].x, monitor[2].y + 482, 974, 605)
-        move_and_restore(title_contains("Working Copy - TortoiseSVN", 5433, 482, 974, 605))
+        move_and_restore(title_contains("Working Copy - TortoiseSVN", monitor[2].botright(974, 605)))
 
 def shim(fn):
     try:
