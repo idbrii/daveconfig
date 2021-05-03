@@ -114,7 +114,13 @@ class Monitor(object):
         return "Monitor[{}] at ({},{}) dimensions ({},{})".format(self.index, self.x, self.y, self.width, self.height)
 
     def topright(self, w,h):
-        x = self.x + self.width - w
+        fudge = 0
+        if self.index == 0:
+            # avoid touching screen edge or y-position is wrong (probably due
+            # to mismatched monitor sizes).
+            fudge = 10
+        
+        x = self.x + self.width - w - fudge
         y = self.y
         return [x,y, w,h]
 
@@ -143,7 +149,7 @@ def get_monitor_layout():
     # return [Monitor(index, *dimensions) for index,(h1,h2,dimensions) in enumerate(win32api.EnumDisplayMonitors())]
     return [
         # width doesn't include task bar and is shrunk until it doesn't overlap with next monitor.
-        Monitor(0, -2978, 282, 3005 - 10, 1750-5),
+        Monitor(0, -2978, 282, 3005 - 10, 1750 - 5),
         Monitor(1, 1,  -11,  3862,  2182),
     ]
 
