@@ -5,6 +5,7 @@
 
 import os
 import pprint as pretty
+import sys
 
 from ahk import AHK
 from ahk.window import Window
@@ -13,7 +14,7 @@ import keyboard
 import logging
 logging.basicConfig(
     level=logging.INFO,
-    filename='c:/scratch/ahk.log',
+    filename='c:/logs/ahk.log',
     filemode='w')
 
 def print_doc(obj):
@@ -173,14 +174,21 @@ logging.info('Starting...')
 keyboard.add_hotkey('windows+f12', organize_desktop, suppress=False)
 keyboard.add_hotkey('windows+ctrl+f11', organize_desktop, suppress=False)
 
-run_loop = True # False
+run_once = 'run-once' in sys.argv
+run_loop = not run_once
 
-# Wait for hotkeys to get hit.
-while run_loop:
-    keyboard.wait()
-    logging.info('Done waiting')
+logging.info(f'run_once: {run_once}')
 
-if not run_loop:
-    organize_desktop()
+try:
+    # Wait for hotkeys to get hit.
+    while run_loop:
+        keyboard.wait()
+        logging.info('Done waiting')
+    
+    if not run_loop:
+        organize_desktop()
+except Exception as e:
+    logging.exception(str(e))
+    raise e
 
 logging.info('Exiting')
