@@ -97,6 +97,32 @@ if has('win32') || has("macunix")
     set fileformats^=unix
 endif
 
+" Session {{{1
+command! SessionSaveAndQuit mksession! ~/.vim-cache/session.vim | qall
+command! SessionLoad        source ~/.vim-cache/session.vim
+
+set sessionoptions=
+
+" Layout options
+set sessionoptions+=blank    " empty windows
+set sessionoptions+=help     " the help window
+set sessionoptions+=resize   " size of the Vim window: 'lines' and 'columns'
+set sessionoptions+=winpos   " position of the whole Vim window
+set sessionoptions+=winsize  " window sizes
+" Content options
+set sessionoptions+=slash    " backslashes in file names replaced with forward slashes
+set sessionoptions+=tabpages " all tab pages (disable when saving a session per tab)
+set sessionoptions+=terminal " include terminal windows where the command can be restored
+set sessionoptions+=unix     " with Unix end-of-line format (single <NL>), even when on Windows or DOS
+" Config options
+set sessionoptions+=curdir " the current directory
+set sessionoptions+=globals  " global variables (String and Number) matching /^\u\k*\l\k*/
+" Disabled - I use sessions for a clean vim.
+"~ set sessionoptions+=buffers " hidden and unloaded buffers, not just those in windows
+"~ set sessionoptions+=folds " manually created folds, opened/closed folds and local fold options
+"~ set sessionoptions+=localoptions " options and mappings local to a window or buffer (not global values for local options)
+"~ set sessionoptions+=options " all options and mappings (also global values for local options)
+
 " Display {{{1
 set background=dark			" I use dark background
 set nolazyredraw				" Don't repaint when scripts are running
