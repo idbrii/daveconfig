@@ -7,6 +7,8 @@ let g:lsp_highlight_references_enabled = 1
 let g:lsp_diagnostics_highlights_delay = 4000
 let g:lsp_diagnostics_signs_delay = 4000
 let g:lsp_document_highlight_delay = 4000
+" Prevents completion from starting after . or ->
+let g:asyncomplete_min_chars = 2
 
 "~ let g:lsp_log_verbose = 1
 let g:lsp_log_file = g:david_cache_root .'/lsp.log'
