@@ -379,3 +379,6 @@
 [submodule "multi/vim/bundle/rhubarb"]
 	path = multi/vim/bundle/rhubarb
 	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "multi/vim/bundle/obsession"]
+	path = multi/vim/bundle/obsession
+	url = https://github.com/tpope/vim-obsession.git
