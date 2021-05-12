@@ -1,12 +1,18 @@
 :: Create a central server to edit in vim
 
-:: Since we use remote-silent, we must send a file!
-set placeholder_file=%1
-if defined placeholder_file (
-    set placeholder_file=
+:: Only use remote-silent if we have a file.
+set file=%1
+if defined file (
+    set file=--remote-silent %*
 ) else (
-    set placeholder_file=hello-new-server
+    set file=
+)
+
+:: Auto load session.
+set session=
+if exist %USERPROFILE%\.vim-cache\session.vim (
+    set session=-S ~/.vim-cache/session.vim 
 )
 
 :: Call the .bat because it doesn't leave our command prompt sticking around.
-call gvim.bat --servername VIDE --remote-silent %placeholder_file% %*
+call gvim.bat --servername VIDE %session% %file%

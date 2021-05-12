@@ -100,6 +100,7 @@ endif
 " Session {{{1
 command! SessionSaveAndQuit mksession! ~/.vim-cache/session.vim | qall
 command! SessionLoad        source ~/.vim-cache/session.vim
+command! SessionObsess      Obsession ~/.vim-cache/session.vim | Chmod 600 ~/.vim-cache/session.vim
 
 set sessionoptions=
 

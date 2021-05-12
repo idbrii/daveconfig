@@ -53,6 +53,10 @@ else
     remote="--remote-silent"
 fi
 
+session=
+if [[ -e ~/.vim-cache/session.vim ]]; then
+    session="-S ~/.vim-cache/session.vim"
+fi
 
 # TODO: videinvoke does not work here!
 # Fork editexisting and make something that handles this logic within vim
@@ -62,7 +66,7 @@ vim="$vim +\"runtime videinvoke.vim\""
 if [[ $is_neovim == 1 ]] ; then
     vim="$vim $remote --cmd \"let g:server_addr = serverstart('vide')\""
 else
-    vim="$vim --servername Vide $remote"
+    vim="$vim $session --servername Vide $remote"
 fi
 
 # --remote says it only accepts one command!
