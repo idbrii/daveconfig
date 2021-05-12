@@ -4,7 +4,7 @@
 " the line.
 "
 " VS passes the following arguments to vim:
-"   --servername Vide --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime videinvoke.vim" $(ItemFileName)$(ItemExt)
+"   --servername Vide --remote-silent +"call cursor($(CurLine),$(CurCol))" +"runtime videinvoke.vim" $(ItemPath)
 "   It might be useful to include: +"set path+=$(SolutionDir)/**"
 " Eclipse passes:
 "   --servername Vide --remote-silent "+runtime videinvoke.vim" "+set path+=${project_loc}/**" ${resource_loc}
