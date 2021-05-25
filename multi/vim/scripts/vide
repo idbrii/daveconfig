@@ -22,7 +22,11 @@ fi
 
 is_neovim=0
 vim=gvim
-if [[ -x "/usr/local/bin/mvim" ]] ; then
+if grep --quiet --no-messages --max-count=1 Microsoft /proc/version; then
+    # Under WSL, unix vim can't send commands to Windows gvim because it
+    # doesn't have clientserver (no X server).
+    vim=vim.exe
+elif [[ -x "/usr/local/bin/mvim" ]] ; then
     # MacVim is a mac frontend for vim.
     vim=mvim
 elif [[ -x "/usr/local/bin/vimr" ]] ; then
