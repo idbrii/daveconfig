@@ -1,4 +1,9 @@
-function! s:BuildLove(additional_args)
+function! s:BuildLove(additional_args) abort
+    if !filereadable(g:david_project_root ..'/makelove.toml')
+        echo printf("Error: No makelove.toml found in '%s'. Did you call LuaLoveSetEntrypoint?\nAborting...", g:david_project_root)
+        return
+    endif
+    
     update
     exec 'lcd' g:david_project_root
 
