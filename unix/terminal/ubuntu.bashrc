@@ -22,13 +22,11 @@ export PATH=$PATH:~/data/apps/bin
 # On WSL, I put unix-only apps in ~/apps/bin.
 export PATH=$PATH:~/apps/bin
 
-if [[ -r /proc/version ]]; then
-    if grep --quiet --max-count=1 Microsoft /proc/version; then
-        # WSL adds Windows paths in PATH, but these are substitutes for unix
-        # commands.
-        REMOVE='/mnt/c/david/settings/daveconfig/win/system/bin'
-        export PATH=${PATH/:$REMOVE:/:}
-    fi
+if grep --quiet --no-messages --max-count=1 Microsoft /proc/version; then
+    # WSL adds Windows paths in PATH, but these are substitutes for unix
+    # commands.
+    REMOVE='/mnt/c/david/settings/daveconfig/win/system/bin'
+    export PATH=${PATH/:$REMOVE:/:}
 fi
 
 
