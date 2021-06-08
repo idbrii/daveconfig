@@ -10,6 +10,9 @@ let g:ale_lint_delay = 1000
 let g:ale_set_quickfix = 0
 let g:ale_set_loclist = 0
 
+" I've configured a bunch of linters here, so don't make me do it again.
+let g:lsp_ale_auto_enable_linter = 0
+
 " C# {{{1
 
 " Disabling mcsc to see if that makes vim more responsive. I've got omnisharp
@@ -41,7 +44,6 @@ endfor
 " Language server is probably best, but mypy does type annotation checking.
 
 let g:ale_linters.python = [
-            \     'pyls',
             \     'flake8',
             \     'mypy',
             \     'pylint'

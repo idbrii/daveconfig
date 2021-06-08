@@ -385,3 +385,6 @@
 [submodule "multi/vim/bundle/obsession"]
 	path = multi/vim/bundle/obsession
 	url = https://github.com/tpope/vim-obsession.git
+[submodule "multi/vim/bundle/lsp-ale"]
+	path = multi/vim/bundle/lsp-ale
+	url = git@github.com:rhysd/vim-lsp-ale.git
