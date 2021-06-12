@@ -5,6 +5,7 @@ Facebook
 GPS
 Parkour
 Platformer
+Powerups
 Protanopia
 RSS
 Rebake
@@ -17,6 +18,7 @@ codebase
 collider
 colliders
 config
+cooldown
 creeped
 davidb
 dbriscoe
@@ -42,6 +44,7 @@ offline
 param
 plugin
 poutine
+powerups
 pseudocode
 quickfix
 realtime
