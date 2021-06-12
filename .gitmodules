@@ -288,7 +288,7 @@
 	url = https://github.com/romainl/Apprentice.git
 [submodule "multi/vim/bundle/ale"]
 	path = multi/vim/bundle/ale
-	url = https://github.com/dense-analysis/ale.git
+	url = https://github.com/idbrii/vim-ale.git
 [submodule "multi/vim/bundle/autohotkey"]
 	path = multi/vim/bundle/autohotkey
 	url = https://github.com/hnamikaw/vim-autohotkey.git

@@ -429,6 +429,9 @@ nnoremap <F5> :<C-u>make
 " IDE make. Setup with <filetype>SetEntrypoint commands.
 nnoremap <Leader>im :<C-u>ProjectMake<CR>
 nnoremap <Leader>ir :<C-u>ProjectRun<CR>
+" IDE lint. mirrors <L>we.
+nnoremap <Leader>ie :<C-u>ALEPopulateQuickfix<CR>
+nnoremap <Leader>iE :<C-u>ALEPopulateLocList<CR>
 
 " If available, use scons instead of make. -u is upward search for root
 " SConstruct.

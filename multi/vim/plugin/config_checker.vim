@@ -6,6 +6,10 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_delay = 1000
 
+" Use ALEPopulateQuickfix instead.
+let g:ale_set_quickfix = 0
+let g:ale_set_loclist = 0
+
 " C# {{{1
 
 " Disabling mcsc to see if that makes vim more responsive. I've got omnisharp
