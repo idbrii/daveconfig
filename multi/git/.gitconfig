@@ -53,6 +53,8 @@
     histlog = log --pretty=format:\"%C(red)%h%C(reset) %C(blue)%an%C(reset), %C(green)%cr%Creset : %s\"
     changelog = log --abbrev-commit --pretty=short --stat
 
+    stashonto = "!f() { if [ -z \"$1\" ] ; then echo 'Error: stashonto requires destination branch.\nExample: git stashonto master\nExample: git stashonto -b new-branch 98e7f99e' ; else git log --oneline --max-count=1 && git stash --include-untracked && git checkout $* && git log --oneline --max-count=1 && git stash apply ; fi;  }; f"
+
     # find urls for the current git repo
     hublist = !git remote -v | sed -e"'s#git@\\([^:]*\\):#git://\\1/#;s#.*\\b\\(git\\|https\\?\\)\\b:\\(.*\\)\\(.git\\)\\?\\s.*#https:\\2#'" | uniq
     #   uses 2 sed substitutions:      ^-- change ssh to readonly     ^-- fix protocol and pull out url
