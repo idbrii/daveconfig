@@ -116,6 +116,12 @@ let g:ale_fixers.go = [
             \ ]
 
 " Luacheck {{{1
+let g:ale_linters.lua = [
+            \       'luac',
+            \       'luacheck',
+            \       'vim-lsp',
+            \   ]
+
 let g:ale_lua_luacheck_options = ''
 
 " Warning suppression {{{2
