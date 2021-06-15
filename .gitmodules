@@ -166,6 +166,9 @@
 [submodule "multi/vim/bundle/detectindent"]
 	path = multi/vim/bundle/detectindent
 	url = git@github.com:idbrii/detectindent.git
+[submodule "multi/vim/bundle/editorconfig"]
+	path = multi/vim/bundle/editorconfig
+	url = git@github.com:editorconfig/editorconfig-vim.git
 [submodule "multi/vim/bundle/quickfix-reflector"]
 	path = multi/vim/bundle/quickfix-reflector
 	url = https://github.com/stefandtw/quickfix-reflector.vim.git
