@@ -133,6 +133,35 @@ if executable('svn')
     endf
     command! -nargs=? SvnDiff :silent call s:SvnDiff(expand("%"), <q-args>)
 
+    function! s:SvnUser()
+        return split(systemlist("svn auth")[4])[1]
+    endf
+    function! s:SvnRepoUrl()
+        return split(systemlist("svn info ".. g:david_project_root)[2])[1]
+    endf
+    function! s:SvnRelativeDate(seconds_from_now)
+        " Date relative to today
+        let today = localtime()
+        return strftime("{%Y-%m-%d}", today + a:seconds_from_now)
+    endf
+
+    function! s:SvnToday()
+        " Show log of changes made by local user today.
+        " Should I put this into sovereign?
+        let days = 24*60*60
+        " Use today and tomorrow. svn will search based on start of day. See
+        " https://stackoverflow.com/a/15759896/79125
+        let cmd = printf("svn log --revision %s:%s --search %s %s", s:SvnRelativeDate(0), s:SvnRelativeDate(1*days), s:SvnUser(), s:SvnRepoUrl())
+        let log = systemlist(cmd)
+        silent Scratch svnlog
+        call append(0,log)
+        0put =cmd
+        " Snap to width used
+        vertical resize 81
+    endf
+    command! SvnToday call s:SvnToday()
+
+
     " There's no VCShow like git show.
     command! -nargs=+ SvnShow :Sedit <args>
 
