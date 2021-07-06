@@ -49,6 +49,7 @@ augroup END
 " Load python and unix tools from local.vim
 source ~/.vim/autoload/david.vim
 source ~/.vim/local.vim
+"~ let $PATH = $PATH .. ';' .. expand('$USERPROFILE/scoop/apps/python39/3.9.1/')
 
 source ~/.vim/plugin/config_display.vim
 FontDefault
