@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
 import plumbum
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 import tempfile
 import argparse
 import os
@@ -20,21 +20,16 @@ from plumbum.cmd import sed, grep, lua, ctags
 def _find(search_dirs, globs, additional_files):
     # TODO: Filter out .svn, etc.
     results = [p.glob("**/" + g) for p in search_dirs for g in globs]
-    results = [str(p) for r in results for p in r]
+    results = [p.as_posix() for r in results for p in r]
     if additional_files:
-        results += [str(p) for p in additional_files]
+        results += [p.as_posix() for p in additional_files]
     return sorted(results, key=str.casefold)
 
 
 def _find_and_writefile(output_fpath, search_dirs, globs, additional_files=None):
     results = _find(search_dirs, globs, additional_files)
     with output_fpath.open("w") as f:
-        print("writing to", output_fpath)
         for line in results:
-            # HACK: I don't know how to get pathlib to produce forward slash
-            # paths regardless of platform.
-            if os.path.sep == '\\':
-                line = line.replace('\\', '/')
             f.write(line)
             f.write("\n")
     return results
@@ -125,7 +120,7 @@ def build(
     tags_file = tagdir / "tags"
 
     # debugging info
-    # ~ print(f'cscope={args.cscope} filetype={filetype} filelist={filelist}')
+    # ~ print(f'cscope={cscope} filetype={filetype} filelist={filelist}')
     # ~ print(f'search_dirs={search_dirs}')
 
     os.chdir(tagdir)
@@ -309,7 +304,6 @@ def build(
         # returned from a file. Don't use it!
         # However my -nr option works with our way of declaring classes.
         ltags = os.path.expanduser("~/.vim/bundle/lua-david/lib/ltags/ltags")
-        # lua(ltags, "-nr", "-filelist", str(luafiles).replace("\\", "/"))
         lua(ltags, "-nr", "-filelist", luafiles)
         luafiles.unlink()
 
@@ -333,10 +327,10 @@ def build(
 
     fix_file_prefix_for_tags_on_win32(tags_file)
 
-    if args.skip_filelist:
+    if skip_filelist:
         filelist.unlink()
 
-    elif args.skip_cscope:
+    elif skip_cscope:
         # Make empty cscope files so scripts expecting them don't barf.
         for mid in ["in.", "po.", ""]:
             p = tagdir / ("cscope." + mid + "out")
@@ -357,7 +351,7 @@ def build(
         # May want to consider these flags
         # 	-m "lang"       Use lang for multi-lingual cscope.
         # 	-R              Recurse directories for files.
-        cscope = plumbum.local[args.cscope]
+        cscope = plumbum.local[cscope]
         cscope("-b", "-q", "-k", "-i", filelist)
 
         # While cscope changed from cscope.out.$type to cscope.$type.out [1],
