@@ -9,11 +9,6 @@ import re
 
 from plumbum.cmd import sed, grep, lua, ctags
 
-ux_find = plumbum.local.get(
-'C:/Users/dbriscoe/scoop/apps/git/current/usr/bin/find.exe',
-)
-ux_sort = plumbum.local["sort"]
-
 # Installing dependents:
 #   aptinstall universal-ctags cscope inotify-tools fswatch
 #    -- fswatch requires universe (although it wasn't working for me under WSL)
@@ -22,9 +17,23 @@ ux_sort = plumbum.local["sort"]
 #   brew install fswatch
 
 
-def _find(search_dirs, *args):
-    search_dirs += args
-    return ux_find(*search_dirs)
+def _find(search_dirs, globs, additional_files):
+    results = [p.glob("**/" + g) for p in search_dirs for g in globs]
+    results = [str(p) for r in results for p in r]
+    if additional_files:
+        results += [str(p) for p in additional_files]
+    return sorted(results, key=str.casefold)
+
+
+def _find_and_writefile(output_fpath, search_dirs, globs, additional_files=None):
+    results = _find(search_dirs, globs, additional_files)
+    with output_fpath.open("w") as f:
+        print("writing to", output_fpath)
+        for line in results:
+            f.write(line)
+            f.write("\n")
+    return results
+
 
 def _get_and_validate_args():
     arg_parser = argparse.ArgumentParser(
@@ -40,9 +49,13 @@ example for the same but no cscope:
     )
 
     arg_parser.add_argument(
-        "--continuous",
-        action="store_true",
-        help="Keep trying to build."
+        "--continuous", action="store_true", help="Keep trying to build."
+    )
+
+    arg_parser.add_argument(
+        "--project-dir",
+        default=Path.cwd(),
+        help="Skip generating filelist.",
     )
 
     arg_parser.add_argument(
@@ -66,7 +79,7 @@ example for the same but no cscope:
     arg_parser.add_argument("filetype", help="The programming language to build for.")
 
     arg_parser.add_argument(
-        "search_dirs", nargs="+", help="The directories to search for code files."
+        "directories", nargs="+", help="The directories to search for code files."
     )
 
     args = arg_parser.parse_args()
@@ -93,8 +106,15 @@ def build_continuous(args):
     monitor.start()
 
 
-def build(filetype, cscope, search_dirs, skip_filelist=False, skip_cscope=False):
-    tagdir = Path.cwd()
+def build(
+    project_dir, filetype, cscope, directories, skip_filelist=False, skip_cscope=False
+):
+    project_dir = Path(project_dir)
+    if directories:
+        search_dirs = [Path(p) for p in directories]
+    else:
+        search_dirs = [project_dir]
+    tagdir = project_dir
     filelist = tagdir / "filelist"
     tags_file = tagdir / "tags"
 
@@ -109,70 +129,100 @@ def build(filetype, cscope, search_dirs, skip_filelist=False, skip_cscope=False)
 
     if filetype == "cpp":
         # Probably a big c++ project, so use the simple format
-        _find(
+        _find_and_writefile(
+            filelist,
             search_dirs,
-            r'-type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print',
-        ) | ux_sort("-f") >> filelist
+            ["*.cpp", "*.h", "*.inl"],
+        )
 
     elif filetype == "lua-engine":
         # Lua-based engines use C++ and lua.
-        _find(
+        _find_and_writefile(
+            filelist,
             search_dirs,
-            r'-type d -name examples -prune -o -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" -o -iname "*.glsl" -o -iname "README.md" \) -print',
-        ) | ux_sort("-f") >> filelist
+            # r'-type d -name examples -prune -',
+            ["*.cpp", "*.h", "*.inl", "*.lua", "*.glsl", "README.md"],
+            project_dir.glob("*.lua"),
+        )
 
     elif filetype == "unreal":
         # A big unreal c++ project, so use the simple format. Ignore generated code
         # in the Intermediate folder (a nuisance in plugins that don't have a fixed
         # path format).
-        _find(
+        _find_and_writefile(
+            filelist,
             search_dirs,
-            r'-type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print | grep -v "Intermediate.Build"',
-        ) | ux_sort("-f") >> filelist
+            ["*.cpp", "*.h", "*.inl"],
+            'grep -v "Intermediate.Build"',
+        )
 
     elif filetype == "cs":
         # C sharp code. don't include examples which are often alongside.
-        _find(
+        _find_and_writefile(
+            filelist,
             search_dirs,
-            r'-not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print',
-        ) | ux_sort("-f") >> filelist
+            # r'-not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a'
+            ["*.cs", "*.xaml"],
+        )
         # Should try this:
-        # _find(search_dirs, r'\( -type d -name "examples" -o -name "obj" \) -prune -o \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print') | ux_sort('-f') >> filelist
+        # _find_and_writefile(filelist,search_dirs, r'\( -type d -name "examples" -o -name "obj" \) -prune -o \( -type f -iname "*.cs", "*.xaml"), filelist)
 
     elif filetype == "android":
         # Android uses java and xml. Assume we're in the source directory
-        _find(
-            tagdir, r'../res -type f \( -iname "*.xml" -o -iname "*.java" \) -print'
-        ) | ux_sort("-f") >> filelist
+        dirs = search_dirs + [tagdir.parent / "res"]
+        _find_and_writefile(
+            filelist,
+            dirs,
+            ["*.xml", "*.java"],
+        )
 
     elif filetype == "java":
         # The only types we're interested in are java
-        _find(search_dirs, r'-type f -iname "*.java" -print') | ux_sort("-f") >> filelist
+        _find_and_writefile(
+            filelist,
+            search_dirs,
+            ["*.java"],
+        )
 
     elif filetype == "rust":
         # Rust code.
         if "src" in search_dirs:
             # Usually keep code in src and want to access the cargo and any
             # documentation.
-            search_dirs = "src ./Cargo.toml ./*.md".split(" ")
+            search_dirs = [tagdir / f for f in "src ./Cargo.toml ./*.md".split(" ")]
             print("Using common rust config.")
-        _find(
+        _find_and_writefile(
+            filelist,
             search_dirs,
-            r'-type f \( -iname "*.rs" -o -iname "*.toml" -o -iname "*.md" \) -print',
-        ) | ux_sort("-f") >> filelist
+            ["*.rs", "*.toml", "*.md"],
+        )
 
     else:
         # Don't know what we are so include anything that's not binary or junk (from vimdoc)
         # DavidAdd: Files: .git tags filelist
         # DavidAdd: Filetypes: pyc out
         # DavidAdd: Folder: v (for virtualenv)
-        _find(
+        _find_and_writefile(
+            filelist,
             search_dirs,
             r'\( -name .git -o -name v -o -name .svn -o -name .bzr -o -name tags -o -name filelist -o -wholename ./classes \) -prune -o -not -iregex ".*\.(pyc|jar|gif|jpg|class|exe|dll|pdd|sw[op]|xls|doc|pdf|zip|tar|ico|ear|war|dat|out)" -type f -print',
-        ) | ux_sort("-f") >> filelist
+        )
 
     # fd, name = tempfile.mkstemp(prefix="buildtags", text=True)
     # TMPFILE = open(fd, 'w')
+
+
+
+
+
+    ####
+    # HACK
+    return
+
+
+
+
+
 
     # convert cygwin paths to windows paths
     lines = sed("-e", r"s,^/cygdrive/\([[:alpha:]]\)/,\1:/,", filelist)
@@ -189,7 +239,7 @@ def build(filetype, cscope, search_dirs, skip_filelist=False, skip_cscope=False)
     # Build ctags and cscope	{{{1
     # Fixup the filelist
 
-    operatingsystem = os.environ["OSTYPE"]
+    operatingsystem = os.environ.get("OSTYPE", "")
     if "cygwin" in operatingsystem:
         # mlcscope needs full paths, so replace the relative path with the fully
         # qualified path
@@ -246,11 +296,12 @@ def build(filetype, cscope, search_dirs, skip_filelist=False, skip_cscope=False)
         #   setlocal tags+=./lua.tags;/
         # (See ~/.vim/bundle/lua-david/after/ftplugin/lua.vim)
         luafiles = tagdir / "filelist.luaonly"
-        grep("lua", filelist) > luafiles
+        grep("lua", filelist) > str(luafiles)
         # The -nv option is no good for us since we declare classes as locals
         # returned from a file. Don't use it!
         # However my -nr option works with our way of declaring classes.
-        lua("~/.vim/bundle/lua-david/lib/ltags/ltags", "-nr", "-filelist", luafiles)
+        ltags = os.path.expanduser("~/.vim/bundle/lua-david/lib/ltags/ltags")
+        lua(ltags, "-nr", "-filelist", luafiles)
         luafiles.unlink()
 
         fix_file_prefix_for_tags_on_win32(tags_file)
@@ -310,9 +361,9 @@ def build(filetype, cscope, search_dirs, skip_filelist=False, skip_cscope=False)
 
 if __name__ == "__main__":
     args = _get_and_validate_args()
+    continuous_build = args.continuous
     args_dict = args.__dict__
-    # args_dict.remove('continuous')
-    del args_dict['continuous']
+    del args_dict["continuous"]
     build(**args_dict)
-    if args.continuous:
+    if continuous_build:
         build_continuous(args)
