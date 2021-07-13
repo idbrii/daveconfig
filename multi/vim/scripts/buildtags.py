@@ -1,0 +1,318 @@
+#! /usr/bin/env python3
+
+import plumbum
+from pathlib import Path
+import tempfile
+import argparse
+import os
+import re
+
+from plumbum.cmd import sed, grep, lua, ctags
+
+ux_find = plumbum.local.get(
+'C:/Users/dbriscoe/scoop/apps/git/current/usr/bin/find.exe',
+)
+ux_sort = plumbum.local["sort"]
+
+# Installing dependents:
+#   aptinstall universal-ctags cscope inotify-tools fswatch
+#    -- fswatch requires universe (although it wasn't working for me under WSL)
+#   scoop install universal-ctags
+#   pip install pycscope fswatch
+#   brew install fswatch
+
+
+def _find(search_dirs, *args):
+    search_dirs += args
+    return ux_find(*search_dirs)
+
+def _get_and_validate_args():
+    arg_parser = argparse.ArgumentParser(
+        description="""Build the filelist, tag file, and cscope databases.
+
+example to build C++ in current directory recursively:
+  buildtags.sh --continous cscope cpp
+example for the same but only tags (no filelist or cscope):
+  buildtags.sh tagonly cpp
+example for the same but no cscope:
+  buildtags.sh skip-cscope cpp""",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+
+    arg_parser.add_argument(
+        "--continuous",
+        action="store_true",
+        help="Keep trying to build."
+    )
+
+    arg_parser.add_argument(
+        "--skip-filelist",
+        action="store_true",
+        help="Skip generating filelist.",
+    )
+
+    arg_parser.add_argument(
+        "--skip-cscope",
+        action="store_true",
+        help="Skip generating cscope.",
+    )
+
+    arg_parser.add_argument(
+        "cscope",
+        default="cscope",
+        help="The cscope executable to use. Default: cscope",
+    )
+
+    arg_parser.add_argument("filetype", help="The programming language to build for.")
+
+    arg_parser.add_argument(
+        "search_dirs", nargs="+", help="The directories to search for code files."
+    )
+
+    args = arg_parser.parse_args()
+    return args
+
+
+def build_continuous(args):
+    from fswatch import Monitor
+
+    monitor = Monitor()
+    for p in args.search_dirs:
+        monitor.add_path(p)
+
+    def callback(path, evt_time, flags, flags_num, event_num):
+        print(path.decode())
+        # Ignore vim swap file changes
+        if re.search(r"/\..*\.sw?", path):
+            print(f"Ignoring change to file {path}")
+        else:
+            print("Rebuild tags...")
+            build(**args)
+
+    monitor.set_callback(callback)
+    monitor.start()
+
+
+def build(filetype, cscope, search_dirs, skip_filelist=False, skip_cscope=False):
+    tagdir = Path.cwd()
+    filelist = tagdir / "filelist"
+    tags_file = tagdir / "tags"
+
+    # debugging info
+    # ~ print(f'cscope={args.cscope} filetype={filetype} filelist={filelist}')
+    # ~ print(f'search_dirs={search_dirs}')
+
+    os.chdir(tagdir)
+
+    # Build filelist	{{{1
+    filelist.unlink(missing_ok=True)
+
+    if filetype == "cpp":
+        # Probably a big c++ project, so use the simple format
+        _find(
+            search_dirs,
+            r'-type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print',
+        ) | ux_sort("-f") >> filelist
+
+    elif filetype == "lua-engine":
+        # Lua-based engines use C++ and lua.
+        _find(
+            search_dirs,
+            r'-type d -name examples -prune -o -type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" -o -iname "*.lua" -o -iname "*.glsl" -o -iname "README.md" \) -print',
+        ) | ux_sort("-f") >> filelist
+
+    elif filetype == "unreal":
+        # A big unreal c++ project, so use the simple format. Ignore generated code
+        # in the Intermediate folder (a nuisance in plugins that don't have a fixed
+        # path format).
+        _find(
+            search_dirs,
+            r'-type f \( -iname "*.cpp" -o -iname "*.h" -o -iname "*.inl" \) -print | grep -v "Intermediate.Build"',
+        ) | ux_sort("-f") >> filelist
+
+    elif filetype == "cs":
+        # C sharp code. don't include examples which are often alongside.
+        _find(
+            search_dirs,
+            r'-not \( -name "examples" -prune \) -a -not \( -name "obj" -prune \) -a \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print',
+        ) | ux_sort("-f") >> filelist
+        # Should try this:
+        # _find(search_dirs, r'\( -type d -name "examples" -o -name "obj" \) -prune -o \( -type f -iname "*.cs" -o -iname "*.xaml" \) -print') | ux_sort('-f') >> filelist
+
+    elif filetype == "android":
+        # Android uses java and xml. Assume we're in the source directory
+        _find(
+            tagdir, r'../res -type f \( -iname "*.xml" -o -iname "*.java" \) -print'
+        ) | ux_sort("-f") >> filelist
+
+    elif filetype == "java":
+        # The only types we're interested in are java
+        _find(search_dirs, r'-type f -iname "*.java" -print') | ux_sort("-f") >> filelist
+
+    elif filetype == "rust":
+        # Rust code.
+        if "src" in search_dirs:
+            # Usually keep code in src and want to access the cargo and any
+            # documentation.
+            search_dirs = "src ./Cargo.toml ./*.md".split(" ")
+            print("Using common rust config.")
+        _find(
+            search_dirs,
+            r'-type f \( -iname "*.rs" -o -iname "*.toml" -o -iname "*.md" \) -print',
+        ) | ux_sort("-f") >> filelist
+
+    else:
+        # Don't know what we are so include anything that's not binary or junk (from vimdoc)
+        # DavidAdd: Files: .git tags filelist
+        # DavidAdd: Filetypes: pyc out
+        # DavidAdd: Folder: v (for virtualenv)
+        _find(
+            search_dirs,
+            r'\( -name .git -o -name v -o -name .svn -o -name .bzr -o -name tags -o -name filelist -o -wholename ./classes \) -prune -o -not -iregex ".*\.(pyc|jar|gif|jpg|class|exe|dll|pdd|sw[op]|xls|doc|pdf|zip|tar|ico|ear|war|dat|out)" -type f -print',
+        ) | ux_sort("-f") >> filelist
+
+    # fd, name = tempfile.mkstemp(prefix="buildtags", text=True)
+    # TMPFILE = open(fd, 'w')
+
+    # convert cygwin paths to windows paths
+    lines = sed("-e", r"s,^/cygdrive/\([[:alpha:]]\)/,\1:/,", filelist)
+    with filelist.open("w") as f:
+        f.write(lines)
+    # I used to make a link in the root to each drive letter (/c for c:). With Bash
+    # on Windows, I can just make a c:/mnt folder with all of the drives in it.
+    # However, this acts wonky if the local drive isn't c:.
+    # I'm not doing this here because Bash on Windows tools (ctags) need unix
+    # paths. Instead, postponed this later so vim only sees Windows paths.
+    # sed -i -e"s,^//\([[:alpha:]]\)/,\1:/," filelist
+    # }}}
+
+    # Build ctags and cscope	{{{1
+    # Fixup the filelist
+
+    operatingsystem = os.environ["OSTYPE"]
+    if "cygwin" in operatingsystem:
+        # mlcscope needs full paths, so replace the relative path with the fully
+        # qualified path
+        # TODO: cygwin replaced mlcscope with cscope. Does it still have this problem?
+        sed("-i", "-e", r"s|^\./|$tagdir/|", filelist)
+
+    def fix_file_prefix_for_tags_on_win32(fpath):
+        # Vim doesn't understand / as beginning of the path in Windows so it thinks
+        # they're relative paths and can't find anything. (I'm using gvim.exe but
+        # building tags with Unix subsystem.)
+        sed("-i", "-e", r"s,/mnt/\([[:alpha:]]\)/,\1:/,", fpath)
+
+        # For reference, opposite transformation.
+        # sed -e"s,\([[:alpha:]]\):/,/mnt/\1/,"
+
+    if filetype in ["cpp", "c"]:
+        ctags("--c++-kinds=+p", "--fields=+iaS", "--extras=+q", "-L", filelist)
+    elif filetype in ["cs"]:
+        # Need namespace kind for inclement.
+        # Need fields for tag completion.
+        #
+        # Using all kinds except:
+        #   e  enumerators (enumeration values) -- just jump to enum instead
+        #   f  fields -- adds 70% more bytes
+        #   l  local variables -- adds 90% more bytes
+        #
+        # Using minimal field info:
+        #   k Kind of tag as a single letter [enabled]
+        #   s Scope of tag definition
+        #   t Type and name of a variable or typedef as "typeref:" field
+        # (excludes f from defaults because it didn't seem useful)
+        #
+        # Other fields:
+        #   a Access (or export) of class members
+        #   f File-restricted scoping
+        #   i Inheritance information
+        #   K Kind of tag as full name
+        #   l Language of source file containing tag
+        #   m Implementation information
+        #   n Line number of tag definition
+        #   S Signature of routine (e.g. prototype or parameter list)
+        #   z Include the "kind:" key in kind field
+        #
+        # Trying out removing extras because it increases size by 1.2x.
+        #
+        # .\ctags.exe --extras=+fq --fields=+ianmzS --c#-kinds=cimnp
+        #
+        ctags("--c#-kinds=cismpdngtEf", "--fields=kst", "-L", filelist)
+
+    elif filetype in ["lua-engine"]:
+        # ltags makes for better lua tags and doesn't bloat the database with
+        # c++.
+        # Builds separate lua.tags from cpp tags file. Vim must have:
+        #   setlocal tags+=./lua.tags;/
+        # (See ~/.vim/bundle/lua-david/after/ftplugin/lua.vim)
+        luafiles = tagdir / "filelist.luaonly"
+        grep("lua", filelist) > luafiles
+        # The -nv option is no good for us since we declare classes as locals
+        # returned from a file. Don't use it!
+        # However my -nr option works with our way of declaring classes.
+        lua("~/.vim/bundle/lua-david/lib/ltags/ltags", "-nr", "-filelist", luafiles)
+        luafiles.unlink()
+
+        fix_file_prefix_for_tags_on_win32(tags_file)
+        tags_file.rename("lua.tags")
+
+        ctags(
+            "--c++-kinds=+p",
+            "--fields=+iaS",
+            "--extras=+q",
+            "-L",
+            filelist,
+            "--exclude=*.lua",
+        )
+
+    else:
+        ctags("-L", filelist)
+
+    fix_file_prefix_for_tags_on_win32(tags_file)
+
+    if args.skip_filelist:
+        filelist.unlink()
+
+    elif args.skip_cscope:
+        # Make empty cscope files so scripts expecting them don't barf.
+        for mid in ["in.", "po.", ""]:
+            p = tagdir / "cscope." + mid + "out"
+            p.touch()
+
+    elif filetype == "python":
+        # Requires the python package pycscope:
+        #   pip install pycscope
+        pycscope = plumbum.locals["pycscope"]
+        pycscope("-i", filelist)
+    else:
+        # Build cscope database
+        # 	-b              Build the database only.
+        # 	-k              Kernel Mode - don't use /usr/include for #include files.
+        # 	-q              Build an inverted index for quick symbol seaching.
+        # May want to consider these flags
+        # 	-m "lang"       Use lang for multi-lingual cscope.
+        # 	-R              Recurse directories for files.
+        cscope = plumbum.locals[args.cscope]
+        cscope("-b", "-q", "-k", "-i", filelist)
+
+        # While cscope changed from cscope.out.$type to cscope.$type.out [1],
+        # mlcscope will still complain that it cannot find cscope.out.in. Ignore
+        # this error! It's not failing to find cscope.in.out, it's just stupid. If
+        # you try to rename the files (mv cscope.in.out cscope.out.in), cscope will
+        # stop working (you'll get errors about your database being invalid).
+        # [1] https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=602738
+        # TODO: cygwin replaced mlcscope with cscope. Does it still have this problem?
+
+    # }}}
+
+    fix_file_prefix_for_tags_on_win32(filelist)
+
+
+if __name__ == "__main__":
+    args = _get_and_validate_args()
+    args_dict = args.__dict__
+    # args_dict.remove('continuous')
+    del args_dict['continuous']
+    build(**args_dict)
+    if args.continuous:
+        build_continuous(args)
