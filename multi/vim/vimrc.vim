@@ -311,9 +311,9 @@ let g:dirvish_autochdir = 1
 " Using autochdir requires a preamble or scripts execute from tmp.
 if has('win32')
     " work across hard drives
-    let g:dirvish_shdo_preamble = 'pushd {}'
+    let g:dirvish_shdo_before = 'pushd {}'
 else
-    let g:dirvish_shdo_preamble = 'cd {}'
+    let g:dirvish_shdo_before = 'cd {}'
 endif
 
 
