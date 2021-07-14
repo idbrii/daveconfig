@@ -1,11 +1,14 @@
 #! /usr/bin/env python3
 
-import plumbum
+import os
+os.environ['PATH'] = os.path.expanduser('~/scoop/apps/git/current/usr/bin/') + ';' + os.environ['PATH']
+
 from pathlib import Path
-import tempfile
 import argparse
 import os
+import plumbum
 import re
+import tempfile
 
 from plumbum.cmd import sed, grep, lua, ctags
 
