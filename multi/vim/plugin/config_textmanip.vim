@@ -5,6 +5,10 @@ nnoremap gc :<C-U>silent!normal!`[v`]<CR>
 " select all
 nnoremap <C-a> 1GVG
 
+" Reverse text
+xnoremap g! "cc<C-r>=pyxeval(printf("'%s'[::-1]", @c))<CR><Esc>
+nmap g! viwg!
+
 " Define operator as default
 nmap g= <Plug>ScripteaseFilter
 xmap g= <Plug>ScripteaseFilter
