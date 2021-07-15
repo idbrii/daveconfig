@@ -6,8 +6,8 @@ nnoremap gc :<C-U>silent!normal!`[v`]<CR>
 nnoremap <C-a> 1GVG
 
 " Reverse text
-xnoremap g! "cc<C-r>=pyxeval(printf("'%s'[::-1]", @c))<CR><Esc>
-nmap g! viwg!
+xnoremap g! "cc<C-r>=@c->split('.\zs')->reverse()->join('')<CR><Esc>
+nmap g! mcviwg!`c
 
 " Define operator as default
 nmap g= <Plug>ScripteaseFilter
