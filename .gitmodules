@@ -46,9 +46,6 @@
 [submodule "multi/vim/bundle/xmledit"]
 	path = multi/vim/bundle/xmledit
 	url = git@github.com:idbrii/xmledit.git
-[submodule "multi/vim/bundle/OmniCppComplete"]
-	path = multi/vim/bundle/OmniCppComplete
-	url = git://github.com/vim-scripts/OmniCppComplete.git
 [submodule "multi/vim/bundle/perforce"]
 	path = multi/vim/bundle/perforce
 	url = git@github.com:idbrii/vim-perforce.git

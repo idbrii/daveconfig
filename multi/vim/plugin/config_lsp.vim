@@ -58,6 +58,11 @@ augroup david_lsp
         " vim-lsp-settings handles setup for emmylua
     endif
 
+    " cpp/c
+    " scoop install llvm
+    " vim-lsp-settings handles setup for clangd, but installing via scoop gets
+    " us clang-format too which ale auto configures.
+
     " pip install python-language-server
     " vim-lsp-settings handles setup for pyls
 
