@@ -793,6 +793,8 @@ let g:no_xml_maps = 1
 let no_pydoc_maps = 1
 "  Highlighting is ugly
 let g:pydoc_highlight = 0
+" Pydoc is formatted to no wider than 80 chars.
+let g:pydoc_open_cmd = 'vertical new|vertical resize 80|setlocal sidescrolloff=0|setlocal nowrap'
 
 " Turning all on gives me end of line highlighting that I don't like.
 " For some reason, if I turn everything else on, then I don't get it.
