@@ -13,6 +13,17 @@ let g:ale_set_loclist = 0
 " I've configured a bunch of linters here, so don't make me do it again.
 let g:lsp_ale_auto_enable_linter = 0
 
+" C++ {{{1
+let g:ale_linters.cpp = [
+            \       'vim-lsp',
+            \   ]
+
+let g:ale_fixers.cpp = []
+" clang-format's default is wild. See ~/.vim/local_templates/clang-format.
+call add(g:ale_fixers.cpp, 'clang-format')
+call add(g:ale_fixers.cpp, 'clangtidy')
+call add(g:ale_fixers.cpp, 'trim_whitespace')
+
 " C# {{{1
 
 " Disabling mcsc to see if that makes vim more responsive. I've got omnisharp
