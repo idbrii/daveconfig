@@ -134,7 +134,13 @@ if executable('svn')
     command! -nargs=? SvnDiff :silent call s:SvnDiff(expand("%"), <q-args>)
 
     function! s:SvnUser()
-        return split(systemlist("svn auth")[4])[1]
+        let auth = systemlist("svn auth")
+        for entry in auth
+            if entry =~# '^Username:'
+                return split(entry)[1]
+            endif
+        endfor
+        return ''
     endf
     function! s:SvnRepoUrl()
         return split(systemlist("svn info ".. g:david_project_root)[2])[1]
@@ -151,8 +157,14 @@ if executable('svn')
         let days = 24*60*60
         " Use today and tomorrow. svn will search based on start of day. See
         " https://stackoverflow.com/a/15759896/79125
-        let cmd = printf("svn log --revision %s:%s --search %s %s", s:SvnRelativeDate(0), s:SvnRelativeDate(1*days), s:SvnUser(), s:SvnRepoUrl())
+        let search = ''
+        let user = s:SvnUser()
+        if !empty(user)
+            let search = '--search '.. user
+        endif
+        let cmd = printf("svn log --revision %s:%s %s %s", s:SvnRelativeDate(0), s:SvnRelativeDate(1*days), search, s:SvnRepoUrl())
         let log = systemlist(cmd)
+        let log = map(log, { i, val -> trim(val) })
         silent Scratch svnlog
         call append(0,log)
         0put =cmd
