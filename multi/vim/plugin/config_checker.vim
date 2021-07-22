@@ -1,3 +1,7 @@
+" Maps {{{1
+
+nnoremap <unique> <Leader>if :<C-u>ALEFix<CR>
+
 " Ale general {{{1
 
 let g:ale_linters = {}
