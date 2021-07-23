@@ -101,9 +101,11 @@ nmap     <unique> <Leader>jL <Plug>(lsp-references)
 nnoremap <unique> <Leader>jp :<C-u>ptag <C-r><C-w><CR>
 nmap     <unique> <Leader>jP :<C-u>call david#tag#preview_jump({ -> execute('LspDefinition')})<CR>
 " Show info (hover for lsp)
-nnoremap <unique> <Leader>ji :<C-u>HoverUnderCursor<CR>
+nnoremap <unique> <Leader>ih :<C-u>HoverUnderCursor<CR>
 " Jump to symbol
 nnoremap <unique> <Leader>js :<C-u>AsyncCscopeFindSymbol <cword><CR>
+" Search for includes. filetypes should make a better version
+nnoremap <buffer> <Leader>ji :<C-u>NotGrep \b<C-r>=expand('%:t:r')<CR>\b<CR>
 
 command -nargs=1 EditUpwards call david#path#edit_upwards_from_current_file(<q-args>)
 

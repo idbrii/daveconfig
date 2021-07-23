@@ -45,3 +45,5 @@ iabbrev <buffer> #d #define
 "nmap <Leader>hc ggO//<CR> @file	<C-r>%<CR>@ingroup	<C-r>=expand('%:p:h:t')<CR><CR><CR>@author	_me<CR>@brief	<CR><CR>Copyright (c) <C-R>=strftime("%Y")<CR> _company All Rights Reserved.<CR><Esc>3kA
 
 nnoremap <buffer> <silent> <A-o> :call david#cpp#SwitchSourceHeader()<CR>
+
+nnoremap <buffer> <Leader>ji :<C-u>NotGrep \binclude.*\b<C-r>=expand('%:t:r')<CR>\b<CR>

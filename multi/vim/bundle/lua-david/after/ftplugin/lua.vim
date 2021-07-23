@@ -15,6 +15,8 @@ nmap <buffer> gx <Plug>(openbrowser-search)
 xnoremap <buffer> <silent> <C-o> :s/^/--\~ <CR>:silent nohl<CR>
 xnoremap <buffer> <silent> <Leader><C-o> :s/^\([ \t]*\)--\~ /\1/<CR>:silent nohl<CR>
 
+nnoremap <buffer> <Leader>ji :<C-u>NotGrep require.*\b<C-r>=expand('%:t:r')<CR>\b<CR>
+
 " don't let lua-xolox clobber my map.
 nnoremap <buffer> <F1> :<C-u>sp ~/.vim-aside<CR>
 "inoremap <buffer> <F1> <Esc>
