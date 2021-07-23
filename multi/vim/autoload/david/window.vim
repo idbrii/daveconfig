@@ -74,9 +74,9 @@ endfunction
 
 function! david#window#copen_without_moving_cursor()
     let must_go_back = &buftype != 'quickfix'
-    keepjumps copen
+    keepalt keepjumps copen
     if must_go_back
-        keepjumps wincmd p
+        keepalt keepjumps wincmd p
     endif
 endf
 
@@ -92,14 +92,14 @@ function! david#window#show_last_error_without_jump()
     let winnr = winnr()
     let bufnr = bufnr()
     " to last line
-    keepjumps clast
+    keepalt keepjumps clast
     try
         " to last actual error
-        keepjumps cprev
+        keepalt keepjumps cprev
     catch /^Vim\%((\a\+)\)\=:E553/	" Error: No more items
     endtry
     call execute(winnr ..'wincmd w')
-    call execute(bufnr ..'buffer')
+    call execute('keepalt '.. bufnr ..'buffer')
     call winrestview(winview) 
 endf
 
