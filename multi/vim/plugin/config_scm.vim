@@ -151,7 +151,7 @@ if executable('svn')
         return strftime("{%Y-%m-%d}", today + a:seconds_from_now)
     endf
 
-    function! s:SvnToday()
+    function! s:SvnDay(days_ago)
         " Show log of changes made by local user today.
         " Should I put this into sovereign?
         let days = 24*60*60
@@ -162,7 +162,7 @@ if executable('svn')
         if !empty(user)
             let search = '--search '.. user
         endif
-        let cmd = printf("svn log --revision %s:%s %s %s", s:SvnRelativeDate(0), s:SvnRelativeDate(1*days), search, s:SvnRepoUrl())
+        let cmd = printf("svn log --revision %s:%s %s %s", s:SvnRelativeDate(-a:days_ago * days), s:SvnRelativeDate((1 - a:days_ago)*days), search, s:SvnRepoUrl())
         let log = systemlist(cmd)
         let log = map(log, { i, val -> trim(val) })
         silent Scratch svnlog
@@ -171,7 +171,7 @@ if executable('svn')
         " Snap to width used
         vertical resize 81
     endf
-    command! SvnToday call s:SvnToday()
+    command! -count=0 SvnDay call s:SvnDay(<count>)
 
 
     " There's no VCShow like git show.
