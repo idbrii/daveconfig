@@ -54,6 +54,7 @@ pip:
 * Install [vimproc](https://github.com/Shougo/vimproc.vim/releases/) to ~/.vim/bundle/vimproc/lib/ for unite and open-browser.
 * Install WSL (below)
 * Install Lua (below)
+* Add ../../multi/svn/config to global svn config.
 
 Windows
 =======
