@@ -1,5 +1,4 @@
 " Compiler:	lua
-" Last Change:	2017-05-17
 
 if exists("current_compiler")
   finish
@@ -51,11 +50,11 @@ CompilerSet makeprg=lua\ %
 "       	[string "boot.lua"]:637: in function '__lt'
 "       	src/lib/flux/init.lua:91: in function 'new'
 let &l:efm = join([
+      \ '%.%#[string "cannot OLDFILEACCESSMETHOD @%f"]:%l:%m',
       \ '%+G%.%#[string "boot.lua"]%.%#',
+      \ '%.%#[string "%f"]:%l:%m',
       \ 'lua%.%#: %f:%l:%m',
       \ '@%\?%f:%l:%\? in %m',
-      \ '%.%#[string "cannot OLDFILEACCESSMETHOD @%f"]:%l:%m',
-      \ '%.%#[string "%f"]:%l:%m',
       \ '%f(%l%\,%c) in %m',
       \ ], ",")
 
