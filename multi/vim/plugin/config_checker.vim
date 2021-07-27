@@ -131,6 +131,10 @@ let g:ale_fixers.go = [
             \ ]
 
 " Luacheck {{{1
+let g:ale_fixers.lua = [
+            \     'trim_whitespace',
+            \ ]
+
 let g:ale_linters.lua = [
             \       'luac',
             \       'luacheck',
