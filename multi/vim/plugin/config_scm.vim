@@ -46,7 +46,7 @@ if executable('git')
     command! -bang -nargs=? -range=-1 -complete=customlist,fugitive#CommitComplete Gcommit call s:GitCommit(<line1>, <count>, +"<range>", <bang>0, "<mods>", "commit " .. <q-args>)
 
     " Fugitive
-    nnoremap <Leader>gi :Gstatus<CR>gg<C-n>
+    nnoremap <Leader>gi :Gstatus<CR>gg)
     nnoremap <Leader>gd :Gdiff<CR>
 
     " GV
