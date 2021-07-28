@@ -1,0 +1,50 @@
+std = "lua53"
+-- * _G (default) - same as lua51c, lua52c, lua53c, or luajit
+--          depending on version of Lua used to run luacheck or same as
+--          max if couldn't detect the version
+-- * lua51    - globals of Lua 5.1 without deprecated ones
+-- * lua51c   - globals of Lua 5.1
+-- * lua52    - globals of Lua 5.2
+-- * lua52c   - globals of Lua 5.2 compiled with LUA_COMPAT_ALL
+-- * lua53    - globals of Lua 5.3
+-- * lua53c   - globals of Lua 5.3 compiled with LUA_COMPAT_5_2
+-- * luajit   - globals of LuaJIT 2.0
+-- * ngx_lua  - globals of Openresty `lua - nginx - module` with LuaJIT 2.0
+-- * min      - intersection of globals of Lua 5.1, Lua 5.2, Lua 5.3 and LuaJIT 2.0
+-- * max      - union of globals of Lua 5.1, Lua 5.2, Lua 5.3 and LuaJIT 2.0
+-- * love     - globals added by `LÖVE` (love2d)
+-- * busted   - globals added by Busted 2.0
+-- * rockspec - globals allowed in rockspecs
+-- * none     - no standard globals
+
+
+unused_args        = false -- unused arguments and loop variables.
+unused_secondaries = false -- unused variables set together with used ones.
+allow_defined_top  = true  -- implicitly define globals by setting at top level scope.
+max_line_length    = false -- Do not limit line length.
+
+
+local luacheck = {
+    std = 'luacheckrc',
+    ignore = {
+        '131', -- Unused global variable
+    },
+}
+files['**/luacheckrc'] = luacheck
+
+
+-- See http://luacheck.readthedocs.io/en/stable/warnings.html for list.
+ignore = {
+    '611', --	A line consists of nothing but whitespace.
+    '612', --	A line contains trailing whitespace.
+    -- I like to do `local a = nil`
+    '311', --	Value assigned to a local variable is unused.
+
+    -- luacheck doesn't know about our globals, so ignore interactions with them.
+    --'111', --	Setting an undefined global variable.
+    --'112', --	Mutating an undefined global variable.
+    -- I want 113 enabled to catch typos in variable names.
+    --'113', --	Accessing an undefined global variable.
+    '142', --	Setting an undefined field of a global variable.
+    '143', --	Accessing an undefined field of a global variable.
+}
