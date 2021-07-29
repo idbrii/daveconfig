@@ -72,15 +72,6 @@ endfunction
 
 " Quickfix convenience {{{1
 
-function! david#window#copen_without_moving_cursor()
-    let must_go_back = &buftype != 'quickfix'
-    keepalt keepjumps copen
-    if must_go_back
-        keepalt keepjumps wincmd p
-    endif
-endf
-
-
 function! david#window#show_last_error_without_jump()
     let only_errors = filter(getqflist(), { k,v -> v.bufnr != 0 })
     if empty(only_errors)

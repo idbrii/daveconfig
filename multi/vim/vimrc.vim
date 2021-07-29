@@ -483,7 +483,7 @@ if !has('patch-8.2.1982')
     " multi-line errorformat (%A,%Z)'
     augroup david-asyncrun
         au!
-        au User AsyncRunStop call david#window#copen_without_moving_cursor()
+        au User AsyncRunStop call fixquick#window#copen_without_moving_cursor()
     augroup END
 endif
 
