@@ -13,6 +13,10 @@ let s:cpo_save = &cpo
 set cpo-=C
 
 
+" Testy assert failures look like:
+"   [FAIL] C:\code\proj\file.lua:265: in function 'test_File'
+CompilerSet errorformat^=%.%#[FAIL]\ %f:%l:\ in\ %m
+
 CompilerSet makeprg=testy.lua\ %
 
 
