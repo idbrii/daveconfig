@@ -431,6 +431,7 @@ nnoremap <F5> :<C-u>make
 " IDE make. Setup with <filetype>SetEntrypoint commands.
 nnoremap <Leader>im :<C-u>ProjectMake<CR>
 nnoremap <Leader>ir :<C-u>ProjectRun<CR>
+nnoremap <Leader>ik :<C-u>ProjectKill<CR>
 " IDE lint. mirrors <L>we.
 nnoremap <Leader>ie :<C-u>ALEPopulateQuickfix<CR>
 nnoremap <Leader>iE :<C-u>ALEPopulateLocList<CR>
