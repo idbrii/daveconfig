@@ -197,3 +197,17 @@ omap i/  <Plug>(textobj-comment-i)
 xmap a/  <Plug>(textobj-comment-big-a)
 omap a/  <Plug>(textobj-comment-big-a)
 
+" filtering {{{1
+" Convert python's logging output to a much simpler format.
+command! LogStripPythonLogging %s/\v^\S\U*<(\u)\u+/\1
+
+function! <SID>LogFilter_options(ArgLead, CmdLine, CursorPos) abort
+    return [
+          \ 'DEBUG',
+          \ 'INFO',
+          \ 'WARNING',
+          \ 'ERROR',
+          \ 'CRITICAL',
+          \]
+endf
+command! -nargs=1 -complete=customlist,<SID>LogFilter_options LogFilter exec 'Unite -input=^<args> -start-insert line'
