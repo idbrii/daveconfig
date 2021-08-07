@@ -35,3 +35,16 @@ function! david#path#edit_upwards_from_current_file(fname)
         execute 'edit '.. found
     endif
 endf
+
+function! david#path#build_kill_from_current_makeprg() abort
+    let exe = &makeprg->split()[0]
+    if exe !~? ".exe$"
+        let exe .= ".exe"
+    endif
+    if !executable(exe)
+        return ''
+    endif
+    
+    let exe = fnamemodify(exe, ':t')
+    return printf('command! ProjectKill call system("taskkill /im %s")', exe)
+endf

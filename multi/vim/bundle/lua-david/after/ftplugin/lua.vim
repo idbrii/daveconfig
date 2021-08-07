@@ -70,6 +70,10 @@ function! s:set_entrypoint(makeprg)
 
     function! DavidProjectBuild() closure
         update
+        ProjectKill
+        " Wait long enough for app to close and asyncrun to terminate so
+        " it doesn't fail to run again.
+        sleep 1
         call execute('lcd '. cur_dir)
         let &makeprg = entrypoint_makeprg
         " Use AsyncRun instead of AsyncMake so we can pass cwd and ensure
@@ -81,6 +85,7 @@ function! s:set_entrypoint(makeprg)
 
     command! ProjectMake call DavidProjectBuild()
     command! ProjectRun  call DavidProjectBuild()
+    exec david#path#build_kill_from_current_makeprg()
 
     " Clobber current project settings.
     silent! unlet g:david_project_filelist
