@@ -1,5 +1,7 @@
 " Configuration for asyncomplete
 
+"~ let g:asyncomplete_log_file = expand('~/.vim-cache/asyncomplete.log')
+
 if !has('timers')
     let g:asyncomplete_loaded = 0
     finish
