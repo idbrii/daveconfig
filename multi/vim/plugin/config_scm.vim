@@ -339,11 +339,19 @@ endif
 
 
 if executable('TortoiseProc')
-    function! s:TortoiseCommand(command, optional_path)
+    function! s:TortoiseCommand(command, optional_path) abort
         let path = a:optional_path
         if len(path) == 0
             let path = '%'
         endif
+        let path = david#path#to_unix(path)
+        " Ensure svn will have a path inside the repo.
+        if isdirectory(path)
+            let dir = fnamemodify(path, ':p')
+        else
+            let dir = fnamemodify(path, ':p:h')
+        endif
+        exec 'cd' dir
         exec 'AsyncCommand TortoiseProc /command:'. a:command .' /path:"'. path .'"'
     endf
     function! s:TortoiseCommandOnInputPathOrRoot(command, path) abort
