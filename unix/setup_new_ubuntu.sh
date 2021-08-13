@@ -148,7 +148,7 @@ fi
     programs="$programs p7zip lame"
 
     # Some of these don't come with a server install? (Or maybe this list came from cygwin.)
-    programs="$programs bash bash-completion binutils bzip2 coreutils curl diffutils dos2unix findutils git git-completion grep gzip indent less sed subversion universal-ctags"
+    programs="$programs bash bash-completion binutils bzip2 coreutils curl diffutils dos2unix findutils git git-completion grep ripgrep gzip indent less sed subversion universal-ctags"
 
 # I use parcellite as a workaround for a bug in chromium:
 #   http://code.google.com/p/chromium/issues/detail?id=67074
