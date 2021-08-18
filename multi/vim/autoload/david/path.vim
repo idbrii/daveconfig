@@ -15,6 +15,27 @@ else
     endf
 endif
 
+function! david#path#lowercase_drive_letter(path) abort
+    let f = a:path
+    if f[1] == ':'
+        let f = printf('%s:%s', tolower(f[0]), f[2:])
+    endif
+    return f
+endf
+
+" If relative_parent is a parent of path, return the relative path. Otherwise
+" return the absolute path.
+function! david#path#relative_to_parent(path, relative_parent) abort
+    let file = david#path#lowercase_drive_letter(david#path#to_unix(fnamemodify(a:path, ':p')))
+    let dir  = david#path#lowercase_drive_letter(david#path#to_unix(a:relative_parent))
+
+    if file->stridx(dir) >= 0
+        let n = len(dir)
+        return file[n+1:]
+    endif
+    return file
+endf
+
 function! david#path#find_upwards_from_current_file(fname)
     let current_file_dir = expand('%:h')
     let found = findfile(a:fname, ';'.. current_file_dir)
