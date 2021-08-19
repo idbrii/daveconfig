@@ -340,7 +340,7 @@ if executable('svn')
     command! -nargs=? VCUpdate call s:VCUpdate(<f-args>)
 
     " Ensure the blame window will have a path inside the repo.
-    nnoremap <silent> <leader>fb :silent! cd %:p:h <Bar>VCBlame<CR>
+    nnoremap <silent> <leader>fb :silent! cd %:p:h <Bar>silent VCBlame<CR>
     " Diff against have revision.
     nnoremap <silent> <leader>fd :Sdiff<CR>
     " Diff against head revision.
