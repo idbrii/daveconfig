@@ -84,6 +84,7 @@ nnoremap <unique> <Leader>jgw :<C-u>NotGrep <cword><CR>
 nnoremap <unique> <Leader>jgW :<C-u>NotGrep <cWORD><CR>
 xnoremap <unique> <Leader>jgw "cy:<C-u>call notgrep#search#NotGrep('grep', @c)<CR>
 nnoremap <unique> <Leader>jq :<C-u>NotGrepFromSearch<CR>
+nnoremap <unique> <Leader>jQ :<C-u>NotGrepCurrentFiletypeFromSearch<CR>
 
 " Jump to tag
 nnoremap <unique> <Leader>jt <C-]>
