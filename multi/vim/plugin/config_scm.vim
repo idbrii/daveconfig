@@ -175,6 +175,31 @@ if executable('svn')
     endf
     command! -count=0 SvnDay call s:SvnDay(<count>)
 
+    " Easy copy message from svn when committing to git. Uses the file under
+    " cursor (from a git commit message buffer).
+    function! s:SvnLastMessage() abort
+        let fname = expand('<cfile>')
+        if !empty(fname)
+            " Assuming we're in a COMMIT_EDITMSG from .git
+            let fname = printf('%s/../%s', expand('%:h'), fname)
+        endif
+        if !filereadable(fname)
+            " Wasn't on a file, try last buffer.
+            let fname = expand('#')
+        endif
+
+        " incremental omits a trailing line
+        let log = systemlist("svn log --limit 1 --incremental ".. fname)
+        if v:shell_error
+            silent 0put =v:shell_error
+        endif
+        
+        let log = map(log, { k,v -> trim(v) })
+        silent 1put =log[:2]
+        silent 0put =log[3:]
+        norm! gg
+    endf
+    command! SvnLastMessage call s:SvnLastMessage()
 
     " There's no VCShow like git show.
     command! -nargs=+ SvnShow :Sedit <args>
