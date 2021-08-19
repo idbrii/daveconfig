@@ -1,3 +1,3 @@
 # Run TortoiseSVN and add to $AppData/Subversion/config
 [miscellany]
-global-ignores = tags lua.tags cscope.* filelist *.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo __pycache__ *.rej *~ #*# .#* .*.swp .DS_Store [Tt]humbs.db .git
+global-ignores = tags lua.tags cscope.* filelist *.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo __pycache__ *.rej *~ #*# .#* .*.swp .DS_Store [Tt]humbs.db .git compile_commands.json
