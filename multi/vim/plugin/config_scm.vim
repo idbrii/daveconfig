@@ -46,8 +46,8 @@ if executable('git')
     command! -bang -nargs=? -range=-1 -complete=customlist,fugitive#CommitComplete Gcommit call s:GitCommit(<line1>, <count>, +"<range>", <bang>0, "<mods>", "commit " .. <q-args>)
 
     " Fugitive
-    nnoremap <Leader>gi :Gstatus<CR>gg)
-    nnoremap <Leader>gd :Gdiff<CR>
+    nnoremap <Leader>gi :Git<CR>gg)
+    nnoremap <Leader>gd :Gdiffsplit<CR>
 
     " GV
     " V: visual repo history
@@ -56,20 +56,22 @@ if executable('git')
     nnoremap <leader>gv :GV!<CR>
     xnoremap <leader>gv :GV!<CR>
 
-    function! s:Gblame(args)
+    function! s:Gblame(range, args)
         " :Gblame scrollbinds the blame window but doesn't support time travel.
-        " :%Gblame uses a disconnected blame window and supports C-i/o to
-        " travel through time (even across reblames).
+        " Instead, use :%Gblame which uses a disconnected blame window and
+        " supports C-i/o to travel through time (even across reblames).
         let winview = winsaveview()
-        exec '%Gblame '.. a:args
+        exec a:range ..'Git blame '.. a:args
         wincmd T
         call winrestview(winview)
         " Offset to the right past the commit info column.
         normal! 64l
     endf
-    nnoremap <Leader>gb :silent! cd %:p:h<CR>:call <sid>Gblame('')<CR>
+    command! -bar -range=% -nargs=? Gblame :silent! cd %:p:h | call <sid>Gblame('<line1>,<line2>', <q-args>)
+    nnoremap <Leader>gb :Gblame<CR>
 
     command! -range Gpopupblame call setbufvar(winbufnr(popup_atcursor(systemlist("git -C ".. shellescape(expand('%:p:h')) .." log --no-merges -n 1 -L <line1>,<line2>:" .. shellescape(resolve(expand("%:t")))), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")
+    xnoremap <Leader>gb :Gpopupblame<CR>
 
     command! Ghistory GV! --all
 
@@ -79,7 +81,7 @@ if executable('git')
             if v:shell_error <= 1
                 " No problems means we can go straight to commit.
                 " On Windows
-                Gcommit -v
+                Git commit -v
                 return
             endif
         catch /^fugitive:/
@@ -88,7 +90,7 @@ if executable('git')
             echo v:exception
         endtry
         " How to open status regardless of fugitive errors?
-        Gstatus
+        Git
     endf
     command! -nargs=1 Grevert call s:GitRevert(<f-args>)
 
