@@ -303,10 +303,17 @@ unity_folderstructure() {
 
 # Serve local directory as a website.
 # Assume 8000 because that's default, but allow it to autopick to avoid errors.
-alias webserve='gogo http://localhost:8000 && (python3 -m http.server --bind localhost || python -m SimpleHTTPServer)'
+alias webserve='gogo http://localhost:8000 && (python3 -m http.server --bind localhost || python3 -m SimpleHTTPServer)'
 
 # Generate html to display image/video slideshow.
-alias webslideshow='python ~/data/settings/daveconfig/unix/terminal/quickcast/cast.py'
+alias webslideshow='python3 ~/data/settings/daveconfig/unix/terminal/quickcast/cast.py'
+
+# Open 
+if is_windows; then
+	alias playlist='cmd.exe /c "python3 %USERPROFILE%/data/settings/daveconfig/unix/terminal/playlist.py"'
+else
+	alias playlist='python3 ~/data/settings/daveconfig/unix/terminal/playlist.py'
+fi
 
 alias buildtag-love='~/.vim/scripts/buildtags --continuous skip-cscope lua-engine src love-api *.md *.lua > /tmp/buildtags.log &'
 
