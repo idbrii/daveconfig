@@ -19,6 +19,13 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+# Command to allow special windows behaviour (mostly for ubuntu, but I want it
+# available for aliases too).
+is_windows()
+{
+	grep --quiet --no-messages --max-count=1 Microsoft /proc/version
+}
+
 # If using a dumb terminal like vim's :shell, then don't do anything (since I
 # use ls --color=auto as an alias)
 [ "$TERM" == "dumb" ] && return
