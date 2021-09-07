@@ -14,6 +14,7 @@ import imghdr
 import os
 import socket
 import sys
+import webbrowser
 
 
 def get_script_path(basename):
@@ -68,6 +69,7 @@ for port in range(8000, 8010):
         pass
 
 server_name = "http://localhost:{port}".format(port=port)
+webbrowser.open(server_name)
 print(server_name +" starting...")
 try:
     httpd.serve_forever()
