@@ -31,6 +31,10 @@
     list-untracked-ignored = status --ignored
     why-ignore = "!f() { if [ -z \"$*\" ] ; then echo 'Error: why-ignore requires a path.\nExample: git get-ignore *' ; else git check-ignore -v $* | $EDITOR - +'set buftype=nofile' +cgetbuffer +copen +'wincmd o' +cfirst ; fi; }; f"
 
+    # https://stackoverflow.com/a/42544963/79125
+    largest-files = "!git rev-list --objects --all | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' | sed -n 's/^blob //p' | sort --numeric-sort --key=2 | cut -c 1-12,41- | $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=13 --round=nearest | tail; echo 'commit        size on disk file'"
+
+
     # If recurseSubmodules doesn't work, use this to check if submodules were updated.
     # TODO: Should process all submodules? Look in history for modified ones? Should be in submanage?
     check-submodule = "!f() { cd $1; git manage-mine master; cd -; }; f"
