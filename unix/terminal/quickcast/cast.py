@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # Generate a simple web slideshow.
@@ -8,12 +8,11 @@
 # http://www.mailsend-online.com/license2014.php
 
 
-import SimpleHTTPServer
-import SocketServer
+import http.server
+import socketserver
 import imghdr
 import os
 import socket
-import string
 import sys
 
 
@@ -37,9 +36,9 @@ def generate_html(kind, is_matching_kind, files, delay_millis):
 
     # Replace variables with the delay in milliseconds, generated list of
     # images, and media tag.
-    payload = string.replace(payload, "$$interval_delay", delay_millis)
-    payload = string.replace(payload, "$$file_list", img_list)
-    payload = string.replace(payload, "$$tag_type", kind)
+    payload = payload.replace("$$interval_delay", delay_millis)
+    payload = payload.replace("$$file_list", img_list)
+    payload = payload.replace("$$tag_type", kind)
     with open(fname, "w") as indexfile:
         indexfile.write(payload)
 
@@ -63,16 +62,16 @@ generate_index()
 # Find a free port and serve our generated index file.
 for port in range(8000, 8010):
     try:
-        httpd = SocketServer.TCPServer(("", port), SimpleHTTPServer.SimpleHTTPRequestHandler)
+        httpd = socketserver.TCPServer(("", port), http.server.SimpleHTTPRequestHandler)
         break
     except socket.error:
         pass
 
 server_name = "http://localhost:{port}".format(port=port)
-print server_name +" starting..."
+print(server_name +" starting...")
 try:
     httpd.serve_forever()
 except KeyboardInterrupt:
     httpd.shutdown()
-    print server_name +" stopped."
+    print(server_name +" stopped.")
 
