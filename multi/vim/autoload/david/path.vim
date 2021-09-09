@@ -69,3 +69,15 @@ function! david#path#build_kill_from_current_makeprg() abort
     let exe = fnamemodify(exe, ':t')
     return printf('command! ProjectKill call system("taskkill /im %s")', exe)
 endf
+
+" See also the more aggressive after/plugin/followsymlink.vim
+function! david#path#chdir_to_current_file() abort
+    call chdir(david#path#get_currentfile_resolved_as_dir())
+endf
+
+function! david#path#get_currentfile_resolved_as_dir() abort
+    return resolve(escape(expand('%:p:h'), '%#'))
+endf
+function! david#path#get_currentfile_resolved() abort
+    return resolve(escape(expand('%:p'), '%#'))
+endf

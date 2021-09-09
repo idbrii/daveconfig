@@ -544,7 +544,8 @@ nnoremap <C-g> 2<C-g>
 noremap Q gw
 
 " <Shift-space> reloads the file using actual and simplified filename.
-nnoremap <S-space> :<C-u>e <C-r>=resolve(escape(expand('%:p'), '%#'))<CR><CR>
+command! ResolveFile execute 'edit' david#path#get_currentfile_resolved()
+nnoremap <S-space> :<C-u>ResolveFile<CR>
 
 " Folding {{{1
 

@@ -11,7 +11,7 @@ function! david#lua#setup_for_running() abort
     "
     " luatesty expects functions called test_[name of another function]()
     " install with `luarocks install testy`
-    command! ProjectRun  compiler lua      | update | AsyncMake
-    command! ProjectMake compiler luatesty | update | AsyncMake
+    command! ProjectRun  compiler lua      | update | call david#path#chdir_to_current_file() | AsyncMake
+    command! ProjectMake compiler luatesty | update | call david#path#chdir_to_current_file() | AsyncMake
 endf
 
