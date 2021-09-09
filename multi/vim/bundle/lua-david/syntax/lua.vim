@@ -14,6 +14,8 @@ syn match luaError "!=" display
 syn match luaError "[+-]=" display
 " Lua uses 1-indexed arrays
 syn match luaError "\[0]" display
+" Lua uses % to escape atoms (vim \w is %w)
+syn match luaError "\v<(find|g?match|gsub)>.*\\[wad]" display
 
 
 " Constants are all caps with underscores. Minimum 4 characters.
