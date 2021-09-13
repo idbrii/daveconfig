@@ -15,3 +15,8 @@ function! david#lua#setup_for_running() abort
     command! ProjectMake compiler luatesty | update | call david#path#chdir_to_current_file() | AsyncMake
 endf
 
+function! david#lua#HeavyDutyFixer() abort
+    call add(g:ale_fixers.lua, 'stylua')
+    ALEFix
+    call remove(g:ale_fixers.lua, index(g:ale_fixers.lua, 'stylua'))
+endf

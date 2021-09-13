@@ -1,3 +1,4 @@
 fswatch==0.1.1
+jsbeautifier>=1.14.0
 pycscope==1.2.1
 -e git+http://github.com/idbrii/PySvn.git@820647967d28f3de90b0a9627dc41e2e9f84f837#egg=svn
