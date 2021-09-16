@@ -16,6 +16,8 @@ set cpo-=C
 " Testy assert failures look like:
 "   [FAIL] C:\code\proj\file.lua:265: in function 'test_File'
 CompilerSet errorformat^=%.%#[FAIL]\ %f:%l:\ in\ %m
+" Skip over stack frames inside testy itself.
+CompilerSet errorformat^=%.%#testy.lua:%n:\ %m
 
 CompilerSet makeprg=testy.lua\ %
 

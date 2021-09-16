@@ -1,7 +1,8 @@
 function! david#lua#setup_qf_after_compile() abort
     " No errors detected in lua, so keep it really small if no callstack.
     call fixquick#window#resize_qf_to_errorcount(5,20)
-    call fixquick#window#show_last_error_without_jump()
+    " Testy usually shows assert failures first.
+    call fixquick#window#show_first_error_without_jump()
 endf
 
 function! david#lua#setup_for_running() abort
