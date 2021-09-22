@@ -5,7 +5,13 @@
 
 function! david#warn(msg)
     echohl WarningMsg
-    echo a:msg
+    echomsg a:msg
+    echohl None
+endf
+
+function! david#error(msg)
+    echohl ErrorMsg
+    echomsg a:msg
     echohl None
 endf
 
