@@ -9,6 +9,10 @@ xnoremap gs :sm/
 nnoremap gS :%S/
 xnoremap gS :S/
 
+" Default * to match case since I usually want exact matches. Can just remove
+" \C from end of query to disable.
+let g:searchsavvy_always_case_sensitive_star = 1
+
 " Refactor remap.
 " Go to local definition and replace it in local scope. Uses textobj-indent
 " (for ai map).
