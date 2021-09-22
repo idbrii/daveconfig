@@ -16,6 +16,19 @@ function! david#lua#setup_for_running() abort
     command! ProjectMake compiler luatesty | update | call david#path#chdir_to_current_file() | AsyncMake
 endf
 
+function! david#lua#run_with(compiler) abort
+    let g:asyncrun_exit = 'call david#lua#setup_qf_after_compile()'
+
+    " Run to execute and make to test.
+    "
+    " luatesty expects functions called test_[name of another function]()
+    " install with `luarocks install testy`
+    exec 'compiler' a:compiler
+    update
+    call david#path#chdir_to_current_file()
+    AsyncMake
+endf
+
 function! david#lua#HeavyDutyFixer() abort
     call add(g:ale_fixers.lua, 'stylua')
     ALEFix
