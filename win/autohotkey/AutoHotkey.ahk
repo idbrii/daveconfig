@@ -431,6 +431,10 @@ ToggleMaximized()
 
 #a::WinSet AlwaysOnTop, Toggle, A,,,
 
+; Disable new desktop -- I only push it by accident
+^#D::
+    return
+
 ;#1::
 ;  ResizeAndCenter(800,600)
 ;return
