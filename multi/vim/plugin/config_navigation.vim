@@ -45,10 +45,9 @@ nnoremap <A-Right> :bn<CR>
 " Ctrl+Shift+PgUp/Dn - Move between files
 nnoremap <C-S-PageDown> :next<CR>
 nnoremap <C-S-PageUp> :prev<CR>
-" Ctrl+PgUp/Dn - Move between quickfix marks. Jump to current first to ensure
-" we always jump to something.
-nnoremap <C-PageDown> :cc<Bar>cnext<CR>
-nnoremap <C-PageUp> :cc<Bar>:cprev<CR>
+" Ctrl+PgUp/Dn - Move between quickfix marks.
+nnoremap <silent> <C-PageDown> :call fixquick#window#jump_to_next(1)<CR>
+nnoremap <silent> <C-PageUp>   :call fixquick#window#jump_to_next(-1)<CR>
 " Alt+PgUp/Dn - Move between quickfix files
 nnoremap <A-PageDown> :cnfile<CR>
 nnoremap <A-PageUp> :cpfile<CR>
