@@ -27,7 +27,7 @@ nnoremap <buffer> <F1> :<C-u>sp ~/.vim-aside<CR>
 " that kicks in automatically, so that's good enough.
 inoremap <buffer> <C-Space> <C-x><C-]>
 
-if lsp#get_server_status('lua-lsp') == 'running' || lsp#get_server_status('emmylua-ls') == 'running'
+if lsp#get_server_status() =~# '\v<lua>.*running'
     setlocal omnifunc=lsp#complete
     " fall back to default omnicompletion
     iunmap <buffer> <C-Space>
