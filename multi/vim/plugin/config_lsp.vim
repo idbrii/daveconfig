@@ -10,8 +10,11 @@ let g:lsp_document_highlight_delay = 4000
 " Prevents completion from starting after . or ->
 let g:asyncomplete_min_chars = 2
 
+" lsp doesn't cycle logs, so this file has unlimited growth. Only enable when
+" debugging.
 "~ let g:lsp_log_verbose = 1
-let g:lsp_log_file = g:david_cache_root .'/lsp.log'
+"~ let g:lsp_log_file = g:david_cache_root .'/lsp.log'
+"~ command! LspLog exec 'edit' g:lsp_log_file
 
 " To make lsp replace ALE:
 "~ let g:lsp_diagnostics_enabled = 1
