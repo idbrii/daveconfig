@@ -38,18 +38,6 @@ call add(s:efm, '%.%#[string "cannot OLDFILEACCESSMETHOD @%f"]:%l:%m')
 call add(s:efm, '%+G%.%#[string "boot.lua"]%.%#')
 call add(s:efm, '%.%#[string "%f"]:%l:%m')
 
-" Standard lua:
-" http://stackoverflow.com/questions/2771919/lua-jump-to-right-line
-"       lua53: string.lua:7: bad argument #1 to 'find' (string expected, got nil)
-"       stack traceback:
-"       	[C]: in function 'string.find'
-"       	string.lua:7: in function 'string.findall'
-"       	string.lua:21: in main chunk
-"       	[C]: in ?
-" asserts on Windows:
-"       C:\apps\lua53\bin\lua.exe: conversation.lua:53: 'TALK_1' doesn't exist.
-call add(s:efm, '%.%#lua%.%#: %f:%l: %m')
-
 " debugstack():
 "       [00:29:08]: stack traceback:
 "           scripts/mainfunctions.lua:139 in () ? (Lua) <136-184>
@@ -62,6 +50,18 @@ call add(s:efm, '@%\?%f:%l:%\? in %m')
 "       	[string "boot.lua"]:637: in function '__lt'
 "       	src/lib/flux/init.lua:91: in function 'new'
 call add(s:efm, '%f(%l%\,%c) in %m')
+
+" Standard lua:
+" http://stackoverflow.com/questions/2771919/lua-jump-to-right-line
+"       lua53: string.lua:7: bad argument #1 to 'find' (string expected, got nil)
+"       stack traceback:
+"       	[C]: in function 'string.find'
+"       	string.lua:7: in function 'string.findall'
+"       	string.lua:21: in main chunk
+"       	[C]: in ?
+" running lua with full path:
+"       C:\apps\lua53\bin\lua.exe: conversation.lua:53: 'TALK_1' doesn't exist.
+call add(s:efm, '%.%#lua%.%#: %f:%l: %m')
 
 
 let &l:efm = join(s:efm, ",")
