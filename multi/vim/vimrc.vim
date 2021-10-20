@@ -468,6 +468,8 @@ nnoremap <A-]> :<C-u>ptag <C-r><C-w><CR>
 " (<C-\>s is defined in cscope_maps.vim)
 nmap <C-\><C-\> <C-\>s
 
+let g:inclement_show_include = 'echo'
+
 " AsyncCommand
 command! -nargs=1 Cscope AsyncCscopeFindSymbol <args>
 let g:asynccommand_statusline_autohide = 1
