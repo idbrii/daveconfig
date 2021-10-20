@@ -46,7 +46,9 @@ call add(s:efm, '%.%#[string "%f"]:%l:%m')
 "       	string.lua:7: in function 'string.findall'
 "       	string.lua:21: in main chunk
 "       	[C]: in ?
-call add(s:efm, 'lua%.%#: %f:%l:%m')
+" asserts on Windows:
+"       C:\apps\lua53\bin\lua.exe: conversation.lua:53: 'TALK_1' doesn't exist.
+call add(s:efm, '%.%#lua%.%#: %f:%l: %m')
 
 " debugstack():
 "       [00:29:08]: stack traceback:
