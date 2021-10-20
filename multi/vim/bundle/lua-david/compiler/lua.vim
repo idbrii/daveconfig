@@ -59,6 +59,13 @@ call add(s:efm, '%f(%l%\,%c) in %m')
 "       	string.lua:7: in function 'string.findall'
 "       	string.lua:21: in main chunk
 "       	[C]: in ?
+" error:
+" Output message from error() doesn't match any above.
+"    lua: conversation.lua:303: this is an error
+"    stack traceback:
+"            [C]: in function 'error'
+"            conversation.lua:303: in main chunk
+"            [C]: in ?
 " running lua with full path:
 "       C:\apps\lua53\bin\lua.exe: conversation.lua:53: 'TALK_1' doesn't exist.
 call add(s:efm, '%.%#lua%.%#: %f:%l: %m')
