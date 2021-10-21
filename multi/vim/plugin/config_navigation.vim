@@ -17,7 +17,7 @@ nnoremap <Leader>vw :<C-u>setlocal invwrap <Bar> set wrap?<CR>
 " Quick spelling toggle
 nnoremap <Leader>vs :<C-u>setlocal invspell <Bar> set spell?<CR>
 " Show cursor (crosshairs like a t)
-nnoremap <Leader>vt :<C-u>set invcursorline invcursorcolumn<CR>
+nnoremap <Leader>vt :<C-u>let &cursorline = !&cursorline<Bar> let &cursorcolumn = &cursorline<CR>
 
 " Jumplist - navigate previous locations
 if has('jumplist')
