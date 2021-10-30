@@ -388,3 +388,6 @@
 [submodule "multi/vim/bundle/lsp-ale"]
 	path = multi/vim/bundle/lsp-ale
 	url = git@github.com:rhysd/vim-lsp-ale.git
+[submodule "multi/vim/bundle/unimpaired"]
+	path = multi/vim/bundle/unimpaired
+	url = https://github.com/idbrii/vim-unimpaired.git
