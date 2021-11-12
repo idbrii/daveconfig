@@ -26,5 +26,7 @@ hi def link luaConstant Define
 " Make functions look like functions (vim-lua#19)
 hi def link luaFuncCall Function
 hi link luaFuncName Function
+" Ensure function keywords never look like function names.
+hi link luaFuncKeyword Type
 " Make local a keyword like return
 hi! def link luaLocal Statement
