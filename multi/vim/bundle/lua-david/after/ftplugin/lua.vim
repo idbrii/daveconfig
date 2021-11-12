@@ -58,6 +58,9 @@ function! s:set_entrypoint(makeprg)
         " configure checker properly.
         let g:ale_lua_luacheck_options .= ' --std love+luajit'
         let target = cur_dir
+
+        " Gabe uses S for a global.
+        let g:vim_lsp_settings_sumneko_lua_language_server_workspace_config.Lua.diagnostics.globals = 'S'
     else
         let target = cur_file
     endif
