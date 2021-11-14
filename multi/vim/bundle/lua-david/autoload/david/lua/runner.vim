@@ -46,6 +46,7 @@ function! david#lua#runner#set_entrypoint(makeprg)
 
     command! ProjectMake call DavidProjectBuild()
     command! ProjectRun  call DavidProjectBuild()
+    let &makeprg = entrypoint_makeprg
     exec david#path#build_kill_from_current_makeprg()
 
     " Clobber current project settings.
