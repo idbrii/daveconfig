@@ -22,6 +22,9 @@
 [submodule "multi/vim/bundle/bbye"]
 	path = multi/vim/bundle/bbye
 	url = https://github.com/moll/vim-bbye.git
+[submodule "multi/vim/bundle/advancedsorters"]
+	path = multi/vim/bundle/advancedsorters
+	url = https://github.com/inkarkat/vim-AdvancedSorters.git
 [submodule "multi/vim/bundle/lib-ingo"]
 	path = multi/vim/bundle/lib-ingo
 	url = https://github.com/inkarkat/vim-ingo-library.git
