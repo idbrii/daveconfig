@@ -90,8 +90,10 @@ xnoremap <Leader>s  <nop>
 xnoremap <Leader>s; :sort 
 xmap <unique> <Leader>ss <Plug>(operator-sort)
 xmap <unique> <Leader>so <Plug>(operator-sort)
+xmap <unique> <Leader>sn <Plug>(operator-sort-numeric)
 
 nmap <unique> <Leader>so <Plug>(operator-sort)
+nmap <unique> <Leader>sn <Plug>(operator-sort-numeric)
 
 
 " Swapping text {{{1
