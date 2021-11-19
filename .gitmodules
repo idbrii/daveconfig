@@ -112,6 +112,9 @@
 [submodule "multi/vim/bundle/operator-user"]
 	path = multi/vim/bundle/operator-user
 	url = git://github.com/kana/vim-operator-user.git
+[submodule "multi/vim/bundle/operator-sort"]
+	path = multi/vim/bundle/operator-sort
+	url = https://github.com/emonkak/vim-operator-sort.git
 [submodule "multi/vim/bundle/itchy"]
 	path = multi/vim/bundle/itchy
 	url = git@github.com:idbrii/itchy.vim.git

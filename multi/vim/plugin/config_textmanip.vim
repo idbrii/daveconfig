@@ -87,8 +87,11 @@ nmap g== :call <SID>FilterNumbers(v:count)<CR>
 
 " Quick sort (haha) {{{1
 xnoremap <Leader>s  <nop>
-xnoremap <Leader>ss :sort<CR>
 xnoremap <Leader>s; :sort 
+xmap <unique> <Leader>ss <Plug>(operator-sort)
+xmap <unique> <Leader>so <Plug>(operator-sort)
+
+nmap <unique> <Leader>so <Plug>(operator-sort)
 
 
 " Swapping text {{{1
