@@ -262,6 +262,9 @@
 [submodule "multi/vim/bundle/neoyank"]
 	path = multi/vim/bundle/neoyank
 	url = https://github.com/Shougo/neoyank.vim.git
+[submodule "multi/vim/bundle/lua-david"]
+	path = multi/vim/bundle/lua-david
+	url = git@github.com:idbrii/vim-lua-david.git
 [submodule "multi/vim/bundle/lua-xolox"]
 	path = multi/vim/bundle/lua-xolox
 	url = git@github.com:idbrii/vim-lua-ftplugin.git
