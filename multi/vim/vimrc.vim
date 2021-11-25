@@ -321,11 +321,13 @@ endif
 "
 " Switch to the directory of the current file unless it breaks something.
 function! s:autochdir()
+    let ignore_ft = ['help', 'dirvish', 'fugitive', 'qf']
     let can_autochdir = (!exists("v:vim_did_enter") || v:vim_did_enter) " Don't mess with vim on startup.
-    let can_autochdir = can_autochdir && david#init#find_ft_match(['help', 'dirvish', 'qf']) < 0 " Not useful for some filetypes
+    let can_autochdir = can_autochdir && david#init#find_ft_match(ignore_ft) < 0 " Not useful for some filetypes
     let fname = david#path#to_unix("%:p") 
     let can_autochdir = can_autochdir && filereadable(fname) " Only change to real files.
     let can_autochdir = can_autochdir && fname !~? "^"..david#path#to_unix($TEMP) " Ignore temp files (Shdo)
+    let can_autochdir = can_autochdir && fname !~# "/\.git/" " Never chdir inside .git
     if can_autochdir
         silent! cd %:p:h
     endif
