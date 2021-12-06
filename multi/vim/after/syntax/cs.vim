@@ -30,7 +30,8 @@ hi link	csBraces	Delimiter
 
 " I like this attribute group, but it has potential problems:
 " https://github.com/nickspoons/vim-cs/pull/5#pullrequestreview-177470208
-syn region	csAttribute	start="^\s*\[\ze\K" end="\]\s*" contains=csString, csVerbatimString, csCharacter, csNumber, csType, csTypeOfStatement, csComment
+" https://github.com/idbrii/vim-cs/blob/attribute/test/attributes.vader
+syn region	csAttribute	start="^\s*\[\ze\K" end="\]\s*" contains=csString, csVerbatimString, csCharacter, csNumber, csType, csTypeOf, csTypeOfOperand, csParens, csComment
 hi def link	csAttribute	Macro
 
 " Fold Code blocks {{{1
