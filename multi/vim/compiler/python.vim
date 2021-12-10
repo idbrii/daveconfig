@@ -25,7 +25,6 @@ CompilerSet makeprg=python\ -t\ %
 CompilerSet errorformat=%A%\\s%#File\ \"%f\"\\,\ line\ %l\\,\ in%.%#
 " Include failed toplevel doctest example.
 CompilerSet errorformat+=%+CFailed\ example:%.%#
-CompilerSet errorformat+=%Z%*\\s\ \ \ %m
 " Ignore big star lines from doctests.
 CompilerSet errorformat+=%-G*%\\{70%\\}
 " Ignore most of doctest summary. x2
@@ -34,10 +33,11 @@ CompilerSet errorformat+=%-G%*\\s%*\\d\ of%*\\s%*\\d\ in%.%#
 
 " SyntaxErrors (%p is for the pointer to the error column).
 " Source: http://www.vim.org/scripts/script.php?script_id=477
-CompilerSet errorformat+=%A\ \ File\ \"%f\"\\\,\ line\ %l
-CompilerSet errorformat+=%+C\ \ %.%#
+CompilerSet errorformat+=%E\ \ File\ \"%f\"\\\,\ line\ %l
+" %p must come before other lines that might match leading whitespace
 CompilerSet errorformat+=%-C%p^
-CompilerSet errorformat+=%Z%m
+CompilerSet errorformat+=%+C\ \ %m
+CompilerSet errorformat+=%Z\ \ %m
 
 " I don't use \%-G%.%# to remove extra output because most of it is useful as
 " context for the actual error message. I also don't include %+G because
