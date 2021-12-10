@@ -94,3 +94,11 @@ function! david#window#show_last_error_without_jump()
     call winrestview(winview) 
 endf
 
+function! david#window#copen_without_moving_cursor()
+    let must_go_back = &buftype != 'quickfix'
+    copen
+    if must_go_back
+        wincmd p
+    endif
+endf
+

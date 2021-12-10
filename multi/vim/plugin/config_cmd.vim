@@ -21,6 +21,15 @@ augroup david_resize_qf
     autocmd VimEnter,VimResized * let g:asyncrun_open = max([5, &lines / 10])
 augroup END
 
+" Refresh qf after asyncrun completes so multi-line errors are populated. I
+" don't think this should be necessary (vim/vim/issues/5735 says fixed in
+" 8.2.1982), but I need it on 8.2.3399.
+augroup david_asyncrun
+    au!
+    au User AsyncRunStop call david#window#copen_without_moving_cursor()
+augroup END
+
+
 " Replace TailMinusF
 command! -nargs=1 -complete=file Tail AsyncRun tail -f <q-args>
 
