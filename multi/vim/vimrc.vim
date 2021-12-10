@@ -101,6 +101,15 @@ endif
 command! SessionSaveAndQuit mksession! ~/.vim-cache/session.vim | qall
 command! SessionLoad        source ~/.vim-cache/session.vim
 command! SessionObsess      Obsession ~/.vim-cache/session.vim | Chmod 600 ~/.vim-cache/session.vim
+" Close quickfix window so it doesn't get stored in the session since it can't
+" be properly reloaded. I think this is only a problem because I use
+" quickfix-reflector which makes qf modifiable.
+" Need to only do on quit because obsession runs on BufEnter and windo messes
+" up our windows.
+augroup obsession_david
+    au!
+    autocmd User ObsessionPre if v:dying | windo if &buftype == 'quickfix' | close | endif | endif
+augroup END
 
 set sessionoptions=
 
