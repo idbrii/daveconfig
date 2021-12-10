@@ -72,28 +72,6 @@ endfunction
 
 " Quickfix convenience {{{1
 
-function! david#window#show_last_error_without_jump()
-    let only_errors = filter(getqflist(), { k,v -> v.bufnr != 0 })
-    if empty(only_errors)
-        " Avoid jumping anywhere if there's no error to jump to.
-        echo "No errors"
-        return
-    endif
-    let winview = winsaveview()
-    let winnr = winnr()
-    let bufnr = bufnr()
-    " to last line
-    keepalt keepjumps clast
-    try
-        " to last actual error
-        keepalt keepjumps cprev
-    catch /^Vim\%((\a\+)\)\=:E553/	" Error: No more items
-    endtry
-    call execute(winnr ..'wincmd w')
-    call execute('keepalt '.. bufnr ..'buffer')
-    call winrestview(winview) 
-endf
-
 function! david#window#copen_without_moving_cursor()
     let must_go_back = &buftype != 'quickfix'
     copen
