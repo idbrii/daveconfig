@@ -1,10 +1,11 @@
 augroup skeletons_shebang
-    "Bash uses sh filetype
+    au!
+    " Bash uses sh filetype
     au BufNewFile *.bash call skeletons#shebang#SetHeader("/bin/bash")
 
-    call skeletons#shebang#Set('/bin/', "sh")
-    call skeletons#shebang#Set('/usr/bin/env ', "py")
-    call skeletons#shebang#Set('/usr/bin/env ', "rb")
+    exec skeletons#shebang#AutocmdForExecutableMatchingFiletype('/bin/', "sh")
+    exec skeletons#shebang#AutocmdForExecutableMatchingFiletype('/usr/bin/env ', "py")
+    exec skeletons#shebang#AutocmdForExecutableMatchingFiletype('/usr/bin/env ', "rb")
 augroup END
 
 " vim: set ts=4 sw=4 et:

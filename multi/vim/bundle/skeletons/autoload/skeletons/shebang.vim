@@ -4,11 +4,15 @@
 " TODO: add the shebang to the ftplugin and call that from here
 
 function! skeletons#shebang#SetHeader(program)
+    if !&modifiable
+        return
+    endif
+    
     call append("0", "\#! " . a:program)
     call append(".", "")
 endfunction
 
-function! skeletons#shebang#Set(program, file_ext)
-    exec "au BufNewFile *." . a:file_ext . " call skeletons#shebang#SetHeader('" . a:program . "' . &ft)"
+function! skeletons#shebang#AutocmdForExecutableMatchingFiletype(program, file_ext)
+    return "au BufNewFile *." . a:file_ext . " call skeletons#shebang#SetHeader('" . a:program . "' . &ft)"
 endfunction
 
