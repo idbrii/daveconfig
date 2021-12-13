@@ -67,7 +67,7 @@ function! david#path#build_kill_from_current_makeprg() abort
     endif
     
     let exe = fnamemodify(exe, ':t')
-    return printf('command! ProjectKill call system("taskkill /im %s")', exe)
+    return printf('command! ProjectKill update | call system("taskkill /im %s")', exe)
 endf
 
 " See also the more aggressive after/plugin/followsymlink.vim
