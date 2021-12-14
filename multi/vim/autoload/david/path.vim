@@ -37,8 +37,9 @@ function! david#path#relative_to_parent(path, relative_parent) abort
 endf
 
 function! david#path#find_upwards_from_current_file(fname)
-    let current_file_dir = expand('%:h')
-    let found = findfile(a:fname, ';'.. current_file_dir)
+    " Don't force unix path so vim interprets slashes correctly.
+    let current_file_dir = expand('%:p:h')
+    let found = findfile(a:fname, current_file_dir ..';/')
     return found
 endf
 
