@@ -209,7 +209,7 @@ if executable('svn')
         norm! gg
     endf
     command! SvnLastMessage call s:SvnLastMessage()
-    command! GcommitSvnMsg :Gcommit -v | call search('lua') | SvnLastMessage
+    command! GcommitSvnMsg :Gcommit -v | call search('to be committed:\n.*:\s*\w', 'e') | SvnLastMessage
 
     " There's no VCShow like git show.
     command! -nargs=+ SvnShow :Sedit <args>
