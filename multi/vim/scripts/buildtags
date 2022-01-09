@@ -51,6 +51,9 @@ fi
 
 
 if [[ $continuous -eq 1 ]]; then
+	# Build tags once on startup.
+	$0 $cscope $filetype $search_dirs
+
     if [[ -x "$(command -v fswatch)" ]]; then
         # fswatch runs in a loop, so it needs to ignore the results of our builds (tags file).
         echo fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude .*.sw*
