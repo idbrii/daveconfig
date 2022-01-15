@@ -2,10 +2,13 @@
 " Stolen from tpope/vim-vinegar@ac893960c324d879b6923a4c1abaea352d8caeb5
 
 function! s:fnameescape(file) abort
+  " shellslash breaks stuff, so I stopped using it, but dirvish's trailing \
+  " breaks most shell commands. Use unix paths instead.
+  let file = david#path#to_unix(a:file)
   if exists('*fnameescape')
-    return fnameescape(a:file)
+    return fnameescape(file)
   else
-    return escape(a:file," \t\n*?[{`$\\%#'\"|!<")
+    return escape(file," \t\n*?[{`$\\%#'\"|!<")
   endif
 endfunction
 
