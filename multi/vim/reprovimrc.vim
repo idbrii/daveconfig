@@ -36,7 +36,7 @@ inoremap <C-l> <Esc>
 nnoremap <Leader>w <C-w>
 nnoremap <Leader>fs :update<CR>
 set ignorecase smartcase
-set wildmode=list:longest
+set wildmode=longest:list,full
 set tag=./tags;/
 source ~/.vim/plugin/config_navigation.vim
 
@@ -53,3 +53,5 @@ source ~/.vim/local.vim
 
 source ~/.vim/plugin/config_display.vim
 FontDefault
+
+nnoremap <buffer> <Leader>vso <Cmd>update<bar> Vader<CR>
