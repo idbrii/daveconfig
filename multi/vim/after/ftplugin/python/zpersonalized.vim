@@ -12,6 +12,9 @@ setlocal cindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 " see # as comments
 setlocal cinoptions+=#1
 
+
+let b:detectindent_check_syntax = 1
+
 "" simple indent-based folding
 if &foldmethod != 'diff'
     setlocal foldmethod=indent

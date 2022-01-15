@@ -926,6 +926,9 @@ let g:detectindent_preferred_when_mixed = 1
 let g:detectindent_preferred_expandtab = &expandtab
 " Zero indent means don't modify (keep it at filetype setting).
 let g:detectindent_preferred_indent = 0
+" in ftplugin/python/zpersonalized.vim, I enable detectindent_check_syntax to
+" ignore indent from multi-line strings.
+let g:detectindent_comments_blacklist = ['python']
 
 " expand-region
 " I'm not sure that normal map is very useful since it always select a word.
