@@ -35,6 +35,14 @@ if has("patch-8.1.0360")
     let g:pathogen_blacklist += ["diff-enhanced"]
 endif
 
+" polyglot   {{{2
+" polyglot disabling must happen very early
+let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
+
+" I already have DetectIndent and sensible
+call add(g:polyglot_disabled, 'autoindent')
+call add(g:polyglot_disabled, 'sensible')
+
 " gdscript3 and vim-unityengine both try to set .shader files.
 " When using godot, add to local.vim:
 " call remove(g:polyglot_disabled, index(g:polyglot_disabled, 'gdscript'))

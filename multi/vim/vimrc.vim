@@ -939,6 +939,9 @@ xmap iV <Plug>(expand_region_shrink)
 
 " polyglot   {{{2
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
+" I already have DetectIndent and sensible
+call add(g:polyglot_disabled, 'autoindent')
+call add(g:polyglot_disabled, 'sensible')
 " I have two different python syntax plugins. Prefer mine over polyglot's.
 call add(g:polyglot_disabled, 'python')
 " I have my own python compiler.
