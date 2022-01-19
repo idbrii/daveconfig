@@ -1,6 +1,7 @@
 " Selection {{{1
 " gc selects previously changed text. (|gv| but for modification.)
 nnoremap gc :<C-U>silent!normal!`[v`]<CR>
+xnoremap gc `]o`[
 
 " select all
 nnoremap <C-a> 1GVG
