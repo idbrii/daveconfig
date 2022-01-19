@@ -937,24 +937,6 @@ let g:detectindent_comments_blacklist = ['python']
 xmap iv <Plug>(expand_region_expand)
 xmap iV <Plug>(expand_region_shrink)
 
-" polyglot   {{{2
-let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
-" I already have DetectIndent and sensible
-call add(g:polyglot_disabled, 'autoindent')
-call add(g:polyglot_disabled, 'sensible')
-" I have two different python syntax plugins. Prefer mine over polyglot's.
-call add(g:polyglot_disabled, 'python')
-" I have my own python compiler.
-call add(g:polyglot_disabled, 'python-compiler')
-" Scala causes lots of files to be sourced for help filetype (tries to add
-" scala syntax for help which loads html, javascript, vb, css).
-call add(g:polyglot_disabled, 'scala')
-" "generic log" highlighting is not generic enough. makes logs that didn't
-" come from a webserver look like rainbow garbage.
-call add(g:polyglot_disabled, 'log')
-" Using my fork of vim-objc
-call add(g:polyglot_disabled, 'objc')
-
 " csv comes with polyglot.
 " I use BackSpace for switching buffers.
 let g:csv_nomap_bs = 1

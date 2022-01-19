@@ -48,11 +48,24 @@ call add(g:polyglot_disabled, 'sensible')
 " call remove(g:polyglot_disabled, index(g:polyglot_disabled, 'gdscript'))
 " call pathogen#cycle_filetype()
 let g:pathogen_blacklist += ["gdscript3"]
-let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
 call add(g:polyglot_disabled, 'gdscript')
 
 " I'm more likely to use objc than mathematica (both use .m)
 call add(g:polyglot_disabled, 'mathematica')
+
+" I have two different python syntax plugins. Prefer mine over polyglot's.
+call add(g:polyglot_disabled, 'python')
+" I have my own python compiler.
+call add(g:polyglot_disabled, 'python-compiler')
+" Scala causes lots of files to be sourced for help filetype (tries to add
+" scala syntax for help which loads html, javascript, vb, css).
+call add(g:polyglot_disabled, 'scala')
+" "generic log" highlighting is not generic enough. makes logs that didn't
+" come from a webserver look like rainbow garbage.
+call add(g:polyglot_disabled, 'log')
+" Using my fork of vim-objc
+call add(g:polyglot_disabled, 'objc')
+
 
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
