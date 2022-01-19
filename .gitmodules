@@ -397,3 +397,6 @@
 [submodule "multi/vim/bundle/unimpaired"]
 	path = multi/vim/bundle/unimpaired
 	url = https://github.com/idbrii/vim-unimpaired.git
+[submodule "multi/vim/bundle/lua-tbastos"]
+	path = multi/vim/bundle/lua-tbastos
+	url = https://github.com/idbrii/vim-lua.git
