@@ -12,10 +12,13 @@ set termwinkey=<C-J>
 " Exit insert mode like a normal buffer.
 tnoremap <silent> <C-l> <C-j>N
 tnoremap <silent> <C-j><C-l> <C-l>
-" readline compatibility -- this will mess up applications run in a terminal,
-" but I don't do that. Not silent so I know it's happening.
-tnoremap <C-u> <C-Home>
-tnoremap <C-k> <C-End>
+if &shell !~# 'bash'
+    " readline compatibility -- this will mess up applications run in a terminal,
+    " but I don't do that. Not silent so I know it's happening.
+    tnoremap <C-u> <C-Home>
+    tnoremap <C-k> <C-End>
+endif
+
 
 " https://github.com/vim/vim/issues/6040
 tnoremap <S-space> <space>
