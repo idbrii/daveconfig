@@ -252,7 +252,7 @@ def build(
         # Vim doesn't understand / as beginning of the path in Windows so it thinks
         # they're relative paths and can't find anything. (I'm using gvim.exe but
         # building tags with Unix subsystem.)
-        sed("-i", "-e", r"s,/mnt/\([[:alpha:]]\)/,\1:/,", fpath)
+        sed("-i", "", "-e", r"s,/mnt/\([[:alpha:]]\)/,\1:/,", fpath)
 
         # For reference, opposite transformation.
         # sed -e"s,\([[:alpha:]]\):/,/mnt/\1/,"
