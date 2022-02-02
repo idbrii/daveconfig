@@ -326,6 +326,9 @@ else
     let g:dirvish_shdo_before = 'cd {}'
 endif
 
+" macOS has a temp dir aliased to another dir.
+let s:temp_dirs = map([$TEMP, $TMPDIR], { k,v -> resolve(v)})
+let s:temp_dirs = filter(s:temp_dirs , { k,v -> !empty(v)})
 
 " 'autochdir' alternative so I can provide exceptions. See calling autocmd.
 "
@@ -336,7 +339,9 @@ function! s:autochdir()
     let can_autochdir = can_autochdir && david#init#find_ft_match(ignore_ft) < 0 " Not useful for some filetypes
     let fname = david#path#to_unix("%:p") 
     let can_autochdir = can_autochdir && filereadable(fname) " Only change to real files.
-    let can_autochdir = can_autochdir && fname !~? "^"..david#path#to_unix($TEMP) " Ignore temp files (Shdo)
+    for tmp in s:temp_dirs
+        let can_autochdir = can_autochdir && fname !~? "^"..david#path#to_unix(tmp) " Ignore temp files (Shdo)
+    endfor
     let can_autochdir = can_autochdir && fname !~# "/\.git/" " Never chdir inside .git
     if can_autochdir
         silent! cd %:p:h
