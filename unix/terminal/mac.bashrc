@@ -47,6 +47,14 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 
+if [ -x /usr/local/bin/python3 ] && [ ! -f /usr/local/bin/python ]; then
+    # brew installs python3 but doesn't link it.
+    echo Creating symlinks to make python3 the default python.
+    ln -s /usr/local/bin/python3 /usr/local/bin/python
+    ln -s /usr/local/bin/pydoc3 /usr/local/bin/pydoc
+fi
+
+
 # For compilers to find ruby you may need to set:
 #   export LDFLAGS="-L/usr/local/opt/ruby/lib"
 #   export CPPFLAGS="-I/usr/local/opt/ruby/include"
