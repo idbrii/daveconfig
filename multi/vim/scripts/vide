@@ -42,12 +42,20 @@ elif [[ -x "/usr/local/bin/nvim" ]] ; then
     is_neovim=1
 fi
 
+session=
+
 # Support opening new server or focusing vim with no filename and opening
 # files in new/existing server.
 if [[ -z "$FileName" ]] ; then
     if [[ -z "$($vim --serverlist | grep -e "\bVIDE\b")" ]] ; then
-        # No existing server! No remote command creates a new one with no file.
-        remote="+ScratchNoSplit"
+        if [[ -e ~/.vim-cache/session.vim ]]; then
+            # No server, so load our session into a new one.
+            session="-S ~/.vim-cache/session.vim"
+        else
+            # No existing server and no session! There isn't a --remote command
+            # to create one, so use a useful command.
+            remote="+ScratchNoSplit"
+        fi
     else
         # videinvoke probably foregrounds, but not much else useful to put
         # here.
@@ -55,11 +63,6 @@ if [[ -z "$FileName" ]] ; then
     fi
 else
     remote="--remote-silent"
-fi
-
-session=
-if [[ -e ~/.vim-cache/session.vim ]]; then
-    session="-S ~/.vim-cache/session.vim"
 fi
 
 # TODO: videinvoke does not work here!
