@@ -43,6 +43,9 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="~/local/bin:$PATH"
 #~ export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+# On mac, packages are installed here
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+
 
 # For compilers to find ruby you may need to set:
 #   export LDFLAGS="-L/usr/local/opt/ruby/lib"
