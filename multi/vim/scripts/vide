@@ -77,6 +77,7 @@ else
 fi
 
 # --remote says it only accepts one command!
+# TODO: cursor_jump doesn't work. What's printed works, so there's an escaping problem here.
 vim="$vim +\"$cursor_jump\" $FileName"
 echo $vim
 $vim
