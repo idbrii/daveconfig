@@ -56,3 +56,74 @@ function! david#editing#join_spaceless_multi() abort range
     endif
 endf
 
+
+function! david#editing#ScripteasePreFilter_StripSuffix(expr)
+  " Strip out f float suffixes.
+  return substitute(a:expr, '\v\C(\d)f>', '\1', 'g')
+endf
+function! david#editing#ScripteasePostFilter_StripSuffix(expr, filter_modified, original)
+  if a:filter_modified
+    " We had f suffixes, so restore them.
+    return substitute(a:expr, '\v\C([0-9.]+)>', '\1f', 'g')
+  endif
+  return a:expr
+endf
+
+" TODO: try stripping out junk and then send it to g= instead of my own eval.
+" (Would that be any better?)
+" I think this is supposed to find numbers inside text to help with summing
+" estimates.
+function! david#editing#FilterNumbersFromWords(count) abort
+    let c_bak = @c
+    try
+        let cnt = 1 " max([1, a:count])
+        exec 'norm! "cd'.. cnt ..'_'
+        let code = @c
+
+        let comment = david#get_single_line_comment_leader()
+        let segments = matchlist(code, '\v\C'..'^(\s*%('..comment..')?\s*%(\k+\s*\=\s*))(.*)(;\s*%('..comment..')?\n)')
+        if len(segments) < 4
+            let g:DAVID_test = @c
+            norm! "cP
+            echoerr "Failed to find numbers:"
+            echom 'norm! "cd'.. cnt ..'_'
+            echom code
+            echom "Found:"
+            echom segments
+            return
+        endif
+
+        let code = segments[2]
+
+         "  51.5 + 12.3
+         "  51.5f + 12.3;
+
+        " absolute_y = 51.5f + 12.3;
+        " absolute_y = 51.5f + 12.3;
+        " absolute_y = 51.5f + 12.3;
+        " absolute_y = 51.5f + 12.3;
+
+        " f suffix for floats
+        let no_f = substitute(code, '\v\C'..'(\d)f>', '\1', 'g')
+        let add_f = no_f != code
+        let code = no_f
+
+        try
+            let code = string(eval(code))
+        catch
+            norm! "cP
+            echoerr "Failed eval("..code..")"
+            throw v:exception
+        endtry
+
+        if add_f
+            let code = substitute(code, '\v\C([0-9.]+)', '\1f', '')
+        endif
+
+        let @c = segments[1] .. code .. segments[3]
+        norm! "cP
+
+    finally
+        let @c = c_bak
+    endtry
+endf
