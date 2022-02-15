@@ -14,6 +14,10 @@ nmap g! mcviwg!`c
 nmap g= <Plug>ScripteaseFilter
 xmap g= <Plug>ScripteaseFilter
 
+" gJ: join and *remove* spaces.
+nnoremap gJ <Cmd>call david#editing#join_spaceless_single()<CR>
+xnoremap gJ :call david#editing#join_spaceless_multi()<CR>
+
 function! My_ScripteasePreFilter_StripSuffix(expr)
   " Strip out f float suffixes.
   return substitute(a:expr, '\v\C(\d)f>', '\1', 'g')
