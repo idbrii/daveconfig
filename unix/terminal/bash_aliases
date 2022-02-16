@@ -86,7 +86,6 @@ function init_skeleton {
     git ci -m'Project skeleton'
 }
 
-alias librarian=~/code/tool/librarian/librarian.py
 
 
 function set_aside_vim {

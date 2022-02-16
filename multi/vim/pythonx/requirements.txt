@@ -7,5 +7,8 @@ pycscope==1.2.1
 pylint>=1.0.0
 pytest>=6.2.5
 
+# May want to install this from my checkout so it's easy to modify
+-e git+http://github.com/idbrii/librarian#egg=code-librarian
+
 # Install this one inside sovereign
 # -e git+http://github.com/idbrii/PySvn.git@820647967d28f3de90b0a9627dc41e2e9f84f837#egg=svn
