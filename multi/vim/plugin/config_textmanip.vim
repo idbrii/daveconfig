@@ -15,8 +15,8 @@ nmap g= <Plug>ScripteaseFilter
 xmap g= <Plug>ScripteaseFilter
 
 " gJ: join and *remove* spaces.
-nnoremap gJ <Cmd>call david#editing#join_spaceless_single()<CR>
-xnoremap gJ :call david#editing#join_spaceless_multi()<CR>
+nnoremap gJ <Cmd>call david#editing#join_spaceless_normal()<CR>
+xnoremap gJ :call david#editing#join_spaceless_visual()<CR>
 
 let g:scriptease_prefilter = 'david#editing#ScripteasePreFilter_StripSuffix'
 let g:scriptease_postfilter = 'david#editing#ScripteasePostFilter_StripSuffix'

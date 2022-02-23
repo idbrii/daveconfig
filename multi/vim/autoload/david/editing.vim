@@ -32,7 +32,7 @@ endf
 
 " gJ but always remove spaces when count is 0. Use 1gJ for default gJ
 " behaviour.
-function! david#editing#join_spaceless_single() abort
+function! david#editing#join_spaceless_normal() abort
     let wants_legacy = v:count == 1
     exec 'normal!' v:count1 ..'gJ'
 
@@ -41,7 +41,7 @@ function! david#editing#join_spaceless_single() abort
         normal! "_dw
     endif
 endf
-function! david#editing#join_spaceless_multi() abort range
+function! david#editing#join_spaceless_visual() abort range
     let wants_legacy = v:count == 1
 
     let last = a:lastline
