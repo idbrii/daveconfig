@@ -867,6 +867,7 @@ if executable('rg')
     let &grepprg = 'rg --vimgrep'
     let &grepformat = "%f:%l:%c:%m"
     call notgrep#setup#NotGrepUseRipgrep()
+    let $RIPGREP_CONFIG_PATH = fnamemodify(resolve(expand("~/.vim")), ":h") ..'/ripgreprc'
 else
     " Fallback to grep so NotGrepRecursiveFrom will work.
     let g:notgrep_prg = &grepprg

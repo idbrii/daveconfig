@@ -1,0 +1,7 @@
+# See vimrc for $RIPGREP_CONFIG_PATH
+
+--type-add
+dosbatch:*.{cmd,bat}
+
+
+# vim: set ft=sh :
