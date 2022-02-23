@@ -30,29 +30,32 @@ function! david#editing#get_word_from_relative_line(offset)
 endf
 
 
-" gJ but always remove spaces when count is 1. Use 0gJ for default gJ
+" gJ but always remove spaces when count is 0. Use 1gJ for default gJ
 " behaviour.
 function! david#editing#join_spaceless_single() abort
-    normal! gJ
+    let wants_legacy = v:count == 1
+    exec 'normal!' v:count1 ..'gJ'
 
-    " Remove whitespace.
-    if v:count1 == 1 && matchstr(getline('.'), '\%' . col('.') . 'c.') =~ '\s'
+    " Check for whitespace and remove it.
+    if !wants_legacy && matchstr(getline('.'), '\%' . col('.') . 'c.') =~ '\s'
         normal! "_dw
     endif
 endf
 function! david#editing#join_spaceless_multi() abort range
+    let wants_legacy = v:count == 1
+
     let last = a:lastline
     if a:lastline == a:firstline
         let last += 1
     endif
     
-    if v:count1 == 1
+    if wants_legacy
+        normal! gvgJ
+    else
         let search_bak = @/
         exec printf('%i,%i sm/\v^\s+//e', a:firstline + 1, last)
-        exec printf('%i,%i join!',       a:firstline,     last)
+        exec printf('%i,%i join!',        a:firstline,     last)
         let @/ = search_bak
-    else
-        normal! gJ
     endif
 endf
 
