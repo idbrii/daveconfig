@@ -48,7 +48,7 @@ function! david#editing#join_spaceless_visual() abort range
     if a:lastline == a:firstline
         let last += 1
     endif
-    
+
     if wants_legacy
         normal! gvgJ
     else
@@ -61,15 +61,15 @@ endf
 
 
 function! david#editing#ScripteasePreFilter_StripSuffix(expr)
-  " Strip out f float suffixes.
-  return substitute(a:expr, '\v\C(\d)f>', '\1', 'g')
+    " Strip out f float suffixes.
+    return substitute(a:expr, '\v\C(\d)f>', '\1', 'g')
 endf
 function! david#editing#ScripteasePostFilter_StripSuffix(expr, filter_modified, original)
-  if a:filter_modified
-    " We had f suffixes, so restore them.
-    return substitute(a:expr, '\v\C([0-9.]+)>', '\1f', 'g')
-  endif
-  return a:expr
+    if a:filter_modified
+        " We had f suffixes, so restore them.
+        return substitute(a:expr, '\v\C([0-9.]+)>', '\1f', 'g')
+    endif
+    return a:expr
 endf
 
 " TODO: try stripping out junk and then send it to g= instead of my own eval.
@@ -98,8 +98,8 @@ function! david#editing#FilterNumbersFromWords(count) abort
 
         let code = segments[2]
 
-         "  51.5 + 12.3
-         "  51.5f + 12.3;
+        "  51.5 + 12.3
+        "  51.5f + 12.3;
 
         " absolute_y = 51.5f + 12.3;
         " absolute_y = 51.5f + 12.3;
