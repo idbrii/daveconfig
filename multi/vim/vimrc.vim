@@ -453,6 +453,9 @@ nnoremap <Leader>ik :<C-u>ProjectKill<CR>
 nnoremap <Leader>ie :<C-u>ALEPopulateQuickfix<CR>
 nnoremap <Leader>iE :<C-u>ALEPopulateLocList<CR>
 
+" Generic entrypoint. Filetypes have smarter versions of this.
+command! -nargs=* SetEntrypoint call david#runner#set_entrypoint(<q-args>)
+
 " If available, use scons instead of make. -u is upward search for root
 " SConstruct.
 if executable('scons')
