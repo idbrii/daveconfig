@@ -39,6 +39,10 @@ endf
 function! david#path#find_upwards_from_current_file(fname)
     " Don't force unix path so vim interprets slashes correctly.
     let current_file_dir = expand('%:p:h')
+    if !isdirectory(current_file_dir)
+        return ''
+    endif
+    
     let found = findfile(a:fname, current_file_dir ..';/')
     return found
 endf
