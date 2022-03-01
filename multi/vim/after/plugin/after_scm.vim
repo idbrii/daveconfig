@@ -1,15 +1,14 @@
 " Mergetool          {{{1
 
 " I only want one command.
-command! Merge call mergetool#start()
+command! -bar Merge call mergetool#toggle()
 delcommand MergetoolStart
 delcommand MergetoolToggle
 
-" When merge is active, swap Merge starter for layout controls.
-" When merge ends, swap back.
+" While merge is active add layout controls.
 augroup david_mergetool
   au!
-  autocmd User MergetoolStart delcommand Merge | command! MergetoolThreeWay MergetoolToggleLayout LmR
-  autocmd User MergetoolStop delcommand MergetoolThreeWay | command! Merge call mergetool#start()
+  autocmd User MergetoolStart command! MergetoolThreeWay MergetoolToggleLayout LmR
+  autocmd User MergetoolStop delcommand MergetoolThreeWay
 augroup END
 
