@@ -12,7 +12,7 @@ function! david#runner#set_entrypoint(args)
 
     let entrypoint_makeprg = s:original_makeprg
     let entrypoint_makeprg = substitute(entrypoint_makeprg, '%', cur_file, '')
-    let entrypoint_makeprg .= a:args
+    let entrypoint_makeprg .= ' '.. a:args
 
     function! DavidProjectBuild() closure
         update
