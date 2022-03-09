@@ -179,10 +179,10 @@ function vader_isolated
     # Setting a colorscheme because the default is unusable.
     vim --clean -Nu <(cat << VIMRC
 filetype off
-set rtp+=~/.vim/bundle/vader
-set rtp+=~/.vim/bundle/sensible
-set rtp+=~/.vim/bundle/textobj-user
-set rtp+=$plugin_dir
+set rtp^=~/.vim/bundle/vader
+set rtp^=~/.vim/bundle/sensible
+set rtp^=~/.vim/bundle/textobj-user
+set rtp^=$plugin_dir
 set rtp+=~/.vim/bundle/textobj-user/after
 set rtp+=$plugin_dir/after
 filetype plugin indent on
