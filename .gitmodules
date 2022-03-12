@@ -400,3 +400,6 @@
 [submodule "multi/vim/bundle/lua-tbastos"]
 	path = multi/vim/bundle/lua-tbastos
 	url = https://github.com/idbrii/vim-lua.git
+[submodule "multi/vim/bundle/zepl"]
+	path = multi/vim/bundle/zepl
+	url = https://github.com/axvr/zepl.vim.git
