@@ -59,11 +59,13 @@ if exists('##TerminalWinOpen')
     augroup david_terminal
         au!
         au TerminalWinOpen * call s:TryApplyTerminalMappings()
+        au User ZeplTerminalWinOpen call s:TryApplyTerminalMappings()
     augroup END
 elseif exists('##TerminalOpen')
     augroup david_terminal
         au!
         au TerminalOpen * call s:TryApplyTerminalMappings()
+        au User ZeplTerminalWinOpen call s:TryApplyTerminalMappings()
     augroup END
 else
     command! TerminalApplyMappings call s:TryApplyTerminalMappings()
