@@ -223,6 +223,7 @@ set showbreak=>>
 """ Buffers
 "set splitbelow                  " Make preview (and all other) splits appear at the bottom
 set switchbuf=useopen       " Ignore tabs; try to stay within the current viewport
+set switchbuf+=split        " Split instead of showing errors
 
 """" Editing
 set nojoinspaces            " I don't use double spaces
