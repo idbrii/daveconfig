@@ -77,6 +77,8 @@ nnoremap <unique> <A-g> :<C-u>NotGrep \b<cword>\b<CR>
 nnoremap <unique> <Leader>jw :<C-u>NotGrep \b<cword>\b<CR>
 nnoremap <unique> <Leader>jW :<C-u>NotGrep \b<cWORD>\b<CR>
 xnoremap <unique> <Leader>jw "cy:<C-u>call notgrep#search#NotGrep('grep', '\b'. @c .'\b')<CR>
+nnoremap <unique> <Leader>jf :<C-u>NotGrepCurrentFiletype \b<cword>\b<CR>
+nnoremap <unique> <Leader>jF :<C-u>NotGrepCurrentFiletype \b<cWORD>\b<CR>
 " Less precise version (\b is word boundary). Map is similar to `*` vs `g*`.
 nnoremap <unique> g<A-g> :<C-u>NotGrep <cword><CR>
 nnoremap <unique> <Leader>jgw :<C-u>NotGrep <cword><CR>
