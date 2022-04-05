@@ -68,6 +68,10 @@ call add(g:polyglot_disabled, 'lua')
 " Using my fork of vim-objc
 call add(g:polyglot_disabled, 'objc')
 
+" cpp-modern (vim-cpp-enhanced-highlight) is mostly stl and is overzealous in
+" highlighting as if all stl types were keywords (span, ratio).
+call add(g:polyglot_disabled, 'cpp-modern')
+
 
 " Pathogen
 " Load immediately -- it loads other plugins, so do it first.
