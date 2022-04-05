@@ -624,6 +624,8 @@ command! -nargs=+ -complete=file DirDiff :call ZF_DirDiff(<f-args>)
 command! -nargs=* -complete=file DirMarkDiff :call ZF_DirDiffMark(<q-args>)
 
 let g:ZFDirDiffMark_needConfirm = 1
+" Ignore dotfiles (often giant cache folders)
+let g:ZFDirDiffFileExclude = ".*"
 
 let g:ZFDirDiffKeymap_update = ['<C-L>']
 let g:ZFDirDiffKeymap_open = ['<cr>', 'o', '>>']
