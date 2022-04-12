@@ -204,7 +204,8 @@ if executable('svn')
         endif
         
         let log = map(log, { k,v -> trim(v) })
-        silent 1put =log[:2]
+        call add(log, "\n") " not all commits have trailing newline
+        silent 0put =log[:2]
         silent 0put =log[3:]
         norm! gg
     endf
