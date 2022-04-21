@@ -314,7 +314,9 @@ else
 	alias playlist='python3 ~/data/settings/daveconfig/unix/terminal/playlist.py'
 fi
 
-alias buildtag-love='~/.vim/scripts/buildtags --continuous skip-cscope lua-engine src love-api *.md *.lua > /tmp/buildtags.log &'
+alias buildtag-love='~/.vim/scripts/buildtags --continuous skip-cscope lua-engine src assets/shaders/ love-api *.md *.lua > /tmp/buildtags.log &'
+# Not using python version because fswatch doesn't work under linux.
+#~ alias buildtag-love='~/.vim/pythonx/buildtags.py --continuous skip-cscope lua-engine src assets/shaders/ love-api *.md *.lua > /tmp/buildtags.log &'
 
 # Tell svn about manual moves: https://stackoverflow.com/a/23541323/79125
 svn-repairmove() { mv -n -- "$2" "$1" && svn mv -- "$1" "$2"; }
