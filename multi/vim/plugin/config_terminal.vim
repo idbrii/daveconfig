@@ -68,3 +68,11 @@ elseif exists('##TerminalOpen')
 else
     command! TerminalApplyMappings call s:TryApplyTerminalMappings()
 endif
+
+
+" zepl {{{1
+
+" Can't set a universal fallback in g:repl_config, so make a shell command to
+" replace :terminal.
+command! -nargs=0 -count Shell call zepl#start(&shell, <q-mods>, <count>)
+
