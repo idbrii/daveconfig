@@ -177,8 +177,8 @@ if executable('svn')
         let log = systemlist(cmd)
         let log = map(log, { i, val -> trim(val) })
         silent Scratch svnlog
-        call append(0,log)
-        0put =cmd
+        silent call append(0,log)
+        silent 0put =cmd
         " Snap to width used
         vertical resize 81
     endf
