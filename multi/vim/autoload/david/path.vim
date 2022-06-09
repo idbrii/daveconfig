@@ -23,11 +23,15 @@ function! david#path#lowercase_drive_letter(path) abort
     return f
 endf
 
+function! david#path#normalize(path) abort
+    return david#path#lowercase_drive_letter(david#path#to_unix(a:path))
+endf
+
 " If relative_parent is a parent of path, return the relative path. Otherwise
 " return the absolute path.
 function! david#path#relative_to_parent(path, relative_parent) abort
-    let file = david#path#lowercase_drive_letter(david#path#to_unix(fnamemodify(a:path, ':p')))
-    let dir  = david#path#lowercase_drive_letter(david#path#to_unix(a:relative_parent))
+    let file = david#path#normalize(fnamemodify(a:path, ':p'))
+    let dir  = david#path#normalize(a:relative_parent)
 
     if file->stridx(dir) >= 0
         let n = len(dir)
@@ -81,8 +85,8 @@ function! david#path#chdir_to_current_file() abort
 endf
 
 function! david#path#get_currentfile_resolved_as_dir() abort
-    return resolve(escape(expand('%:p:h'), '%#'))
+    return david#path#normalize(resolve(escape(expand('%:p:h'), '%#')))
 endf
 function! david#path#get_currentfile_resolved() abort
-    return resolve(escape(expand('%:p'), '%#'))
+    return david#path#normalize(resolve(escape(expand('%:p'), '%#')))
 endf
