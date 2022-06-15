@@ -558,7 +558,14 @@ return
 
 #v::
 	KeyWait LWin
-	Run %vim_bin%\gvim.exe
+	Run gvim.bat
+return
+
+; Replace Cortana with anything else.
+#c::
+	KeyWait LWin
+	;; A faster loading version of vim.
+	Run gvim.bat --clean +"silent! source ~/.vimrc" +"source ~/.vim/plugin/config_display.vim" +"silent! source ~/.gvimrc" ~/.vim-aside
 return
 
 ; Misc {{{1
