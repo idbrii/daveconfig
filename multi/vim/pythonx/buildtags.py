@@ -246,13 +246,13 @@ def build(
         # mlcscope needs full paths, so replace the relative path with the fully
         # qualified path
         # TODO: cygwin replaced mlcscope with cscope. Does it still have this problem?
-        sed("--in-place=''", "-e", r"s|^\./|$tagdir/|", filelist)
+        sed("--in-place", "-e", r"s|^\./|$tagdir/|", filelist)
 
     def fix_file_prefix_for_tags_on_win32(fpath):
         # Vim doesn't understand / as beginning of the path in Windows so it thinks
         # they're relative paths and can't find anything. (I'm using gvim.exe but
         # building tags with Unix subsystem.)
-        sed("--in-place=''", "-e", r"s,/mnt/\([[:alpha:]]\)/,\1:/,", fpath)
+        sed("--in-place", "-e", r"s,/mnt/\([[:alpha:]]\)/,\1:/,", fpath)
 
         # For reference, opposite transformation.
         # sed -e"s,\([[:alpha:]]\):/,/mnt/\1/,"
@@ -343,7 +343,7 @@ def build(
         # Requires the python package pycscope:
         #   pip install pycscope
         import pycscope
-        pycscope.main(["-i", filelist])
+        pycscope.main(["-i", filelist.as_posix()])
         # pycscope = plumbum.local["pycscope"]
         # pycscope("-i", filelist)
     else:
