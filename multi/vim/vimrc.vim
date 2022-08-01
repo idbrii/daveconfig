@@ -870,6 +870,7 @@ nmap <Leader>w+ <Plug>(window-fill-screen)
 
 " NotGrep/searchsavvy   {{{2
 let g:notgrep_no_mappings = 1
+let g:notgrep_ripgrep_fold_matches = 1
 
 if executable('rg')
     let g:searchsavvy_smartgrep_auto_enable = 0
