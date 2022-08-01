@@ -74,5 +74,13 @@ endif
 
 " Can't set a universal fallback in g:repl_config, so make a shell command to
 " replace :terminal.
-command! -nargs=0 -count Shell call zepl#start(&shell, <q-mods>, <count>)
+function! s:Shell(args, mods, count) abort
+    call zepl#start(&shell, a:mods, a:count)
+    if len(a:args) > 0
+        " Send the command instead of starting zepl with it so if command
+        " terminates, window doesn't close.
+        call zepl#send(a:args)
+    endif
+endf
+command! -nargs=* -count Shell call s:Shell(<q-args>, <q-mods>, <count>)
 

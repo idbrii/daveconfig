@@ -68,7 +68,7 @@ endf
 
 function! david#path#build_kill_from_current_makeprg() abort
     let exe = &makeprg->split()[0]
-    if exe !~? ".exe$"
+    if has('win32') && exe !~? ".exe$"
         let exe .= ".exe"
     endif
     if !executable(exe)
@@ -76,7 +76,11 @@ function! david#path#build_kill_from_current_makeprg() abort
     endif
     
     let exe = fnamemodify(exe, ':t')
-    return printf('command! ProjectKill update | call system("taskkill /im %s")', exe)
+    if has('win32')
+        return printf('command! ProjectKill update | call system("taskkill /im %s")', exe)
+    else
+        return printf('command! ProjectKill update | call system("kill -7 %s")', exe)
+    endif
 endf
 
 " See also the more aggressive after/plugin/followsymlink.vim

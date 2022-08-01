@@ -106,6 +106,10 @@ function! s:set_entrypoint(should_be_async, entrypoint_makeprg)
     endf
     command! ProjectMake call DavidProjectBuild()
     command! ProjectRun  call DavidProjectBuild()
+    let &makeprg = a:entrypoint_makeprg
+    exec david#path#build_kill_from_current_makeprg()
+    call LocateAll()
+    NotGrepRecursiveFrom .
 endf
 " Defaults to async. Use bang for :make.
 command! -bang -buffer -nargs=* PythonSetEntrypoint call s:set_module_entrypoint(<bang>1, <q-args>)
