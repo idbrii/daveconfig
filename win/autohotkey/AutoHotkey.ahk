@@ -73,21 +73,25 @@ GetDesktopLeft(ActiveMonitor) {
     return work_area_Left + offset
 }
 
+GetDesktopWidth(monitor_index) {
+	TaskbarEdge := GetTaskbarEdge()
+	ActiveMonitor := Convert_MonitorIndexToLeftToRight(monitor_index)
+
+	if (DoesMonitorHaveTaskbar(ActiveMonitor) && (TaskbarEdge = "left" or TaskbarEdge = "right")) {
+		WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
+		return A_ScreenWidth - TW
+	} else {
+		return A_ScreenWidth
+	}
+}
+
 GetCurrentDesktopWidth(use_leftmost_monitor := false) {
-  WinGetPos,TX,TY,TW,TH,ahk_class Shell_TrayWnd,,,
-  TaskbarEdge := GetTaskbarEdge()
-
-  if (use_leftmost_monitor) {
-      ActiveMonitor := 0
-  } else {
-      ActiveMonitor := Convert_MonitorIndexToLeftToRight(GetActiveMonitorIndex())
-  }
-
-  if (DoesMonitorHaveTaskbar(ActiveMonitor) && (TaskbarEdge = "left" or TaskbarEdge = "right")) {
-    return A_ScreenWidth - TW
-  } else {
-    return A_ScreenWidth
-  }
+	if (use_leftmost_monitor) {
+		ActiveMonitor := 0
+	} else {
+		ActiveMonitor := Convert_MonitorIndexToLeftToRight(GetActiveMonitorIndex())
+	}
+	return GetDesktopWidth(ActiveMonitor)
 }
 
 GetCurrentDesktopHeight(use_leftmost_monitor := false) {
