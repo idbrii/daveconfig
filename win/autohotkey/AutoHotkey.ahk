@@ -286,18 +286,19 @@ SmallGolden() {
 
 ToggleGoldenRatio(use_right_side) {
     WinRestore, A
-    MonitorIndex := GetActiveMonitorIndex()
+    monitor_id := GetActiveMonitorIndex()
+    monitor_index_LeftToRight := Convert_LeftToRightToMonitorIndex(monitor_id)
     ;; TODO: Can I figure out how to make this work on other monitors?
     ;; HACK: Only monitor 1. If I use active montior, it seems to change
     ;; monitors between toggles.
-    MonitorIndex := Convert_LeftToRightToMonitorIndex(1)
-    SysGet, workArea, MonitorWorkArea, MonitorIndex
+    ;~ monitor_index_LeftToRight := Convert_LeftToRightToMonitorIndex(1)
+
+    SysGet, workArea, MonitorWorkArea, monitor_id
     workAreaWidth := workAreaRight - workAreaLeft
     workAreaHeight := workAreaBottom - workAreaTop
 
-    ActiveMonitor := Convert_MonitorIndexToLeftToRight(MonitorIndex)
-    X := GetDesktopLeft(ActiveMonitor)
-    Y := GetDesktopTop(ActiveMonitor)
+    X := GetDesktopLeft(monitor_index_LeftToRight)
+    Y := GetDesktopTop(monitor_index_LeftToRight)
     WinGetPos, winX, winY, winWidth, winHeight, A
     small_width := Floor(workAreaWidth * SmallGolden())
     my_golden := 0
