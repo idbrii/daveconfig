@@ -201,6 +201,13 @@ def build(
             ["*.rs", "*.toml", "*.md"],
         )
 
+    elif filetype == "godot":
+        _find_and_writefile(
+            filelist,
+            search_dirs,
+            ["*.gd", "*.md", "*.tscn"],
+        )
+
     elif filetype == "python":
         _find_and_writefile(
             filelist,
