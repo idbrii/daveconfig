@@ -56,8 +56,8 @@ if [[ $continuous -eq 1 ]]; then
 
     if [[ -x "$(command -v fswatch)" ]]; then
         # fswatch runs in a loop, so it needs to ignore the results of our builds (tags file).
-        echo fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude ".*.sw*"
-             fswatch --print0 $search_dirs --exclude *.md --exclude tags --exclude ".*.sw*" | while read -d "" event
+        echo fswatch --recursive --print0 --exclude \*.md --exclude tags --exclude \".\*.sw*\" $search_dirs 
+             fswatch --recursive --print0 --exclude *.md --exclude tags --exclude ".*.sw*" $search_dirs | while read -d "" event
         do
             # Ignore vim swap file changes
             if [[ $event == *.*.sw* ]]; then

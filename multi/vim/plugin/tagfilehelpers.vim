@@ -85,10 +85,20 @@ function! LocateAll() abort
 endfunction
 
 " Call a shell script to build our filelist, ctags, and cscope databases.
-function! s:BuildTags() abort
-    execute '!bash ~/.vim/scripts/buildtags' &cscopeprg &ft
-
-    call LocateAll()
+function! s:BuildTags(use_async) abort
+    let cscope = &cscopeprg
+    if !executable(cscope)
+        let cscope = '--skip-cscope'
+    endif
+    
+    if a:use_async
+        " Can't yet retire bash script since continuous build doesn't work in
+        " python under linux.
+        execute '!bash ~/.vim/scripts/buildtags' cscope &ft
+        call LocateAll()
+    else
+        execute 'AsyncShell' expand('~/.vim/pythonx/buildtags.py') cscope &ft
+    endif
 endf
-command! BuildTags call s:BuildTags()
-command! AsyncRebuildTags execute 'AsyncShell bash ~/.vim/scripts/buildtags '. &cscopeprg &ft
+command! BuildTags call s:BuildTags(0)
+command! AsyncRebuildTags call s:BuildTags(1)
