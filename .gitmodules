@@ -313,9 +313,9 @@
 [submodule "multi/vim/bundle/unityengine"]
 	path = multi/vim/bundle/unityengine
 	url = git@github.com:idbrii/vim-unityengine.git
-[submodule "multi/vim/bundle/gdscript3"]
-	path = multi/vim/bundle/gdscript3
-	url = https://github.com/clktmr/vim-gdscript3.git
+[submodule "multi/vim/bundle/godot"]
+	path = multi/vim/bundle/godot
+	url = https://github.com/habamax/vim-godot.git
 [submodule "multi/vim/bundle/jumpmethod"]
 	path = multi/vim/bundle/jumpmethod
 	url = git@github.com:idbrii/vim-jumpmethod.git
