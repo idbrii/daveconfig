@@ -90,6 +90,12 @@ function! s:BuildTags(use_async) abort
     if !executable(cscope)
         let cscope = '--skip-cscope'
     endif
+
+    if &ft == "gdscript"
+        call godot#lcd_to_project_root()
+        execute 'AsyncShell' expand('~/.vim/pythonx/buildtags.py') cscope "godot"
+        return
+    endif
     
     if a:use_async
         " Can't yet retire bash script since continuous build doesn't work in
