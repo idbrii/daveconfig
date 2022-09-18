@@ -37,11 +37,15 @@ function! wikisweet#UrlToName(url)
     if exists(':Scratch') == 2 && exists(':ConvertFromUrlEncoding') == 2
         " Putting this in a scratch buffer since that's the easiest way to
         " work with ConvertFromUrlEncoding.
+        let bufnr = bufnr()
         silent Scratch
         silent 0put =a:url
         silent ConvertFromUrlEncoding
         normal! "cdiW
         bdelete
+        " If we were in a preview window, we won't be returned there, so
+        " ensure we jump back to correct window.
+        exec bufwinnr(bufnr) 'wincmd w'
     endif
 	let name = @c
 	let name = substitute(name, '^.*/', '', '')
