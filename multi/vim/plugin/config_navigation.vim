@@ -149,6 +149,12 @@ vmap gx <Plug>(openbrowser-smart-search)
 " netrw support for fugitive's Gbrowse
 command! -nargs=1 Browse OpenBrowser <args>
 
+" Common limit set of protocols for languages that use lots of colons.
+let g:david_openbrowser_safe_schemes = [
+            \     'https\?',
+            \     's\?ftp',
+            \ ]
+
 " Set browsed dir as current dir.
 let g:netrw_keepdir = 0
 

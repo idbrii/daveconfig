@@ -15,6 +15,9 @@ else
     nnoremap <buffer> <Leader>vso <Cmd>update<CR>:source %<CR>
 endif
 
+" Vim uses lots of : so limit to known ones.
+let b:openbrowser_allowed_schemes = g:david_openbrowser_safe_schemes
+
 " Easy execute line.
 " https://stackoverflow.com/a/20262740/79125
 command! -buffer -bar -range Eval silent <line1>,<line2>yank c | call david#vim#eval(@c)
