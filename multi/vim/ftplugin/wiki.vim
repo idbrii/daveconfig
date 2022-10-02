@@ -1,3 +1,0 @@
-abbreviate {{ <code>
-abbreviate }} </code>
-

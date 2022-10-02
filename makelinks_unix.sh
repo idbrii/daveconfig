@@ -3,8 +3,8 @@
 dconfig_path=~/data/settings/daveconfig
 
 ln -s --no-target-directory $dconfig_path/multi/vim ~/.vim
-ln -s $dconfig_path/multi/vim/vimrc.vim ~/.vimrc
-ln -s $dconfig_path/multi/vim/gvimrc.vim ~/.gvimrc
+ln -s $dconfig_path/multi/vim/bundle/aa-david/vimrc.vim ~/.vimrc
+ln -s $dconfig_path/multi/vim/bundle/aa-david/gvimrc.vim ~/.gvimrc
 
 ln -s $dconfig_path/multi/git/.gitconfig ~/.
 ln -s $dconfig_path/multi/git/.gitignore ~/.
