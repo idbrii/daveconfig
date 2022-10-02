@@ -11,7 +11,7 @@ export EDITOR="$VISUAL"
 export PAGER=less
 
 # Path extensions
-export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool:~/data/settings/daveconfig/unix/bin
+export PATH=$PATH:~/data/settings/daveconfig/multi/git/submanage:~/data/settings/daveconfig/multi/git/tool:~/data/settings/daveconfig/unix/bin:~/.local/bin/
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
