@@ -89,7 +89,7 @@
 	path = multi/vim/bundle/textconv
 	url = git@github.com:idbrii/textconv.vim.git
 [submodule "multi/vim/bundle/NrrwRgn"]
-	path = multi/vim/bundle/NrrwRgn
+	path = multi/vim/bundle/narrowregion
 	url = git://github.com/chrisbra/NrrwRgn.git
 [submodule "multi/vim/bundle/context"]
 	path = multi/vim/bundle/context
@@ -212,7 +212,7 @@
 	path = multi/vim/bundle/sandydune
 	url = git@github.com:idbrii/vim-sandydune.git
 [submodule "multi/vim/bundle/FastFold"]
-	path = multi/vim/bundle/FastFold
+	path = multi/vim/bundle/fast-fold
 	url = https://github.com/Konfekt/FastFold.git
 [submodule "multi/vim/bundle/markdown-folding"]
 	path = multi/vim/bundle/markdown-folding
