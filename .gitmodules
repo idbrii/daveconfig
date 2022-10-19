@@ -6,7 +6,7 @@
 	url = git@github.com:idbrii/bashmarks.git
 [submodule "multi/vim/bundle/aa-david"]
 	path = multi/vim/bundle/aa-david
-	url = https://github.com/idbrii/vim-david
+	url = git@github.com:idbrii/vim-david
 [submodule "multi/vim/bundle/thesaurus_query"]
 	path = multi/vim/bundle/thesaurus_query
 	url = https://github.com/Ron89/thesaurus_query.vim.git
@@ -399,7 +399,7 @@
 	url = git@github.com:rhysd/vim-lsp-ale.git
 [submodule "multi/vim/bundle/unimpaired"]
 	path = multi/vim/bundle/unimpaired
-	url = https://github.com/idbrii/vim-unimpaired.git
+	url = git@github.com:idbrii/vim-unimpaired.git
 [submodule "multi/vim/bundle/lua-tbastos"]
 	path = multi/vim/bundle/lua-tbastos
 	url = https://github.com/idbrii/vim-lua.git
