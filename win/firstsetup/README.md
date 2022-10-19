@@ -8,6 +8,7 @@ use scoop.sh:
     scoop install
         7zip
         autohotkey
+        ffmpeg
         flux
         git
         imageglass
@@ -15,6 +16,7 @@ use scoop.sh:
         paint.net
         python
         ripgrep
+        screentogif
         sudo
         sysinternals
         universal-ctags
