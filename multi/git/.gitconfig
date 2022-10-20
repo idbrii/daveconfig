@@ -73,6 +73,8 @@
 [core]
     excludesfile = ~/.gitignore
     autocrlf = input
+[init]
+	defaultBranch = main
 [branch]
     autosetupmerge = true
 ; Specify web options in gitconfig.local
