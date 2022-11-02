@@ -4,6 +4,7 @@ Installation
 use scoop.sh:
 
     scoop bucket add extras
+    scoop bucket add versions
     scoop bucket add nerd-fonts
     scoop install
         7zip
@@ -14,26 +15,32 @@ use scoop.sh:
         imageglass
         love
         paint.net
-        python
+        pandoc
+        powertoys
+        python310
         ripgrep
         screentogif
+        stretchly
         sudo
         sysinternals
+        treesize-free
         universal-ctags
         vim-nightly
-        workrave
+        vlc
     sudo scoop install firacode firamono-nf ProggyClean-NF
 
 Possibly also:
 
     scoop install
+        renderdoc
+        llvm
         slack
+        tightvnc
         tortoisesvn
+        vscode
 
     sudo scoop install
-        ProggyClean-NF
         FiraCode@1.207
-        firamono-nf
 
 (firacode 2 has ligatures for all kinds of things and not just symbols)
 
@@ -46,7 +53,7 @@ pip:
 
 * Do the workaround for gvim: https://github.com/ScoopInstaller/Main/issues/848
 * Run the .reg for python (scoop info python)
-* Run workrave, setup timers, enable run on startup
+* Run stretchly, setup timers, enable run on startup
 * Run imageglass and enable file association
 * Run flux; add shortcut to startup menu
 * Clean up context menus (below)
