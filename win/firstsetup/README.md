@@ -75,6 +75,7 @@ Add some paths to PATH:
     %USERPROFILE%\scoop\apps\tortoisesvn\current\bin
     C:\david\apps\bin
     C:\david\settings\daveconfig\win\system\bin
+    C:\david\settings\daveconfig\win\visualstudio\vcvars
 
 (scoop doesn't add tortoisesvn to path itself.)
 
