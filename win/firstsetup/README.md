@@ -122,6 +122,13 @@ Turn off python in Manage App Execution Aliases.
 [To prevent 'python' from opening Windows Store](https://stackoverflow.com/questions/58754860/cmd-opens-window-store-when-i-type-python)
 
 
+When running python installed via scoop it does not configure the user or system level association.
+
+
+Using `assoc` doesn't seem to work (python_assoc.cmd).
+
+Edit the registry and add %* to py_auto_type as described [in this answer](https://superuser.com/a/669154).
+
 vim
 ===
 
