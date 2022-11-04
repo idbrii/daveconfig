@@ -370,6 +370,9 @@
 [submodule "multi/vim/bundle/asyncomplete-tags"]
 	path = multi/vim/bundle/asyncomplete-tags
 	url = https://github.com/prabirshrestha/asyncomplete-tags.vim.git
+[submodule "multi/vim/bundle/healthcheck"]
+	path = multi/vim/bundle/healthcheck
+	url = https://github.com/rhysd/vim-healthcheck
 [submodule "multi/vim/bundle/dirvish-repo"]
 	path = multi/vim/bundle/dirvish-repo
 	url = git@github.com:idbrii/vim-dirvish-repo.git
