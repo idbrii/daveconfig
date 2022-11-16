@@ -90,8 +90,10 @@ call pathogen#infect()
 
 " Setup filetype and syntax. Doing these right after pathogen because
 " somethings depend on them (colorschemes) and pathogen must come first.
-filetype plugin indent on   " Enable+detect filetype plugins and use to indent
-syntax on                   " Turn on syntax highlighting
+" Use sensible so it doesn't also set filetype.
+runtime! plugin/sensible.vim
+"filetype plugin indent on   " Enable+detect filetype plugins and use to indent
+"syntax on                   " Turn on syntax highlighting
 "syntax enable				" Enable, but keep current highlighting scheme
 if has("spell")
     "set spell   "check spelling (z= suggestions, zg add good word, zb bad)
