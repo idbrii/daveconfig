@@ -5,10 +5,11 @@
 [alias]
 	# Create vim plugin in bundle directory and update remote name.
 	# Args: clone-url name
-	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/bundle/$2 && cd multi/vim/bundle/$2 && git manage-mine master && cd - ; };f"
-	# Pull and update input branch and master to be on top of new HEAD.
-	# Args: input-branch (assumed to be a descendent of master).
-	pullmasterrebase = "!f(){ [ $# -eq 1 ] && git checkout master && git pull --rebase mine master && git checkout $1 && git rebase master ; };f"
+	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/bundle/$2 && cd multi/vim/bundle/$2 && git manage-mine main && cd - ; };f"
+	# Pull and update input branch and main to be on top of new HEAD.
+	# Args: input-branch (assumed to be a descendent of main).
+	pullmasterrebase = "!f(){ [ $# -eq 1 ] && git checkout main && git pull --rebase mine main && git checkout $1 && git rebase main ; };f"
+	rebasedavid = "!f(){ [ $# -eq 1 ] && ~/data/settings/daveconfig/multi/vim/bundle/aa-david/push_main_to_daveconfig.bash $1 ; };f"
 
 [remote "mine"]
     # add these as new lines (don't replace) for gtm notes
