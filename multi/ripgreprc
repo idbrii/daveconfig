@@ -1,7 +1,12 @@
 # See vimrc for $RIPGREP_CONFIG_PATH
+#
+# Add ripgrep types that match vim filetype names.
 
 --type-add
 dosbatch:*.{cmd,bat}
+
+--type-add
+gdscript:*.{gd}
 
 
 # vim: set ft=sh :
