@@ -45,10 +45,10 @@ call add(g:polyglot_disabled, 'sensible')
 
 " gdscript3 and vim-unityengine both try to set .shader files.
 " When using godot, add to local.vim:
-" call remove(g:polyglot_disabled, index(g:polyglot_disabled, 'gdscript'))
 " call pathogen#cycle_filetype()
-"~ let g:pathogen_blacklist += ["gdscript3"]
-"~ call add(g:polyglot_disabled, 'gdscript')
+"~ let g:pathogen_blacklist += ["godot"]
+" I use a different gdscript plugin because the gdscript3 ft seems short sighted.
+call add(g:polyglot_disabled, 'gdscript')
 
 " I'm more likely to use objc than mathematica (both use .m)
 call add(g:polyglot_disabled, 'mathematica')
