@@ -49,10 +49,10 @@ main() {
         elif [ "$local_branch" = "$current_local_branch" ]; then
           echo " branch $local_branch was $n_behind commit(s) behind of $remote/$remote_branch. fast-forward merge";
           git fetch $remote_br_ref
-          git merge -q $remote_br_ref;
+          git merge --quiet $remote_br_ref;
         else
           echo " branch $local_branch was $n_behind commit(s) behind of $remote/$remote_branch. reseting local branch to remote";
-          git branch -l -f $local_branch -t $remote_br_ref >/dev/null;
+          git branch --list -f $local_branch --track $remote_br_ref >/dev/null;
         fi
       fi
     done
