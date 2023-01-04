@@ -45,14 +45,13 @@ main() {
       n_ahead=$((  $(git rev-list --count $remote_br_ref..$local_br_ref 2>/dev/null) +0));
       if [ "$n_behind" -gt 0 ]; then
         if [ "$n_ahead" -gt 0 ]; then
-          echo " branch $local_branch is $n_behind commit(s) behind and $n_ahead commit(s) ahead of $remote/$remote_branch. could not be fast-forwarded";
+          echo " branch $local_branch is $n_behind commit(s) behind and $n_ahead commit(s) ahead of $remote/$remote_branch. could not be fast-forwarded.";
         elif [ "$local_branch" = "$current_local_branch" ]; then
-          echo " branch $local_branch was $n_behind commit(s) behind of $remote/$remote_branch. fast-forward merge";
-          git fetch $remote_br_ref
-          git merge --quiet $remote_br_ref;
+          echo " branch $local_branch was $n_behind commit(s) behind of $remote/$remote_branch. fast forwarding.";
+          git pull --ff-only $remote $remote_branch
         else
-          echo " branch $local_branch was $n_behind commit(s) behind of $remote/$remote_branch. reseting local branch to remote";
-          git branch --list -f $local_branch --track $remote_br_ref >/dev/null;
+          echo " branch $local_branch was $n_behind commit(s) behind of $remote/$remote_branch. updating branch to match remote.";
+          git fetch $remote $remote_branch:$local_branch
         fi
       fi
     done
