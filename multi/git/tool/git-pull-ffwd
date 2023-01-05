@@ -1,0 +1,79 @@
+#! /usr/bin/env python3
+
+from pathlib import Path
+
+import git
+
+
+def search_upwards_for_file(d, filename):
+    """Search in the current directory and all directories above it
+    for a file of a particular name.
+    https://stackoverflow.com/a/68994012/79125
+
+    Arguments:
+    ---------
+    filename :: Path, the directory to start looking in.
+    filename :: string, the filename to look for.
+
+    Returns
+    -------
+    pathlib.Path, the location of the first file found or
+    None, if none was found
+    """
+    d = Path.cwd()
+    root = Path(d.root)
+
+    while d != root:
+        attempt = d / filename
+        if attempt.exists():
+            return attempt
+        d = d.parent
+
+    return None
+
+
+def remove_prefix(text, prefix):
+    """Strip a prefix from beginning and return the new string.
+    https://stackoverflow.com/a/16891418/79125
+    """
+    if text.startswith(prefix):
+        text = text[len(prefix) :]
+    return text
+
+
+root = search_upwards_for_file(Path.cwd(), ".git")
+repo = git.Repo(root)
+for remote in repo.remotes:
+    remote.fetch()
+
+for local_branch in repo.branches:
+    remote_branch = local_branch.tracking_branch()
+    if not remote_branch or local_branch.commit == remote_branch.commit:
+        continue
+
+    remote_branch_name = remove_prefix(
+        str(remote_branch), remote_branch.remote_name + "/"
+    )
+    if local_branch.name != remote_branch_name:
+        continue
+
+    if repo.active_branch == local_branch:
+        print(
+            f"fast forwarding active branch '{local_branch}' to match upstream {remote_branch.remote_name}/{remote_branch}."
+        )
+        print("  repo.git.pull(ff_only=True)")
+        try:
+            repo.git.pull(ff_only=True)
+        except git.exc.GitCommandError as e:
+            print(e)
+    else:
+        print(f"updating '{local_branch}' to match upstream {remote_branch}.")
+        print(f"  repo.git.fetch {local_branch}:{remote_branch_name}")
+        # Seems that fetch with this refspec only works when the local branch
+        # name matches the remote branch name.
+        try:
+            repo.git.fetch(
+                remote_branch.remote_name, f"{local_branch}:{remote_branch_name}"
+            )
+        except git.exc.GitCommandError as e:
+            print(e)
