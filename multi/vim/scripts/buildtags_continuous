@@ -1,0 +1,69 @@
+#! /bin/bash
+# vim:set fdm=marker:
+#
+# A dumb wrapper around fwatch since py-fwatch doesn't work on Windows or WSL.
+
+if [[ $# -eq 0 || "$1" == "--help" ]] ; then
+    echo "Build the filelist, tag file, and cscope databases"
+    echo "Usage:"
+    echo "  buildtags_continuous.sh cscope-binary lang [directories to search]"
+    echo ""
+    echo "see buildtags --help for more"
+    echo ""
+    exit 0
+fi
+
+# Installing dependents:
+#   aptinstall universal-ctags cscope inotify-tools fswatch
+#    -- fswatch requires universe (although it wasn't working for me under WSL)
+#   scoop install universal-ctags
+#   pip install pycscope
+#   brew install fswatch
+
+cscope=$1
+if [[ $# -lt 1 ]] ; then
+    # assume plain cscope if we got no input
+    cscope=cscope
+fi
+
+filetype=$2
+
+search_dirs=.
+if [[ $# -gt 2 ]] ; then
+    # search directories passed in
+
+	# ignore cscope and filetype
+	shift
+	shift
+	# use remaining parameters
+    search_dirs=$*
+fi
+
+
+# Build tags once on startup.
+~/.vim/bundle/aa-david/pythonx/buildtags.py  $cscope $filetype $search_dirs
+
+if [[ -x "$(command -v fswatch)" ]]; then
+	# fswatch runs in a loop, so it needs to ignore the results of our builds (tags file).
+	echo fswatch --recursive --print0 --exclude tags --exclude \".\*.sw*\" $search_dirs 
+			fswatch --recursive --print0 --exclude tags --exclude ".*.sw*" $search_dirs | while read -d "" event
+	do
+		# Ignore vim swap file changes
+		if [[ $event == *.*.sw* ]]; then
+			echo Ignoring change to file $event
+		elif [[ -f $event ]]; then
+			echo Rebuild tags...
+			~/.vim/bundle/aa-david/pythonx/buildtags.py  $cscope $filetype $search_dirs
+		fi
+	done
+else
+	# Only linux seems to have watch support by default.
+	# --quiet to avoid "Setting up watches" print on each invocation.
+	# --exclude to ignore .gtm and vim .swp -- prevent build on opening
+	#     file. Only one exclude is allowed, additions need to extend the
+	#     regex.
+	while inotifywait --quiet --event close_write,moved_to,create --exclude '/\.' --recursive $search_dirs ; do
+		echo Rebuild tags...
+		~/.vim/bundle/aa-david/pythonx/buildtags.py  $cscope $filetype $search_dirs
+	done
+fi
