@@ -37,6 +37,9 @@
 [submodule "multi/vim/bundle/fugitive"]
 	path = multi/vim/bundle/fugitive
 	url = git@github.com:idbrii/vim-fugitive.git
+[submodule "multi/vim/bundle/fugitive-gitea"]
+	path = multi/vim/bundle/fugitive-gitea
+	url = https://github.com/borissov/fugitive-gitea.git
 [submodule "multi/vim/bundle/apathy"]
 	path = multi/vim/bundle/apathy
 	url = https://github.com/tpope/vim-apathy.git
