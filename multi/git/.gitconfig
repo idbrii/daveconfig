@@ -129,7 +129,11 @@
 # Archive: http://archive.is/7DQCc
 # However, I probably will forget that it's writing credentials in plaintext
 # and enter a password, so use manager instead.
-	helper = manager
+# 2023-01-17: Not sure if manager works on linux, but under Windows I get an
+# error "git: 'credential-manager' is not a git command." Disable.
+# Dumping git config also shows helper = git-credential-manager-core, but I
+# don't know where it's set. (I think I installed it.)
+#    helper = manager
 
 [url "https://github.com"]
 # "git:// protocol is less secure." Use https instead.
