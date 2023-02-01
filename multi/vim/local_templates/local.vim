@@ -138,21 +138,36 @@ if has('win32')
 
     "~ let g:can_set_pythonhome = 0
     "~ call david#setup_python_paths('2.7', $MY_PYTHONHOME)
-    call david#setup_python_paths('3.8', expand('$USERPROFILE/scoop/apps/python38/3.8.6'))
+    "~ call david#setup_python_paths('3.10', expand('$USERPROFILE/scoop/apps/python310/3.10.7'))
 
     " If these calls succeed, try uncommenting can_set_pythonhome above.
     "~ call david#python_version(2)
     "~ call david#python_version(3)
 
-    " My version of vim wants 5.3
-    let lua_53 = expand('C:/david/apps/lua/lua53/bin')
-    if !david#add_to_path(lua_53)
+    " My version of vim wants 5.4
+    let lua_54 = expand('C:/david/apps/lua54/bin')
+    let luarocks = expand('C:/david/apps/lua54/bin/luarocks.bat')
+
+    if !david#add_to_path(lua_54)
         echoerr "Failed to find lua."
     endif
-    if len($LUA_PATH_5_3) == 0
-        let $LUA_PATH_5_3 = lua_53
+    if empty($LUA_PATH_5_4)
+        " TODO: Load these paths to ~/.vim-cache/luapath.json or create it
+        " with them if it doesn't exist.
+        "~ let $LUA_PATH_5_4  = system("luarocks --lua-version 5.4 --local path --lr-path")
+        "~ let $LUA_CPATH_5_4 = system("luarocks --lua-version 5.4 --local path --lr-cpath")
+
+        "~ let $LUA_PATH_5_4  = $AppData .."/luarocks/share/lua/5.4/?.lua;" blah blah
+        "~ let $LUA_CPATH_5_4 = $AppData .."/luarocks/lib/lua/5.4/?.dll;" blah blah
+
+        "~ let $LUA_PATH_5_3  = $AppData .."/luarocks/share/lua/5.3/?.lua;" blah blah
+        "~ let $LUA_CPATH_5_3 = $AppData .."/luarocks/lib/lua/5.3/?.dll;" blah blah
+
     endif
-    let $LUA_PATH_5_3 .= ';'. expand('E:/david/clones/love/Penlight/lua/pl')
+    if empty($LUA_PATH_5_4)
+        echoerr "Luarocks failed to set path"
+        let $LUA_PATH_5_4 = lua_54
+    end
 
 
     " Git providers (pick one) {{{1
