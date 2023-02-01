@@ -32,8 +32,9 @@ use scoop.sh:
 Possibly also:
 
     scoop install
-        renderdoc
+        git-credential-manager
         llvm
+        renderdoc
         slack
         tightvnc
         tortoisesvn
