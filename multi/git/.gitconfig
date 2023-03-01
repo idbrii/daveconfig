@@ -161,3 +161,5 @@
     # them in a computer-local config file. This works on cygwin git 2.1.1.
     # This include must be a the end so clobbers options set above.
     path = ~/.gitconfig.local
+[credential "helperselector"]
+    selected = manager
