@@ -8,7 +8,7 @@
 	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/bundle/$2 && cd multi/vim/bundle/$2 && git manage-mine main && cd - ; };f"
 	# Pull and update input branch and main to be on top of new HEAD.
 	# Args: input-branch (assumed to be a descendent of main).
-	pullmasterrebase = "!f(){ [ $# -eq 1 ] && git checkout main && git pull --rebase mine main && git checkout $1 && git rebase main ; };f"
+	pullmainrebase = "!f(){ [ $# -eq 1 ] && git checkout main && git pull --rebase mine main && git checkout $1 && git rebase main ; };f"
 	rebasedavid = "!f(){ [ $# -eq 1 ] && ~/data/settings/daveconfig/multi/vim/bundle/aa-david/push_main_to_daveconfig.bash $1 ; };f"
 
 [remote "mine"]
