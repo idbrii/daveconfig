@@ -162,4 +162,4 @@
     # This include must be a the end so clobbers options set above.
     path = ~/.gitconfig.local
 [credential "helperselector"]
-    selected = manager
+	selected = manager
