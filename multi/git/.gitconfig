@@ -58,6 +58,8 @@
     changelog = log --abbrev-commit --pretty=short --stat
 
     stashonto = "!f() { if [ -z \"$1\" ] ; then echo 'Error: stashonto requires destination branch.\nExample: git stashonto master\nExample: git stashonto -b new-branch 98e7f99e' ; else git log --oneline --max-count=1 && git stash --include-untracked && git checkout $* && git log --oneline --max-count=1 && git stash apply ; fi;  }; f"
+    # Apply a stash, but use their version of files. Stages files and doesn't create a commit.
+    stashforceapply = "!f() { stash=${1:-stash}; git merge --squash --strategy-option=theirs $stash ; }; f"
 
     # find urls for the current git repo
     hublist = !git remote -v | sed -e"'s#git@\\([^:]*\\):#git://\\1/#;s#.*\\b\\(git\\|https\\?\\)\\b:\\(.*\\)\\(.git\\)\\?\\s.*#https:\\2#'" | uniq
