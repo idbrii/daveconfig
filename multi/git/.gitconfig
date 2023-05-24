@@ -72,6 +72,12 @@
     gtm-chart = "!f() { echo 'Last month:' ; if [ -n \"$1\" ] ; then gtm report -last-month -format project $1 ; fi ; gtm report -last-month -format timeline-hours $1 ; }; f"
     gtm-today = "!f() { echo 'Today:' ;      if [ -n \"$1\" ] ; then gtm report -today -format project $1 ; fi ; gtm report -today -format timeline-hours $1 ; }; f"
 
+[log]
+    # Use local time and order with increasing precision to show dates like
+    # "2023-01-11 Wed 10:27:30 AM". Include the day of the week for relative
+    # referencing.
+    date=format-local:%Y-%m-%d %a %r
+
 [core]
     excludesfile = ~/.gitignore
     autocrlf = input
