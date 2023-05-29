@@ -37,7 +37,7 @@
 
     # If recurseSubmodules doesn't work, use this to check if submodules were updated.
     # TODO: Should process all submodules? Look in history for modified ones? Should be in submanage?
-    check-submodule = "!f() { cd $1; git manage-mine master; cd -; }; f"
+    check-submodule = "!f() { cd $1; git manage-mine main; cd -; }; f"
 
     # Interactive merging.
     # Source: http://stackoverflow.com/a/11843922/79125
@@ -57,7 +57,7 @@
     histlog = log --pretty=format:\"%C(red)%h%C(reset) %C(blue)%an%C(reset), %C(green)%cr%Creset : %s\"
     changelog = log --abbrev-commit --pretty=short --stat
 
-    stashonto = "!f() { if [ -z \"$1\" ] ; then echo 'Error: stashonto requires destination branch.\nExample: git stashonto master\nExample: git stashonto -b new-branch 98e7f99e' ; else git log --oneline --max-count=1 && git stash --include-untracked && git checkout $* && git log --oneline --max-count=1 && git stash apply ; fi;  }; f"
+    stashonto = "!f() { if [ -z \"$1\" ] ; then echo 'Error: stashonto requires destination branch.\nExample: git stashonto main\nExample: git stashonto -b new-branch 98e7f99e' ; else git log --oneline --max-count=1 && git stash --include-untracked && git checkout $* && git log --oneline --max-count=1 && git stash apply ; fi;  }; f"
     # Apply a stash, but use their version of files. Stages files and doesn't create a commit.
     stashforceapply = "!f() { stash=${1:-stash}; git merge --squash --strategy-option=theirs $stash ; }; f"
 
