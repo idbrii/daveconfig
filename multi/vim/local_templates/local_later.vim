@@ -3,6 +3,13 @@
 if has('gui_running') && v:servername == 'VIDE'
     function! s:GuessProject() abort
 
+        " Delete autocmd to prevent recursion.
+        augroup local_later
+            au!
+        augroup END
+        augroup! local_later
+
+
         if expand("%:p") =~# 'Project'
             ProjectSwitchProject
 
@@ -20,12 +27,6 @@ if has('gui_running') && v:servername == 'VIDE'
             " Current main project.
             ProjectSwitchProject
         endif
-
-
-        augroup local_later
-            au!
-        augroup END
-        augroup! local_later
     endf
 
     " After my obsession session loads my most recent file, guess the project
