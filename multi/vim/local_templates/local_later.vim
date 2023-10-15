@@ -18,7 +18,10 @@ if has('gui_running') && v:servername == 'VIDE'
 
         elseif !empty(findfile('project.godot', '.;'))
             let g:snips_company = 'idbrii'
-            ProjectSwitchGodot worldkit
+            " Must use project folder name as session name.
+            let proj = findfile('project.godot', '.;')
+            let proj = fnamemodify(proj, ":h:t")
+            exec 'ProjectSwitchGodot' proj
 
         elseif !empty(finddir('Library', '.;'))
             ProjectSwitchUnityCurrent
