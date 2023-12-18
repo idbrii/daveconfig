@@ -2,5 +2,5 @@ multi/vim/glocal.vim
 multi/vim/local.vim
 multi/vim/after/plugin/local_later.vim
 multi/vim/.netrwhist
-**/spell/*.add.spl
+spell/*.add.spl
 /.gtm/
