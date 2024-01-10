@@ -1,3 +1,16 @@
+" Search for a file that indicates the root of this kind of project and switch
+" to it.
+function! s:find_folder_for_marker(marker_file, proj_switcher) abort
+    if !empty(findfile(a:marker_file, '.;'))
+        " Use project folder name as session name.
+        let proj = findfile(a:marker_file, '.;')
+        let proj = fnamemodify(proj, ":h:t")
+        let g:snips_company = 'idbrii'
+        exec a:proj_switcher proj
+        return v:true
+    end
+    return v:false
+endf
 
 " For gamejam/personal.
 if has('gui_running') && v:servername == 'VIDE'
@@ -16,12 +29,12 @@ if has('gui_running') && v:servername == 'VIDE'
         elseif !empty(findfile('main.lua', '.;'))
             ProjectSwitchLove
 
-        elseif !empty(findfile('project.godot', '.;'))
-            let g:snips_company = 'idbrii'
-            " Must use project folder name as session name.
-            let proj = findfile('project.godot', '.;')
-            let proj = fnamemodify(proj, ":h:t")
-            exec 'ProjectSwitchGodot' proj
+        elseif s:find_folder_for_marker('project.godot', 'ProjectSwitchGodot')
+
+        elseif s:find_folder_for_marker('Cargo.toml', 'ProjectSwitchRust')
+
+        " TODO: an argument instead of being fixed on one project
+        "~ elseif s:find_folder_for_marker('main.lua', 'ProjectSwitchLove')
 
         elseif !empty(finddir('Library', '.;'))
             ProjectSwitchUnityCurrent
