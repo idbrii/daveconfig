@@ -53,6 +53,10 @@ call add(g:polyglot_disabled, 'gdscript')
 " I'm more likely to use objc than mathematica (both use .m)
 call add(g:polyglot_disabled, 'mathematica')
 
+" po makes vim run slow and I don't need the extra debug.
+let g:airline#extensions#po#enabled = 0
+"~ call add(g:polyglot_disabled, 'po')
+
 " I have two different python syntax plugins. Prefer mine over polyglot's.
 call add(g:polyglot_disabled, 'python')
 " I have my own python compiler.
