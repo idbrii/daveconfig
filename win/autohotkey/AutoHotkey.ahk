@@ -271,6 +271,12 @@ Convert_MonitorIndexToLeftToRight(ActiveMonitor) {
     return -1
 }
 
+#f::
+    ;; Fast indexed search (instead of Windows Feedback Hub).
+    ;; scoop install everything
+    Run, %USERPROFILE%\scoop\apps\everything\current\Everything.exe
+return
+
 ;; Golden ratio window movement
 ;; Source: https://autohotkey.com/board/topic/85457-detecting-the-screen-the-current-window-is-on/
 
