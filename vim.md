@@ -96,6 +96,7 @@ For me this means:
 * Getting a syntax file if (shock!) vim didn't come with one.
 * ctags and cscope for almost all of my code navigation
 * Finding a decent completion plugin. For languages it supports, I use the massive [eclim vim plugin](http://eclim.org/vim/python/index.html) (lets you use eclipse functionality like completion, tasks, finding files, syntax checking from within Vim). Since I already have Eclipse open for debugging, I don't mind the weight.
+    * 2024-04-01: I no longer use eclim. For the past few years I've used [LSP](https://microsoft.github.io/language-server-protocol/)-based solutions to provide the features that eclim had without having to run eclipse.
 * I usually have to write my own compiler script to get builds working. I rarely find compiler scripts (see `:help :compiler`) and often people set them up to just check syntax instead of running from vim and parsing the callstack. Figuring out the efm is my least favourite part (I've never actually used scanf, so I haven't internalized the commands).
 
 After I've got the basics (and I'm still enjoying working in the language), I get fancier:

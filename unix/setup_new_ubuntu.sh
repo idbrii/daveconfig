@@ -121,10 +121,6 @@ fi
 # Code {{{2
     programs="$programs build-essential scons cmake universal-ctags cscope meld git mercurial screen inotify-tools"
 
-# Can install one of these jre source packages to prevent eclim from
-# complaining about missing src.zip
-# programs="$programs openjdk-6-source sun-java6-source"
-
 # Primary {{{2
 if [ $gui == "true" ]; then
     # from ppas

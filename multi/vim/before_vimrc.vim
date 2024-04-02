@@ -10,9 +10,6 @@ if !executable('p4')
     let g:pathogen_blacklist += ["perforce"]
     let g:pathogen_blacklist += ["perforce-david"]
 endif
-if !executable('eclipse')
-    let g:pathogen_blacklist += ["eclim"]
-endif
 " Cannot do git since it's added to the path in local.vim
 "if !executable('git')
 "    let g:pathogen_blacklist += ["fugitive"]
