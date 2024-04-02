@@ -35,6 +35,8 @@ if has("patch-8.1.0360")
     let g:pathogen_blacklist += ["diff-enhanced"]
 endif
 
+let g:pathogen_blacklist += ["git-time-metric"]
+
 " polyglot   {{{2
 " polyglot disabling must happen very early
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
