@@ -31,6 +31,9 @@
 [submodule "multi/vim/bundle/lib-ingo"]
 	path = multi/vim/bundle/lib-ingo
 	url = https://github.com/inkarkat/vim-ingo-library.git
+[submodule "multi/vim/bundle/groovy-indent"]
+	path = multi/vim/bundle/groovy-indent
+	url = https://github.com/vim-scripts/groovyindent-unix.git
 [submodule "multi/vim/bundle/gundo"]
 	path = multi/vim/bundle/gundo
 	url = https://github.com/simnalamburt/vim-mundo.git
