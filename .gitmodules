@@ -415,3 +415,6 @@
 [submodule "multi/vim/bundle/zepl"]
 	path = multi/vim/bundle/zepl
 	url = https://github.com/axvr/zepl.vim.git
+[submodule "multi/vim/bundle/csv"]
+	path = multi/vim/bundle/csv
+	url = https://github.com/chrisbra/csv.vim.git
