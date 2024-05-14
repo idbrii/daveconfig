@@ -42,6 +42,9 @@ let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
 call add(g:polyglot_disabled, 'autoindent')
 call add(g:polyglot_disabled, 'sensible')
 
+" csv includes docs which I want and polyglot doesn't.
+call add(g:polyglot_disabled, 'csv')
+
 " gdscript3 and vim-unityengine both try to set .shader files.
 " When using godot, add to local.vim:
 " call pathogen#cycle_filetype()
