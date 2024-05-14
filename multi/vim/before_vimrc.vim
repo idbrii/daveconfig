@@ -50,6 +50,13 @@ endif
 
 let g:pathogen_blacklist += ["git-time-metric"]
 
+" TODO: Debugging why vim hangs
+" Hangs with asyncomplete blacklisted, but not lsp.
+let g:pathogen_blacklist += ["asyncomplete"]
+" Does it hang with this blacklisted?
+let g:pathogen_blacklist += ["lsp"]
+let g:pathogen_blacklist += ["lsp-settings"]
+
 " polyglot   {{{2
 " polyglot disabling must happen very early
 let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
