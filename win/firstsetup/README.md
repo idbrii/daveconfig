@@ -221,3 +221,26 @@ Fira Mono (for different sizes):
 https://github.com/mozilla/Fira/releases
 
 
+File Explorer
+=============
+Restore the old Context Menu in Windows 11
+
+1. Right-click the Start button and choose Windows Terminal.
+2. Copy the command from below, paste it into Windows Terminal Window, and press enter.
+     reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+4. Restart File Explorer or your computer for the changes to take effect.
+5. You see the Legacy Right Click Context menu by default.
+https://answers.microsoft.com/en-us/windows/forum/all/restore-old-right-click-context-menu-in-windows-11/a62e797c-eaf3-411b-aeec-e460e6e5a82a
+
+Remove VLC
+https://stackoverflow.com/a/37090548/79125
+Remove PlayWithVLC-dir and add string value named "Extended" to AddToPlaylistVLC-dir (so it's in Shift-Right-Click).
+
+Remove ads:
+* Replace Windows Spotlight with gallery of wallpapers I find online.
+* Uninstall bloatware apps
+* Hide OneDrive ads
+* Settings > System > Notifications > Additional Settings. uncheck all
+* Settings > Personalization > Taskbar. uncheck all
+* Settings > Personalization > Start. uncheck recommendations
+https://lifehacker.com/tech/how-to-block-ads-in-windows-11
