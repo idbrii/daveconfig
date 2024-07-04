@@ -18,8 +18,11 @@ stylesoutshell = styles -- apply the same scheme to Output/Console windows
 styles.auxwindow = styles.text -- apply text colors to auxiliary windows
 styles.calltip = styles.text -- apply text colors to tooltips
 
--- VS-style breakpoint.
+-- VS-style breakpoint and stepping.
 keymap[ID.BREAK]            = "Shift-F9"
 keymap[ID.BREAKPOINTTOGGLE] = "F9"
 keymap[ID.BREAKPOINTNEXT]   = ""
 keymap[ID.BREAKPOINTPREV]   = ""
+keymap[ID.STEP]             = "F11"
+keymap[ID.STEPOVER]         = "F10"
+keymap[ID.STEPOUT]          = "Shift-F11"
