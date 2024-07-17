@@ -6,6 +6,7 @@
 	# Create vim plugin in bundle directory and update remote name.
 	# Args: clone-url name
 	subaddvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/bundle/$2 && cd multi/vim/bundle/$2 && git manage-mine main && cd - ; };f"
+	subaddnvim = "!f(){ [ $# -eq 2 ] && git submodule add $1 multi/vim/nvim/pack/core/start/$2 && cd multi/vim/nvim/pack/core/start/$2 && git manage-mine main && cd - ; };f"
 	# Pull and update input branch and main to be on top of new HEAD.
 	# Args: input-branch (assumed to be a descendent of main).
 	pullmainrebase = "!f(){ [ $# -eq 1 ] && git checkout main && git pull --rebase mine main && git checkout $1 && git rebase main ; };f"
