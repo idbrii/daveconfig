@@ -1,6 +1,6 @@
 :: Create a central server to edit in vim
 
-goto :gvim_server
+goto :nvim_server
 
 
 :nvim_server
