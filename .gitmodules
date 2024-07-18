@@ -7,6 +7,9 @@
 [submodule "multi/vim/bundle/aa-david"]
 	path = multi/vim/bundle/aa-david
 	url = git@github.com:idbrii/vim-david
+[submodule "multi/vim/nvim/pack/core/start/lspconfig"]
+	path = multi/vim/nvim/pack/core/start/lspconfig
+	url = https://github.com/neovim/nvim-lspconfig.git
 [submodule "multi/vim/bundle/thesaurus_query"]
 	path = multi/vim/bundle/thesaurus_query
 	url = https://github.com/Ron89/thesaurus_query.vim.git

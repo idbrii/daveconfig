@@ -6,6 +6,15 @@
 " Must setup blacklist before calling infect().
 let g:pathogen_blacklist = []
 
+if has('nvim')
+    " nvim comes with builtin lsp.
+    let g:pathogen_blacklist += ["lsp"]
+    let g:pathogen_blacklist += ["lsp-ale"]
+    " nvim uses lspconfig instead (see ~/.vim/nvim/pack)
+    let g:pathogen_blacklist += ["lsp-settings"]
+endif
+
+
 if !executable('p4')
     let g:pathogen_blacklist += ["perforce"]
     let g:pathogen_blacklist += ["perforce-david"]
