@@ -10,6 +10,12 @@
 [submodule "multi/vim/nvim/pack/core/start/lspconfig"]
 	path = multi/vim/nvim/pack/core/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule "multi/vim/nvim/pack/core/start/mason"]
+	path = multi/vim/nvim/pack/core/start/mason
+	url = https://github.com/williamboman/mason.nvim.git
+[submodule "multi/vim/nvim/pack/core/start/mason-lspconfig"]
+	path = multi/vim/nvim/pack/core/start/mason-lspconfig
+	url = https://github.com/williamboman/mason-lspconfig.nvim.git
 [submodule "multi/vim/bundle/thesaurus_query"]
 	path = multi/vim/bundle/thesaurus_query
 	url = https://github.com/Ron89/thesaurus_query.vim.git
