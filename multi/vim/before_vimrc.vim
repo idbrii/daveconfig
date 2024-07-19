@@ -27,9 +27,11 @@ endif
 if !executable(get(g:, 'slime_target', 'screen'))
     let g:pathogen_blacklist += ["slime"]
 endif
-if !has('clientserver')
+if !has('clientserver') && !has('nvim')
     " Console vim doesn't have clientserver, so we can't use asynccommand. Do
     " this to prevent loading and squelch the warning.
+    " But I use asyncrun as a backend for asynccommand and it doesn't require
+    " clientserver. I think that only works for nvim?
     let g:pathogen_blacklist += ["asynccommand"]
 endif
 if !executable('ctags') || 1 " I'm not using taglist recently. 
