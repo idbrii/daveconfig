@@ -10,19 +10,20 @@ if exist %USERPROFILE%\.nvim-cache\session.vim (
     set session=-S ~/.nvim-cache/session.vim 
 )
 
-:: TODO: server/listen doesn't work. nvim's pipes don't seem to work on
-:: Windows. just launch with session instead.
-call gnvim.bat --maximized %session% %*
-goto :eof
+set servername=localhost:8900
 
-set servername=~/.nvim-cache/server.pipe
-
+:: Unfortunately, nvim's solution requires specifying the server two different
+:: ways so it's not very convenient: I need to explicitly start the server to
+:: be able to send files to it. But if I failed to start the server, it will
+:: open terminal with the wrong v:servername.
 set file=%1
 if defined file (
-    call nvim.bat --server %servername% --remote-silent %*
+    :: Send the file to the server.
+    call nvim --server %servername% --remote-silent %*
 ) else (
+    :: Start the server.
     :: gnvim.bat is part of daveconfig.
-    call gnvim.bat --listen %servername% --maximized %session% %*
+    call gnvim.bat --maximized %* -- --listen %servername% %session%
 )
 
 goto :eof
