@@ -7,8 +7,8 @@ rem -- Run Vim --
 rem # uninstall key: vim82 #
 
 setlocal
-set VIM_EXE_DIR=%USERPROFILE%\scoop\apps\goneovim\current\
-set VIM_EXE=%VIM_EXE_DIR%\goneovim.exe
+set VIM_EXE_DIR=%USERPROFILE%\scoop\apps\neovide\current\
+set VIM_EXE=%VIM_EXE_DIR%\neovide.exe
 
 if exist "%VIM_EXE%" goto havevim
 echo "%VIM_EXE%" not found
