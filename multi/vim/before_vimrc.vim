@@ -42,6 +42,9 @@ if has("patch-8.1.0360")
     " EnhancedDiffIgnorePat, but I can't get that to work.
     let g:pathogen_blacklist += ["diff-enhanced"]
 endif
+if has('patch-8.2.4724') || has('nvim-0.10')
+    let g:pathogen_blacklist += ["searchlight"]
+endif
 
 let g:pathogen_blacklist += ["git-time-metric"]
 
