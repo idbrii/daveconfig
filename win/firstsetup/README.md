@@ -244,3 +244,6 @@ Remove ads:
 * Settings > Personalization > Taskbar. uncheck all
 * Settings > Personalization > Start. uncheck recommendations
 https://lifehacker.com/tech/how-to-block-ads-in-windows-11
+
+Appearance:
+Settings > Accessibility > Underline access keys
