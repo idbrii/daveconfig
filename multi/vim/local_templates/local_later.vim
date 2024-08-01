@@ -13,7 +13,7 @@ function! s:find_folder_for_marker(marker_file, proj_switcher) abort
 endf
 
 " For gamejam/personal.
-if has('gui_running') && v:servername == 'VIDE'
+if has('gui_running') && (v:servername == 'VIDE' || v:servername == 'localhost:8900')
     function! s:GuessProject() abort
 
         " Delete autocmd to prevent recursion.
