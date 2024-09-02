@@ -12,6 +12,8 @@ if has('nvim')
     let g:pathogen_blacklist += ["lsp-ale"]
     " nvim uses lspconfig instead (see ~/.vim/nvim/pack)
     let g:pathogen_blacklist += ["lsp-settings"]
+    " nvim enables their lua port of man by default
+    let g:pathogen_blacklist += ["man"]
 endif
 
 
