@@ -93,6 +93,11 @@
 ; [web]
 ;     browser = chromium-browser
 
+[rerere]
+    # "reuse recorded resolution": check for previous recorded resolutions for
+    # conflicts, if they exist, use them to resolve those conflicts
+    # automatically.
+    enabled = true
 [merge]
     # meld is also a good option where it's installed, but diffconflicts is a
     # globally available default.
