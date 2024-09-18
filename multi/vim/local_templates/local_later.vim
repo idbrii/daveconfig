@@ -1,10 +1,10 @@
 " Search for a file that indicates the root of this kind of project and switch
 " to it.
 function! s:find_folder_for_marker(marker_file, proj_switcher) abort
-    if !empty(findfile(a:marker_file, '.;'))
+    let proj = findfile(a:marker_file, '.;')
+    if !empty(proj)
         " Use project folder name as session name.
-        let proj = findfile(a:marker_file, '.;')
-        let proj = fnamemodify(proj, ":h:t")
+        let proj = fnamemodify(proj, ":p:h:t")
         let g:snips_company = 'idbrii'
         exec a:proj_switcher proj
         return v:true
@@ -27,6 +27,8 @@ if has('gui_running') && (v:servername == 'VIDE' || v:servername == 'localhost:8
             ProjectSwitchProject
 
         elseif !empty(findfile('main.lua', '.;'))
+            " TODO: Not using find_folder_for_marker because love project
+            " doesn't support arguments.
             ProjectSwitchLove
 
         elseif s:find_folder_for_marker('project.godot', 'ProjectSwitchGodot')
