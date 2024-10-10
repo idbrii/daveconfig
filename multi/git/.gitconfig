@@ -27,6 +27,9 @@
     # Update all local branches to match tracking.
     # https://stackoverflow.com/a/76267753/79125
     sync = !git pull --prune --ff-only && git fetch . $(git for-each-ref --format='%(push):%(refname)' refs/heads --exclude="refs/heads/$(git rev-parse --abbrev-ref HEAD)")
+    # Which branches contain input commit.
+    # https://stackoverflow.com/a/2707110/79125
+    which-branch = branch --all --contains
 
     get-ignore = "!f() { if [ -z \"$1\" ] ; then echo 'Error: get-ignore requires repo type.\nExample: git get-ignore Unity' ; else curl --fail https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore > .gitignore || return ; git add .gitignore; git commit -m'Initial commit: add gitignore' ; fi; }; f"
     # https://stackoverflow.com/a/9370094/79125
