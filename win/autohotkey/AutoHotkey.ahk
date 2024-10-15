@@ -569,7 +569,16 @@ return
 
 #v::
 	KeyWait LWin
-	Run gvim.bat
+
+    SetTitleMatchMode 2 ;; A window's title can contain WinTitle anywhere inside it to be a match
+	if WinExist("VIDE") {
+		WinActivate ;; Use the window found by WinExist.
+	}
+	else {
+		Run vide.bat
+	}
+
+    SetTitleMatchMode 1 ;; Reset to default: A window's title must start with the specified WinTitle to be a match
 return
 
 ; Replace Cortana with anything else.
