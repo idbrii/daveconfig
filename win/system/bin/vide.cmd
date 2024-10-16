@@ -1,6 +1,11 @@
 :: Create a central server to edit in vim
 
-goto :nvim_server
+where /q nvim.exe
+if ERRORLEVEL 1 (
+    goto :gvim_server
+) else (
+    goto :nvim_server
+)
 
 
 :nvim_server
