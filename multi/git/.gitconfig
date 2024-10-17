@@ -26,7 +26,12 @@
 
     # Update all local branches to match tracking.
     # https://stackoverflow.com/a/76267753/79125
-    sync = !git pull --prune --ff-only && git fetch . $(git for-each-ref --format='%(push):%(refname)' refs/heads --exclude="refs/heads/$(git rev-parse --abbrev-ref HEAD)")
+    # Split into two commands to allow pull to fail
+    # but still fetch. Do not use --prune with fetch
+    # since explictly passing local-only branches may
+    # delete them!
+    sync = "!git pull --prune --ff-only ; echo Fetching ; git superfetch"
+    superfetch = !git fetch . $(git for-each-ref --format='%(push):%(refname)' refs/heads --exclude="refs/heads/$(git rev-parse --abbrev-ref HEAD)")
     # Which branches contain input commit.
     # https://stackoverflow.com/a/2707110/79125
     which-branch = branch --all --contains
