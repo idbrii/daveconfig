@@ -7,8 +7,13 @@ rem -- Run Vim --
 rem # uninstall key: vim82 #
 
 setlocal
+:: neovide is constantly failing to draw large sections of my file until I
+:: scroll it off screen. Maybe related to floatingwin?
 set VIM_EXE_DIR=%USERPROFILE%\scoop\apps\neovide\current\
 set VIM_EXE=%VIM_EXE_DIR%\neovide.exe
+:: goneovim hangs when I compile C++.
+::~ set VIM_EXE_DIR=%USERPROFILE%\scoop\apps\goneovim\current\
+::~ set VIM_EXE=%VIM_EXE_DIR%\goneovim.exe
 
 if exist "%VIM_EXE%" goto havevim
 echo "%VIM_EXE%" not found
