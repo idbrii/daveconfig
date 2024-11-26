@@ -21,6 +21,7 @@ mklink    %USERPROFILE%\.screenrc        %daveconfig%\unix\terminal\screenrc
 mklink /D %USERPROFILE%\.vim             %daveconfig%\multi\vim
 echo source %daveconfig%\multi\vim\bundle\aa-david\gvimrc.vim> %USERPROFILE%\.gvimrc
 echo source %daveconfig%\multi\vim\bundle\aa-david\vimrc.vim > %USERPROFILE%\.vimrc
+echo vim.api.nvim_command('source %daveconfig%/multi/vim/bundle/aa-david/vimrc.vim') > %LocalAppData%\nvim\init.lua
 
 
 mklink    %USERPROFILE%\.gitconfig       %daveconfig%\multi\git\.gitconfig

@@ -6,6 +6,9 @@ ln -s --no-target-directory $dconfig_path/multi/vim ~/.vim
 ln -s $dconfig_path/multi/vim/bundle/aa-david/vimrc.vim ~/.vimrc
 ln -s $dconfig_path/multi/vim/bundle/aa-david/gvimrc.vim ~/.gvimrc
 
+mkdir -p ~/.config/nvim/
+ln -s $dconfig_path/multi/vim/bundle/aa-david/vimrc.vim ~/.config/nvim/init.vim
+
 ln -s $dconfig_path/multi/git/.gitconfig ~/.
 ln -s $dconfig_path/multi/git/.gitignore ~/.
 
