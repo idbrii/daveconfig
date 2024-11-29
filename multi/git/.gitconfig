@@ -101,6 +101,9 @@
 ; [web]
 ;     browser = chromium-browser
 
+[apply]
+    # output warnings for a few errors and applies the patch after fixing them.
+    whitespace = fix
 [rerere]
     # "reuse recorded resolution": check for previous recorded resolutions for
     # conflicts, if they exist, use them to resolve those conflicts
