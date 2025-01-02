@@ -7,6 +7,9 @@
 [submodule "multi/vim/bundle/aa-david"]
 	path = multi/vim/bundle/aa-david
 	url = git@github.com:idbrii/vim-david
+[submodule "multi/vim/nvim/pack/core/start/dap"]
+	path = multi/vim/nvim/pack/core/start/dap
+	url = https://github.com/mfussenegger/nvim-dap.git
 [submodule "multi/vim/nvim/pack/core/start/lspconfig"]
 	path = multi/vim/nvim/pack/core/start/lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
@@ -16,6 +19,15 @@
 [submodule "multi/vim/nvim/pack/core/start/mason-lspconfig"]
 	path = multi/vim/nvim/pack/core/start/mason-lspconfig
 	url = https://github.com/williamboman/mason-lspconfig.nvim.git
+[submodule "multi/vim/nvim/pack/core/start/mason-dap"]
+	path = multi/vim/nvim/pack/core/start/mason-dap
+	url = https://github.com/jay-babu/mason-nvim-dap.nvim.git
+[submodule "multi/vim/nvim/pack/core/start/dap-ui"]
+	path = multi/vim/nvim/pack/core/start/dap-ui
+	url = https://github.com/rcarriga/nvim-dap-ui.git
+[submodule "multi/vim/nvim/pack/core/start/nio"]
+	path = multi/vim/nvim/pack/core/start/nio
+	url = https://github.com/nvim-neotest/nvim-nio.git
 [submodule "multi/vim/bundle/thesaurus_query"]
 	path = multi/vim/bundle/thesaurus_query
 	url = https://github.com/Ron89/thesaurus_query.vim.git
