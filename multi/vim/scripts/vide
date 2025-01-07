@@ -25,7 +25,13 @@ vim=gvim
 if grep --quiet --no-messages --max-count=1 Microsoft /proc/version; then
     # Under WSL, unix vim can't send commands to Windows gvim because it
     # doesn't have clientserver (no X server).
-    vim=vim.exe
+    # TODO: Haven't tested if neovim has the same problem.
+    if hash nvim.exe 2>/dev/null ; then
+        vim=nvim.exe
+        is_neovim=1
+    else
+        vim=vim.exe
+    fi
 elif [[ -x "/usr/local/bin/mvim" ]] ; then
     # MacVim is a mac frontend for vim.
     vim=mvim
@@ -66,19 +72,20 @@ else
 fi
 
 # TODO: videinvoke does not work here!
-# Fork editexisting and make something that handles this logic within vim
+# Fork vim's editexisting and make something that handles this logic within vim
 # instead.
 # Vopen pack/dist/opt/editexisting/plugin/editexisting.vim
-vim="$vim +\"runtime videinvoke.vim\""
 if [[ $is_neovim == 1 ]] ; then
-    vim="$vim $remote --cmd \"let g:server_addr = serverstart('vide')\""
+    # neovim is very basic. For port, see vide.cmd.
+    vim="$vim --server localhost:8900 $remote $(realpath $FileName)"
 else
+    vim="$vim +\"runtime videinvoke.vim\""
     vim="$vim $session --servername Vide $remote"
+    # --remote says it only accepts one command!
+    # TODO: cursor_jump doesn't work. What's printed works, so there's an escaping problem here.
+    vim="$vim +\"$cursor_jump\" $FileName"
 fi
 
-# --remote says it only accepts one command!
-# TODO: cursor_jump doesn't work. What's printed works, so there's an escaping problem here.
-vim="$vim +\"$cursor_jump\" $FileName"
 echo $vim
 $vim
 
