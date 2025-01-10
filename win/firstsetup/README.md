@@ -8,6 +8,7 @@ use scoop.sh:
     scoop bucket add nerd-fonts
     scoop install
         7zip
+        alacritty
         autohotkey
         ffmpeg
         flux
@@ -65,6 +66,8 @@ pip:
 * Install WSL (below)
 * Install Lua (below)
 * Add ../../multi/svn/config to global svn config.
+* Create shortcuts to terminal apps in alacritty to get unique taskbar icons in win11.
+    %USERPROFILE%\scoop\shims\alacritty.exe -e C:\bin\run_win11.bat
 
 Windows
 =======
