@@ -75,7 +75,7 @@ function giv {
 }
 alias g=git
 # Completion: http://stackoverflow.com/questions/342969/how-do-i-get-bash-completion-to-work-with-aliases
-complete -o default -o nospace -F _git g
+__git_complete g __git_main 
 
 function init_skeleton {
     cp ../gitignore .gitignore
