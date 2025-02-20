@@ -151,22 +151,22 @@ if has('win32')
     if !david#add_to_path(lua_54)
         echoerr "Failed to find lua."
     endif
-    if empty($LUA_PATH_5_4)
+    if empty($LUA_PATH)
         " TODO: Load these paths to ~/.vim-cache/luapath.json or create it
         " with them if it doesn't exist.
-        "~ let $LUA_PATH_5_4  = system("luarocks --lua-version 5.4 --local path --lr-path")
-        "~ let $LUA_CPATH_5_4 = system("luarocks --lua-version 5.4 --local path --lr-cpath")
+        "~ let $LUA_PATH  = system("luarocks --lua-version 5.4 --local path --lr-path")
+        "~ let $LUA_CPATH = system("luarocks --lua-version 5.4 --local path --lr-cpath")
 
-        "~ let $LUA_PATH_5_4  = $AppData .."/luarocks/share/lua/5.4/?.lua;" blah blah
-        "~ let $LUA_CPATH_5_4 = $AppData .."/luarocks/lib/lua/5.4/?.dll;" blah blah
+        "~ let $LUA_PATH  = $AppData .."/luarocks/share/lua/5.4/?.lua;" blah blah
+        "~ let $LUA_CPATH = $AppData .."/luarocks/lib/lua/5.4/?.dll;" blah blah
 
         "~ let $LUA_PATH_5_3  = $AppData .."/luarocks/share/lua/5.3/?.lua;" blah blah
         "~ let $LUA_CPATH_5_3 = $AppData .."/luarocks/lib/lua/5.3/?.dll;" blah blah
 
     endif
-    if empty($LUA_PATH_5_4)
+    if empty($LUA_PATH)
         echoerr "Luarocks failed to set path"
-        let $LUA_PATH_5_4 = lua_54
+        let $LUA_PATH = lua_54
     end
 
 
