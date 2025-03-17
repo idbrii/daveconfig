@@ -94,7 +94,9 @@ Add some paths to PATH:
 
 ## Context Menus
 
-Remove 'Edit with 3D paint' and 'Edit with photos':
+Win11: Run cleanup_context_menu.cmd as admin.
+
+Win10 only? Remove 'Edit with 3D paint' and 'Edit with photos':
 https://www.windowscentral.com/how-remove-edit-photos-and-edit-paint-3d-context-menu-windows-10
 
 Run Windows_OpenWithPaintNet.reg to make paint.net (via scoop) the default image editor.
