@@ -16,8 +16,6 @@ if has('nvim')
     let g:pathogen_blacklist += ["quickfix-reflector"]
     " nvim enables their lua port of man by default
     let g:pathogen_blacklist += ["man"]
-    " Not sure I always want copilot, so it's an opt plugin.
-    packadd copilot
 endif
 
 
