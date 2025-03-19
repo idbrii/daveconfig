@@ -16,6 +16,9 @@
 [submodule "multi/vim/nvim/pack/core/opt/copilot-chat"]
 	path = multi/vim/nvim/pack/core/opt/copilot-chat
 	url = https://github.com/CopilotC-Nvim/CopilotChat.nvim.git
+[submodule "multi/vim/nvim/pack/core/start/plenary"]
+	path = multi/vim/nvim/pack/core/start/plenary
+	url = https://github.com/nvim-lua/plenary.nvim.git
 [submodule "multi/vim/nvim/pack/core/start/dap"]
 	path = multi/vim/nvim/pack/core/start/dap
 	url = https://github.com/mfussenegger/nvim-dap.git
