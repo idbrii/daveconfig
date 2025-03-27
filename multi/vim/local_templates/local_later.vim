@@ -26,6 +26,7 @@ if has('gui_running') && (v:servername == 'VIDE' || v:servername == 'localhost:8
         if expand("%:p") =~# 'Project'
             ProjectSwitchProject
 
+        "~ elseif s:find_folder_for_marker('main.lua', 'ProjectSwitchLove')
         elseif !empty(findfile('main.lua', '.;'))
             " TODO: Not using find_folder_for_marker because love project
             " doesn't support arguments.
@@ -35,11 +36,7 @@ if has('gui_running') && (v:servername == 'VIDE' || v:servername == 'localhost:8
 
         elseif s:find_folder_for_marker('Cargo.toml', 'ProjectSwitchRust')
 
-        " TODO: an argument instead of being fixed on one project
-        "~ elseif s:find_folder_for_marker('main.lua', 'ProjectSwitchLove')
-
-        elseif !empty(finddir('Library', '.;'))
-            ProjectSwitchUnityCurrent
+        elseif !empty(finddir('Library', '.;')) && s:find_folder_for_marker('Assembly-CSharp.csproj', 'ProjectSwitchUnity')
 
         else
             " Current main project.
