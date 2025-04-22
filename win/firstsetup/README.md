@@ -92,6 +92,22 @@ Add some paths to PATH:
 * [Generate a new ssh key and add to github](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
 
+## PowerToys
+
+Setup PowerToys keymaps:
+* Advanced Paste - plain text: Ctrl+Alt+V
+* Crop and Lock - thumbnail: Ctrl+Shift+T
+* FancyZones: Replace aero snap
+* Peek: Ctrl-Space
+* PowerToys Run: Win+Space 
+* Text Extractor: Win+Ctrl+C
+
+Also enable:
+* Environment Variables
+* File Locksmith
+* Hosts File
+* Registry Preview
+
 ## Context Menus
 
 Win11: Run cleanup_context_menu.cmd as admin.
@@ -252,3 +268,7 @@ https://lifehacker.com/tech/how-to-block-ads-in-windows-11
 
 Appearance:
 Settings > Accessibility > Underline access keys
+
+Disable start menu search:
+* Go to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search 
+* Look for BingSearchEnabled. If it doesn’t exist, right-click, choose New → DWORD (32-bit) Value, name it BingSearchEnabled, and set its value to 0. 
