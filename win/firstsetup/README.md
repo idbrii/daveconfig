@@ -95,8 +95,7 @@ Add some paths to PATH:
 ## PowerToys
 
 Setup PowerToys keymaps:
-* Advanced Paste - plain text: Ctrl+Alt+V
-* Crop and Lock - thumbnail: Ctrl+Shift+T
+* Crop and Lock - thumbnail: Win+Ctrl+Shift+T
 * FancyZones: Replace aero snap
 * Peek: Ctrl-Space
 * PowerToys Run: Win+Space 
