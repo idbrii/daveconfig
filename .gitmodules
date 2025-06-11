@@ -329,11 +329,8 @@
 	path = multi/vim/bundle/lua-refvim
 	url = git@github.com:idbrii/luarefvim.git
 [submodule "multi/vim/bundle/polyglot"]
-	path = multi/vim/bundle/aaa-polyglot/
-	url = https://github.com/sheerun/vim-polyglot.git
-[submodule "multi/vim/bundle/aaa-polyglot"]
-	path = multi/vim/bundle/aaa-polyglot
-	url = https://github.com/sheerun/vim-polyglot.git
+	path = multi/vim/bundle/zzz-polyglot
+	url = https://github.com/prurigro/vim-polyglot-darkcloud.git
 [submodule "multi/vim/bundle/apprentice"]
 	path = multi/vim/bundle/apprentice
 	url = https://github.com/romainl/Apprentice.git

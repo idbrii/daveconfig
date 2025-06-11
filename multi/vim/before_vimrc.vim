@@ -60,48 +60,10 @@ let g:pathogen_blacklist += ["lsp"]
 let g:pathogen_blacklist += ["lsp-settings"]
 
 " polyglot   {{{2
-" polyglot disabling must happen very early
-let g:polyglot_disabled = get(g:, 'polyglot_disabled', [])
-
-" I already have DetectIndent and sensible
-call add(g:polyglot_disabled, 'autoindent')
-call add(g:polyglot_disabled, 'sensible')
-
-" csv includes docs which I want and polyglot doesn't.
-call add(g:polyglot_disabled, 'csv')
-
-" gdscript3 and vim-unityengine both try to set .shader files.
-" When using godot, add to local.vim:
-" call pathogen#cycle_filetype()
-"~ let g:pathogen_blacklist += ["godot"]
-" I use a different gdscript plugin because the gdscript3 ft seems short sighted.
-call add(g:polyglot_disabled, 'gdscript')
-
-" I'm more likely to use objc than mathematica (both use .m)
-call add(g:polyglot_disabled, 'mathematica')
+" polyglot-darkcloud doesn't support disabling
 
 " po makes vim run slow and I don't need the extra debug.
 let g:airline#extensions#po#enabled = 0
-"~ call add(g:polyglot_disabled, 'po')
-
-" I have two different python syntax plugins. Prefer mine over polyglot's.
-call add(g:polyglot_disabled, 'python')
-" I have my own python compiler.
-call add(g:polyglot_disabled, 'python-compiler')
-" Scala causes lots of files to be sourced for help filetype (tries to add
-" scala syntax for help which loads html, javascript, vb, css).
-call add(g:polyglot_disabled, 'scala')
-" "generic log" highlighting is not generic enough. makes logs that didn't
-" come from a webserver look like rainbow garbage.
-call add(g:polyglot_disabled, 'log')
-" Using my fork of vim-lua
-call add(g:polyglot_disabled, 'lua')
-" Using my fork of vim-objc
-call add(g:polyglot_disabled, 'objc')
-
-" cpp-modern (vim-cpp-enhanced-highlight) is mostly stl and is overzealous in
-" highlighting as if all stl types were keywords (span, ratio).
-call add(g:polyglot_disabled, 'cpp-modern')
 
 
 " Pathogen
