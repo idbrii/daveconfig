@@ -48,7 +48,7 @@
 	url = git://github.com/jpalardy/vim-slime.git
 [submodule "multi/vim/bundle/surround"]
 	path = multi/vim/bundle/surround
-	url = git://github.com/tpope/vim-surround.git
+	url = git://github.com/idbrii/vim-surround.git
 [submodule "multi/vim/bundle/asynccommand"]
 	path = multi/vim/bundle/asynccommand
 	url = git@github.com:idbrii/AsyncCommand.git
