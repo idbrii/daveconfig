@@ -21,10 +21,18 @@ set servername=localhost:8900
 :: ways so it's not very convenient: I need to explicitly start the server to
 :: be able to send files to it. But if I failed to start the server, it will
 :: open terminal with the wrong v:servername.
-set file=%1
+set file=%*
+if "%1" == "--cursor" (
+    REM Passing +cursor() to nvim doesn't seem to work, so use multiple commands instead.
+    set cursor_expr="cursor(%2,%3)"
+    set file=%4
+)
 if defined file (
-    :: Send the file to the server.
-    call nvim --server %servername% --remote-silent %*
+    REM Send the file to the server.
+    call nvim --server %servername% --remote-silent %file%
+    if defined cursor_expr (
+        call nvim --server %servername% --remote-expr %cursor_expr%
+    )
 ) else (
     :: Start the server.
     :: gnvim.bat is part of daveconfig.
