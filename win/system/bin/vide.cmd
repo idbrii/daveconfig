@@ -21,11 +21,15 @@ set servername=localhost:8900
 :: ways so it's not very convenient: I need to explicitly start the server to
 :: be able to send files to it. But if I failed to start the server, it will
 :: open terminal with the wrong v:servername.
-set file=%*
+::
+:: Use ~f to resolve absolute paths so relative paths work from terminal. nvim
+:: doesn't handle more than one file so don't bother with other args.
+set file=%~f1
 if "%1" == "--cursor" (
+    REM Passing from Visual Studio or other integration.
     REM Passing +cursor() to nvim doesn't seem to work, so use multiple commands instead.
     set cursor_expr="cursor(%2,%3)"
-    set file=%4
+    set file=%~f4
 )
 if defined file (
     REM Send the file to the server.
