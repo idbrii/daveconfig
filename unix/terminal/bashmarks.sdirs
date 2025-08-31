@@ -19,4 +19,3 @@ if [ -e /mnt/c/Users/$USER/.bashmarks.local.sdirs ]; then
     # gvim, so let it find the above file.
     source "/mnt/c/Users/$USER/.bashmarks.local.sdirs"
 fi
-
