@@ -22,14 +22,17 @@ export PATH=$PATH:~/data/apps/bin
 # On WSL, I put unix-only apps in ~/apps/bin.
 export PATH=$PATH:~/apps/bin
 
+# Ruby Gems in ~/.ruby_gems
+export GEM_HOME="$HOME/.ruby_gems"
+export PATH="$HOME/.ruby_gems/bin:$PATH"
+
+
 if is_windows; then
     # WSL adds Windows paths in PATH, but these are substitutes for unix
     # commands.
     REMOVE='/mnt/c/david/settings/daveconfig/win/system/bin'
     export PATH=${PATH/:$REMOVE:/:}
 fi
-
-
 
 ## Commands {{{1
 
