@@ -16,6 +16,8 @@
     purify = checkout
     refloginspect = log --walk-reflogs
     diff-staged = diff --cached
+    # Install winmerge with scoop.
+    diff-image = difftool --tool=winmerge
     piecemeal = add --patch
     # git is too picky for svn patches, so use patch instead. TODO: cd to git root.
     apply-svn-patch     = !patch -p0 --input=$1
