@@ -20,8 +20,8 @@
     diff-image = difftool --tool=winmerge
     piecemeal = add --patch
     # git is too picky for svn patches, so use patch instead. TODO: cd to git root.
-    apply-svn-patch     = !patch -p0 --input=$1
-    apply-svn-patch-dry = !patch -p0 --input=$1 --dry-run
+    apply-svn-patch     = !patch -p0 --input=$*
+    apply-svn-patch-dry = !patch -p0 --input=$* --dry-run
     unstage = reset HEAD --
     substat = submodule foreach "git status || :"
     subupdate = sub-update
