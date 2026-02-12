@@ -311,7 +311,7 @@
 	path = multi/vim/bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
 [submodule "multi/vim/bundle/neoyank"]
-	path = multi/vim/bundle/neoyank
+	path = multi/vim/bundle/unite-history_yank
 	url = https://github.com/Shougo/neoyank.vim.git
 [submodule "multi/vim/bundle/lua-david"]
 	path = multi/vim/bundle/lua-david
