@@ -16,6 +16,12 @@ if has('nvim')
     let g:pathogen_blacklist += ["quickfix-reflector"]
     " nvim enables their lua port of man by default
     let g:pathogen_blacklist += ["man"]
+
+    " Must be set very early. Without this, nvim complains that scoop's
+    " python.exe is a shim (true) and its from pyenv (false). Also, maybe
+    " using pythonw and skipping the tty creation will prevent my tty closing
+    " problem.
+    let g:python3_host_prog = '~/scoop/apps/python311/current/pythonw.exe'
 endif
 
 
