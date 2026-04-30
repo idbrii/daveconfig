@@ -17,6 +17,11 @@ if has('nvim')
     " nvim enables their lua port of man by default
     let g:pathogen_blacklist += ["man"]
 
+    " Nvim comes with an undotree plugin. Try it out.
+    let g:pathogen_blacklist += ["gundo"]
+    packadd nvim.undotree
+    command! -bar MundoToggle Undotree
+
     " Must be set very early. Without this, nvim complains that scoop's
     " python.exe is a shim (true) and its from pyenv (false). Also, maybe
     " using pythonw and skipping the tty creation will prevent my tty closing
