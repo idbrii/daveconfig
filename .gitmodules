@@ -451,3 +451,9 @@
 [submodule "multi/vim/bundle/csv"]
 	path = multi/vim/bundle/csv
 	url = https://github.com/chrisbra/csv.vim.git
+[submodule "multi/vim/nvim/pack/core/start/hexview"]
+	path = multi/vim/nvim/pack/core/start/hexview
+	url = git@github.com:idbrii/hexview.nvim.git
+[submodule "multi/vim/nvim/pack/core/start/hex"]
+	path = multi/vim/nvim/pack/core/start/hex
+	url = git@github.com:idbrii/hex.nvim.git
