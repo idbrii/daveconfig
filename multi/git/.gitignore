@@ -24,3 +24,5 @@ obj/
 
 # git-time-metric
 /.gtm/
+
+**/.claude/settings.local.json
