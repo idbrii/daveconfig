@@ -11,7 +11,6 @@ source $DIR/unix.bashrc
 # -s is close (kernel name), so let's try that.
 case "`uname -s`" in
 MINGW*|CYGWIN*|MSYS_*)
-    echo $DIR/cygwin.bashrc
 	source $DIR/cygwin.bashrc
     ;;
 Linux)
