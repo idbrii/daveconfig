@@ -20,7 +20,6 @@ if has('nvim')
     " Nvim comes with an undotree plugin. Try it out.
     let g:pathogen_blacklist += ["gundo"]
     packadd nvim.undotree
-    nnoremap <F2> <Cmd>Undotree<CR>
 
     " Must be set very early. Without this, nvim complains that scoop's
     " python.exe is a shim (true) and its from pyenv (false). Also, maybe
