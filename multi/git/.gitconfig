@@ -29,6 +29,13 @@
     commit-fixup-with = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
     commit-squash-with = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
 
+    # Find text in a log message.
+    # https://stackoverflow.com/a/7125014/79125
+    # Usage: git find dragon --since=8.weeks -i
+    # Better to use vim:
+    #   :8Gfind dragon
+    find = log --all --pretty=\"format:%Cgreen%H %Cblue%s\n%b%Creset\" --name-status --grep
+
     # Update all local branches to match tracking.
     # https://stackoverflow.com/a/76267753/79125
     # Split into two commands to allow pull to fail but still fetch. Do not use
