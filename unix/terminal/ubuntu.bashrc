@@ -8,6 +8,9 @@ export ANDROID_HOME=$HOME/data/.android_devkit/android-sdk-linux
 
 export ECLIM_ECLIPSE_HOME=$HOME/data/apps/eclipse
 
+# Fix directories are unreadable green.
+export LS_COLORS=$LS_COLORS:'ow=1;34:'
+
 # Set our primary development gpg key to be default
 export GPGKEY=D4D6822E
 
