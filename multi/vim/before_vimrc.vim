@@ -17,9 +17,11 @@ if has('nvim')
     " nvim enables their lua port of man by default
     let g:pathogen_blacklist += ["man"]
 
-    " Nvim comes with an undotree plugin. Try it out.
-    let g:pathogen_blacklist += ["gundo"]
-    packadd nvim.undotree
+    if has("nvim-0.12.0") > 0
+        " Nvim comes with an undotree plugin. Try it out.
+        let g:pathogen_blacklist += ["gundo"]
+        packadd nvim.undotree
+    endif
 
     " Must be set very early. Without this, nvim complains that scoop's
     " python.exe is a shim (true) and its from pyenv (false). Also, maybe
