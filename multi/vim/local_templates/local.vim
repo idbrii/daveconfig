@@ -166,7 +166,8 @@ if has('win32')
     endif
     if empty($LUA_PATH)
         echoerr "Luarocks failed to set path"
-        let $LUA_PATH = lua_54
+        " This is not how to use LUA_PATH_5_4. It should be a package path.
+        "~ let $LUA_PATH = lua_54
     end
 
 
